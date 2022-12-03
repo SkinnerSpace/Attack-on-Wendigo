@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private CharacterData data;
-    [NonSerialized] public CharacterController body;
+    [SerializeField] private Character character;
+    public Character Character => character;
 
     private FlatMovement flatMovement;
     private VerticalMovement verticalMovement;
@@ -12,21 +12,18 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-        data = GetComponent<CharacterData>();
-        body = GetComponent<CharacterController>();
-
         flatMovement = GetComponent<FlatMovement>();
         verticalMovement = GetComponent<VerticalMovement>();
         momentum = GetComponent<Momentum>();
     }
 
-    public void Process()
+    public void Move()
     {
-        Vector3 flatVelocity = flatMovement.Calculate(data.moveSpeed);
+        Vector3 flatVelocity = flatMovement.Calculate(character.data.moveSpeed);
         Vector3 velocity = verticalMovement.ApplyTo(flatVelocity);
-        data.velocity = momentum.ApplyTo(velocity);
+        character.data.velocity = momentum.ApplyTo(velocity);
         momentum.Decelerate();
 
-        body.Move(data.velocity * Time.deltaTime);
+        character.body.Move(character.data.velocity * Time.deltaTime);
     }
 }

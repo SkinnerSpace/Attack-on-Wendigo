@@ -2,16 +2,16 @@
 
 public class FlatMovement : MonoBehaviour
 {
-    private IController controller;
+    private Character character;
 
     private void Awake()
     {
-        controller = GetComponent<IController>();
+        character = GetComponent<Movement>().Character;
     }
 
     public Vector3 Calculate(float speed)
     {
-        Vector3 rawDirection = controller.GetRawDirection();
+        Vector3 rawDirection = character.controller.GetRawDirection();
         Vector3 velocity = (transform.right * rawDirection.x) + (transform.forward * rawDirection.z);
         velocity = velocity.normalized * speed;
 

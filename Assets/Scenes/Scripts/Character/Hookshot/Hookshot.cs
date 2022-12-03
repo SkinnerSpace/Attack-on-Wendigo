@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hookshot : MonoBehaviour
 {
     private float REACH_DISTANCE = 1f;
     private const float PULL_SPEED_MULTIPLIER = 2f;
 
-    [SerializeField] private CharacterData data;
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private Rope rope;
     [SerializeField] private Character character;
-    private IController controller;
 
+    private Rope rope;
     private HookshotTarget hookshotTarget;
 
     [SerializeField] private float throwSpeed = 70f;
@@ -26,15 +18,15 @@ public class Hookshot : MonoBehaviour
 
     private void Awake()
     {
-        controller = GetComponent<IController>();
-        hookshotTarget = new HookshotTarget();
-
+        rope = GetComponent<Rope>();
         rope.gameObject.SetActive(false);
+
+        hookshotTarget = new HookshotTarget();
     }
 
-    public void TryThrow()
+    public void Throw()
     {
-        if (controller.GetHookshot())
+        if (character.controller.GetHookshot())
         {
             DetectHookshotTarget();
             ThrowIfTargetExist();
@@ -45,7 +37,7 @@ public class Hookshot : MonoBehaviour
     {
         hookshotTarget.valid = false;
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit raycastHit))
+        if (Physics.Raycast(character.mainCamera.transform.position, character.mainCamera.transform.forward, out RaycastHit raycastHit))
         {
             hookshotTarget.position = raycastHit.point;
             hookshotTarget.valid = true;
@@ -58,20 +50,21 @@ public class Hookshot : MonoBehaviour
         {
             debugHitPointTransform.position = hookshotTarget.position;
             rope.SetLength(0f);
+            rope.LookAt(hookshotTarget.position);
             rope.SetActive(true);
 
             character.SetState(State.HookshotThrown);
         }
     }
 
-    public void Fly()
+    public void FlyToTarget()
     {
         StretchRope();
 
         if (rope.length >= GetDistanceToTarget())
         {
             character.SetState(State.HookshotFlying);
-            cameraFov.SetCameraFov(HOOKSHOT_VOF);
+            character.cameraFov.SetCameraFov(CameraFov.HOOKSHOT_VOF);
         }
     }
 
@@ -81,55 +74,64 @@ public class Hookshot : MonoBehaviour
         rope.Lengthen(throwSpeed);
     }
 
-    public void Movement()
+    public void PullBodyToTarget()
     {
         Pull();
         StopWhenReached();
         
-
-        if (controller.GetHookshot())
-        {
+        if (character.controller.GetHookshot())
             StopHookshot();
-        }
 
-        if (controller.GetJump())
-        {
-            float momentumExtraSpeed = 7f;
-            characterVelocityMomentum = hookshotDir * pullSpeed * momentumExtraSpeed;
-            float jumpSpeed = 40f;
-            characterVelocityMomentum += Vector3.up * jumpSpeed;
-            StopHookShot();
-        }
-    }
-
-    private void Pull()
-    {
-        rope.LookAt(hookshotTarget.position);
-        Vector3 dirToTarget = (hookshotTarget.position - transform.position).normalized;
-        float pullSpeed = GetPullSpeed();
-        Vector3 pullVelocity = dirToTarget * pullSpeed;
-        data.characterController.Move(pullVelocity * Time.deltaTime);
+        if (character.controller.GetJump())
+            AirJump();
     }
 
     private void StopWhenReached()
     {
         if (GetDistanceToTarget() <= REACH_DISTANCE)
-        {
             StopHookshot();
-        }
+    }
+
+    private void Pull()
+    {
+        rope.LookAt(hookshotTarget.position);
+        Vector3 pullVelocity = GetPullVelocity();
+        character.body.Move(pullVelocity * Time.deltaTime);
+    }
+
+    private void AirJump()
+    {
+        character.data.velocityMomentum = GetPullVelocity() * character.data.momentumMultiplier;
+        character.data.velocityMomentum += Vector3.up * character.data.jumpStrength;
+        StopHookshot();
+    }
+
+    private Vector3 GetPullVelocity()
+    {
+        Vector3 dirToTarget = GetDirToTarget();
+        float pullSpeed = GetPullSpeed();
+        Vector3 pullVelocity = dirToTarget * pullSpeed;
+
+        return pullVelocity;
     }
 
     public void StopHookshot()
     {
-        state = State.Normal;
-        ResetGravityEffect();
+        character.SetState(State.Normal);
+        character.data.verticalVelocity = 0f;
         rope.SetActive(false);
-        cameraFov.SetCameraFov(NORMAL_FOV);
+        character.cameraFov.SetCameraFov(CameraFov.NORMAL_FOV);
     }
 
     private float GetDistanceToTarget()
     {
         return Vector3.Distance(transform.position, hookshotTarget.position);
+    }
+
+    private Vector3 GetDirToTarget()
+    {
+        Vector3 hookshotDir = (hookshotTarget.position - transform.position).normalized;
+        return hookshotDir;
     }
 
     private float GetPullSpeed()
