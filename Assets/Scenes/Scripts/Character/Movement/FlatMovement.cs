@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class FlatMovement : MonoBehaviour
+public class FlatMovement : MonoBehaviour, ICharacterDependee
 {
     private Character character;
 
-    private void Awake()
+    public void SetUp(Character character)
     {
-        character = GetComponent<Movement>().Character;
+        this.character = character;
     }
 
     public Vector3 Calculate(float speed)

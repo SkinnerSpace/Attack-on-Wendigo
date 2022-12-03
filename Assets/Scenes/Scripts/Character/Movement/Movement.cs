@@ -1,17 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, ICharacterDependee
 {
-    [SerializeField] private Character character;
-    public Character Character => character;
+    private Character character;
 
     private FlatMovement flatMovement;
     private VerticalMovement verticalMovement;
     private Momentum momentum;
 
-    private void Awake()
+    public void SetUp(Character character)
     {
+        this.character = character;
+
         flatMovement = GetComponent<FlatMovement>();
         verticalMovement = GetComponent<VerticalMovement>();
         momentum = GetComponent<Momentum>();

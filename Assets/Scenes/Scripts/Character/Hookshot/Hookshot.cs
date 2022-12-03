@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class Hookshot : MonoBehaviour
+public class Hookshot : MonoBehaviour, ICharacterDependee
 {
     private float REACH_DISTANCE = 1f;
     private const float PULL_SPEED_MULTIPLIER = 2f;
 
-    [SerializeField] private Character character;
+    private Character character;
 
     private Rope rope;
     private HookshotTarget hookshotTarget;
@@ -16,10 +16,22 @@ public class Hookshot : MonoBehaviour
 
     [SerializeField] public Transform debugHitPointTransform;
 
-    private void Awake()
+    private bool active = false;
+
+    private void Update()
     {
+        if (!active)
+        {
+            rope.Shorten(rope.length * 10f);
+        }
+    }
+
+    public void SetUp(Character character)
+    {
+        this.character = character;
+
         rope = GetComponent<Rope>();
-        rope.gameObject.SetActive(false);
+        active = false;
 
         hookshotTarget = new HookshotTarget();
     }
@@ -51,7 +63,7 @@ public class Hookshot : MonoBehaviour
             debugHitPointTransform.position = hookshotTarget.position;
             rope.SetLength(0f);
             rope.LookAt(hookshotTarget.position);
-            rope.SetActive(true);
+            active = true;
 
             character.SetState(State.HookshotThrown);
         }
@@ -59,7 +71,7 @@ public class Hookshot : MonoBehaviour
 
     public void FlyToTarget()
     {
-        StretchRope();
+        StretchRope(throwSpeed);
 
         if (rope.length >= GetDistanceToTarget())
         {
@@ -68,10 +80,10 @@ public class Hookshot : MonoBehaviour
         }
     }
 
-    private void StretchRope()
+    private void StretchRope(float speed)
     {
         rope.LookAt(hookshotTarget.position);
-        rope.Lengthen(throwSpeed);
+        rope.Lengthen(speed);
     }
 
     public void PullBodyToTarget()
@@ -86,17 +98,23 @@ public class Hookshot : MonoBehaviour
             AirJump();
     }
 
+    private void Pull()
+    {
+        Vector3 pullVelocity = GetPullVelocity();
+        ShrinkRope(pullVelocity.magnitude);
+        character.body.Move(pullVelocity * Time.deltaTime);
+    }
+
+    private void ShrinkRope(float speed)
+    {
+        rope.LookAt(hookshotTarget.position);
+        rope.Shorten(speed);
+    }
+
     private void StopWhenReached()
     {
         if (GetDistanceToTarget() <= REACH_DISTANCE)
             StopHookshot();
-    }
-
-    private void Pull()
-    {
-        rope.LookAt(hookshotTarget.position);
-        Vector3 pullVelocity = GetPullVelocity();
-        character.body.Move(pullVelocity * Time.deltaTime);
     }
 
     private void AirJump()
@@ -119,7 +137,7 @@ public class Hookshot : MonoBehaviour
     {
         character.SetState(State.Normal);
         character.data.verticalVelocity = 0f;
-        rope.SetActive(false);
+        active = false;
         character.cameraFov.SetCameraFov(CameraFov.NORMAL_FOV);
     }
 

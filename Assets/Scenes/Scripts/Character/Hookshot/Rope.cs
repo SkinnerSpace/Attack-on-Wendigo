@@ -3,10 +3,11 @@
 public class Rope : MonoBehaviour
 {
     public float length { get; private set; }
+    private bool active = true;
 
     public void SetActive(bool active)
     {
-        gameObject.SetActive(active);
+        this.active = active;
     }
 
     public void LookAt(Vector3 position)
@@ -23,6 +24,7 @@ public class Rope : MonoBehaviour
     public void Shorten(float units)
     {
         length -= units * Time.deltaTime;
+        length = Mathf.Max(length, 0f);
         transform.localScale = new Vector3(1, 1, length);
     }
 

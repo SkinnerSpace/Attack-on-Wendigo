@@ -10,29 +10,16 @@ public class Character : MonoBehaviour
     [NonSerialized] public CameraFov cameraFov;
     [NonSerialized] public CharacterData data;
 
-    private Movement movement;
-    private Hookshot hookshot;
-    private CameraLook cameraLook;
+    [NonSerialized] public Movement movement;
+    [NonSerialized] public Hookshot hookshot;
+    [NonSerialized] public CameraLook cameraLook;
  
-    [SerializeField] private Controllers controllerType;
-    public IController controller { get; private set; }
+    [SerializeField] public Controllers controllerType;
+    public IController controller;
 
     private void Awake()
     {
-        controller = ControllerFactory.Create(controllerType);
-        data = GetComponent<CharacterData>();
-
-        body = GetComponent<CharacterController>();
-        movement = transform.Find("Movement").GetComponent<Movement>();
-        hookshot = transform.Find("Hookshot").GetComponent<Hookshot>();
-
-        mainCamera = transform.Find("Camera").GetComponent<Camera>();
-
-        if (mainCamera != null)
-        {
-            cameraLook = mainCamera.GetComponent<CameraLook>();
-            cameraFov = mainCamera.GetComponent<CameraFov>();
-        }
+        GetComponent<CharacterBootstrap>().Bootstrap(this);
     }
 
     private void Update()

@@ -12,5 +12,5 @@ public class CharacterData : MonoBehaviour
     [NonSerialized] public Vector3 velocity;
     [NonSerialized] public Vector3 velocityMomentum;
     [NonSerialized] public float verticalVelocity = 0f;
-    [NonSerialized] public float momentumMultiplier = 7f;
+    [NonSerialized] public float momentumMultiplier = 2f;
 }

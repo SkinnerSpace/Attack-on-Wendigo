@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System;
 
-public class VerticalMovement : MonoBehaviour
+public class VerticalMovement : MonoBehaviour, ICharacterDependee
 {
     private Character character;
 
-    private void Awake()
+    public void SetUp(Character character)
     {
-        character = GetComponent<Movement>().Character;
+        this.character = character;
     }
 
     public Vector3 ApplyTo(Vector3 velocity)

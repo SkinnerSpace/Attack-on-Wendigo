@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
-public class CameraLook : MonoBehaviour
+public class CameraLook : MonoBehaviour, ICharacterDependee
 {
-    [SerializeField] private Character character;
-
-    private Camera playerCamera;
+    private Character character;
     private float cameraVerticalAngle;
 
-    private void Awake()
+    public void SetUp(Character character)
     {
-        playerCamera = GetComponent<Camera>();
+        this.character = character;
+        character.mainCamera = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -21,6 +20,6 @@ public class CameraLook : MonoBehaviour
 
         cameraVerticalAngle -= rawLook.y * character.data.mouseSensitivity;
         cameraVerticalAngle = Mathf.Clamp(cameraVerticalAngle, -89f, 89f);
-        playerCamera.transform.localEulerAngles = new Vector3(cameraVerticalAngle, 0f, 0f);
+        character.mainCamera.transform.localEulerAngles = new Vector3(cameraVerticalAngle, 0f, 0f);
     }
 }

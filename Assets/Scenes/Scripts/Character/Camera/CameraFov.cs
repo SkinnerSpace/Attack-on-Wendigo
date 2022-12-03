@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class CameraFov : MonoBehaviour
+public class CameraFov : MonoBehaviour, ICharacterDependee
 {
     public const float NORMAL_FOV = 60f;
     public const float HOOKSHOT_VOF = 100f;
 
-    private Camera playerCamera;
+    private Character character;
     private float targetFov;
     private float fov;
 
-    private void Awake()
+    public void SetUp(Character character)
     {
-        playerCamera = GetComponent<Camera>();
-        targetFov = playerCamera.fieldOfView;
+        this.character = character;
+        targetFov = character.mainCamera.fieldOfView;
         fov = targetFov;
     }
 
@@ -20,7 +20,7 @@ public class CameraFov : MonoBehaviour
     {
         float fovSpeed = 4f;
         fov = Mathf.Lerp(fov, targetFov, fovSpeed * Time.deltaTime);
-        playerCamera.fieldOfView = fov;
+        character.mainCamera.fieldOfView = fov;
     }
 
     public void SetCameraFov(float targetFov)
