@@ -8,7 +8,7 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
     private Character character;
 
     private Rope rope;
-    private HookshotTarget hookshotTarget;
+    [SerializeField] private HookshotTarget hookshotTarget;
 
     [SerializeField] private float throwSpeed = 70f;
     [SerializeField] private float minPullSpeed = 10f;
@@ -32,8 +32,6 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
 
         rope = GetComponent<Rope>();
         active = false;
-
-        hookshotTarget = new HookshotTarget();
     }
 
     public void Throw()
@@ -51,7 +49,8 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
 
         if (Physics.Raycast(character.mainCamera.transform.position, character.mainCamera.transform.forward, out RaycastHit raycastHit))
         {
-            hookshotTarget.position = raycastHit.point;
+            hookshotTarget.transform.SetParent(raycastHit.transform);
+            hookshotTarget.transform.position = raycastHit.point;
             hookshotTarget.valid = true;
         }
     }
@@ -60,9 +59,9 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
     {
         if (hookshotTarget.valid)
         {
-            debugHitPointTransform.position = hookshotTarget.position;
+            debugHitPointTransform.position = hookshotTarget.transform.position;
             rope.SetLength(0f);
-            rope.LookAt(hookshotTarget.position);
+            rope.LookAt(hookshotTarget.transform.position);
             active = true;
 
             character.SetState(State.HookshotThrown);
@@ -82,7 +81,7 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
 
     private void StretchRope(float speed)
     {
-        rope.LookAt(hookshotTarget.position);
+        rope.LookAt(hookshotTarget.transform.position);
         rope.Lengthen(speed);
     }
 
@@ -107,7 +106,7 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
 
     private void ShrinkRope(float speed)
     {
-        rope.LookAt(hookshotTarget.position);
+        rope.LookAt(hookshotTarget.transform.position);
         rope.Shorten(speed);
     }
 
@@ -143,12 +142,12 @@ public class Hookshot : MonoBehaviour, ICharacterDependee
 
     private float GetDistanceToTarget()
     {
-        return Vector3.Distance(transform.position, hookshotTarget.position);
+        return Vector3.Distance(transform.position, hookshotTarget.transform.position);
     }
 
     private Vector3 GetDirToTarget()
     {
-        Vector3 hookshotDir = (hookshotTarget.position - transform.position).normalized;
+        Vector3 hookshotDir = (hookshotTarget.transform.position - transform.position).normalized;
         return hookshotDir;
     }
 
