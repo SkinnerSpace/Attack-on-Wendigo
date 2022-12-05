@@ -9,12 +9,17 @@ public class Player : MonoBehaviour
     [SerializeField] private Walk walk;
     [SerializeField] private Jump jump;
     [SerializeField] private Fall fall;
+    [SerializeField] private Move move;
+    [SerializeField] private Hookshot hookshot;
 
     private void Update()
     {
         look.Execute();
         walk.Execute();
-        //jump.Execute();
+        jump.Execute();
         fall.Execute();
+        move.Execute();
+
+        hookshot.Execute();
     }
 }
