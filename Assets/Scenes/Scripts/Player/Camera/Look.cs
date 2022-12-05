@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Look : MonoBehaviour, ICommand
+public class Look : Command
 {
     private Vector2 rawCameraVector;
     private float horizontalAngle = 0f;
@@ -18,7 +18,7 @@ public class Look : MonoBehaviour, ICommand
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void Execute()
+    public override void Execute()
     {
         rawCameraVector = controller.GetRawCameraVector();
         HorizontalRotation();

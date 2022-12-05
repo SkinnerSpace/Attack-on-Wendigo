@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Walk : MonoBehaviour, ICommand
+public class Walk : Command
 {
     private CharacterData data;
     private IController controller;
@@ -11,9 +11,9 @@ public class Walk : MonoBehaviour, ICommand
         controller = transform.parent.GetComponent<IController>();
     }
 
-    public void Execute()
+    public override void Execute()
     {
-        Vector2 rawVector = controller.GetRawMovementVector(); 
+        Vector2 rawVector = controller.GetRawMovementVector();
 
         Vector3 leftRight = transform.right * rawVector.x;
         Vector3 backwardForward = transform.forward * rawVector.y;

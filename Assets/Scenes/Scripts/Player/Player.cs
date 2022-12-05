@@ -5,21 +5,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Look look;
-    [SerializeField] private Walk walk;
-    [SerializeField] private Jump jump;
-    [SerializeField] private Fall fall;
-    [SerializeField] private Move move;
-    [SerializeField] private Hookshot hookshot;
+    [SerializeField] private Look look; public Look Look => look;
+    [SerializeField] private Walk walk; public Walk Walk => walk;
+    [SerializeField] private Jump jump; public Jump Jump => jump;
+    [SerializeField] private Fall fall; public Fall Fall => fall;
+    [SerializeField] private Move move; public Move Move => move;
 
     private void Update()
     {
-        look.Execute();
-        walk.Execute();
-        jump.Execute();
-        fall.Execute();
-        move.Execute();
-
-        hookshot.Execute();
+        Look.Execute();
+        Walk.Execute();
+        Jump.Execute();
+        Fall.Execute();
+        Move.Execute();
     }
 }

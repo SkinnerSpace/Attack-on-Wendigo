@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Jump : VerticalMovement, ICommand
+public class Jump : VerticalMovement
 {
     private IController controller;
 
@@ -10,7 +10,7 @@ public class Jump : VerticalMovement, ICommand
         controller = transform.parent.GetComponent<IController>();
     }
 
-    public void Execute()
+    public override void Execute()
     {
         if (IsGrounded())
         {

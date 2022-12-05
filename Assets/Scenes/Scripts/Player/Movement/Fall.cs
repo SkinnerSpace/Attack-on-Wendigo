@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Fall : VerticalMovement, ICommand
+public class Fall : VerticalMovement
 {
-    public void Execute()
+    public override void Execute()
     {
         float verticalVelocity = data.velocity.y;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class VerticalMovement : MonoBehaviour
+public abstract class VerticalMovement : Command
 {
     protected CharacterData data;
     protected LayerMask groundLayer;

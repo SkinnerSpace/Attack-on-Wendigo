@@ -32,6 +32,6 @@ public class PlayerController : MonoBehaviour, IController
 
     public bool HookshotButtonIsPressed()
     {
-        throw new NotImplementedException();
+        return Input.GetKey(KeyCode.E);
     }
 }

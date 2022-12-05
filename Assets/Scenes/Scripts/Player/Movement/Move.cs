@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Move : MonoBehaviour, ICommand
+public class Move : Command
 {
     private CharacterData data;
     private CharacterController body;
@@ -11,7 +11,7 @@ public class Move : MonoBehaviour, ICommand
         body = transform.parent.GetComponent<CharacterController>();
     }
 
-    public void Execute()
+    public override void Execute()
     {
         body.Move(data.velocity * Time.deltaTime);
     }
