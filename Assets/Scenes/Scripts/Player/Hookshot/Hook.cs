@@ -9,9 +9,7 @@ public class Hook : MonoBehaviour
 {
     public Player character; 
     public Transform mainCamera;
-    public Transform gunTip;
     public LayerMask grappleable;
-    public LineRenderer lineRenderer;
 
     public float maxDistance;
     public float delayTime;
@@ -22,6 +20,8 @@ public class Hook : MonoBehaviour
     private float coolDownTimer;
 
     private bool grappling;
+
+    [SerializeField] private Rope rope;
 
     private IController controller;
 
@@ -37,14 +37,23 @@ public class Hook : MonoBehaviour
 
         if (coolDownTimer > 0)
             coolDownTimer -= Time.deltaTime;
+
+        if (grappling)
+        {
+            Lengthen();
+            rope.LookAt(target.position);
+        }
+        else
+        {
+            Shorten();
+        }
     }
 
     private void LateUpdate()
     {
         if (grappling)
         {
-            lineRenderer.SetPosition(0, gunTip.position);
-            lineRenderer.SetPosition(1, target.position);
+            
         }
     }
 
@@ -67,19 +76,29 @@ public class Hook : MonoBehaviour
             target.position = mainCamera.position + (mainCamera.forward * maxDistance);
             Invoke(nameof(StopGrapple), delayTime);
         }
+    }
 
-        lineRenderer.enabled = true;
+    public void Lengthen()
+    {
+        float distanceToTarget = Vector3.Distance(rope.transform.position, target.position);
+        rope.Lengthen(distanceToTarget, distanceToTarget);
+        //Debug.Log(distanceToTarget);
+    }
+
+    public void Shorten()
+    {
+        float distanceToTarget = Vector3.Distance(rope.transform.position, target.position);
+        rope.Shorten(distanceToTarget, 0.2f);
     }
 
     public void ExecuteGrapple()
     {
-
+        
     }
 
     public void StopGrapple()
     {
         grappling = false;
         coolDownTimer = coolDown;
-        lineRenderer.enabled = false;
     }
 }
