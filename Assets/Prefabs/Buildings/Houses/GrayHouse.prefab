@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923198903628701911}
-  - component: {fileID: 923198903628701912}
+  - component: {fileID: 1291762040688793582}
   m_Layer: 0
   m_Name: GrayHouse
   m_TagString: Untagged
@@ -143,7 +143,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &923198903628701912
+--- !u!114 &1291762040688793582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 923198903628701910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b47f2f5f26fc534184fe12cb3cbacae, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ad91c7e74b744e41930efdae48e94e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  size: {x: 13, y: 7}
+  length: 13
+  width: 7
+  height: 8
