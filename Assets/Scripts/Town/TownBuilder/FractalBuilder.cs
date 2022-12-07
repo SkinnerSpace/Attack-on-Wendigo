@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FractalBuilder : IHost
+public class FractalBuilder : IFractalBuilder, IHost
 {
-    private int layer;
-    private int length;
-    private int width;
+    public int depth { get; private set; }
+    public int length { get; private set; }
+    public int width { get; private set; } 
 
     private FractalArea[,] areas;
     private List<FractalArea> definedAreas = new List<FractalArea>();
@@ -17,11 +13,16 @@ public class FractalBuilder : IHost
     public int areasCount { get; private set; }
     public int definedAreasCount { get; private set; }
 
-    public FractalBuilder(int length, int width, float areaSize)
+    private FractalMediator mediator;
+
+    public FractalBuilder(BuilderBootstrap bootstrap)
     {
-        this.length = length;
-        this.width = width;
-        this.areaSize = areaSize;
+        depth = bootstrap.depth;
+        length = bootstrap.length;
+        width = bootstrap.width;
+        areaSize = bootstrap.areaSize;
+
+        mediator = new FractalMediator(this);
 
         GenerateAreas();
         GetCentralArea().Define();
@@ -31,14 +32,43 @@ public class FractalBuilder : IHost
     {
         areas = new FractalArea[length, width];
         areasCount = length * width;
-        
-        for (int i=0; i<areas.GetLength(0); i++)
+
+        for (int x=0; x<areas.GetLength(0); x++)
         {
-            for (int j=0; j<areas.GetLength(1); j++)
+            for (int y=0; y<areas.GetLength(1); y++)
             {
-                areas[i, j] = new FractalArea(new Vector2(i, j), this);
+                CreateArea(x, y);
             }
         }
+    }
+
+    private void CreateArea(int x, int y)
+    {
+        AreaBootstrap areaBootstrap = new AreaBootstrap();
+        areaBootstrap.depth = depth;
+        areaBootstrap.coords = new Vector2(x, y);
+        areaBootstrap.mediator = mediator;
+
+        areas[x, y] = new FractalArea(areaBootstrap);
+    }
+
+    public void AreaIsDefined(FractalArea area)
+    {
+        definedAreasCount++;
+        definedAreas.Add(area);
+
+        if (definedAreasCount >= areasCount)
+            RenderDefinedAreas();
+    }
+
+    public void RenderDefinedAreas()
+    {
+        RawAreaData rawData = new RawAreaData();
+        rawData.length = length;
+        rawData.width = width;
+        rawData.size = areaSize;
+
+        AreasRenderer areasRenderer = new AreasRenderer(definedAreas, rawData);
     }
 
     private FractalArea GetCentralArea()
@@ -46,68 +76,9 @@ public class FractalBuilder : IHost
         return areas[length / 2, width / 2];
     }
 
-    public List<FractalArea> GetAvailableAreas(Vector2 coords)
+    public FractalArea GetArea(int x, int y)
     {
-        List<FractalArea> availableAreas = new List<FractalArea>();
-
-        AddArea(coords + Vector2.up, availableAreas);
-        AddArea(coords + Vector2.down, availableAreas);
-        AddArea(coords + Vector2.left, availableAreas);
-        AddArea(coords + Vector2.right, availableAreas);
-
-        return availableAreas;
-    }
-
-    private void AddArea(Vector2 coords, List<FractalArea> availableAreas)
-    {
-        int x = (int)coords.x;
-        int y = (int)coords.y;
-
-        if (AreaExist(x, y))
-        {
-            FractalArea area = areas[x, y];
-            AddAreaIfAvailable(area, availableAreas);
-        }
-    }
-
-    private bool AreaExist(int x, int y)
-    {
-        return (x >= 0 && x < areas.GetLength(0)) && (y >= 0 && y < areas.GetLength(1));
-    }
-
-    private void AddAreaIfAvailable(FractalArea area, List<FractalArea> availableAreas)
-    {
-        if (area.index == 0)
-            availableAreas.Add(area);
-    }
-
-    public void AreaDefined(FractalArea area)
-    {
-        definedAreasCount++;
-        definedAreas.Add(area);
-
-        if (definedAreasCount >= areasCount)
-            RenderAllAreas();
-    }
-
-    private void RenderAllAreas()
-    {
-        foreach (FractalArea area in definedAreas)
-            RenderArea(area);
-    }
-
-    private void RenderArea(FractalArea area)
-    {
-        float lengthAdjustment = width / (float)length;
-        float widthAdjustment = length / (float)width;
-        
-        float areaLength = (length > width) ? (areaSize * lengthAdjustment) : (areaSize);
-        float areaWidth = (length < width) ? (areaSize * widthAdjustment) : (areaSize);
-
-        //Debug.Log("Area length " + areaLength);
-        //Debug.Log("Area width " + areaWidth);
-
-        area.Render(areaLength, areaWidth, 0.9f);
+        return areas[x, y];
     }
 
     public void ComeIn(IFractalVisitor visitor)

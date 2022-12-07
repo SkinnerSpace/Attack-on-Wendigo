@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FractalArea : IGuest
 {
+    public int depth { get; private set; }
     public int index { get; private set; }
     public Vector2 coords { get; private set; }
 
@@ -16,27 +13,27 @@ public class FractalArea : IGuest
     private List<FractalArea> availableAreas = new List<FractalArea>();
     private List<FractalArea> areasUnderConstruction = new List<FractalArea>();
 
-    private FractalBuilder builder;
+    private FractalMediator mediator;
     public FractalData data;
 
-    public FractalArea(Vector2 coords, FractalBuilder builder)
+    private FractalBuilder fractalBuilder;
+
+    public FractalArea(AreaBootstrap bootstrap)
     {
-        this.coords = coords;
-        this.builder = builder;
+        depth = bootstrap.depth;
+        coords = bootstrap.coords;
+        mediator = bootstrap.mediator;
     }
 
     public void Define()
     {
-        builder.AreaDefined(this);
-        index = builder.definedAreasCount;
-        Debug.Log(index);
-
+        index = mediator.AskForIndex(this);
         KeepGrowing();
     }
 
     private void KeepGrowing()
     {
-        availableAreas = builder.GetAvailableAreas(coords);
+        availableAreas = mediator.GetAvailableAreas(coords);
 
         if (availableAreas.Count > 0)
         {
@@ -78,6 +75,7 @@ public class FractalArea : IGuest
         size = new Vector3(filledSpace.x, 1f, filledSpace.y) * 0.1f;
 
         PackData();
+        GoDeeper();
     }
 
     private float RenderCoord(float virtualCoord, float spaceCoord)
@@ -92,10 +90,18 @@ public class FractalArea : IGuest
     {
         data = new FractalData();
 
-        //data.layer = layer;
+        data.depth = depth;
         data.index = index;
         data.position = position;
         data.size = size;
+    }
+
+    private void GoDeeper()
+    {
+        if (depth > 0)
+        {
+            
+        }
     }
 
     public void MeetVisitor(IFractalVisitor visitor)

@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TownBuilder : MonoBehaviour
 {
+    public int depth;
     public int length;
     public int width;
     public float areaSize;
 
     private void Awake()
     {
-        FractalBuilder fractalBuilder = new FractalBuilder(length, width, areaSize);
+        BuilderBootstrap bootstrap = new BuilderBootstrap();
+        bootstrap.depth = depth;
+        bootstrap.length = length;
+        bootstrap.width = width;
+        bootstrap.areaSize = areaSize;
+
+        FractalBuilder fractalBuilder = new FractalBuilder(bootstrap);
         BuildingsRenderer buildingsRenderer = new BuildingsRenderer();
         fractalBuilder.ComeIn(buildingsRenderer);
     }
