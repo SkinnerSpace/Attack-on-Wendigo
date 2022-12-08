@@ -12,35 +12,54 @@ public class UrbanPlanner : Designer
         int x = doc.cell.x;
         int y = doc.cell.y;
         float chance = UnityEngine.Random.Range(0f, 1f);
-
-        float likelyhood = AdjustLikelyhood(doc.likelyhood);
-        CheckNeighbours(doc);
+        float likelyhood = CalculateLikelyhood(doc);
 
         return (chance <= likelyhood) ? doc.mark : doc.map[x, y];
     }
 
-    private float AdjustLikelyhood(float originalLikelyhood)
+    private float CalculateLikelyhood(Requirments doc)
     {
-        float adjustedLikelyhood = originalLikelyhood;
-        
-        return originalLikelyhood;
+        Dictionary<Directions, Mark> neighbours = GetNeighbours(doc);
+        float percent = GetNeighboursOfSameTypePercent(neighbours, doc.mark.type);
+        float likelyhood = doc.likelyhood + percent;
+
+        return likelyhood;
     }
 
-    private void CheckNeighbours(Requirments doc)
+    private Dictionary<Directions, Mark> GetNeighbours(Requirments doc)
     {
-        foreach (Cell direction in directions.Values)
+        Dictionary<Directions, Mark> neighbours = new Dictionary<Directions, Mark>();
+
+        foreach (Directions direction in directions.Keys)
         {
-            Cell guessedCell = new Cell(doc.cell.x + direction.x, doc.cell.y + direction.y);
+            Cell offset = directions[direction];
+            Cell guessedCell = new Cell(doc.cell.x + offset.x, doc.cell.y + offset.y);
 
-            // OUT OF BOUNDS
-            if (!CellExist(guessedCell, doc.map))
-                Debug.Log("Out " + new Vector2(guessedCell.x, guessedCell.y));
-
+            if (CellExist(guessedCell, doc.map))
+                neighbours.Add(direction, doc.map[guessedCell.x, guessedCell.y]);
         }
+
+        return neighbours;
     }
 
     private bool CellExist(Cell guessedCell, Mark[,] map)
     {
         return (guessedCell.x > -1 && guessedCell.x < map.GetLength(0)) && (guessedCell.y > -1 && guessedCell.y < map.GetLength(1));
+    }
+
+    private float GetNeighboursOfSameTypePercent(Dictionary<Directions, Mark> neighbours, Types type)
+    {
+        float percent = (float) GetNeighboursMatchTypeCount(neighbours, type) / neighbours.Count;
+        return percent;
+    }
+
+    private int GetNeighboursMatchTypeCount(Dictionary<Directions, Mark> neighbours, Types expectedType)
+    {
+        int count = 0;
+
+        foreach (Mark neighbour in neighbours.Values)
+            count = (neighbour.type == expectedType) ? (count + 1) : (count);
+
+        return count;
     }
 }

@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2439895861927170492}
   - component: {fileID: 2439895861927170483}
+  - component: {fileID: 6310161268462793750}
   m_Layer: 0
   m_Name: SpruceTree1
   m_TagString: Untagged
@@ -126,3 +127,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 18, z: 2}
   m_Center: {x: 0, y: 9, z: 0}
+--- !u!114 &6310161268462793750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439895861927170493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4b895100863a74ea3f8be6bf15420a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  length: 0
+  width: 0
+  height: 0
+  angles: []
+  minScale: 0.4
+  maxScale: 1.2

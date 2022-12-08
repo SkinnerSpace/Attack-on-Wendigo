@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Town : MonoBehaviour
 {
-    public IBuilding[] buildings { get; private set; }
+    public Prop[] buildings { get; private set; }
     [NonSerialized] public int buildingsCount;
 
     public static Town Instance { get; private set; }
@@ -13,7 +13,6 @@ public class Town : MonoBehaviour
     private void Awake()
     {
         Singleton();
-        //InitializeBuildings();
     }
 
     private void Singleton()
@@ -27,17 +26,4 @@ public class Town : MonoBehaviour
             Instance = this;
         }
     }
-
-    /*
-    private void InitializeBuildings()
-    {
-        buildings = GetComponentsInChildren<IBuilding>();
-        buildingsCount = buildings.Length;
-
-        foreach (Building building in buildings)
-            building.SetTown(this);
-
-        Debug.Log("Buildings " + buildingsCount);
-    }
-    */
 }

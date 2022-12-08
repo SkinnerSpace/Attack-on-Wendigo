@@ -20,22 +20,26 @@ public class DetectionArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IBuilding building = other.transform as IBuilding;
+        /*
+        Prop building = other.transform as Prop;
 
         if (building != null)
             buildings += 1;
 
         ShowCount();
+        */
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IBuilding building = other.transform as IBuilding;
+        /*
+        Prop building = other.transform as Prop;
 
         if (building != null)
             buildings -= 1;
 
         ShowCount();
+        */
     }
 
     private void ShowCount()

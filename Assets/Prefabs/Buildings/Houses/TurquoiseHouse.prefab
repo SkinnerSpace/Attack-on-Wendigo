@@ -44,10 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad91c7e74b744e41930efdae48e94e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 8, y: 8}
   length: 8
   width: 8
   height: 9
+  angles:
+  - 0
+  - 90
+  - 180
+  - 270
+  minScale: 1
+  maxScale: 1
 --- !u!1 &1952101101083304321
 GameObject:
   m_ObjectHideFlags: 0

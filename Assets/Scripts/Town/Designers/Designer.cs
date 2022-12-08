@@ -23,48 +23,13 @@ public abstract class Designer : IDesigner
     {
         { Directions.NORTH, new Cell(0,1) },
         { Directions.NORTH_EAST, new Cell(1,1) },
-        { Directions.EAST, new Cell(1,0) }
+        { Directions.EAST, new Cell(1,0) },
+        { Directions.SOUTH_EAST, new Cell(1,-1) },
+        { Directions.SOUTH, new Cell(0,-1) },
+        { Directions.SOUTH_WEST, new Cell(-1,-1) },
+        { Directions.WEST, new Cell(-1, 0) },
+        { Directions.NORH_WEST, new Cell(-1,1) }
     };
 
     public abstract Mark Design(Requirments doc);
-
-    public Mark NorthMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x, cell.y + 1];
-    }
-
-    public Mark NorthEastMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x + 1, cell.y + 1];
-    }
-
-    public Mark EastMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x + 1, cell.y];
-    }
-
-    public Mark SouthEastMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x + 1, cell.y - 1];
-    }
-
-    public Mark SouthMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x, cell.y - 1];
-    }
-
-    public Mark SouthWestMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x - 1, cell.y - 1];
-    }
-
-    public Mark WestMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x - 1, cell.y];
-    }
-
-    public Mark NorthWestMark(Mark[,] map, Cell cell)
-    {
-        return map[cell.x - 1, cell.y + 1];
-    }
 }

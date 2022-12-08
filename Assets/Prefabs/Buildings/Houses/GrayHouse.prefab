@@ -155,7 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad91c7e74b744e41930efdae48e94e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 13, y: 7}
   length: 13
   width: 7
   height: 8
+  angles:
+  - 0
+  - 90
+  minScale: 1
+  maxScale: 1
