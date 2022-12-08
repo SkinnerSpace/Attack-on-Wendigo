@@ -5,7 +5,7 @@ public class FractalBuilder : IFractalBuilder, IHost
 {
     public int depth { get; private set; }
     public int length { get; private set; }
-    public int width { get; private set; } 
+    public int width { get; private set; }
 
     private FractalArea[,] areas;
     private List<FractalArea> definedAreas = new List<FractalArea>();

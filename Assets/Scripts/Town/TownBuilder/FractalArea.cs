@@ -7,8 +7,10 @@ public class FractalArea : IGuest
     public int index { get; private set; }
     public Vector2 coords { get; private set; }
 
+    private Vector3 builderOrigin = Vector3.zero;
     private Vector3 position = Vector3.zero;
     private Vector3 size = Vector3.zero;
+    private Vector3 areaSize = Vector3.zero;
 
     private List<FractalArea> availableAreas = new List<FractalArea>();
     private List<FractalArea> areasUnderConstruction = new List<FractalArea>();
@@ -75,7 +77,6 @@ public class FractalArea : IGuest
         size = new Vector3(filledSpace.x, 1f, filledSpace.y) * 0.1f;
 
         PackData();
-        GoDeeper();
     }
 
     private float RenderCoord(float virtualCoord, float spaceCoord)
@@ -96,16 +97,10 @@ public class FractalArea : IGuest
         data.size = size;
     }
 
-    private void GoDeeper()
-    {
-        if (depth > 0)
-        {
-            
-        }
-    }
-
     public void MeetVisitor(IFractalVisitor visitor)
     {
         visitor.GatherFractalData(data);
+        if (fractalBuilder != null)
+            fractalBuilder.ComeIn(visitor);
     }
 }
