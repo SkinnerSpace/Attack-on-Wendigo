@@ -8,15 +8,13 @@ using UnityEngine;
 public class Gingerbread : Titan
 {
     [SerializeField] private float speed = 10f;
+    public bool active = false;
 
     private void Update()
     {
-        /*
-        Vector3 direction = (Town.Instance.transform.position - transform.position).normalized;
-        Vector3 velocity = direction * speed;
-        transform.position += velocity * Time.deltaTime;
-        */
-
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+        if (active)
+        {
+            transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+        }
     }
 }

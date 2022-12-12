@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GingerbreadMaterial
+    second: {fileID: 2100000, guid: 0d4b31104bf74c8438e20097e2c3b7af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: GingerbreadV0.2
     second: {fileID: 2100000, guid: b4aa1be8d6530fd4a873aa11191ac014, type: 2}
   materials:
