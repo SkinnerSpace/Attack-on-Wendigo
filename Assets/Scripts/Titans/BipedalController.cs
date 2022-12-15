@@ -5,42 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BipedalController : RigController
+public class BipedalController : MonoBehaviour
 {
-    [SerializeField] private float footSpacing; public float FootSpacing => footSpacing;
-    [SerializeField] private float stepDistance; public float StepDistance => stepDistance;
-    [SerializeField] private float stepHeight; public float StepHeight => stepHeight;
-    [SerializeField] private float speed; public float Speed => speed;
-    [SerializeField] private LayerMask groundLayer; public LayerMask GroundLayer => groundLayer;
-
+    private bool active;
     private List<LegPoint> legs = new List<LegPoint>();
     private int currentLeg = 0;
 
-    private void Update()
+    [SerializeField] private Titan titan;
+
+    public void AddLeg(LegPoint leg)
     {
-        if (legs.Count > 0)
-            legs[currentLeg].Walk();
+        legs.Add(leg);
     }
 
-    public override void AddRigPoint(RigPoint rigPoint)
+    public void SetActive(bool active)
     {
-        legs.Add(rigPoint as LegPoint);
-    }
+        this.active = active;
 
-    public override void Notify(RigPoint rigPoint)
-    {
-        NextLeg();
-    }
-
-    public void NextLeg()
-    {
-        if ((currentLeg + 1) >= legs.Count)
+        if (active == true)
         {
-            currentLeg = 0;
+            legs[currentLeg].StepForward();
         }
-        else
+    }
+
+    public void Stepped (LegPoint leg)
+    {
+        if (active && leg == legs[currentLeg])
         {
             currentLeg += 1;
+            if (currentLeg > legs.Count - 1)
+                currentLeg = 0;
+
+            legs[currentLeg].StepForward();
+            titan.SetActive(active);
         }
     }
 }

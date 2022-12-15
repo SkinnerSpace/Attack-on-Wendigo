@@ -5,73 +5,196 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class LegPoint : RigPoint
+public class LegPoint : RigPoint, IDebugController
 {
     public enum Side
     {
         Left = -1,
         Right = 1
     }
+
     [SerializeField] public Side side;
 
-    private Vector3 oldPosition;
-    private Vector3 currentPosition;
-    private Vector3 newPosition;
-    private float lerp = 0f;
+    private const float MAX_DISTANCE = 10f;
+    private const float STEP_HEIGHT = 3f;
+    private const float STEP_DISTANCE = 5f;
+    private const float SPACING = 5f;
+    private const int GROUND_LAYER = 1 << 8;
+    private const float SPEED_ADJUSTMENT = 0.3f;
 
-    [SerializeField] protected BipedalController controller;
+    [SerializeField] private Titan titan;
+    private Transform pivot;
+    [SerializeField] private BipedalController controller;
+
+    private float speed;
+    private Vector3 oldPos;
+    private Vector3 currentPos;
+    private float lerp;
+    [SerializeField] private bool active;
+
+    [SerializeField] private List<DebugSphere> nextDebug = new List<DebugSphere>();
+    [SerializeField] private List<DebugSphere> exDebug = new List<DebugSphere>();
+    [SerializeField] private List<DebugSphere> footDebug = new List<DebugSphere>();
+    [SerializeField] private List<DebugSphere> pivotDebug = new List<DebugSphere>();
+    [SerializeField] private List<DebugSphere> projectionDebug = new List<DebugSphere>();
+
+    private Vector3 nextStepPos;
 
     private void Awake()
     {
-        currentPosition = transform.position;
-        oldPosition = currentPosition;
-        newPosition = currentPosition;
-
-        controller.AddRigPoint(this);
+        Initialize();
+        SetDefaultPose();
+        ApplyPose();
     }
 
-    public void Walk()
+    private void Initialize()
     {
-        transform.position = currentPosition;
+        pivot = titan.transform;
+        speed = titan.speed * SPEED_ADJUSTMENT;
+        controller.AddLeg(this);
+    }
 
-        RaycastHit hitInfo = GetHitPoint();
-        SetNewPositionIfDistanceTooBig(hitInfo.point);
+    public void StepForward()
+    {
+        active = true;
+        lerp = 0f;
 
+        Ray nextStepRay = GetStepForwardRay();
+        SetNextStepPos(nextStepRay);
+    }
+
+    private void Update()
+    {
+        
+        Walk();
+
+        ApplyPose();
+    }
+
+    private void LateUpdate()
+    {
+        UpdateDebug();
+    }
+
+    private void SetDefaultPose()
+    {
+        SetStandPose();
+    }
+
+    private void SetStandPose()
+    {
+        Ray ray = new Ray(GetStandPos(), Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 10f, GROUND_LAYER))
+        {
+            currentPos = raycastHit.point;
+        }
+    }
+
+    private void ApplyPose()
+    {
+        transform.position = currentPos;
+    }
+
+    /*
+     * GET DIRECTED STEP RAY -->
+     */
+
+    private Ray GetStepForwardRay()
+    {
+        Ray ray = new Ray(GetStepForwardPos(), Vector3.down);
+        return ray;
+    }
+
+    private Vector3 GetStepForwardPos()
+    {
+        return (GetStandPos() + (pivot.forward * STEP_DISTANCE));
+    }
+
+    private Ray GetStepBackwardRay()
+    {
+        Ray ray = new Ray(GetStepBackwardPos(), Vector3.down);
+        return ray;
+    }
+
+    private Vector3 GetStepBackwardPos()
+    {
+        return (GetStandPos() - (pivot.forward * STEP_DISTANCE));
+    }
+
+    /*
+     * GET DIRECTED STEP RAY <--
+     */
+
+    private void SetNextStepPos(Ray ray)
+    {
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 10f, GROUND_LAYER))
+        {
+            oldPos = transform.position;
+            nextStepPos = raycastHit.point;
+            lerp = 0f;
+        }
+            //UpdateNextStepIfTooFar(raycastHit.point);
+    }
+
+    private void UpdateNextStepIfTooFar(Vector3 castStepPos)
+    {
+        if (Vector3.Distance(nextStepPos, castStepPos) > MAX_DISTANCE)
+        {
+            oldPos = transform.position;
+            nextStepPos = castStepPos;
+            lerp = 0f;
+        }
+    }
+
+    private Vector3 GetStandPos()
+    {
+        return pivot.position + (pivot.right * (SPACING * (float)side));
+    }
+
+    private void Walk()
+    {
         if (lerp < 1f)
         {
-            Vector3 footPosition = Vector3.Lerp(oldPosition, newPosition, lerp);
-            footPosition.y += Mathf.Sin(lerp * Mathf.PI) * controller.StepHeight;
-            currentPosition = footPosition;
-            lerp += Time.deltaTime * controller.Speed;
+            if (active)
+                IncrementLerp();
+            MoveLeg();
         }
-        else
+    }
+
+    private void IncrementLerp()
+    {
+        lerp += speed * Time.deltaTime;
+        if (lerp >= 1f)
         {
-            oldPosition = newPosition;
-            controller.Notify(this);
+            lerp = 1f;
+            active = false;
+            controller.Stepped(this);
         }
     }
 
-    private RaycastHit GetHitPoint()
+    private void MoveLeg()
     {
-        Ray ray = new Ray(controller.transform.position + (controller.transform.right * controller.FootSpacing * (float) side), Vector3.down);
-        Physics.Raycast(ray, out RaycastHit info, Mathf.Infinity, controller.GroundLayer.value);
-        return info;
+        Vector3 footPos = Vector3.Lerp(oldPos, nextStepPos, lerp);
+        footPos.y = Mathf.Sin(lerp * Mathf.PI) * STEP_HEIGHT;
+        currentPos = footPos;
     }
 
-    private void SetNewPositionIfDistanceTooBig(Vector3 bodyPosition)
+    public void UpdateDebug()
     {
-        if (Vector3.Distance(newPosition, bodyPosition) > controller.StepDistance)
-        {
-            lerp = 0f;
-            newPosition = bodyPosition;
-        }
-    }
+        foreach (DebugSphere debugPoint in nextDebug)
+            debugPoint.Draw(nextStepPos, Color.red);
 
-    private void OnDrawGizmos()
-    {
         /*
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 2f);
+        foreach (DebugSphere debugPoint in exDebug)
+            debugPoint.Draw(exStepPos, Color.green);
         */
+
+        /*
+        foreach (DebugSphere debugPoint in footDebug)
+            debugPoint.Draw(footPos, Color.blue);
+        */
+
+        foreach (DebugSphere debugPoint in pivotDebug)
+            debugPoint.Draw(pivot.position, Color.yellow);
     }
 }
