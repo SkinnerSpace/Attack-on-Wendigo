@@ -8,18 +8,15 @@ using UnityEngine;
 public class Gingerbread : Titan
 {  
     private bool active = false;
-    [SerializeField] private BipedalController bipedalController;
+    [SerializeField] private LegsSynchronizer legsSynchronizer;
+
+    private Vector3 movePosition;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            bipedalController.SetActive(true);
-        }
-
-        if (active)
-        {
-            Move();
+            legsSynchronizer.SetActive(true);
         }
     }
 

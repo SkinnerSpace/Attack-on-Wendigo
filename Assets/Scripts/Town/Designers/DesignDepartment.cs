@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class DesignDepartment : IDesigner
 {
-    private UrbanPlanner urbanPlanner = new UrbanPlanner();
-    private LandscapeDesigner landscapeDesigner = new LandscapeDesigner();
+    readonly private UrbanPlanner urbanPlanner = new UrbanPlanner();
+    readonly private LandscapeDesigner landscapeDesigner = new LandscapeDesigner();
 
     public Mark Design(Requirments doc)
     {
