@@ -1,4 +1,4 @@
-﻿internal interface IDebugController
+﻿public interface IDebugController
 {
     void UpdateDebug();
 }

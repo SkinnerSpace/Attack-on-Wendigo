@@ -3,7 +3,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts"
+        "Scripts",
+        "Titans",
+        "TitanPresenter",
+        "TitanMovement"
     ],
     "includePlatforms": [
         "Editor"

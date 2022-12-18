@@ -1,0 +1,16 @@
+{
+    "name": "TitanMovement",
+    "references": [
+        "GUID:669033de2a0d89f4faed7ce4e766aa75",
+        "GUID:46078f17560d25b4b9997fa625ac2a1f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
