@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 public class TitanData
 {
+    public string name;
     public float speed;
     public Titans titan;
-    public TransformProxy transform;
+    //public ITransformProxy transform { get; private set; }
 
     public TitanData()
     {
@@ -20,4 +21,11 @@ public class TitanData
         speed = setup.speed;
         titan = setup.titan;
     }
+
+    /*
+    public void SetTransform(ITransformProxy transform)
+    {
+        //this.transform = transform;
+    }
+    */
 }

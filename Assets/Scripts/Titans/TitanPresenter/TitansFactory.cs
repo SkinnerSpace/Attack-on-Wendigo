@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 public static class TitansFactory
 {
-    public static Titan CreateTitan(TitanData data)
+    public static Titan CreateTitan(Titans titan)
     {
-        switch (data.titan)
+        switch (titan)
         {
             case Titans.GINGERBREAD:
-                return new Gingerbread(data);
+                return new Gingerbread();
 
             default:
                 return null;

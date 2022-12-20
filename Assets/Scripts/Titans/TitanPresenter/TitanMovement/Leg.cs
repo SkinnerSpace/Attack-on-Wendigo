@@ -1,62 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Leg : ILeg
 {
-    private Sides side; 
-    public float Side => (side == Sides.Left) ? (-1f) : (1f);
+    private const float SPEED_ADJUSTMENT = 0.2f;
+    private Sides side; public float Side => (side == Sides.Left) ? (-1f) : (1f);
 
-    private Vector3 oldStepPos = Vector3.zero;
-    private Vector3 newStepPos = Vector3.zero;
-    private Vector3 currentStepPos = Vector3.zero;
+    public ITransformProxy transform { get; private set; }
+    private StepPos stepPos;
+    private float speed;
 
-    private TransformProxy transform;
-    private TitanData data;
+    public ILegsSync synchronizer { get; private set; }
+    private readonly LegRaycaster raycaster;
+    private readonly LegEngine engine;
 
-    private LegsSync synchronizer;
-    private LegRaycaster raycaster;
-    private LegEngine engine;
-
-    public Leg(LegSetupPack legSetupPack)
+    public Leg(LegSetupPack setupPack)
     {
-        side = legSetupPack.side;
-        transform = legSetupPack.transform;
-        data = legSetupPack.data;
+        Unpack(setupPack);
 
-        raycaster = new LegRaycaster(this);
-        engine = new LegEngine(this);
+        raycaster = new LegRaycaster(this, setupPack);
+        engine = new LegEngine(this, setupPack);
     }
 
-    private void Update()
+    private void Unpack(LegSetupPack setupPack)
     {
-        UpdatePosition();
+        side = setupPack.side;
+        speed = setupPack.speed * SPEED_ADJUSTMENT;
+        transform = setupPack.transform;
     }
 
-    public void SetSynchronizer(LegsSync synchronizer)
+    public void SetSynchronizer(ILegsSync synchronizer)
     {
         this.synchronizer = synchronizer;
     }
 
     public void MakeAStep()
     {
-        oldStepPos = transform.Position;
-        newStepPos = raycaster.GetNextStepPos(data.transform);
+        stepPos.old = transform.Position;
+        stepPos.novel = raycaster.GetNextStepPos();
         engine.SetActive(true);
     }
 
-    private void UpdatePosition()
+    public void Update()
     {
-        currentStepPos = engine.UpdatePosition(oldStepPos, newStepPos, data.speed * 0.2f);
-        transform.position = currentStepPos;
+        stepPos.current = engine.UpdatePosition(stepPos.old, stepPos.novel, speed);
+        transform.Position = stepPos.current;
     }
 
     public void StepIsOver()
     {
-        oldStepPos = transform.position;
+        stepPos.old = transform.Position;
         synchronizer.StepIsOver();
     }
 

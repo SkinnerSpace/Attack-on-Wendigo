@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 public struct LegSetupPack
 {
     public Sides side;
-    public TransformProxy transform;
-    public TitanData data;
+    public ITransformProxy transform;
+    public ITransformProxy titanTransform;
+
+    public float speed;
+    public float stepDistance;
+    public float spacing;
+    public float stepHeight;
 }

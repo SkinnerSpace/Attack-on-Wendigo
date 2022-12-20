@@ -11,4 +11,8 @@ public class TitanSetup : ScriptableObject
     public string titanName;
     public Titans titan;
     public float speed;
+
+    public float stepDistance;
+    public float spacing;
+    public float stepHeight;
 }

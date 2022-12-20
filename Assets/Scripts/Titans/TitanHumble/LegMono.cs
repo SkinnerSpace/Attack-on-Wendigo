@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LegMono : MonoBehaviour
 {
-    [SerializeField] private TitanMono titan;
     [SerializeField] private Sides side;
     private Leg leg;
 
-    private void Awake()
+    public void Initialize(Titan titan, TitanSetup titanSetup)
     {
-        //LegSetupPack setupPack = CreateSetupPack();
-        //leg = new Leg(setupPack);
+        LegSetupPack legSetup = CreateSetupPack(titan, titanSetup);
+
+        leg = new Leg(legSetup);
+        titan.movementController.AddLeg(leg);
     }
 
-    private LegSetupPack CreateSetupPack()
+    private LegSetupPack CreateSetupPack(Titan titan, TitanSetup titanSetup)
     {
-        LegSetupPack setupPack = new LegSetupPack();
+        LegSetupPack legSetup = new LegSetupPack();
 
-        setupPack.side = side;
-        setupPack.transform = new TransformProxy(transform);
-        //setupPack.data = titan.data;
+        legSetup.side = side;
+        legSetup.titanTransform = titan.transform;
+        legSetup.transform = new TransformProxy(transform);
 
-        return setupPack;
+        legSetup.speed = titanSetup.speed;
+        legSetup.stepDistance = titanSetup.stepDistance;
+        legSetup.spacing = titanSetup.spacing;
+        legSetup.stepHeight = titanSetup.stepHeight;
+
+        return legSetup;
     }
 }

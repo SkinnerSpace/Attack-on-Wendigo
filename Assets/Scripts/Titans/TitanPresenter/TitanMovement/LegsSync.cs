@@ -8,14 +8,33 @@ using UnityEngine;
 public class LegsSync : ILegsSync
 {
     public List<ILeg> legs { get; set; }
+
     private int currentLeg = 0;
 
-    public LegsSync(List<ILeg> legs)
+    public void AddLeg(ILeg leg)
     {
-        this.legs = legs;
+        if (legs == null)
+            legs = new List<ILeg>();
 
-        foreach (Leg leg in legs)
+        if (legs.Count < 2)
+        {
+            legs.Add(leg);
             leg.SetSynchronizer(this);
+        }
+    }
+
+    public int GetLegsCount()
+    {
+        return legs.Count;
+    }
+
+    private ILeg GetNextLeg()
+    {
+        currentLeg += 1;
+        if (currentLeg > legs.Count - 1)
+            currentLeg = 0;
+
+        return legs[currentLeg];
     }
 
     public void SetActive(bool active)
@@ -26,14 +45,5 @@ public class LegsSync : ILegsSync
     public void StepIsOver()
     {
         GetNextLeg().MakeAStep();
-    }
-
-    private ILeg GetNextLeg()
-    {
-        currentLeg += 1;
-        if (currentLeg > legs.Count - 1)
-            currentLeg = 0;
-
-        return legs[currentLeg];
     }
 }

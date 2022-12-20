@@ -7,21 +7,20 @@ using UnityEngine;
 
 public class TitanMono : MonoBehaviour
 {
-    [SerializeField] public TitanSetup setup;
+    [SerializeField] private TitanSetup setup;
+    [SerializeField] private List<LegMono> legs;
     private Titan titan;
 
     private void Awake()
     {
-        TitanData data = PackData(); 
-        titan = TitansFactory.CreateTitan(data);
+        titan = TitanAssembly.CreateTitan(setup, transform);
+        InitializeLegs();
     }
 
-    private TitanData PackData()
+    private void InitializeLegs()
     {
-        TitanData data = new TitanData(setup);
-        data.transform = new TransformProxy(transform);
-
-        return data;
+        foreach (LegMono legMono in legs)
+            legMono.Initialize(titan, setup);
     }
 
     private void Update()

@@ -1,8 +1,10 @@
 {
-    "name": "TitanPresenter",
+    "name": "TitanBridge",
     "references": [
-        "GUID:669033de2a0d89f4faed7ce4e766aa75",
-        "GUID:67d5259132ab2a24b861dd2fc0e14392"
+        "GUID:67d5259132ab2a24b861dd2fc0e14392",
+        "GUID:46078f17560d25b4b9997fa625ac2a1f",
+        "GUID:4b87e2672920f0447a6ce3ccc7f82e88",
+        "GUID:669033de2a0d89f4faed7ce4e766aa75"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -4,16 +4,24 @@ using UnityEngine;
 
 public abstract class Titan
 {
-    public TitanData data;
-    public MovementController movementController { get; private set; }
+    public TitanData data { get; private set; }
+    public ITransformProxy transform { get; private set; }
+    public IMovementController movementController { get; private set; }
 
-    public Titan(TitanData data)
+    public abstract void Update();
+    public abstract void Move();
+
+    public void SetData(TitanData data)
     {
         this.data = data;
     }
 
-    public abstract void Update();
-    public void SetMovementController(MovementController movementController)
+    public void SetTransform(ITransformProxy transform)
+    {
+        this.transform = transform;
+    }
+
+    public void SetMovementController(IMovementController movementController)
     {
         this.movementController = movementController;
     }

@@ -600,7 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd0205a86bfeb84ca5205b261821560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titan: {fileID: 1935315022461834908}
   side: 1
 --- !u!1 &1935315022461834910
 GameObject:
@@ -648,6 +647,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setup: {fileID: 11400000, guid: 74c7922d2e001ce49aeeb6bd7f659d5b, type: 2}
+  legs:
+  - {fileID: 1414287244497061928}
+  - {fileID: 5142847510443409442}
 --- !u!1 &2003647374973176122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd0205a86bfeb84ca5205b261821560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titan: {fileID: 1935315022461834908}
   side: 0
 --- !u!1 &6190482462552170609
 GameObject:

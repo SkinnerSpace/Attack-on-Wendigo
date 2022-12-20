@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface ILegsSync
+public class TitanBuildException : Exception
 {
-    List<ILeg> legs { get; set; }
+    public TitanBuildException(string message) : base(message) { }
 }

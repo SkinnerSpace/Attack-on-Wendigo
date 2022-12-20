@@ -8,19 +8,13 @@ using UnityEngine;
 public class TransformProxy : ITransformProxy
 {
     private Transform transform;
-    public Vector3 position; public Vector3 Position => position != Vector3.zero ? position : transform.position;
+    public Vector3 Position
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
+    }
     public Vector3 Forward => transform.forward;
     public Vector3 Right => transform.right;
-
-    public TransformProxy()
-    {
-
-    }
-
-    public TransformProxy(Vector3 position)
-    {
-        this.position = position;
-    }
 
     public TransformProxy(Transform transform)
     {

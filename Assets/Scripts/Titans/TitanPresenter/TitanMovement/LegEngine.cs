@@ -2,16 +2,17 @@
 
 public class LegEngine
 {
-    private const float STEP_HEIGHT = 3f;
+    private float stepHeight = 3f;
 
     private bool active = false;
     private float lerp = 0f;
     
     private Leg leg;
 
-    public LegEngine(Leg leg)
+    public LegEngine(Leg leg, LegSetupPack setupPack)
     {
         this.leg = leg;
+        stepHeight = setupPack.stepHeight;
     }
 
     public void SetActive(bool active)
@@ -44,7 +45,7 @@ public class LegEngine
     private Vector3 CalculatePosition(Vector3 oldPos, Vector3 newPos)
     {
         Vector3 footPos = Vector3.Lerp(oldPos, newPos, lerp);
-        footPos.y = footPos.y + (Mathf.Sin(lerp * Mathf.PI) * STEP_HEIGHT);
+        footPos.y = footPos.y + (Mathf.Sin(lerp * Mathf.PI) * stepHeight);
         return footPos;
     }
 }
