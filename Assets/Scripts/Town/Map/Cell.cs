@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 public class Cell
 {
-    public int x { get; private set; }
-    public int y { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
 
-    public Cell(int x, int y)
+    public Cell(int X, int Y)
     {
-        this.x = x;
-        this.y = y;
+        this.X = X;
+        this.Y = Y;
     }
 }

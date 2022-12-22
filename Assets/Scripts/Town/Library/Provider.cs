@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Provider : MonoBehaviour
@@ -10,7 +6,7 @@ public class Provider : MonoBehaviour
     [SerializeField] private List<GameObject> buildings = new List<GameObject>();
     [SerializeField] private List<GameObject> trees = new List<GameObject>();
 
-    private Dictionary<Types, List<GameObject>> objects = new Dictionary<Types, List<GameObject>>();
+    private readonly Dictionary<Types, List<GameObject>> objects = new Dictionary<Types, List<GameObject>>();
 
     private void Awake()
     {
@@ -25,6 +21,6 @@ public class Provider : MonoBehaviour
 
     public GameObject GetObject(Mark mark)
     {
-        return objects[mark.type][mark.index-1];
+        return objects[mark.Type][mark.Index-1];
     }
 }

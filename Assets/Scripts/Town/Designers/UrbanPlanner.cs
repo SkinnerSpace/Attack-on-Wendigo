@@ -9,19 +9,19 @@ public class UrbanPlanner : Designer
 {
     public override Mark Design(Requirments doc)
     {
-        int x = doc.cell.x;
-        int y = doc.cell.y;
+        int X = doc.Cell.X;
+        int Y = doc.Cell.Y;
         float chance = UnityEngine.Random.Range(0f, 1f);
         float likelyhood = CalculateLikelyhood(doc);
 
-        return (chance <= likelyhood) ? doc.mark : doc.map[x, y];
+        return (chance <= likelyhood) ? doc.Mark : doc.Map[X, Y];
     }
 
     private float CalculateLikelyhood(Requirments doc)
     {
         Dictionary<Directions, Mark> neighbours = GetNeighbours(doc);
-        float percent = GetNeighboursOfSameTypePercent(neighbours, doc.mark.type);
-        float likelyhood = doc.likelyhood + percent;
+        float percent = GetNeighboursOfSameTypePercent(neighbours, doc.Mark.Type);
+        float likelyhood = doc.Likelyhood + percent;
 
         return likelyhood;
     }
@@ -33,18 +33,18 @@ public class UrbanPlanner : Designer
         foreach (Directions direction in directions.Keys)
         {
             Cell offset = directions[direction];
-            Cell guessedCell = new Cell(doc.cell.x + offset.x, doc.cell.y + offset.y);
+            Cell guessedCell = new Cell(doc.Cell.X + offset.X, doc.Cell.Y + offset.Y);
 
-            if (CellExist(guessedCell, doc.map))
-                neighbours.Add(direction, doc.map[guessedCell.x, guessedCell.y]);
+            if (CellExist(guessedCell, doc.Map))
+                neighbours.Add(direction, doc.Map[guessedCell.X, guessedCell.Y]);
         }
 
         return neighbours;
     }
 
-    private bool CellExist(Cell guessedCell, Mark[,] map)
+    private bool CellExist(Cell guessedCell, Mark[,] Map)
     {
-        return (guessedCell.x > -1 && guessedCell.x < map.GetLength(0)) && (guessedCell.y > -1 && guessedCell.y < map.GetLength(1));
+        return (guessedCell.X > -1 && guessedCell.X < Map.GetLength(0)) && (guessedCell.Y > -1 && guessedCell.Y < Map.GetLength(1));
     }
 
     private float GetNeighboursOfSameTypePercent(Dictionary<Directions, Mark> neighbours, Types type)
@@ -58,7 +58,7 @@ public class UrbanPlanner : Designer
         int count = 0;
 
         foreach (Mark neighbour in neighbours.Values)
-            count = (neighbour.type == expectedType) ? (count + 1) : (count);
+            count = (neighbour.Type == expectedType) ? (count + 1) : (count);
 
         return count;
     }

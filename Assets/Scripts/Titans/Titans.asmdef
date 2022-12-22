@@ -1,7 +1,8 @@
 {
     "name": "Titans",
     "references": [
-        "GUID:67d5259132ab2a24b861dd2fc0e14392"
+        "GUID:67d5259132ab2a24b861dd2fc0e14392",
+        "GUID:0f9a48a42118c394ab7d6ce4509311c4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

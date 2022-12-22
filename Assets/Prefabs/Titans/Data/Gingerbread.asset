@@ -15,3 +15,6 @@ MonoBehaviour:
   titanName: Gingerbread
   titan: 0
   speed: 3
+  stepDistance: 7
+  spacing: 4.7
+  stepHeight: 5

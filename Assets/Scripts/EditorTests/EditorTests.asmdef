@@ -4,10 +4,12 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Scripts",
+        "General",
         "Titans",
-        "TitanPresenter",
         "TitanMovement",
-        "TitanBridge"
+        "TitanDataStructs",
+        "TitanImp",
+        "TitanFakeObjects"
     ],
     "includePlatforms": [
         "Editor"

@@ -24,8 +24,8 @@ public class Builder : MonoBehaviour
     {
         if (!mark.IsEmpty())
         {
-            Vector3 position = (blueprint.field.position + new Vector3(cell.x, 0f, cell.y)) * blueprint.scale;
-            Transform builtObject = Instantiate(provider.GetObject(mark), position, Quaternion.identity, blueprint.field).transform;
+            Vector3 position = (blueprint.field.position + new Vector3(cell.X, 0f, cell.Y)) * blueprint.scale;
+            Instantiate(provider.GetObject(mark), position, Quaternion.identity, blueprint.field);
         }
     }
 }

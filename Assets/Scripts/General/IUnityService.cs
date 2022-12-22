@@ -2,5 +2,5 @@
 
 public interface IUnityService
 {
-    float delta { get; } 
+    float Delta { get; } 
 }

@@ -7,172 +7,88 @@ using NSubstitute;
 
 namespace Tests
 {
-    public class titan_creation_test
+    public class Titan_creation_test
     {
-        private Vector3 originalPosition = Vector3.zero;
+        [Test]
+        public void Titan_is_created()
+        {
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
+            Assert.That(titan != null);
+        }
 
         [Test]
-        public void data_is_valid()
+        public void Titan_has_data()
+        {
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
+            ITitanData data = Substitute.For<ITitanData>();
+            titan.SetData(data);
+
+            Assert.That(titan.data != null);
+        }
+
+        [Test]
+        public void Data_is_valid()
         {
             string name = "Kevin";
             float speed = 3f;
 
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
 
-            TitanData data = new TitanData();
-            data.name = name;
-            data.speed = speed;
-
-            titanCharacter.SetData(data);
-
-            Assert.That(titanCharacter.data.name == name && titanCharacter.data.speed == speed);
-        }
-
-        [Test]
-        public void position_is_correct()
-        {
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            titanCharacter.SetTransform(transform);
-
-            Assert.That(titanCharacter.transform.Position == originalPosition);
-        }
-
-        [Test]
-        public void unity_service_exists()
-        {
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            Assert.That(titanCharacter.movementController.unityService != null);
-        }
-
-        [Test]
-        public void both_legs_exist()
-        {
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            AddLegs(2, movementController);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            Assert.True(titanCharacter.movementController.legsSync.GetLegsCount() == 2);
-        }
-
-        [Test]
-        public void no_more_than_two_legs_exist()
-        {
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            AddLegs(3, movementController);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            Assert.True(titanCharacter.movementController.legsSync.GetLegsCount() <= 2);
-        }
-
-        [Test]
-        public void leg_exist()
-        {
-            Vector3 legPos = new Vector3(-1f, 0f, 0f);
-
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            Leg leg = CreateLeg(Sides.Left, legPos, transform);
-            movementController.AddLeg(leg);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            Assert.That(titanCharacter.movementController.legsSync.GetLegsCount() > 0);
-        }
-
-        [Test]
-        public void leg_has_synchronizer()
-        {
-            Vector3 legPos = new Vector3(-1f, 0f, 0f);
-
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            Leg leg = CreateLeg(Sides.Left, legPos, transform);
-            movementController.AddLeg(leg);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            titanCharacter.Move();
-
-            Assert.That(leg.synchronizer != null);
-        }
-
-        [Test]
-        public void legs_move()
-        {
-            Vector3 leftLegPos = new Vector3(-1f, 0f, 0f);
-            Vector3 rightLegPos = new Vector3(1f, 0f, 0f);
-
-            Titan titanCharacter = TitansFactory.CreateTitan(Titans.GINGERBREAD);
-
-            ITransformProxy transform = new FakeTransformProxy(originalPosition);
-            IMovementController movementController = new MovementController(transform);
-
-            ILeg leftLeg = CreateLeg(Sides.Left, leftLegPos, transform);
-            ILeg rightLeg = CreateLeg(Sides.Right, rightLegPos, transform);
-
-            movementController.AddLeg(leftLeg);
-            movementController.AddLeg(rightLeg);
-
-            titanCharacter.SetTransform(transform);
-            titanCharacter.SetMovementController(movementController);
-
-            titanCharacter.Move();
-
-            Assert.That(leftLeg.transform.Position != leftLegPos);
-            Assert.That(rightLeg.transform.Position != rightLegPos);
-        }
-
-        private void AddLegs(int count, IMovementController movementController)
-        {
-            for (int i=0; i<count; i++)
+            FakeTitanData data = new FakeTitanData
             {
-                ILeg leg = Substitute.For<ILeg>();
-                movementController.AddLeg(leg);
-            }
+                name = name,
+                speed = speed
+            };
+
+            titan.SetData(data);
+
+            Assert.That(titan.data.Name == name);
+            Assert.That(titan.data.Speed == speed);
         }
 
-        private Leg CreateLeg(Sides side, Vector3 pos, ITransformProxy titanTransform)
+        [Test]
+        public void Titan_has_transform()
         {
-            LegSetupPack legSetupPack = new LegSetupPack();
+            Vector3 originalPosition = Vector3.zero;
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
 
-            legSetupPack.side = side;
-            legSetupPack.transform = new FakeTransformProxy(pos);
-            legSetupPack.titanTransform = titanTransform;
-            legSetupPack.speed = 3f;
-            legSetupPack.spacing = 47f;
-            legSetupPack.stepDistance = 10f;
+            ITransformProxy transform = new FakeTransformProxy(originalPosition);
+            titan.SetTransform(transform);
 
-            Leg leg = new Leg(legSetupPack);
-            return leg;
+            Assert.That(titan.transform.Position == originalPosition);
+        }
+
+        [Test]
+        public void Titan_has_movement_controller()
+        {
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
+
+            IMovementController movementController = Substitute.For<IMovementController>();
+            titan.SetMovementController(movementController);
+
+            Assert.That(titan.movementController != null);
+        }
+
+        [Test]
+        public void Titan_moves_when_update_is_called()
+        {
+            float speed = 1f;
+
+            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
+            titan.SetTransform(Substitute.For<ITransformProxy>());
+
+            FakeTitanData data = new FakeTitanData
+            {
+                speed = speed
+            };
+            titan.SetData(data);
+
+            IMovementController movementController = Substitute.For<IMovementController>();
+            titan.SetMovementController(movementController);
+
+            titan.Update();
+
+            movementController.Received().Move(speed);
         }
     }
 }

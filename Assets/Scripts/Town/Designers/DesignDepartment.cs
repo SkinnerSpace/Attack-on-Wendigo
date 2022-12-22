@@ -12,7 +12,7 @@ public class DesignDepartment : IDesigner
 
     public Mark Design(Requirments doc)
     {
-        switch (doc.mark.type)
+        switch (doc.Mark.Type)
         {
             case Types.BUILDING:
                 return urbanPlanner.Design(doc);

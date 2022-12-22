@@ -1,6 +1,9 @@
 ﻿public interface ILeg
 {
-    ITransformProxy transform { get; }
-    void MakeAStep();
+    ITransformProxy Transform { get; }
+    float Side { get; }
+    void SetNextStep();
     void SetSynchronizer(ILegsSync synchronizer);
+    void Update();
+    void StepIsOver();
 }

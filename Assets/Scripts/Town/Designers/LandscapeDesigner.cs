@@ -8,10 +8,10 @@ public class LandscapeDesigner : Designer
 {
     public override Mark Design(Requirments doc)
     {
-        int x = doc.cell.x;
-        int y = doc.cell.y;
+        int x = doc.Cell.X;
+        int y = doc.Cell.Y;
         float chance = UnityEngine.Random.Range(0f, 1f);
 
-        return (chance <= doc.likelyhood) ? doc.mark : doc.map[x, y];
+        return (chance <= doc.Likelyhood) ? doc.Mark : doc.Map[x, y];
     }
 }

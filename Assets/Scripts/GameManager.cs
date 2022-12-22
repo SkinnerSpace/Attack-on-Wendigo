@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
             SpawnTitan();
     }
 
+    /*
     private void TimeOut()
     {
         SpawnTitan();
     }
+    */
 
     private void SpawnTitan()
     {
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private Vector3 GetSpawnPosition()
     {
-        Vector3 center = Town.Instance.transform.position;
+        //Vector3 center = Town.Instance.transform.position;
         int degrees = Random.Range(0, 361);
 
         float x = spawnRadius * Mathf.Cos(degrees * Mathf.Deg2Rad);

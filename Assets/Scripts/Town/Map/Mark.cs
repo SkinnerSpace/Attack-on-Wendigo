@@ -7,19 +7,19 @@ using UnityEngine;
 
 public class Mark
 {
-    public Types type { get; private set; }
-    public int index { get; private set; }
+    public Types Type { get; private set; }
+    public int Index { get; private set; }
 
     public Mark() { }
 
-    public Mark(Types type, int index)
+    public Mark(Types Type, int Index)
     {
-        this.type = type;
-        this.index = index;
+        this.Type = Type;
+        this.Index = Index;
     }
 
     public bool IsEmpty()
     {
-        return type == Types.NONE && index == 0;
+        return Type == Types.NONE && Index == 0;
     }
 }

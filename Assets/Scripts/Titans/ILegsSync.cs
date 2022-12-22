@@ -9,4 +9,5 @@ public interface ILegsSync
     void StepIsOver();
     void AddLeg(ILeg leg);
     int GetLegsCount();
+    void Update();
 }

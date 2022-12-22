@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Town : MonoBehaviour
 {
-    public Prop[] buildings { get; private set; }
+    public Prop[] Buildings { get; private set; }
     [NonSerialized] public int buildingsCount;
 
     public static Town Instance { get; private set; }
