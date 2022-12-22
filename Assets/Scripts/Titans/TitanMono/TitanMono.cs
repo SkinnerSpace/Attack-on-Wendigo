@@ -16,7 +16,7 @@ public class TitanMono : MonoBehaviour
     {
         titan = TitanAssembly.CreateTitan(setup, transform);
         InitializeLegs();
-        torso.Initialize(titan);
+        torso.Initialize(setup, titan);
     }
 
     private void InitializeLegs()

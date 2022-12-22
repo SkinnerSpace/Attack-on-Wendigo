@@ -9,9 +9,9 @@ public class TorsoMono : MonoBehaviour
 {
     private Torso torso;
 
-    public void Initialize(Titan titan)
+    public void Initialize(TitanSetup titanSetup, Titan titan)
     {
-        torso = new Torso();
+        torso = new Torso(titanSetup, new TransformProxy(transform));
         titan.movementController.AddTorso(torso);
     }
 }

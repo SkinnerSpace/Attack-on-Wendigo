@@ -26,6 +26,17 @@ namespace Tests
         }
 
         [Test]
+        public void Movement_controller_has_torso()
+        {
+            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>());
+            ITorso torso = Substitute.For<ITorso>();
+            movementController.AddTorso(torso);
+            movementController.Move(1f);
+
+            torso.Received().Update();
+        }
+
+        [Test]
         public void Movement_controller_has_at_least_one_leg()
         {
             ITransformProxy transform = Substitute.For<ITransformProxy>();
@@ -80,7 +91,7 @@ namespace Tests
             MovementController movementController = new MovementController(transformProxy);
             movementController.SetUnityService(UnityService);
 
-            movementController.MoveBodyForward(speed);
+            movementController.Move(speed);
 
             Assert.AreEqual(expectedPosition, transformProxy.Position);
         }

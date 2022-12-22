@@ -9,7 +9,7 @@ public class MovementController : IMovementController, ITorsoController
     public MovementController(ITransformProxy transform)
     {
         this.transform = transform;
-        UnityService = new UnityService(); 
+        UnityService = new UnityService();
     }
 
     public void SetUnityService(IUnityService UnityService)
@@ -33,24 +33,20 @@ public class MovementController : IMovementController, ITorsoController
 
     public void Move(float speed)
     {
-        MoveBodyForward(speed);
-        MoveLegs();
-        MoveTorso();
-    }
-
-    public void MoveBodyForward(float speed)
-    {
         transform.Position += (transform.Forward * speed) * UnityService.Delta;
+        if (LegsSync != null) LegsSync.Update();
+        if (Torso != null) Torso.Update();
     }
 
-    public void MoveLegs()
+    public float GetTorsoModifier()
     {
-        LegsSync.Update();
-    }
+        if (LegsSync != null)
+        {
+            ILeg currentLeg = LegsSync.CurrentLeg;
+            return currentLeg.Side * currentLeg.Transform.Position.y;
+        }
 
-    public void MoveTorso()
-    {
-        Torso.Update();
+        return 0f;
     }
 }
 

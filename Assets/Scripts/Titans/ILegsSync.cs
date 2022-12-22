@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public interface ILegsSync
 {
+    ILeg CurrentLeg { get; }
     void StepIsOver();
     void AddLeg(ILeg leg);
     int GetLegsCount();

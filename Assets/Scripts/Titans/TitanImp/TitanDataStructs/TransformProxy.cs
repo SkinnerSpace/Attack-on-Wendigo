@@ -14,10 +14,22 @@ public class TransformProxy : ITransformProxy
         set { transform.position = value; }
     }
 
+    public Vector3 LocalPosition
+    {
+        get { return transform.localPosition; }
+        set { transform.localPosition = value; }
+    }
+
     public Vector3 Angle
     {
         get { return transform.eulerAngles; }
         set { transform.eulerAngles = value; }
+    }
+
+    public Vector3 LocalAngle
+    {
+        get { return transform.localEulerAngles; }
+        set { transform.localEulerAngles = value; }
     }
 
     public Quaternion Rotation

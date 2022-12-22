@@ -26,7 +26,7 @@ namespace Tests
 
             legsSync.StepIsOver();
 
-            Assert.AreEqual(1, legsSync.CurrentLeg);
+            Assert.AreEqual(1, legsSync.Index);
         }
 
         private void AddFakeLegs(int count, ILegsSync legsSync)

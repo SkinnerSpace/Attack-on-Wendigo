@@ -11,4 +11,7 @@ public class TitanSetup : ScriptableObject
     public float stepDistance;
     public float spacing;
     public float stepHeight;
+
+    public Vector3 torsoPosDeviation;
+    public Vector3 torsoAngleDeviation;
 }

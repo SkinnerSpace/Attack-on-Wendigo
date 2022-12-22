@@ -14,12 +14,26 @@ public class FakeTransformProxy : ITransformProxy
     }
     private Vector3 position;
 
+    public Vector3 LocalPosition
+    {
+        get { return localPosition; }
+        set { localPosition = value; }
+    }
+    private Vector3 localPosition;
+
     public Vector3 Angle
     {
         get { return angle; }
         set { angle = value; }
     }
     private Vector3 angle;
+
+    public Vector3 LocalAngle
+    {
+        get { return localAngle; }
+        set { localAngle = value; }
+    }
+    private Vector3 localAngle;
 
     public Quaternion Rotation
     {

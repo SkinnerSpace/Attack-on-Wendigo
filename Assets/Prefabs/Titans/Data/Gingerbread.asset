@@ -18,3 +18,5 @@ MonoBehaviour:
   stepDistance: 7
   spacing: 4.7
   stepHeight: 5
+  torsoPosDeviation: {x: 0, y: 0.02, z: 0}
+  torsoAngleDeviation: {x: 0, y: 5, z: 5}

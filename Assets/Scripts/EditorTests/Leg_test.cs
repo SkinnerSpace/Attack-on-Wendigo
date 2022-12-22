@@ -51,12 +51,40 @@ namespace Tests
         }
 
         [Test]
+        public void Foot_bends_min()
+        {
+            Vector3 position = new Vector3(0f, 0f, 0f);
+            float sign = -1f;
+
+            ITransformProxy transform = new FakeTransformProxy(position);
+            Foot foot = new Foot(sign);
+
+            foot.Update(transform);
+
+            Assert.AreEqual(new Vector3(0f, 0f, Foot.MIN_BEND_ANGLE * sign), transform.Angle);
+        }
+
+        [Test]
+        public void Foot_bends_max()
+        {
+            Vector3 position = new Vector3(0f, Foot.MAX_HEIGHT, 0f);
+            float sign = -1f;
+
+            ITransformProxy transform = new FakeTransformProxy(position);
+            Foot foot = new Foot(sign);
+
+            foot.Update(transform);
+
+            Assert.AreEqual(new Vector3(0f, 0f, Foot.MAX_BEND_ANGLE * sign), transform.Angle);
+        }
+
+        [Test]
         public void Update_is_called()
         {
             MovementController movementController = new MovementController(Substitute.For<ITransformProxy>());
             ILeg leg = Substitute.For<ILeg>();
             movementController.AddLeg(leg);
-            movementController.MoveLegs();
+            movementController.Move(1f);
 
             leg.Received().Update();
         }
