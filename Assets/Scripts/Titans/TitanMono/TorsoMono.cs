@@ -11,7 +11,8 @@ public class TorsoMono : MonoBehaviour
 
     public void Initialize(TitanSetup titanSetup, Titan titan)
     {
-        torso = new Torso(titanSetup, new TransformProxy(transform));
+        torso = new Torso(new TransformProxy(transform));
+        torso.SetPosAndAngleDeviations(titanSetup.torsoPosDeviation, titanSetup.torsoAngleDeviation);
         titan.movementController.AddTorso(torso);
     }
 }

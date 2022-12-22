@@ -2,7 +2,7 @@
 
 public class Torso : ITorso
 {
-    private const float INTENSITY_MODIFIER = 0.2f;
+    public const float INTENSITY_MODIFIER = 0.2f;
 
     private readonly ITransformProxy transform;
     private ITorsoController torsoController;
@@ -13,14 +13,17 @@ public class Torso : ITorso
     private Vector3 posDeviation;
     private Vector3 angleDeviation;
 
-    public Torso(TitanSetup titanSetup, ITransformProxy transform)
+    public Torso(ITransformProxy transform)
     {
-        posDeviation = titanSetup.torsoPosDeviation;
-        angleDeviation = titanSetup.torsoAngleDeviation;
-
         this.transform = transform;
         originalPosition = transform.LocalPosition;
         originalAngle = transform.LocalAngle;
+    }
+
+    public void SetPosAndAngleDeviations(Vector3 posDeviation, Vector3 angleDeviation)
+    {
+        this.posDeviation = posDeviation;
+        this.angleDeviation = angleDeviation;
     }
 
     public void SetTorsoController(ITorsoController torsoController)
