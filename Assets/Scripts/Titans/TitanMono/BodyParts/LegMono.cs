@@ -9,10 +9,12 @@ public class LegMono : MonoBehaviour
     {
         leg = new Leg(side, new TransformProxy(transform));
 
-        LegRaycaster raycaster = new LegRaycaster(leg, titan.transform, titanSetup.spacing, titanSetup.stepDistance);
+        LegRaycaster raycaster = new LegRaycaster(leg, titan.transform);
+        raycaster.SetSpacingAndStepDistance(titanSetup.spacing, titanSetup.stepDistance);
         leg.SetRaycaster(raycaster);
 
-        LegEngine engine = new LegEngine(leg, titanSetup.speed, titanSetup.stepHeight);
+        LegEngine engine = new LegEngine(leg, titan.clock);
+        engine.SetSpeedAndStepHeight(titanSetup.speed, titanSetup.stepHeight);
         leg.SetEngine(engine);
 
         titan.movementController.AddLeg(leg);

@@ -9,20 +9,18 @@ public class LegEngine : ILegEngine
     public float Lerp { get; set; }
 
     private readonly ILeg leg;
-    public IUnityService UnityService { get; private set; }
+    public IClock clock { get; private set; }
 
-    public LegEngine(ILeg leg, float Speed, float StepHeight)
+    public LegEngine(ILeg leg, IClock clock)
     {
         this.leg = leg;
-        this.Speed = Speed * SPEED_ADJUSTMENT;
-        this.StepHeight = StepHeight;
-
-        UnityService = new UnityService();
+        this.clock = clock;
     }
 
-    public void SetUnityService(IUnityService UnityService)
+    public void SetSpeedAndStepHeight(float Speed, float StepHeight)
     {
-        this.UnityService = UnityService;
+        this.Speed = Speed * SPEED_ADJUSTMENT;
+        this.StepHeight = StepHeight;
     }
 
     public Vector3 UpdatePosition(Vector3 oldPos, Vector3 newPos)
@@ -38,7 +36,7 @@ public class LegEngine : ILegEngine
 
     public void IncrementLerp(float Speed)
     {
-        Lerp += Speed * UnityService.Delta;
+        Lerp += Speed * clock.Delta;
         if (Lerp >= 1f)
         {
             Lerp = 1f;

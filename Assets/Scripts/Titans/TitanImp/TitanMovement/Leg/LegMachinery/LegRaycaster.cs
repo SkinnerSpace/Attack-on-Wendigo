@@ -7,13 +7,17 @@ public class LegRaycaster : ILegRaycaster
     private readonly ILeg leg;
     private readonly ITransformProxy pivotPoint;
 
-    private readonly float stepDistance;
-    private readonly float spacing;
+    private float stepDistance;
+    private float spacing;
 
-    public LegRaycaster(ILeg leg, ITransformProxy pivotPoint, float spacing, float stepDistance)
+    public LegRaycaster(ILeg leg, ITransformProxy pivotPoint)
     {
         this.leg = leg;
         this.pivotPoint = pivotPoint;
+    }
+
+    public void SetSpacingAndStepDistance(float spacing, float stepDistance)
+    {
         this.spacing = spacing;
         this.stepDistance = stepDistance;
     }

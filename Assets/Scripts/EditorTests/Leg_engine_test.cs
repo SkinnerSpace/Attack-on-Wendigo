@@ -14,18 +14,18 @@ namespace Tests
         public void Leg_engine_is_created()
         {
             ILeg leg = Substitute.For<ILeg>();
-            ILegEngine engine = new LegEngine(leg, speed, stepHeight);
+            ILegEngine engine = new LegEngine(leg, Substitute.For<IClock>());
 
             Assert.That(engine != null);
         }
 
         [Test]
-        public void Leg_engine_has_unity_service()
+        public void Leg_engine_has_clock()
         {
             ILeg leg = Substitute.For<ILeg>();
-            LegEngine engine = new LegEngine(leg, speed, stepHeight);
+            LegEngine engine = new LegEngine(leg, Substitute.For<IClock>());
 
-            Assert.That(engine.UnityService != null);
+            Assert.That(engine.clock != null);
         }
 
         [Test]
@@ -34,15 +34,15 @@ namespace Tests
             int cycles = 3;
 
             ILeg leg = Substitute.For<ILeg>();
-            LegEngine engine = new LegEngine(leg, speed, stepHeight);
+            IClock clock = Substitute.For<IClock>();
+            clock.Delta.Returns(delta);
 
-            IUnityService UnityService = Substitute.For<IUnityService>();
-            UnityService.Delta.Returns(delta);
-            engine.SetUnityService(UnityService);
+            LegEngine engine = new LegEngine(leg, clock);
+            engine.SetSpeedAndStepHeight(speed, stepHeight);
 
             float expectedLerp = (speed * delta) * cycles;
 
-            for (int i=0; i<cycles; i++)
+            for (int i=0; i < cycles; i++)
                 engine.IncrementLerp(speed);
 
             Assert.AreEqual(expectedLerp, engine.Lerp);
@@ -55,11 +55,12 @@ namespace Tests
             Vector3 newPos = Vector3.one;
             float lerp = 0.5f;
 
-            ILeg leg = Substitute.For<ILeg>();
-            LegEngine engine = new LegEngine(leg, speed, stepHeight)
+            LegEngine engine = new LegEngine(Substitute.For<ILeg>(), Substitute.For<IClock>())
             {
                 Lerp = lerp
             };
+
+            engine.SetSpeedAndStepHeight(speed, stepHeight);
 
             Vector3 expectedPosition = Vector3.Lerp(oldPos, newPos, lerp);
             expectedPosition.y += (Mathf.Sin(lerp * Mathf.PI) * stepHeight);
@@ -76,11 +77,11 @@ namespace Tests
             float delta = 1f;
 
             ILeg leg = Substitute.For<ILeg>();
+            IClock clock = Substitute.For<IClock>();
+            clock.Delta.Returns(delta);
 
-            LegEngine engine = new LegEngine(leg, speed, StepHeight: 1f);
-            IUnityService UnityService = Substitute.For<IUnityService>();
-            UnityService.Delta.Returns(delta);
-            engine.SetUnityService(UnityService);
+            LegEngine engine = new LegEngine(leg, clock);
+            engine.SetSpeedAndStepHeight(speed, 1f);
 
             engine.IncrementLerp(speed);
             engine.ResetLerpIfMax();

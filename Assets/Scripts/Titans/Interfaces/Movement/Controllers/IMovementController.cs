@@ -7,11 +7,10 @@ using UnityEngine;
 
 public interface IMovementController
 {
-    IUnityService UnityService { get; }
     ILegsSync LegsSync { get; }
+    IClock clock { get; }
 
     void Move(float speed);
-    void Look(Vector3 lookDirection, float speed);
     void AddLeg(ILeg leg);
     void AddTorso(ITorso torso);
 }

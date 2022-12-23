@@ -16,6 +16,7 @@ namespace Tests
             AddFakeLegs(3, legsSync);
 
             Assert.AreEqual(2, legsSync.GetLegsCount());
+            Assert.That(legsSync.CurrentLeg != null);
         }
 
         [Test]

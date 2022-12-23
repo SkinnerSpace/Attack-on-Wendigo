@@ -7,28 +7,37 @@ namespace Tests
     public class Movement_controller_test
     {
         [Test]
-        public void Movement_controller_has_unity_service()
+        public void Moves()
         {
-            ITransformProxy transform = Substitute.For<ITransformProxy>();
-            IMovementController movementController = new MovementController(transform);
+            Vector3 originalPosition = Vector3.zero;
+            float speed = 3f;
+            float delta = 1f;
 
-            Assert.That(movementController.UnityService != null);
+            Vector3 expectedPosition = originalPosition + ((Vector3.forward * speed) * delta);
+
+            ITransformProxy transformProxy = new FakeTransformProxy(originalPosition);
+            IClock clock = Substitute.For<IClock>();
+            clock.Delta.Returns(delta);
+
+            IMovementController movementController = new MovementController(transformProxy, clock);
+            movementController.Move(speed);
+
+            Assert.AreEqual(expectedPosition, transformProxy.Position);
         }
 
         [Test]
-        public void Movement_controller_has_legs_synchronizer()
+        public void legs_sync_was_added_after_adding_a_leg()
         {
-            ITransformProxy transform = Substitute.For<ITransformProxy>();
-            IMovementController movementController = new MovementController(transform);
+            IMovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             AddFakeLegs(1, movementController);
 
             Assert.That(movementController.LegsSync != null);
         }
 
         [Test]
-        public void Movement_controller_has_torso()
+        public void Torso_is_connected()
         {
-            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>());
+            IMovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             ITorso torso = Substitute.For<ITorso>();
             movementController.AddTorso(torso);
             movementController.Move(1f);
@@ -37,10 +46,29 @@ namespace Tests
         }
 
         [Test]
+        public void Torso_modifier_is_zero_without_legs_sync()
+        {
+            ITorsoController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
+            Assert.AreEqual(0f, movementController.GetTorsoModifier());
+        }
+
+        [Test]
+        public void Torso_modifier_is_none_zero_with_legs_sync()
+        {
+            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
+
+            ITransformProxy transformProxy = new FakeTransformProxy(Vector3.one);
+            ILeg leg = new Leg(Sides.Right, transformProxy);
+
+            movementController.AddLeg(leg);
+
+            Assert.AreEqual(1f, movementController.GetTorsoModifier());
+        }
+
+        [Test]
         public void Movement_controller_has_at_least_one_leg()
         {
-            ITransformProxy transform = Substitute.For<ITransformProxy>();
-            IMovementController movementController = new MovementController(transform);
+            IMovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             AddFakeLegs(1, movementController);
 
             Assert.That(movementController.LegsSync.GetLegsCount() > 0);
@@ -49,8 +77,7 @@ namespace Tests
         [Test]
         public void Movement_controller_has_two_legs()
         {
-            ITransformProxy transform = Substitute.For<ITransformProxy>();
-            IMovementController movementController = new MovementController(transform);
+            IMovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             AddFakeLegs(2, movementController);
 
             Assert.That(movementController.LegsSync.GetLegsCount() == 2);
@@ -59,8 +86,7 @@ namespace Tests
         [Test]
         public void Movement_controller_has_no_more_than_two_legs()
         {
-            ITransformProxy transform = Substitute.For<ITransformProxy>();
-            IMovementController movementController = new MovementController(transform);
+            IMovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             AddFakeLegs(3, movementController);
 
             Assert.That(movementController.LegsSync.GetLegsCount() <= 2);
@@ -73,27 +99,6 @@ namespace Tests
                 ILeg leg = Substitute.For<ILeg>();
                 movementController.AddLeg(leg);
             }
-        }
-
-        [Test]
-        public void Move_test()
-        {
-            Vector3 originalPosition = Vector3.zero;
-            float speed = 3f;
-            float delta = 1f;
-
-            Vector3 expectedPosition = originalPosition + ((Vector3.forward * speed) * delta);
-
-            ITransformProxy transformProxy = new FakeTransformProxy(originalPosition);
-            IUnityService UnityService = Substitute.For<IUnityService>();
-            UnityService.Delta.Returns(delta);
-
-            MovementController movementController = new MovementController(transformProxy);
-            movementController.SetUnityService(UnityService);
-
-            movementController.Move(speed);
-
-            Assert.AreEqual(expectedPosition, transformProxy.Position);
-        }
+        } 
     }
 }

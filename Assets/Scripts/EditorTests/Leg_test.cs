@@ -17,7 +17,7 @@ namespace Tests
         public void Leg_has_raycaster()
         {
             Leg leg = new Leg(Sides.Left, Substitute.For<ITransformProxy>());
-            LegRaycaster Raycaster = new LegRaycaster(leg, Substitute.For<ITransformProxy>(), 1f, 1f);
+            LegRaycaster Raycaster = new LegRaycaster(leg, Substitute.For<ITransformProxy>());
             leg.SetRaycaster(Raycaster);
 
             Assert.That(leg.Raycaster != null);
@@ -27,7 +27,7 @@ namespace Tests
         public void Leg_has_engine()
         {
             Leg leg = new Leg(Sides.Left, Substitute.For<ITransformProxy>());
-            LegEngine Engine = new LegEngine(leg, 1f, 1f);
+            LegEngine Engine = new LegEngine(leg, Substitute.For<IClock>());
             leg.SetEngine(Engine);
 
             Assert.That(leg.Engine != null);
@@ -36,7 +36,7 @@ namespace Tests
         [Test]
         public void Leg_has_synchronizer()
         {
-            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>());
+            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             Leg leg = new Leg(Sides.Left, Substitute.For<ITransformProxy>());
             movementController.AddLeg(leg);
 
@@ -81,7 +81,7 @@ namespace Tests
         [Test]
         public void Update_is_called()
         {
-            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>());
+            MovementController movementController = new MovementController(Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             ILeg leg = Substitute.For<ILeg>();
             movementController.AddLeg(leg);
             movementController.Move(1f);

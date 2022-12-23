@@ -10,23 +10,6 @@ namespace Tests
     public class Titan_creation_test
     {
         [Test]
-        public void Titan_is_created()
-        {
-            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
-            Assert.That(titan != null);
-        }
-
-        [Test]
-        public void Titan_has_data()
-        {
-            Titan titan = TitansFactory.CreateTitan(TitanTypes.GINGERBREAD);
-            ITitanData data = Substitute.For<ITitanData>();
-            titan.SetData(data);
-
-            Assert.That(titan.data != null);
-        }
-
-        [Test]
         public void Data_is_valid()
         {
             string name = "Kevin";
@@ -70,7 +53,7 @@ namespace Tests
         }
 
         [Test]
-        public void Titan_moves_when_update_is_called()
+        public void Titan_moves()
         {
             float speed = 1f;
 
@@ -86,7 +69,7 @@ namespace Tests
             IMovementController movementController = Substitute.For<IMovementController>();
             titan.SetMovementController(movementController);
 
-            titan.Update();
+            titan.MoveForward();
 
             movementController.Received().Move(speed);
         }

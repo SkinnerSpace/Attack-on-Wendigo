@@ -15,7 +15,8 @@ namespace Tests
             ILeg leg = Substitute.For<ILeg>();
             ITransformProxy pivotPoint = new FakeTransformProxy(Vector3.zero);
 
-            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint, spacing, stepDistance);
+            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint);
+            raycaster.SetSpacingAndStepDistance(spacing, stepDistance);
             Assert.That(raycaster != null);
         }
 
@@ -26,7 +27,8 @@ namespace Tests
             ITransformProxy pivotPoint = new FakeTransformProxy(Vector3.zero);
             Vector3 expectedPoint = pivotPoint.Position + (pivotPoint.Right * (spacing * leg.Side));
 
-            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint, spacing, stepDistance);
+            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint);
+            raycaster.SetSpacingAndStepDistance(spacing, stepDistance);
             Vector3 currentPoint = raycaster.GetStandPoint();
 
             Assert.AreEqual(expectedPoint, currentPoint);
@@ -38,7 +40,8 @@ namespace Tests
             ILeg leg = new Leg(Sides.Left, Substitute.For<ITransformProxy>());
             ITransformProxy pivotPoint = new FakeTransformProxy(Vector3.zero);
 
-            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint, spacing, stepDistance);
+            LegRaycaster raycaster = new LegRaycaster(leg, pivotPoint);
+            raycaster.SetSpacingAndStepDistance(spacing, stepDistance);
 
             Vector3 expectedPoint = raycaster.GetStandPoint() + (pivotPoint.Forward * stepDistance);
             Vector3 currentPoint = raycaster.GetNextStepPoint();

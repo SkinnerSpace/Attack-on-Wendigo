@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class LegsSync : ILegsSync
 {
@@ -18,6 +17,7 @@ public class LegsSync : ILegsSync
         {
             Legs.Add(leg);
             leg.SetSynchronizer(this);
+            CurrentLeg = Legs[Index];
         }
     }
 

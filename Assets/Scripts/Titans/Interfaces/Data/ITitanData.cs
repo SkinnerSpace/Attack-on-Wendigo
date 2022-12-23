@@ -3,4 +3,5 @@
     TitanTypes Type { get; }
     string Name { get; }
     float Speed { get; }
+    float RotationSpeed { get; }
 }

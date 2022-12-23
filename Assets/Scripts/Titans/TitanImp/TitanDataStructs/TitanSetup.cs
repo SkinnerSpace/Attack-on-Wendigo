@@ -7,6 +7,7 @@ public class TitanSetup : ScriptableObject
     public string titanName;
     public TitanTypes titan;
     public float speed;
+    public float rotationSpeed;
 
     public float stepDistance;
     public float spacing;
