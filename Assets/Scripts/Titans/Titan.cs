@@ -10,7 +10,7 @@ public abstract class Titan
 
     public abstract void Update();
     public abstract void Move();
-
+    public abstract void FindTarget();
     public void SetData(ITitanData data)
     {
         this.data = data;

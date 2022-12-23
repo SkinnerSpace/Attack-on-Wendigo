@@ -1,39 +1,27 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class Prop : MonoBehaviour
+public abstract class Prop : IProp
 {
-    [SerializeField] private float length; public float Length => length;
-    [SerializeField] private float width; public float Width => width;
-    [SerializeField] private float height; public float Height => height;
+    public IPropData data { get; private set; }
+    public ITransformProxy transform { get; private set; }
 
-    [SerializeField] private List<float> angles = new List<float>();
-    [SerializeField] private float minScale = 1f;
-    [SerializeField] private float maxScale = 1f;
-
-    private void Awake()
+    public void AddToTown()
     {
-        SetRandomScale();
-        SetRandomAngle();
+        Town.Instance.AddProp(data.Type, this);
     }
 
-    private void SetRandomScale()
+    public void SetData(IPropData data)
     {
-        float scale = UnityEngine.Random.Range(minScale, maxScale);
-        transform.localScale = new Vector3(scale, scale, scale);
+        this.data = data;
     }
 
-    private void SetRandomAngle()
+    public void SetTransform(ITransformProxy transform)
     {
-        if (angles.Count > 0)
-        {
-            int index = UnityEngine.Random.Range(0, angles.Count);
-            transform.eulerAngles = new Vector3(0f, angles[index], 0f);
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(0f, UnityEngine.Random.Range(0f, 360f), 0f);
-        }
+        this.transform = transform;
     }
 }

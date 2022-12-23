@@ -1,7 +1,9 @@
 {
     "name": "TitanImp",
     "references": [
-        "GUID:669033de2a0d89f4faed7ce4e766aa75"
+        "GUID:669033de2a0d89f4faed7ce4e766aa75",
+        "GUID:0f9a48a42118c394ab7d6ce4509311c4",
+        "GUID:4ac9419d64913f14c9564ac67b997136"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

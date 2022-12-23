@@ -52,10 +52,13 @@ public class GameManager : MonoBehaviour
 
     private Quaternion GetSpawnRotation(Vector3 spawnPosition)
     {
+        /*
         Vector3 dirToCenter = (Town.Instance.transform.position - spawnPosition).normalized;
         Debug.Log(dirToCenter);
         Quaternion spawnRotation = Quaternion.LookRotation(dirToCenter);
 
         return spawnRotation;
+        */
+        return Quaternion.identity;
     }
 }
