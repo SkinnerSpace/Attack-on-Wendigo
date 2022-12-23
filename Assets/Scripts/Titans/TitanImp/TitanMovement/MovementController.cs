@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 public class MovementController : IMovementController, ITorsoController
 {
     public ILegsSync LegsSync { get; private set; }
@@ -31,9 +32,25 @@ public class MovementController : IMovementController, ITorsoController
         Torso.SetTorsoController(this);
     }
 
+    public void Look(Vector3 direction, float speed)
+    {
+        Vector3 targetAngle = CalculateAngle(direction);
+        Debug.Log(targetAngle);
+        //transform.Angle = Vector3.Lerp(transform.Angle, targetAngle, speed * UnityService.Delta);
+    }
+
+    public Vector3 CalculateAngle(Vector3 direction)
+    {
+        float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        Vector3 targetAngle = new Vector3(0f, angleY, 0f);
+
+        return targetAngle;
+    }
+
     public void Move(float speed)
     {
         transform.Position += (transform.Forward * speed) * UnityService.Delta;
+       
         if (LegsSync != null) LegsSync.Update();
         if (Torso != null) Torso.Update();
     }
