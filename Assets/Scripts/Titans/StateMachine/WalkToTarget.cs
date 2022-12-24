@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 public class WalkToTarget : IState
 {
-    private readonly IMovementController movementController;
-    private readonly IDirectionController directionController;
+    private readonly IMover movementController;
+    private readonly IRotator directionController;
 
-    public WalkToTarget(IMovementController movementController, IDirectionController directionController)
+    public WalkToTarget(IMover movementController, IRotator directionController)
     {
         this.movementController = movementController;
         this.directionController = directionController;
@@ -17,8 +17,8 @@ public class WalkToTarget : IState
 
     public void Tick()
     {
-        movementController.Move();
-        directionController.LookAt();
+        //movementController.Move();
+        //directionController.RotateTo();
     }
 
     public void OnEnter() { }

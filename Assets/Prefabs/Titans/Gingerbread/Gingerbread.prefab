@@ -646,11 +646,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454541b51797d3043b23c5d3d92a0bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setup: {fileID: 11400000, guid: 74c7922d2e001ce49aeeb6bd7f659d5b, type: 2}
-  legs:
+  setup: {fileID: 11400000, guid: 028034dd38e8aa2418a152d2a225537b, type: 2}
+  legsMono:
   - {fileID: 1414287244497061928}
   - {fileID: 5142847510443409442}
-  torso: {fileID: 7484491108990742275}
+  torsoMono: {fileID: 7484491108990742275}
 --- !u!1 &2003647374973176122
 GameObject:
   m_ObjectHideFlags: 0

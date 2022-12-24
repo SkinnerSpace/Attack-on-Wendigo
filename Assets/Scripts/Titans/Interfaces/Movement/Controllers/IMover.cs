@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
-public interface ILegsSync
+public interface IMover
 {
-    ILeg CurrentLeg { get; }
-    void StepIsOver();
-    void Walk();
+    IClock clock { get; }
+
+    void MoveForward();
 }

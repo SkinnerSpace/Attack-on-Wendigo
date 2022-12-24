@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface ILegsSync
+public abstract class TitanLeg
 {
-    ILeg CurrentLeg { get; }
-    void StepIsOver();
-    void Walk();
 }
