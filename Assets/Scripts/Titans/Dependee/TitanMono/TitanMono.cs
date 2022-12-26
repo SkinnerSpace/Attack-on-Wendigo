@@ -15,8 +15,9 @@ public class TitanMono : MonoBehaviour
     private void Awake()
     {
         TitansAssembly titansAssembly = TitansAssemblyFactory.Create(setup.titanType);
+
         titansAssembly.CreateCoreComponents(setup, transform);
-        titansAssembly.CreateMovementController(GetLegs(), torsoMono.GetTorso());
+        titansAssembly.CreateMovementController(GetLegs(), GetTorso());
         titan = titansAssembly.Assemble();
     }
 
@@ -27,6 +28,11 @@ public class TitanMono : MonoBehaviour
             legs.Add(legMono.GetLeg());
 
         return legs;
+    }
+
+    private Torso GetTorso()
+    {
+        return torsoMono.GetTorso();
     }
 
     private void Update()

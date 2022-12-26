@@ -36,10 +36,11 @@ public class GingerbreadAssembly : TitansAssembly
         clock = new Clock();
     }
 
-    public override void SetCoreComponents(TitanData data, ITransformProxy titanTransform)
+    public override void SetCoreComponents(TitanData data, ITransformProxy titanTransform, IClock clock)
     {
         this.data = data as GingerbreadData;
         this.titanTransform = titanTransform;
+        this.clock = clock;
     }
 
     public override void CreateMovementController(List<ILeg> legs, Torso torso)

@@ -12,7 +12,10 @@ public static class PropConfigurator
     public static void SetRandomScale(ITransformProxy transform, float minScale, float maxScale)
     {
         float scale = UnityEngine.Random.Range(minScale, maxScale);
-        transform.LocalScale = new Vector3(scale, scale, scale);
+        transform.LocalScale = new Vector3(
+            transform.LocalScale.x * scale, 
+            transform.LocalScale.y * scale, 
+            transform.LocalScale.z * scale);
     }
 
     public static void SetRandomAngle(ITransformProxy transform, List<float> angles)

@@ -5,23 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class Prop : IProp
+public abstract class Prop : IProp, IDestructible
 {
     public IPropData data { get; private set; }
-    public ITransformProxy transform { get; private set; }
+    public List<ITransformProxy> transforms { get; private set; }
+    public bool isCollapsing { get; protected set; }
 
     public void AddToTown()
     {
         Town.Instance.AddProp(data.Type, this);
     }
-
     public void SetData(IPropData data)
     {
         this.data = data;
     }
 
-    public void SetTransform(ITransformProxy transform)
+    public void AddTransform(ITransformProxy transform)
     {
-        this.transform = transform;
+        transforms.Add(transform);
     }
+
+    public void SetTransforms(List<ITransformProxy> transforms)
+    {
+        this.transforms = transforms;
+    }
+
+    public abstract void Collapse(Vector3 impact);
+    public abstract void UpdateCollapse();
 }

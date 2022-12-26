@@ -20,10 +20,20 @@ namespace Tests
         public void Gingerbread_is_created()
         {
             GingerbreadAssembly gingerbreadAssembly = TitansAssemblyFactory.Create(TitanTypes.GINGERBREAD) as GingerbreadAssembly;
-            gingerbreadAssembly.SetCoreComponents(new GingerbreadData(), Substitute.For<ITransformProxy>());
+            gingerbreadAssembly.SetCoreComponents(new GingerbreadData(), Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
             Titan gingerbread = gingerbreadAssembly.Assemble();
 
             Assert.That(gingerbread != null);
+        }
+
+        [Test]
+        public void Gingerbread_has_clock()
+        {
+            GingerbreadAssembly gingerbreadAssembly = TitansAssemblyFactory.Create(TitanTypes.GINGERBREAD) as GingerbreadAssembly;
+            gingerbreadAssembly.SetCoreComponents(new GingerbreadData(), Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
+            Titan gingerbread = gingerbreadAssembly.Assemble();
+
+            Assert.That(gingerbread.clock != null);
         }
 
         [Test]
@@ -33,11 +43,21 @@ namespace Tests
             ITransformProxy transformProxy = new FakeTransformProxy(Vector3.zero);
 
             GingerbreadAssembly gingerbreadAssembly = TitansAssemblyFactory.Create(TitanTypes.GINGERBREAD) as GingerbreadAssembly;
-            gingerbreadAssembly.SetCoreComponents(data, transformProxy);
+            gingerbreadAssembly.SetCoreComponents(data, transformProxy, Substitute.For<IClock>());
             gingerbreadAssembly.CreateMovementController(new List<ILeg>(), new Torso(Substitute.For<ITransformProxy>()));
             Titan gingerbread = gingerbreadAssembly.Assemble();
 
             Assert.That(gingerbread.movementController != null);
+        }
+
+        [Test]
+        public void Gingerbread_has_target_pointer()
+        {
+            GingerbreadAssembly gingerbreadAssembly = TitansAssemblyFactory.Create(TitanTypes.GINGERBREAD) as GingerbreadAssembly;
+            gingerbreadAssembly.SetCoreComponents(new GingerbreadData(), Substitute.For<ITransformProxy>(), Substitute.For<IClock>());
+            Titan gingerbread = gingerbreadAssembly.Assemble();
+
+            Assert.That(gingerbread.targetPointer != null);
         }
     }
 }

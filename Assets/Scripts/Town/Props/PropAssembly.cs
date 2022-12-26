@@ -10,11 +10,12 @@ public static class PropAssembly
     public static Prop CreateProp(PropSetup setup, Transform transform)
     {
         IPropData data = CreateData(setup, transform);
-        ITransformProxy transformProxy = new TransformProxy(transform);
 
         Prop prop = PropFactory.CreateProp(setup.type);
         prop.SetData(data);
-        prop.SetTransform(transformProxy);
+
+        List<ITransformProxy> transforms = GetAllTransforms(transform);
+        prop.SetTransforms(transforms);
 
         return prop;
     }
@@ -27,6 +28,17 @@ public static class PropAssembly
         data.SetSize(size);
 
         return data;
+    }
+
+    public static List<ITransformProxy> GetAllTransforms(Transform transform)
+    {
+        Transform[] childTransforms = transform.GetComponentsInChildren<Transform>();
+        List<ITransformProxy> transforms = new List<ITransformProxy>();
+
+        foreach (Transform childTransform in childTransforms)
+            transforms.Add(new TransformProxy(childTransform.transform));
+
+        return transforms;
     }
 
     public static Vector3 GetSize(Transform transform)

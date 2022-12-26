@@ -11,6 +11,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Fall fall; public Fall Fall => fall;
     [SerializeField] private Move move; public Move Move => move;
 
+    public ITransformProxy transformProxy;
+
+    public static Player Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+        transformProxy = new TransformProxy(transform);
+    }
+
     private void Update()
     {
         Look.Execute();
