@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titanName: 
   titanType: 0
-  speed: 3
-  rotationSpeed: 0.1
+  speed: 0
+  rotationSpeed: 10
   stepDistance: 8
   stepSpacing: 4
   stepHeight: 5
