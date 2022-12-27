@@ -20,8 +20,6 @@ public class PropMono : MonoBehaviour, IDestructible
 
     public void Collapse(Vector3 impact)
     {
-        //Debug.Log(transform.name + " collapse");
-
         hitBox.enabled = false;
         prop.Collapse(impact);
         StartCoroutine(PlayCollapseAnimation());

@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propSetup: {fileID: 11400000, guid: 2f951175f9b3f024a90884966e2f5259, type: 2}
+  model: {fileID: 0}

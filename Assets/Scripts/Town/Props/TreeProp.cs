@@ -23,7 +23,7 @@ public class TreeProp : Prop
         isCollapsing = true;
         bounciness = UnityEngine.Random.Range(MIN_BOUNCINESS, MAX_BOUNCINESS);
 
-        float angleY = (Mathf.Atan2(impact.x, impact.z) * Mathf.Rad2Deg);
+        float angleY = (Mathf.Atan2(impact.x, impact.z) * Mathf.Rad2Deg) + transforms[0].Angle.y;
         Vector3 fallDirection = new Vector3(0f, angleY, 0f);
         Vector3 invertedFallDirection = new Vector3(0f, -angleY, 0f);
 

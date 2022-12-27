@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NightSkybox
-  m_Shader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_HIGH_QUALITY
+  m_Shader: {fileID: 4800000, guid: 82881a2d011b0964696411c822cdd00b, type: 3}
+  m_ShaderKeywords: _ENABLEFOG_ON _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -80,11 +80,22 @@ Material:
     - _AtmosphereThickness: 1
     - _Blend: 0
     - _BumpScale: 1
+    - _CubemapPosition: 0
+    - _Cubemapp: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
+    - _EnableFog: 1
+    - _EnableRotation: 0
     - _EnvironmentReflections: 1
     - _Exposure: 1
+    - _FogFill: 0.151
+    - _FogHeight: 0.334
+    - _FogIntensity: 1
+    - _FogMessage: 0
+    - _FogPosition: 0
+    - _FogSmoothness: 0.431
+    - _Fogg: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -97,6 +108,9 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rotation: 0
+    - _RotationSpeed: 1
+    - _Rotationn: 1
+    - _SkyboxExtended: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -115,6 +129,7 @@ Material:
     - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 0.5}
+    - _TintColor: {r: 0.7783019, g: 0.7935355, b: 1, a: 1}
 --- !u!114 &6434521623727755590
 MonoBehaviour:
   m_ObjectHideFlags: 11
