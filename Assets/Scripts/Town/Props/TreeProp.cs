@@ -16,8 +16,6 @@ public class TreeProp : Prop
     private float bounciness;
     private float lerp;
 
-    private bool bounced;
-
     public override void Collapse(Vector3 impact)
     {
         isCollapsing = true;
@@ -44,7 +42,6 @@ public class TreeProp : Prop
             BounceOrStop();
 
         transforms[COLLAPSE_TRANSFORM].LocalAngle = Vector3.Lerp(beforeCollapse, afterCollapse, lerp);
-        //Debug.Log("Update");
     } 
 
     private void BounceOrStop()

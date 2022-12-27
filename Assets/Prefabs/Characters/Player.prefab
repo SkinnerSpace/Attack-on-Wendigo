@@ -546,7 +546,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -664,15 +664,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe60a6892a1c3474297e8fe3b8df9ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 6176119535850529059}
-  mainCamera: {fileID: 6176119536334313433}
-  grappleable:
+  grappleableSurface:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 0
   maxDistance: 300
   delayTime: 0.25
   target: {fileID: 5473892126694684433}
-  coolDown: 1
+  throwTime: 0
+  throwSpeed: 5
+  position: {x: 0, y: 0, z: 0}
 --- !u!120 &2612924296704631415
 LineRenderer:
   m_ObjectHideFlags: 0

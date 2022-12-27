@@ -29,4 +29,9 @@ public class Player : MonoBehaviour
         Fall.Execute();
         Move.Execute();
     }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
 }

@@ -10,6 +10,7 @@ public class Blueprint
     public Mark[,] map;
     public float scale;
     public Transform field;
+    public Vector3 offset;
 
     public Blueprint(Mark[,] map, float scale, Transform field)
     {
