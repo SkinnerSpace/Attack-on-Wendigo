@@ -5,19 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+# if UNITY_EDITOR
+using UnityEditor;
+# endif
+
 public class Architect : MonoBehaviour
 {
-    [SerializeField] private int size;
+    [SerializeField] private bool debugMode;
+
+    [SerializeField] private int mapSize;
+    [SerializeField] private int forestSize;
     [SerializeField] private int townSize;
     [SerializeField] private float scale;
-    private int townOffset;
     private Vector3 center;
 
     private DesignDepartment designDepartment;
     [SerializeField] private Builder builder;
+    [SerializeField] private TerraPlanner terraformer;
+
     [SerializeField] private CentralizedObjects centralizedObjects;
 
     private Mark[,] map;
+    private const float BUILDING_CHANCE = 0.01f;
 
     private void Awake()
     {
@@ -25,53 +34,52 @@ public class Architect : MonoBehaviour
 
         designDepartment = new DesignDepartment();
         GenerateMap();
-        FindBoundaries();
+        FindCenter();
+        ShowMap();
         centralizedObjects.Centralize(center);
     }
 
     private void Start()
     {
-        AddMarks(new Mark(PropTypes.BUILDING, 1), likelyhood: 0.02f, townOffset);
-        AddMarks(new Mark(PropTypes.BUILDING, 2), likelyhood: 0.02f, townOffset);
-        AddMarks(new Mark(PropTypes.BUILDING, 3), likelyhood: 0.02f, townOffset);
-        AddMarks(new Mark(PropTypes.BUILDING, 4), likelyhood: 0.02f, townOffset);
+        AddMarks(new Mark(PropTypes.BUILDING, 1), likelyhood: BUILDING_CHANCE);
+        AddMarks(new Mark(PropTypes.BUILDING, 2), likelyhood: BUILDING_CHANCE);
+        AddMarks(new Mark(PropTypes.BUILDING, 3), likelyhood: BUILDING_CHANCE);
+        AddMarks(new Mark(PropTypes.BUILDING, 4), likelyhood: BUILDING_CHANCE);
         AddMarks(new Mark(PropTypes.TREE, 1), likelyhood: 0.4f);
 
         Blueprint blueprint = DrawBlueprint();
         builder.Build(blueprint);
+
+        terraformer.GenerateMap(mapSize, mapSize);
     }
 
     private void GenerateMap()
     {
-        map = new Mark[size, size];
+        map = new Mark[mapSize, mapSize];
 
-        for (int y = 0; y < size; y++)
+        for (int y = 0; y < mapSize; y++)
         {
-            for (int x = 0; x < size; x++)
+            for (int x = 0; x < mapSize; x++)
             {
-                map[x, y] = new Mark(0, 0);
+                map[x, y] = new Mark(PropTypes.NONE, Index: 0);
             }
         }
 
     }
 
-    private void FindBoundaries()
+    private void FindCenter()
     {
-        float totalSize = size * scale;
+        float totalSize = mapSize * scale;
         center = new Vector3(totalSize / 2, 0, totalSize / 2);
-        townOffset = (size - townSize) / 2;
     }
 
     public void AddMarks(Mark mark, float likelyhood)
     {
-        AddMarks(mark, likelyhood, 0);
-    }
+        int offset = GetOffset(mark.Type);
 
-    public void AddMarks(Mark mark, float likelyhood, int offset)
-    {
-        for (int y = offset; y < size - offset; y++)
+        for (int y = offset; y < mapSize - offset; y++)
         {
-            for (int x = offset; x < size - offset; x++)
+            for (int x = offset; x < mapSize - offset; x++)
             {
                 if (map[x, y].IsEmpty())
                 {
@@ -84,7 +92,68 @@ public class Architect : MonoBehaviour
 
     private Blueprint DrawBlueprint()
     {
-        Blueprint blueprint = new Blueprint(map, scale, transform);
+        int offset = GetOffset(PropTypes.TREE);
+        Blueprint blueprint = new Blueprint(map, offset, scale, transform);
         return blueprint;
+    }
+
+    public int GetOffset(PropTypes type)
+    {
+        switch (type)
+        {
+            case PropTypes.BUILDING:
+                return (mapSize - townSize) / 2;
+
+            case PropTypes.TREE:
+                return (mapSize - forestSize) / 2;
+
+            default:
+                return 0;
+        }
+    }
+
+    # if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!debugMode) return;
+
+        FindCenter();
+
+        float forestFullSize = (forestSize * scale);
+        Vector3 forestCubeSize = new Vector3(forestFullSize, 20f, forestFullSize);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(center, forestCubeSize);
+
+        float townFullSize = (townSize * scale);
+        Vector3 townCubeSize = new Vector3(townFullSize, 20f, townFullSize);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(center, townCubeSize);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center, (forestFullSize / 2) * 0.8f);
+
+        float mapFullSize = (mapSize * scale);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(center, mapFullSize / 2);
+    }
+#endif
+
+    private void ShowMap()
+    {
+        string elements = "";
+
+        for (int y = 0; y < mapSize; y++)
+        {
+            string yElements = "";
+
+            for (int x = 0; x < mapSize; x++)
+            {
+                yElements += map[x, y].ToString() + "   ";
+            }
+
+            elements += "\n" + yElements;
+        }
+
+        Debug.Log(elements);
     }
 }

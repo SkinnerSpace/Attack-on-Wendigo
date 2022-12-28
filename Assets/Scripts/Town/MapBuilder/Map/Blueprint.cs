@@ -8,13 +8,14 @@ using UnityEngine;
 public class Blueprint
 {
     public Mark[,] map;
+    public int offset;
     public float scale;
     public Transform field;
-    public Vector3 offset;
 
-    public Blueprint(Mark[,] map, float scale, Transform field)
+    public Blueprint(Mark[,] map, int offset, float scale, Transform field)
     {
         this.map = map;
+        this.offset = offset;
         this.scale = scale;
         this.field = field;
     }
