@@ -10,41 +10,52 @@ public class MeshGenerator : MonoBehaviour
     Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
+    GeoMap geoMap;
 
-    [SerializeField] private int xSize = 20;
-    [SerializeField] private int zSize = 20;
+    private int width;
+    private int height;
 
     private int vert = 0;
     private int tris = 0;
 
-    [SerializeField] private float scale = 16f;
+    private float scale = 100f;
     [SerializeField] private float mountainsSeed = 1f;
     [SerializeField] private float mountainsHeight = 16f;
 
-    private void Start()
+    private void Awake()
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    public void GenerateTerrain(GeoMap geoMap)
+    {
+        this.geoMap = geoMap;
+
+        width = geoMap.width;
+        height = geoMap.height;
+        //scale = geoMap.scale;
 
         CreateShape();
         UpdateMesh();
+        Debug.Log("Generate");
     }
 
     private void CreateShape()
     {
-        CreateVertices();
+        CreateVertices(geoMap);
         CreateQuads();
     }
 
-    private void CreateVertices()
+    private void CreateVertices(GeoMap geoMap)
     {
-        vertices = new Vector3[(xSize + 1) * (zSize + 1)];
+        vertices = new Vector3[(width + 1) * (height + 1)];
 
-        for (int i = 0, z = 0; z <= zSize; z++)
+        for (int i = 0, z = 0; z < height; z++)
         {
-            for (int x = 0; x <= xSize; x++)
+            for (int x = 0; x < width; x++)
             {
-                float y = Mathf.PerlinNoise(x * mountainsSeed, z * mountainsSeed) * mountainsHeight;
+                float y = geoMap.GetAltitude(x, z) * 10f;
                 vertices[i] = new Vector3(x, y, z) * scale;
                 i++;
             }
@@ -55,9 +66,9 @@ public class MeshGenerator : MonoBehaviour
     {
         AllocateSpaceForTriangles();
 
-        for (int z = 0; z < zSize; z++)
+        for (int z = 0; z < height; z++)
         {
-            for (int x = 0; x < xSize; x++)
+            for (int x = 0; x < width; x++)
                 CreateQuad();
 
             SwitchToNextLine();
@@ -66,7 +77,7 @@ public class MeshGenerator : MonoBehaviour
 
     private void AllocateSpaceForTriangles()
     {
-        triangles = new int[xSize * zSize * QUAD_POINTS];
+        triangles = new int[width * height * QUAD_POINTS];
 
         vert = 0;
         tris = 0;
@@ -83,15 +94,15 @@ public class MeshGenerator : MonoBehaviour
     private void CreateFirstTriangle()
     {
         triangles[tris + 0] = vert + 0;
-        triangles[tris + 1] = vert + (xSize + 1);
+        triangles[tris + 1] = vert + (width + 1);
         triangles[tris + 2] = vert + 1;
     }
 
     private void CreateSecondTriangle()
     {
         triangles[tris + 3] = vert + 1;
-        triangles[tris + 4] = vert + (xSize + 1);
-        triangles[tris + 5] = vert + (xSize + 2);
+        triangles[tris + 4] = vert + (width + 1);
+        triangles[tris + 5] = vert + (width + 2);
     }
 
     private void SwitchToNextQuad()

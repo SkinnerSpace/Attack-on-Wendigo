@@ -9,36 +9,40 @@ public class TerraPlanner : MonoBehaviour
 {
     [SerializeField] private Cartographer cartographer;
 
-    private int width = 256;
-    private int height = 256;
+    private int width = 10;
+    private int height = 10;
 
     private const float RANDOM_RESOLUTION = 2560f;
     private float xOrg;
     private float yOrg;
 
-    [SerializeField] private float scale = 16f;
-    private float[,] map;
+    private float scale = 100f;
+    private GeoMap geoMap;
+
+    private void Awake()
+    {
+        GenerateMap();
+    }
 
     private void Update()
     {
-        if (map != null)
-            cartographer.DrawMap(map);
+        cartographer.DrawMap(geoMap);
     }
 
-    public void GenerateMap(int width, int height)
+    public void GenerateMap()
     {
-        this.width = width;
-        this.height = height;
-
         SetRandomOrigin();
 
-        map = new float[width, height];
+        geoMap = new GeoMap(width, height);
 
         for (int x=0; x < width; x++)
         {
             for (int y=0; y < height; y++)
             {
-                map[x, y] = CalculateAltitude(x, y);
+                float altitude  = CalculateAltitude(x, y);
+                Cell cell = new Cell(x, y);
+
+                geoMap.SetAltitude(cell, altitude);
             }
         }
     }
@@ -47,7 +51,6 @@ public class TerraPlanner : MonoBehaviour
     {
         xOrg = UnityEngine.Random.Range(-RANDOM_RESOLUTION, RANDOM_RESOLUTION);
         yOrg = UnityEngine.Random.Range(-RANDOM_RESOLUTION, RANDOM_RESOLUTION);
-        Debug.Log("Origin " + "x: " + xOrg + "y: " + yOrg);
     }
 
     public float CalculateAltitude(int x, int y)

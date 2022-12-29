@@ -21,7 +21,6 @@ public class Architect : MonoBehaviour
 
     private DesignDepartment designDepartment;
     [SerializeField] private Builder builder;
-    [SerializeField] private TerraPlanner terraformer;
 
     [SerializeField] private CentralizedObjects centralizedObjects;
 
@@ -31,26 +30,29 @@ public class Architect : MonoBehaviour
     private void Awake()
     {
         UnityEngine.Random.InitState(DateTime.Now.Millisecond);
-
         designDepartment = new DesignDepartment();
+
         GenerateMap();
         FindCenter();
-        ShowMap();
+
         centralizedObjects.Centralize(center);
     }
 
     private void Start()
+    {
+        SetMarks();
+
+        Blueprint blueprint = DrawBlueprint();
+        builder.Build(blueprint);
+    }
+
+    private void SetMarks()
     {
         AddMarks(new Mark(PropTypes.BUILDING, 1), likelyhood: BUILDING_CHANCE);
         AddMarks(new Mark(PropTypes.BUILDING, 2), likelyhood: BUILDING_CHANCE);
         AddMarks(new Mark(PropTypes.BUILDING, 3), likelyhood: BUILDING_CHANCE);
         AddMarks(new Mark(PropTypes.BUILDING, 4), likelyhood: BUILDING_CHANCE);
         AddMarks(new Mark(PropTypes.TREE, 1), likelyhood: 0.4f);
-
-        Blueprint blueprint = DrawBlueprint();
-        builder.Build(blueprint);
-
-        terraformer.GenerateMap(mapSize, mapSize);
     }
 
     private void GenerateMap()
@@ -136,24 +138,5 @@ public class Architect : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(center, mapFullSize / 2);
     }
-#endif
-
-    private void ShowMap()
-    {
-        string elements = "";
-
-        for (int y = 0; y < mapSize; y++)
-        {
-            string yElements = "";
-
-            for (int x = 0; x < mapSize; x++)
-            {
-                yElements += map[x, y].ToString() + "   ";
-            }
-
-            elements += "\n" + yElements;
-        }
-
-        Debug.Log(elements);
-    }
+    #endif
 }

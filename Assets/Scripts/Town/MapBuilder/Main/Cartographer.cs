@@ -8,12 +8,12 @@ public class Cartographer : MonoBehaviour
     private int width;
     private int height;
 
-    public void DrawMap(float[,] map)
+    public void DrawMap(GeoMap geoMap)
     {
         if (texture == null)
         {
-            width = map.GetLength(0);
-            height = map.GetLength(1);
+            width = geoMap.width;
+            height = geoMap.height;
             texture = new Texture2D(width, height);
         }
 
@@ -21,7 +21,7 @@ public class Cartographer : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                float altitude = map[x, y];
+                float altitude = geoMap.GetAltitude(x, y);
                 Color color = new Color(altitude, altitude, altitude);
                 texture.SetPixel(x, y, color);
             }

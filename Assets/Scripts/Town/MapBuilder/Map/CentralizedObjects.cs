@@ -9,6 +9,6 @@ public class CentralizedObjects : MonoBehaviour
     public void Centralize(Vector3 center)
     {
         foreach (Transform transform in objects)
-            transform.position = center;
+            transform.position = new Vector3(center.x, transform.position.y, center.z);
     }
 }

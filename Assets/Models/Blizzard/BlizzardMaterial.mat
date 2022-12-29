@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-407656724910326461
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AuroraMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: ad9a383f9fa63d642b6d2e605687a4b6,
+  m_Name: BlizzardMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: b0ea432c6fc488c4ba8db023c506c34e,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,7 +20,7 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_599503C3:
+    - Mask:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -66,17 +53,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - NoiseScale: 32
-    - Vector1_1372F7AF: 0.1
-    - Vector1_1ABD1EE7: 2000
-    - Vector1_1E5AF724: 128
-    - Vector1_2A4912D8: 149.1
-    - Vector1_3E288A31: -0.01
-    - Vector1_493D3AF2: 1
-    - Vector1_6AA770B0: 0.3
-    - Vector1_92737CD5: 2
-    - Vector1_CF2D8549: 2
-    - Vector1_DECE80DB: 2
+    - BlizzardScale: 500
+    - BlizzardSpeed: 0.1
+    - DeformScale: 100
+    - DeformSpeed: 5
+    - Dissolve: 0.3
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -99,12 +80,24 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_79500DA5: {r: 1.6, g: 5.992157, b: 1.6, a: 0}
-    - Color_DA26480E: {r: 1.4980392, g: 0, b: 0, a: 1}
-    - LightColor: {r: 3.482202, g: 3.482202, b: 3.482202, a: 0}
-    - Vector2_B6BBACBE: {r: 12, g: 0.11, b: 0, a: 0}
-    - Vector3_391A9667: {r: 0.1, g: 0.001, b: 0.001, a: 0}
+    - BlizzardColor: {r: 7.3772106, g: 7.3772106, b: 7.3772106, a: 0}
+    - DeformTiling: {r: 100, g: 1, b: 0, a: 0}
+    - Tiling: {r: 10, g: 0.7, b: 0, a: 0}
+    - Vector2_B3F9F498: {r: 100, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+--- !u!114 &6119780681734842399
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2

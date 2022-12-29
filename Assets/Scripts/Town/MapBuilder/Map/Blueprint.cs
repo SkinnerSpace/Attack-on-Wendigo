@@ -19,4 +19,14 @@ public class Blueprint
         this.scale = scale;
         this.field = field;
     }
+
+    public int GetWidth()
+    {
+        return map.GetLength(0);
+    }
+
+    public int GetHeight()
+    {
+        return map.GetLength(1);
+    }
 }
