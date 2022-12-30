@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VolumetricFog : MonoBehaviour
+public class Sticker : MonoBehaviour
 {
     [SerializeField] private Transform holder;
+    [SerializeField] private Vector3 offset;
 
     void Update()
     {
@@ -12,6 +13,6 @@ public class VolumetricFog : MonoBehaviour
             return;
 
         Vector3 position = new Vector3(holder.position.x, 0f, holder.position.z);
-        transform.position = position;
+        transform.position = position + offset;
     }
 }
