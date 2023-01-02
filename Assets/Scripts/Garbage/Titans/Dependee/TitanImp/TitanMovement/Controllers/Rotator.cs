@@ -20,7 +20,7 @@ public class Rotator
         Vector3 targetDirection = (targetPosition - transform.Position).normalized;
         targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        transform.Rotation = Quaternion.Lerp(transform.Rotation, targetRotation, speed * clock.Delta);
+        transform.Rotation = Quaternion.Lerp(transform.Rotation, targetRotation, speed * clock.DeltaTime);
     }
 }
 

@@ -36,7 +36,7 @@ public class LegEngine : ILegEngine
 
     public void IncrementLerp(float Speed)
     {
-        Lerp += Speed * clock.Delta;
+        Lerp += Speed * clock.DeltaTime;
         if (Lerp >= 1f)
         {
             Lerp = 1f;

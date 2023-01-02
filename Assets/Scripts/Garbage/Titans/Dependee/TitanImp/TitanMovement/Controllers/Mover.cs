@@ -15,7 +15,7 @@
 
     public void MoveForward()
     {
-        transform.Position += (transform.Forward * speed) * clock.Delta;
+        transform.Position += (transform.Forward * speed) * clock.DeltaTime;
     }
 }
 

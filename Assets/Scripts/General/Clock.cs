@@ -7,5 +7,5 @@ using UnityEngine;
 
 public class Clock : IClock
 {
-    public float Delta => Time.deltaTime;
+    public float DeltaTime => Time.deltaTime;
 }

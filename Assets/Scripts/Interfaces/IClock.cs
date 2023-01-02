@@ -1,5 +1,5 @@
 ﻿
 public interface IClock
 {
-    float Delta { get; }
+    float DeltaTime { get; }
 }

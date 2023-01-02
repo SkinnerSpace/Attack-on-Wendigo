@@ -10,7 +10,7 @@ public abstract class Titan
     public IMovementController movementController { get; set; }
     public ITargetPointer targetPointer { get; set; }
     public IClock clock { get; set; }
-    public StateMachine stateMachine;
+   // public StateMachine stateMachine;
 
     public ITransformProxy Target { get; set; }
 

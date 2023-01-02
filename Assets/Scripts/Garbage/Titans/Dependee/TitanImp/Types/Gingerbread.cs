@@ -11,8 +11,10 @@ public class Gingerbread : Titan
 
     public override void Update() // => stateMachine.Tick();
     {
+        /*
         if (target == null)
             target = Player.Instance.transformProxy;
+        */
         //target = targetPointer.GetTarget(PropTypes.BUILDING);
 
         if (target != null)
