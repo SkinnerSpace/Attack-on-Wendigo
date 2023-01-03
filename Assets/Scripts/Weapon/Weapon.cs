@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Parts")]
     [SerializeField] private GunSight gunSight;
     [SerializeField] private GunMagazine gunMagazine;
     [SerializeField] private GunBarrel gunBarrel;
+
+    [Header("Controllers")]
+    [SerializeField] private WeaponAimController aimController;
+    [SerializeField] private WeaponRecoilController recoilController;
 
     public Action notifyOutOfAmmo;
 
@@ -21,24 +22,30 @@ public class Weapon : MonoBehaviour
     public void PullTheTrigger()
     {
         if (gunBarrel.isReady)
+            ShootIfEnoughAmmo();
+    }
+
+    private void ShootIfEnoughAmmo()
+    {
+        if (!gunMagazine.IsEmpty())
         {
-            if (!gunMagazine.IsEmpty())
-            {
-                gunBarrel.bullet = gunMagazine.TakeAmmo();
-                gunBarrel.Shoot();
-                
-                DamageTargetIfExist();
-            }
-            else
-            {
-                notifyOutOfAmmo();
-            }
+            Shoot();
+        }
+        else
+        {
+            notifyOutOfAmmo();
         }
     }
 
-    public void Reload()
+    private void Shoot()
     {
-        gunMagazine.Reload();
+        gunBarrel.bullet = gunMagazine.TakeAmmo();
+        gunBarrel.Shoot();
+        recoilController.Recoil();
+
+        sFXPlayer.play(sFXLibrary.shootSFX);
+
+        DamageTargetIfExist();
     }
 
     private void DamageTargetIfExist()
@@ -49,5 +56,14 @@ public class Weapon : MonoBehaviour
             gunSight.Damageable.ReceiveDamage(damagePackage);
         }
     }
-}
 
+    public void Aim(bool isAiming)
+    {
+        aimController.Aim(isAiming);
+    }
+
+    public void Reload()
+    {
+        gunMagazine.Reload();
+    }
+}

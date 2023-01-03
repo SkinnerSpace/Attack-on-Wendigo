@@ -6,6 +6,7 @@ public interface IKeyBinds
     float MouseInversion { get; }
     
     KeyCode Shoot { get; }
+    KeyCode Aim { get; }
     KeyCode Reload { get; }
 
     KeyCode MoveRight { get; }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
@@ -30,12 +25,9 @@ public class PlayerLook : MonoBehaviour
 
     private void Look()
     {
-        float xAxis = Input.GetAxis("Mouse X");
-        float yAxis = Input.GetAxis("Mouse Y");
+        xRotation += InputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime;
 
-        xRotation += xAxis * keys.MouseSensitivity * Time.deltaTime;
-
-        yRotation += yAxis * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
+        yRotation += InputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
         yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(new Vector3(yRotation, xRotation, 0f));

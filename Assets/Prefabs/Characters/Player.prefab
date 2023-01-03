@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6176119535850529056}
   - component: {fileID: 6146795615001241510}
   - component: {fileID: 1691979724270368987}
+  - component: {fileID: 5236374400679958590}
   - component: {fileID: 5845931283795517954}
   - component: {fileID: 1416451892556028029}
   - component: {fileID: 5956892049143004515}
@@ -50,7 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671c0149394e8574fbb916f49561fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  minSpeed: 10
+  maxSpeed: 15
+  acceleration: 0.5
   jumpHeight: 3
   gravity: 16
 --- !u!114 &1691979724270368987
@@ -74,6 +77,18 @@ MonoBehaviour:
   moveForward: 119
   moveBackward: 115
   jump: 32
+--- !u!114 &5236374400679958590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5ac74ef3d286143b3a58508338b4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5845931283795517954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de971d8ccc1c5e0438dfacf3fbfbedc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSin: {fileID: 0}
 --- !u!114 &5956892049143004515
 MonoBehaviour:
   m_ObjectHideFlags: 0

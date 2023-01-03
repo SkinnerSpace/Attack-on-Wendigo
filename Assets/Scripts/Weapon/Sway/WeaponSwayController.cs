@@ -12,28 +12,25 @@ public class WeaponSwayController : MonoBehaviour
     [SerializeField] private bool tiltOn = true;
     private WeaponTilter tilter;
 
+    [SerializeField] private bool oscillationOn = true;
+    private WeaponOscillator oscillator;
+
     private Quaternion tiltedRotation = Quaternion.identity;
     private Quaternion offsettedRotation = Quaternion.identity;
 
-    private Vector2 input;
-    public Action<Vector2> SendInput;
+    public Vector2 input { get; private set; }
 
     private void Awake()
     {
         displacer = GetComponent<WeaponDisplacer>();
-        if (displacer != null) SendInput += displacer.ReadInput;
-
         rotator = GetComponent<WeaponRotator>();
-        if (rotator != null) SendInput += rotator.ReadInput;
-
         tilter = GetComponent<WeaponTilter>();
-        if (tilter != null) SendInput += tilter.ReadInput;
+        oscillator = GetComponent<WeaponOscillator>();
     }
 
     private void Update()
     {
         ReadInput();
-        SendInput?.Invoke(input);
 
         if (displacementOn) DisplacePosition();
         if (rotationOn) OffsetRotation();
@@ -44,26 +41,25 @@ public class WeaponSwayController : MonoBehaviour
 
     private void ReadInput()
     {
+        Vector2 oscillation = oscillationOn ? oscillator.movement : Vector2.one;
+
         input = new Vector2(
-            Input.GetAxis("Mouse X"),
-            Input.GetAxis("Mouse Y"));
+            InputReader.mouse.x + oscillation.x,
+            InputReader.mouse.y + oscillation.y);
     }
 
     private void DisplacePosition()
     {
-        if (displacer != null)
-            transform.localPosition = displacer.DisplacePosition(transform.localPosition);
+        transform.localPosition = displacer.DisplacePosition(transform.localPosition);
     }
 
     private void OffsetRotation()
     {
-        if (rotator != null)
-            offsettedRotation = rotationOn ? rotator.OffsetRotation(offsettedRotation) : Quaternion.identity;
+        offsettedRotation = rotationOn ? rotator.OffsetRotation(offsettedRotation) : Quaternion.identity;
     }
 
     private void TiltRotation()
     {
-        if (tilter != null)
-            tiltedRotation = tiltOn ? tilter.TiltRotation(tiltedRotation) : Quaternion.identity;
+        tiltedRotation = tiltOn ? tilter.TiltRotation(tiltedRotation) : Quaternion.identity;
     }
 }

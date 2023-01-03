@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerHorizontalMovement : MonoBehaviour
 {
+    public static float velocityMagnitude;
+    public static float speedMagnitude;
+
+    [SerializeField] private WeaponOscillator weaponSin;
+
     private PlayerCharacter player;
     private CharacterController controller;
-    private IKeyBinds keys;
 
-    private float xAxis;
-    private float zAxis;
-    private Vector3 direction;
+    private Vector3 velocity;
 
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         controller = GetComponent<CharacterController>();
-        keys = GetComponent<IKeyBinds>();
     }
 
     private void Update()
@@ -34,20 +30,33 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        float moveRight = Input.GetKey(keys.MoveRight) ? 1f : 0f;
-        float moveLeft = Input.GetKey(keys.MoveLeft) ? -1f : 0f;
-        xAxis = moveRight + moveLeft;
+        Vector3 direction = GetDirection();
+        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
 
-        float moveForward = Input.GetKey(keys.MoveForward) ? 1f : 0f;
-        float moveBackward = Input.GetKey(keys.MoveBackward) ? -1f : 0f;
-        zAxis = moveForward + moveBackward;
+        velocity = direction * player.Speed;
+    }
 
-        Vector3 directionRaw = new Vector3(xAxis, 0f, zAxis).normalized;
-        direction = (directionRaw.x * transform.right) + (directionRaw.z * transform.forward);
+    private Vector3 GetDirection()
+    {
+        Vector3 direction = (InputReader.normDir.x * transform.right) + (InputReader.normDir.z * transform.forward);
+        return direction;
+    }
+
+    private bool PlayerIsMoving(Vector3 direction)
+    {
+        return direction.magnitude > 0f;
+    }
+
+    private float AccelerateSpeed()
+    {
+        return Mathf.Lerp(player.Speed, player.MaxSpeed, player.Acceleration * Time.deltaTime);
     }
 
     private void ApplyMovement()
     {
-        controller.Move(direction * player.Speed * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
+
+        velocityMagnitude = velocity.magnitude / player.MaxSpeed;
+        speedMagnitude = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f) / (player.MaxSpeed - player.MinSpeed);
     }
 }

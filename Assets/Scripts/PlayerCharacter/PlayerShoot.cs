@@ -28,8 +28,9 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(keys.Shoot))
             weapon.PullTheTrigger();
 
+        weapon.Aim(Input.GetKey(keys.Aim));
+
         if (Input.GetKey(keys.Reload))
             weapon.Reload();
-
     }
 }

@@ -6,17 +6,29 @@ public class PlayerCharacter : MonoBehaviour
 {
     private CapsuleCollider collisionBox;
 
-    public float Speed => speed;
-    [SerializeField] private float speed = 10f;
-    public float JumpHeight => jumpHeight;
+    [Header("Horizontal movement")]
+    [SerializeField] private float minSpeed = 10f;
+    [SerializeField] private float maxSpeed = 15f;
+    [SerializeField] private float acceleration = 0.5f;
+
+    public float Speed { get; set; }
+    public float MinSpeed => minSpeed;
+    public float MaxSpeed => maxSpeed;
+    public float Acceleration => acceleration;
+    
+    [Header("Vertical movement")]
     [SerializeField] private float jumpHeight = 10f;
-    public float Gravity => gravity;
     [SerializeField] private float gravity = 16f;
 
+    public float JumpHeight => jumpHeight;
+    public float Gravity => gravity;
+    
     public float height => collisionBox.height;
 
     private void Awake()
     {
         collisionBox = GetComponentInChildren<CapsuleCollider>();
+
+        Speed = MinSpeed;
     }
 }

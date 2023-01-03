@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerVerticalMovement : MonoBehaviour
 {
+    public static float velocityMagnitude { get; private set; }
+    public static float landMagnitude { get; private set; }
+
     private const int GROUND = 1 << 8;
     private const float GROUND_CHECK_RADIUS = 0.1f;
     private Vector3 groundCheckOffset;
 
     private PlayerCharacter player;
     private CharacterController controller;
-    private IKeyBinds keys;
 
     private float verticalVelocity;
     private bool isGrounded;
+
+    [SerializeField] private WeaponSwayController weaponSway;
 
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         controller = GetComponent<CharacterController>();
-        keys = GetComponent<IKeyBinds>();
     }
 
     private void Start()
@@ -39,19 +38,32 @@ public class PlayerVerticalMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
+
+        bool wasGrounded = isGrounded;
         isGrounded = CheckIsGrounded();
+        Landing(wasGrounded);
+
+        velocityMagnitude = verticalVelocity / player.JumpHeight;
     }
 
     private void HandleMovement()
     {
         if (isGrounded)
         {
-            verticalVelocity = Input.GetKey(keys.Jump) ? GetJumpVelocity() : 0f;
+            verticalVelocity = InputReader.jump ? GetJumpVelocity() : 0f;
         }
         else if (!isGrounded)
         {
             verticalVelocity -= player.Gravity * Time.deltaTime;
         }  
+    }
+
+    private void Landing(bool wasGrounded)
+    {
+        if ((wasGrounded != isGrounded) && isGrounded)
+            landMagnitude = 1f;
+
+        landMagnitude = Mathf.Lerp(landMagnitude, 0f, Time.deltaTime);
     }
 
     private float GetJumpVelocity()

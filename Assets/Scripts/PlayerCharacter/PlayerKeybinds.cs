@@ -17,9 +17,11 @@ public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
     
     [Header("Actions")]
     [SerializeField] private KeyCode shoot = KeyCode.Mouse0;
-    [SerializeField] private KeyCode reload = KeyCode.Mouse1;
+    [SerializeField] private KeyCode aim = KeyCode.Mouse1;
+    [SerializeField] private KeyCode reload = KeyCode.R;
 
     public KeyCode Shoot => shoot;
+    public KeyCode Aim => aim;
     public KeyCode Reload => reload;
 
     [Header("Movement")]
