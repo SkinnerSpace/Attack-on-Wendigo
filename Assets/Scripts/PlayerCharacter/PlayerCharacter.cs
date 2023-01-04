@@ -28,7 +28,6 @@ public class PlayerCharacter : MonoBehaviour
     private void Awake()
     {
         collisionBox = GetComponentInChildren<CapsuleCollider>();
-
         Speed = MinSpeed;
     }
 }

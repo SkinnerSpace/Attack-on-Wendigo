@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour
         gunBarrel.Shoot();
         recoilController.Recoil();
 
-        sFXPlayer.play(sFXLibrary.shootSFX);
+        //sFXPlayer.play(sFXLibrary.shootSFX);
 
         DamageTargetIfExist();
     }

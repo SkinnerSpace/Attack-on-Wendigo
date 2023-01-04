@@ -2,15 +2,13 @@
 
 public class PlayerHorizontalMovement : MonoBehaviour
 {
-    public static float velocityMagnitude;
-    public static float speedMagnitude;
-
-    [SerializeField] private WeaponOscillator weaponSin;
+    public static float velocityMagnitude { get; private set; }
+    public static float speedMagnitude { get; private set; }
 
     private PlayerCharacter player;
     private CharacterController controller;
 
-    private Vector3 velocity;
+    public Vector3 velocity { get; private set; }
 
     private void Awake()
     {

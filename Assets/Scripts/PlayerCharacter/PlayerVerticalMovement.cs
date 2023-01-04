@@ -1,33 +1,23 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerVerticalMovement : MonoBehaviour
+public class PlayerVerticalMovement : MonoBehaviour, IJumper
 {
     public static float velocityMagnitude { get; private set; }
-    public static float landMagnitude { get; private set; }
-
-    private const int GROUND = 1 << 8;
-    private const float GROUND_CHECK_RADIUS = 0.1f;
-    private Vector3 groundCheckOffset;
-
+    
     private PlayerCharacter player;
     private CharacterController controller;
+    private PlayerGroundDetector groundDetector;
+    private PlayerJumpHandler jumpHandler;
 
     private float verticalVelocity;
-    private bool isGrounded;
-
-    [SerializeField] private WeaponSwayController weaponSway;
 
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         controller = GetComponent<CharacterController>();
-    }
-
-    private void Start()
-    {
-        float offset = (player.height / 2f) + GROUND_CHECK_RADIUS;
-        groundCheckOffset = new Vector3(0f, offset, 0f);
+        groundDetector = GetComponent<PlayerGroundDetector>();
+        jumpHandler = GetComponent<PlayerJumpHandler>();
     }
 
     private void Update()
@@ -38,48 +28,33 @@ public class PlayerVerticalMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
-
-        bool wasGrounded = isGrounded;
-        isGrounded = CheckIsGrounded();
-        Landing(wasGrounded);
+        groundDetector.UpdateDetection();
 
         velocityMagnitude = verticalVelocity / player.JumpHeight;
     }
 
     private void HandleMovement()
     {
-        if (isGrounded)
+        if (groundDetector.isGrounded)
         {
-            verticalVelocity = InputReader.jump ? GetJumpVelocity() : 0f;
+            SetVelocity(0f);
+            jumpHandler.ResetState();
+            jumpHandler.PerformJump(this);
         }
-        else if (!isGrounded)
+        else if (!groundDetector.isGrounded)
         {
             verticalVelocity -= player.Gravity * Time.deltaTime;
+            jumpHandler.PerformAirJump(this);
         }  
     }
 
-    private void Landing(bool wasGrounded)
+    public void SetVelocity(float verticalVelocity)
     {
-        if ((wasGrounded != isGrounded) && isGrounded)
-            landMagnitude = 1f;
-
-        landMagnitude = Mathf.Lerp(landMagnitude, 0f, Time.deltaTime);
-    }
-
-    private float GetJumpVelocity()
-    {
-        float jumpVelocity = Mathf.Sqrt(player.JumpHeight * 2f * player.Gravity);
-        return jumpVelocity;
+        this.verticalVelocity = verticalVelocity;
     }
 
     private void ApplyMovement()
     {
         controller.Move(new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
-    }
-
-    private bool CheckIsGrounded()
-    {
-        Vector3 checkPoint = transform.position - groundCheckOffset;
-        return Physics.CheckSphere(checkPoint, GROUND_CHECK_RADIUS, GROUND);
     }
 }

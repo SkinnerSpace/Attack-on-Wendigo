@@ -19,7 +19,7 @@ public static class VerticalTuner
     {
         float adjustedInputY = inputY + 
             (PlayerVerticalMovement.velocityMagnitude * verticalAdjustment) + 
-            (PlayerVerticalMovement.landMagnitude);
+            (PlayerGroundDetector.landMagnitude);
         
         return adjustedInputY;
     }

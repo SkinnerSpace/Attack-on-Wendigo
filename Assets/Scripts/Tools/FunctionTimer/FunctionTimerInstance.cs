@@ -33,8 +33,8 @@ public class FunctionTimerInstance
 
             if (time < 0f)
             {
-                execute();
                 Stop();
+                execute();
             }
         }
     }
