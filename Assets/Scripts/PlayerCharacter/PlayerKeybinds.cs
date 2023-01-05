@@ -30,11 +30,13 @@ public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
     [SerializeField] private KeyCode moveForward = KeyCode.W;
     [SerializeField] private KeyCode moveBackward = KeyCode.S;
     [SerializeField] private KeyCode jump = KeyCode.Space;
+    [SerializeField] private KeyCode dash = KeyCode.LeftShift;
 
     public KeyCode MoveRight => moveRight;
     public KeyCode MoveLeft => moveLeft;
     public KeyCode MoveForward => moveForward;
     public KeyCode MoveBackward => moveBackward;
     public KeyCode Jump => jump;
+    public KeyCode Dash => dash;
     
 }

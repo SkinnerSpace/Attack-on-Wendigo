@@ -9,6 +9,7 @@ public class PlayerVerticalMovement : MonoBehaviour, IJumper
     private CharacterController controller;
     private PlayerGroundDetector groundDetector;
     private PlayerJumpHandler jumpHandler;
+    private PlayerDashHandler dashHandler;
 
     private float verticalVelocity;
 
@@ -18,6 +19,7 @@ public class PlayerVerticalMovement : MonoBehaviour, IJumper
         controller = GetComponent<CharacterController>();
         groundDetector = GetComponent<PlayerGroundDetector>();
         jumpHandler = GetComponent<PlayerJumpHandler>();
+        dashHandler = GetComponent<PlayerDashHandler>();
     }
 
     private void Update()
@@ -41,7 +43,7 @@ public class PlayerVerticalMovement : MonoBehaviour, IJumper
             jumpHandler.ResetState();
             jumpHandler.PerformJump(this);
         }
-        else if (!groundDetector.isGrounded)
+        else if (!groundDetector.isGrounded && !dashHandler.isSoaring)
         {
             verticalVelocity -= player.Gravity * Time.deltaTime;
             jumpHandler.PerformAirJump(this);

@@ -2789,14 +2789,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1640929652}
+    - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
       propertyPath: sway
       value: 
       objectReference: {fileID: 436023367}
     - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
+      propertyPath: dashPower
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
       propertyPath: weaponSin
       value: 
       objectReference: {fileID: 720755452}
+    - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: coolDownTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: stepsFrequency
@@ -2877,6 +2892,16 @@ PrefabInstance:
       propertyPath: jetpackPower
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6036142253385846663, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1640929652}
+    - target: {fileID: 6036142253385846663, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: coolDownTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: gravity
@@ -2886,11 +2911,6 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpHeight
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
-        type: 3}
-      propertyPath: acceleration
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}

@@ -14,4 +14,5 @@ public interface IKeyBinds
     KeyCode MoveForward { get; }
     KeyCode MoveBackward { get; }
     KeyCode Jump { get; }
+    KeyCode Dash { get; }
 }

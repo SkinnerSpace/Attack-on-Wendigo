@@ -7,13 +7,17 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private PlayerCharacter player;
     private CharacterController controller;
+    private PlayerDashHandler dashHandler;
 
+    private Vector3 continuousVelocity;
+    private Vector3 discreteVelocity;
     public Vector3 velocity { get; private set; }
-
+    
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         controller = GetComponent<CharacterController>();
+        dashHandler = GetComponent<PlayerDashHandler>();
     }
 
     private void Update()
@@ -28,10 +32,9 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector3 direction = GetDirection();
-        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
+        
 
-        velocity = direction * player.Speed;
+        
     }
 
     private Vector3 GetDirection()
@@ -52,9 +55,24 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
+        Vector3 direction = GetDirection();
+        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
+        discreteVelocity = direction * player.Speed;
+
+        dashHandler.HandleDash();
+
+        velocity = discreteVelocity + continuousVelocity;
+        continuousVelocity = Vector3.Lerp(continuousVelocity, Vector3.zero, player.Deceleration * Time.deltaTime);
+
         controller.Move(velocity * Time.deltaTime);
 
         velocityMagnitude = velocity.magnitude / player.MaxSpeed;
         speedMagnitude = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f) / (player.MaxSpeed - player.MinSpeed);
+    }
+
+    public void AddContinuousVelocity(Vector3 extraVelocity)
+    {
+        continuousVelocity += extraVelocity;
+        Debug.Log("EXTRA " + extraVelocity.magnitude);
     }
 }

@@ -12,11 +12,13 @@ public class PlayerGroundDetector : MonoBehaviour
 
     private PlayerCharacter player;
     private PlayerSurfaceDetector surfaceDetector;
+    private PlayerDashHandler dashHandler;
 
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         surfaceDetector = GetComponent<PlayerSurfaceDetector>();
+        dashHandler = GetComponent<PlayerDashHandler>();
     }
 
     private void Start()
@@ -44,6 +46,7 @@ public class PlayerGroundDetector : MonoBehaviour
         {
             landMagnitude = 1f;
             surfaceDetector.UpdateSurfaceData();
+            dashHandler.CoolDown();
         }
 
         landMagnitude = Mathf.Lerp(landMagnitude, 0f, Time.deltaTime);

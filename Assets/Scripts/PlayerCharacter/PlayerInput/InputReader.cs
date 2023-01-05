@@ -7,6 +7,7 @@ public class InputReader : MonoBehaviour
     public static Vector3 rawDir { get; private set; }
     public static Vector3 normDir { get; private set; }
     public static bool jump { get; private set; }
+    public static bool dash { get; private set; }
     public static Vector2 mouse { get; private set; }
 
     private IKeyBinds keys;
@@ -35,6 +36,7 @@ public class InputReader : MonoBehaviour
     {
         ReadDirectionInput();
         ReadJumpInput();
+        ReadDashInput();
         ReadMouseInput();
     }
 
@@ -55,6 +57,11 @@ public class InputReader : MonoBehaviour
     private void ReadJumpInput()
     {
         jump = Input.GetKey(keys.Jump);
+    }
+
+    private void ReadDashInput()
+    {
+        dash = Input.GetKeyDown(keys.Dash);
     }
 
     private void ReadMouseInput()
