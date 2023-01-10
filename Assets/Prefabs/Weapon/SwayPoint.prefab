@@ -50,7 +50,7 @@ MonoBehaviour:
   displacementOn: 1
   rotationOn: 1
   tiltOn: 1
-  sinOn: 1
+  oscillationOn: 1
 --- !u!114 &4814313316671648785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sinFrequency: 8
-  sinMagnitude: 1
+  sinMagnitude: 0.1
   sinX: 1
   sinY: 1

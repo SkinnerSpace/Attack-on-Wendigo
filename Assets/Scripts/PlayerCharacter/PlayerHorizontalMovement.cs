@@ -2,8 +2,8 @@
 
 public class PlayerHorizontalMovement : MonoBehaviour
 {
+    private const float MAX_SPEED_VELOCITY_RELATION = 3f;
     public static float velocityMagnitude { get; private set; }
-    public static float speedMagnitude { get; private set; }
 
     private PlayerCharacter player;
     private CharacterController controller;
@@ -12,7 +12,8 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private Vector3 continuousVelocity;
     private Vector3 discreteVelocity;
     public Vector3 velocity { get; private set; }
-    
+    public float speedMagnitude { get; private set; }
+
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
@@ -22,19 +23,20 @@ public class PlayerHorizontalMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+        HandleDiscreteVelocity();
     }
 
     private void FixedUpdate()
     {
+        HandleContinuousVelocity();
         ApplyMovement();
     }
 
-    private void HandleMovement()
+    private void HandleDiscreteVelocity()
     {
-        
-
-        
+        Vector3 direction = GetDirection();
+        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
+        discreteVelocity = direction * player.Speed;
     }
 
     private Vector3 GetDirection()
@@ -53,26 +55,26 @@ public class PlayerHorizontalMovement : MonoBehaviour
         return Mathf.Lerp(player.Speed, player.MaxSpeed, player.Acceleration * Time.deltaTime);
     }
 
-    private void ApplyMovement()
+    private void HandleContinuousVelocity()
     {
-        Vector3 direction = GetDirection();
-        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
-        discreteVelocity = direction * player.Speed;
-
-        dashHandler.HandleDash();
+        if (InputReader.dash) dashHandler.Dash();
 
         velocity = discreteVelocity + continuousVelocity;
         continuousVelocity = Vector3.Lerp(continuousVelocity, Vector3.zero, player.Deceleration * Time.deltaTime);
+    }
 
+    private void ApplyMovement()
+    {
         controller.Move(velocity * Time.deltaTime);
 
         velocityMagnitude = velocity.magnitude / player.MaxSpeed;
-        speedMagnitude = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f) / (player.MaxSpeed - player.MinSpeed);
+
+        float speedVelocityRelation = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f);
+        speedMagnitude = speedVelocityRelation / (player.MaxSpeed - player.MinSpeed);
     }
 
     public void AddContinuousVelocity(Vector3 extraVelocity)
     {
         continuousVelocity += extraVelocity;
-        Debug.Log("EXTRA " + extraVelocity.magnitude);
     }
 }

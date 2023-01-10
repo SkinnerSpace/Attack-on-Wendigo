@@ -2,6 +2,8 @@
 
 public class PlayerLook : MonoBehaviour
 {
+    private const float STEEP_ANGLE = 70f;
+
     [SerializeField] private PlayerCharacter player;
     private Transform body;
     private IKeyBinds keys;
@@ -32,5 +34,10 @@ public class PlayerLook : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(new Vector3(yRotation, xRotation, 0f));
         body.rotation = Quaternion.Euler(new Vector3(0f, xRotation, 0f));
+    }
+
+    public bool IsLookingDown()
+    {
+        return yRotation >= STEEP_ANGLE;
     }
 }

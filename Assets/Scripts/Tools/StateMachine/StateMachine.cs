@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine
 {
     private IState currentState;
     private Dictionary<Type, List<Transition>> transitions = new Dictionary<Type, List<Transition>>();

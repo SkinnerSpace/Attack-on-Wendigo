@@ -4,6 +4,11 @@ public class InputReader : MonoBehaviour
 {
     public static InputReader Instance { get; private set; }
 
+    public static bool right { get; private set; }
+    public static bool left { get; private set; }
+    public static bool forward { get; private set; }
+    public static bool backward { get; private set; }
+
     public static Vector3 rawDir { get; private set; }
     public static Vector3 normDir { get; private set; }
     public static bool jump { get; private set; }
@@ -42,12 +47,17 @@ public class InputReader : MonoBehaviour
 
     private void ReadDirectionInput()
     {
-        float moveRight = Input.GetKey(keys.MoveRight) ? 1f : 0f;
-        float moveLeft = Input.GetKey(keys.MoveLeft) ? -1f : 0f;
+        right = Input.GetKey(keys.MoveRight);
+        left = Input.GetKey(keys.MoveLeft);
+        forward = Input.GetKey(keys.MoveForward);
+        backward = Input.GetKey(keys.MoveBackward);
+
+        float moveRight = right ? 1f : 0f;
+        float moveLeft = left ? -1f : 0f;
         float xAxis = moveRight + moveLeft;
 
-        float moveForward = Input.GetKey(keys.MoveForward) ? 1f : 0f;
-        float moveBackward = Input.GetKey(keys.MoveBackward) ? -1f : 0f;
+        float moveForward = forward ? 1f : 0f;
+        float moveBackward = backward ? -1f : 0f;
         float zAxis = moveForward + moveBackward;
 
         rawDir = new Vector3(xAxis, 0f, zAxis);
