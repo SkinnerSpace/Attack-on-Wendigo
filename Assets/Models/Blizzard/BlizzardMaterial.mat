@@ -80,7 +80,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BlizzardColor: {r: 7.3772106, g: 7.3772106, b: 7.3772106, a: 0}
+    - BlizzardColor: {r: 3.6886053, g: 3.6886053, b: 3.6886053, a: 0}
     - DeformTiling: {r: 20, g: 0.3, b: 0, a: 0}
     - Tiling: {r: 10, g: 0.7, b: 0, a: 0}
     - Vector2_B3F9F498: {r: 100, g: 1, b: 1, a: 0}
