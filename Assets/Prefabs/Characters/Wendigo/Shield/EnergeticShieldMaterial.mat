@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WendigoHairMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: f288194df765cf34cbde8c6d4d84e905,
+  m_Name: EnergeticShieldMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 460c4637d5c605747b403947a16c05e5,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -19,16 +19,11 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - HairTexture:
-        m_Texture: {fileID: 2800000, guid: 2fd1c51dcc2700d488951791313d48b8, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Floats:
-    - NoiseScale: 1
+    - Energy: 1
+    - EnergyDensity: 1
     - NoiseSpeed: 0.1
-    - WobbleDistance: 0.08
-    - WobbleFrequency: 5
-    - WobbleSpeed: 5
+    - ShieldOpacity: 1
     m_Colors:
-    - Vector3_27C67318: {r: 3, g: 0, b: 0, a: 0}
+    - ShieldColor: {r: 0.7385625, g: 7.4559646, b: 6.01381, a: 0}

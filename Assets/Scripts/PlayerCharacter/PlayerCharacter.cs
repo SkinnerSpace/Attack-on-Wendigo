@@ -29,8 +29,12 @@ public class PlayerCharacter : MonoBehaviour
     
     public float height => collisionBox.height;
 
+    public static PlayerCharacter Instance { get; private set; }
+
     private void Awake()
     {
+        Instance = this;
+
         collisionBox = GetComponentInChildren<CapsuleCollider>();
         Speed = MinSpeed;
     }

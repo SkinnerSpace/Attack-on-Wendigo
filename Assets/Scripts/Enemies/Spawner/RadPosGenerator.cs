@@ -6,9 +6,10 @@ public class RadPosGenerator : MonoBehaviour
     private const float MAX_DISTANCE = 140;
     private const float MAX_RADIUS_OFFSET = 60f;
 
-    [SerializeField] private float radius = 380f;
+    [SerializeField] private RadPosCalc radPosCalc;
     [SerializeField] private Transform viewer;
 
+    [SerializeField] private float radius = 380f;
     [SerializeField] private bool test;
 
     public Vector3 GetPosition()
@@ -18,52 +19,16 @@ public class RadPosGenerator : MonoBehaviour
 
         Vector3 localPos = new Vector3(randPosInSight, 0f, 1f).normalized * radius;
 
-        Vector3 rawForwardPos = LocalToWorldForward(localPos);
-        Vector3 absForwardPos = AdjustPosition(rawForwardPos, radius);
+        Vector3 rawForwardPos = radPosCalc.LocalToWorldForward(localPos, viewer);
+        Vector3 absForwardPos = radPosCalc.AdjustPosition(rawForwardPos, radius);
         float absDistToForwardPos = Vector3.Distance(viewer.position, absForwardPos);
 
         Vector3 spawnPos = absDistToForwardPos > MAX_DISTANCE
-                                            ? GetForwardPos(rawForwardPos, randRadius)
-                                            : GetBackwardPos(localPos, randRadius);
+                                            ? radPosCalc.GetForwardPos(rawForwardPos, randRadius)
+                                            : radPosCalc.GetBackwardPos(localPos, randRadius, viewer);
         return spawnPos;
     }
 
-    private Vector3 GetForwardPos(Vector3 rawForwardPos, float randRadius)
-    {
-        return AdjustPosition(rawForwardPos, randRadius);
-    }
-
-    private Vector3 GetBackwardPos(Vector3 localPos, float randRadius)
-    {
-        Vector3 rawBackwardPos = LocalToWorldBackward(localPos);
-        return AdjustPosition(rawBackwardPos, randRadius);
-    }
-
-    private Vector3 LocalToWorldForward(Vector3 localPos)
-    {
-        Vector3 pos = viewer.position;
-        pos += localPos.x * viewer.right;
-        pos += localPos.z * viewer.forward;
-
-        return pos;
-    }
-
-    private Vector3 LocalToWorldBackward(Vector3 localPos)
-    {
-        Vector3 pos = viewer.position;
-        pos += localPos.x * -viewer.right;
-        pos += localPos.z * -viewer.forward;
-
-        return pos;
-    }
-
-    private Vector3 AdjustPosition(Vector3 pos, float adjustmentRadius)
-    {
-        Vector3 adjustedPos = transform.position + (pos - transform.position).normalized * adjustmentRadius;
-        return adjustedPos;
-    }
-
-    
     private void OnDrawGizmos()
     {
         if (test && viewer != null)
@@ -72,5 +37,4 @@ public class RadPosGenerator : MonoBehaviour
             Gizmos.DrawSphere(GetPosition(), 3f);
         }
     }
-    
 }

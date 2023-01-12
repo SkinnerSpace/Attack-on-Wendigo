@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 874012968601863398}
   - component: {fileID: 6498195847071277101}
   - component: {fileID: 1652087050669785381}
+  - component: {fileID: 1998793183233607699}
   - component: {fileID: 7820593142600697943}
   - component: {fileID: 1358747189775576019}
   m_Layer: 0
@@ -135,9 +136,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0731b1a0b6f454c92c136a7e5e6e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalMovement: {fileID: 0}
   minFOV: 80
   maxFOV: 100
   defaultSmooth: 1
+--- !u!114 &1998793183233607699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680944993474019683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb504f805820e9b46939e4d549f68102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!81 &7820593142600697943
 AudioListener:
   m_ObjectHideFlags: 0
