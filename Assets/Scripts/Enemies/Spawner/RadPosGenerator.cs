@@ -2,7 +2,7 @@
 
 public class RadPosGenerator : MonoBehaviour
 {
-    private const float HORIZON_LENGTH = 0.6f;
+    
     private const float MAX_DISTANCE = 140;
     private const float MAX_RADIUS_OFFSET = 60f;
 
@@ -10,11 +10,12 @@ public class RadPosGenerator : MonoBehaviour
     [SerializeField] private Transform viewer;
 
     [SerializeField] private float radius = 380f;
+    [SerializeField] private float horizonLength = 0.6f;
     [SerializeField] private bool test;
 
     public Vector3 GetPosition()
     {
-        float randPosInSight = UnityEngine.Random.Range(-HORIZON_LENGTH, HORIZON_LENGTH);
+        float randPosInSight = UnityEngine.Random.Range(-horizonLength, horizonLength);
         float randRadius = radius - (UnityEngine.Random.Range(0, MAX_RADIUS_OFFSET));
 
         Vector3 localPos = new Vector3(randPosInSight, 0f, 1f).normalized * radius;

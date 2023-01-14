@@ -33,10 +33,12 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.K))
         {
             ScreenShake.Create().Launch();
         }
+        */
     }
 
     private void Awake()

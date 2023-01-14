@@ -1831,7 +1831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aef1ec546f8db4b8f8716515d82e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2065355997}
+  body: {fileID: 1302925505}
 --- !u!1 &870122727 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6705627011588671538, guid: ec5586c8e7b5f114ba681e3824b5315f,
@@ -3502,6 +3502,7 @@ MonoBehaviour:
   radPosCalc: {fileID: 1488656790}
   viewer: {fileID: 840574094}
   radius: 380
+  horizonLength: 0.6
   test: 0
 --- !u!114 &1488656790
 MonoBehaviour:

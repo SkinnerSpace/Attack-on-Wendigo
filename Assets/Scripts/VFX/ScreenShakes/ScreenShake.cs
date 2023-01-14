@@ -41,8 +41,8 @@ public class ScreenShake
     public ScreenShake WithAttenuation(float distance, float maxDistance)
     {
         attenuation = 1f - (distance / maxDistance);
-        attenuation = Mathf.Min(attenuation, 1f);
-        attenuation *= attenuation;
+        if (attenuation <= 0f) attenuation = 0f;
+        else attenuation *= attenuation;
 
         return this;
     }
