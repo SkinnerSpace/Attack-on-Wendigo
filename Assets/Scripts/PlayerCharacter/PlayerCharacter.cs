@@ -31,6 +31,14 @@ public class PlayerCharacter : MonoBehaviour
 
     public static PlayerCharacter Instance { get; private set; }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            ScreenShakeController.Instance.Create();
+        }
+    }
+
     private void Awake()
     {
         Instance = this;

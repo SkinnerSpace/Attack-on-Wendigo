@@ -8,15 +8,16 @@ public class ScreenShakeController : MonoBehaviour
     [SerializeField] private Shaker shaker;
     private ShakeHandler shakeHandler;
 
+    public static ScreenShakeController Instance { get; private set; }
+
     private void Awake()
     {
+        Instance = this;
         shakeHandler = new ShakeHandler();
     }
 
     private void Update()
     {
-        Launch();
-
         foreach (ScreenShake shake in shakes)
         {
             shakeHandler.Handle(shake);
@@ -24,16 +25,13 @@ public class ScreenShakeController : MonoBehaviour
         }
     }
 
-    private void Launch()
+    public void Create()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ShakeCurve curve = new ShakeCurve(frequency: 10f, attack: 0.25f, release: 0.25f);
-            ShakeStrength strength = new ShakeStrength(1f, 8f);
-            ScreenShake shake = new ScreenShake(time: 1f, strength, curve);
+        ShakeCurve curve = new ShakeCurve(frequency: 10f, attack: 0.25f, release: 0.25f);
+        ShakeStrength strength = new ShakeStrength(1f, 8f);
+        ScreenShake shake = new ScreenShake(time: 1f, strength, curve);
 
-            shakes.Add(shake);
-            shakeHandler.Launch(shake);
-        }
+        shakes.Add(shake);
+        shakeHandler.Launch(shake);
     }
 }
