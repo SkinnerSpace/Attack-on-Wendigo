@@ -9,6 +9,7 @@ public class ScreenShake
     public Vector3 MaxPosDisplacement => direction * strength.amount;
     public Vector3 MaxAngleDisplacement => angle * strength.amount * strength.angleMultiplier;
     public Vector3 Dir => direction;
+    public float Attenuation => attenuation;
 
     public float FQ => curve.frequency;
     public float Attack => curve.attack;
@@ -16,6 +17,7 @@ public class ScreenShake
 
     private Vector3 direction;
     private Vector3 angle;
+    private float attenuation;
 
     private ShakeStrength strength;
     private ShakeCurve curve;
@@ -25,25 +27,33 @@ public class ScreenShake
     private float exWave;
     private float wave;
 
-    public ScreenShake(float time, ShakeStrength strength, ShakeCurve curve)
+    public ScreenShake(ShakeTimer timer, ShakeStrength strength, ShakeCurve curve, float attenuation)
     {
+        this.timer = timer;
         this.strength = strength;
         this.curve = curve;
-
-        timer = new ShakeTimer(time);
+        this.attenuation = attenuation;
     }
 
     public void Launch(Vector3 dir, float angle)
     {
-        SetDir(dir);
-        SetAngle(angle);
-        isActive = true;
+        Debug.Log("ACtivate");
+
+        if (!isActive)
+        {
+            SetDir(dir);
+            SetAngle(angle);
+            isActive = true;
+        }
     }
 
     public void Proceed()
     {
         timer.CountDown();
         isActive = !timer.TimeOut();
+
+        if (timer.TimeOut())
+            Debug.Log("Time out");
     }
 
     public void UpdateWave(float wave)
@@ -54,6 +64,6 @@ public class ScreenShake
 
     public bool WaveHasPassed() => (exWave < 0f) && (wave >= 0f);
     public void SetDir(Vector3 direction) => this.direction = direction;
-    public void SetAngle(float zAngle) => new Vector3(0f, 0f, zAngle);
+    public void SetAngle(float zAngle) => angle = new Vector3(0f, 0f, zAngle);
 }
 

@@ -35,7 +35,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            ScreenShakeController.Instance.Create();
+            ShakeBuilder.Create().Launch();
         }
     }
 

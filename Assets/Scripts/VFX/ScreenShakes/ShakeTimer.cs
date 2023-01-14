@@ -16,6 +16,11 @@ public class ShakeTimer
         timeScaled = 0f;
     }
 
+    public void SetTime(float maxTime)
+    {
+        this.maxTime = maxTime;
+    }
+
     public bool TimeOut() => (time >= maxTime);
 
     public void CountDown()

@@ -191,6 +191,12 @@ MonoBehaviour:
       Data3: 1686102408
       Data4: 639327713
     Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
+--- !u!4 &13202871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7745797158065002892, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1165287136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &13202872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
@@ -2463,7 +2469,17 @@ PrefabInstance:
         type: 3}
       propertyPath: shakes.Array.data[0]
       value: 
-      objectReference: {fileID: 1165287149}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: angleAcceptor
+      value: 
+      objectReference: {fileID: 2065355997}
+    - target: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: positionAcceptor
+      value: 
+      objectReference: {fileID: 13202871}
     - target: {fileID: 5893274589254510266, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: pivot
@@ -2634,18 +2650,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9073ba8dba133af40b3d34caf6168fc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1165287149 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 921276215746182767, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1165287136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d03c1eb856b79f4ca00103a346952df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1217603044

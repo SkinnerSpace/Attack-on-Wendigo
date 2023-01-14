@@ -32,7 +32,7 @@ public class PlayerLook : MonoBehaviour
         yRotation += InputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
         yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(new Vector3(yRotation, xRotation, 0f));
+        transform.rotation = Quaternion.Euler(new Vector3(yRotation, xRotation, transform.eulerAngles.z));
         body.rotation = Quaternion.Euler(new Vector3(0f, xRotation, 0f));
     }
 
