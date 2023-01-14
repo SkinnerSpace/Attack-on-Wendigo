@@ -2452,6 +2452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523758912386502066, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
+      propertyPath: shakeable
+      value: 
+      objectReference: {fileID: 13202872}
+    - target: {fileID: 4523758912386502066, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
       propertyPath: releaseTime
       value: 0.5
       objectReference: {fileID: 0}

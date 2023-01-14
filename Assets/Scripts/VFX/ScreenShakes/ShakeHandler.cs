@@ -5,9 +5,9 @@ public static class ShakeHandler
     private const float WAVE_UNIT = Mathf.PI * 2f;
     private const float DEVIATION_MULTIPLIER = 0.1f;
 
-    public static void Launch(ScreenShake shake) => shake.Launch(GetRandDir(), GetRandAngle());
+    public static void Launch(Shake shake) => shake.Launch(GetRandDir(), GetRandAngle());
 
-    public static void Handle(ScreenShake shake)
+    public static void Handle(Shake shake)
     {
         shake.UpdateWave(GetRawWave(shake.Time, shake.FQ));
 
@@ -17,7 +17,7 @@ public static class ShakeHandler
         shake.Proceed();
     }
 
-    public static ShakeDisplacement GetDisplacement(ScreenShake shake)
+    public static ShakeDisplacement GetDisplacement(Shake shake)
     {
         float wave = GetWave(shake);
 
@@ -26,7 +26,7 @@ public static class ShakeHandler
                    angle: (wave * shake.MaxAngleDisplacement * shake.Attenuation));
     }
 
-    private static float GetWave(ScreenShake shake) => GetRawWave(shake.Time, shake.FQ) * 
+    private static float GetWave(Shake shake) => GetRawWave(shake.Time, shake.FQ) * 
                                                 Amplitude.Calculate(shake.Time, shake.Attack, shake.Release);
     private static float GetRawWave(float time, float frequency) => Mathf.Sin(time * WAVE_UNIT * frequency);
 
