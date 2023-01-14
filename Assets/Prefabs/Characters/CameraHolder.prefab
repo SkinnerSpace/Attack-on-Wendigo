@@ -215,8 +215,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7745797158065002892}
   - component: {fileID: 4523758912386502066}
-  - component: {fileID: 921276215746182767}
-  - component: {fileID: 9170767762170562051}
   - component: {fileID: 5708966445217698579}
   m_Layer: 0
   m_Name: ScreenShake
@@ -252,34 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b105d5442914045800d95f9205b65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakes: []
---- !u!114 &921276215746182767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290335171503858707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d03c1eb856b79f4ca00103a346952df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 9170767762170562051}
-  shaker: {fileID: 5708966445217698579}
---- !u!114 &9170767762170562051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290335171503858707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1b21480a9ba0c438e73c570cd5e099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  observer: {fileID: 921276215746182767}
+  shaker: {fileID: 0}
 --- !u!114 &5708966445217698579
 MonoBehaviour:
   m_ObjectHideFlags: 0

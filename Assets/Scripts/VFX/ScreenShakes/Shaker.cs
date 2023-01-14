@@ -2,10 +2,10 @@
 
 public class Shaker : MonoBehaviour
 {
-    public void SetPosAndAngle(Vector3 shakePosition, Vector3 shakeAngle)
+    public void Displace(ShakeDisplacement shakePack)
     {
-        transform.localPosition = shakePosition;
-        transform.localEulerAngles = shakeAngle;
+        transform.localPosition = shakePack.position;
+        transform.localEulerAngles = shakePack.angle;
     }
 } 
 

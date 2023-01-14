@@ -191,6 +191,18 @@ MonoBehaviour:
       Data3: 1686102408
       Data4: 639327713
     Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
+--- !u!114 &13202872 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1165287136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86885d000bbbc104e9cbbff754dae43c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &95337229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2429,11 @@ PrefabInstance:
       propertyPath: power
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4523758912386502066, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: shaker
+      value: 
+      objectReference: {fileID: 13202872}
     - target: {fileID: 4523758912386502066, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: maxTime

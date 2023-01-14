@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class ScreenShakeController : MonoBehaviour
 {
-    [SerializeField] private List<ScreenShake> shakes;
+    private List<ScreenShake> shakes = new List<ScreenShake>();
+    [SerializeField] private Shaker shaker;
+    private ShakeHandler shakeHandler;
+
+    private void Awake()
+    {
+        shakeHandler = new ShakeHandler();
+    }
 
     private void Update()
     {
@@ -12,7 +19,8 @@ public class ScreenShakeController : MonoBehaviour
 
         foreach (ScreenShake shake in shakes)
         {
-            shake.UpdateShake(Time.deltaTime);
+            shakeHandler.Handle(shake);
+            shaker.Displace(shakeHandler.GetDisplacement(shake));
         }
     }
 
@@ -20,15 +28,12 @@ public class ScreenShakeController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            foreach (ScreenShake shake in shakes)
-            {
-                shake.Launch();
-            }
+            ShakeCurve curve = new ShakeCurve(frequency: 10f, attack: 0.25f, release: 0.25f);
+            ShakeStrength strength = new ShakeStrength(1f, 8f);
+            ScreenShake shake = new ScreenShake(time: 1f, strength, curve);
+
+            shakes.Add(shake);
+            shakeHandler.Launch(shake);
         }
-    }
-    
-    public void AddShake(ScreenShake shake)
-    {
-        shakes.Add(shake);
     }
 }

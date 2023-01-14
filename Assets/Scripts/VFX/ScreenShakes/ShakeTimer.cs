@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShakeTimer : MonoBehaviour
+public class ShakeTimer
 {
     public float TimeScaled => timeScaled;
 
@@ -8,9 +8,7 @@ public class ShakeTimer : MonoBehaviour
     private float time;
     private float timeScaled;
 
-    [SerializeField] private ScreenShake observer;
-
-    public void Set(float maxTime)
+    public ShakeTimer(float maxTime)
     {
         this.maxTime = maxTime;
 
@@ -18,16 +16,17 @@ public class ShakeTimer : MonoBehaviour
         timeScaled = 0f;
     }
 
-    public void CountDown(float timePassed)
+    public bool TimeOut() => (time >= maxTime);
+
+    public void CountDown()
     {
-        time += timePassed;
+        time += Time.deltaTime;
         timeScaled = time / maxTime;
 
         if (time >= maxTime)
         {
             time = maxTime;
             timeScaled = 1f;
-            observer.Stop();
         }
     }
 }
