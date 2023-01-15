@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &878009917097513052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 150733985066556175}
-  m_Layer: 11
-  m_Name: CollapseAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &150733985066556175
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878009917097513052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5441132573943817413}
-  m_Father: {fileID: 3900529288956612910}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3900529288956612896
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3900529288956612910}
-  - component: {fileID: 3900529288956612911}
   - component: {fileID: 3900529288956612908}
   - component: {fileID: 3900529288956612909}
+  - component: {fileID: 8434468804220601578}
+  - component: {fileID: 7862063910842211870}
   m_Layer: 11
   m_Name: SpruceTree
   m_TagString: Untagged
@@ -61,25 +31,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 150733985066556175}
+  - {fileID: 6888142963761921520}
   - {fileID: 2576455409893662149}
+  - {fileID: 8837114853306547904}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3900529288956612911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3900529288956612896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b47f2f5f26fc534184fe12cb3cbacae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propSetup: {fileID: 11400000, guid: 13e69807dde3b9f499c14ba8385dd14e, type: 2}
-  model: {fileID: 0}
 --- !u!65 &3900529288956612908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,6 +66,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8434468804220601578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900529288956612896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7ba0a306815a04d976862b277826d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prop: {fileID: 3900529288956612910}
+  angles: []
+--- !u!114 &7862063910842211870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900529288956612896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff9944ddd17aef428fa10dbe9385768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prop: {fileID: 3900529288956612910}
+  minScale: 0.4
+  maxScale: 1.2
 --- !u!1 &6204432398175283201
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +156,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &7053683557306879124
+--- !u!1 &7341622738964268655
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,35 +164,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5441132573943817413}
+  - component: {fileID: 8837114853306547904}
+  - component: {fileID: 2760662147833084672}
+  - component: {fileID: 6693680161165483674}
   m_Layer: 11
-  m_Name: CorrectiveAxis
+  m_Name: CollapseBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5441132573943817413
+--- !u!4 &8837114853306547904
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7053683557306879124}
+  m_GameObject: {fileID: 7341622738964268655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 6888142963761921520}
-  m_Father: {fileID: 150733985066556175}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 3900529288956612910}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2760662147833084672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 3900529288956612910}
+--- !u!65 &6693680161165483674
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 16, z: 11}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6349267310655560219
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5441132573943817413}
+    m_TransformParent: {fileID: 3900529288956612910}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1196a2a3e5860b645a3d07734bf2447a,
         type: 3}
@@ -216,7 +229,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1196a2a3e5860b645a3d07734bf2447a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1196a2a3e5860b645a3d07734bf2447a,
         type: 3}

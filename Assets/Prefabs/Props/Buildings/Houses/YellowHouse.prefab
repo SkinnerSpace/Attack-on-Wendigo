@@ -45,6 +45,64 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -931021205976162681, guid: b1b2fc4ff53a33048946f49d5d38e000, type: 3}
+--- !u!1 &2448751003118346560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6747572053322638929}
+  - component: {fileID: 4184217490755039104}
+  - component: {fileID: 8304183702697363340}
+  m_Layer: 11
+  m_Name: CollapseBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6747572053322638929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8724278805808078295}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4184217490755039104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 8724278805808078295}
+--- !u!65 &8304183702697363340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 16, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8239632340764624749
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +115,6 @@ GameObject:
   - component: {fileID: 5673698581008601714}
   - component: {fileID: 7591364202216236728}
   - component: {fileID: 224131303150266893}
-  - component: {fileID: 295594364967072419}
   m_Layer: 11
   m_Name: YellowHouse
   m_TagString: Untagged
@@ -77,6 +134,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 7678803173278249975}
+  - {fileID: 6747572053322638929}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -141,17 +199,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -931021205976162681, guid: b1b2fc4ff53a33048946f49d5d38e000, type: 3}
---- !u!114 &295594364967072419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239632340764624749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b47f2f5f26fc534184fe12cb3cbacae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propSetup: {fileID: 11400000, guid: 09517b6663b28cf45a9a5d71a8fbb506, type: 2}
-  model: {fileID: 0}

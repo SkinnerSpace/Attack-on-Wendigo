@@ -29,6 +29,8 @@ public class PlayerCharacter : MonoBehaviour
     
     public float height => collisionBox.height;
 
+    public bool IsGrounded => PlayerGroundDetector.Instance.isGrounded;
+
     public static PlayerCharacter Instance { get; private set; }
 
     private void Update()

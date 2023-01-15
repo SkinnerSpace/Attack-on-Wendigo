@@ -12,7 +12,8 @@ public class Wendigo : MonoBehaviour, IDamageable
     private FunctionTimer timer;
 
     public Transform Target => target;
-    [SerializeField] private Transform target;
+    private Transform target;
+    [SerializeField] private WendigoHeadTarget headTarget;
     
     private void Awake()
     {
@@ -49,5 +50,6 @@ public class Wendigo : MonoBehaviour, IDamageable
     public void SetTarget(Transform target)
     {
         this.target = target;
+        headTarget.SetTarget(target);
     }
 }

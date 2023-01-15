@@ -14,11 +14,15 @@ public class PlayerGroundDetector : MonoBehaviour
     private PlayerSurfaceDetector surfaceDetector;
     private PlayerDashHandler dashHandler;
 
+    public static PlayerGroundDetector Instance { get; private set; }
+
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
         surfaceDetector = GetComponent<PlayerSurfaceDetector>();
         dashHandler = GetComponent<PlayerDashHandler>();
+
+        Instance = this;
     }
 
     private void Start()

@@ -12,6 +12,8 @@ public class GunSight : MonoBehaviour
 
     public Action<bool> onTarget;
 
+    private DestroyerHitBox destroyer;
+
     private void Start()
     {
         onTarget += Aim.Instance.TargetUpdate;
