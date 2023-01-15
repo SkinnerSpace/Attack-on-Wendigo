@@ -40,6 +40,6 @@ public class WendigoSpawner : MonoBehaviour
     {
         Instantiate(lightningBolt, throwPos, Quaternion.identity, transform);
         float dist = Vector3.Distance(throwPos, PlayerCharacter.Instance.transform.position);
-        ScreenShake.Create().withTime(1f).WithStrength(1f, 4f).WithCurve(10f, 0.1f, 0.25f).WithAttenuation(dist, 600f).Launch();
+        ScreenShake.Create().withTime(1f).WithAxis(1f, 1f, 0f).WithStrength(1f, 4f).WithCurve(10f, 0.1f, 0.25f).WithAttenuation(dist, 600f).Launch();
     }
 }

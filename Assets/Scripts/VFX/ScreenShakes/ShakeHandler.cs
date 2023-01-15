@@ -5,14 +5,14 @@ public static class ShakeHandler
     private const float WAVE_UNIT = Mathf.PI * 2f;
     private const float DEVIATION_MULTIPLIER = 0.1f;
 
-    public static void Launch(Shake shake) => shake.Launch(GetRandDir(), GetRandAngle());
+    public static void Launch(Shake shake) => shake.Launch(GetRandDir(shake.Axis), GetRandAngle());
 
     public static void Handle(Shake shake)
     {
         shake.UpdateWave(GetRawWave(shake.Time, shake.FQ));
 
         if (shake.WaveHasPassed())
-            shake.SetDir(ModifyDir(shake.Dir));
+            shake.SetDir(ModifyDir(shake.Dir, shake.Axis));
 
         shake.Proceed();
     }
@@ -30,20 +30,20 @@ public static class ShakeHandler
                                                 Amplitude.Calculate(shake.Time, shake.Attack, shake.Release);
     private static float GetRawWave(float time, float frequency) => Mathf.Sin(time * WAVE_UNIT * frequency);
 
-    private static Vector3 ModifyDir(Vector3 dir)
+    private static Vector3 ModifyDir(Vector3 dir, Vector3 axis)
     {
-        Vector3 deviation = GetRandDir() * DEVIATION_MULTIPLIER;
+        Vector3 deviation = GetRandDir(axis) * DEVIATION_MULTIPLIER;
         Vector3 modifiedDir = (dir + deviation).normalized;
 
         return modifiedDir;
     }
 
-    private static Vector3 GetRandDir()
+    private static Vector3 GetRandDir(Vector3 axis)
     {
         return new Vector3(
-               x: Rand.Range(-1f, 1f),
-               y: Rand.Range(-1f, 1f),
-               z: 0f).
+               x: Rand.Range(-1f, 1f) * axis.x,
+               y: Rand.Range(-1f, 1f) * axis.y,
+               z: Rand.Range(-1f, 1f) * axis.z).
                normalized;
     }
 

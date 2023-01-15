@@ -9,6 +9,7 @@ public class Shake
     public Vector3 MaxPosDisplacement => direction * strength.amount;
     public Vector3 MaxAngleDisplacement => angle * strength.amount * strength.angleMultiplier;
     public Vector3 Dir => direction;
+    public Vector3 Axis => axis;
     public float Attenuation => attenuation;
 
     public float FQ => curve.frequency;
@@ -16,6 +17,7 @@ public class Shake
     public float Release => curve.release;
 
     private Vector3 direction;
+    private Vector3 axis;
     private Vector3 angle;
     private float attenuation;
 
@@ -27,9 +29,10 @@ public class Shake
     private float exWave;
     private float wave;
 
-    public Shake(ShakeTimer timer, ShakeStrength strength, ShakeCurve curve, float attenuation)
+    public Shake(ShakeTimer timer, Vector3 axis, ShakeStrength strength, ShakeCurve curve, float attenuation)
     {
         this.timer = timer;
+        this.axis = axis;
         this.strength = strength;
         this.curve = curve;
         this.attenuation = attenuation;
@@ -58,6 +61,7 @@ public class Shake
     }
 
     public bool WaveHasPassed() => (exWave < 0f) && (wave >= 0f);
+    public void SetAxis(Vector3 axis) => this.axis = axis;
     public void SetDir(Vector3 direction) => this.direction = direction;
     public void SetAngle(float zAngle) => angle = new Vector3(0f, 0f, zAngle);
 }

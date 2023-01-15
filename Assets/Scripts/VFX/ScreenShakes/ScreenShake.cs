@@ -3,6 +3,7 @@
 public class ScreenShake
 {
     private ShakeTimer timer;
+    private Vector3 axis;
     private ShakeStrength strength;
     private ShakeCurve curve;
     private float attenuation = 1f;
@@ -23,6 +24,12 @@ public class ScreenShake
     public ScreenShake withTime(float time)
     {
         timer.SetTime(time);
+        return this;
+    }
+
+    public ScreenShake WithAxis(float x, float y, float z)
+    {
+        axis = new Vector3(x, y, z);
         return this;
     }
 
@@ -49,7 +56,7 @@ public class ScreenShake
 
     public void Launch()
     {
-        Shake shake = new Shake(timer, strength, curve, attenuation);
+        Shake shake = new Shake(timer, axis, strength, curve, attenuation);
         ShakeManager.Instance.AddAndLaunch(shake);
     }
 }

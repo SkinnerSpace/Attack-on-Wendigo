@@ -6,7 +6,7 @@ public class PropDestroyer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Collapsible collapsible = other.GetComponent<Collapsible>();
+        Destructible collapsible = other.GetComponent<Destructible>();
         collapsible.Collapse();
     }
 }

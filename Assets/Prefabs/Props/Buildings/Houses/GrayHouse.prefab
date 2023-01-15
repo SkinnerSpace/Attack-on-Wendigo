@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3189606943258495807}
   - component: {fileID: 6627569727207678701}
   - component: {fileID: 2789702383926972558}
+  - component: {fileID: 5754360198753576840}
   m_Layer: 11
   m_Name: CollapseBox
   m_TagString: Untagged
@@ -58,6 +59,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 6808107000943480945}
+  propShake: {fileID: 5754360198753576840}
+--- !u!114 &5754360198753576840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934922025384716284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56869e995c478964390ccc3800202673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeable: {fileID: 7447994766002077897}
 --- !u!1 &4469008446883903003
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +131,7 @@ GameObject:
   - component: {fileID: 5634123958586043166}
   - component: {fileID: 6481234302836897695}
   - component: {fileID: 3544531693028970970}
+  - component: {fileID: 7447994766002077897}
   m_Layer: 11
   m_Name: GrayHouse
   m_TagString: Untagged
@@ -216,3 +232,17 @@ MonoBehaviour:
   angles:
   - 0
   - 90
+--- !u!114 &7447994766002077897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138566354844142283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06728f1cee32c7a46b1fb75e2303f621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionAcceptor: {fileID: 6808107000943480945}
+  angleAcceptor: {fileID: 0}
