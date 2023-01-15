@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropShakeManager : MonoBehaviour
+public class PropShaker : MonoBehaviour
 {
-    [SerializeField] private ShakeableProp shakeable;
-    [SerializeField] private float time = 2f;
     [SerializeField] private float power = 0.5f; 
     [SerializeField] private float frequency = 30f;
     [SerializeField] private float attack = 0.1f;
@@ -13,21 +12,7 @@ public class PropShakeManager : MonoBehaviour
 
     private Shake shake;
 
-    private void Update() => UpdateShakes();
-
-    private void UpdateShakes()
-    {
-        if (shake != null)
-        {
-            if (shake.isActive)
-            {
-                ShakeHandler.Handle(shake);
-                shakeable.Displace(ShakeHandler.GetDisplacement(shake));
-            }
-        }
-    }
-
-    public void Launch()
+    public void PrepareShake(float time)
     {
         ShakeTimer timer = new ShakeTimer(time);
         Vector3 axis = new Vector3(1f, 0f, 1f);
@@ -36,6 +21,12 @@ public class PropShakeManager : MonoBehaviour
         float attenuation = 1f;
 
         shake = new Shake(timer, axis, strength, curve, attenuation);
-        ShakeHandler.Launch(shake);
     }
+
+    public void Launch() => ShakeHandler.Launch(shake);
+
+    public void UpdateShake() => ShakeHandler.Handle(shake);
+    public Vector3 GetPosDisplacement() => ShakeHandler.GetDisplacement(shake).position;
+    public bool IsDone() => !shake.isActive;
 }
+

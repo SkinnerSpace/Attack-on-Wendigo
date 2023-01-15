@@ -54,8 +54,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6747572053322638929}
-  - component: {fileID: 4184217490755039104}
   - component: {fileID: 8304183702697363340}
+  - component: {fileID: 4184217490755039104}
+  - component: {fileID: 941743191646384074}
+  - component: {fileID: 8366434519473635828}
   m_Layer: 11
   m_Name: CollapseBox
   m_TagString: Untagged
@@ -77,19 +79,6 @@ Transform:
   m_Father: {fileID: 8724278805808078295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4184217490755039104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2448751003118346560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 8724278805808078295}
 --- !u!65 &8304183702697363340
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,6 +92,49 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 16, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4184217490755039104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptor: {fileID: 4976458807267190740}
+  time: 2
+--- !u!114 &941743191646384074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab255b224a11f3e489d0d6019d5be218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallOffset: {x: 0, y: -10, z: 0}
+--- !u!114 &8366434519473635828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448751003118346560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56869e995c478964390ccc3800202673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0.5
+  frequency: 30
+  attack: 0.1
+  release: 0.25
 --- !u!1 &8239632340764624749
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +147,7 @@ GameObject:
   - component: {fileID: 5673698581008601714}
   - component: {fileID: 7591364202216236728}
   - component: {fileID: 224131303150266893}
+  - component: {fileID: 4976458807267190740}
   m_Layer: 11
   m_Name: YellowHouse
   m_TagString: Untagged
@@ -199,3 +232,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -931021205976162681, guid: b1b2fc4ff53a33048946f49d5d38e000, type: 3}
+--- !u!114 &4976458807267190740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239632340764624749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44555e63143a29c4a89aa10ce527f567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

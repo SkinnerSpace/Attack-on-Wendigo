@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3857080926532834917}
-  - component: {fileID: 1461025392453318955}
   - component: {fileID: 639072905054556587}
+  - component: {fileID: 1461025392453318955}
+  - component: {fileID: 7990171523689693150}
+  - component: {fileID: 5738720099005337451}
   m_Layer: 11
   m_Name: CollapseBox
   m_TagString: Untagged
@@ -32,19 +34,6 @@ Transform:
   m_Father: {fileID: 7185410475368986667}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1461025392453318955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249567306785773534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 7185410475368986667}
 --- !u!65 &639072905054556587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58,6 +47,49 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7, y: 8, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1461025392453318955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249567306785773534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptor: {fileID: 2073741375273693079}
+  time: 2
+--- !u!114 &7990171523689693150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249567306785773534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab255b224a11f3e489d0d6019d5be218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallOffset: {x: 0, y: -10, z: 0}
+--- !u!114 &5738720099005337451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249567306785773534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56869e995c478964390ccc3800202673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0.5
+  frequency: 30
+  attack: 0.1
+  release: 0.25
 --- !u!1 &3924339957779903520
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +149,7 @@ GameObject:
   - component: {fileID: 7222944481077649346}
   - component: {fileID: 8303863886400180455}
   - component: {fileID: 5267273018233611084}
+  - component: {fileID: 2073741375273693079}
   m_Layer: 11
   m_Name: WoodenHouse
   m_TagString: Untagged
@@ -233,3 +266,15 @@ MonoBehaviour:
   angles:
   - 0
   - 90
+--- !u!114 &2073741375273693079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565031895521387153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44555e63143a29c4a89aa10ce527f567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
