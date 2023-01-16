@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PropDestroyer : MonoBehaviour
 {
+    [SerializeField] private Transform pivot;
+
     private void OnTriggerEnter(Collider other)
     {
         CollapseController collapsible = other.GetComponent<CollapseController>();
-
-        Vector3 pushDir = transform.forward;
-        collapsible.Push(pushDir);
+        collapsible.Push(pivot.forward);
     }
 }

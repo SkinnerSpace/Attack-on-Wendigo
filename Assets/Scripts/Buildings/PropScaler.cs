@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PropScaler : MonoBehaviour
 {
-    [SerializeField] private Transform prop;
-
     [SerializeField] private float minScale = 1f;
     [SerializeField] private float maxScale = 1f;
 
@@ -14,6 +10,6 @@ public class PropScaler : MonoBehaviour
     private void SetScale()
     {
         float randomScale = Rand.Range(minScale, maxScale);
-        prop.localScale *= randomScale;
+        transform.localScale *= randomScale;
     }
 }

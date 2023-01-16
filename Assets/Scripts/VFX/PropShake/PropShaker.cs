@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PropShaker : MonoBehaviour
+public class PropShaker
 {
-    [SerializeField] private float power = 0.5f; 
-    [SerializeField] private float attack = 0.1f;
-    [SerializeField] private float release = 0.25f;
+    private float power = 0.5f; 
+    private float attack = 0.1f;
+    private float release = 0.25f;
 
     private Shake shake;
 
-    public void PrepareShake(float time, float frequency)
+    public void PrepareToShake(CollapseEstimator estimator)
     {
-        ShakeTimer timer = new ShakeTimer(time);
+        ShakeTimer timer = new ShakeTimer(estimator.time);
         Vector3 axis = new Vector3(1f, 0f, 1f);
         ShakeStrength strength = new ShakeStrength(power, 0f);
-        ShakeCurve curve = new ShakeCurve(frequency, attack, release);
+        ShakeCurve curve = new ShakeCurve(estimator.frequency, attack, release);
         float attenuation = 1f;
 
         shake = new Shake(timer, axis, strength, curve, attenuation);

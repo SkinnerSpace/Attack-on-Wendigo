@@ -3094,7 +3094,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323597733}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 960, y: 5.67, z: 960}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3113,6 +3113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivot: {fileID: 1323597736}
 --- !u!1 &1335141283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3696,7 +3697,7 @@ MonoBehaviour:
   - {fileID: 7565031895521387153, guid: 2b1790229d3dd0247a4b77f9f48cc710, type: 3}
   - {fileID: 8239632340764624749, guid: 6845960eed7b24d4085bc0ff050ecb4a, type: 3}
   trees:
-  - {fileID: 3900529288956612896, guid: 78976d43cc11cb74f9a3b3081293edb0, type: 3}
+  - {fileID: 985683765228275101, guid: 78976d43cc11cb74f9a3b3081293edb0, type: 3}
 --- !u!114 &1515446544
 MonoBehaviour:
   m_ObjectHideFlags: 0
