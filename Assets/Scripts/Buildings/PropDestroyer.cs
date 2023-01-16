@@ -7,6 +7,8 @@ public class PropDestroyer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CollapseController collapsible = other.GetComponent<CollapseController>();
-        collapsible.Launch();
+
+        Vector3 pushDir = transform.forward;
+        collapsible.Push(pushDir);
     }
 }

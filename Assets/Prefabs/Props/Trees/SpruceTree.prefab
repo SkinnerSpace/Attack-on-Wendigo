@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3900529288956612909}
   - component: {fileID: 8434468804220601578}
   - component: {fileID: 7862063910842211870}
+  - component: {fileID: 2748692814187776784}
   m_Layer: 11
   m_Name: SpruceTree
   m_TagString: Untagged
@@ -95,6 +96,18 @@ MonoBehaviour:
   prop: {fileID: 3900529288956612910}
   minScale: 0.4
   maxScale: 1.2
+--- !u!114 &2748692814187776784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900529288956612896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44555e63143a29c4a89aa10ce527f567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6204432398175283201
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +179,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8837114853306547904}
   - component: {fileID: 6693680161165483674}
+  - component: {fileID: 1652543590593096680}
+  - component: {fileID: 8188351574081963824}
+  - component: {fileID: 6469017872743796225}
+  - component: {fileID: 217836029624144203}
+  - component: {fileID: 8434290658788441091}
   m_Layer: 11
   m_Name: CollapseBox
   m_TagString: Untagged
@@ -196,10 +214,79 @@ BoxCollider:
   m_GameObject: {fileID: 7341622738964268655}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 11, y: 16, z: 11}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1652543590593096680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40ef3d720e535741a5c2674940f3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptor: {fileID: 2748692814187776784}
+  meshRenderer: {fileID: 5754673828353361567}
+--- !u!114 &8188351574081963824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab255b224a11f3e489d0d6019d5be218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6469017872743796225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56869e995c478964390ccc3800202673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0.5
+  attack: 0.1
+  release: 0.25
+--- !u!114 &217836029624144203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdefe98eaa1963499cc3ebf5f3708df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prop: {fileID: 6888142963761921520}
+  realSize: {x: 0, y: 0, z: 0}
+  realScale: {x: 0, y: 0, z: 0}
+--- !u!114 &8434290658788441091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341622738964268655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e587bf232966c4a8d2cc0c4951883c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 5754673828353361567}
 --- !u!1001 &6349267310655560219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,6 +359,12 @@ PrefabInstance:
 --- !u!4 &6888142963761921520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1196a2a3e5860b645a3d07734bf2447a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6349267310655560219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5754673828353361567 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1196a2a3e5860b645a3d07734bf2447a,
     type: 3}
   m_PrefabInstance: {fileID: 6349267310655560219}
   m_PrefabAsset: {fileID: 0}

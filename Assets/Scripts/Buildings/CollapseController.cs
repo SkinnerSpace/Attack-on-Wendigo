@@ -5,7 +5,8 @@ using UnityEngine;
 public class CollapseController : MonoBehaviour
 {
     [SerializeField] private CollapseAcceptor acceptor;
-    [SerializeField] private float time;
+    [SerializeField] private MeshRenderer meshRenderer;
+    private CollapseEstimator estimator;
 
     private PropShaker propShaker;
     private PropDropper propDropper;
@@ -14,18 +15,24 @@ public class CollapseController : MonoBehaviour
 
     private void Awake()
     {
+        estimator = GetComponent<CollapseEstimator>();
+        estimator.UpdateEstimations();
+
         propDropper = GetComponent<PropDropper>();
-        propDropper.PrepareFall(time);
+        propDropper.PrepareFall(estimator.time, estimator.height);
 
         propShaker = GetComponent<PropShaker>();
-        propShaker.PrepareShake(time);
+        propShaker.PrepareShake(estimator.time, estimator.frequency);
     }
 
-    public void Launch()
+    public void Push(Vector3 pushDir)
     {
+       // Debug.Log("Height " + propSize.y + " Time " + time + " Frequency " + frequency);
+
         if (!collapsed && propShaker != null)
         {
             collapsed = true;
+            propDropper.SetDir(pushDir);
             propShaker.Launch();
             StartCoroutine(Collapse());
         }
@@ -42,5 +49,8 @@ public class CollapseController : MonoBehaviour
 
             yield return null;
         }
+
+        meshRenderer.enabled = false;
     }
 }
+

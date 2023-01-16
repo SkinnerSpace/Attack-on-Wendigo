@@ -6,13 +6,12 @@ using UnityEngine;
 public class PropShaker : MonoBehaviour
 {
     [SerializeField] private float power = 0.5f; 
-    [SerializeField] private float frequency = 30f;
     [SerializeField] private float attack = 0.1f;
     [SerializeField] private float release = 0.25f;
 
     private Shake shake;
 
-    public void PrepareShake(float time)
+    public void PrepareShake(float time, float frequency)
     {
         ShakeTimer timer = new ShakeTimer(time);
         Vector3 axis = new Vector3(1f, 0f, 1f);
