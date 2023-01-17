@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -14,6 +15,18 @@ public class Weapon : MonoBehaviour
 
     public Action notifyOutOfAmmo;
 
+    private IHoldable[] holdables;
+    private IReleaseable[] releaseables;
+
+    private void Awake()
+    {
+        holdables = GetComponentsInChildren<IHoldable>();
+        releaseables = GetComponentsInChildren<IReleaseable>();
+
+        Debug.Log("Holdables " + holdables.Length);
+        Debug.Log("Releaseables " + releaseables.Length);
+    }
+
     private void Start()
     {
         notifyOutOfAmmo += AmmoBar.Instance.UpdateOutOfAmmo;
@@ -21,49 +34,55 @@ public class Weapon : MonoBehaviour
 
     public void PullTheTrigger()
     {
+        foreach (IHoldable holdable in holdables)
+            holdable.Hold();
+
         if (gunBarrel.isReady)
             ShootIfEnoughAmmo();
     }
 
+    public void ReleaseTheTrigger()
+    {
+        foreach (IReleaseable releaseable in releaseables)
+            releaseable.Release();
+
+        //Debug.Log("release");
+    }
+
     private void ShootIfEnoughAmmo()
     {
-        if (!gunMagazine.IsEmpty())
-        {
-            Shoot();
-        }
-        else
-        {
-            notifyOutOfAmmo();
-        }
+        if (!gunMagazine.IsEmpty()) Shoot();
+        else notifyOutOfAmmo();
     }
 
     private void Shoot()
     {
-        gunBarrel.bullet = gunMagazine.TakeAmmo();
+        gunBarrel.Load(gunMagazine.TakeAmmo());
         gunBarrel.Shoot();
         recoilController.Recoil();
 
-        //sFXPlayer.play(sFXLibrary.shootSFX);
-
-        DamageTargetIfExist();
+        //DamageTargetIfExist();
     }
 
     private void DamageTargetIfExist()
     {
-        if (gunSight.Damageable != null)
+        if (gunSight.targetExist)
         {
             DamagePackage damagePackage = new DamagePackage(1f);
             gunSight.Damageable.ReceiveDamage(damagePackage);
         }
     }
 
-    public void Aim(bool isAiming)
-    {
-        aimController.Aim(isAiming);
-    }
+    public void Aim(bool isAiming) => aimController.Aim(isAiming);
+    public void Reload() => gunMagazine.Reload();
+}
 
-    public void Reload()
-    {
-        gunMagazine.Reload();
-    }
+public interface IHoldable
+{
+    void Hold();
+}
+
+public interface IReleaseable
+{
+    void Release();
 }

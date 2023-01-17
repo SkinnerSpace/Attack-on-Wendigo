@@ -2,10 +2,18 @@
 
 public class GunBarrel : MonoBehaviour
 {
+    [SerializeField] private Transform shootPoint;
     [SerializeField] private float shootInterval = 1f;
+
+    [SerializeField] private float maxPower = 100f;
+    [SerializeField] private float chargeTime = 2f;
+
+    private float power;
+    private float charge;
+
     public bool isReady { get; private set; } = true;
 
-    public GameObject bullet { get; set; }
+    public GameObject projectile { get; set; }
     private FunctionTimer timer;
     private GunSight gunSight;
 
@@ -15,24 +23,24 @@ public class GunBarrel : MonoBehaviour
         gunSight = GetComponent<GunSight>();
     }
 
+    public void Load(GameObject projectile) => this.projectile = projectile;
+
     public void Shoot()
     {
         isReady = false;
         timer.Set("Cool down", shootInterval, CoolDown);
 
-        PlayShootVFX();
+        IProjectile currentProjectile = Instantiate(projectile, shootPoint.position, shootPoint.rotation).GetComponent<IProjectile>();
+        currentProjectile.Launch(shootPoint.forward * power);
     }
 
-    private void CoolDown()
-    {
-        isReady = true;
-    }
+    private void CoolDown() => isReady = true;
 
-    private void PlayShootVFX()
+    private void PlayVFX()
     {
         if (gunSight.Hit.point != Vector3.zero)
         {
-            Instantiate(bullet, gunSight.Hit.point, Quaternion.identity);
+            Instantiate(projectile, gunSight.Hit.point, Quaternion.identity);
         }
     }
 }

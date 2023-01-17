@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Arrival : IState
 {
-    private const float ARRIVAL_TIME = 2.9f;
+    private const float ARRIVAL_TIME = 3.2f;
 
     private FunctionTimer timer;
     private Wendigo wendigo;

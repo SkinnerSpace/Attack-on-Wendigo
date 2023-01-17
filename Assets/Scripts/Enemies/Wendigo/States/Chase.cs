@@ -7,25 +7,26 @@ using UnityEngine;
 
 public class Chase : IState
 {
+    public const float ROTATION_THRESHOLD = 1f;
+
     private WendigoRotator rotator;
     private WendigoMover mover;
+    private readonly WendigoTarget target;
 
-    private Wendigo wendigo;
-    //private Transform target;
-
-    public Chase(WendigoRotator rotator, WendigoMover mover, Wendigo wendigo)
+    public Chase(WendigoRotator rotator, WendigoMover mover, WendigoTarget target)
     {
         this.rotator = rotator;
         this.mover = mover;
-        this.wendigo = wendigo;
-        //this.target = target;
+        this.target = target;
     }
 
     public void Tick()
     {
-        if (wendigo.Target != null) rotator.RotateToTarget(wendigo.Target);
         mover.MoveForward();
+        if (ShouldRotate()) rotator.RotateToTarget(target.Position);
     }
+
+    private bool ShouldRotate() => (target.Exist) && (mover.velocityMagn >= ROTATION_THRESHOLD);
 
     public void OnEnter() { }
 

@@ -17,11 +17,11 @@ TagManager:
   - Characters
   - Weapon
   - Props
-  - Titans
+  - Damageable
   - Player
-  - 
-  - 
-  - 
+  - PropDestroyers
+  - Projectiles
+  - Items
   - 
   - 
   - 

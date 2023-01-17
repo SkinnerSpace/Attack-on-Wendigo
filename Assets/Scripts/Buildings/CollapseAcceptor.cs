@@ -33,10 +33,9 @@ public class CollapseAcceptor : MonoBehaviour
 
     public void Apply()
     {
-        transform.position = collapsePos;
-        collapsePos = originalPos;
+        transform.SetPositionAndRotation(collapsePos, collapseRot);
 
-        transform.rotation = collapseRot;
+        collapsePos = originalPos;
         collapseRot = originalRot;
     }
 

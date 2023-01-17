@@ -12,25 +12,24 @@ public class PlayerShoot : MonoBehaviour
 
     private IKeyBinds keys;
 
-    private void Awake()
-    {
-        keys = GetComponent<IKeyBinds>();
-    }
+    private void Awake() => keys = GetComponent<IKeyBinds>();
 
-    private void Update()
-    {
-        ReadInput();
-    }
-
+    private void Update() => ReadInput();
     
     private void ReadInput()
     {
-        if (Input.GetKey(keys.Shoot))
-            weapon.PullTheTrigger();
+        if (weapon != null)
+        {
+            if (Input.GetKey(keys.Shoot))
+                weapon.PullTheTrigger();
 
-        weapon.Aim(Input.GetKey(keys.Aim));
+            if (Input.GetKeyUp(keys.Shoot))
+                weapon.ReleaseTheTrigger();
 
-        if (Input.GetKey(keys.Reload))
-            weapon.Reload();
+            weapon.Aim(Input.GetKey(keys.Aim));
+
+            if (Input.GetKey(keys.Reload))
+                weapon.Reload();
+        }
     }
 }

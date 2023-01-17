@@ -8,36 +8,67 @@ public class PlayerLook : MonoBehaviour
     private Transform body;
     private IKeyBinds keys;
     
-    private float xRotation;
-    private float yRotation;
+    private float xAngle;
+    private float yAngle;
 
     private void Awake()
     {
+        InitializeComponents();
+        SetUpCursor();
+    }
+
+    private void InitializeComponents()
+    {
         body = player.transform;
         keys = player.transform.GetComponent<IKeyBinds>();
+    }
 
+    private void SetUpCursor()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void Update()
-    {
-        Look();
-    }
+    private void Update() => Look();
 
     private void Look()
     {
-        xRotation += InputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime;
+        xAngle = ModifyAngleX(xAngle);
+        yAngle = ModifyAngleY(yAngle);
 
-        yRotation += InputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
-        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+        SetCameraRotation();
+        SetBodyRotation();
+    }
 
-        transform.rotation = Quaternion.Euler(new Vector3(yRotation, xRotation, transform.eulerAngles.z));
-        body.rotation = Quaternion.Euler(new Vector3(0f, xRotation, 0f));
+    private float ModifyAngleX(float xAngle) => xAngle + (InputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime);
+
+    private float ModifyAngleY(float yAngle)
+    {
+        float yRotated = yAngle;
+        yRotated += InputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
+        yRotated = Mathf.Clamp(yRotated, -90, 90f);
+
+        return yRotated;
+    }
+
+    private void SetCameraRotation()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(
+            x: yAngle, 
+            y: xAngle, 
+            z: transform.eulerAngles.z));
+    }
+
+    private void SetBodyRotation()
+    {
+        body.rotation = Quaternion.Euler(new Vector3(
+            x: 0f, 
+            y: xAngle, 
+            z: 0f));
     }
 
     public bool IsLookingDown()
     {
-        return yRotation >= STEEP_ANGLE;
+        return yAngle >= STEEP_ANGLE;
     }
 }
