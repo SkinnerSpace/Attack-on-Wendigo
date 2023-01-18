@@ -452,6 +452,7 @@ MonoBehaviour:
   - Master
   Banks:
   - Ambient
+  - Environment
   - EnvironmentInteraction
   BanksToLoad: []
   LiveUpdatePort: 9264

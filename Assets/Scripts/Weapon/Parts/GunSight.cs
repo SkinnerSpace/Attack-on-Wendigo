@@ -20,7 +20,7 @@ public class GunSight : MonoBehaviour
 
     private void SubscribeObservers()
     {
-        onTarget += Aim.Instance.TargetUpdate;
+        onTarget += Aim.Instance.SetOnTarget;
     }
 
     private void TakeAim()

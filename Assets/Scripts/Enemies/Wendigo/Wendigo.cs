@@ -20,7 +20,7 @@ public class Wendigo : MonoBehaviour, IDamageable
         SetUpStateMachine();
     }
 
-    private void Update() => stateMachine.Tick();
+    private void FixedUpdate() => stateMachine.Tick();
 
     private void InitializeComponents()
     {

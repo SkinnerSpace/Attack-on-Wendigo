@@ -15,8 +15,5 @@ public class Aim : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    public void TargetUpdate(bool onTarget)
-    {
-        image.color = onTarget ? Color.red : Color.black;
-    }
+    public void SetOnTarget(bool onTarget) => image.color = onTarget ? Color.red : Color.black;
 }

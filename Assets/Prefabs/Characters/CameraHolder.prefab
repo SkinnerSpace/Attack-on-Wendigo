@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1680944993474019686}
   - component: {fileID: 874012968601863398}
   - component: {fileID: 6498195847071277101}
+  - component: {fileID: 8425617499996812408}
   - component: {fileID: 1652087050669785381}
   - component: {fileID: 7820593142600697943}
   - component: {fileID: 1358747189775576019}
@@ -123,6 +124,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &8425617499996812408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680944993474019683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a59ff4825122245af68b2a49f2ab64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1652087050669785381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b105d5442914045800d95f9205b65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shaker: {fileID: 0}
+  shakeable: {fileID: 0}
 --- !u!114 &5708966445217698579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,3 +276,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86885d000bbbc104e9cbbff754dae43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionAcceptor: {fileID: 0}
+  angleAcceptor: {fileID: 0}
