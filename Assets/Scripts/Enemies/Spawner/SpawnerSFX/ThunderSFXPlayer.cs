@@ -5,10 +5,10 @@ using UnityEngine;
 public class ThunderSFXPlayer : MonoBehaviour
 {
     private FMODUnity.EventReference thunderSFX;
-    private AudioPlayer audioPlayer = new AudioPlayer();
+    //private AudioPlayer audioPlayer = new AudioPlayer();
 
     public void PlayThunderSFX()
     {
-        audioPlayer.Play(thunderSFX);
+        //audioPlayer.Play(thunderSFX);
     }
 }

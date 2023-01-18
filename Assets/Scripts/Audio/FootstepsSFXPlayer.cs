@@ -11,8 +11,6 @@ public class FootstepsSFXPlayer : MonoBehaviour
     [SerializeField] private PlayerHorizontalMovement horizontalMovement;
     [SerializeField] private PlayerGroundDetector groundDetector;
 
-    private AudioPlayer audioPlayer = new AudioPlayer();
-
     private float stepProgress;
     private bool firstStepIsMade = false;
 
@@ -54,7 +52,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
         if (stepProgress >= stepSpacing)
         {
             stepProgress -= stepSpacing;
-            audioPlayer.Play(snowFootstepSFX);
+            AudioPlayer.Create().WithPitch(-2f, 2f).Play(snowFootstepSFX);
         }
     }
 }
