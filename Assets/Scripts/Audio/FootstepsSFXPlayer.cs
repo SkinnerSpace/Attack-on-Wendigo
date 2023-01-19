@@ -2,17 +2,29 @@
 
 public class FootstepsSFXPlayer : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private FMODUnity.EventReference snowFootstepSFX;
-    [SerializeField] private FMODUnity.EventReference concreteFootStepSFX;
-    [SerializeField] private float stepSpacing = 5f;
-
-    [Header("Required components")]
+    [Header("Required Components")]
     [SerializeField] private PlayerHorizontalMovement horizontalMovement;
     [SerializeField] private PlayerGroundDetector groundDetector;
 
+    [Header("Audio References")]
+    [SerializeField] private FMODUnity.EventReference snowFootstepSFX;
+    [SerializeField] private FMODUnity.EventReference concreteFootStepSFX;
+
+    [Header("Settings")]
+    [SerializeField] private float stepSpacing = 5f;
+    [SerializeField] private int variety = 5;
+    [SerializeField] private float minPitch = -2f;
+    [SerializeField] private float maxPitch = 2f;
+
     private float stepProgress;
     private bool firstStepIsMade = false;
+
+    private AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = AudioPlayer.Create(snowFootstepSFX).WithPitch(minPitch, maxPitch).WithVariety(variety);
+    }
 
     private void Update()
     {
@@ -52,7 +64,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
         if (stepProgress >= stepSpacing)
         {
             stepProgress -= stepSpacing;
-            AudioPlayer.Create().WithPitch(-2f, 2f).Play(snowFootstepSFX);
+            audioPlayer.PlayOneShot();
         }
     }
 }

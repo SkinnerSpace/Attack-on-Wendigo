@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e7d7b776a2c0243b28816790cff9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalMovement: {fileID: 1416451892556028029}
+  groundDetector: {fileID: 8191541783654543729}
   snowFootstepSFX:
     Guid:
       Data1: -1602073474
@@ -58,8 +60,9 @@ MonoBehaviour:
       Data4: 639327713
     Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
   stepSpacing: 5
-  horizontalMovement: {fileID: 1416451892556028029}
-  groundDetector: {fileID: 8191541783654543729}
+  variety: 5
+  minPitch: -2
+  maxPitch: 2
 --- !u!1 &6176119535850529057
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,10 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671c0149394e8574fbb916f49561fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionBox: {fileID: 225323459830800341}
   minSpeed: 10
   maxSpeed: 15
   acceleration: 0.5
   deceleration: 10
+  dashDistance: 10
   jumpHeight: 3
   gravity: 16
 --- !u!114 &1691979724270368987
@@ -196,9 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908f90fffef56304d9c2c6ce512dcd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  coolDownTime: 0.5
-  dashPower: 100
+  look: {fileID: 0}
 --- !u!114 &5956892049143004515
 MonoBehaviour:
   m_ObjectHideFlags: 0

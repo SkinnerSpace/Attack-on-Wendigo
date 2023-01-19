@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Blizzard : MonoBehaviour
 {
-    private List<IPushable> insiders = new List<IPushable>();
+    private List<IPushable> pushables = new List<IPushable>();
 
     [SerializeField] private float pushPower;
     [SerializeField] private float pushRadius;
     [SerializeField] private float pushBorder;
-    [SerializeField] private bool update;
+    [SerializeField] private bool constantUpdate;
 
     private float squaredPushRadius;
     private float squaredPushBorder;
@@ -25,58 +25,74 @@ public class Blizzard : MonoBehaviour
 
     private void Update()
     {
-        foreach (IPushable insider in insiders)
-            PushAway(insider);
+        foreach (IPushable pushable in pushables)
+            PushAway(pushable);
 
-        if (update)
+        if (constantUpdate)
         {
             squaredPushRadius = pushRadius * pushRadius;
             squaredPushBorder = pushBorder * pushBorder;
         }
     }
 
-    public void AddInsider(IPushable insider)
-    {
-        insiders.Add(insider);
-    }
+    public void AddPushable(IPushable pushable) => pushables.Add(pushable);
 
     public void PushAway(IPushable pushable)
     {
-        float squaredDist = CalculateSquaredDist(pushable.position);
-        float pushCoefficient = CalculateRepulsionCoefficient(squaredDist);
+        float proximity = GetProximity(pushable.position);
 
-        if (pushCoefficient > 0)
-            ApplyPower(pushable, pushCoefficient);
+        float resistance = GetResistance(pushable, proximity);
+        pushable.SetResistance(resistance);
+
+        Vector3 force = GetForce(pushable, proximity);
+        pushable.ApplyForce(force);
     }
 
-    public void ApplyPower(IPushable pushable, float pushCoefficient)
+    public float GetProximity(Vector3 position)
     {
-        Vector3 pushDirection = (transform.position - pushable.position).normalized;
-        Vector3 pushVelocity = pushDirection * pushPower * pushCoefficient;
+        float squaredDist = GetSquaredDist(position);
+        float rawProximity = (squaredDist - squaredPushRadius) / squaredPushBorder;
+        float proximity = Mathf.Clamp(rawProximity, 0f, 1f);
 
-        pushable.Push(pushVelocity);
+        return proximity;
     }
 
-    public float CalculateSquaredDist(Vector3 position)
+    public float GetSquaredDist(Vector3 position)
     {
         Vector3 relativePos = position - transform.position;
         float squaredDist = (relativePos.x * relativePos.x) + (relativePos.z * relativePos.z);
+
         return squaredDist;
     }
 
-    public float CalculateRepulsionCoefficient(float squaredDist)
+    private float GetResistance(IPushable pushable, float proximity)
     {
-        float coefficient = (squaredDist - squaredPushRadius) / squaredPushBorder;
-        coefficient = Mathf.Max(0f, coefficient);
+        float directedness = GetDirectedness(pushable);
+        float resistance = 1f - (proximity * directedness);
 
-        return coefficient;
+        return resistance;
     }
 
-    # if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private float GetDirectedness(IPushable pushable)
     {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, pushRadius);
+        Vector3 faceVector = (transform.position - pushable.position);
+        Vector2 flatFaceVector = new Vector2(faceVector.x, faceVector.z);
+        Vector2 faceDirection = flatFaceVector.normalized;
+
+        Vector2 currentDirection = new Vector2(pushable.direction.x, pushable.direction.z).normalized;
+
+        float directedness = Vector2.Dot(faceDirection, currentDirection);
+        directedness = -directedness; //Mathf.Max(0f, -directedness);
+       // directedness = Mathf.Sqrt(directedness);
+
+        return directedness;
     }
-    #endif
+
+    public Vector3 GetForce(IPushable pushable, float proximity)
+    {
+        Vector3 direction = (transform.position - pushable.position).normalized;
+        Vector3 force = direction * pushPower * proximity;
+
+        return force;
+    }
 }

@@ -121,76 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1609559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1609561}
-  - component: {fileID: 1609560}
-  - component: {fileID: 1609562}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1609560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadEvent: 1
-  UnloadEvent: 2
-  Banks:
-  - EnvironmentInteraction
-  - Ambient
-  CollisionTag: 
-  PreloadSamples: 0
---- !u!4 &1609561
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609559}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1609562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9669c2eac9da9d548977280e984481e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testEvent:
-    Guid:
-      Data1: -1602073474
-      Data2: 1239405464
-      Data3: 1686102408
-      Data4: 639327713
-    Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
 --- !u!4 &13202871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7745797158065002892, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
@@ -409,10 +339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0faf13f015211419e72066536a9f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushPower: 10
-  pushRadius: 420
-  pushBorder: 100
-  update: 0
+  pushPower: 5
+  pushRadius: 405
+  pushBorder: 200
+  constantUpdate: 0
 --- !u!4 &227111462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11f052a4cf82b194aba90cd894d4a0ba,
@@ -3923,6 +3853,56 @@ MonoBehaviour:
   verticalWave: 1
   verticalFrequency: 2
   verticalMagnitude: 2
+--- !u!1 &1598699266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1598699267}
+  - component: {fileID: 1598699268}
+  m_Layer: 0
+  m_Name: EnvironmentSFXPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1598699267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598699266}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1598699268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598699266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632effd7bdc89694ebad3c39d8cae70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windSFX:
+    Guid:
+      Data1: 558561701
+      Data2: 1299365177
+      Data3: 239218576
+      Data4: 363782031
+    Path: event:/SFX/Game/Ambient/Wind
 --- !u!20 &1640929652 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1680944993474019686, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
@@ -4846,7 +4826,7 @@ PrefabInstance:
     - target: {fileID: 6176119535850529056, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 960
+      value: 1337.5
       objectReference: {fileID: 0}
     - target: {fileID: 6176119535850529056, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}

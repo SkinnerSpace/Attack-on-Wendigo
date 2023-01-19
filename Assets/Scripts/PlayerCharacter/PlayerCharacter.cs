@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-    private CapsuleCollider collisionBox;
+    [SerializeField] private CapsuleCollider collisionBox;
 
     [Header("Horizontal movement")]
     [SerializeField] private float minSpeed = 10f;
@@ -31,23 +31,14 @@ public class PlayerCharacter : MonoBehaviour
 
     public bool IsGrounded => PlayerGroundDetector.Instance.isGrounded;
 
+    public Vector3 position => transform.position;
+
     public static PlayerCharacter Instance { get; private set; }
 
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ScreenShake.Create().Launch();
-        }
-        */
-    }
 
     private void Awake()
     {
         Instance = this;
-
-        collisionBox = GetComponentInChildren<CapsuleCollider>();
         Speed = MinSpeed;
     }
 }

@@ -3,5 +3,7 @@
 public interface IPushable
 {
     Vector3 position { get; }
-    void Push(Vector3 pushVelocity);
+    Vector3 direction { get; }
+    void SetResistance(float resistance);
+    void ApplyForce(Vector3 force);
 }

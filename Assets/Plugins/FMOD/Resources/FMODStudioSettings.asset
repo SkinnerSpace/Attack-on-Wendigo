@@ -454,6 +454,7 @@ MonoBehaviour:
   - Ambient
   - Environment
   - EnvironmentInteraction
+  - Wendigo
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

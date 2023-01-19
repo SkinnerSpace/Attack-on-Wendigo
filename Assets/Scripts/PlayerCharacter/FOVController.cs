@@ -29,7 +29,7 @@ public class FOVController : MonoBehaviour
 
     private void Update()
     {
-        UpdateFOV(horizontalMovement.speedMagnitude);
+        UpdateFOV(horizontalMovement.velocityFOVModifier);
     }
 
     private void UpdateFOV(float magnitude)
