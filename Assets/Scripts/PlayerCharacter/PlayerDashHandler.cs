@@ -33,7 +33,7 @@ public class PlayerDashHandler : MonoBehaviour
             Vector3 resistanceDirection = look.IsLookingDown() ? (new Vector3(0, DOWN_MULTIPLIER, 0)) : (new Vector3(1, 0, 1));
             Vector3 dashVelocity = Vector3.Scale(direction, GetPower(resistanceDirection));
 
-            horizontalMovement.AddContinuousVelocity(dashVelocity);
+            horizontalMovement.AddForce(dashVelocity);
 
             timer.Set("Cool Down", COOL_DOWN_TIME, CoolDown);
             timer.Set("Stop Soaring", SOARING_TIME, StopSoaring);

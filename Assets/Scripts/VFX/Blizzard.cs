@@ -6,33 +6,18 @@ public class Blizzard : MonoBehaviour
 {
     private List<IPushable> pushables = new List<IPushable>();
 
-    [SerializeField] private float pushPower;
-    [SerializeField] private float pushRadius;
-    [SerializeField] private float pushBorder;
-    [SerializeField] private bool constantUpdate;
-
-    private float squaredPushRadius;
-    private float squaredPushBorder;
+    [SerializeField] private float strength;
+    [SerializeField] private float radius;
+    [SerializeField] private float maxOuterDistance;
 
     public static Blizzard Instance { get; private set; }
 
-    private void Awake()
-    {
-        Instance = this;
-        squaredPushRadius = pushRadius * pushRadius;
-        squaredPushBorder = pushBorder * pushBorder;
-    }
+    private void Awake() => Instance = this;
 
     private void Update()
     {
         foreach (IPushable pushable in pushables)
             PushAway(pushable);
-
-        if (constantUpdate)
-        {
-            squaredPushRadius = pushRadius * pushRadius;
-            squaredPushBorder = pushBorder * pushBorder;
-        }
     }
 
     public void AddPushable(IPushable pushable) => pushables.Add(pushable);
@@ -45,30 +30,23 @@ public class Blizzard : MonoBehaviour
         pushable.SetResistance(resistance);
 
         Vector3 force = GetForce(pushable, proximity);
-        pushable.ApplyForce(force);
+        //pushable.ApplyForce(force);
     }
 
-    public float GetProximity(Vector3 position)
+    public float GetProximity(Vector3 objPosition)
     {
-        float squaredDist = GetSquaredDist(position);
-        float rawProximity = (squaredDist - squaredPushRadius) / squaredPushBorder;
+        float distance = Vector3.Distance(transform.position, objPosition);
+        float rawProximity = Mathf.Max(0f, (distance - radius)) / maxOuterDistance;
         float proximity = Mathf.Clamp(rawProximity, 0f, 1f);
 
         return proximity;
     }
 
-    public float GetSquaredDist(Vector3 position)
-    {
-        Vector3 relativePos = position - transform.position;
-        float squaredDist = (relativePos.x * relativePos.x) + (relativePos.z * relativePos.z);
-
-        return squaredDist;
-    }
-
     private float GetResistance(IPushable pushable, float proximity)
     {
         float directedness = GetDirectedness(pushable);
-        float resistance = 1f - (proximity * directedness);
+        float resistance = Mathf.Clamp((proximity * directedness), 0f, 1f);
+        resistance = 1f - resistance;
 
         return resistance;
     }
@@ -82,8 +60,7 @@ public class Blizzard : MonoBehaviour
         Vector2 currentDirection = new Vector2(pushable.direction.x, pushable.direction.z).normalized;
 
         float directedness = Vector2.Dot(faceDirection, currentDirection);
-        directedness = -directedness; //Mathf.Max(0f, -directedness);
-       // directedness = Mathf.Sqrt(directedness);
+        directedness = -directedness;
 
         return directedness;
     }
@@ -91,7 +68,7 @@ public class Blizzard : MonoBehaviour
     public Vector3 GetForce(IPushable pushable, float proximity)
     {
         Vector3 direction = (transform.position - pushable.position).normalized;
-        Vector3 force = direction * pushPower * proximity;
+        Vector3 force = direction * strength * proximity;
 
         return force;
     }

@@ -1,65 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioPlayer
 {
-    private AudioEvent audioEvent;
-    private List<AudioParam> parameters;
+    public int parametersCount => parameters.Count;
 
-    public static AudioPlayer Create(FMODUnity.EventReference audioReference)
-    {
-        return new AudioPlayer(audioReference);
-    }
+    private AudioEvent audioEvent;
+    private AudioParameters parameters;
+
+    public static AudioPlayer Create(FMODUnity.EventReference audioReference) => new AudioPlayer(audioReference);
 
     private AudioPlayer(FMODUnity.EventReference audioReference)
     {
         audioEvent = new AudioEvent(audioReference);
-        parameters = new List<AudioParam>();
+        parameters = new AudioParameters();
     }
 
     public AudioPlayer WithPitch(float min, float max)
     {
-        parameters.Add(new AudioPitch(min, max));
+        parameters.Get(AudioPitch.parameter).Set(min, max);
         return this;
     }
 
     public AudioPlayer WithVariety(int variety)
     {
-        parameters.Add(new AudioVariety(variety));
+        parameters.Get(AudioVariety.parameter).Set(variety);
         return this;
     }
 
     public AudioPlayer WithVolume(float volume)
     {
-        parameters.Add(new AudioVolume(volume));
+        parameters.Get(AudioVolume.parameter).Set(volume);
         return this;
     }
 
     public AudioPlayer WithPosition(Vector3 position)
     {
-        parameters.Add(new AudioPosition(position));
+        parameters.Get(AudioPosition.parameter).Set(position);
         return this;
     }
 
     public void PlayOneShot()
     {
-        ApplyParameters();
+        parameters.ApplyTo(audioEvent);
         audioEvent.PlayOneShot();
     }
 
     public void PlayLoop()
     {
-        ApplyParameters();
+        parameters.ApplyTo(audioEvent);
         audioEvent.PlayLoop();
-    }
-
-    private void ApplyParameters()
-    {
-        foreach (AudioParam param in parameters)
-            param.ApplyTo(audioEvent);
     }
 }

@@ -1,16 +1,12 @@
-﻿public abstract class AudioParam
+﻿using System;
+using UnityEngine;
+
+public abstract class AudioParam
 {
+    public static Type parameter => typeof(AudioParam);
     public abstract void ApplyTo(AudioEvent audioEvent);
-}
-
-public class AudioVolume : AudioParam
-{
-    private float volume;
-
-    public AudioVolume(float volume) => this.volume = volume;
-
-    public override void ApplyTo(AudioEvent audioEvent)
-    {
-        audioEvent.SetVolume(volume);
-    }
+    public virtual void Set(int value) { }
+    public virtual void Set(float value) { }
+    public virtual void Set(float first, float second) { }
+    public virtual void Set(Vector3 position) { }
 }

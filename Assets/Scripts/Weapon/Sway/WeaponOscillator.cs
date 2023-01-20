@@ -2,6 +2,10 @@
 
 public class WeaponOscillator : MonoBehaviour
 {
+    [Header("Required Components")]
+    [SerializeField] private PlayerHorizontalMovement horizontalMover;
+
+    [Header("Settings")]
     [SerializeField] private float sinFrequency = 8f;
     [SerializeField] private float sinMagnitude = 1f;
 
@@ -14,7 +18,7 @@ public class WeaponOscillator : MonoBehaviour
 
     private void Update()
     {
-        Wave(PlayerHorizontalMovement.velocityMagnitude * sinFrequency);
+        Wave(horizontalMover.velocityMagnitude * sinFrequency);
     }
 
     public void Wave(float movementMagnitude)

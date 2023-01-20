@@ -1,11 +1,15 @@
-﻿public class AudioPitch : AudioParam
+﻿using System;
+
+public class AudioPitch : AudioParam
 {
+    public new static Type parameter => typeof(AudioPitch); 
+
     private float pitch;
 
     private float min;
     private float max;
 
-    public AudioPitch(float min, float max)
+    public override void Set(float min, float max)
     {
         this.min = min;
         this.max = max;
@@ -18,4 +22,6 @@
     }
 
     private void Update() => pitch = Rand.Range(min, max);
+
+    public override string ToString() => $"Pitch, min: {min}, max: {max}, Current: {pitch}";
 }

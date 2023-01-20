@@ -1,16 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AudioVariety : AudioParam
 {
+    public new static Type parameter => typeof(AudioVariety);
+
     private int variants;
 
     private int current;
     private int previous;
 
-    public AudioVariety(int variants)
-    {
-        this.variants = variants;
-    }
+    public override void Set(int variants) => this.variants = variants;
 
     public override void ApplyTo(AudioEvent audioEvent)
     {
@@ -34,4 +34,6 @@ public class AudioVariety : AudioParam
 
         return rand;
     }
+
+    public override string ToString() => $"Variants: {variants}, Current: {current}";
 }
