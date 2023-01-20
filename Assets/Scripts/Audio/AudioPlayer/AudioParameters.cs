@@ -21,7 +21,7 @@ public class AudioParameters
     {
         foreach (AudioParam param in parameters.Values)
         {
-            Debug.Log(param.ToString());
+            //Debug.Log(param.ToString());
             param.ApplyTo(audioEvent);
         }
     }

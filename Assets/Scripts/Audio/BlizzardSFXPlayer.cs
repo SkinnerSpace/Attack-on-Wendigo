@@ -11,12 +11,21 @@ public class BlizzardSFXPlayer : MonoBehaviour
 
     private void Awake()
     {
-        audioPlayer = AudioPlayer.Create(blizzardSFX).WithVolume(0.5f);
+        audioPlayer = AudioPlayer.Create(blizzardSFX);
+        UpdateAttenuation();
 
-        audioPlayer.WithVolume(0.5f);
         audioPlayer.PlayLoop();
-        audioPlayer.WithVolume(0.5f);
+    }
 
-        Logger.Print("Params " + audioPlayer.parametersCount);
+    private void Update() => UpdateAttenuation();
+
+    private void UpdateAttenuation()
+    {
+        float distToCenter = Vector3.Distance(transform.position, PlayerCharacter.Instance.position);
+        float distToRadius = Mathf.Min((distToCenter / Blizzard.Instance.Radius), 1f); 
+        float volume = distToRadius;
+
+        audioPlayer.WithVolume(volume);
+        audioPlayer.Update();
     }
 }

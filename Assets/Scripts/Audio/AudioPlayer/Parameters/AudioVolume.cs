@@ -7,11 +7,7 @@ public class AudioVolume : AudioParam
     private float volume;
 
     public override void Set(float volume) => this.volume = volume;
-
-    public override void ApplyTo(AudioEvent audioEvent)
-    {
-        audioEvent.SetVolume(volume);
-    }
+    public override void ApplyTo(AudioEvent audioEvent) => audioEvent.SetVolume(volume);
 
     public override string ToString() => $"Volume: {volume}";
 }

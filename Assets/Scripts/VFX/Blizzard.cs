@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Blizzard : MonoBehaviour
 {
+    public float Radius => radius;
+
     private List<IPushable> pushables = new List<IPushable>();
 
     [SerializeField] private float strength;

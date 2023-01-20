@@ -5,13 +5,14 @@ public class AudioPlayer
     public int parametersCount => parameters.Count;
 
     private AudioEvent audioEvent;
+    private FMODUnity.EventReference audioReference;
     private AudioParameters parameters;
 
     public static AudioPlayer Create(FMODUnity.EventReference audioReference) => new AudioPlayer(audioReference);
 
     private AudioPlayer(FMODUnity.EventReference audioReference)
     {
-        audioEvent = new AudioEvent(audioReference);
+        this.audioReference = audioReference;
         parameters = new AudioParameters();
     }
 
@@ -41,13 +42,21 @@ public class AudioPlayer
 
     public void PlayOneShot()
     {
+        audioEvent = new AudioEvent(audioReference);
         parameters.ApplyTo(audioEvent);
         audioEvent.PlayOneShot();
     }
 
     public void PlayLoop()
     {
+        audioEvent = new AudioEvent(audioReference);
         parameters.ApplyTo(audioEvent);
         audioEvent.PlayLoop();
+    }
+
+    public void Update()
+    {
+        if (audioEvent != null)
+            parameters.ApplyTo(audioEvent);
     }
 }
