@@ -22,10 +22,8 @@ public class BlizzardSFXPlayer : MonoBehaviour
     private void UpdateAttenuation()
     {
         float distToCenter = Vector3.Distance(transform.position, PlayerCharacter.Instance.position);
-        float distToRadius = Mathf.Min((distToCenter / Blizzard.Instance.Radius), 1f); 
-        float volume = distToRadius;
+        float volume = Mathf.InverseLerp(0f, Blizzard.Instance.Radius, distToCenter);
 
-        audioPlayer.WithVolume(volume);
-        audioPlayer.Update();
+        audioPlayer.WithVolume(volume).Update();
     }
 }

@@ -4,42 +4,40 @@ using UnityEngine;
 
 public class WendigoSpawner : MonoBehaviour
 {
-    private RadPosGenerator radPosGenerator;
-
-    [SerializeField] private GameObject lightningBolt;
-    [SerializeField] private GameObject wendigo;
-    [SerializeField] private GameObject shield;
-
+    [Header("Required Components")]
+    [SerializeField] private LightningThrower lightningThrower;
+    [SerializeField] private EnergyShieldSpawner shieldSpawner;
+    [SerializeField] private RadPosGenerator radPosGenerator;
     [SerializeField] private Transform characters;
 
-    private void Awake()
-    {
-        radPosGenerator = GetComponent<RadPosGenerator>();
-    }
+    [Header("Prefabs")]
+    [SerializeField] private GameObject wendigoPrefab;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            SpawnWendigo();
+        if (Input.GetKeyDown(KeyCode.G)) Launch();
     }
 
-    private void SpawnWendigo()
+    private void Launch()
     {
-        Vector3 spawnPos = radPosGenerator.GetPosition();
+        Vector3 position = radPosGenerator.GetPosition();
 
-        Transform wendigoTf = Instantiate(wendigo, spawnPos, Quaternion.identity, characters).transform;
-        wendigoTf.LookAt(PlayerCharacter.Instance.transform);
-        wendigoTf.eulerAngles = new Vector3(0f, wendigoTf.eulerAngles.y, 0f);
-
-        Instantiate(shield, spawnPos, Quaternion.identity, transform);
-
-        ThrowLightningBolt(spawnPos);
+        SpawnWendigo(position);
+        shieldSpawner.Spawn(position);
+        lightningThrower.Throw(position);
     }
 
-    private void ThrowLightningBolt(Vector3 throwPos)
+    private void SpawnWendigo(Vector3 position)
     {
-        Instantiate(lightningBolt, throwPos, Quaternion.identity, transform);
-        float dist = Vector3.Distance(throwPos, PlayerCharacter.Instance.transform.position);
-        ScreenShake.Create().withTime(1f).WithAxis(1f, 1f, 0f).WithStrength(1f, 4f).WithCurve(10f, 0.1f, 0.25f).WithAttenuation(dist, 600f).Launch();
+        Transform wendigo = CreateIn(position);
+        TurnToTarget(wendigo);
+    }
+
+    private Transform CreateIn(Vector3 position) => Instantiate(wendigoPrefab, position, Quaternion.identity, characters).transform;
+
+    private void TurnToTarget(Transform wendigo)
+    {
+        wendigo.LookAt(PlayerCharacter.Instance.transform);
+        wendigo.eulerAngles = new Vector3(0f, wendigo.eulerAngles.y, 0f);
     }
 }

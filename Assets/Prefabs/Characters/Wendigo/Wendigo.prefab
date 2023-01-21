@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479952689a2d4114ea18ef475f9ae3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sFXPlayer: {fileID: 6783199577854852569}
 --- !u!114 &8100390333917869422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,6 +1035,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1701307915360685877}
+  - {fileID: 6299782067304498616}
   - {fileID: 3501373726285032967}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1542,7 +1544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2604546528073915769}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2061031389655630050
 CapsuleCollider:
@@ -3563,6 +3565,70 @@ Transform:
   m_Father: {fileID: 1199275615899566793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.2259649, y: 0.1647888, z: -10.744195}
+--- !u!1 &9099387906177220144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6299782067304498616}
+  - component: {fileID: 6783199577854852569}
+  m_Layer: 9
+  m_Name: SFXPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6299782067304498616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099387906177220144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2604546528073915769}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6783199577854852569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099387906177220144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ae9caf088756949855d32c4be43c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stompSFX:
+    Guid:
+      Data1: 812215381
+      Data2: 1157169961
+      Data3: -1941391173
+      Data4: -1856236421
+    Path: event:/SFX/Game/Gameplay/Wendigo/Stomp
+  arrivalRoarSFX:
+    Guid:
+      Data1: 964716215
+      Data2: 1121429328
+      Data3: 1444099775
+      Data4: -163083851
+    Path: event:/SFX/Game/Gameplay/Wendigo/Roars/ArrivalRoar
+  movementRoarSFX:
+    Guid:
+      Data1: 11639198
+      Data2: 1201852585
+      Data3: 1497844394
+      Data4: 1792139170
+    Path: event:/SFX/Game/Gameplay/Wendigo/Roars/MovementRoar
 --- !u!1 &9123887102132083627
 GameObject:
   m_ObjectHideFlags: 0
