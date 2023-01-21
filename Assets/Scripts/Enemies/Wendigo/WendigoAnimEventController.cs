@@ -25,5 +25,6 @@ public class WendigoAnimEventController : MonoBehaviour
     public void RoarOnArrival()
     {
         sFXPlayer.PlayArrivalRoarSFX();
+        sFXPlayer.PlayArrivalBoneCrackSFX();
     }
 }

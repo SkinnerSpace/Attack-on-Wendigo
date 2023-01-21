@@ -7,14 +7,17 @@ public class WendigoSFXPlayer : MonoBehaviour
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference stompSFX;
     [SerializeField] private FMODUnity.EventReference arrivalRoarSFX;
+    [SerializeField] private FMODUnity.EventReference arrivalBoneCrackSFX;
     [SerializeField] private FMODUnity.EventReference movementRoarSFX;
 
     private AudioPlayer arrivalRoarAudioPlayer;
+    private AudioPlayer arrivalBoneCrackAudioPlayer;
     private AudioPlayer stompAudioPlayer;
 
     private void Awake()
     {
         arrivalRoarAudioPlayer = AudioPlayer.Create(arrivalRoarSFX).WithPitch(-2f, 2f);
+        arrivalBoneCrackAudioPlayer = AudioPlayer.Create(arrivalBoneCrackSFX).WithPitch(-2f, 2f);
         stompAudioPlayer = AudioPlayer.Create(stompSFX).WithPitch(0f, 4f).WithVariety(3);
     }
 
@@ -24,6 +27,10 @@ public class WendigoSFXPlayer : MonoBehaviour
 
     public void PlayArrivalRoarSFX(){
         arrivalRoarAudioPlayer.WithPosition(transform.position).PlayOneShot();
+    }
+
+    public void PlayArrivalBoneCrackSFX(){
+        arrivalBoneCrackAudioPlayer.WithPosition(transform.position).PlayOneShot();
     }
 }
 

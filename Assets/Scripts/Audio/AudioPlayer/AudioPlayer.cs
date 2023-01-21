@@ -14,6 +14,7 @@ public class AudioPlayer
     {
         this.audioReference = audioReference;
         parameters = new AudioParameters();
+
     }
 
     public AudioPlayer WithPitch(float min, float max)
@@ -40,6 +41,12 @@ public class AudioPlayer
         return this;
     }
 
+    public AudioPlayer WithStartTime(float timelinePosition)
+    {
+        parameters.Get(AudioTimelinePosition.parameter).Set(timelinePosition);
+        return this;
+    }
+
     public void PlayOneShot()
     {
         audioEvent = new AudioEvent(audioReference);
@@ -59,4 +66,6 @@ public class AudioPlayer
         if (audioEvent != null)
             parameters.ApplyTo(audioEvent);
     }
+
+    public void Stop() => audioEvent.Stop();
 }

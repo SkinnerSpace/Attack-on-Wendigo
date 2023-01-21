@@ -5,6 +5,7 @@ public class PropDropper
     private const float DEPTH_OFFSET = 1f;
     private const float PUSH_MULTIPLIER = 15f;
 
+    public float Completeness => lerp;
     public Vector3 posDisplacement { get; private set; }
     public Quaternion rotDisplacement { get; private set; }
 

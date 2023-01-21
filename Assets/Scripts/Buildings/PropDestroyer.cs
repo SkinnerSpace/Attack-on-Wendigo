@@ -9,6 +9,6 @@ public class PropDestroyer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CollapseController collapsible = other.GetComponent<CollapseController>();
-        collapsible.Push(pivot.forward);
+        collapsible.PullDown(pivot.forward);
     }
 }

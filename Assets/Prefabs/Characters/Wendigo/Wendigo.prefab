@@ -3622,6 +3622,13 @@ MonoBehaviour:
       Data3: 1444099775
       Data4: -163083851
     Path: event:/SFX/Game/Gameplay/Wendigo/Roars/ArrivalRoar
+  arrivalBoneCrackSFX:
+    Guid:
+      Data1: 1207410937
+      Data2: 1292968362
+      Data3: 1401239740
+      Data4: 776061448
+    Path: event:/SFX/Game/Gameplay/Wendigo/BoneCrack/ArrivalCrack
   movementRoarSFX:
     Guid:
       Data1: 11639198

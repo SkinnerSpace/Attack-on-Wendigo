@@ -10,3 +10,4 @@ public abstract class AudioParam
     public virtual void Set(float first, float second) { }
     public virtual void Set(Vector3 position) { }
 }
+
