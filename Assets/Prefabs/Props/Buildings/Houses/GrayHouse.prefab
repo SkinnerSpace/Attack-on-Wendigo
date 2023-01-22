@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6627569727207678701}
   - component: {fileID: 2789702383926972558}
   m_Layer: 11
-  m_Name: CollapseBox
+  m_Name: CollapseController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ BoxCollider:
   m_GameObject: {fileID: 1934922025384716284}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 13, y: 7, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptor: {fileID: 6218675348472352625}
-  collapseSFXPlayer: {fileID: 0}
+  depthMultiplier: 0.2
 --- !u!1 &4469008446883903003
 GameObject:
   m_ObjectHideFlags: 0

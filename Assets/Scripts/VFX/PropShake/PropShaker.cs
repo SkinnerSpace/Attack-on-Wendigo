@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PropShaker
+public class PropShaker : ICollapseObserver
 {
     private float power = 0.5f; 
     private float attack = 0.1f;
@@ -19,10 +19,7 @@ public class PropShaker
     }
 
     public void Launch() => ShakeHandler.Launch(shake);
-
-    public void UpdateShake() => ShakeHandler.Handle(shake);
-    public void SetCompleteness(float progress) => ShakeHandler.Handle(shake, progress);
+    public void ReceiveCollapseUpdate(float progress) => ShakeHandler.Handle(shake, progress);
     public Vector3 GetPosDisplacement() => ShakeHandler.GetDisplacement(shake).position;
-    public bool IsDone() => !shake.isActive;
 }
 

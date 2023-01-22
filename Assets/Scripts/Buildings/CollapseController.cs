@@ -5,60 +5,53 @@ using UnityEngine;
 public class CollapseController : MonoBehaviour
 {
     [SerializeField] private CollapseAcceptor acceptor;
-    [SerializeField] private CollapseSFXPlayer collapseSFXPlayer;
     private BoxCollider collapseCollider;
+
+    [SerializeField] private float depthMultiplier = 1f;
 
     private PropShaker shaker;
     private PropDropper dropper;
+    private CollapseEstimations estimations;
 
-    private bool collapsed;
-
+    private bool started;
     private float currentTime;
     private float completeness;
-    public event Action<float> notifyOnUpdate;
 
-    private CollapseEstimations estimated;
+    public event Action<float> notifyOnUpdate;
 
     private void Awake()
     {
-        collapseCollider = GetComponent<BoxCollider>();
-        collapseCollider.enabled = true;
-
-        PrepareToCollapse();
+        SetupComponents();
+        SubscribeComponents();
     }
 
-    private void PrepareToCollapse()
+    private void SetupComponents()
     {
-        estimated = CollapseEstimator.EstimateFor(acceptor.height);
+        collapseCollider = GetComponent<BoxCollider>();
 
-        dropper = new PropDropper(acceptor);
-        shaker = new PropShaker(estimated.frequency);
-
-        notifyOnUpdate += dropper.SetDisplacement;
-        notifyOnUpdate += shaker.SetCompleteness;
-        if(collapseSFXPlayer != null) collapseSFXPlayer.SubscribeTo(this);
+        estimations = CollapseEstimator.EstimateFor(acceptor.height);
+        dropper = new PropDropper(acceptor, depthMultiplier);
+        shaker = new PropShaker(estimations.frequency);
     }
 
-    public void Subscribe()
+    private void SubscribeComponents()
+    {
+        Subscribe(dropper);
+        Subscribe(shaker);
+    }
+
+    public void Subscribe(ICollapseObserver observer) => notifyOnUpdate += observer.ReceiveCollapseUpdate;
 
     public void PullDown(Vector3 pushDir)
     {
-        if (!collapsed)
-        {
-            collapsed = true;
+        if (!started){
+            started = true;
             collapseCollider.enabled = false;
 
-            LaunchCollapse(pushDir);
+            dropper.Launch(pushDir);
+            shaker.Launch();
+            StartCoroutine(Collapse());
         }
-    }
-
-    private void LaunchCollapse(Vector3 pushDir)
-    {
-        if (collapseSFXPlayer != null) collapseSFXPlayer.PlayFallSFX();
-
-        dropper.Launch(pushDir);
-        shaker.Launch();
-        StartCoroutine(Collapse());
     }
 
     IEnumerator Collapse()
@@ -68,21 +61,15 @@ public class CollapseController : MonoBehaviour
             yield return null;
         }
 
-        SweepTheTrash();
+        //acceptor.Disappear();
     }
 
     private void KeepDestroying()
     {
         currentTime += Chronos.DeltaTime;
-        completeness = currentTime / estimated.time;
+        completeness = currentTime / estimations.time;
         notifyOnUpdate(completeness);
 
         acceptor.Add(dropper.posDisplacement).Add(dropper.rotDisplacement).Add(shaker.GetPosDisplacement()).Apply();
-    }
-
-    private void SweepTheTrash()
-    {
-        Debug.Log("COLLAPSED!");
-        acceptor.Disappear();
     }
 }

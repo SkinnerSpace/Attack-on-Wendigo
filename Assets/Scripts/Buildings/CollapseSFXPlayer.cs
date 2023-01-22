@@ -1,33 +1,45 @@
 ﻿using UnityEngine;
 using System;
 
-public class CollapseSFXPlayer : MonoBehaviour
+public class CollapseSFXPlayer : MonoBehaviour, ICollapseObserver
 {
+    private const float TIMEOUT = 0.6f;
+
+    [Header("Requited Components")]
+    [SerializeField] private CollapseController controller;
+
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference fallSFX;
 
     private AudioPlayer fallAudioPlayer;
-    private CollapseController controller;
+    private bool isPlaying;
 
     private void Awake()
     {
+        controller.Subscribe(this);
         fallAudioPlayer = AudioPlayer.Create(fallSFX).WithPitch(-3f, 3f).WithStartTime(Rand.Range(0f, 1f)).WithPosition(transform.position);
     }
 
-    public void PlayFallSFX() => fallAudioPlayer.PlayLoop();
-
-    public void SubscribeTo(CollapseController controller)
+    public void ReceiveCollapseUpdate(float completeness)
     {
-        this.controller = controller;
-        controller.notifyOnUpdate += TimeOut;
+        if (!isPlaying) Play();
+        if (completeness >= TIMEOUT) Stop();
     }
 
-    public void TimeOut(float completeness)
+    private void Play()
     {
-        if (completeness >= 0.6f)
-        {
-            controller.notifyOnUpdate -= TimeOut;
-            fallAudioPlayer.Stop();
-        }
+        isPlaying = true;
+        fallAudioPlayer.PlayLoop();
     }
+
+    private void Stop()
+    {
+        controller.notifyOnUpdate -= ReceiveCollapseUpdate;
+        fallAudioPlayer.Stop();
+    }
+}
+
+public interface ICollapseObserver
+{
+    void ReceiveCollapseUpdate(float completeness);
 }

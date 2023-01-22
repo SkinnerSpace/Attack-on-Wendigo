@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PropDropper
+public class PropDropper : ICollapseObserver
 {
     private const float DEPTH_OFFSET = 1f;
     private const float PUSH_MULTIPLIER = 15f;
@@ -14,13 +14,17 @@ public class PropDropper
     private Vector3 fallPosOffset;
     private Quaternion fallRotation;
 
-    public PropDropper(CollapseAcceptor acceptor)
+    private float depthMultiplier;
+
+    public PropDropper(CollapseAcceptor acceptor, float depthMultiplier)
     {
         originalPos = acceptor.originalPos;
         originalRot = acceptor.originalRot;
 
-        float depth = -(acceptor.height + DEPTH_OFFSET);
+        float depth = -(acceptor.height + DEPTH_OFFSET) * 1.5f;
         fallPosOffset = new Vector3(0f, depth, 0f);
+
+        this.depthMultiplier = depthMultiplier;
     }
 
     public void Launch(Vector3 pushDir)
@@ -35,16 +39,18 @@ public class PropDropper
     {
         Vector3 fallPos = originalPos + offset;
         Vector3 fallDir = (fallPos - originalPos).normalized;
-
         float adjustmentAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
         Quaternion adjustmentRotation = Quaternion.Euler(0f, -adjustmentAngle, 0f);
 
         return Quaternion.LookRotation(fallDir, Vector3.up) * originalRot * adjustmentRotation;
     }
 
-    public void SetDisplacement(float displacement)
+    public void ReceiveCollapseUpdate(float displacement)
     {
-        posDisplacement = Vector3.Lerp(Vector3.zero, fallPosOffset, displacement);
+        Vector3 fallPosAdjusted = new Vector3(fallPosOffset.x * 0.2f, fallPosOffset.y * depthMultiplier, fallPosOffset.z * 0.2f);
+        posDisplacement = Vector3.Lerp(Vector3.zero, fallPosAdjusted, displacement);
+        //posDisplacement = Vector3.Lerp(Vector3.zero, fallPosOffset, displacement);
         rotDisplacement = Quaternion.Slerp(originalRot, fallRotation, displacement);
     }
 }
