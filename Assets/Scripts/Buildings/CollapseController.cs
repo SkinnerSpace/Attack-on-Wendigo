@@ -1,41 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class CollapseController : MonoBehaviour
 {
     [SerializeField] private CollapseAcceptor acceptor;
     [SerializeField] private CollapseSFXPlayer collapseSFXPlayer;
-    
     private BoxCollider collapseCollider;
-    private CollapseEstimator estimator;
+
     private PropShaker shaker;
     private PropDropper dropper;
 
     private bool collapsed;
 
+    private float currentTime;
+    private float completeness;
+    public event Action<float> notifyOnUpdate;
+
+    private CollapseEstimations estimated;
+
     private void Awake()
     {
-        InitializeComponents();
-        PrepareToCollapse();
-    }
-
-    private void InitializeComponents()
-    {
         collapseCollider = GetComponent<BoxCollider>();
+        collapseCollider.enabled = true;
 
-        estimator = new CollapseEstimator();
-        dropper = new PropDropper();
-        shaker = new PropShaker(); 
+        PrepareToCollapse();
     }
 
     private void PrepareToCollapse()
     {
-        estimator.EstiamteFor(acceptor);
-        collapseCollider.size = estimator.propSize;
+        estimated = CollapseEstimator.EstimateFor(acceptor.height);
 
-        dropper.PrepareToFall(estimator, acceptor);
-        shaker.PrepareToShake(estimator);
+        dropper = new PropDropper(acceptor);
+        shaker = new PropShaker(estimated.frequency);
+
+        notifyOnUpdate += dropper.SetDisplacement;
+        notifyOnUpdate += shaker.SetCompleteness;
+        if(collapseSFXPlayer != null) collapseSFXPlayer.SubscribeTo(this);
     }
+
+    public void Subscribe()
 
     public void PullDown(Vector3 pushDir)
     {
@@ -59,7 +63,7 @@ public class CollapseController : MonoBehaviour
 
     IEnumerator Collapse()
     {
-        while (IsNotDestroyedYet()){
+        while (completeness < 1f){
             KeepDestroying();
             yield return null;
         }
@@ -67,32 +71,18 @@ public class CollapseController : MonoBehaviour
         SweepTheTrash();
     }
 
-    private bool IsNotDestroyedYet() => !dropper.IsDone() && !shaker.IsDone();
-
     private void KeepDestroying()
     {
-        dropper.UpdateFall();
-        shaker.UpdateShake();
-
-        if (dropper.Completeness >= 0.6f)
-            StopCollapseSFX();
+        currentTime += Chronos.DeltaTime;
+        completeness = currentTime / estimated.time;
+        notifyOnUpdate(completeness);
 
         acceptor.Add(dropper.posDisplacement).Add(dropper.rotDisplacement).Add(shaker.GetPosDisplacement()).Apply();
     }
 
-
-    private bool collapseSFXHasStopped;
-    private void StopCollapseSFX()
-    {
-        if (!collapseSFXHasStopped){
-            Debug.Log("STOP EVEMT");
-            collapseSFXHasStopped = true;
-            if (collapseSFXPlayer != null) collapseSFXPlayer.Stop();
-        }
-    }
-
     private void SweepTheTrash()
     {
+        Debug.Log("COLLAPSED!");
         acceptor.Disappear();
     }
 }

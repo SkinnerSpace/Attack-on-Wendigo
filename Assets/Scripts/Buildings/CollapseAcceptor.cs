@@ -2,6 +2,7 @@
 
 public class CollapseAcceptor : MonoBehaviour
 {
+    public float height => mesh.bounds.size.y;
     public MeshRenderer mesh { get; private set; }
 
     public Vector3 originalPos { get; private set; }

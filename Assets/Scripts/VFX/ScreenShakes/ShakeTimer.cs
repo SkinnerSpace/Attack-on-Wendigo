@@ -2,36 +2,39 @@
 
 public class ShakeTimer
 {
-    public float TimeScaled => timeScaled;
+    public float TimeScaled => currentTimeScaled;
 
-    private float maxTime;
-    private float time;
-    private float timeScaled;
+    private float waitTime;
+    private float currentTime;
+    private float currentTimeScaled;
 
-    public ShakeTimer(float maxTime)
+    public ShakeTimer(float waitTime)
     {
-        this.maxTime = maxTime;
+        this.waitTime = waitTime;
 
-        time = 0f;
-        timeScaled = 0f;
+        currentTime = 0f;
+        currentTimeScaled = 0f;
     }
 
-    public void SetTime(float maxTime)
-    {
-        this.maxTime = maxTime;
-    }
-
-    public bool TimeOut() => (time >= maxTime);
+    public void SetWaitTime(float waitTime) => this.waitTime = waitTime;
+    public bool TimeOut() => (currentTimeScaled >= 1f);
 
     public void CountDown()
     {
-        time += Time.deltaTime;
-        timeScaled = time / maxTime;
+        currentTime += Time.deltaTime;
+        CalculateScaledTime();
+    }
 
-        if (time >= maxTime)
+    public void SetCompleteness(float progress) => currentTimeScaled = progress;
+
+    private void CalculateScaledTime()
+    {
+        currentTimeScaled = currentTime / waitTime;
+
+        if (currentTime >= waitTime)
         {
-            time = maxTime;
-            timeScaled = 1f;
+            currentTime = waitTime;
+            currentTimeScaled = 1f;
         }
     }
 }

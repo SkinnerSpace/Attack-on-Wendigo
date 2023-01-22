@@ -3,8 +3,7 @@
 public class Shake
 {
     public bool isActive { get; private set; }
-
-    public float Time => timer.TimeScaled;
+    public float Completeness { get; private set; }
 
     public Vector3 MaxPosDisplacement => direction * strength.amount;
     public Vector3 MaxAngleDisplacement => angle * strength.amount * strength.angleMultiplier;
@@ -29,13 +28,13 @@ public class Shake
     private float exWave;
     private float wave;
 
-    public Shake(ShakeTimer timer, Vector3 axis, ShakeStrength strength, ShakeCurve curve, float attenuation)
+    public Shake(Vector3 axis, ShakeStrength strength, ShakeCurve curve, float attenuation, ShakeTimer timer = null)
     {
-        this.timer = timer;
         this.axis = axis;
         this.strength = strength;
         this.curve = curve;
         this.attenuation = attenuation;
+        this.timer = timer;
     }
 
     public void Launch(Vector3 dir, float angle)
@@ -51,7 +50,15 @@ public class Shake
     public void Proceed()
     {
         timer.CountDown();
+
+        Completeness = timer.TimeScaled;
         isActive = !timer.TimeOut();
+    }
+
+    public void SetCompleteness(float completeness)
+    {
+        Completeness = completeness;
+        isActive = completeness < 1f;
     }
 
     public void UpdateWave(float wave)

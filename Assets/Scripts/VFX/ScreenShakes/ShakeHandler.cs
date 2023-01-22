@@ -9,12 +9,22 @@ public static class ShakeHandler
 
     public static void Handle(Shake shake)
     {
-        shake.UpdateWave(GetRawWave(shake.Time, shake.FQ));
+        MoveTheWave(shake);
+        shake.Proceed();
+    }
+
+    public static void Handle(Shake shake, float progress)
+    {
+        MoveTheWave(shake);
+        shake.SetCompleteness(progress);
+    }
+
+    public static void MoveTheWave(Shake shake)
+    {
+        shake.UpdateWave(GetRawWave(shake.Completeness, shake.FQ));
 
         if (shake.WaveHasPassed())
             shake.SetDir(ModifyDir(shake.Dir, shake.Axis));
-
-        shake.Proceed();
     }
 
     public static ShakeDisplacement GetDisplacement(Shake shake)
@@ -26,8 +36,8 @@ public static class ShakeHandler
                    angle: (wave * shake.MaxAngleDisplacement * shake.Attenuation));
     }
 
-    private static float GetWave(Shake shake) => GetRawWave(shake.Time, shake.FQ) * 
-                                                Amplitude.Calculate(shake.Time, shake.Attack, shake.Release);
+    private static float GetWave(Shake shake) => GetRawWave(shake.Completeness, shake.FQ) * 
+                                                Amplitude.Calculate(shake.Completeness, shake.Attack, shake.Release);
     private static float GetRawWave(float time, float frequency) => Mathf.Sin(time * WAVE_UNIT * frequency);
 
     private static Vector3 ModifyDir(Vector3 dir, Vector3 axis)

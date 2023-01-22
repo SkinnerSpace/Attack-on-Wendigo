@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class CollapseSFXPlayer : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class CollapseSFXPlayer : MonoBehaviour
     [SerializeField] private FMODUnity.EventReference fallSFX;
 
     private AudioPlayer fallAudioPlayer;
+    private CollapseController controller;
 
     private void Awake()
     {
@@ -13,5 +15,19 @@ public class CollapseSFXPlayer : MonoBehaviour
     }
 
     public void PlayFallSFX() => fallAudioPlayer.PlayLoop();
-    public void Stop() => fallAudioPlayer.Stop();
+
+    public void SubscribeTo(CollapseController controller)
+    {
+        this.controller = controller;
+        controller.notifyOnUpdate += TimeOut;
+    }
+
+    public void TimeOut(float completeness)
+    {
+        if (completeness >= 0.6f)
+        {
+            controller.notifyOnUpdate -= TimeOut;
+            fallAudioPlayer.Stop();
+        }
+    }
 }

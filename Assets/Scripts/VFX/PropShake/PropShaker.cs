@@ -8,20 +8,20 @@ public class PropShaker
 
     private Shake shake;
 
-    public void PrepareToShake(CollapseEstimator estimator)
+    public PropShaker(float frequency)
     {
-        ShakeTimer timer = new ShakeTimer(estimator.time);
         Vector3 axis = new Vector3(1f, 0f, 1f);
         ShakeStrength strength = new ShakeStrength(power, 0f);
-        ShakeCurve curve = new ShakeCurve(estimator.frequency, attack, release);
+        ShakeCurve curve = new ShakeCurve(frequency, attack, release);
         float attenuation = 1f;
 
-        shake = new Shake(timer, axis, strength, curve, attenuation);
+        shake = new Shake(axis, strength, curve, attenuation);
     }
 
     public void Launch() => ShakeHandler.Launch(shake);
 
     public void UpdateShake() => ShakeHandler.Handle(shake);
+    public void SetCompleteness(float progress) => ShakeHandler.Handle(shake, progress);
     public Vector3 GetPosDisplacement() => ShakeHandler.GetDisplacement(shake).position;
     public bool IsDone() => !shake.isActive;
 }

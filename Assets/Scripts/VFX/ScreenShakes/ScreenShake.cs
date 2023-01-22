@@ -23,7 +23,7 @@ public class ScreenShake
 
     public ScreenShake withTime(float time)
     {
-        timer.SetTime(time);
+        timer.SetWaitTime(time);
         return this;
     }
 
@@ -56,7 +56,7 @@ public class ScreenShake
 
     public void Launch()
     {
-        Shake shake = new Shake(timer, axis, strength, curve, attenuation);
+        Shake shake = new Shake(axis, strength, curve, attenuation, timer);
         ShakeManager.Instance.AddAndLaunch(shake);
     }
 }

@@ -5,7 +5,6 @@ public class PropDropper
     private const float DEPTH_OFFSET = 1f;
     private const float PUSH_MULTIPLIER = 15f;
 
-    public float Completeness => lerp;
     public Vector3 posDisplacement { get; private set; }
     public Quaternion rotDisplacement { get; private set; }
 
@@ -15,17 +14,12 @@ public class PropDropper
     private Vector3 fallPosOffset;
     private Quaternion fallRotation;
 
-    private float time;
-    private float currentTime;
-    private float lerp;
-
-    public void PrepareToFall(CollapseEstimator estimator, CollapseAcceptor acceptor)
+    public PropDropper(CollapseAcceptor acceptor)
     {
-        time = estimator.time;
         originalPos = acceptor.originalPos;
         originalRot = acceptor.originalRot;
 
-        float depth = -(estimator.height + DEPTH_OFFSET);
+        float depth = -(acceptor.height + DEPTH_OFFSET);
         fallPosOffset = new Vector3(0f, depth, 0f);
     }
 
@@ -48,15 +42,10 @@ public class PropDropper
         return Quaternion.LookRotation(fallDir, Vector3.up) * originalRot * adjustmentRotation;
     }
 
-    public void UpdateFall()
+    public void SetDisplacement(float displacement)
     {
-        currentTime += Time.deltaTime;
-        lerp = Mathf.Pow((currentTime / time), 2f);
-
-        posDisplacement = Vector3.Lerp(Vector3.zero, fallPosOffset, lerp);
-        rotDisplacement = Quaternion.Slerp(originalRot, fallRotation, lerp);
+        posDisplacement = Vector3.Lerp(Vector3.zero, fallPosOffset, displacement);
+        rotDisplacement = Quaternion.Slerp(originalRot, fallRotation, displacement);
     }
-
-    public bool IsDone() => currentTime >= time;
 }
 
