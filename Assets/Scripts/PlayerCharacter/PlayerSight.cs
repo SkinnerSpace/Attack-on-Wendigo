@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerSight : MonoBehaviour
 {
+    private const float REACH_DISTANCE = 4f;
+
+    [SerializeField] private WeaponHolder weaponHolder;
+
     private LayerMask ignoreLayers = ~(1 << 13 | 1 << 14);
 
     private Camera cam;
     public bool hasTarget { get; private set; }
     public RaycastHit Spot => spot;
     private RaycastHit spot;
+    private bool suitable;
 
     private List<Type> targetTypes = new List<Type>();
 
@@ -48,26 +53,41 @@ public class PlayerSight : MonoBehaviour
         hasTarget = spot.transform != null;
 
         UpdateTargetStatus();
+        SpotAnItem();
     }
 
     private void UpdateTargetStatus()
     {
-        bool suitable = hasTarget ? IsSuitable(spot.transform) : false;
-        notifyOnTarget(suitable);
+        suitable = hasTarget ? IsSuitable(spot.transform) : false;
+        notifyOnTarget(suitable); 
     }
+
+    private void SpotAnItem()
+    {
+        if (IsAbleToTakeAnItem()){
+            if (InputReader.leftClick) weaponHolder.TakeAnItem(spot.transform);
+        }
+    }
+
+    private bool IsAbleToTakeAnItem() => suitable &&
+                                         GetDistanceTo(spot) <= REACH_DISTANCE &&
+                                         GetTargetType(spot.transform) == typeof(IPickable);
+
+    private float GetDistanceTo(RaycastHit spot) => Vector3.Distance(spot.transform.position, transform.position);
 
     private bool IsSuitable(Transform targetTransform)
     {
-        foreach (Type type in targetTypes)
-            if (targetTransform.GetComponent(type) != null)
-                return true;
+        Type type = GetTargetType(targetTransform);
+        return type != null;
+    }
 
-        return false;
+    private Type GetTargetType(Transform targetTransform)
+    {
+        foreach (Type type in targetTypes){
+            if (targetTransform.GetComponent(type) != null)
+                return type;
+        }
+
+        return null;
     }
 }
-
-// Make an item picker class
-// Make a target object + null target object
-// Send target object to the item picker
-// Item picker can pick up an item if it's not of a nullt type, otherwise get message that there is nothing to pick up
-// Pickable item should disappear after being picked up

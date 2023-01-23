@@ -20,12 +20,7 @@ public class WeaponTilter : MonoBehaviour
         originalRotation = transform.localRotation;
     }
 
-    private void Update()
-    {
-        ReadInput();
-    }
-
-    private void ReadInput()
+    public void ReadInput()
     {
         float inputY = controller.input.y;
         inputY = VerticalTuner.ReduceVerticalInput(inputY);

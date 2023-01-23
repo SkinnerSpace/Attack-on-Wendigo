@@ -3,7 +3,7 @@
 public class FootstepsSFXPlayer : MonoBehaviour
 {
     [Header("Required Components")]
-    [SerializeField] private PlayerHorizontalMovement horizontalMovement;
+    [SerializeField] private PlayerHorizontalMover horizontalMovement;
     [SerializeField] private PlayerGroundDetector groundDetector;
 
     [Header("Audio References")]

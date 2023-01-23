@@ -21,12 +21,7 @@ public class WeaponDisplacer : MonoBehaviour
         originalPosition = transform.localPosition;
     }
 
-    private void Update()
-    {
-        ReadInput();
-    }
-
-    private void ReadInput()
+    public void ReadInput()
     {
         float inputY = controller.input.y;
         inputY = VerticalTuner.IncreaseVerticalInput(inputY, VERTICAL_ADJUSTMENT, LAND_ADJUSTMENT);

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e7d7b776a2c0243b28816790cff9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovement: {fileID: 1416451892556028029}
+  horizontalMovement: {fileID: 5716060233150994623}
   groundDetector: {fileID: 8191541783654543729}
   snowFootstepSFX:
     Guid:
@@ -63,6 +63,36 @@ MonoBehaviour:
   variety: 5
   minPitch: -2
   maxPitch: 2
+--- !u!1 &2170787529287074303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5801301066778041583}
+  m_Layer: 13
+  m_Name: WeaponPickUpPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5801301066778041583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2170787529287074303}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6176119535850529056}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6176119535850529057
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +106,7 @@ GameObject:
   - component: {fileID: 1691979724270368987}
   - component: {fileID: 5236374400679958590}
   - component: {fileID: 5845931283795517954}
-  - component: {fileID: 1416451892556028029}
+  - component: {fileID: 5716060233150994623}
   - component: {fileID: 6036142253385846663}
   - component: {fileID: 5956892049143004515}
   - component: {fileID: 4202293268386115700}
@@ -105,6 +135,8 @@ Transform:
   - {fileID: 4249632368387092724}
   - {fileID: 5556981696199256394}
   - {fileID: 8752990138465119577}
+  - {fileID: 4424905859504793801}
+  - {fileID: 5801301066778041583}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -176,8 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  weapon: {fileID: 0}
---- !u!114 &1416451892556028029
+--- !u!114 &5716060233150994623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,9 +217,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6176119535850529057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de971d8ccc1c5e0438dfacf3fbfbedc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 237eae9efec128f4aa215b1267b9a64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6146795615001241510}
+  characterController: {fileID: 7181526249658469568}
+  dashHandler: {fileID: 6036142253385846663}
+  speedometer: {fileID: 764975185769255422}
+  cam: {fileID: 0}
 --- !u!114 &6036142253385846663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,3 +391,46 @@ Transform:
   m_Father: {fileID: 6176119535850529056}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8827623575968643476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4424905859504793801}
+  - component: {fileID: 764975185769255422}
+  m_Layer: 13
+  m_Name: Speedometer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4424905859504793801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827623575968643476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6176119535850529056}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764975185769255422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827623575968643476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9e013650348fb4a9d29187e9142270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

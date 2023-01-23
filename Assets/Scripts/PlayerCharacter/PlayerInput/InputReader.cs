@@ -15,6 +15,9 @@ public class InputReader : MonoBehaviour
     public static bool dash { get; private set; }
     public static Vector2 mouse { get; private set; }
 
+    public static bool leftClick { get; private set; }
+    public static bool rightClick { get; private set; }
+
     private IKeyBinds keys;
 
     private InputReader() { }
@@ -27,12 +30,10 @@ public class InputReader : MonoBehaviour
 
     private void PreserveSingleton()
     {
-        if (Instance != null && Instance != this)
-        {
+        if (Instance != null && Instance != this){
             Destroy(this);
         }
-        else
-        {
+        else{
             Instance = this;
         }
     }
@@ -47,38 +48,56 @@ public class InputReader : MonoBehaviour
 
     private void ReadDirectionInput()
     {
+        ReadMoveButtons();
+
+        rawDir = GetRawDirection();
+        normDir = rawDir.normalized;
+    }
+
+    private void ReadMoveButtons()
+    {
         right = Input.GetKey(keys.MoveRight);
         left = Input.GetKey(keys.MoveLeft);
         forward = Input.GetKey(keys.MoveForward);
         backward = Input.GetKey(keys.MoveBackward);
+    }
 
+    private Vector3 GetRawDirection() => new Vector3(GetXAxis(), 0f, GetZAxis());
+
+    private float GetXAxis()
+    {
         float moveRight = right ? 1f : 0f;
         float moveLeft = left ? -1f : 0f;
-        float xAxis = moveRight + moveLeft;
+        return moveRight + moveLeft;
+    }
 
+    private float GetZAxis()
+    {
         float moveForward = forward ? 1f : 0f;
         float moveBackward = backward ? -1f : 0f;
-        float zAxis = moveForward + moveBackward;
-
-        rawDir = new Vector3(xAxis, 0f, zAxis);
-        normDir = rawDir.normalized;
+        return moveForward + moveBackward;
     }
 
-    private void ReadJumpInput()
-    {
-        jump = Input.GetKey(keys.Jump);
-    }
-
-    private void ReadDashInput()
-    {
-        dash = Input.GetKeyDown(keys.Dash);
-    }
+    private void ReadJumpInput() => jump = Input.GetKey(keys.Jump);
+    private void ReadDashInput() => dash = Input.GetKeyDown(keys.Dash);
 
     private void ReadMouseInput()
+    {
+        ReadMousePosition();
+        ReadMouseClicks();
+    }
+
+    private void ReadMousePosition()
     {
         float xAxis = Input.GetAxis("Mouse X");
         float yAxis = Input.GetAxis("Mouse Y");
 
         mouse = new Vector2(xAxis, yAxis);
+    }
+
+    private void ReadMouseClicks()
+    {
+        leftClick = Input.GetMouseButton(0);
+        rightClick = Input.GetMouseButton(1);
     }
 }

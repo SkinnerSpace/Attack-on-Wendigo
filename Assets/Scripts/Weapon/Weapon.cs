@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver
 {
     [Header("Parts")]
     [SerializeField] private GunSight gunSight;
@@ -12,77 +12,28 @@ public class Weapon : MonoBehaviour
     [Header("Controllers")]
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponRecoilController recoilController;
+    [SerializeField] private WeaponSwayController swayController;
+
+    public Vector3 DefaultPosition => aimController.DefaultPosition;
 
     public Action notifyOutOfAmmo;
 
-    private IHoldable[] holdables;
-    private IReleaseable[] releaseables;
-
-    private void Awake()
-    {
-        holdables = GetComponentsInChildren<IHoldable>();
-        releaseables = GetComponentsInChildren<IReleaseable>();
-
-        Debug.Log("Holdables " + holdables.Length);
-        Debug.Log("Releaseables " + releaseables.Length);
-    }
+    public bool isReady { get; private set; }
 
     private void Start()
     {
         notifyOutOfAmmo += AmmoBar.Instance.UpdateOutOfAmmo;
     }
 
-    public void PullTheTrigger()
+    public void PullTheTrigger(bool pull)
     {
-        foreach (IHoldable holdable in holdables)
-            holdable.Hold();
-
-        if (gunBarrel.isReady)
-            ShootIfEnoughAmmo();
-    }
-
-    public void ReleaseTheTrigger()
-    {
-        foreach (IReleaseable releaseable in releaseables)
-            releaseable.Release();
-
-        //Debug.Log("release");
-    }
-
-    private void ShootIfEnoughAmmo()
-    {
-        if (!gunMagazine.IsEmpty()) Shoot();
-        else notifyOutOfAmmo();
-    }
-
-    private void Shoot()
-    {
-        gunBarrel.Load(gunMagazine.TakeAmmo());
-        gunBarrel.Shoot();
-        recoilController.Recoil();
-
-        //DamageTargetIfExist();
-    }
-
-    private void DamageTargetIfExist()
-    {
-        if (gunSight.targetExist)
-        {
-            DamagePackage damagePackage = new DamagePackage(1f);
-            gunSight.Damageable.ReceiveDamage(damagePackage);
-        }
+        if (pull) Debug.Log("PULL");
     }
 
     public void Aim(bool isAiming) => aimController.Aim(isAiming);
     public void Reload() => gunMagazine.Reload();
+    public void GetReady(bool isReady) => this.isReady = isReady;
+
+    public void ConnectSpeedometer(Speedometer speedometer) => swayController.ConnectSpeedometer(speedometer);
 }
 
-public interface IHoldable
-{
-    void Hold();
-}
-
-public interface IReleaseable
-{
-    void Release();
-}

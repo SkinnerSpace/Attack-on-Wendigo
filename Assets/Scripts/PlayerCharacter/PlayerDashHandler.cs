@@ -9,7 +9,7 @@ public class PlayerDashHandler : MonoBehaviour
     [SerializeField] private PlayerLook look;
 
     private PlayerCharacter player;
-    private PlayerHorizontalMovement horizontalMovement;
+    private PlayerHorizontalMover horizontalMovement;
     private FunctionTimer timer;
 
     private bool isCharged = true;
@@ -18,7 +18,7 @@ public class PlayerDashHandler : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerCharacter>();
-        horizontalMovement = GetComponent<PlayerHorizontalMovement>();
+        horizontalMovement = GetComponent<PlayerHorizontalMover>();
         timer = GetComponent<FunctionTimer>();
     }
 

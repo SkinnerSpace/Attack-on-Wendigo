@@ -1,8 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public class WeaponSwayController : MonoBehaviour
+public class WeaponSwayController : MonoBehaviour, ISpeedObserver
 {
+    [Header("RequiredComponents")]
+    [SerializeField] private Transform Weapon;
+    private IWeapon weapon;
+
+    [Header("Settings")]
     [SerializeField] private bool displacementOn = true;
     private WeaponDisplacer displacer;
 
@@ -22,6 +27,8 @@ public class WeaponSwayController : MonoBehaviour
 
     private void Awake()
     {
+        weapon = Weapon.GetComponent<IWeapon>();
+
         displacer = GetComponent<WeaponDisplacer>();
         rotator = GetComponent<WeaponRotator>();
         tilter = GetComponent<WeaponTilter>();
@@ -30,13 +37,14 @@ public class WeaponSwayController : MonoBehaviour
 
     private void Update()
     {
-        ReadInput();
+        if (weapon.isReady)
+        {
+            UpdateActiveDisplacers();
+            ReadInput();
 
-        if (displacementOn) DisplacePosition();
-        if (rotationOn) OffsetRotation();
-        if (tiltOn) TiltRotation();
-
-        transform.localRotation = offsettedRotation * tiltedRotation;
+            transform.localPosition = GetPositionDisplacement();
+            transform.localRotation = GetRotationDisplacement();
+        }
     }
 
     private void ReadInput()
@@ -48,18 +56,26 @@ public class WeaponSwayController : MonoBehaviour
             InputReader.mouse.y + oscillation.y);
     }
 
-    private void DisplacePosition()
+    private void UpdateActiveDisplacers()
     {
-        transform.localPosition = displacer.DisplacePosition(transform.localPosition);
+        if (displacementOn) displacer.ReadInput();
+        if (rotationOn) rotator.ReadInput();
+        if (tiltOn) tilter.ReadInput();
+        if (oscillationOn) oscillator.ReadInput();
     }
 
-    private void OffsetRotation()
+    private Vector3 GetPositionDisplacement() => displacer.DisplacePosition(transform.localPosition);
+
+    private Quaternion GetRotationDisplacement()
     {
-        offsettedRotation = rotationOn ? rotator.OffsetRotation(offsettedRotation) : Quaternion.identity;
+        offsettedRotation = OffsetRotation(offsettedRotation);
+        tiltedRotation = TiltRotation(tiltedRotation);
+
+        return offsettedRotation * tiltedRotation;
     }
 
-    private void TiltRotation()
-    {
-        tiltedRotation = tiltOn ? tilter.TiltRotation(tiltedRotation) : Quaternion.identity;
-    }
+    private Quaternion OffsetRotation(Quaternion rotation) => rotationOn ? rotator.OffsetRotation(rotation) : Quaternion.identity;
+    private Quaternion TiltRotation(Quaternion rotation) => tiltOn ? tilter.TiltRotation(rotation) : Quaternion.identity;
+
+    public void ConnectSpeedometer(Speedometer speedometer) => oscillator.ConnectSpeedometer(speedometer);
 }

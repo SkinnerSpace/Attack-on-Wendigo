@@ -1,4 +1,7 @@
-﻿public interface IPickable
+﻿using System;
+using UnityEngine;
+
+public interface IPickable
 {
-    void PickUp(IOwner owner);
+    void PickUp(IHolder holder, Action callback);
 }

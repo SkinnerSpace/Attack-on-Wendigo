@@ -9,7 +9,7 @@ public class FOVController : MonoBehaviour
 {
     private const float ADDITIONAL_FOV_MULTIPLIER = 0.75f;
 
-    [SerializeField] PlayerHorizontalMovement horizontalMovement;
+    [SerializeField] PlayerHorizontalMover horizontalMovement;
 
     [SerializeField] private float minFOV = 80f;
     [SerializeField] private float maxFOV = 100f;

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class PlayerHorizontalMovement : MonoBehaviour, IPushable
+public class PlayerHorizontalMover : MonoBehaviour, IPushable
 {
     [SerializeField] private PlayerCharacter player;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerDashHandler dashHandler;
+    [SerializeField] private Speedometer speedometer;
 
     [SerializeField] private Transform cam;
 
@@ -55,7 +56,7 @@ public class PlayerHorizontalMovement : MonoBehaviour, IPushable
 
     private void NotifyOnChange()
     {
-        velocityMagnitude = velocity.magnitude / player.MaxSpeed;
+        speedometer.MeasureSpeed(velocity.magnitude, player.MaxSpeed);
 
         float velocitySpeedDifference = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f);
         velocityFOVModifier = velocitySpeedDifference / (player.MaxSpeed - player.MinSpeed);

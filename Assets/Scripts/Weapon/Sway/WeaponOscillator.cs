@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class WeaponOscillator : MonoBehaviour
+public class WeaponOscillator : MonoBehaviour, ISpeedObserver
 {
-    [Header("Required Components")]
-    [SerializeField] private PlayerHorizontalMovement horizontalMover;
-
     [Header("Settings")]
     [SerializeField] private float sinFrequency = 8f;
     [SerializeField] private float sinMagnitude = 1f;
@@ -12,21 +9,24 @@ public class WeaponOscillator : MonoBehaviour
     [SerializeField] private bool sinX = true;
     [SerializeField] private bool sinY = true;
 
+    private Speedometer speedometer;
     private SinCounter sinCounter = new SinCounter();
 
     public Vector2 movement { get; private set; }
 
-    private void Update()
+    public void ReadInput()
     {
-        Wave(horizontalMover.velocityMagnitude * sinFrequency);
+        if (speedometer != null) Wave(speedometer.speedMagnitude);
     }
 
     public void Wave(float movementMagnitude)
     {
-        if (movementMagnitude > 0f)
+        float force = movementMagnitude * sinFrequency;
+
+        if (force > 0f)
         {
-            sinCounter.CountTime(movementMagnitude);
-            movement = GetSinMovement(movementMagnitude);
+            sinCounter.CountTime(force);
+            movement = GetSinMovement(force);
         }
     }
 
@@ -40,4 +40,6 @@ public class WeaponOscillator : MonoBehaviour
 
         return sinMovement;
     }
+
+    public void ConnectSpeedometer(Speedometer speedometer) => this.speedometer = speedometer;
 }
