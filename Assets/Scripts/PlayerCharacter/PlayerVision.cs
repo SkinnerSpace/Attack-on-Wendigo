@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSight : MonoBehaviour
+public class PlayerVision : MonoBehaviour
 {
     private const float REACH_DISTANCE = 4f;
 
     [SerializeField] private WeaponHolder weaponHolder;
 
-    private LayerMask ignoreLayers = ~(1 << 13 | 1 << 14);
+    private LayerMask ignoreLayers = ~(1 << 11 | 1 << 13 | 1 << 14);
 
     private Camera cam;
     public bool hasTarget { get; private set; }
     public RaycastHit Spot => spot;
     private RaycastHit spot;
     private bool suitable;
+
+    public Vector3 point;
 
     private List<Type> targetTypes = new List<Type>();
 
@@ -54,6 +56,8 @@ public class PlayerSight : MonoBehaviour
 
         UpdateTargetStatus();
         SpotAnItem();
+
+        point = hasTarget ? spot.point : ray.direction * 300f;
     }
 
     private void UpdateTargetStatus()

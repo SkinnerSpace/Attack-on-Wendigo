@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   speedometer: {fileID: 0}
+  vision: {fileID: 8425617499996812408}
 --- !u!81 &7820593142600697943
 AudioListener:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public class WeaponHandler : MonoBehaviour
 {
     [SerializeField] private Camera cam;
 

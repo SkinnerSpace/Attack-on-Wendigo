@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour, IHolder
 {
-    [SerializeField] Shooter shooter;
+    [SerializeField] WeaponHandler shooter;
     [SerializeField] Speedometer speedometer;
+    [SerializeField] PlayerVision vision;
 
     public Vector3 targetPosition =>  weapon.DefaultPosition;
 
@@ -22,6 +23,7 @@ public class WeaponHolder : MonoBehaviour, IHolder
         SetWeapon(item);
         PickUp(item);
         ConnectSpeedometerTo(item);
+        ConnectVisionTo(item);
     }
 
     private void SetWeapon(Transform item)
@@ -31,5 +33,6 @@ public class WeaponHolder : MonoBehaviour, IHolder
     }
     private void PickUp(Transform item) => item.GetComponent<IPickable>().PickUp(this, onPickedUp);
     private void ConnectSpeedometerTo(Transform item) => item.GetComponent<ISpeedObserver>().ConnectSpeedometer(speedometer);
+    private void ConnectVisionTo(Transform item) => item.GetComponent<IVisionUser>().ConnectVision(vision);
     private void WeaponIsTaken() => weapon.GetReady(true);
 }

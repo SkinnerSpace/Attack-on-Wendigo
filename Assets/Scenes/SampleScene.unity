@@ -1700,10 +1700,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573619074}
     m_Modifications:
+    - target: {fileID: 1019616968512288038, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5729313339192358272, guid: 8ae986e19e6ca6d43bb269551dd73f14,
         type: 3}
       propertyPath: m_Name
       value: TestWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457974829572280632, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457974829572280632, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7479170303341011718, guid: 8ae986e19e6ca6d43bb269551dd73f14,
         type: 3}
@@ -1765,6 +1780,21 @@ PrefabInstance:
       propertyPath: weaponHolder
       value: 
       objectReference: {fileID: 2065355997}
+    - target: {fileID: 8216332864619221728, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: power
+      value: 20.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216332864619221728, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: maxPower
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216332864619221728, guid: 8ae986e19e6ca6d43bb269551dd73f14,
+        type: 3}
+      propertyPath: chargeTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae986e19e6ca6d43bb269551dd73f14, type: 3}
 --- !u!1 &963580475
@@ -2277,6 +2307,11 @@ PrefabInstance:
       propertyPath: m_Cameras.Array.data[1]
       value: 
       objectReference: {fileID: 704566956}
+    - target: {fileID: 1614565378195615431, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: field of view
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1652087050669785381, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: reg
