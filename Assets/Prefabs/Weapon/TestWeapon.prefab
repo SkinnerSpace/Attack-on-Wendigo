@@ -373,6 +373,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7479170303341011718}
     m_Modifications:
+    - target: {fileID: 251564940964325342, guid: 648e2505b2005694c9d71a096f1576f0,
+        type: 3}
+      propertyPath: maxPower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 251564940964325342, guid: 648e2505b2005694c9d71a096f1576f0,
+        type: 3}
+      propertyPath: chargeTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3333206833433062339, guid: 648e2505b2005694c9d71a096f1576f0,
         type: 3}
       propertyPath: m_RootOrder

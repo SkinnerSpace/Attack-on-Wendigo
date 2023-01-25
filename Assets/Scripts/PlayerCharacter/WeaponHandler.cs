@@ -30,10 +30,6 @@ public class WeaponHandler : MonoBehaviour
 
             if (Input.GetKey(keys.Reload)) weapon.Reload();
         }
-        else
-        {
-            //weapon.Aim(false);
-        }
     }
 
     public void SetWeapon(IWeapon weapon)

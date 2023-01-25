@@ -28,7 +28,6 @@ public class ProjectileEmitter : MonoBehaviour, IShooter
     private void Charge()
     {
         charger.Charge();
-
         DrawTrajectory();
     }
 
@@ -36,7 +35,7 @@ public class ProjectileEmitter : MonoBehaviour, IShooter
     {
         if (charger.power > 0f) EmitProjectile();
         charger.Discharge();
-        trajectoryMarker.CancelTrajectory();
+        CancelTrajectory();
     }
 
     private void EmitProjectile()
@@ -52,5 +51,6 @@ public class ProjectileEmitter : MonoBehaviour, IShooter
     private Vector3 GetForce() => shootPoint.forward * charger.power;
     private IProjectile CreateProjectile() => Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation).transform.GetComponent<IProjectile>();
     private void DrawTrajectory() => trajectoryMarker.DrawTrajectory(shootPoint.position, GetForce(), Physics.gravity);
+    private void CancelTrajectory() => trajectoryMarker.CancelTrajectory();
     private void CoolDown() => ready = true;
 }
