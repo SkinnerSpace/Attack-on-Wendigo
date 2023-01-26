@@ -13,12 +13,7 @@ public class WendigoSpawner : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject wendigoPrefab;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G)) Launch();
-    }
-
-    private void Launch()
+    public void Launch()
     {
         Vector3 position = radPosGenerator.GetPosition();
 

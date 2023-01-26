@@ -7,16 +7,10 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour, IDamageable
 {
-    [SerializeField] private Transform enemy;
-    private IDamageable damageable;
-
-    private void Awake()
-    {
-        damageable = enemy.GetComponent<IDamageable>();
-    }
+    [SerializeField] private HealthSystem healthSystem;
 
     public void ReceiveDamage(DamagePackage damagePackage)
     {
-        damageable.ReceiveDamage(damagePackage);
+        healthSystem.ReceiveDamage(damagePackage);
     }
 }

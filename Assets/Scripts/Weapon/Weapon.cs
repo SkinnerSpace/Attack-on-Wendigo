@@ -12,7 +12,6 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
 
     [Header("Controllers")]
     [SerializeField] private WeaponAimController aimController;
-    [SerializeField] private WeaponRecoilController recoilController;
     [SerializeField] private WeaponSwayController swayController;
 
     private IShooter shooter;
@@ -20,7 +19,8 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
 
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
-    public Action notifyOutOfAmmo;
+    public event Action notifyOnShoot;
+    public event Action notifyOutOfAmmo;
 
     public bool isReady { get; private set; }
 
@@ -50,4 +50,9 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
         IVisionUser visionUser = shooterImp.GetComponent<IVisionUser>();
         if (visionUser != null) visionUser.ConnectVision(vision);
     }
+}
+
+public interface IWeaponObserver
+{
+    void Shot();
 }

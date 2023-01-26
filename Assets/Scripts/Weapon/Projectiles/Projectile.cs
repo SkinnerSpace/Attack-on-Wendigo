@@ -2,38 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IProjectile
+public class Projectile : MonoBehaviour, IProjectile, IDamageBoxObserver
 {
-    private const float GRAVITY = 9.8f;
-
     [SerializeField] private Rigidbody body;
+    [SerializeField] private DamageBox damageBox;
 
-    private Vector3 velocity;
-
-    private bool launched;
-
-    private void Update()
+    private void Awake()
     {
-        /*
-        if (launched)
-        {
-            velocity -= new Vector3(0f, GRAVITY, 0f) * Time.deltaTime; 
-            transform.position += velocity * Time.deltaTime;
-        }
-        */
+        damageBox.Subscribe(this);
     }
 
     public void Launch(Vector3 force)
     {
-        //velocity = transform.forward * impulse;
         body.AddForce(force, ForceMode.Impulse);
-        launched = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Contacted(IDamageable damageable)
     {
-        //Debug.Log("COLLISION " + collision.collider);
+        Destroy(gameObject);
     }
-
-    
 }
+
+public interface IDamageBoxObserver
+{
+    void Contacted(IDamageable damageable);
+}
+
