@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public interface IWeapon
 {
@@ -9,4 +10,5 @@ public interface IWeapon
     void Aim(bool isAiming);
     void PullTheTrigger(bool pull);
     void Reload();
+    Dictionary<string, HandPoint> GetHandPoints();
 }

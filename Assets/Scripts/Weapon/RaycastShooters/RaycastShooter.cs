@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
 {
+    [Header("Required Components")]
+    [SerializeField] private WeaponRecoilController recoilController;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject bulletExplosion;
-
-    [SerializeField] private WeaponRecoilController recoilController;
 
     private PlayerVision vision;
     private RaycastHit spot;

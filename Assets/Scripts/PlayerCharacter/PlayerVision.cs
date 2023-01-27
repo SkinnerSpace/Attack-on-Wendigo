@@ -8,8 +8,6 @@ public class PlayerVision : MonoBehaviour
 
     [SerializeField] private WeaponHolder weaponHolder;
 
-    private LayerMask ignoreLayers = ~(1 << 11 | 1 << 13 | 1 << 14);
-
     private Camera cam;
     public bool hasTarget { get; private set; }
     public RaycastHit Spot => spot;
@@ -51,7 +49,7 @@ public class PlayerVision : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        Physics.Raycast(ray, out spot, Mathf.Infinity, ignoreLayers);
+        Physics.Raycast(ray, out spot, Mathf.Infinity, Layers.Vision);
         hasTarget = spot.transform != null;
 
         UpdateTargetStatus();

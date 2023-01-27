@@ -14,6 +14,10 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
 
+    [Header("Hand Points")]
+    [SerializeField] private HandPoint leftHandPoint;
+    [SerializeField] private HandPoint rightHandPoint; 
+
     private IShooter shooter;
     private PlayerVision vision;
 
@@ -49,6 +53,17 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
         this.vision = vision;
         IVisionUser visionUser = shooterImp.GetComponent<IVisionUser>();
         if (visionUser != null) visionUser.ConnectVision(vision);
+    }
+
+    public Dictionary<string, HandPoint> GetHandPoints()
+    {
+        Dictionary<string, HandPoint> handPoints = new Dictionary<string, HandPoint>()
+        {
+            {"Left", leftHandPoint },
+            {"Right", rightHandPoint }
+        };
+
+        return handPoints;
     }
 }
 

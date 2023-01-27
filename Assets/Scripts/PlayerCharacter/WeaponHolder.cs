@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour, IHolder
 {
-    [SerializeField] WeaponHandler shooter;
+    [SerializeField] WeaponHandler weaponHandler;
     [SerializeField] Speedometer speedometer;
     [SerializeField] PlayerVision vision;
 
     public Vector3 targetPosition =>  weapon.DefaultPosition;
 
+    private Transform item;
     private IWeapon weapon;
     public Action onPickedUp;
 
@@ -20,16 +21,20 @@ public class WeaponHolder : MonoBehaviour, IHolder
 
     public void TakeAnItem(Transform item)
     {
-        SetWeapon(item);
-        PickUp(item);
-        ConnectSpeedometerTo(item);
-        ConnectVisionTo(item);
+        if (this.item != item){
+            this.item = item;
+
+            SetWeapon(item);
+            PickUp(item);
+            ConnectSpeedometerTo(item);
+            ConnectVisionTo(item);
+        }
     }
 
     private void SetWeapon(Transform item)
     {
         weapon = item.GetComponent<IWeapon>();
-        shooter.SetWeapon(weapon);
+        weaponHandler.SetWeapon(weapon);
     }
     private void PickUp(Transform item) => item.GetComponent<IPickable>().PickUp(this, onPickedUp);
     private void ConnectSpeedometerTo(Transform item) => item.GetComponent<ISpeedObserver>().ConnectSpeedometer(speedometer);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class NullWeapon : IWeapon
 {
@@ -22,4 +23,6 @@ public class NullWeapon : IWeapon
     public void PullTheTrigger(bool pull){}
 
     public void Reload(){}
+
+    public Dictionary<string, HandPoint> GetHandPoints() { return null; }
 }
