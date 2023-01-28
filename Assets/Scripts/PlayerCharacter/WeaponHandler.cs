@@ -16,7 +16,7 @@ public class WeaponHandler : MonoBehaviour
     private void Awake()
     {
         weapon = NullWeapon.Instance;
-        keys = GetComponent<IKeyBinds>();
+        keys = InputReader.Instance.keys;
     }
 
     private void Update() => ReadInput();
@@ -26,14 +26,12 @@ public class WeaponHandler : MonoBehaviour
         if (weapon.isReady)
         {
             weapon.PullTheTrigger(Input.GetKey(keys.Shoot));
-            weapon.Aim(Input.GetKey(keys.Aim));
+            weapon.Aim(InputReader.aim);
 
             if (Input.GetKey(keys.Reload)) weapon.Reload();
         }
     }
 
-    public void SetWeapon(IWeapon weapon)
-    {
-        this.weapon = weapon;
-    }
+    public void SetWeapon(IWeapon weapon) => this.weapon = weapon;
+    public void ResetWeapon() => weapon = NullWeapon.Instance;
 }

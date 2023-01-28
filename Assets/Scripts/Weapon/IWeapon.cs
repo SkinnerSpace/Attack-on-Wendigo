@@ -10,5 +10,4 @@ public interface IWeapon
     void Aim(bool isAiming);
     void PullTheTrigger(bool pull);
     void Reload();
-    Dictionary<string, HandPoint> GetHandPoints();
 }

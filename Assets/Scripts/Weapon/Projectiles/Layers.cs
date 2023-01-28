@@ -1,22 +1,25 @@
 ﻿using UnityEngine;
 
-public static class Layers
+public enum Layers
 {
-    public const int Props = 11;
-    public const int Damageable = 12;
-    public const int Player = 13;
-    public const int PropDestroyers = 14;
-    public const int Projectiles = 15;
-
-    public const int Damaging = 17;
-    public const int Barriers = 18;
-
-    public static LayerMask Vision = ~(
-        1 << Props | 
-        1 << Player | 
-        1 << PropDestroyers | 
-        1 << Projectiles | 
-        1 << Damaging | 
-        1 << Barriers);
+    Default = 0,
+    Weapon = 10,
+    Props = 11,
+    Damageable = 12,
+    Player = 13,
+    PropDestroyers = 14,
+    Projectiles = 15,
+    Damaging = 17,
+    Barriers = 18,
 }
 
+public static class ComplexLayers
+{
+    public static LayerMask Vision = ~(
+        1 << (int)Layers.Props |
+        1 << (int)Layers.Player |
+        1 << (int)Layers.PropDestroyers |
+        1 << (int)Layers.Projectiles |
+        1 << (int)Layers.Damaging |
+        1 << (int)Layers.Barriers);
+}

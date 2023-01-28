@@ -14,11 +14,14 @@ public class WeaponRecoilController : MonoBehaviour
 
     private void UpdateRecoil()
     {
+        Move();
+
+/*
         if (isRecoiling)
         {
             Move();
             StopRecoil();
-        }
+        }*/
     }
 
     public void Recoil()

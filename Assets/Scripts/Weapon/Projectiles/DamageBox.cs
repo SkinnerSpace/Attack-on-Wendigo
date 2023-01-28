@@ -21,7 +21,7 @@ public class DamageBox : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == Layers.Damageable)
+        if (collision.gameObject.layer == (int)Layers.Damageable)
         {
             CauseDamage(collision.transform);
 

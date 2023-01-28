@@ -19,6 +19,7 @@ public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
     [SerializeField] private KeyCode shoot = KeyCode.Mouse0;
     [SerializeField] private KeyCode aim = KeyCode.Mouse1;
     [SerializeField] private KeyCode reload = KeyCode.R;
+    [SerializeField] private KeyCode interact = KeyCode.E;
 
     public KeyCode Shoot => shoot;
     public KeyCode Aim => aim;
@@ -38,5 +39,6 @@ public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
     public KeyCode MoveBackward => moveBackward;
     public KeyCode Jump => jump;
     public KeyCode Dash => dash;
+    public KeyCode Interact => interact;
     
 }

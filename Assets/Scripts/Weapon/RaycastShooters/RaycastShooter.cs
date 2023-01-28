@@ -5,10 +5,9 @@ using UnityEngine;
 public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
 {
     [Header("Required Components")]
-    [SerializeField] private WeaponRecoilController recoilController;
-
-    [Header("Prefabs")]
-    [SerializeField] private GameObject bulletExplosion;
+    [SerializeField] private WeaponVFXController vFXController;
+    [SerializeField] private WeaponSFXPlayer sFXPlayer;
+    [SerializeField] private Transform shootPoint;
 
     private PlayerVision vision;
     private RaycastHit spot;
@@ -24,12 +23,14 @@ public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
 
     public void Shoot(bool isFiring)
     {
-        if (isFiring && isReady && vision.hasTarget)
+        if (isFiring && isReady)
         {
             isReady = false;
             spot = vision.Spot;
-            Instantiate(bulletExplosion, spot.point, Quaternion.identity);
-            recoilController.Recoil();
+
+            sFXPlayer.PlayShootSFX();
+            vFXController.Shoot();
+            if (vision.hasTarget) vFXController.Hit(spot);
 
             timer.Set("CoolDown", coolDownTime, CoolDown);
         }
@@ -38,4 +39,6 @@ public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
     private void CoolDown() => isReady = true;
 
     public void ConnectVision(PlayerVision vision) => this.vision = vision;
+    public Vector3 GetDirToTarget() => (spot.transform.position - shootPoint.position).normalized;
 }
+

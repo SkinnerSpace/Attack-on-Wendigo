@@ -6,7 +6,7 @@ public class PlayerVision : MonoBehaviour
 {
     private const float REACH_DISTANCE = 4f;
 
-    [SerializeField] private WeaponHolder weaponHolder;
+    [SerializeField] private ItemHolder weaponHolder;
 
     private Camera cam;
     public bool hasTarget { get; private set; }
@@ -14,7 +14,7 @@ public class PlayerVision : MonoBehaviour
     private RaycastHit spot;
     private bool suitable;
 
-    public Vector3 point;
+    public Vector3 point { get; private set; }
 
     private List<Type> targetTypes = new List<Type>();
 
@@ -49,7 +49,7 @@ public class PlayerVision : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        Physics.Raycast(ray, out spot, Mathf.Infinity, Layers.Vision);
+        Physics.Raycast(ray, out spot, Mathf.Infinity, ComplexLayers.Vision);
         hasTarget = spot.transform != null;
 
         UpdateTargetStatus();
@@ -67,7 +67,7 @@ public class PlayerVision : MonoBehaviour
     private void SpotAnItem()
     {
         if (IsAbleToTakeAnItem()){
-            if (InputReader.leftClick) weaponHolder.TakeAnItem(spot.transform);
+            if (InputReader.interact) weaponHolder.TakeAnItem(spot.transform);
         }
     }
 

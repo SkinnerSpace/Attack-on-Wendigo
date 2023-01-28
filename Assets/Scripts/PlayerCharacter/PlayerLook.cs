@@ -20,7 +20,7 @@ public class PlayerLook : MonoBehaviour
     private void InitializeComponents()
     {
         body = player.transform;
-        keys = player.transform.GetComponent<IKeyBinds>();
+        keys = InputReader.Instance.keys;
     }
 
     private void SetUpCursor()
@@ -37,7 +37,7 @@ public class PlayerLook : MonoBehaviour
         yAngle = ModifyAngleY(yAngle);
 
         SetCameraRotation();
-        SetBodyRotation();
+        SetBodyRotation(); 
     }
 
     private float ModifyAngleX(float xAngle) => xAngle + (InputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime);

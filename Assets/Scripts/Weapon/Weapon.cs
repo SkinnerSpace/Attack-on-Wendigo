@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
 {
-    [Header("Customizable Parts")]
-    [SerializeField] private Transform shooterImp;
-    [SerializeField] private GunSight gunSight;
-    [SerializeField] private GunMagazine gunMagazine;
-    [SerializeField] private GunBarrel gunBarrel;
-
-    [Header("Controllers")]
+    [Header("Required Components")]
+    [SerializeField] private Transform shooterImp; 
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
-
-    [Header("Hand Points")]
-    [SerializeField] private HandPoint leftHandPoint;
-    [SerializeField] private HandPoint rightHandPoint; 
+    [SerializeField] private SkinnedMeshRenderer arms;
 
     private IShooter shooter;
     private PlayerVision vision;
@@ -44,8 +36,14 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
     }
 
     public void Aim(bool isAiming) => aimController.Aim(isAiming);
-    public void Reload() => gunMagazine.Reload();
-    public void GetReady(bool isReady) => this.isReady = isReady;
+    public void Reload() { }
+    public void GetReady(bool isReady)
+    {
+        this.isReady = isReady;
+        arms.enabled = isReady;
+
+        if (!isReady) swayController.ResetSway();
+    }
 
     public void ConnectSpeedometer(Speedometer speedometer) => swayController.ConnectSpeedometer(speedometer);
     public void ConnectVision(PlayerVision vision)
@@ -54,20 +52,4 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
         IVisionUser visionUser = shooterImp.GetComponent<IVisionUser>();
         if (visionUser != null) visionUser.ConnectVision(vision);
     }
-
-    public Dictionary<string, HandPoint> GetHandPoints()
-    {
-        Dictionary<string, HandPoint> handPoints = new Dictionary<string, HandPoint>()
-        {
-            {"Left", leftHandPoint },
-            {"Right", rightHandPoint }
-        };
-
-        return handPoints;
-    }
-}
-
-public interface IWeaponObserver
-{
-    void Shot();
 }

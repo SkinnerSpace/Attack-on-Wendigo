@@ -5,84 +5,25 @@ using UnityEngine;
 
 public class PickableItem : MonoBehaviour, IPickable
 {
-    [SerializeField] private Transform portablePart;
-    [SerializeField] private List<GameObject> layerTransitiveParts;
-    [SerializeField] private Rigidbody physics;
+    [SerializeField] private ItemBehaviorController behaviorController;
+    [SerializeField] private ItemTransitionController transitionController;
+    [SerializeField] private ItemSFXPlayer sFXPlayer;
 
-    float currentTime = 0f;
-    float pickTime = 0.3f;
+    private ItemPositionSetter positionSetter;
 
-    private Vector3 targetPosition;
-    private Vector3 originalPos;
-
-    private Action onPickedUp;
+    private void Awake() => positionSetter = new ItemPositionSetter(transform);
 
     public void PickUp(IHolder holder, Action onPickedUp)
     {
-        this.onPickedUp = onPickedUp;
-
-        StickToAPoint(holder);
-        StartCoroutine(ComeIntoPosition());
+        behaviorController.GetReadyToHands(holder);
+        positionSetter.SetUp(holder);
+        transitionController.Launch(positionSetter, onPickedUp);
+        sFXPlayer.PlayTakeSFX();
     }
 
-    private void StickToAPoint(IHolder holder)
+    public void Drop(Vector3 force)
     {
-        SetPhysics(false);
-
-        transform.SetParent(holder.transform, true);
-        originalPos = transform.localPosition;
-        targetPosition = holder.targetPosition;
-
-        foreach(GameObject part in layerTransitiveParts)
-            part.layer = LayerMask.NameToLayer("Weapon");
-    }
-
-    private IEnumerator ComeIntoPosition()
-    {
-        while (currentTime < pickTime)
-        {
-            currentTime += Chronos.DeltaTime;
-            float transition = GetTransitionFrom(currentTime);
-            Displace(transition);
-
-            yield return null;
-        }
-
-        SetFinalPosition();
-        onPickedUp();
-    }
-
-    private float GetTransitionFrom(float currentTime)
-    {
-        float transition = Mathf.InverseLerp(0f, pickTime, currentTime);
-        transition = FadeOut(transition);
-
-        return transition;
-    }
-
-    private float FadeOut(float value) => Mathf.Sqrt(value);
-
-    private void Displace(float transition)
-    {
-        transform.localPosition = Vector3.Lerp(originalPos, targetPosition, transition);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 0, 0), transition);
-    }
-
-    private void SetFinalPosition()
-    {
-        transform.localPosition = Vector3.zero;
-        portablePart.localPosition = targetPosition;
-    }
-
-    private void SetPhysics(bool active)
-    {
-        if (active){
-            physics.isKinematic = false;
-            physics.useGravity = true;
-        }
-        else{
-            physics.isKinematic = true;
-            physics.useGravity = false;
-        }
+        behaviorController.ThrowAway(force);
+        positionSetter.Reset();
     }
 }

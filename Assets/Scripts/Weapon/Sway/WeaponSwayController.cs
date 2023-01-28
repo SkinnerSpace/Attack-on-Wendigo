@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class WeaponSwayController : MonoBehaviour, ISpeedObserver
@@ -35,7 +36,9 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
         oscillator = GetComponent<WeaponOscillator>();
     }
 
-    private void Update()
+    private void Update() => Sway();
+
+    private void Sway()
     {
         if (weapon.isReady)
         {
@@ -45,6 +48,27 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
             transform.localPosition = GetPositionDisplacement();
             transform.localRotation = GetRotationDisplacement();
         }
+    }
+
+    float resetTime = 5f;
+    float currentTime = 0f;
+
+    public void ResetSway() => StartCoroutine(BackToDefault());
+
+    private IEnumerator BackToDefault()
+    {
+        Debug.Log("BEGIN");
+
+        while (!weapon.isReady && currentTime < resetTime)
+        {
+            currentTime += Chronos.DeltaTime;
+            float lerp = Mathf.InverseLerp(0f, resetTime, currentTime);
+            Debug.Log("Current " + lerp);
+            yield return null;
+        }
+
+        Debug.Log("IS OVER");
+        currentTime = 0f;
     }
 
     private void ReadInput()

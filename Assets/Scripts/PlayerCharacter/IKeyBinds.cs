@@ -15,4 +15,5 @@ public interface IKeyBinds
     KeyCode MoveBackward { get; }
     KeyCode Jump { get; }
     KeyCode Dash { get; }
+    KeyCode Interact { get; }
 }
