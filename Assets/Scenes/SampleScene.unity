@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 282758764}
   - component: {fileID: 282758763}
   - component: {fileID: 282758762}
-  - component: {fileID: 282758766}
+  - component: {fileID: 282758767}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -658,7 +658,7 @@ Transform:
   m_Father: {fileID: 1854148183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &282758766
+--- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -667,10 +667,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 282758761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4230ab64b317d049a263baddde02a30, type: 3}
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
 --- !u!1 &348362389
 GameObject:
   m_ObjectHideFlags: 0

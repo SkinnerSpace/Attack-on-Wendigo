@@ -3,5 +3,7 @@
     Undefined,
     Snow,
     Concrete,
-    Wood
+    Wood,
+    Bones,
+    Flash
 }

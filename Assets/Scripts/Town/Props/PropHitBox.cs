@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PropHitBox : MonoBehaviour
 {
-
-
     public void Collapse()
     {
         throw new System.NotImplementedException();

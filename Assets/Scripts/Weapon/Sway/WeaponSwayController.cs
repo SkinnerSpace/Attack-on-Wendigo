@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 public class WeaponSwayController : MonoBehaviour, ISpeedObserver
 {
     [Header("RequiredComponents")]
-    [SerializeField] private Transform Weapon;
+    [SerializeField] private Transform weaponImp;
     private IWeapon weapon;
 
     [Header("Settings")]
@@ -21,6 +20,8 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
     [SerializeField] private bool oscillationOn = true;
     private WeaponOscillator oscillator;
 
+    private DisplacementCorrector corrector;
+
     private Quaternion tiltedRotation = Quaternion.identity;
     private Quaternion offsettedRotation = Quaternion.identity;
 
@@ -28,12 +29,13 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
 
     private void Awake()
     {
-        weapon = Weapon.GetComponent<IWeapon>();
+        weapon = weaponImp.GetComponent<IWeapon>();
 
         displacer = GetComponent<WeaponDisplacer>();
         rotator = GetComponent<WeaponRotator>();
         tilter = GetComponent<WeaponTilter>();
         oscillator = GetComponent<WeaponOscillator>();
+        corrector = GetComponent<DisplacementCorrector>();
     }
 
     private void Update() => Sway();
@@ -50,26 +52,7 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
         }
     }
 
-    float resetTime = 5f;
-    float currentTime = 0f;
-
-    public void ResetSway() => StartCoroutine(BackToDefault());
-
-    private IEnumerator BackToDefault()
-    {
-        Debug.Log("BEGIN");
-
-        while (!weapon.isReady && currentTime < resetTime)
-        {
-            currentTime += Chronos.DeltaTime;
-            float lerp = Mathf.InverseLerp(0f, resetTime, currentTime);
-            Debug.Log("Current " + lerp);
-            yield return null;
-        }
-
-        Debug.Log("IS OVER");
-        currentTime = 0f;
-    }
+    public void ResetSway() => corrector.Fix(weapon);
 
     private void ReadInput()
     {
