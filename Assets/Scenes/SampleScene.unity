@@ -670,6 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snowParticle: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
+    type: 3}
 --- !u!1 &348362389
 GameObject:
   m_ObjectHideFlags: 0

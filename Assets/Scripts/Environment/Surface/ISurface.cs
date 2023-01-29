@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface ISurface
+﻿public interface ISurface
 {
-    void Hit(Vector3 velocity, float radius);
+    void Hit(SurfaceHitPoint hitPoint, SurfaceHitCollider hitCollider);
 }

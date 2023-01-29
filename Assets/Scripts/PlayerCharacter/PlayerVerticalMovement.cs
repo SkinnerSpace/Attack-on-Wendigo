@@ -57,6 +57,7 @@ public class PlayerVerticalMovement : MonoBehaviour, IJumper
 
     private void ApplyMovement()
     {
+        player.verticalVelocity = new Vector3(0f, verticalVelocity, 0f);
         controller.Move(new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
     }
 }

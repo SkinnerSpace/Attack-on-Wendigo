@@ -33,6 +33,10 @@ public class PlayerCharacter : MonoBehaviour
 
     public Vector3 position => transform.position;
 
+    public Vector3 velocity => new Vector3(horizontalVelocity.x, verticalVelocity.y, horizontalVelocity.z);
+    public Vector3 horizontalVelocity;
+    public Vector3 verticalVelocity;
+
     public static PlayerCharacter Instance { get; private set; }
 
 

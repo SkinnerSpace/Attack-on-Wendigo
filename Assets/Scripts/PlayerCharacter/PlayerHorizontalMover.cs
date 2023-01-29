@@ -32,8 +32,9 @@ public class PlayerHorizontalMover : MonoBehaviour, IPushable
         if (InputReader.dash) dashHandler.Dash();
 
         velocity = (movementVelocity + forceVelocity) * resistance;
-        forceVelocity = DecelerateForce(); 
+        forceVelocity = DecelerateForce();
 
+        player.horizontalVelocity = velocity;
         characterController.Move(velocity * Time.deltaTime);
 
         NotifyOnChange();

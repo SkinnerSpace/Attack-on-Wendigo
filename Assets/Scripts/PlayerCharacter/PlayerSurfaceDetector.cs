@@ -8,7 +8,8 @@ public class PlayerSurfaceDetector : MonoBehaviour
     private PlayerCharacter player;
 
     private Vector3 surfaceCheckOffset;
-    public SurfaceTypes surfaceType { get; private set; }
+    public ISurface surface { get; private set; }
+    public Vector3 position { get; private set; }
 
     private void Awake()
     {
@@ -28,8 +29,13 @@ public class PlayerSurfaceDetector : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, GROUND))
         {
-            Surface surface = hit.transform.GetComponent<Surface>();
-            surfaceType = (surface != null) ? surface.Type : SurfaceTypes.Undefined;
+            surface = hit.transform.GetComponent<ISurface>();
+            position = hit.point;
+        }
+        else
+        {
+            surface = null;
+            NULLSURFACE
         }
     }
 }
