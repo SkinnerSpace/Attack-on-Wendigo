@@ -654,7 +654,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 960, y: 0, z: 960}
   m_LocalScale: {x: 240, y: 1, z: 240}
-  m_Children: []
+  m_Children:
+  - {fileID: 640821269}
   m_Father: {fileID: 1854148183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -670,8 +671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snowParticle: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
+  particlePrefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
     type: 3}
+  sfxManager: {fileID: 640821270}
 --- !u!1 &348362389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,6 +1304,95 @@ Transform:
   m_Father: {fileID: 1998657956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640821268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640821269}
+  - component: {fileID: 640821270}
+  - component: {fileID: 640821272}
+  - component: {fileID: 640821271}
+  m_Layer: 8
+  m_Name: SurfaceSFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640821269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640821268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 282758765}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640821270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640821268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089a61499e2c96741a8fdddc2867c0b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &640821271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640821268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2720118cefaa18f42933acbf98aed002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSFX:
+    Guid:
+      Data1: -1017058278
+      Data2: 1198547612
+      Data3: -154582880
+      Data4: 1228721202
+    Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+  threshold: 0.5
+  variety: 2
+  pitchRange: 2
+--- !u!114 &640821272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640821268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2720118cefaa18f42933acbf98aed002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSFX:
+    Guid:
+      Data1: -2112291897
+      Data2: 1170762902
+      Data3: -935357809
+      Data4: -1354720529
+    Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowHit
+  threshold: 0
+  variety: 2
+  pitchRange: 2
 --- !u!1001 &698326167
 PrefabInstance:
   m_ObjectHideFlags: 0

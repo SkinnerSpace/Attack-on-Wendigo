@@ -61,20 +61,21 @@ public class PlayerGroundDetector : MonoBehaviour
         surfaceDetector.UpdateSurfaceData();
         HitTheSurface();
         dashHandler.CoolDown();
-
-        Debug.Log("LAND");
     }
 
     private void HitTheSurface()
     {
         if (surfaceDetector.surface != null)
         {
+            Surface surface = surfaceDetector.surface;
             Vector3 direction = player.velocity.normalized;
-            Debug.Log("Dir " + direction);
 
-            SurfaceHitPoint hitPoint = new SurfaceHitPoint(surfaceDetector.position, Vector3.up);
-            SurfaceHitCollider hitCollider = new SurfaceHitCollider(direction, 0.5f);
-            surfaceDetector.surface.Hit(hitPoint, hitCollider);
+            surface.Hit().
+                    WithPosition(surfaceDetector.position).
+                    WithAngle(direction, Vector3.up).
+                    WithShape(1f, 70f).
+                    WithCount(5, 10).
+                    Launch();
         }
     }
 }

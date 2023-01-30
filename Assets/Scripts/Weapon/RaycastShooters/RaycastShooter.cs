@@ -49,13 +49,15 @@ public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
 
     private void BlowUpTheSurface()
     {
-        ISurface surface = spot.transform.GetComponent<ISurface>();
+        Surface surface = spot.transform.GetComponent<Surface>();
         if (surface != null)
         {
-            SurfaceHitPoint hitPoint = new SurfaceHitPoint(spot.point, spot.normal);
-            SurfaceHitCollider hitCollider = new SurfaceHitCollider(GetDirToTarget(), 0f);
-            
-            surface.Hit(hitPoint, hitCollider);
+            surface.Hit().
+                    WithPosition(spot.point).
+                    WithAngle(GetDirToTarget(), spot.normal).
+                    WithShape(0f, 45f).
+                    WithCount(20, 30).
+                    Launch();
         }
     }
 
