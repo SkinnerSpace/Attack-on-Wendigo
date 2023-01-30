@@ -10,13 +10,20 @@ public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
     [SerializeField] private WeaponVFXController vFXController;
     [SerializeField] private WeaponSFXPlayer sFXPlayer;
     [SerializeField] private Transform shootPoint;
+    [SerializeField] private Magazine magazine;
+    [SerializeField] private WeaponSight weaponSight;
 
     private PlayerVision vision;
     private RaycastHit spot;
     private FunctionTimer timer;
 
+    private float precision;
+
     private float coolDownTime = 0.3f;
     private bool isReady = true;
+
+    private bool wasFiring;
+    private bool hadAmmo;
 
     private void Awake()
     {
@@ -27,14 +34,53 @@ public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
     {
         if (isFiring && isReady)
         {
-            isReady = false;
-            spot = vision.Spot;
+            if (magazine.HasAmmo())
+            {
+                DoShoot();
+            }
+            else
+            {
+                ReactOnTheLackOfAmmo(isFiring);
+            }
+        }
 
-            sFXPlayer.PlayShootSFX();
-            vFXController.Shoot();
-            HitTheTarget();
+        wasFiring = isFiring;
+    }
 
-            timer.Set("CoolDown", coolDownTime, CoolDown);
+    private void DoShoot()
+    {
+        ManageShootState();
+        GetTheSpot();
+        HitTheTarget();
+
+        sFXPlayer.PlayShootSFX();
+        vFXController.Shoot();
+
+        weaponSight.GetTheSpot(precision);
+        weaponSight.AimOffhand(precision);
+
+        timer.Set("CoolDown", coolDownTime, CoolDown);
+    }
+
+    private void ManageShootState()
+    {
+        isReady = false;
+        hadAmmo = true;
+        magazine.ReduceCount();
+    }
+
+    private void GetTheSpot()
+    {
+        spot = vision.Spot;
+    }
+
+    private void ReactOnTheLackOfAmmo(bool isFiring)
+    {
+        if (!wasFiring && isFiring || hadAmmo)
+        {
+            hadAmmo = false;
+            sFXPlayer.PlayIsEmptySFX();
+            AmmoBar.Instance.UpdateOutOfAmmo();
         }
     }
 

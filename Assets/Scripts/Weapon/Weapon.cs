@@ -5,7 +5,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
 {
     [Header("Required Components")]
-    [SerializeField] private Transform shooterImp; 
+    [SerializeField] private Transform shooterImp;
+    [SerializeField] private Magazine magazine;
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private SkinnedMeshRenderer arms;
@@ -15,19 +16,13 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
 
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
-    public event Action notifyOnShoot;
-    public event Action notifyOutOfAmmo;
-
     public bool isReady { get; private set; }
+
+    public event Action notifyOnShoot;
 
     private void Awake()
     {
         shooter = shooterImp.GetComponent<IShooter>();
-    }
-
-    private void Start()
-    {
-        notifyOutOfAmmo += AmmoBar.Instance.UpdateOutOfAmmo;
     }
 
     public void PullTheTrigger(bool pull)
@@ -40,6 +35,7 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
     public void GetReady(bool isReady)
     {
         this.isReady = isReady;
+        magazine.GetReady(isReady);
         arms.enabled = isReady;
 
         if (!isReady) swayController.ResetSway();
@@ -49,6 +45,7 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
     public void ConnectVision(PlayerVision vision)
     {
         this.vision = vision;
+
         IVisionUser visionUser = shooterImp.GetComponent<IVisionUser>();
         if (visionUser != null) visionUser.ConnectVision(vision);
     }

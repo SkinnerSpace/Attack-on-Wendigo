@@ -27,18 +27,11 @@ public class AmmoBar : MonoBehaviour
         EnforcedPlayAnimation(updateAnimation);
     }
 
-    public void UpdateOutOfAmmo()
-    {
-        PlayAnimation(emptyAnimation);
-    }
+    public void UpdateOutOfAmmo() => EnforcedPlayAnimation(emptyAnimation);
 
-    private void PlayAnimation(int animation)
-    {
-        animator.Play(animation);
-    }
+    public void SetActive(bool active) => label.enabled = active;
 
-    private void EnforcedPlayAnimation(int animation)
-    {
-        animator.Play(animation, -1, 0f);
-    }
+    private void PlayAnimation(int animation) => animator.Play(animation);
+
+    private void EnforcedPlayAnimation(int animation) => animator.Play(animation, -1, 0f);
 }
