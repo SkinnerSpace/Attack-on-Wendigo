@@ -2,33 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
+public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
 {
     [Header("Required Components")]
     [SerializeField] private Transform shooterImp;
     [SerializeField] private Magazine magazine;
+
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private SkinnedMeshRenderer arms;
 
-    private IShooter shooter;
-    private PlayerVision vision;
+    [SerializeField] private List<Transform> cameraUsers;
 
+    private IShooter shooter;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
     public bool isReady { get; private set; }
 
-    public event Action notifyOnShoot;
+    public event Action onShot;
 
     private void Awake()
     {
         shooter = shooterImp.GetComponent<IShooter>();
+        onShot += NotifyOnShot;
     }
 
     public void PullTheTrigger(bool pull)
     {
-        shooter.Shoot(pull);
+        if (magazine.HasAmmo()){
+            shooter.Shoot(pull, onShot);
+        }
+        else if (pull){
+            magazine.ReportIsEmpty();
+        }
     }
+
+    private void NotifyOnShot() => magazine.ReduceCount();
 
     public void Aim(bool isAiming) => aimController.Aim(isAiming);
     public void Reload() { }
@@ -42,11 +51,14 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, IVisionUser
     }
 
     public void ConnectSpeedometer(Speedometer speedometer) => swayController.ConnectSpeedometer(speedometer);
-    public void ConnectVision(PlayerVision vision)
-    {
-        this.vision = vision;
 
-        IVisionUser visionUser = shooterImp.GetComponent<IVisionUser>();
-        if (visionUser != null) visionUser.ConnectVision(vision);
+    public void ConnectCamera(Camera cam)
+    {
+        foreach (Transform user in cameraUsers)
+        {
+            ICameraUser cameraUser = user.GetComponent<ICameraUser>();
+            cameraUser.ConnectCamera(cam);
+        }
     }
 }
+

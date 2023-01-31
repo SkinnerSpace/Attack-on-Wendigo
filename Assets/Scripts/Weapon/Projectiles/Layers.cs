@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum Layers
+﻿public enum Layers
 {
     Default = 0,
     Weapon = 10,
@@ -11,15 +9,5 @@ public enum Layers
     Projectiles = 15,
     Damaging = 17,
     Barriers = 18,
-}
-
-public static class ComplexLayers
-{
-    public static LayerMask Vision = ~(
-        1 << (int)Layers.Props |
-        1 << (int)Layers.Player |
-        1 << (int)Layers.PropDestroyers |
-        1 << (int)Layers.Projectiles |
-        1 << (int)Layers.Damaging |
-        1 << (int)Layers.Barriers);
+    RagDoll = 19
 }

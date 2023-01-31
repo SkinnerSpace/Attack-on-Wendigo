@@ -1,115 +1,79 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class RaycastShooter : MonoBehaviour, IShooter, IVisionUser
+public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
 {
-    private const float flyPower = 100f;
-
     [Header("Required Components")]
+    [SerializeField] private WeaponData data;
+    [SerializeField] private Transform shootPoint;
     [SerializeField] private WeaponVFXController vFXController;
     [SerializeField] private WeaponSFXPlayer sFXPlayer;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private Magazine magazine;
-    [SerializeField] private WeaponSight weaponSight;
 
-    private PlayerVision vision;
-    private RaycastHit spot;
+    private WeaponSight sight;
     private FunctionTimer timer;
 
-    private float precision;
-
-    private float coolDownTime = 0.3f;
     private bool isReady = true;
-
-    private bool wasFiring;
-    private bool hadAmmo;
 
     private void Awake()
     {
         timer = GetComponent<FunctionTimer>();
     }
 
-    public void Shoot(bool isFiring)
+    public void Shoot(bool isFiring, Action onShot)
     {
         if (isFiring && isReady)
         {
-            if (magazine.HasAmmo())
-            {
-                DoShoot();
-            }
-            else
-            {
-                ReactOnTheLackOfAmmo(isFiring);
-            }
+            DoShoot();
+            onShot?.Invoke();
         }
-
-        wasFiring = isFiring;
     }
 
     private void DoShoot()
     {
-        ManageShootState();
-        GetTheSpot();
-        HitTheTarget();
+        isReady = false;
+        HitTheTarget(sight.GetTarget());
 
         sFXPlayer.PlayShootSFX();
-        vFXController.Shoot();
+        vFXController.PlayShootVFX();
 
-        weaponSight.GetTheSpot(precision);
-        weaponSight.AimOffhand(precision);
-
-        timer.Set("CoolDown", coolDownTime, CoolDown);
+        timer.Set("CoolDown", data.Rate, CoolDown);
     }
 
-    private void ManageShootState()
+    private void HitTheTarget(WeaponTarget target)
     {
-        isReady = false;
-        hadAmmo = true;
-        magazine.ReduceCount();
-    }
-
-    private void GetTheSpot()
-    {
-        spot = vision.Spot;
-    }
-
-    private void ReactOnTheLackOfAmmo(bool isFiring)
-    {
-        if (!wasFiring && isFiring || hadAmmo)
+        if (target.exist)
         {
-            hadAmmo = false;
-            sFXPlayer.PlayIsEmptySFX();
-            AmmoBar.Instance.UpdateOutOfAmmo();
+            DamageTheTarget(target);
+            BlowUpTheSurface(target);
+            vFXController.Hit(target);
         }
     }
 
-    private void HitTheTarget()
+    private void DamageTheTarget(WeaponTarget target)
     {
-        if (vision.hasTarget)
+        if (target.isDamageable)
         {
-            BlowUpTheSurface();
-            vFXController.Hit(spot);
+            DamagePackage damagePackage = new DamagePackage(data.Damage);
+            target.damageable.ReceiveDamage(damagePackage);
         }
     }
 
-    private void BlowUpTheSurface()
+    private void BlowUpTheSurface(WeaponTarget target)
     {
-        Surface surface = spot.transform.GetComponent<Surface>();
+        Surface surface = target.surface;
+
         if (surface != null)
         {
             surface.Hit().
-                    WithPosition(spot.point).
-                    WithAngle(GetDirToTarget(), spot.normal).
+                    WithPosition(target.hitPosition).
+                    WithAngle(target.hitDirection, target.normal).
                     WithShape(0f, 45f).
                     WithCount(20, 30).
                     Launch();
         }
     }
-
     private void CoolDown() => isReady = true;
-    public void ConnectVision(PlayerVision vision) => this.vision = vision;
-    public Vector2 GetVelocity() => GetDirToTarget() * flyPower;
-    public Vector3 GetDirToTarget() => (spot.point - vision.transform.position).normalized;
+    public void ConnectCamera(Camera cam) => sight = new WeaponSight(data, cam);
 }
-

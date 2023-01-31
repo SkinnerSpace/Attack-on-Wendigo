@@ -25,7 +25,7 @@ public class Architect : MonoBehaviour
     [SerializeField] private CentralizedObjects centralizedObjects;
 
     private Mark[,] map;
-    private const float BUILDING_CHANCE = 0.01f;
+    private const float BUILDING_CHANCE = 0.05f;
 
     private void Awake()
     {
@@ -112,6 +112,11 @@ public class Architect : MonoBehaviour
             default:
                 return 0;
         }
+    }
+
+    private void CutMark()
+    {
+
     }
 
     # if UNITY_EDITOR

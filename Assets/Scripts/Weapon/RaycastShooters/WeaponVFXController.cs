@@ -14,7 +14,7 @@ public class WeaponVFXController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject bulletExplosion;
 
-    public void Shoot()
+    public void PlayShootVFX()
     {
         recoilController.Recoil();
         animator.Play(shootAnim);
@@ -22,9 +22,9 @@ public class WeaponVFXController : MonoBehaviour
         muzzleFlash.Play();
     }
 
-    public void Hit(RaycastHit hit)
+    public void Hit(WeaponTarget target)
     {
-        Instantiate(bulletExplosion, hit.point, Quaternion.identity);
+        Instantiate(bulletExplosion, target.hitPosition, Quaternion.identity);
     }
 }
 

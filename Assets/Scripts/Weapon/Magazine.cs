@@ -3,48 +3,48 @@ using UnityEngine;
 
 public class Magazine : MonoBehaviour
 {
-    [SerializeField] private int ammo;
+    [Header("Required Components")]
+    [SerializeField] private WeaponSFXPlayer sfxPlayer;
+    [SerializeField] private WeaponData data;
 
-    public int Ammo => ammo;
+    private FunctionTimer timer;
+    private AmmoReporter reporter;
 
-    public event Action<bool> notifyOnActive;
-    public event Action<int> notifyOnUpdate;
-    public event Action notifyOutOfAmmo;
+    public event Action<int> onUpdate;
+
+    private void Awake()
+    {
+        timer = GetComponent<FunctionTimer>();
+        reporter = new AmmoReporter(timer, sfxPlayer);
+    }
 
     public void GetReady(bool isReady)
     {
-        if (isReady) Subscribe();
-        else Unsubscribe();
+        if (isReady) Subscribe(AmmoBar.Instance);
+        else Unsubscribe(AmmoBar.Instance);
     }
 
-    private void Subscribe()
+    public void ReportIsEmpty() => reporter.ReportIsEmpty();
+
+    public void Subscribe(IAmmoObserver observer)
     {
-        notifyOnActive += AmmoBar.Instance.SetActive;
-        notifyOnUpdate += AmmoBar.Instance.UpdateAmmo;
-        notifyOutOfAmmo += AmmoBar.Instance.UpdateOutOfAmmo;
-
-        notifyOnActive?.Invoke(true);
-        notifyOnUpdate?.Invoke(ammo);
+        observer.SetActive(true);
+        onUpdate += observer.UpdateAmmo;
+        
+        onUpdate?.Invoke(data.Ammo);
     }
 
-    private void Unsubscribe()
+    public void Unsubscribe(IAmmoObserver observer)
     {
-        notifyOnActive?.Invoke(false);
-
-        notifyOnUpdate -= AmmoBar.Instance.UpdateAmmo;
-        notifyOutOfAmmo -= AmmoBar.Instance.UpdateOutOfAmmo;
+        observer.SetActive(false);
+        onUpdate -= observer.UpdateAmmo;
     }
 
-    public bool HasAmmo()
-    {
-        if (ammo > 0) return true;
-
-        return false;
-    }
+    public bool HasAmmo() => data.Ammo > 0;
 
     public void ReduceCount()
     {
-        ammo -= 1;
-        notifyOnUpdate(ammo);
+        data.SetAmmo(data.Ammo - 1);
+        onUpdate(data.Ammo);
     }
 }

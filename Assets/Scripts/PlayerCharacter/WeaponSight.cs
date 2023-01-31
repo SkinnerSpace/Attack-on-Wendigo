@@ -1,51 +1,37 @@
 ﻿using UnityEngine;
 
-public class WeaponSight : MonoBehaviour
+public class WeaponSight
 {
-    private const float MAX_SCATTER = 0.1f;
+    private const float MAX_SCATTER = 0.2f;
+    
+    private WeaponData data;
+    private Camera cam;
 
-    [SerializeField] private Camera cam;
-    Ray ray;
-
-    private Vector3 originalStart;
-    private Vector3 originalEnd;
-
-    private Vector3 scatteredStart;
-    private Vector3 scatteredEnd;
-
-    private void Update()
+    public WeaponSight(WeaponData data, Camera cam)
     {
-        Debug.DrawLine(originalStart, originalEnd, Color.blue);
-        Debug.DrawLine(scatteredStart, scatteredEnd, Color.red);
+        this.data = data;
+        this.cam = cam;
     }
 
-    public void GetTheSpot(float precision)
+    public WeaponTarget GetTarget()
     {
+        Ray ray = GetExactDirection();
+        ray.direction = ApplyScatter(ray.direction);
+        Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Vision);
 
+        return new WeaponTarget(ray, hit);
     }
 
-    public void AimOffhand(float precision)
+    private Vector3 ApplyScatter(Vector3 direction)
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition);
+        Vector3 deviation = GetRandomDirection();
+        float scatterDegree = Mathf.Lerp(MAX_SCATTER, 0f, data.Precision);
+        Vector3 scatter = deviation * scatterDegree;
+        Vector3 scatteredDirection = (direction + scatter).normalized;
 
-        if (Physics.Raycast(ray, out RaycastHit spot, Mathf.Infinity, ComplexLayers.Vision)){
-            originalStart = ray.origin;
-            originalEnd = spot.point;
-        }
-
-        Vector3 scatter = new Vector3(x: Rand.Range(-1f, 1f), y: Rand.Range(-1f, 1f), z: Rand.Range(-1f, 1f)).normalized;
-        scatter *= MAX_SCATTER;
-
-        Debug.Log("Original " + ray.direction);
-        Debug.Log("Scatter " + scatter);
-        ray.direction = (ray.direction + scatter).normalized;
-        Debug.Log("Fucked Up " + ray.direction);
-
-        scatteredStart = ray.origin;
-
-        if (Physics.Raycast(ray, out RaycastHit spot2, Mathf.Infinity, ComplexLayers.Vision)){
-            scatteredStart = ray.origin;
-            scatteredEnd = spot2.point;
-        }
+        return scatteredDirection;
     }
+
+    private Ray GetExactDirection() => cam.ScreenPointToRay(Input.mousePosition);
+    private Vector3 GetRandomDirection() => new Vector3(x: Rand.Range(-1f, 1f), y: Rand.Range(-1f, 1f), z: Rand.Range(-1f, 1f)).normalized;
 }

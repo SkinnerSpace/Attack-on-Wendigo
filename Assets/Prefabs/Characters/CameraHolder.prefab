@@ -71,7 +71,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 129847
+    m_Bits: 1702711
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -140,7 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 4902129331834518017}
-  point: {x: 0, y: 0, z: 0}
 --- !u!114 &1652087050669785381
 MonoBehaviour:
   m_ObjectHideFlags: 0

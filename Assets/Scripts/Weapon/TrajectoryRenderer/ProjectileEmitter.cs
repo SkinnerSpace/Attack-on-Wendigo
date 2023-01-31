@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ProjectileEmitter : MonoBehaviour, IShooter
 {
@@ -19,7 +20,7 @@ public class ProjectileEmitter : MonoBehaviour, IShooter
         timer = GetComponent<FunctionTimer>();
     }
 
-    public void Shoot(bool isFiring)
+    public void Shoot(bool isFiring, Action onShot)
     {
         if (isFiring) Charge();
         else Discharge();

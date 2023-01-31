@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo : MonoBehaviour, IDamageable
+public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver
 {
+    private HealthSystem healthSystem;
     private StateMachine stateMachine;
+
+    [SerializeField] private RagDollController ragDollController;
 
     private WendigoRotator rotator;
     private WendigoMover mover;
@@ -13,11 +16,15 @@ public class Wendigo : MonoBehaviour, IDamageable
 
     public WendigoTarget target { get; private set; }
     [SerializeField] private WendigoHeadTarget headTarget;
-    
+
+    private bool testDeath;
+
     private void Awake()
     {
         InitializeComponents();
         SetUpStateMachine();
+
+        healthSystem.Subscribe(this);
     }
 
     private void FixedUpdate() => stateMachine.Tick();
@@ -27,6 +34,7 @@ public class Wendigo : MonoBehaviour, IDamageable
         rotator = GetComponent<WendigoRotator>();
         mover = GetComponent<WendigoMover>();
         timer = GetComponent<FunctionTimer>();
+        healthSystem = GetComponent<HealthSystem>();
 
         target = new WendigoTarget();
     }
@@ -38,18 +46,23 @@ public class Wendigo : MonoBehaviour, IDamageable
         var arrival = new Arrival(timer, this);
         var idle = new Idle();
         var chase = new Chase(rotator, mover, target);
+        var dead = new Dead();
 
-        At(arrival, idle, HasNoTarget());
-        At(arrival, chase, HasTarget());
+        Add(arrival, idle, HasNoTarget());
+        Add(arrival, chase, HasTarget());
 
-        At(idle, chase, HasTarget());
-        At(chase, idle, HasNoTarget());
+        Add(idle, chase, HasTarget());
+        Add(chase, idle, HasNoTarget());
+
+        Add(idle, dead, IsDead());
+        Add(chase, dead, IsDead());
 
         stateMachine.SetState(arrival);
 
-        void At(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
+        void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
         Func<bool> HasTarget() => () => target.Exist;
         Func<bool> HasNoTarget() => () => !target.Exist;
+        Func<bool> IsDead() => () => !healthSystem.IsAlive() || testDeath;
     }
 
     public void ReceiveDamage(DamagePackage damagePackage)
@@ -57,18 +70,21 @@ public class Wendigo : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K)) HasDied();
+    }
+
     public void SetTarget(Transform target)
     {
         this.target.Set(target);
         headTarget.SetTarget(target);
     }
-}
 
-public class WendigoTarget
-{
-    public bool Exist => target != null;
-    public Vector3 Position => target.position;
-    private Transform target;
-
-    public void Set(Transform target) => this.target = target;
+    public void HasDied()
+    {
+        ragDollController.SetActive(true);
+        testDeath = true;
+        Debug.Log("HAS DIED");
+    }
 }

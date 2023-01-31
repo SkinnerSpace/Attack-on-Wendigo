@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AmmoBar : MonoBehaviour
+public class AmmoBar : MonoBehaviour, IAmmoObserver
 {
     private TextMeshProUGUI label;
     private Animator animator;

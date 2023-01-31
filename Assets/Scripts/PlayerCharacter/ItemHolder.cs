@@ -8,6 +8,7 @@ public class ItemHolder : MonoBehaviour, IHolder
     [SerializeField] WeaponHandler weaponHandler;
     [SerializeField] Speedometer speedometer;
     [SerializeField] PlayerVision vision;
+    private Camera cam;
 
     public Vector3 targetPosition =>  weapon.DefaultPosition;
 
@@ -19,6 +20,7 @@ public class ItemHolder : MonoBehaviour, IHolder
 
     private void Awake()
     {
+        cam = GetComponent<Camera>();
         weapon = NullWeapon.Instance;
         onPickedUp += WeaponIsTaken;
     }
@@ -35,8 +37,6 @@ public class ItemHolder : MonoBehaviour, IHolder
 
             SetWeapon(item);
             PickUp(item);
-            ConnectSpeedometerTo(item);
-            ConnectVisionTo(item);
         }
     }
 
@@ -50,18 +50,21 @@ public class ItemHolder : MonoBehaviour, IHolder
         }
     }
 
+    private void SetWeapon(Transform item)
+    {
+        weapon = item.GetComponent<IWeapon>();
+        weaponHandler.SetWeapon(weapon);
+
+        ConnectSpeedometerTo(item);
+        ConnectCameraTo(item);
+    }
+
     private void ResetWeapon()
     {
         item = null;
         weapon.GetReady(false);
         weapon = NullWeapon.Instance;
         weaponHandler.ResetWeapon();
-    }
-
-    private void SetWeapon(Transform item)
-    {
-        weapon = item.GetComponent<IWeapon>();
-        weaponHandler.SetWeapon(weapon);
     }
 
     private void PickUp(Transform item)
@@ -71,7 +74,7 @@ public class ItemHolder : MonoBehaviour, IHolder
     }
 
     private void ConnectSpeedometerTo(Transform item) => item.GetComponent<ISpeedObserver>().ConnectSpeedometer(speedometer);
-    private void ConnectVisionTo(Transform item) => item.GetComponent<IVisionUser>().ConnectVision(vision);
+    private void ConnectCameraTo(Transform item) => item.GetComponent<ICameraUser>().ConnectCamera(cam);
     private void WeaponIsTaken() => weapon.GetReady(true);
     private Vector3 GetDropVelocity() => GetDropDirection() * dropForce;
     private Vector3 GetDropDirection() => (vision.point - item.position).normalized;

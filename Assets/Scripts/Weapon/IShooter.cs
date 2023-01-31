@@ -1,4 +1,6 @@
-﻿public interface IShooter
+﻿using System;
+
+public interface IShooter
 {
-    void Shoot(bool isFiring);
+    void Shoot(bool isFiring, Action onShot);
 }
