@@ -10,4 +10,8 @@ public static class ComplexLayers
         1 << (int)Layers.Damaging |
         1 << (int)Layers.Barriers) |
         1 << (int)Layers.RagDoll;
+
+    public static LayerMask Solid =
+        1 << (int)Layers.Ground |
+        1 << (int)Layers.Landscape;
 }

@@ -83,8 +83,7 @@ public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver
 
     public void HasDied()
     {
-        ragDollController.SetActive(true);
+        ragDollController.SwitchOn();
         testDeath = true;
-        Debug.Log("HAS DIED");
     }
 }

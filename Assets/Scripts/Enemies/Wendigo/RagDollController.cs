@@ -6,10 +6,19 @@ public class RagDollController : MonoBehaviour
     [SerializeField] private Transform world;
     [SerializeField] private Animator animator;
 
-    [SerializeField] private List<Transform> bones = new List<Transform>();
-
+    [SerializeField] private Transform skeleton;
+    [SerializeField] private Transform mainRoot;
+    [SerializeField] private Transform hips;
+    [SerializeField] private Transform armsRoot;
     [SerializeField] private Transform targetBone;
-    [SerializeField] private Transform destination;
+    [SerializeField] private Transform neckPeak;
+
+    [SerializeField] private Transform spine3;
+    [SerializeField] private List<Transform> shoulders = new List<Transform>();
+
+    [SerializeField] private List<Transform> iks = new List<Transform>();
+
+    [SerializeField] private List<Transform> bones = new List<Transform>();
 
     private Rigidbody[] rigidBodies;
     private Collider[] colliders;
@@ -21,54 +30,86 @@ public class RagDollController : MonoBehaviour
         colliders = transform.GetComponentsInChildren<Collider>();
         joints = transform.GetComponentsInChildren<Joint>();
 
-        SetActive(false);
+        DisableRagdoll();
     }
 
-    public void SetActive(bool enabled)
+    public void DisableRagdoll()
+    {
+        SwitchOff();
+        DisableColliders();
+        DisableJoints();
+
+        animator.enabled = true;
+    }
+
+    private void SwitchOff()
+    {
+        foreach (Rigidbody body in rigidBodies)
+        {
+            if (body.gameObject.layer == (int)Layers.RagDoll){
+                body.velocity = Vector3.zero;
+                body.isKinematic = true;
+            }
+        }
+    }
+
+    private void DisableColliders()
+    {
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.layer == (int)Layers.RagDoll){
+                collider.enabled = false;
+            }
+        }
+    }
+
+    private void DisableJoints()
+    {
+        foreach (Joint joint in joints){
+            joint.enableCollision = false;
+        }
+    }
+
+    public void SwitchOn()
+    {
+        animator.enabled = false;
+
+        EnableComponents();
+        ChangeParents();
+    }
+
+    private void EnableComponents()
     {
         foreach (Transform bone in bones)
+            SetUpBone(bone);
+    }
+
+    private void SetUpBone(Transform bone)
+    {
+        if (bone != null)
         {
             Rigidbody rigidBone = bone.GetComponent<Rigidbody>();
             Collider colliderBone = bone.GetComponent<Collider>();
             Joint joint = bone.GetComponent<Joint>();
 
             if (rigidBone != null) rigidBone.velocity = Vector3.zero;
-            if (rigidBone != null) rigidBone.isKinematic = !enabled;
-            if (colliderBone != null) colliderBone.enabled = enabled;
-            if (joint != null) joint.enableCollision = enabled;
+            if (rigidBone != null) rigidBone.isKinematic = false;
+            if (colliderBone != null) colliderBone.enabled = true;
+            if (joint != null) joint.enableCollision = true;
         }
+    }
 
-        if (enabled)
-        {
-            targetBone.SetParent(destination);
-            //transform.SetParent(world);
-        }
+    private void ChangeParents()
+    {
+        targetBone.SetParent(neckPeak);
+        hips.SetParent(skeleton);
+        armsRoot.SetParent(skeleton);
+        transform.SetParent(world);
 
-        if (!enabled)
-        {
-            foreach (Rigidbody body in rigidBodies)
-            {
-                if (body.gameObject.layer == (int)Layers.RagDoll)
-                {
-                    body.velocity = Vector3.zero;
-                    body.isKinematic = !enabled;
-                }
-            }
+        foreach (Transform ik in iks)
+            ik.SetParent(skeleton);
 
-            foreach (Collider collider in colliders)
-            {
-                if (collider.gameObject.layer == (int)Layers.RagDoll)
-                {
-                    collider.enabled = enabled;
-                }
-            }
-
-            foreach (Joint joint in joints)
-            {
-                joint.enableCollision = enabled;
-            }
-        }
-
-        animator.enabled = !enabled;
+        foreach (Transform shoulder in shoulders)
+            shoulder.SetParent(spine3);
     }
 }

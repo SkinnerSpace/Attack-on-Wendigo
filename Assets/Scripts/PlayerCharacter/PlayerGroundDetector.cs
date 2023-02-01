@@ -43,7 +43,7 @@ public class PlayerGroundDetector : MonoBehaviour
     private bool CheckIsGrounded()
     {
         Vector3 checkPoint = transform.position - groundCheckOffset;
-        return Physics.CheckSphere(checkPoint, GROUND_CHECK_RADIUS, GROUND);
+        return Physics.CheckSphere(checkPoint, GROUND_CHECK_RADIUS, ComplexLayers.Solid);
     }
 
     private void Landing()
