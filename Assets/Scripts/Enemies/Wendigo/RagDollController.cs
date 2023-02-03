@@ -1,115 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class RagDollController : MonoBehaviour
 {
-    [SerializeField] private Transform world;
-    [SerializeField] private Animator animator;
+    private Animator animator;
+    private SkeletonRestructurer restructurer;
+    private RagdollBoneStorage storage;
 
-    [SerializeField] private Transform skeleton;
-    [SerializeField] private Transform mainRoot;
-    [SerializeField] private Transform hips;
-    [SerializeField] private Transform armsRoot;
-    [SerializeField] private Transform targetBone;
-    [SerializeField] private Transform neckPeak;
-
-    [SerializeField] private Transform spine3;
-    [SerializeField] private List<Transform> shoulders = new List<Transform>();
-
-    [SerializeField] private List<Transform> iks = new List<Transform>();
-
-    [SerializeField] private List<Transform> bones = new List<Transform>();
-
-    private Rigidbody[] rigidBodies;
-    private Collider[] colliders;
-    private Joint[] joints; 
+    private bool ragdollIsEnabled;
 
     private void Awake()
     {
-        rigidBodies = transform.GetComponentsInChildren<Rigidbody>();
-        colliders = transform.GetComponentsInChildren<Collider>();
-        joints = transform.GetComponentsInChildren<Joint>();
-
-        DisableRagdoll();
+        animator = GetComponent<Animator>();
+        restructurer = GetComponent<SkeletonRestructurer>();
+        storage = GetComponent<RagdollBoneStorage>();
     }
 
-    public void DisableRagdoll()
+    private void Start()
     {
         SwitchOff();
-        DisableColliders();
-        DisableJoints();
-
-        animator.enabled = true;
     }
 
-    private void SwitchOff()
+    public void TriggerRagdoll(Vector3 force, Vector3 hitPoint)
     {
-        foreach (Rigidbody body in rigidBodies)
-        {
-            if (body.gameObject.layer == (int)Layers.RagDoll){
-                body.velocity = Vector3.zero;
-                body.isKinematic = true;
-            }
-        }
+        SwitchOn();
+        ApplyForce(force, hitPoint);
     }
 
-    private void DisableColliders()
+    private void ApplyForce(Vector3 force, Vector3 hitPoint)
     {
-        foreach (Collider collider in colliders)
-        {
-            if (collider.gameObject.layer == (int)Layers.RagDoll){
-                collider.enabled = false;
-            }
-        }
+        RagdollBone closestBone = storage.ragdollBones.OrderBy(bone => Vector3.Distance(bone.transform.position, hitPoint)).First();
+        closestBone.AddForceAtPosition(force, hitPoint);
     }
 
-    private void DisableJoints()
-    {
-        foreach (Joint joint in joints){
-            joint.enableCollision = false;
-        }
-    }
+    public void SwitchOff() => EnableRagdoll(false);
 
     public void SwitchOn()
     {
-        animator.enabled = false;
+        EnableRagdoll(true);
 
-        EnableComponents();
-        ChangeParents();
+        /*if (!restructurer.isDone)
+            restructurer.Restructure();*/
     }
 
-    private void EnableComponents()
+    private void EnableRagdoll(bool isRagdoll)
     {
-        foreach (Transform bone in bones)
-            SetUpBone(bone);
-    }
+        if (ragdollIsEnabled != isRagdoll){
+            ragdollIsEnabled = true;
 
-    private void SetUpBone(Transform bone)
-    {
-        if (bone != null)
-        {
-            Rigidbody rigidBone = bone.GetComponent<Rigidbody>();
-            Collider colliderBone = bone.GetComponent<Collider>();
-            Joint joint = bone.GetComponent<Joint>();
+            animator.enabled = isRagdoll ? false : true;
 
-            if (rigidBone != null) rigidBone.velocity = Vector3.zero;
-            if (rigidBone != null) rigidBone.isKinematic = false;
-            if (colliderBone != null) colliderBone.enabled = true;
-            if (joint != null) joint.enableCollision = true;
+            foreach (RagdollBone bone in storage.ragdollBones)
+                bone.EnableRagdoll(isRagdoll);
+
+            foreach (RagdollPuller puller in storage.pullers)
+                puller.Launch();
         }
-    }
-
-    private void ChangeParents()
-    {
-        targetBone.SetParent(neckPeak);
-        hips.SetParent(skeleton);
-        armsRoot.SetParent(skeleton);
-        transform.SetParent(world);
-
-        foreach (Transform ik in iks)
-            ik.SetParent(skeleton);
-
-        foreach (Transform shoulder in shoulders)
-            shoulder.SetParent(spine3);
     }
 }

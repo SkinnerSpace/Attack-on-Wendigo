@@ -43,6 +43,8 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
 
     private void HitTheTarget(WeaponTarget target)
     {
+        //Debug.Log("TARGET NAME " + target.name);
+
         if (target.exist)
         {
             DamageTheTarget(target);
@@ -55,7 +57,8 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
     {
         if (target.isDamageable)
         {
-            DamagePackage damagePackage = new DamagePackage(data.Damage);
+            Vector3 impact = CalculateImpact(target.hitDirection, data.Impact);
+            DamagePackage damagePackage = new DamagePackage(data.Damage, impact, target.hitPosition);
             target.damageable.ReceiveDamage(damagePackage);
         }
     }
@@ -76,4 +79,5 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
     }
     private void CoolDown() => isReady = true;
     public void ConnectCamera(Camera cam) => sight = new WeaponSight(data, cam);
+    private Vector3 CalculateImpact(Vector3 direction, float force) => direction * force;
 }

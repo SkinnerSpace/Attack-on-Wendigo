@@ -1,7 +1,9 @@
 {
     "name": "Wendigo",
     "references": [
-        "GUID:67d5259132ab2a24b861dd2fc0e14392"
+        "GUID:67d5259132ab2a24b861dd2fc0e14392",
+        "GUID:af4a3ceb227b8f94cb8375f40e156398",
+        "GUID:7f7d1af65c2641843945d409d28f2e20"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

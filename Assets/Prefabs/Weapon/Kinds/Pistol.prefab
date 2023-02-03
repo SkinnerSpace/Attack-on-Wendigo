@@ -421,6 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91292e07b42d23c4e9c9aea7fa290566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playAnimation: 1
   recoilController: {fileID: 8533214991433855408}
   muzzleFlash: {fileID: 5944037392786839833}
   bulletShell: {fileID: 599221758087645794}
@@ -528,8 +529,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  ammo: 10
-  precision: 0.5
+  impact: 100
+  ammo: 100
+  precision: 0.7
+  aimPrecision: 0.9
   rate: 0.3
 --- !u!114 &997745253376797098
 MonoBehaviour:
@@ -543,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f3dd25a5f6b9943a4bdf19cf09393f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 2257250665810215781}
   defaultPosition: {x: 0.75, y: -0.35, z: 1.5}
   aimingPosition: {x: 0, y: -0.5, z: 1.2}
   aimingSpeed: 10
@@ -5655,11 +5659,21 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4640717602789015768, guid: 03e1634c0c3949743a636eeebe722546,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 03e1634c0c3949743a636eeebe722546,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 02476d57af19fe247b9a51654a061e38, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 03e1634c0c3949743a636eeebe722546,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7868921578104316843, guid: 03e1634c0c3949743a636eeebe722546,
         type: 3}
       propertyPath: m_Enabled
@@ -5669,6 +5683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CastShadows
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7868921578104316843, guid: 03e1634c0c3949743a636eeebe722546,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e1634c0c3949743a636eeebe722546, type: 3}

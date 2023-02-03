@@ -22,14 +22,22 @@ public class WeaponRotator : MonoBehaviour
 
     public void ReadInput()
     {
-        float inputY = controller.input.y;
-        inputY = VerticalTuner.IncreaseVerticalInput(inputY, VERTICAL_ADJUSTMENT, LAND_ADJUSTMENT);
+        float inputY = GetVerticalInput();
 
         input = new Vector2(
             controller.input.x,
             inputY);
 
         input *= WeaponAimController.GetStability(STABILITY_MODIFIER);
+    }
+
+    private float GetVerticalInput()
+    {
+        float inputY = controller.input.y;
+        inputY = Mathf.Clamp(inputY, 0f, 1f);
+        inputY = VerticalTuner.IncreaseVerticalInput(inputY, VERTICAL_ADJUSTMENT, LAND_ADJUSTMENT);
+
+        return inputY;
     }
 
     public Quaternion OffsetRotation(Quaternion currentRotation)

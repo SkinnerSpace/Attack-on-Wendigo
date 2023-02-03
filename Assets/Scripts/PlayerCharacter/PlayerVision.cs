@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVision : MonoBehaviour
 {
-    private const float REACH_DISTANCE = 4f;
-
     [SerializeField] private ItemHolder weaponHolder;
+    [SerializeField] private PlayerVisionInteractor interactor;
+    [SerializeField] private VisionTypeChecker typeChecker;
 
     private Camera cam;
     public bool hasTarget { get; private set; }
@@ -16,14 +15,11 @@ public class PlayerVision : MonoBehaviour
 
     public Vector3 point { get; private set; }
 
-    private List<Type> targetTypes = new List<Type>();
-
     public event Action<bool> notifyOnTarget;
 
     private void Awake()
     {
         InitializeComponents();
-        InitializeTargets();
     }
 
     private void Start() => SubscribeEventListeners();
@@ -32,12 +28,6 @@ public class PlayerVision : MonoBehaviour
     private void InitializeComponents()
     {
         cam = GetComponent<Camera>();
-    }
-
-    private void InitializeTargets()
-    {
-        targetTypes.Add(typeof(IPickable));
-        targetTypes.Add(typeof(IDamageable));
     }
 
     private void SubscribeEventListeners()
@@ -53,7 +43,7 @@ public class PlayerVision : MonoBehaviour
         hasTarget = spot.transform != null;
 
         UpdateTargetStatus();
-        SpotAnItem();
+        interactor.InteractIfPossible(spot.transform);
 
         point = hasTarget ? spot.point : ray.direction * 300f;
     }
@@ -61,35 +51,13 @@ public class PlayerVision : MonoBehaviour
     private void UpdateTargetStatus()
     {
         suitable = hasTarget ? IsSuitable(spot.transform) : false;
-        notifyOnTarget(suitable); 
+        notifyOnTarget(suitable);
     }
 
-    private void SpotAnItem()
-    {
-        if (IsAbleToTakeAnItem()){
-            if (InputReader.interact) weaponHolder.TakeAnItem(spot.transform);
-        }
-    }
-
-    private bool IsAbleToTakeAnItem() => suitable &&
-                                         GetDistanceTo(spot) <= REACH_DISTANCE &&
-                                         GetTargetType(spot.transform) == typeof(IPickable);
-
-    private float GetDistanceTo(RaycastHit spot) => Vector3.Distance(spot.transform.position, transform.position);
 
     private bool IsSuitable(Transform targetTransform)
     {
-        Type type = GetTargetType(targetTransform);
+        Type type = typeChecker.CheckType(targetTransform);
         return type != null;
-    }
-
-    private Type GetTargetType(Transform targetTransform)
-    {
-        foreach (Type type in targetTypes){
-            if (targetTransform.GetComponent(type) != null)
-                return type;
-        }
-
-        return null;
     }
 }

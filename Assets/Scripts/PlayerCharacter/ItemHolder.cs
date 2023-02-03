@@ -33,10 +33,18 @@ public class ItemHolder : MonoBehaviour, IHolder
     public void TakeAnItem(Transform item)
     {
         if (this.item != item){
-            this.item = item;
+            DropARedundantItem();
 
+            this.item = item;
             SetWeapon(item);
             PickUp(item);
+        }
+    }
+
+    private void DropARedundantItem()
+    {
+        if (item != null){
+            DropAnItem();
         }
     }
 

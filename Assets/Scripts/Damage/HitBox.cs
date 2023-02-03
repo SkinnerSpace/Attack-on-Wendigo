@@ -10,10 +10,6 @@ public class HitBox : MonoBehaviour, IDamageable
 
     public void ReceiveDamage(DamagePackage damagePackage)
     {
-        if (healthSystem.IsAlive())
-        {
-            Debug.Log("Damage " + damagePackage.damage);
-            healthSystem.ReceiveDamage(damagePackage);
-        }
+        healthSystem.ReceiveDamage(damagePackage);
     }
 }

@@ -158,6 +158,8 @@ MonoBehaviour:
   dashDistance: 10
   jumpHeight: 3
   gravity: 16
+  horizontalVelocity: {x: 0, y: 0, z: 0}
+  verticalVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &5845931283795517954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fad04e014f6c2544939c62feccc8975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 7181526249658469568}
+  detectionRadius: 0.48
+  detectionHeight: 0.62
 --- !u!114 &6809514969268328242
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 874012968601863398}
   - component: {fileID: 6498195847071277101}
   - component: {fileID: 8425617499996812408}
+  - component: {fileID: 5052864313933649279}
+  - component: {fileID: 4873663919095250494}
   - component: {fileID: 1652087050669785381}
   - component: {fileID: 4902129331834518017}
   - component: {fileID: 7820593142600697943}
@@ -140,6 +142,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 4902129331834518017}
+  interactor: {fileID: 5052864313933649279}
+  typeChecker: {fileID: 4873663919095250494}
+--- !u!114 &5052864313933649279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680944993474019683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a29a6af69444343ad3eae2d206996b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 4902129331834518017}
+  typeChecker: {fileID: 4873663919095250494}
+--- !u!114 &4873663919095250494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680944993474019683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10040380f3677284e84218035fa3ec53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1652087050669785381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +279,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 3
+  far clip plane: 5
   field of view: 60
   orthographic: 0
   orthographic size: 5

@@ -17,6 +17,8 @@ public class CollapseController : MonoBehaviour
     private float currentTime;
     private float completeness;
 
+    public Vector3 Position => transform.position;
+
     public event Action<float> notifyOnUpdate;
 
     private void Awake()

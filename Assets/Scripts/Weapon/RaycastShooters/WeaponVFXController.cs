@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 public class WeaponVFXController : MonoBehaviour
 {
     private static int shootAnim = Animator.StringToHash("Shoot");
+    [SerializeField] private bool playAnimation;
 
     [Header("Required Components")]
     [SerializeField] private WeaponRecoilController recoilController;
@@ -17,7 +18,7 @@ public class WeaponVFXController : MonoBehaviour
     public void PlayShootVFX()
     {
         recoilController.Recoil();
-        animator.Play(shootAnim);
+        if (playAnimation) animator.Play(shootAnim);
         bulletShell.Play();
         muzzleFlash.Play();
     }

@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver
+public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver, IRagdoll
 {
     private HealthSystem healthSystem;
     private StateMachine stateMachine;
 
+    [SerializeField] private PropDestroyer mainPropDestroyer;
     [SerializeField] private RagDollController ragDollController;
 
     private WendigoRotator rotator;
@@ -25,6 +26,7 @@ public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver
         SetUpStateMachine();
 
         healthSystem.Subscribe(this);
+        healthSystem.SubscribeOnRagdoll(this);
     }
 
     private void FixedUpdate() => stateMachine.Tick();
@@ -83,7 +85,16 @@ public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver
 
     public void HasDied()
     {
+        headTarget.SetTarget(null);
         ragDollController.SwitchOn();
+        mainPropDestroyer.SwitchOff();
+        testDeath = true;
+    }
+
+    public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
+    {
+        headTarget.SetTarget(null);
+        ragDollController.TriggerRagdoll(impact, hitPoint);
         testDeath = true;
     }
 }

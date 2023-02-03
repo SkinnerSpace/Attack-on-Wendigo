@@ -4,10 +4,13 @@ public class PlayerGroundDetector : MonoBehaviour
 {
     public static float landMagnitude { get; private set; }
 
-    private const int GROUND = 1 << 8;
-    private const float GROUND_CHECK_RADIUS = 0.1f;
+    private float groundCheckRadius => characterController.radius;
 
     private Vector3 groundCheckOffset;
+    [SerializeField] private CharacterController characterController;
+
+    [SerializeField] private float detectionRadius;
+    [SerializeField] private float detectionHeight;
 
     private bool wasGrounded;
     public bool isGrounded { get; private set; }
@@ -29,7 +32,7 @@ public class PlayerGroundDetector : MonoBehaviour
 
     private void Start()
     {
-        float offset = (player.height / 2f) + GROUND_CHECK_RADIUS;
+        float offset = (player.height / 2f) + groundCheckRadius;
         groundCheckOffset = new Vector3(0f, offset, 0f);
     }
 
@@ -43,7 +46,7 @@ public class PlayerGroundDetector : MonoBehaviour
     private bool CheckIsGrounded()
     {
         Vector3 checkPoint = transform.position - groundCheckOffset;
-        return Physics.CheckSphere(checkPoint, GROUND_CHECK_RADIUS, ComplexLayers.Solid);
+        return Physics.CheckSphere(GetCheckPos(), detectionRadius, ComplexLayers.Solid);
     }
 
     private void Landing()
@@ -77,5 +80,13 @@ public class PlayerGroundDetector : MonoBehaviour
                     WithCount(5, 10).
                     Launch();
         }
+    }
+
+    private Vector3 GetCheckPos() => transform.position - new Vector3(0f, detectionHeight, 0f);
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(GetCheckPos(), detectionRadius);
     }
 }

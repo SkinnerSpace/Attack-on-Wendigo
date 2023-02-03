@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
     [SerializeField] private List<Transform> cameraUsers;
 
     private IShooter shooter;
+    private Collider collisionBox;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
     public bool isReady { get; private set; }
@@ -24,6 +25,7 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
     private void Awake()
     {
         shooter = shooterImp.GetComponent<IShooter>();
+        collisionBox = GetComponent<Collider>();
         onShot += NotifyOnShot;
     }
 
@@ -47,7 +49,13 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
         magazine.GetReady(isReady);
         arms.enabled = isReady;
 
-        if (!isReady) swayController.ResetSway();
+        if (isReady){
+            collisionBox.enabled = false;
+        }
+        else if (!isReady){
+            swayController.ResetSway();
+            collisionBox.enabled = true;
+        }
     }
 
     public void ConnectSpeedometer(Speedometer speedometer) => swayController.ConnectSpeedometer(speedometer);

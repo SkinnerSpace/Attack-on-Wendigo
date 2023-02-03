@@ -15,6 +15,7 @@ public class WeaponAimController : MonoBehaviour
 
     [Header("Required Components")]
     [SerializeField] private IPickable pickableItem;
+    [SerializeField] private WeaponData data;
 
     [Header("Settings")]
     [SerializeField] private Vector3 defaultPosition;
@@ -29,6 +30,8 @@ public class WeaponAimController : MonoBehaviour
     public void Aim(bool isAiming)
     {
         float targetState = isAiming ? 1f : 0f;
+        data.SetPrecisionAdjustrment(isAiming ? data.AimPrecision : 0f);
+
         currentState = GetCurrentState(targetState);
         currentPosition = GetCurrentPosition(currentState);
         SetPosition(currentPosition);

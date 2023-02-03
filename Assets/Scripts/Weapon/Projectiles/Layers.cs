@@ -8,6 +8,7 @@
     Player = 13,
     PropDestroyers = 14,
     Projectiles = 15,
+    Items = 16,
     Damaging = 17,
     Barriers = 18,
     RagDoll = 19,

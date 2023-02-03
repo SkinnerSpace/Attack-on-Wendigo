@@ -3,15 +3,25 @@
 public class WeaponData : MonoBehaviour
 {
     [SerializeField] private float damage;
+    [SerializeField] private float impact;
+
     [SerializeField] private int ammo;
     [Range(0f, 1f)]
     [SerializeField] private float precision;
+    [Range(0f, 1f)]
+    [SerializeField] private float aimPrecision;
+
     [SerializeField] private float rate;
 
     public float Damage => damage;
+    public float Impact => impact;
     public int Ammo => ammo;
-    public float Precision => precision;
+    public float Precision => Mathf.Lerp(precision, 1f, precisionAdjustment);
+    public float AimPrecision => aimPrecision;
     public float Rate => rate;
 
-    public void SetAmmo(int ammo) => this.ammo = ammo; 
+    private float precisionAdjustment = 0f;
+
+    public void SetAmmo(int ammo) => this.ammo = ammo;
+    public void SetPrecisionAdjustrment(float precisionAdjustment) => this.precisionAdjustment = precisionAdjustment;
 }

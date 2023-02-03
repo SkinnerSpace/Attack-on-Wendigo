@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerVerticalMovement : MonoBehaviour, IJumper
 {
+    public const float maxVelocityMagnitude = 3f;
     public static float velocityMagnitude { get; private set; }
     
     private PlayerCharacter player;
@@ -33,6 +34,7 @@ public class PlayerVerticalMovement : MonoBehaviour, IJumper
         groundDetector.UpdateDetection();
 
         velocityMagnitude = verticalVelocity / player.JumpHeight;
+        velocityMagnitude = Mathf.Clamp(velocityMagnitude, -maxVelocityMagnitude, velocityMagnitude/2f);
     }
 
     private void HandleMovement()
