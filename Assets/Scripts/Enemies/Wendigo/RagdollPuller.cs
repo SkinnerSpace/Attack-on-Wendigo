@@ -8,22 +8,18 @@ public class RagdollPuller : MonoBehaviour
 
     private float force;
 
-    private float forceTime = 2f;
+    private float timeOut = 2f;
     private float currentTime;
 
     private Rigidbody body;
     private bool isPulling;
 
-    private void Awake()
-    {
-        body = GetComponent<Rigidbody>();
-    }
+    private void Awake() => body = GetComponent<Rigidbody>();
 
     public void Launch()
     {
         force = maxForce;
         isPulling = true;
-        //StartCoroutine(Pulling());
     }
 
     private void Update() => Pull();
@@ -34,31 +30,13 @@ public class RagdollPuller : MonoBehaviour
         {
             currentTime += Chronos.DeltaTime;
 
-            float interpolation = Mathf.InverseLerp(0f, forceTime, currentTime);
-            force = Mathf.Lerp(0, maxForce, interpolation);
-
+            float forcePercent = Mathf.InverseLerp(0f, timeOut, currentTime);
+            force = Mathf.Lerp(maxForce, 0f, forcePercent);
             body.velocity = direction * force;
 
-            if (currentTime >= forceTime)
-            {
-                isPulling = false;
-            }
+            StopPulling();
         }
     }
 
-    private IEnumerator Pulling()
-    {
-        while (currentTime < forceTime){
-            currentTime += Chronos.DeltaTime;
-
-            float interpolation = Mathf.InverseLerp(0f, forceTime, currentTime);
-            force = Mathf.Lerp(maxForce, 0f, interpolation);
-
-            body.velocity = direction * force;
-            Debug.Log(body.velocity);
-
-        }
-
-        yield return null;
-    }
+    private void StopPulling() => isPulling = currentTime < timeOut;
 }

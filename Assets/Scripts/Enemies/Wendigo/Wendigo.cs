@@ -3,29 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver, IRagdoll
+public class Wendigo : MonoBehaviour, IRagdoll
 {
-    private HealthSystem healthSystem;
-    private StateMachine stateMachine;
-
+    [Header("Required Components")]
     [SerializeField] private PropDestroyer mainPropDestroyer;
     [SerializeField] private RagDollController ragDollController;
-
-    private WendigoRotator rotator;
-    private WendigoMover mover;
-    private FunctionTimer timer;
-
-    public WendigoTarget target { get; private set; }
     [SerializeField] private WendigoHeadTarget headTarget;
 
-    private bool testDeath;
+    [HideInInspector] public HealthSystem healthSystem;
+    [HideInInspector] public StateMachine stateMachine;
+
+    [HideInInspector] public WendigoRotator rotator;
+    [HideInInspector] public WendigoMover mover;
+    [HideInInspector] public FunctionTimer timer;
+
+    [HideInInspector] public WendigoTarget target { get; private set; }
+    
+    [HideInInspector] public bool testDeath;
 
     private void Awake()
     {
         InitializeComponents();
-        SetUpStateMachine();
+        WendigoStateMachineInstaller.SetUp(this, stateMachine);
 
-        healthSystem.Subscribe(this);
         healthSystem.SubscribeOnRagdoll(this);
     }
 
@@ -38,57 +38,14 @@ public class Wendigo : MonoBehaviour, IDamageable, IHealthObserver, IRagdoll
         timer = GetComponent<FunctionTimer>();
         healthSystem = GetComponent<HealthSystem>();
 
+        stateMachine = new StateMachine();
         target = new WendigoTarget();
     }
 
-    private void SetUpStateMachine()
+    public void SetTarget(Transform rawTarget)
     {
-        stateMachine = new StateMachine();
-
-        var arrival = new Arrival(timer, this);
-        var idle = new Idle();
-        var chase = new Chase(rotator, mover, target);
-        var dead = new Dead();
-
-        Add(arrival, idle, HasNoTarget());
-        Add(arrival, chase, HasTarget());
-
-        Add(idle, chase, HasTarget());
-        Add(chase, idle, HasNoTarget());
-
-        Add(idle, dead, IsDead());
-        Add(chase, dead, IsDead());
-
-        stateMachine.SetState(arrival);
-
-        void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
-        Func<bool> HasTarget() => () => target.Exist;
-        Func<bool> HasNoTarget() => () => !target.Exist;
-        Func<bool> IsDead() => () => !healthSystem.IsAlive() || testDeath;
-    }
-
-    public void ReceiveDamage(DamagePackage damagePackage)
-    {
-        Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K)) HasDied();
-    }
-
-    public void SetTarget(Transform target)
-    {
-        this.target.Set(target);
-        headTarget.SetTarget(target);
-    }
-
-    public void HasDied()
-    {
-        headTarget.SetTarget(null);
-        ragDollController.SwitchOn();
-        mainPropDestroyer.SwitchOff();
-        testDeath = true;
+        target.Set(rawTarget);
+        headTarget.SetTarget(rawTarget);
     }
 
     public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)

@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
     public void Subscribe(IHealthObserver observer)
     {
-        onDied += observer.HasDied;
+        onDied += observer.Die;
     }
 
     public void SubscribeOnRagdoll(IRagdoll ragdoll)

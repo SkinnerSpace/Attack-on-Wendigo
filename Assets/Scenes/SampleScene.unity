@@ -1479,6 +1479,37 @@ MonoBehaviour:
   threshold: 0
   variety: 2
   pitchRange: 2
+--- !u!1 &691428452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691428453}
+  m_Layer: 0
+  m_Name: Helicopter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691428453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691428452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 17.1, z: 960}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1420892163}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &698326167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1819,6 +1850,18 @@ Transform:
   m_Father: {fileID: 1238712298}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765288940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5605730839354197699, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 1070283164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &834177142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2442,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000008892746
       objectReference: {fileID: 0}
+    - target: {fileID: 482734159287141324, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 482734159287141324, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 545458138696707192, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2407,7 +2460,7 @@ PrefabInstance:
     - target: {fileID: 545458138696707192, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 578581555906273557, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2417,7 +2470,7 @@ PrefabInstance:
     - target: {fileID: 578581555906273557, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 853337575238424335, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2434,6 +2487,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000058207668
       objectReference: {fileID: 0}
+    - target: {fileID: 853337575238424335, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 853337575238424335, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 918897713643664815, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2442,7 +2505,7 @@ PrefabInstance:
     - target: {fileID: 918897713643664815, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1322048006095146726, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2452,7 +2515,7 @@ PrefabInstance:
     - target: {fileID: 1322048006095146726, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1571954798725881621, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2462,7 +2525,7 @@ PrefabInstance:
     - target: {fileID: 1571954798725881621, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1723622521661451271, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2472,7 +2535,7 @@ PrefabInstance:
     - target: {fileID: 1723622521661451271, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1974584241436508402, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2482,7 +2545,7 @@ PrefabInstance:
     - target: {fileID: 1974584241436508402, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2036046271372153590, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2499,6 +2562,41 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000016763801
       objectReference: {fileID: 0}
+    - target: {fileID: 2036046271372153590, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036046271372153590, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2523814211013476484, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: pullers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2523814211013476484, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: pullers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1398916778}
+    - target: {fileID: 2523814211013476484, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: pullers.Array.data[2]
+      value: 
+      objectReference: {fileID: 765288940}
+    - target: {fileID: 2523814211013476484, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: pullers.Array.data[3]
+      value: 
+      objectReference: {fileID: 1398916778}
+    - target: {fileID: 2523814211013476484, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: pullers.Array.data[4]
+      value: 
+      objectReference: {fileID: 765288940}
     - target: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Name
@@ -2567,7 +2665,7 @@ PrefabInstance:
     - target: {fileID: 2793117092257040080, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2820408216676651921, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2584,6 +2682,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000012293458
       objectReference: {fileID: 0}
+    - target: {fileID: 2820408216676651921, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820408216676651921, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2858422550578407191, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2592,7 +2700,7 @@ PrefabInstance:
     - target: {fileID: 2858422550578407191, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3011467293587890648, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2609,6 +2717,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.026520992
       objectReference: {fileID: 0}
+    - target: {fileID: 3011467293587890648, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011467293587890648, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3046023683006294187, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2617,7 +2735,22 @@ PrefabInstance:
     - target: {fileID: 3046023683006294187, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525949941872728741, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: maxHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525949941872728741, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: minHeight
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525949941872728741, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: angleOfView
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3543485175666575028, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2634,6 +2767,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000002285061
       objectReference: {fileID: 0}
+    - target: {fileID: 3543485175666575028, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543485175666575028, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3597028397983041262, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2642,7 +2785,32 @@ PrefabInstance:
     - target: {fileID: 3597028397983041262, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712385781850540430, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.00000023544452
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712385781850540430, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.043564674
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712385781850540430, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712385781850540430, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712385781850540430, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3763191302250588830, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2652,7 +2820,7 @@ PrefabInstance:
     - target: {fileID: 3763191302250588830, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3952895415649453955, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2669,6 +2837,21 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000045169134
       objectReference: {fileID: 0}
+    - target: {fileID: 3952895415649453955, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952895415649453955, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058552332178477486, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: angleOfView
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4286370615115797919, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2677,22 +2860,32 @@ PrefabInstance:
     - target: {fileID: 4286370615115797919, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4506627089130588024, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000014634554
+      value: -0.000000018420533
       objectReference: {fileID: 0}
     - target: {fileID: 4506627089130588024, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.026713492
+      value: -0.00000003386044
       objectReference: {fileID: 0}
     - target: {fileID: 4506627089130588024, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.01099252
+      value: -7.1054265e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4506627089130588024, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4506627089130588024, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4556142986943200684, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2702,7 +2895,7 @@ PrefabInstance:
     - target: {fileID: 4556142986943200684, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4645824444516925268, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2712,7 +2905,7 @@ PrefabInstance:
     - target: {fileID: 4645824444516925268, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4921500968123391309, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2722,7 +2915,7 @@ PrefabInstance:
     - target: {fileID: 4921500968123391309, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5033531786349808171, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2739,6 +2932,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00491149
       objectReference: {fileID: 0}
+    - target: {fileID: 5033531786349808171, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033531786349808171, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137895175893068989, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2753,6 +2956,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000058207668
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137895175893068989, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137895175893068989, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5660723310571544896, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2769,6 +2982,21 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000023283064
       objectReference: {fileID: 0}
+    - target: {fileID: 5660723310571544896, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660723310571544896, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687853590222840503, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_Data.m_MaintainOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5870723612974900548, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2783,6 +3011,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000005494801
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870723612974900548, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870723612974900548, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5876088706034712034, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2814,6 +3052,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.004911339
       objectReference: {fileID: 0}
+    - target: {fileID: 6037386650941525133, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037386650941525133, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6386410228290795868, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2822,22 +3070,32 @@ PrefabInstance:
     - target: {fileID: 6386410228290795868, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6477469945635046957, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000026213055
+      value: 0.00000003585592
       objectReference: {fileID: 0}
     - target: {fileID: 6477469945635046957, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.020392835
+      value: 0.028886799
       objectReference: {fileID: 0}
     - target: {fileID: 6477469945635046957, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.02449666
+      value: 0.000000058673315
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477469945635046957, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477469945635046957, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6744286435887070462, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2847,7 +3105,7 @@ PrefabInstance:
     - target: {fileID: 6744286435887070462, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6963824817811528513, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2857,7 +3115,7 @@ PrefabInstance:
     - target: {fileID: 6963824817811528513, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7107323632337229273, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2874,6 +3132,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000035297143
       objectReference: {fileID: 0}
+    - target: {fileID: 7107323632337229273, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107323632337229273, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8040372197996764342, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -2882,7 +3150,7 @@ PrefabInstance:
     - target: {fileID: 8040372197996764342, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8052028001855878403, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2892,7 +3160,7 @@ PrefabInstance:
     - target: {fileID: 8052028001855878403, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8093236969652405799, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2909,6 +3177,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.008116532
       objectReference: {fileID: 0}
+    - target: {fileID: 8093236969652405799, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093236969652405799, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8205894040025749494, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2923,6 +3201,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000015832484
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205894040025749494, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205894040025749494, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8284029998754483544, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2939,6 +3227,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.0000000041909503
       objectReference: {fileID: 0}
+    - target: {fileID: 8284029998754483544, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284029998754483544, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8409146101233448323, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2954,20 +3252,40 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000012386583
       objectReference: {fileID: 0}
+    - target: {fileID: 8409146101233448323, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409146101233448323, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8458531705149458538, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.00000003138419
+      value: 0.000000107373864
       objectReference: {fileID: 0}
     - target: {fileID: 8458531705149458538, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.03158579
+      value: 0.03187408
       objectReference: {fileID: 0}
     - target: {fileID: 8458531705149458538, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.030003175
+      value: -0.00000001396984
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458531705149458538, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458531705149458538, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8770690297023908594, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2977,7 +3295,7 @@ PrefabInstance:
     - target: {fileID: 8770690297023908594, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8882477432727171523, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -2987,7 +3305,7 @@ PrefabInstance:
     - target: {fileID: 8882477432727171523, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8909437974703449381, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -3004,6 +3322,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000017741694
       objectReference: {fileID: 0}
+    - target: {fileID: 8909437974703449381, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8909437974703449381, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8933316923171546991, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3019,6 +3347,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.026521
       objectReference: {fileID: 0}
+    - target: {fileID: 8933316923171546991, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_ProjectionDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933316923171546991, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_SwingLimitSpring.damper
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8938741277581170355, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_Drag
@@ -3027,7 +3365,7 @@ PrefabInstance:
     - target: {fileID: 8938741277581170355, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49ab6b7f6631c5e46928697600911e71, type: 3}
@@ -7371,6 +7709,111 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1362483532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1398916778 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1960720742295965060, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 1070283164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1420892162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420892163}
+  - component: {fileID: 1420892166}
+  - component: {fileID: 1420892165}
+  - component: {fileID: 1420892164}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1420892163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420892162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 4, z: 5}
+  m_Children: []
+  m_Father: {fileID: 691428453}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1420892164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420892162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1420892165
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420892162}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1420892166
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420892162}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1428074936
 PrefabInstance:
   m_ObjectHideFlags: 0

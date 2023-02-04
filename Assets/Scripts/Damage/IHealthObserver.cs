@@ -1,4 +1,4 @@
 ﻿public interface IHealthObserver
 {
-    void HasDied();
+    void Die();
 }

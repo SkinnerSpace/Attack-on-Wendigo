@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class RagdollBone : MonoBehaviour
 {
     public RagdollBoneStorage storage;
 
-    [Range(0f, 1f)]
-    [SerializeField] private float weightCoefficient;
-
     private Rigidbody boneBody;
     private Collider boneCollider;
-    private Joint boneJoint;
+    private CharacterJoint boneJoint;
 
     public Vector3 Position => transform.position;
 
@@ -22,7 +20,7 @@ public class RagdollBone : MonoBehaviour
     {
         boneBody = GetComponent<Rigidbody>();
         boneCollider = GetComponent<Collider>();
-        boneJoint = GetComponent<Joint>();
+        boneJoint = GetComponent<CharacterJoint>();
     }
 
     public void LinkTheStorage(RagdollBoneStorage storage) => this.storage = storage;
@@ -39,9 +37,9 @@ public class RagdollBone : MonoBehaviour
 
     private void SetRigidBody(bool isRagdoll)
     {
-
         boneBody.velocity = Vector3.zero;
         boneBody.isKinematic = !isRagdoll;
+
         boneBody.useGravity = isRagdoll;
     }
 
@@ -53,11 +51,10 @@ public class RagdollBone : MonoBehaviour
 
     public void SetDetection(bool continuous) => boneBody.collisionDetectionMode = continuous ? CollisionDetectionMode.ContinuousSpeculative : CollisionDetectionMode.Discrete;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == (int)Layers.Landscape)
+    public void SetProjectionDistance(float projectionDistance){
+        if (boneJoint != null)
         {
-            //boneBody.velocity = Vector3.zero;
+            boneJoint.projectionDistance = projectionDistance;
         }
     }
 }

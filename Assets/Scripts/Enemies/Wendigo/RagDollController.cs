@@ -5,22 +5,21 @@ using System.Linq;
 public class RagDollController : MonoBehaviour
 {
     private Animator animator;
-    private SkeletonRestructurer restructurer;
     private RagdollBoneStorage storage;
+    private SkeletonRestructurer restructurer;
 
     private bool ragdollIsEnabled;
 
-    private void Awake()
+    private void Awake() => InitializeComponents();
+
+    private void InitializeComponents()
     {
         animator = GetComponent<Animator>();
-        restructurer = GetComponent<SkeletonRestructurer>();
         storage = GetComponent<RagdollBoneStorage>();
+        restructurer = GetComponent<SkeletonRestructurer>();
     }
 
-    private void Start()
-    {
-        SwitchOff();
-    }
+    private void Start() => SwitchOff();
 
     public void TriggerRagdoll(Vector3 force, Vector3 hitPoint)
     {
@@ -36,26 +35,29 @@ public class RagDollController : MonoBehaviour
 
     public void SwitchOff() => EnableRagdoll(false);
 
-    public void SwitchOn()
-    {
-        EnableRagdoll(true);
-
-        /*if (!restructurer.isDone)
-            restructurer.Restructure();*/
-    }
+    public void SwitchOn() => EnableRagdoll(true);
 
     private void EnableRagdoll(bool isRagdoll)
     {
         if (ragdollIsEnabled != isRagdoll){
             ragdollIsEnabled = true;
 
-            animator.enabled = isRagdoll ? false : true;
-
-            foreach (RagdollBone bone in storage.ragdollBones)
-                bone.EnableRagdoll(isRagdoll);
-
-            foreach (RagdollPuller puller in storage.pullers)
-                puller.Launch();
+            DisableAnimator(isRagdoll);
+            EnableBones(isRagdoll);
         }
+    }
+
+    private void DisableAnimator(bool isRagdoll) => animator.enabled = isRagdoll ? false : true;
+
+    private void EnableBones(bool isRagdoll)
+    {
+        foreach (RagdollBone bone in storage.ragdollBones)
+            bone.EnableRagdoll(isRagdoll);
+    }
+
+    private void EnablePullers()
+    {
+        foreach (RagdollPuller puller in storage.pullers)
+            puller.Launch();
     }
 }

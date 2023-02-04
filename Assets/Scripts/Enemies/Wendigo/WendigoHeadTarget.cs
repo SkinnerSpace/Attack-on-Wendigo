@@ -6,15 +6,20 @@ using UnityEngine.Animations;
 public class WendigoHeadTarget : MonoBehaviour
 {
     [SerializeField] private RigController rigController;
+    [SerializeField] private InSightChecker inSightChecker;
+    [SerializeField] private Transform defaultPoint;
 
     private Transform target;
     private Vector3 velocity;
+    private Vector3 targetPosition;
 
     private void Update()
     {
-        if (target != null) 
-            transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, 0.2f);
+        targetPosition = TargetIsVisible() ? target.position : defaultPoint.position;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
     }
+
+    private bool TargetIsVisible() => (target != null) && inSightChecker.TargetIsVisibleFromPointOfView(target);
 
     public void SetTarget(Transform target)
     {

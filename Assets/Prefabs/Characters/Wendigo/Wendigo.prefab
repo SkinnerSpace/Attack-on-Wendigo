@@ -53,7 +53,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8409146101233448323
@@ -93,7 +93,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0.527
 --- !u!114 &8517874847025723103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1, z: 0}
-  maxForce: 0
+  maxForce: 20
 --- !u!1 &194902281681296457
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +509,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8909437974703449381
@@ -550,7 +549,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -584,7 +583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &792005436043079685
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +797,7 @@ MonoBehaviour:
     m_MinLimit: -40
     m_MaxLimit: 40
     m_AimAxis: 2
-    m_MaintainOffset: 1
+    m_MaintainOffset: 0
     m_ConstrainedAxes:
       x: 1
       y: 0
@@ -1054,7 +1052,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &2036046271372153590
@@ -1094,7 +1092,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -1115,7 +1113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &1269250815977019686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1378,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &5870723612974900548
@@ -1421,7 +1418,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -1455,7 +1452,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &1961440708800152387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1533,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.01
-  m_Height: 0.09
+  m_Height: 0.08
   m_Direction: 1
   m_Center: {x: 0, y: 0.04, z: 0}
 --- !u!54 &8938741277581170355
@@ -1553,7 +1549,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &3543485175666575028
@@ -1593,7 +1589,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -1614,7 +1610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!114 &5605730839354197699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,7 +1623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1, z: 0}
-  maxForce: 5
+  maxForce: 10
 --- !u!1 &2078290438083712399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1659,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 907572237431750394}
   - {fileID: 7811027259693016623}
+  - {fileID: 4629433699292653120}
   - {fileID: 7288111730271745222}
   - {fileID: 429680503242453467}
   - {fileID: 2882891804078472666}
@@ -1896,7 +1893,8 @@ MonoBehaviour:
   drag: 1
   angularDrag: 2
   mass: 1
-  interpolate: 1
+  projectionDistance: 0.3
+  interpolate: 0
   continuousDetection: 1
 --- !u!1 &2103448165050008617
 GameObject:
@@ -2382,6 +2380,11 @@ MonoBehaviour:
   mainPropDestroyer: {fileID: 54220094663826474}
   ragDollController: {fileID: 2173253743383517456}
   headTarget: {fileID: 3525949941872728741}
+  healthSystem: {fileID: 0}
+  rotator: {fileID: 0}
+  mover: {fileID: 0}
+  timer: {fileID: 0}
+  testDeath: 0
 --- !u!114 &2604546528073915770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2592,7 +2595,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &3952895415649453955
@@ -2632,7 +2635,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -2666,7 +2669,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &2735409879582691497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,7 +2797,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8933316923171546991
@@ -2835,7 +2837,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -2856,7 +2858,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &3067346091073263964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,7 +2909,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.01
-  m_Height: 0.09
+  m_Height: 0.08
   m_Direction: 1
   m_Center: {x: 0, y: 0.04, z: 0}
 --- !u!54 &545458138696707192
@@ -2924,7 +2925,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &482734159287141324
@@ -2964,7 +2965,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -2985,7 +2986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!114 &1960720742295965060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1, z: 0}
-  maxForce: 5
+  maxForce: 10
 --- !u!1 &3097627273818083130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,7 +3230,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8093236969652405799
@@ -3270,7 +3270,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -3304,7 +3304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &3260302850866024934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,7 +3569,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &6477469945635046957
@@ -3580,11 +3579,11 @@ CharacterJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3631766261497569414}
-  m_ConnectedBody: {fileID: 1322048006095146726}
+  m_ConnectedBody: {fileID: 6386410228290795868}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000005880929, y: -0.020392774, z: -0.024496678}
+  m_ConnectedAnchor: {x: 0.0000000032596308, y: 0.0288868, z: -0.0000000055879346}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -3610,7 +3609,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -3631,7 +3630,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!135 &5433973188847832909
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3842,7 +3840,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1701307915360685877}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2674261145065030804
 SkinnedMeshRenderer:
@@ -3962,6 +3960,50 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000000014901161, y: 0.1409433, z: 0.09049696}
     m_Extent: {x: 0.25741172, y: 0.160143, z: 0.14666057}
   m_DirtyAABB: 0
+--- !u!1 &4017569383546163766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4629433699292653120}
+  - component: {fileID: 3860029956233993437}
+  m_Layer: 19
+  m_Name: InSightChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4629433699292653120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017569383546163766}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 15, z: 16.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1701307915360685877}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3860029956233993437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017569383546163766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2c329ce75626a44b9b98e1e5f33dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleOfView: 60
 --- !u!1 &4030578837165973765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,7 +4052,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &6037386650941525133
@@ -4050,7 +4092,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -4084,7 +4126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &4063804262655099148
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,7 +4419,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8284029998754483544
@@ -4418,7 +4459,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -4439,7 +4480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &4587823301908567734
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,7 +4665,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &5033531786349808171
@@ -4665,7 +4705,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -4699,7 +4739,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &4700962156814263049
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,12 +4963,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5294860924460664382}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 30}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 15, z: 16.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1701307915360685877}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3525949941872728741
 MonoBehaviour:
@@ -4944,6 +4983,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigController: {fileID: 5114566614934186673}
+  inSightChecker: {fileID: 3860029956233993437}
+  defaultPoint: {fileID: 907572237431750394}
 --- !u!1 &5393497284205702335
 GameObject:
   m_ObjectHideFlags: 0
@@ -5009,7 +5050,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &3011467293587890648
@@ -5049,7 +5090,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -5070,7 +5111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &5409906992090621508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5262,7 +5302,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4842410930846465048}
   - component: {fileID: 3046023683006294187}
-  - component: {fileID: 5876088706034712034}
   - component: {fileID: 183940101551592142}
   - component: {fileID: 4371058470015211185}
   m_Layer: 19
@@ -5304,54 +5343,9 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!144 &5876088706034712034
-CharacterJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5753602897387108276}
-  m_ConnectedBody: {fileID: 6386410228290795868}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.999053e-14, y: -0.000000011412965, z: 0.000000008228925}
-  serializedVersion: 2
-  m_SwingAxis: {x: 0, y: 0, z: 0}
-  m_TwistLimitSpring:
-    spring: 0
-    damper: 0
-  m_LowTwistLimit:
-    limit: 0
-    bounciness: 0
-    contactDistance: 0
-  m_HighTwistLimit:
-    limit: 70
-    bounciness: 0
-    contactDistance: 0
-  m_SwingLimitSpring:
-    spring: 0
-    damper: 0
-  m_Swing1Limit:
-    limit: 15
-    bounciness: 0
-    contactDistance: 0
-  m_Swing2Limit:
-    limit: 15
-    bounciness: 0
-    contactDistance: 0
-  m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
-  m_ProjectionAngle: 180
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 0
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &183940101551592142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5365,7 +5359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!136 &4371058470015211185
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5428,7 +5421,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &2820408216676651921
@@ -5468,7 +5461,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -5502,7 +5495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &5926236991630072487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5721,7 +5713,7 @@ Transform:
   - {fileID: 9102821961339656821}
   - {fileID: 7881070732707580343}
   m_Father: {fileID: 1701307915360685877}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -89.98021, y: 8.59299e-31, z: 0}
 --- !u!1 &6294271110173353081
 GameObject:
@@ -5754,7 +5746,7 @@ Transform:
   m_Children:
   - {fileID: 8583031115411875507}
   m_Father: {fileID: 1701307915360685877}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5280938863634042262
 MonoBehaviour:
@@ -6155,7 +6147,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &5660723310571544896
@@ -6195,7 +6187,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -6216,7 +6208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &6949925313050838285
 GameObject:
   m_ObjectHideFlags: 0
@@ -6390,7 +6381,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &5137895175893068989
@@ -6430,7 +6421,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -6451,7 +6442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &7341291120456902916
 GameObject:
   m_ObjectHideFlags: 0
@@ -6532,7 +6522,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8458531705149458538
@@ -6542,11 +6532,11 @@ CharacterJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7430803028682210780}
-  m_ConnectedBody: {fileID: 1571954798725881621}
+  m_ConnectedBody: {fileID: 3597028397983041262}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000006547341, y: -0.031585805, z: -0.03000319}
+  m_ConnectedAnchor: {x: 0.000000010516316, y: 0.031874064, z: 0.0000000018626454}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -6572,7 +6562,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -6593,7 +6583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!136 &2207397200400634435
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6682,6 +6671,7 @@ GameObject:
   - component: {fileID: 1571954798725881621}
   - component: {fileID: 1339317242646775803}
   - component: {fileID: 5968913261875346274}
+  - component: {fileID: 3712385781850540430}
   m_Layer: 19
   m_Name: Spine3
   m_TagString: Untagged
@@ -6718,7 +6708,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!136 &1339317242646775803
@@ -6748,7 +6738,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
+--- !u!144 &3712385781850540430
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537259995175839393}
+  m_ConnectedBody: {fileID: 1322048006095146726}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.000000019377424, y: 0.0435644, z: 0.000000018626448}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 15
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 15
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 15
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 1
+  m_ProjectionDistance: 0.3
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &7577706288498661621
 GameObject:
   m_ObjectHideFlags: 0
@@ -6953,7 +6987,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &853337575238424335
@@ -6993,7 +7027,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -7014,7 +7048,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &7840524395696256475
 GameObject:
   m_ObjectHideFlags: 0
@@ -7354,7 +7387,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &7107323632337229273
@@ -7394,7 +7427,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -7428,7 +7461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &8323908641042233486
 GameObject:
   m_ObjectHideFlags: 0
@@ -7508,7 +7540,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &4506627089130588024
@@ -7518,11 +7550,11 @@ CharacterJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8329778319263843035}
-  m_ConnectedBody: {fileID: 3597028397983041262}
+  m_ConnectedBody: {fileID: 3046023683006294187}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000001463453, y: -0.026713483, z: -0.010992532}
+  m_ConnectedAnchor: {x: -0.0000000037840735, y: -0.000000031064243, z: -7.1054265e-15}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -7548,7 +7580,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -7569,7 +7601,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!135 &7966956647847077741
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7583,6 +7614,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0.017, z: 0}
+--- !u!1 &8345559539761532832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907572237431750394}
+  m_Layer: 19
+  m_Name: DefaultPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &907572237431750394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8345559539761532832}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 15, z: 25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1701307915360685877}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8636949683253961723
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,7 +8148,7 @@ Rigidbody:
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!144 &8205894040025749494
@@ -8127,7 +8188,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 1
-  m_ProjectionDistance: 0.1
+  m_ProjectionDistance: 0.3
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -8148,7 +8209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
-  weightCoefficient: 0
 --- !u!1 &9211106622801728780
 GameObject:
   m_ObjectHideFlags: 0
