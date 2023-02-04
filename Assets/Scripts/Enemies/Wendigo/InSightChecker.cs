@@ -22,8 +22,8 @@ public class InSightChecker : MonoBehaviour
 
     private Vector2 GetDirToTarget(Transform target)
     {
-        Vector2 position = new Vector2(transform.position.x, transform.position.z);
-        Vector2 targetPosition = new Vector2(target.position.x, target.position.z);
+        Vector2 position = transform.position.Flatten();
+        Vector2 targetPosition = target.position.Flatten();
         Vector2 dirToTarget = (targetPosition - position).normalized;
 
         return dirToTarget;
@@ -37,4 +37,9 @@ public class InSightChecker : MonoBehaviour
 
         return dotToTarget;
     }
+}
+
+public static class VectorExtention
+{
+    public static Vector2 Flatten(this Vector3 v) => new Vector2(v.x, v.z);
 }
