@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public static class BezierCurveProjector
+public class BezierCurveProjector : MonoBehaviour
 {
-    public static void DrawCurve(Vector3[] points, BezierVisualizer visualizer)
+    public void DrawCurve(Vector3[] points, BezierVisualizer visualizer)
     {
         Vector3 prev = points[0];
 

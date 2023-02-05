@@ -6,12 +6,7 @@ public static class BezierProjector
         BezierPointProjector.DrawPoint(points, position, visualizer);
     }
 
-    public static void DrawCurve(Vector3[] points, BezierVisualizer visualizer){
-        BezierCurveProjector.DrawCurve(points, visualizer);
-    }
-
     public static void DrawConstraints(Vector3[] points, float position, BezierVisualizer visualizer){
         BezierConstraintsProjector.DrawConstraints(points, position, visualizer);
     }
 }
-

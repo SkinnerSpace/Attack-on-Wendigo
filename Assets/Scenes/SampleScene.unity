@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186572985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 20, z: 976.5}
+  m_LocalPosition: {x: 948, y: 20, z: 980}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}
@@ -1564,7 +1564,9 @@ GameObject:
   m_Component:
   - component: {fileID: 691428453}
   - component: {fileID: 691428454}
+  - component: {fileID: 691428457}
   - component: {fileID: 691428455}
+  - component: {fileID: 691428456}
   m_Layer: 0
   m_Name: Trajectory
   m_TagString: Untagged
@@ -1601,7 +1603,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storage: {fileID: 1718593692}
   visualizer: {fileID: 691428455}
-  position: 0.766
+  bezierLUT: {fileID: 691428457}
+  curveProjector: {fileID: 691428456}
+  distance: 91.4
 --- !u!114 &691428455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,6 +1625,32 @@ MonoBehaviour:
   handlePointsColor: {r: 0, g: 1, b: 0.098634005, a: 1}
   curveColor: {r: 0, g: 0, b: 0, a: 1}
   pointColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &691428456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691428452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271541af49bd52242b99edb0804c660c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &691428457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691428452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893934b3e9d4ce84dba721b464864429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storage: {fileID: 1718593692}
+  details: 32
 --- !u!1001 &698326167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9238,7 +9268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812486621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1018.4, y: 20, z: 976.2}
+  m_LocalPosition: {x: 1020.7, y: 20, z: 994.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}

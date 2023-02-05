@@ -11,7 +11,10 @@ public class PointsStorage : MonoBehaviour
 
     public bool IsReady => points.Length >= 2; 
 
-    public void UpdatePoints() => points = ExtractPointsArray();
+    public void UpdatePoints()
+    {
+        points = ExtractPointsArray();
+    }
 
     private Vector3[] ExtractPointsArray()
     {
