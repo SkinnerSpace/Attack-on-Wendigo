@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186572985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 785.5, y: 20.5, z: 894.8}
+  m_LocalPosition: {x: 960, y: 20, z: 976.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}
@@ -1564,8 +1564,9 @@ GameObject:
   m_Component:
   - component: {fileID: 691428453}
   - component: {fileID: 691428454}
+  - component: {fileID: 691428455}
   m_Layer: 0
-  m_Name: Helicopter
+  m_Name: Trajectory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,7 +1600,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 1718593692}
-  t: 0.997
+  visualizer: {fileID: 691428455}
+  position: 0.766
+--- !u!114 &691428455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691428452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1baf5b4b54d0b5439a0475567153b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curveDetails: 32
+  handlePointsSize: 0.5
+  positionPointSize: 1
+  constraintLinesColor: {r: 1, g: 1, b: 1, a: 1}
+  handlePointsColor: {r: 0, g: 1, b: 0.098634005, a: 1}
+  curveColor: {r: 0, g: 0, b: 0, a: 1}
+  pointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &698326167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7653,7 +7674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326193597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 985.3, y: 44.2, z: 989.3}
+  m_LocalPosition: {x: 1014.5, y: 20, z: 1041.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}
@@ -8714,7 +8735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639146908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 820.5, y: 66.8, z: 951.1}
+  m_LocalPosition: {x: 960, y: 20, z: 1031.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}
@@ -9158,11 +9179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31847da21767c734bb9baf1f5dd54393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - {x: 785.5, y: 20.5, z: 894.8}
-  - {x: 820.5, y: 66.8, z: 951.1}
-  - {x: 985.3, y: 44.2, z: 989.3}
-  - {x: 1115, y: 8.2, z: 869}
 --- !u!1 &1727173808
 GameObject:
   m_ObjectHideFlags: 0
@@ -9222,7 +9238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812486621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1115, y: 8.2, z: 869}
+  m_LocalPosition: {x: 1018.4, y: 20, z: 976.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718593691}

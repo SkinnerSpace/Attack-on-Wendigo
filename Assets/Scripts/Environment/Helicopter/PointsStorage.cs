@@ -4,21 +4,24 @@ using UnityEngine;
 [ExecuteAlways]
 public class PointsStorage : MonoBehaviour
 {
-    public Vector3[] positions;
+    public Vector3[] Points => points;
+    private Vector3[] points;
 
     private void OnEnable() => UpdatePoints();
 
-    public void UpdatePoints() => positions = ExtractPointsArray();
+    public bool IsReady => points.Length >= 2; 
+
+    public void UpdatePoints() => points = ExtractPointsArray();
 
     private Vector3[] ExtractPointsArray()
     {
-        Transform[] points = GetComponentsInChildren<Transform>();
-        Vector3[] positions = new Vector3[points.Length-1];
+        Transform[] entities = GetComponentsInChildren<Transform>();
+        Vector3[] points = new Vector3[entities.Length-1];
 
-        for (int i = 1; i < points.Length; i++){
-            positions[i-1] = points[i].position;
+        for (int i = 1; i < entities.Length; i++){
+            points[i-1] = entities[i].position;
         }
             
-        return positions;
+        return points;
     }
 }
