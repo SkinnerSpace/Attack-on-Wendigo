@@ -1,12 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public static class BezierProjector
+[ExecuteAlways]
+public class BezierProjector : MonoBehaviour
 {
-    public static void DrawPoint(Vector3[] points, float position, BezierVisualizer visualizer){
-        BezierPointProjector.DrawPoint(points, position, visualizer);
+    Action<Vector3[], int> send;
+    [SerializeField] private BezierVisualizer visualizer;
+
+    private void OnEnable() => send += visualizer.Draw;
+    private void OnDisable() => send -= visualizer.Draw;
+
+    public void DrawPoints(Vector3[] points, float time) => GetPoint(points, time, send);
+
+    public void DrawCurve(Vector3[] points, int details)
+    {
+        Vector3 prev = points[0];
+
+        for (int i = 1; i < details; i++)
+        {
+            float tDraw = i / (details - 1f);
+            Vector3 point = GetPoint(points, tDraw, null);
+            visualizer.DrawCurveSegment(prev, point);
+            prev = point;
+        }
     }
 
-    public static void DrawConstraints(Vector3[] points, float position, BezierVisualizer visualizer){
-        BezierConstraintsProjector.DrawConstraints(points, position, visualizer);
+    public Vector3 GetPoint(Vector3[] points, float time) => GetPoint(points, time, null);
+
+    private Vector3 GetPoint(Vector3[] points, float time, Action<Vector3[], int> send)
+    {
+        send?.Invoke(points, points.Length);
+
+        if (points.Length >= 2)
+        {
+            Vector3[] lerpedPoints = Lerp.BetweenPoints(points, time);
+            return GetPoint(lerpedPoints, time, send);
+        }
+        return points[0];
     }
 }
+
