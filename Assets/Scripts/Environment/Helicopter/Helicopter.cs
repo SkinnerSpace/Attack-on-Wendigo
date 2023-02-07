@@ -45,7 +45,6 @@ public class Helicopter : MonoBehaviour
 
     public void SetOff()
     {
-        Debug.Log("SET OFF");
         trajectory.GenerateTrajectory();
         Launch();
     }

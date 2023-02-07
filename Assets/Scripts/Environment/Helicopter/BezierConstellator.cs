@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BezierConstellator : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class BezierConstellator : MonoBehaviour
     [SerializeField] private BezierOffsetCalculator offset;
 
     private Vector3 straightDir;
-    private float straightDistance;
     private Vector3 perpDir;
 
     public void RearrangePoints(BezierPoint[] bezierPoints, BezierArrangement arrangement)
@@ -37,6 +35,7 @@ public class BezierConstellator : MonoBehaviour
 
         float length = Rand.Range(data.lineMinLength, data.lineMaxLength);
         Vector3 endPos = bezierPoints[bezierPoints.Length - 1].Position + (dirToPivot * length);
+        endPos = new Vector3(endPos.x, Rand.Range(data.minHeight, data.maxHeight), endPos.z);
 
         bezierPoints[bezierPoints.Length - 1].SetPosition(endPos);
     }
@@ -44,7 +43,6 @@ public class BezierConstellator : MonoBehaviour
     private void CalculateStraightLine(BezierPoint[] bezierPoints)
     {
         Vector3 vector = bezierPoints[bezierPoints.Length - 1].Position - bezierPoints[0].Position;
-        straightDistance = vector.magnitude;
         straightDir = vector.normalized;
         perpDir = new Vector3(-straightDir.z, 0f, straightDir.x);
     }
@@ -62,5 +60,4 @@ public class BezierConstellator : MonoBehaviour
         Vector3 thirdEnd = thirdStart + offset.GetPerpendicular(arrangement, perpDir);
         bezierPoints[2].SetPosition(thirdEnd);
     }
-
 }
