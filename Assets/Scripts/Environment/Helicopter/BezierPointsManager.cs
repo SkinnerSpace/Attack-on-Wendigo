@@ -2,6 +2,7 @@
 
 public class BezierPointsManager : MonoBehaviour
 {
+    public BezierPoint[] BezierPoints => bezierPoints;
     public Vector3[] Points => points;
     public bool isReady => points.Length > 0;
 
@@ -26,54 +27,58 @@ public class BezierPointsManager : MonoBehaviour
         }
     }
 
-    public void DisplacePoints(Vector3 targetPivot, float minOffset, float maxOffset)
+    /*public void DisplacePoints(Vector3 pivot, BezierDisplacement dispData)
     {
-        BezierPoint start = bezierPoints[0];
-        BezierPoint startHandle = bezierPoints[1];
-        BezierPoint endHandle = bezierPoints[2];
-        BezierPoint end = bezierPoints[3];
-
-        Vector3 startPos = end.Position;
-        start.SetPosition(startPos);
-
-        Vector3 startHandlePos = GetRandPos(targetPivot, minOffset, maxOffset);
-        startHandle.SetPosition(startHandlePos);
-
-        Vector3 endPos = GetRandPos(targetPivot, minOffset, maxOffset);
-        end.SetPosition(endPos);
-
-        Vector3 endHandlePos = GetRandPos(targetPivot, minOffset, maxOffset);
-        endHandle.SetPosition(endHandlePos);
+        ShiftStartToExEnd();
+        SetRandomPos(pivot, dispData);
     }
 
-    private Vector3 GetRandPos(Vector3 pivot, float minOffset, float maxOffset)
+    private void ShiftStartToExEnd()
     {
-        float offset = GetOffset(minOffset, maxOffset);
-        Vector3 displacement = GetDisplacement(offset);
+        Vector3 startPos = bezierPoints[bezierPoints.Length - 1].Position;
+        bezierPoints[0].SetPosition(startPos);
+    }
+
+    private void SetRandomPos(Vector3 pivot, BezierDisplacement dispData)
+    {
+        for (int i = 1; i < bezierPoints.Length; i++)
+        {
+            Vector3 randomPos = GetRandPos(pivot, dispData);
+            bezierPoints[i].SetPosition(randomPos);
+        }
+    }
+
+    private Vector3 GetRandPos(Vector3 pivot, BezierDisplacement dispData)
+    {
+        float offsetRange = GetOffsetRange(dispData.minOffset, dispData.maxOffset);
+        float height = GetHeight(dispData.minHeight, dispData.maxHeight);
+        Vector3 displacement = GetDisplacement(offsetRange, height);
         Vector3 position = pivot + displacement;
 
         return position;
     }
 
-    private float GetOffset(float minOffset, float maxOffset)
+    private float GetOffsetRange(float minOffset, float maxOffset)
     {
         float offset = Rand.Range(-maxOffset, maxOffset);
-        offset = CorrectOffset(offset, minOffset);
+        offset = CorrectOffsetRange(offset, minOffset);
 
         return offset;
     }
 
-    private float CorrectOffset(float offset, float minOffset) => Mathf.Abs(offset) < minOffset ? (Mathf.Sign(offset) * minOffset) : offset;
+    private float CorrectOffsetRange(float offset, float minOffset) => Mathf.Abs(offset) < minOffset ? (Mathf.Sign(offset) * minOffset) : offset;
 
-    private Vector3 GetDisplacement(float offset)
+    private float GetHeight(float minHeight, float maxHeight) => Rand.Range(minHeight, maxHeight);
+
+    private Vector3 GetDisplacement(float offsetRange, float height)
     {
         Vector3 displacement = new Vector3(
-                x: Rand.Range(-offset, offset),
-                y: 0f,
-                z: Rand.Range(-offset, offset)
+                x: Rand.Range(-offsetRange, offsetRange),
+                y: height,
+                z: Rand.Range(-offsetRange, offsetRange)
                 );
 
         return displacement;
-    }
+    }*/
 }
 

@@ -5,8 +5,14 @@ public class Helicopter : MonoBehaviour
 {
     [SerializeField] private BezierTrajectory trajectory;
     [SerializeField] private float speed;
+
+    public float DistancePassed => distancePassed;
+    public float RouteCompletion => (distancePassed / trajectory.Length);
+    public float timeToComplete => (trajectory.Length - distancePassed) / speed;
+
+    private float totalTime;
     private float distancePassed;
-    public bool isMoving;
+    private bool isMoving;
 
     private Action onFinish;
 
@@ -19,6 +25,15 @@ public class Helicopter : MonoBehaviour
     {
         Move();
     }
+
+    public void Launch()
+    {
+        isMoving = true;
+        totalTime = trajectory.Length / speed;
+        Debug.Log(totalTime);
+    }
+
+    public void Stop() => isMoving = false;
 
     public void Move()
     {

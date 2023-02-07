@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186572985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.628784, y: -26.5, z: -38.1261}
+  m_LocalPosition: {x: -120.80798, y: 4.4275246, z: 203.21106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -1117,6 +1117,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671c0149394e8574fbb916f49561fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &546784221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546784222}
+  - component: {fileID: 546784223}
+  m_Layer: 0
+  m_Name: Constellator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &546784222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546784221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 691428453}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &546784223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546784221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeeaaa2381cf8d49b8be58c8c35e92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &557286416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1666,6 +1709,7 @@ Transform:
   - {fileID: 384437932}
   - {fileID: 850003684}
   - {fileID: 1677091044}
+  - {fileID: 546784222}
   - {fileID: 2145819343}
   m_Father: {fileID: 365858762}
   m_RootOrder: 1
@@ -1683,12 +1727,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsManager: {fileID: 2145819344}
+  constellator: {fileID: 546784223}
   bezierLUT: {fileID: 1677091045}
   projector: {fileID: 850003685}
-  pivot: {fileID: 1302925505}
-  details: 30
-  distance: 53.4
-  offset: 50
+  details: 32
+  distance: 177.8
+  arrangement:
+    pivot: {fileID: 1302925505}
+    minOffset: 100
+    maxOffset: 200
+    minHeight: 16
+    maxHeight: 40
 --- !u!1001 &698326167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7787,7 +7836,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326193597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -132.38959, y: -26.5, z: 106.30847}
+  m_LocalPosition: {x: -97.73041, y: -10.240681, z: -49.941284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -8877,7 +8926,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639146908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.184814, y: -26.5, z: -41.391663}
+  m_LocalPosition: {x: -70.13049, y: 7.9230824, z: 54.942932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -9390,7 +9439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812486621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.94568, y: -26.5, z: 62.91571}
+  m_LocalPosition: {x: -9.392944, y: -5.1832123, z: -53.733337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -9657,7 +9706,7 @@ Transform:
   - {fileID: 1326193598}
   - {fileID: 1812486622}
   m_Father: {fileID: 691428453}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2145819344
 MonoBehaviour:

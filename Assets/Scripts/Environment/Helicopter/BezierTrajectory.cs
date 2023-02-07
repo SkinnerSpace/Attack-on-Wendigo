@@ -6,18 +6,18 @@ public class BezierTrajectory : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private BezierPointsManager pointsManager;
+    [SerializeField] private BezierConstellator constellator;
     [SerializeField] private BezierLUT bezierLUT;
     [SerializeField] private BezierProjector projector;
-    [SerializeField] private Transform pivot;
     
     [Header("Settings")]
     [Range(3,128)]
     [SerializeField] private int details = 32;
     public float distance;
 
-    [Header("Displacement")]
-    [SerializeField] private float minOffset;
-    [SerializeField] private float maxOffset;
+    [SerializeField] private BezierArrangement arrangement;
+
+    public float Length => bezierLUT.arcLength;
 
     private void OnEnable()
     {
@@ -62,7 +62,6 @@ public class BezierTrajectory : MonoBehaviour
 
     public void GenerateTrajectory()
     {
-        pointsManager.DisplacePoints(pivot.position, minOffset, maxOffset);
+        constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
     }
 }
-

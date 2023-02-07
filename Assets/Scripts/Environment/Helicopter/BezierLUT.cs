@@ -7,8 +7,15 @@ public class BezierLUT : MonoBehaviour
     [SerializeField] private BezierProjector projector;
 
     private float[] LUT;
+    public float arcLength { get; private set; }
+    public int segmentsCount { get; private set; }
 
-    public void UpdateLUT(Vector3[] points, int details) => LUT = GenerateLUT(points, details);
+    public void UpdateLUT(Vector3[] points, int details)
+    {
+        LUT = GenerateLUT(points, details);
+        arcLength = LUT[LUT.Length - 1];
+        segmentsCount = LUT.Length;
+    }
 
     public float[] GenerateLUT(Vector3[] points, int details)
     {
@@ -31,9 +38,6 @@ public class BezierLUT : MonoBehaviour
 
     public float GetTimeFromDistance(float distance)
     {
-        float arcLength = LUT[LUT.Length - 1];
-        int segmentsCount = LUT.Length;
-
         if (distance.Between(0, arcLength)){
             for (int i=0; i< segmentsCount; i++){
                 if (distance.Between(LUT[i], LUT[i + 1])){

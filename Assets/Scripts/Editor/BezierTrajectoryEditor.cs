@@ -20,6 +20,7 @@ public class BezierTrajectoryEditor : Editor
 
         using (new GUILayout.VerticalScope())
         {
+            GUILayout.Space(50);
             using (new GUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Generate Trajectory"))
