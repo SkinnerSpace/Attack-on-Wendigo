@@ -1,59 +1,66 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BezierConstellator : MonoBehaviour
 {
-    public void RearrangePoints(BezierPoint[] bezierPoints, BezierArrangement arrangementData)
+    private const float POSITIVE = 1f;
+    private const float NEGATIVE = -1f;
+    private const float DEVIATION_MULTIPLIER = 0.3f;
+
+    [SerializeField] private BezierOffsetCalculator offset;
+
+    private Vector3 straightDir;
+    private float straightDistance;
+    private Vector3 perpDir;
+
+    public void RearrangePoints(BezierPoint[] bezierPoints, BezierArrangement arrangement)
     {
-        ShiftStartToPreviousEnd(bezierPoints);
-        SetRandomPos(bezierPoints, arrangementData);
+        ShiftStartToEnd(bezierPoints);
+        ShiftEndToNew(bezierPoints, arrangement);
+        CalculateStraightLine(bezierPoints);
+
+        SetSecondPoint(bezierPoints, arrangement);
+        SetThirdPoint(bezierPoints, arrangement);
     }
 
-    private void ShiftStartToPreviousEnd(BezierPoint[] bezierPoints)
+    private void ShiftStartToEnd(BezierPoint[] bezierPoints)
     {
         Vector3 startPos = bezierPoints[bezierPoints.Length - 1].Position;
         bezierPoints[0].SetPosition(startPos);
     }
 
-    private void SetRandomPos(BezierPoint[] bezierPoints, BezierArrangement arrangementData)
+    private void ShiftEndToNew(BezierPoint[] bezierPoints, BezierArrangement data)
     {
-        for (int i = 1; i < bezierPoints.Length; i++)
-        {
-            Vector3 randomPos = GetRandPos(arrangementData);
-            bezierPoints[i].SetPosition(randomPos);
-        }
+        Vector3 dirToPivot = (data.Pivot - bezierPoints[0].Position).normalized;
+        Vector3 deviation = new Vector3(Rand.Range(-1f, 1f), 0f, Rand.Range(-1f, 1f)).normalized * DEVIATION_MULTIPLIER;
+        dirToPivot = (dirToPivot + deviation).normalized;
+
+        float length = Rand.Range(data.lineMinLength, data.lineMaxLength);
+        Vector3 endPos = bezierPoints[bezierPoints.Length - 1].Position + (dirToPivot * length);
+
+        bezierPoints[bezierPoints.Length - 1].SetPosition(endPos);
     }
 
-    private Vector3 GetRandPos(BezierArrangement arrangementData)
+    private void CalculateStraightLine(BezierPoint[] bezierPoints)
     {
-        float offsetRange = GetOffsetRange(arrangementData.minOffset, arrangementData.maxOffset);
-        float height = GetHeight(arrangementData.minHeight, arrangementData.maxHeight);
-        Vector3 displacement = GetDisplacement(offsetRange, height);
-        Vector3 position = arrangementData.Pivot + displacement;
-
-        return position;
+        Vector3 vector = bezierPoints[bezierPoints.Length - 1].Position - bezierPoints[0].Position;
+        straightDistance = vector.magnitude;
+        straightDir = vector.normalized;
+        perpDir = new Vector3(-straightDir.z, 0f, straightDir.x);
     }
 
-    private float GetOffsetRange(float minOffset, float maxOffset)
+    private void SetSecondPoint(BezierPoint[] bezierPoints, BezierArrangement arrangement)
     {
-        float offset = Rand.Range(-maxOffset, maxOffset);
-        offset = CorrectOffsetRange(offset, minOffset);
-
-        return offset;
+        Vector3 secondStart = bezierPoints[0].Position + offset.GetStraight(arrangement, straightDir, POSITIVE);
+        Vector3 secondEnd = secondStart + offset.GetPerpendicular(arrangement, perpDir);
+        bezierPoints[1].SetPosition(secondEnd);
     }
 
-    private float CorrectOffsetRange(float offset, float minOffset) => Mathf.Abs(offset) < minOffset ? (Mathf.Sign(offset) * minOffset) : offset;
-
-    private float GetHeight(float minHeight, float maxHeight) => Rand.Range(minHeight, maxHeight);
-
-    private Vector3 GetDisplacement(float offsetRange, float height)
+    private void SetThirdPoint(BezierPoint[] bezierPoints, BezierArrangement arrangement)
     {
-        Vector3 displacement = new Vector3(
-                x: Rand.Range(-offsetRange, offsetRange),
-                y: height,
-                z: Rand.Range(-offsetRange, offsetRange)
-                );
-
-        return displacement;
+        Vector3 thirdStart = bezierPoints[3].Position + offset.GetStraight(arrangement, straightDir, NEGATIVE);
+        Vector3 thirdEnd = thirdStart + offset.GetPerpendicular(arrangement, perpDir);
+        bezierPoints[2].SetPosition(thirdEnd);
     }
+
 }
-

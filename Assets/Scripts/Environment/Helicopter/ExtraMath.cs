@@ -8,4 +8,8 @@ public static class ExtraMath
         float lerp = Mathf.InverseLerp(Ax, Ay, value);
         return Mathf.Lerp(Bx, By, lerp);
     }
+
+    public static float SmoothInOut(float time) => time * time * (3 - (2 * time));
+
+    public static Vector3 Mean(this Vector3 original, Vector3 additional) => (original + additional) / 2f;
 }

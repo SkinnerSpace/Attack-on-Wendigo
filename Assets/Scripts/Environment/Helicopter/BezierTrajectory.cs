@@ -63,5 +63,6 @@ public class BezierTrajectory : MonoBehaviour
     public void GenerateTrajectory()
     {
         constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
+        pointsManager.PushThePoints();
     }
 }

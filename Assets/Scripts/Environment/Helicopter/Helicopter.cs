@@ -3,52 +3,89 @@ using UnityEngine;
 
 public class Helicopter : MonoBehaviour
 {
+    private enum States
+    {
+        Idle,
+        Move,
+        Rotate
+    }
+
+    private States state;
+
     [SerializeField] private BezierTrajectory trajectory;
-    [SerializeField] private float speed;
+    [SerializeField] private HelicopterMover mover;
+    [SerializeField] private HelicopterRotator rotator;
+
+    [SerializeField] private HelicopterTimer synchronizer;
+    [SerializeField] private HelicopterData data;
+
+    private FunctionTimer timer;
+    private float idleTime = 2f;
 
     public float DistancePassed => distancePassed;
-    public float RouteCompletion => (distancePassed / trajectory.Length);
-    public float timeToComplete => (trajectory.Length - distancePassed) / speed;
+    public float RouteCompletion => Mathf.Round((distancePassed / trajectory.Length) * 100f);
+    public float timeToComplete => (trajectory.Length - distancePassed) / data.Speed;
 
-    private float totalTime;
+    private float rotationTime;
+    private float currentRotationTime;
+
     private float distancePassed;
-    private bool isMoving;
 
     private Action onFinish;
 
+    private Vector3 prevPos;
+
     private void Awake()
     {
+        timer = GetComponent<FunctionTimer>();
+
         onFinish += Arrived;
+        synchronizer.Subscribe(mover);
     }
 
-    private void Update()
+    public void SetOff()
     {
-        Move();
+        Debug.Log("SET OFF");
+        trajectory.GenerateTrajectory();
+        Launch();
     }
 
     public void Launch()
     {
-        isMoving = true;
-        totalTime = trajectory.Length / speed;
-        Debug.Log(totalTime);
+        state = States.Move;
+        synchronizer.Set(trajectory.Length, data.Speed);
     }
 
-    public void Stop() => isMoving = false;
+    private void Update() => UpdateState();
 
-    public void Move()
+    public void Stop() => state = States.Idle;
+
+    public void UpdateState()
     {
-        if (isMoving)
+        switch (state)
         {
-            distancePassed += speed * Chronos.DeltaTime;
-            transform.position = trajectory.GetPosition(distancePassed, onFinish);
+            case States.Move:
+                synchronizer.UpdateTime();
+                transform.position = mover.Move(trajectory, onFinish);
+                transform.rotation = rotator.Rotate(prevPos);
+                SavePreviousPosition();
+                break;
+
+            case States.Rotate:
+                break;
         }
+    }
+    
+    private void SavePreviousPosition()
+    {
+        prevPos = transform.position;
     }
 
     public void Arrived()
     {
-        isMoving = false;
+        state = States.Idle;
         distancePassed = 0f;
+
+        timer.Set("SetOff", idleTime, SetOff);
     }
 }
-
-

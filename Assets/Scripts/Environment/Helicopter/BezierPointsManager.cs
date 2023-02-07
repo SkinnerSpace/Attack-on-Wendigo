@@ -9,6 +9,8 @@ public class BezierPointsManager : MonoBehaviour
     private BezierPoint[] bezierPoints;
     private Vector3[] points;
 
+    private Vector3 center;
+
     public void SetUpPoints(BezierTrajectory trajectory)
     {
         bezierPoints = GetComponentsInChildren<BezierPoint>();
@@ -21,64 +23,19 @@ public class BezierPointsManager : MonoBehaviour
     {
         points = new Vector3[bezierPoints.Length];
 
-        for (int i = 0; i < bezierPoints.Length; i++)
-        {
+        for (int i = 0; i < bezierPoints.Length; i++){
             points[i] = bezierPoints[i].Position;
         }
     }
 
-    /*public void DisplacePoints(Vector3 pivot, BezierDisplacement dispData)
+    public void PushThePoints()
     {
-        ShiftStartToExEnd();
-        SetRandomPos(pivot, dispData);
-    }
+        Vector3 meanArithmetic = bezierPoints[0].Position;
 
-    private void ShiftStartToExEnd()
-    {
-        Vector3 startPos = bezierPoints[bezierPoints.Length - 1].Position;
-        bezierPoints[0].SetPosition(startPos);
-    }
-
-    private void SetRandomPos(Vector3 pivot, BezierDisplacement dispData)
-    {
         for (int i = 1; i < bezierPoints.Length; i++)
-        {
-            Vector3 randomPos = GetRandPos(pivot, dispData);
-            bezierPoints[i].SetPosition(randomPos);
-        }
+            meanArithmetic = meanArithmetic.Mean(bezierPoints[i].Position);
+
+        center = meanArithmetic;
     }
-
-    private Vector3 GetRandPos(Vector3 pivot, BezierDisplacement dispData)
-    {
-        float offsetRange = GetOffsetRange(dispData.minOffset, dispData.maxOffset);
-        float height = GetHeight(dispData.minHeight, dispData.maxHeight);
-        Vector3 displacement = GetDisplacement(offsetRange, height);
-        Vector3 position = pivot + displacement;
-
-        return position;
-    }
-
-    private float GetOffsetRange(float minOffset, float maxOffset)
-    {
-        float offset = Rand.Range(-maxOffset, maxOffset);
-        offset = CorrectOffsetRange(offset, minOffset);
-
-        return offset;
-    }
-
-    private float CorrectOffsetRange(float offset, float minOffset) => Mathf.Abs(offset) < minOffset ? (Mathf.Sign(offset) * minOffset) : offset;
-
-    private float GetHeight(float minHeight, float maxHeight) => Rand.Range(minHeight, maxHeight);
-
-    private Vector3 GetDisplacement(float offsetRange, float height)
-    {
-        Vector3 displacement = new Vector3(
-                x: Rand.Range(-offsetRange, offsetRange),
-                y: height,
-                z: Rand.Range(-offsetRange, offsetRange)
-                );
-
-        return displacement;
-    }*/
 }
 
