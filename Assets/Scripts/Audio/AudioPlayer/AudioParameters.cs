@@ -34,6 +34,7 @@ public class AudioParameters
         if (parameter == AudioVariety.parameter) return new AudioVariety();
         if (parameter == AudioVolume.parameter) return new AudioVolume();
         if (parameter == AudioPosition.parameter) return new AudioPosition();
+        if (parameter == AudioAnchor.parameter) return new AudioAnchor();
         if (parameter == AudioTimelinePosition.parameter) return new AudioTimelinePosition();
 
         return null;

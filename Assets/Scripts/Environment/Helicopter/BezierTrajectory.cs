@@ -13,11 +13,13 @@ public class BezierTrajectory : MonoBehaviour
     [Header("Settings")]
     [Range(3,128)]
     [SerializeField] private int details = 32;
-    public float distance;
+    [SerializeField] public float distance;
+    [SerializeField] private bool visualize;
 
     [SerializeField] private BezierArrangement arrangement;
 
     public float Length => bezierLUT.arcLength;
+    public bool Visualize => visualize;
 
     private void OnEnable()
     {

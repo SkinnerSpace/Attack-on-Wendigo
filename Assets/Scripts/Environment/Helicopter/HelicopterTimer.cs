@@ -23,7 +23,7 @@ public class HelicopterTimer : MonoBehaviour
     public void UpdateTime()
     {
         currentTime += Chronos.DeltaTime;
-        completion = Mathf.Clamp01(currentTime / travelTime);
+        completion = (currentTime / travelTime).Clamp01();
 
         onTimeUpdate(completion);
     }

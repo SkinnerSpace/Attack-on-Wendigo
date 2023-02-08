@@ -3,88 +3,69 @@ using UnityEngine;
 
 public class Helicopter : MonoBehaviour
 {
-    private enum States
-    {
-        Idle,
-        Move,
-        Rotate
-    }
-
-    private States state;
-
     [SerializeField] private BezierTrajectory trajectory;
     [SerializeField] private HelicopterMover mover;
     [SerializeField] private HelicopterRotator rotator;
+    [SerializeField] private HelicopterSway sway;
+    [SerializeField] private DispenserManager dispenserManager;
 
     [SerializeField] private HelicopterTimer synchronizer;
     [SerializeField] private HelicopterData data;
+    [SerializeField] private FunctionTimer timer;
 
-    private FunctionTimer timer;
+    private bool isMoving;
     private float idleTime = 2f;
 
     public float DistancePassed => distancePassed;
-    public float RouteCompletion => Mathf.Round((distancePassed / trajectory.Length) * 100f);
-    public float timeToComplete => (trajectory.Length - distancePassed) / data.Speed;
-
-    private float rotationTime;
-    private float currentRotationTime;
+    public float RouteCompletion => (trajectory != null) ? Mathf.Round((distancePassed / trajectory.Length) * 100f) : 0f;
+    public float timeToComplete => (trajectory != null) ? (trajectory.Length - distancePassed) / data.Speed : 0f;
 
     private float distancePassed;
-
-    private Action onFinish;
-
     private Vector3 prevPos;
 
-    private void Awake()
-    {
-        timer = GetComponent<FunctionTimer>();
+    private void Awake() => SynchronizeComponents();
 
-        onFinish += Arrived;
+    private void SynchronizeComponents()
+    {
         synchronizer.Subscribe(mover);
-    }
-
-    public void SetOff()
-    {
-        trajectory.GenerateTrajectory();
-        Launch();
+        synchronizer.Subscribe(rotator);
+        synchronizer.Subscribe(sway);
     }
 
     public void Launch()
     {
-        state = States.Move;
+        arrived = false;
+
+        isMoving = true;
+
+        distancePassed = 0f;
+        trajectory.GenerateTrajectory();
         synchronizer.Set(trajectory.Length, data.Speed);
     }
 
-    private void Update() => UpdateState();
+    public void Stop() => isMoving = false;
 
-    public void Stop() => state = States.Idle;
+    private void Update() => Move();
 
-    public void UpdateState()
+    public void Move()
     {
-        switch (state)
+        if (isMoving)
         {
-            case States.Move:
-                synchronizer.UpdateTime();
-                transform.position = mover.Move(trajectory, onFinish);
-                transform.rotation = rotator.Rotate(prevPos);
-                SavePreviousPosition();
-                break;
+            synchronizer.UpdateTime();
+            transform.position = mover.Move(trajectory, Arrived);
+            transform.rotation = rotator.Rotate(transform.rotation, prevPos);
 
-            case States.Rotate:
-                break;
+            prevPos = transform.position;
         }
     }
-    
-    private void SavePreviousPosition()
-    {
-        prevPos = transform.position;
-    }
+
+    private bool arrived;
 
     public void Arrived()
     {
-        state = States.Idle;
-        distancePassed = 0f;
-
-        timer.Set("SetOff", idleTime, SetOff);
+        arrived = true;
+        isMoving = false;
+        dispenserManager.DropAnItem(Launch);
+        //timer.Set("Launch", idleTime, Launch); ONLY AFTER THE DOORS ARE SHUT!
     }
 }

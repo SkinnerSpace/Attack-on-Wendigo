@@ -11,6 +11,7 @@ public class AudioEvent
     public void SetVolume(float volume) => instance.setParameterByName("Vol", volume);
     public void SetTimelinePosition(int milliseconds) => instance.setTimelinePosition(milliseconds);
     public void Set3DPosition(Vector3 position) => instance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(position));
+    public void SetAnchor(Transform body) => FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, body);
 
     public int GetLength(){
         FMOD.Studio.EventDescription description = GetDescription();

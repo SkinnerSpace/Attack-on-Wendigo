@@ -9,10 +9,7 @@ public class AudioPosition : AudioParam
 
     public override void Set(Vector3 position) => this.position = position;
 
-    public override void ApplyTo(AudioEvent audioEvent)
-    {
-        audioEvent.Set3DPosition(position);
-    }
+    public override void ApplyTo(AudioEvent audioEvent) => audioEvent.Set3DPosition(position);
 
     public override string ToString() => $"Position: {position}" ;
 }

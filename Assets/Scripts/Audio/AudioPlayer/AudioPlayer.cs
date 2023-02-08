@@ -41,6 +41,12 @@ public class AudioPlayer
         return this;
     }
 
+    public AudioPlayer WithAnchor(Transform body)
+    {
+        parameters.Get(AudioAnchor.parameter).Set(body);
+        return this;
+    }
+
     public AudioPlayer WithStartTime(float timelinePosition)
     {
         parameters.Get(AudioTimelinePosition.parameter).Set(timelinePosition);

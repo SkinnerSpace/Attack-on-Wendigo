@@ -38,7 +38,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
 
     private void Walk(bool isGrounded, float distance)
     {
-        //Debug.Log("WALK " + distance);
+        Debug.Log("WALK " + distance);
 
         if (isGrounded && distance > 0f)
         {
