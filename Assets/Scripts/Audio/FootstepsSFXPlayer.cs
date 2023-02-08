@@ -30,7 +30,6 @@ public class FootstepsSFXPlayer : MonoBehaviour
     {
         bool isGrounded = groundDetector.isGrounded;
         float distance = horizontalMovement.velocity.magnitude * Time.deltaTime;
-        //Debug.Log(horizontalMovement.velocity.magnitude);
 
         Walk(isGrounded, distance);
         PlaySFXIfStepped();
@@ -38,9 +37,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
 
     private void Walk(bool isGrounded, float distance)
     {
-        Debug.Log("WALK " + distance);
-
-        if (isGrounded && distance > 0f)
+        if (isGrounded && distance > 0.1f)
         {
             MakeAStep(distance);
         }
