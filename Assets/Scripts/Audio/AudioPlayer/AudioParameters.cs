@@ -20,10 +20,7 @@ public class AudioParameters
     public void ApplyTo(AudioEvent audioEvent)
     {
         foreach (AudioParam param in parameters.Values)
-        {
-            //Debug.Log(param.ToString());
             param.ApplyTo(audioEvent);
-        }
     }
 
     private bool NoInstanceOf(Type parameter) => !parameters.ContainsKey(parameter);

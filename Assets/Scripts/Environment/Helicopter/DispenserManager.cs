@@ -4,7 +4,6 @@ using UnityEngine;
 public class DispenserManager : MonoBehaviour
 {
     [Header("Required Components")]
-    [SerializeField] private GameObject crate;
     [SerializeField] private Transform target;
     [SerializeField] private DispenserData data;
 
@@ -12,15 +11,23 @@ public class DispenserManager : MonoBehaviour
     [SerializeField] private Dispenser rightDispenser;
     [SerializeField] private Dispenser leftDispenser;
 
+    private IObjectPooler pooler;
+
     private void Awake()
     {
         rightDispenser.SetData(data);
         leftDispenser.SetData(data);
     }
 
+    private void Start()
+    {
+        pooler = PoolHolder.Instance;
+    }
+
     public void DropAnItem(Action moveOn)
     {
         Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
+        GameObject crate = pooler.SpawnFromThePool("Crate");
         dispenser.Launch(crate, moveOn);
     }
 

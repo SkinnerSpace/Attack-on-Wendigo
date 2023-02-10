@@ -3,6 +3,7 @@
 public class CrateLandingController : MonoBehaviour
 {
     [SerializeField] private LaserBeam laserBeam;
+    [SerializeField] private Crate crate;
 
     private Rigidbody physics;
     private bool isGrounded;
@@ -15,13 +16,24 @@ public class CrateLandingController : MonoBehaviour
         if (!isDisabled && isGrounded && physics.velocity.magnitude <= 0f)
         {
             isDisabled = true;
-            physics.isKinematic = true;
-            physics.useGravity = false;
-
+            crate.ResetPhysics();
             laserBeam.SwitchOn();
-            Destroy(this);
         }
     }
 
-    private void OnCollisionEnter(Collision collision) => isGrounded = true;
+    public void ResetLanding()
+    {
+        isGrounded = false;
+        isDisabled = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isGrounded = true;
+        Surface surface = collision.transform.GetComponent<Surface>();
+        if (surface != null)
+        {
+            Debug.Log(surface);
+        }
+    }
 }

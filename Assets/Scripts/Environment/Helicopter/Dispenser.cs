@@ -8,7 +8,7 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
     [SerializeField] private HelicopterDoor door;
     [SerializeField] private FunctionTimer timer;
 
-    private GameObject item;
+
     private Crate crate;
     private Action notifyOnComplete;
 
@@ -16,11 +16,12 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
 
     public void SetData(DispenserData data) => this.data = data;
 
-    public void Launch(GameObject cratePrefab, Action notifyOnComplete)
+    public void Launch(GameObject crateObject, Action notifyOnComplete)
     {
-        this.item = cratePrefab;
         this.notifyOnComplete = notifyOnComplete;
-        crate = Instantiate(cratePrefab, transform.position, transform.rotation, data.DropSpace).GetComponent<Crate>();
+
+        crateObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        crate = crateObject.GetComponent<Crate>();
         crate.Pack(storage.GetAnItem());
         
         door.Open();

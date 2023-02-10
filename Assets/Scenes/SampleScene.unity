@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 282758763}
   - component: {fileID: 282758762}
   - component: {fileID: 282758767}
+  - component: {fileID: 282758766}
   m_Layer: 20
   m_Name: Ground
   m_TagString: Untagged
@@ -787,6 +788,23 @@ Transform:
   m_Father: {fileID: 1854148183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282758766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282758761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTemplates:
+  - tag: SnowParticle
+    prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
+      type: 3}
+    size: 12
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
     type: 3}
+  particleName: SnowParticle
   sfxManager: {fileID: 640821270}
 --- !u!1 &348362389
 GameObject:
@@ -835,6 +854,49 @@ Transform:
   m_Father: {fileID: 213085768}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &353433193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353433194}
+  - component: {fileID: 353433195}
+  m_Layer: 0
+  m_Name: Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &353433194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353433193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1006532234}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &353433195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353433193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b153ad9f5d73c4b488172e69278c6931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &360137433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11f052a4cf82b194aba90cd894d4a0ba,
@@ -2413,6 +2475,7 @@ Transform:
   - {fileID: 394028989}
   - {fileID: 1488656788}
   - {fileID: 219536278}
+  - {fileID: 353433194}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8198,6 +8261,7 @@ GameObject:
   - component: {fileID: 1488656792}
   - component: {fileID: 1488656789}
   - component: {fileID: 1488656790}
+  - component: {fileID: 1488656793}
   m_Layer: 0
   m_Name: WendigoSpawner
   m_TagString: Untagged
@@ -8303,6 +8367,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldPrefab: {fileID: 4058788711753654392, guid: 9979c73e82004d64390f6b6afffceaa2,
     type: 3}
+--- !u!114 &1488656793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488656786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTemplates:
+  - tag: Wendigo
+    prefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
+      type: 3}
+    size: 10
 --- !u!1001 &1503373807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9676,6 +9757,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 365858762}
     m_Modifications:
+    - target: {fileID: 106448554005381371, guid: 20a34df6d30fd1c469716e43b10b97d4,
+        type: 3}
+      propertyPath: poolTemplates.Array.data[0].size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 618881268519985980, guid: 20a34df6d30fd1c469716e43b10b97d4,
         type: 3}
       propertyPath: target

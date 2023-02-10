@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 8314286997772649539}
   - component: {fileID: 8314286997772649538}
   - component: {fileID: 8314286997772649537}
+  - component: {fileID: 8337543436546903680}
   m_Layer: 8
   m_Name: SnowParticle
   m_TagString: Untagged
@@ -122,7 +123,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4891,3 +4892,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8337543436546903680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8314286997772649536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d11c621cda24fc4eb7673c5d127d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

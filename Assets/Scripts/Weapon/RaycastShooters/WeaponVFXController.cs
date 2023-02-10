@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.VFX;
 
 public class WeaponVFXController : MonoBehaviour
@@ -12,8 +13,12 @@ public class WeaponVFXController : MonoBehaviour
     [SerializeField] private ParticleSystem bulletShell;
     [SerializeField] private Animator animator;
 
-    [Header("Prefabs")]
-    [SerializeField] private GameObject bulletExplosion;
+    private IObjectPooler pooler;
+
+    private void Start()
+    {
+        pooler = PoolHolder.Instance;
+    }
 
     public void PlayShootVFX()
     {
@@ -25,7 +30,6 @@ public class WeaponVFXController : MonoBehaviour
 
     public void Hit(WeaponTarget target)
     {
-        Instantiate(bulletExplosion, target.hitPosition, Quaternion.identity);
+        pooler.SpawnFromThePool("BulletExplosion", target.hitPosition, Quaternion.identity);
     }
 }
-

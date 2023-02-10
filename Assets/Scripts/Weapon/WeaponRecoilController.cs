@@ -4,44 +4,48 @@ public class WeaponRecoilController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float recoilPower = 2f;
-    [SerializeField] private float recoilSpeed = 10f;
-    [SerializeField] private float recoilDeceleration = 10f;
+    [SerializeField] private float recoilTime = 1f;
 
-    private Vector3 recoilVelocity;
+    private Vector3 RecoiledPosition => -1 * Vector3.forward * recoilPower;
+    private float currentTime;
+
     private bool isRecoiling;
 
     private void Update() => UpdateRecoil();
 
     private void UpdateRecoil()
     {
-        Move();
-
-/*
-        if (isRecoiling)
-        {
-            Move();
-            StopRecoil();
-        }*/
+        if (isRecoiling) Move();
     }
 
     public void Recoil()
     {
         isRecoiling = true;
-        recoilVelocity = new Vector3(0f, 0f, -1f) * recoilPower;
+        currentTime = recoilTime;
     }
 
     private void Move()
     {
-        recoilVelocity = Vector3.Lerp(recoilVelocity, Vector3.zero, recoilDeceleration * Time.deltaTime);
-        transform.localPosition = Vector3.Lerp(transform.localPosition, recoilVelocity, recoilSpeed * Time.deltaTime);
+        CountDown();
+        float percent = GetRecoilPercent();
+        transform.localPosition = Vector3.Lerp(Vector3.zero, RecoiledPosition, percent);
     }
 
-    private void StopRecoil()
+    private void CountDown()
     {
-        if (recoilVelocity.magnitude <= 0.01f)
+        currentTime -= Chronos.DeltaTime;
+
+        if (currentTime <= 0f)
         {
+            currentTime = 0f;
             isRecoiling = false;
-            transform.localPosition = Vector3.zero;
         }
+    }
+
+    private float GetRecoilPercent()
+    {
+        float percent = Mathf.InverseLerp(0f, recoilTime, currentTime);
+        float lerp = Mathf.Lerp(-0.5f, 1f, percent);
+        return Easing.QuadEaseOut(lerp);
     }
 }

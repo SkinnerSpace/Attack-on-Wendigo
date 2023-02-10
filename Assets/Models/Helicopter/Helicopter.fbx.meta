@@ -14,6 +14,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: HelicopterMaterial
     second: {fileID: 2100000, guid: 94ccf4a5d8a5eb54d9b1dd4e95a50b7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HelicopterWindowsMaterial
+    second: {fileID: 2100000, guid: 7cf939f0458fe3041a6d3ea1ea4a593b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightMaterial
+    second: {fileID: 2100000, guid: 9b815886cf4eb9641b2dc6b99688dbdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightMetalMaterial
+    second: {fileID: 2100000, guid: 7a4095c0eac85e8419a53c78831bbd55, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

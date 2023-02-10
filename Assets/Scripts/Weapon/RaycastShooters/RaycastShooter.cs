@@ -43,8 +43,6 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
 
     private void HitTheTarget(WeaponTarget target)
     {
-        //Debug.Log("TARGET NAME " + target.name);
-
         if (target.exist)
         {
             DamageTheTarget(target);

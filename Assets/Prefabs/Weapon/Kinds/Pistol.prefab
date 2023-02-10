@@ -189,9 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 2
-  recoilSpeed: 10
-  recoilDeceleration: 10
+  recoilPower: 0.5
+  recoilTime: 0.3
 --- !u!1 &4611868940550012031
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5633621881303655743}
   - component: {fileID: 4958221207093448998}
+  - component: {fileID: 649704660126404581}
   m_Layer: 16
   m_Name: VFXController
   m_TagString: Untagged
@@ -426,8 +426,23 @@ MonoBehaviour:
   muzzleFlash: {fileID: 5944037392786839833}
   bulletShell: {fileID: 599221758087645794}
   animator: {fileID: 6420187401967105178}
-  bulletExplosion: {fileID: 2459673218311241910, guid: 4d5a878363f043a469570653df67d39a,
-    type: 3}
+--- !u!114 &649704660126404581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5842747548233882238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTemplates:
+  - tag: BulletExplosion
+    prefab: {fileID: 2459673218311241910, guid: 4d5a878363f043a469570653df67d39a,
+      type: 3}
+    size: 8
 --- !u!114 &4506095490508226331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +486,7 @@ GameObject:
   - component: {fileID: 199296187303216987}
   - component: {fileID: 4191662873811235155}
   - component: {fileID: 4743937849382538504}
+  - component: {fileID: 7317129112943931184}
   m_Layer: 16
   m_Name: Pistol
   m_TagString: Untagged
@@ -626,6 +642,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7317129112943931184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473361558535834234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d3d299d707f6a438e6ae07ac30056a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7566391290444403050
 GameObject:
   m_ObjectHideFlags: 0

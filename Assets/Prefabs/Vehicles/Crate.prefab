@@ -246,6 +246,8 @@ GameObject:
   - component: {fileID: 3913650606176296814}
   - component: {fileID: 137477694732360836}
   - component: {fileID: 340786710075545641}
+  - component: {fileID: 711807515168722588}
+  - component: {fileID: 2257178372747876790}
   m_Layer: 16
   m_Name: Crate
   m_TagString: Untagged
@@ -311,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physics: {fileID: 3913650606176296814}
+  sfxPlayer: {fileID: 711807515168722588}
 --- !u!114 &340786710075545641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,4 +326,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bd06274cc35e64b9178c4bfaba4534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserBeam: {fileID: 6744949977964748514}
+  crate: {fileID: 137477694732360836}
+--- !u!114 &711807515168722588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715555677677968425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44597e9462443a48a3797dc50cc9839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropSFX:
+    Guid:
+      Data1: 225767034
+      Data2: 1130895068
+      Data3: 1730571182
+      Data4: -1274920236
+    Path: event:/SFX/Game/Gameplay/Helicopter/DropCargo
+--- !u!114 &2257178372747876790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715555677677968425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38514c2a6d4636340b091c2d68037b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crate: {fileID: 137477694732360836}
+  landingController: {fileID: 340786710075545641}
   laserBeam: {fileID: 6744949977964748514}
