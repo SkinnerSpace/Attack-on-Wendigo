@@ -8,6 +8,7 @@ public class WeaponRotator : MonoBehaviour
 
     [SerializeField] private float rotationIntensity = 3f;
     [SerializeField] private float smoothRotation = 5f;
+    [SerializeField] private WeaponAimController aimController;
 
     private WeaponSwayController controller;
     private Quaternion originalRotation;
@@ -28,7 +29,7 @@ public class WeaponRotator : MonoBehaviour
             controller.input.x,
             inputY);
 
-        input *= WeaponAimController.GetStability(STABILITY_MODIFIER);
+        input *= aimController.GetStability(STABILITY_MODIFIER);
     }
 
     private float GetVerticalInput()

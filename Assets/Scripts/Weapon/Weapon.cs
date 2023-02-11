@@ -20,32 +20,32 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
 
     public bool isReady { get; private set; }
 
-    public event Action onShot;
+    public event Action<bool> onReady;
 
     private void Awake()
     {
         shooter = shooterImp.GetComponent<IShooter>();
         collisionBox = GetComponent<Collider>();
-        onShot += NotifyOnShot;
     }
 
-    public void PullTheTrigger(bool pull)
+    public void PullTheTrigger()
     {
         if (magazine.HasAmmo()){
-            shooter.Shoot(pull, onShot);
+            shooter.Shoot(true, OnShot);
         }
-        else if (pull){
+        else{
             magazine.ReportIsEmpty();
         }
     }
 
-    private void NotifyOnShot() => magazine.ReduceCount();
+    private void OnShot() => magazine.ReduceCount();
 
     public void Aim(bool isAiming) => aimController.Aim(isAiming);
     public void Reload() { }
-    public void GetReady(bool isReady)
+    public void SetReady(bool isReady)
     {
         this.isReady = isReady;
+        onReady?.Invoke(isReady);
         magazine.GetReady(isReady);
         arms.enabled = isReady;
 

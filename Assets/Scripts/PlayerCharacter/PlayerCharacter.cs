@@ -6,6 +6,15 @@ public class PlayerCharacter : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider collisionBox;
 
+    [Header("Required Components")]
+    [SerializeField] private CharacterData data;
+    [SerializeField] private PlayerHorizontalMover movementController;
+    [SerializeField] private WeaponHandler weaponHandler;
+
+    [Header("Input Readers")]
+    [SerializeField] private MovementInputReader movementInputReader;
+    [SerializeField] private CombatInputReader combatInputReader;
+
     [Header("Horizontal movement")]
     [SerializeField] private float minSpeed = 10f;
     [SerializeField] private float maxSpeed = 15f;
@@ -39,6 +48,17 @@ public class PlayerCharacter : MonoBehaviour
 
     public static PlayerCharacter Instance { get; private set; }
 
+    private bool isActive;
+
+    private void Update()
+    {
+        if (!isActive && Input.GetKeyDown(KeyCode.C))
+        {
+            isActive = true;
+            movementInputReader.Subscribe(movementController);
+            weaponHandler.SetCombatInputReader(combatInputReader);
+        }
+    }
 
     private void Awake()
     {

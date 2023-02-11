@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Surface : MonoBehaviour
 {
-    [SerializeField] private GameObject particlePrefab;
     [SerializeField] private string particleName;
     [SerializeField] private SurfaceSFXManager sfxManager;
 

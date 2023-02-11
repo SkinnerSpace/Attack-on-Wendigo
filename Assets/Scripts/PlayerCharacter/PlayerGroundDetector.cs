@@ -90,3 +90,21 @@ public class PlayerGroundDetector : MonoBehaviour
         Gizmos.DrawWireSphere(GetCheckPos(), detectionRadius);
     }
 }
+
+public class GroundDetector
+{
+    private CharacterData data;
+
+    public void Detect()
+    {
+        Physics.CheckSphere(GetCheckPos(), detectionRadius, ComplexLayers.Solid);
+    }
+
+    private Vector3 GetCheckPos() => data.Position - new Vector3(0f, detectionHeight, 0f);
+}
+
+public class GroundDetectorData
+{
+    [SerializeField] private float detectionRadius;
+    [SerializeField] private float detectionHeight;
+}

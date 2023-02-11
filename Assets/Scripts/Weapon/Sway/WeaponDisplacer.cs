@@ -9,6 +9,7 @@ public class WeaponDisplacer : MonoBehaviour
     [SerializeField] private float displacementIntensity = 0.2f;
     [SerializeField] private float maxDisplacement = 0.5f;
     [SerializeField] private float smoothDisplacement = 6f;
+    [SerializeField] private WeaponAimController aimController;
 
     private WeaponSwayController controller;
     private Vector3 originalPosition;
@@ -30,7 +31,7 @@ public class WeaponDisplacer : MonoBehaviour
             controller.input.x,
             inputY);
 
-        input *= WeaponAimController.GetStability(STABILITY_MODIFIER);
+        input *= aimController.GetStability(STABILITY_MODIFIER);
     }
 
     public Vector3 DisplacePosition(Vector3 currentPosition)

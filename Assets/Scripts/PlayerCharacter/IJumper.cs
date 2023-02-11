@@ -1,4 +1,4 @@
 ﻿public interface IJumper
 {
-    void SetVelocity(float velocity);
+    //void SetVelocity(float velocity);
 }

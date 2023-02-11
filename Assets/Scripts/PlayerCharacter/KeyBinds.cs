@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
+public class KeyBinds : MonoBehaviour, IKeyBinds
 {
     [Header("Mouse")]
     [Range(0f, 1000f)]
@@ -42,3 +42,4 @@ public class PlayerKeyBinds : MonoBehaviour, IKeyBinds
     public KeyCode Interact => interact;
     
 }
+

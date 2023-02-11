@@ -295,6 +295,7 @@ MonoBehaviour:
   displacementIntensity: 0.2
   maxDisplacement: 0.5
   smoothDisplacement: 6
+  aimController: {fileID: 997745253376797098}
 --- !u!114 &1536859498695772921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationIntensity: 3
   smoothRotation: 5
+  aimController: {fileID: 997745253376797098}
 --- !u!114 &7650513728836118252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ MonoBehaviour:
   tiltIntensity: 4
   maxTilt: 5
   smoothTilt: 12
+  aimController: {fileID: 997745253376797098}
 --- !u!114 &8805010115170836883
 MonoBehaviour:
   m_ObjectHideFlags: 0

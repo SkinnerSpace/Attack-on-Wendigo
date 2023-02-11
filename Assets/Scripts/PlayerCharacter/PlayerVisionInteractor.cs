@@ -14,7 +14,7 @@ public class PlayerVisionInteractor : MonoBehaviour
         if (item == null) return;
 
         if (IsAbleToTakeAnItem(item)){
-            if (InputReader.interact) weaponHolder.TakeAnItem(item);
+            if (OldInputReader.interact) weaponHolder.TakeAnItem(item);
         }
     }
 

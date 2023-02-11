@@ -50,7 +50,7 @@ public class ItemHolder : MonoBehaviour, IHolder
 
     private void DropAnItem()
     {
-        if (InputReader.interact && weapon.isReady)
+        if (OldInputReader.interact && weapon.isReady)
         {
             Vector3 dropVelocity = GetDropVelocity();
             ResetWeapon();
@@ -70,7 +70,7 @@ public class ItemHolder : MonoBehaviour, IHolder
     private void ResetWeapon()
     {
         item = null;
-        weapon.GetReady(false);
+        weapon.SetReady(false);
         weapon = NullWeapon.Instance;
         weaponHandler.ResetWeapon();
     }
@@ -83,7 +83,7 @@ public class ItemHolder : MonoBehaviour, IHolder
 
     private void ConnectSpeedometerTo(Transform item) => item.GetComponent<ISpeedObserver>().ConnectSpeedometer(speedometer);
     private void ConnectCameraTo(Transform item) => item.GetComponent<ICameraUser>().ConnectCamera(cam);
-    private void WeaponIsTaken() => weapon.GetReady(true);
+    private void WeaponIsTaken() => weapon.SetReady(true);
     private Vector3 GetDropVelocity() => GetDropDirection() * dropForce;
     private Vector3 GetDropDirection() => (vision.point - item.position).normalized;
 }

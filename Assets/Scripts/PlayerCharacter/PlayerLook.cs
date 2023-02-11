@@ -20,7 +20,7 @@ public class PlayerLook : MonoBehaviour
     private void InitializeComponents()
     {
         body = player.transform;
-        keys = InputReader.Instance.keys;
+        keys = OldInputReader.Instance.keys;
     }
 
     private void SetUpCursor()
@@ -40,12 +40,12 @@ public class PlayerLook : MonoBehaviour
         SetBodyRotation(); 
     }
 
-    private float ModifyAngleX(float xAngle) => xAngle + (InputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime);
+    private float ModifyAngleX(float xAngle) => xAngle + (OldInputReader.mouse.x * keys.MouseSensitivity * Time.deltaTime);
 
     private float ModifyAngleY(float yAngle)
     {
         float yRotated = yAngle;
-        yRotated += InputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
+        yRotated += OldInputReader.mouse.y * keys.MouseSensitivity * keys.MouseInversion * Time.deltaTime;
         yRotated = Mathf.Clamp(yRotated, -90, 90f);
 
         return yRotated;

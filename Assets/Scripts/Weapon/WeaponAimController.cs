@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class WeaponAimController : MonoBehaviour
 {
-    private static float currentState;
     private enum TestModes
     {
         Off,
@@ -20,26 +22,46 @@ public class WeaponAimController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Vector3 defaultPosition;
     [SerializeField] private Vector3 aimingPosition;
-    [SerializeField] private float aimingSpeed = 10f;
 
     [Header("Test")]
     [SerializeField] private TestModes testMode = TestModes.Off;
 
-    private Vector3 currentPosition;
+    private bool isAiming;
+    private float focus;
+
+    private float transitionTime = 0.2f;
+    private float currentTime;
 
     public void Aim(bool isAiming)
     {
-        float targetState = isAiming ? 1f : 0f;
+        this.isAiming = isAiming;
         data.SetPrecisionAdjustrment(isAiming ? data.AimPrecision : 0f);
 
-        currentState = GetCurrentState(targetState);
-        currentPosition = GetCurrentPosition(currentState);
-        SetPosition(currentPosition);
+        StopCoroutine(MakeTransition());
+        StartCoroutine(MakeTransition());
     }
 
-    public static float GetStability(float stabilityModifier) => 1f - (currentState * stabilityModifier);
-    private float GetCurrentState(float targetState) => Mathf.Lerp(currentState, targetState, aimingSpeed * Chronos.DeltaTime);
-    private Vector3 GetCurrentPosition(float currentState) => Vector3.Lerp(defaultPosition, aimingPosition, currentState);
+    private IEnumerator MakeTransition()
+    {
+        while (IsMakingTransition)
+        {
+            currentTime = isAiming ? (currentTime += Chronos.DeltaTime) : (currentTime -= Chronos.DeltaTime);
+            ChangePosition();
+
+            yield return null;
+        }
+    }
+
+    private bool IsMakingTransition => (isAiming && currentTime < transitionTime) || (!isAiming && currentTime > 0f);
+
+    private void ChangePosition()
+    {
+        currentTime = Mathf.Clamp(currentTime, 0f, transitionTime);
+        focus = (currentTime / transitionTime).QuadEaseInOut();
+        transform.localPosition = Vector3.Lerp(defaultPosition, aimingPosition, focus);
+    }
+
+    public float GetStability(float stabilityModifier) => 1f - (focus * stabilityModifier);
     private void SetPosition(Vector3 position) => transform.localPosition = position;
 
     private void OnDrawGizmos() => Test();

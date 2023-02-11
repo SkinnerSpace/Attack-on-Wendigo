@@ -22,6 +22,11 @@ public class PlayerDashHandler : MonoBehaviour
         timer = GetComponent<FunctionTimer>();
     }
 
+    private void Update()
+    {
+        if (OldInputReader.dash) Dash();
+    }
+
     public void Dash()
     {
         if (isCharged)
@@ -50,11 +55,11 @@ public class PlayerDashHandler : MonoBehaviour
 
     private Vector3 GetDirection()
     {
-        if (InputReader.forward) return look.transform.forward;
-        if (InputReader.backward) return look.transform.forward * -1f;
+        if (OldInputReader.forward) return look.transform.forward;
+        if (OldInputReader.backward) return look.transform.forward * -1f;
 
-        if (InputReader.right) return look.transform.right;
-        if (InputReader.left) return look.transform.right * -1f;
+        if (OldInputReader.right) return look.transform.right;
+        if (OldInputReader.left) return look.transform.right * -1f;
 
         return look.transform.forward;
     }

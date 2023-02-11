@@ -8,6 +8,7 @@ public class WeaponTilter : MonoBehaviour
     [SerializeField] private float tiltIntensity = 4f;
     [SerializeField] private float maxTilt = 5f;
     [SerializeField] private float smoothTilt = 12f;
+    [SerializeField] private WeaponAimController aimController;
 
     private WeaponSwayController controller;
     private Quaternion originalRotation;
@@ -29,7 +30,7 @@ public class WeaponTilter : MonoBehaviour
             controller.input.x, 
             inputY);
 
-        input *= WeaponAimController.GetStability(STABILITY_MODIFIER);
+        input *= aimController.GetStability(STABILITY_MODIFIER);
     }
 
     public Quaternion TiltRotation(Quaternion currentRotation)

@@ -16,11 +16,11 @@ public class NullWeapon : IWeapon
         return instance;
     }
 
-    public void GetReady(bool isReady){}
+    public void SetReady(bool isReady){}
 
     public void Aim(bool isAiming){}
 
-    public void PullTheTrigger(bool pull){}
+    public void PullTheTrigger(){}
 
     public void Reload(){}
 }

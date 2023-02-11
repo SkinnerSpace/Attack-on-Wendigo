@@ -107,11 +107,12 @@ GameObject:
   - component: {fileID: 5716060233150994623}
   - component: {fileID: 6036142253385846663}
   - component: {fileID: 5956892049143004515}
-  - component: {fileID: 4202293268386115700}
   - component: {fileID: 8191541783654543729}
   - component: {fileID: 6809514969268328242}
   - component: {fileID: 7254224541728550267}
   - component: {fileID: 7181526249658469568}
+  - component: {fileID: 61735261016310312}
+  - component: {fileID: 402587302504087578}
   m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
@@ -151,6 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionBox: {fileID: 225323459830800341}
+  data: {fileID: 0}
+  movementController: {fileID: 0}
+  weaponHandler: {fileID: 0}
+  movementInputReader: {fileID: 0}
+  combatInputReader: {fileID: 0}
   minSpeed: 10
   maxSpeed: 15
   acceleration: 0.5
@@ -172,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63badfdaffbbc584e927d278d2391644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!114 &5716060233150994623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6146795615001241510}
   characterController: {fileID: 7181526249658469568}
-  dashHandler: {fileID: 6036142253385846663}
   speedometer: {fileID: 764975185769255422}
   cam: {fileID: 0}
 --- !u!114 &6036142253385846663
@@ -213,18 +217,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23e67caae65d56946bdf80da2c08f81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4202293268386115700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176119535850529057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6abe234a915a5e1408e140c613bcac6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8191541783654543729
@@ -284,6 +276,35 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &61735261016310312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b246af76d89b744e83c38a481e2991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 16
+  jumpHeight: 3
+--- !u!114 &402587302504087578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 61735261016310312}
+  jumpInputReader: {fileID: 0}
+  controller: {fileID: 7181526249658469568}
 --- !u!1 &7065882845511245401
 GameObject:
   m_ObjectHideFlags: 0

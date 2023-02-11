@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -362,6 +362,10 @@ GameObject:
   - component: {fileID: 219536278}
   - component: {fileID: 219536279}
   - component: {fileID: 219536280}
+  - component: {fileID: 219536282}
+  - component: {fileID: 219536283}
+  - component: {fileID: 219536284}
+  - component: {fileID: 219536281}
   m_Layer: 0
   m_Name: InputReader
   m_TagString: Untagged
@@ -419,6 +423,60 @@ MonoBehaviour:
   moveBackward: 115
   jump: 32
   dash: 304
+--- !u!114 &219536281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082489794c407a444bc590e2e66f3fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &219536282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18244e4ffd4b6f469eba703e751d349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 219536281}
+  keys: {fileID: 219536280}
+--- !u!114 &219536283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011293bc3afcfb245a0d2736506b3376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 219536281}
+  keys: {fileID: 219536280}
+--- !u!114 &219536284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa12eb37e811194592d81941d164a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 219536281}
+  keys: {fileID: 219536280}
 --- !u!1 &225116403
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,8 +875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
-    type: 3}
   particleName: SnowParticle
   sfxManager: {fileID: 640821270}
 --- !u!1 &348362389
@@ -9919,6 +9975,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 963580476}
     m_Modifications:
+    - target: {fileID: 402587302504087578, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: jumpInputReader
+      value: 
+      objectReference: {fileID: 219536284}
     - target: {fileID: 891318553643976312, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -10031,9 +10092,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845931283795517954, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
+      propertyPath: reader
+      value: 
+      objectReference: {fileID: 219536282}
+    - target: {fileID: 5845931283795517954, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
       propertyPath: weapon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5845931283795517954, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 219536279}
     - target: {fileID: 5902795958023373542, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: cam
@@ -10086,9 +10157,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
+      propertyPath: weaponHandler
+      value: 
+      objectReference: {fileID: 1565864867}
+    - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
       propertyPath: mouseSensitivity
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: combatInputReader
+      value: 
+      objectReference: {fileID: 219536282}
+    - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: movementController
+      value: 
+      objectReference: {fileID: 425635449}
+    - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: movementInputReader
+      value: 
+      objectReference: {fileID: 219536283}
     - target: {fileID: 6176119534898269400, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class PlayerHorizontalMover : MonoBehaviour, IPushable
+public class PlayerHorizontalMover : MonoBehaviour, IPushable, IMovementController
 {
     [SerializeField] private PlayerCharacter player;
     [SerializeField] private CharacterController characterController;
-    [SerializeField] private PlayerDashHandler dashHandler;
     [SerializeField] private Speedometer speedometer;
 
     [SerializeField] private Transform cam;
@@ -25,12 +24,8 @@ public class PlayerHorizontalMover : MonoBehaviour, IPushable
         Blizzard.Instance.AddPushable(this);
     }
 
-    private void Update() => HandleArbitraryMovement();
-
-    private void FixedUpdate()
+    private void Update()
     {
-        if (InputReader.dash) dashHandler.Dash();
-
         velocity = (movementVelocity + forceVelocity) * resistance;
         forceVelocity = DecelerateForce();
 
@@ -40,16 +35,12 @@ public class PlayerHorizontalMover : MonoBehaviour, IPushable
         NotifyOnChange();
     }
 
-    private void HandleArbitraryMovement()
+    public void Move(Vector3 inDirection)
     {
-        Vector3 direction = GetDirection();
-        player.Speed = PlayerIsMoving(direction) ? AccelerateSpeed() : player.MinSpeed;
+        Vector3 direction = (inDirection.x * transform.right) + (inDirection.z * transform.forward);
+        player.Speed = direction.magnitude > 0f ? AccelerateSpeed() : player.MinSpeed;
         movementVelocity = direction * player.Speed;
     }
-
-    private Vector3 GetDirection() => (InputReader.normDir.x * transform.right) + (InputReader.normDir.z * transform.forward);
-
-    private bool PlayerIsMoving(Vector3 direction) => direction.magnitude > 0f;
 
     private float AccelerateSpeed() => Mathf.Lerp(player.Speed, player.MaxSpeed, player.Acceleration * Time.deltaTime);
 
@@ -61,15 +52,6 @@ public class PlayerHorizontalMover : MonoBehaviour, IPushable
 
         float velocitySpeedDifference = Mathf.Max((velocity.magnitude - player.MinSpeed), 0f);
         velocityFOVModifier = velocitySpeedDifference / (player.MaxSpeed - player.MinSpeed);
-    }
-
-    private float GetDirectedness()
-    {
-        Vector2 camDir = new Vector2(cam.forward.x, cam.forward.z).normalized;
-        Vector2 flatVelocity = new Vector2(velocity.x, velocity.z).normalized;
-        float directedness = Vector2.Dot(camDir, flatVelocity);
-
-        return directedness;
     }
 
     public void ApplyForce(Vector3 force) => AddForce(force);
