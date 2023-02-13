@@ -21,3 +21,4 @@ public class WeaponHandler : MonoBehaviour
         weapon = NullWeapon.Instance;
     }
 }
+

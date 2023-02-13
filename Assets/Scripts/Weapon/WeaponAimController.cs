@@ -45,7 +45,7 @@ public class WeaponAimController : MonoBehaviour
     {
         while (IsMakingTransition)
         {
-            currentTime = isAiming ? (currentTime += Chronos.DeltaTime) : (currentTime -= Chronos.DeltaTime);
+            currentTime = isAiming ? (currentTime += OldChronos.DeltaTime) : (currentTime -= OldChronos.DeltaTime);
             ChangePosition();
 
             yield return null;

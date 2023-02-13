@@ -66,7 +66,6 @@ public class Architect : MonoBehaviour
                 map[x, y] = new Mark(PropTypes.NONE, Index: 0);
             }
         }
-
     }
 
     private void FindCenter()
@@ -90,6 +89,8 @@ public class Architect : MonoBehaviour
                 }
             }
         }
+
+        map[mapSize / 2, mapSize / 2] = new Mark(PropTypes.NONE, Index: 0);
     }
 
     private Blueprint DrawBlueprint()

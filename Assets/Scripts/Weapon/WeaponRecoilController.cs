@@ -33,7 +33,7 @@ public class WeaponRecoilController : MonoBehaviour
 
     private void CountDown()
     {
-        currentTime -= Chronos.DeltaTime;
+        currentTime -= OldChronos.DeltaTime;
 
         if (currentTime <= 0f)
         {

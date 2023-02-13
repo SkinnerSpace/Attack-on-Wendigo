@@ -4,7 +4,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private PlayerHorizontalMover horizontalMovement;
-    [SerializeField] private PlayerGroundDetector groundDetector;
+    [SerializeField] private GroundDetectorBehavior groundDetector;
 
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference snowFootstepSFX;
@@ -28,7 +28,7 @@ public class FootstepsSFXPlayer : MonoBehaviour
 
     private void Update()
     {
-        bool isGrounded = groundDetector.isGrounded;
+        bool isGrounded = true;//groundDetector.isGrounded;
         float distance = horizontalMovement.velocity.magnitude * Time.deltaTime;
 
         Walk(isGrounded, distance);

@@ -7,7 +7,7 @@ public class HelicopterBlades : MonoBehaviour
 
     private void Update()
     {
-        rotation += rotationSpeed * Chronos.DeltaTime;
+        rotation += rotationSpeed * OldChronos.DeltaTime;
         if (rotation >= 360f) rotation = 0f;
 
         transform.localEulerAngles = new Vector3(0f, rotation, 0f);

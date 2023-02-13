@@ -39,7 +39,7 @@ public class RigController : MonoBehaviour
 
         while (time < timeOut)
         {
-            time += Chronos.DeltaTime;
+            time += OldChronos.DeltaTime;
             rig.weight = ChangeWeight(rig.weight);
 
             yield return null;

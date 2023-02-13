@@ -31,7 +31,7 @@ public class HelicopterSway : MonoBehaviour, IHelicopterTimeObserver
 
     private void Wave()
     {
-        time += waveSpeed * Chronos.DeltaTime;
+        time += waveSpeed * OldChronos.DeltaTime;
         wave = Mathf.Sin(time / (Mathf.PI * 2f));
         wave *= waveMagnitude;
         wave *= (1f - movement);

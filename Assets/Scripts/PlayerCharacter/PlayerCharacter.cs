@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-    [SerializeField] private CapsuleCollider collisionBox;
-
     [Header("Required Components")]
     [SerializeField] private CharacterData data;
     [SerializeField] private PlayerHorizontalMover movementController;
     [SerializeField] private WeaponHandler weaponHandler;
-
-    [Header("Input Readers")]
-    [SerializeField] private MovementInputReader movementInputReader;
-    [SerializeField] private CombatInputReader combatInputReader;
 
     [Header("Horizontal movement")]
     [SerializeField] private float minSpeed = 10f;
@@ -36,9 +30,7 @@ public class PlayerCharacter : MonoBehaviour
     public float DashDistance => dashDistance;
     public float Gravity => gravity;
     
-    public float height => collisionBox.height;
-
-    public bool IsGrounded => PlayerGroundDetector.Instance.isGrounded;
+    public bool IsGrounded => data.IsGrounded;
 
     public Vector3 position => transform.position;
 
@@ -55,8 +47,6 @@ public class PlayerCharacter : MonoBehaviour
         if (!isActive && Input.GetKeyDown(KeyCode.C))
         {
             isActive = true;
-            movementInputReader.Subscribe(movementController);
-            weaponHandler.SetCombatInputReader(combatInputReader);
         }
     }
 

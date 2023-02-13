@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class PoolImplementorTests
+    public class Pool_tests
     {
         private const string FIRST_POOL = "First";
         private const string SECOND_POOL = "Second";

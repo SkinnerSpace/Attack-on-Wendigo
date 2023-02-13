@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-public class FunctionTimer : MonoBehaviour
+public class FunctionTimer : MonoBehaviour, IFunctionTimer
 {
     private Dictionary<string, FunctionTimerInstance> activeTimers = new Dictionary<string, FunctionTimerInstance>();
     private Action onUpdate;
@@ -12,10 +12,7 @@ public class FunctionTimer : MonoBehaviour
         onUpdate?.Invoke();
     }
 
-    public void Set(string timerName, float time, Action action)
-    {
-        Set(timerName, time, new Clock(), action);
-    }
+    public void Set(string timerName, float time, Action action) => Set(timerName, time, new Clock(), action);
 
     public void Set(string timerName, float time, IClock clock, Action action)
     {
@@ -42,8 +39,10 @@ public class FunctionTimer : MonoBehaviour
         }
     }
 
-    public bool TimerExist(string timerName)
-    {
-        return activeTimers.ContainsKey(timerName);
-    }
+    public bool TimerExist(string timerName) => activeTimers.ContainsKey(timerName);
+}
+
+public interface IFunctionTimer
+{
+
 }

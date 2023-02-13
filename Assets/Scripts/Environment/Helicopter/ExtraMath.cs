@@ -9,6 +9,18 @@ public static class ExtraMath
         return Mathf.Lerp(Bx, By, lerp);
     }
 
+    public static float Negative(this float value) => value * -1f;
+
+    public static Vector2 FlatV2(this Vector3 vector) => new Vector2(vector.x, vector.z);
+
+    public static Vector3 Round(this Vector3 vector, int size)
+    {
+        vector.x = Mathf.Round(vector.x / size) * size;
+        vector.y = Mathf.Round(vector.y / size) * size;
+        vector.z = Mathf.Round(vector.z / size) * size;
+        return vector;
+    }
+
     public static float QuadEaseOut(float t) => 1f - QuadEaseIn(1f - t);
 
     public static float QuadEaseIn(float t) => t * t;

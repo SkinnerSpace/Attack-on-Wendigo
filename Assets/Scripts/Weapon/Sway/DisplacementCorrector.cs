@@ -43,7 +43,7 @@ public class DisplacementCorrector : MonoBehaviour
 
     private void DoTransition()
     {
-        currentTime += Chronos.DeltaTime;
+        currentTime += OldChronos.DeltaTime;
         Move(GetTransition());
     }
 

@@ -11,7 +11,7 @@ public class Charger : MonoBehaviour
 
     public void Charge()
     {
-        currentTime += Chronos.DeltaTime;
+        currentTime += OldChronos.DeltaTime;
         charge = GetCharge(currentTime);
         power = GetPower(charge);
     }

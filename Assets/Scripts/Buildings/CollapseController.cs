@@ -68,7 +68,7 @@ public class CollapseController : MonoBehaviour
 
     private void KeepDestroying()
     {
-        currentTime += Chronos.DeltaTime;
+        currentTime += OldChronos.DeltaTime;
         completeness = currentTime / estimations.time;
         notifyOnUpdate(completeness);
 

@@ -10,7 +10,7 @@ public class PlayerVerticalMovement : MonoBehaviour
 
     private PlayerCharacter player;
     //private CharacterController controller;
-    private PlayerGroundDetector groundDetector;
+    private GroundDetectorBehavior groundDetector;
     //private JumpController jumpHandler;
     private PlayerDashHandler dashHandler;
 
@@ -20,7 +20,7 @@ public class PlayerVerticalMovement : MonoBehaviour
     {
         player = GetComponent<PlayerCharacter>();
         //controller = GetComponent<CharacterController>();
-        groundDetector = GetComponent<PlayerGroundDetector>();
+        groundDetector = GetComponent<GroundDetectorBehavior>();
         //jumpHandler = GetComponent<JumpController>();
         dashHandler = GetComponent<PlayerDashHandler>();
     }
@@ -35,16 +35,16 @@ public class PlayerVerticalMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        groundDetector.UpdateDetection();
+        //groundDetector.UpdateDetection();
     }
 
     private void HandleMovement()
     {
-        if (groundDetector.isGrounded)
+        if (data.IsGrounded)
         {
             data.VerticalVelocity = 0f;
         }
-        else if (!groundDetector.isGrounded && !dashHandler.isSoaring)
+        else if (!data.IsGrounded && !dashHandler.isSoaring)
         {
             data.VerticalVelocity -= player.Gravity * Time.deltaTime;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public static class Chronos
+public class Chronos : IChronos
 {
-    public static float DeltaTime => Time.deltaTime;
+    public float DeltaTime => Time.deltaTime;
 }
 

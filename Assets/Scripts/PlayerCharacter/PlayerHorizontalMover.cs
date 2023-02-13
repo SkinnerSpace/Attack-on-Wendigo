@@ -26,13 +26,13 @@ public class PlayerHorizontalMover : MonoBehaviour, IPushable, IMovementControll
 
     private void Update()
     {
-        velocity = (movementVelocity + forceVelocity) * resistance;
+        /*velocity = (movementVelocity + forceVelocity) * resistance;
         forceVelocity = DecelerateForce();
 
         player.horizontalVelocity = velocity;
         characterController.Move(velocity * Time.deltaTime);
 
-        NotifyOnChange();
+        NotifyOnChange();*/
     }
 
     public void Move(Vector3 inDirection)

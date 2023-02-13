@@ -28,7 +28,7 @@ public class RagdollPuller : MonoBehaviour
     {
         if (isPulling)
         {
-            currentTime += Chronos.DeltaTime;
+            currentTime += OldChronos.DeltaTime;
 
             float forcePercent = Mathf.InverseLerp(0f, timeOut, currentTime);
             force = Mathf.Lerp(maxForce, 0f, forcePercent);

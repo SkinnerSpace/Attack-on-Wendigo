@@ -4,7 +4,7 @@ public class PlayerDashHandler : MonoBehaviour
 {
     private const float DOWN_MULTIPLIER = 2f;
     private const float COOL_DOWN_TIME = 0.5f;
-    private const float SOARING_TIME = 0.1f;
+    private const float SOARING_TIME = 0.1f; 
 
     [SerializeField] private PlayerLook look;
 

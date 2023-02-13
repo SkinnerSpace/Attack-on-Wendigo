@@ -1,8 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class InputReader : MonoBehaviour
 {
-    [SerializeField] protected UniversalInputReader input;
-    [SerializeField] protected KeyBinds keys;
-}
+    protected UniversalInputReader input;
+    protected KeyBinds keys;
 
+    private void Awake()
+    {
+        input = GetComponent<UniversalInputReader>();
+        keys = GetComponent<KeyBinds>();
+    }
+}

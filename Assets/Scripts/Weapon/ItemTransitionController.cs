@@ -32,7 +32,7 @@ public class ItemTransitionController : MonoBehaviour
 
     private void CarryOn()
     {
-        currentTime += Chronos.DeltaTime;
+        currentTime += OldChronos.DeltaTime;
         float transition = GetTransition(currentTime);
         positionSetter.Displace(transition);
     }
