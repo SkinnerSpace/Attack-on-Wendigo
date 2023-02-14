@@ -8,7 +8,10 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private float speed;
     [SerializeField] private float groundDeceleration;
     [SerializeField] private float airDeceleration;
+
+    [Header("Dash")]
     [SerializeField] private float dashDistance;
+    [SerializeField] private float dashCoolDownTime;
 
     [Header("Jump")]
     [SerializeField] private float gravity;
@@ -24,11 +27,9 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
     public Vector3 Forward => transform.forward;
-
     public Vector3 Right => transform.right;
-
     public Vector3 Up => transform.up;
-
+    public Vector3 Euler => transform.eulerAngles;
 
     public float Height => controller.height;
 
@@ -37,7 +38,11 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float Deceleration { get; set; }
     public float GroundDeceleration => groundDeceleration;
     public float AirDeceleration => airDeceleration;
+
+    public bool IsAbleToDash { get; set; }
+    public Vector3 DashDirection { get; set; }
     public float DashDistance => dashDistance;
+    public float DashCoolDownTime => dashCoolDownTime;
     public Vector3 Velocity => new Vector3(flatVelocity.x, verticalVelocity, flatVelocity.y);
 
     public Vector2 FlatVelocity { get { return flatVelocity; } set { flatVelocity = value; } }

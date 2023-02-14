@@ -282,6 +282,7 @@ MonoBehaviour:
   groundDeceleration: 20
   airDeceleration: 15
   dashDistance: 10
+  dashCoolDownTime: 0.3
   gravity: 26
   jumpHeight: 3
   maxJumpCount: 2
@@ -375,6 +376,7 @@ MonoBehaviour:
   data: {fileID: 61735261016310312}
   controller: {fileID: 7181526249658469568}
   groundDetector: {fileID: 2175779166000222748}
+  timer: {fileID: 7254224541728550267}
 --- !u!1 &7584302398406140779
 GameObject:
   m_ObjectHideFlags: 0

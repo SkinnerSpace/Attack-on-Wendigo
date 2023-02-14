@@ -6,6 +6,7 @@ public class MainController : MonoBehaviour
     [SerializeField] private CharacterData data;
     [SerializeField] private CharacterController controller;
     [SerializeField] private GroundDetectorBehavior groundDetector;
+    [SerializeField] private FunctionTimer timer;
 
     private IChronos chronos;
 
@@ -21,7 +22,7 @@ public class MainController : MonoBehaviour
 
         movementController = new MovementController(data, chronos);
         jumpController = new JumpController(data);
-        dashController = new DashController(data, chronos);
+        dashController = new DashController(data, chronos, timer);
         gravityController = new GravityController(data, chronos);
         decelerationController = new DecelerationController(data, chronos);
         
@@ -34,6 +35,7 @@ public class MainController : MonoBehaviour
     private void ConnectInputReaders()
     {
         mainInputReader.GetInputReader<MovementInputReader>().Subscribe(movementController);
+        mainInputReader.GetInputReader<MovementInputReader>().Subscribe(dashController);
         mainInputReader.GetInputReader<JumpInputReader>().Subscribe(jumpController);
         mainInputReader.GetInputReader<DashInputReader>().Subscribe(dashController);
     }

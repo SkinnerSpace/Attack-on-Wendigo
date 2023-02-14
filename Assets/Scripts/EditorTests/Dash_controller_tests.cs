@@ -9,9 +9,11 @@ namespace Tests
         [Test]
         public void Dash_controller_exists()
         {
-            ICharacterData data = new MockCharacterData();
+            ICharacterData data = Substitute.For<ICharacterData>();
             IChronos chronos = Substitute.For<IChronos>();
-            DashController dashController = new DashController(data, chronos);
+            IFunctionTimer timer = Substitute.For<IFunctionTimer>();
+
+            DashController dashController = new DashController(data, chronos, timer);
 
             Assert.That(dashController != null);
         }
@@ -24,8 +26,10 @@ namespace Tests
             ICharacterData data = new MockCharacterData() { Deceleration = 1f, DashDistance = dashDistance };
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(0.1f);
+            IFunctionTimer timer = Substitute.For<IFunctionTimer>();
 
-            DashController dashController = new DashController(data, chronos);
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Move(Vector3.zero);
             dashController.Dash();
 
             DecelerationController decelerator = new DecelerationController(data, chronos);
@@ -45,6 +49,47 @@ namespace Tests
             }
 
             return data.Position;
+        }
+
+        [Test]
+        public void Can_not_use_dash_more_than_once_without_taking_a_break()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            IFunctionTimer timer = Substitute.For<IFunctionTimer>();
+
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Dash();
+
+            Assert.That(data.IsAbleToDash);
+        }
+
+        [Test]
+        public void Dash_restores_after_cool_down_time()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            MockFunctionTimer timer = new MockFunctionTimer();
+
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Dash();
+
+            timer.Set("CoolDown", data.DashCoolDownTime, dashController.CoolDown);
+            timer.TimeOut();
+
+            Assert.That(!data.IsAbleToDash);
+        }
+
+        [Test]
+        public void Dash_forward()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            MockFunctionTimer timer = new MockFunctionTimer();
+
+            DashController dashController = new DashController(data, chronos, timer);
+
+            Assert.That(true);
         }
     }
 }

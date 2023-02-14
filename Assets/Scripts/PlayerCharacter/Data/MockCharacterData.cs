@@ -22,13 +22,16 @@ public class MockCharacterData : ICharacterData
     public float GroundDetectionHeight { get; set; }
 
     public Vector3 Forward { get; set; } = Vector3.forward;
-
     public Vector3 Right { get; set; } = Vector3.right;
-
     public Vector3 Up { get; set; } = Vector3.up;
+    public Vector3 Euler { get; set; }
 
     public float Speed { get; set; }
+
+    public bool IsAbleToDash { get; set; }
+    public Vector3 DashDirection { get; set; }
     public float DashDistance { get; set; }
+    public float DashCoolDownTime { get; set; }
 
     public float Deceleration { get; set; }
     public float GroundDeceleration { get; set; }

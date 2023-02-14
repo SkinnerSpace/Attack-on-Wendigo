@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 
 public class DashInputReader : InputReader
 {
@@ -9,6 +10,7 @@ public class DashInputReader : InputReader
         if (input.Pressed(keys.Dash)) onDash?.Invoke();
     }
 
-    public void Subscribe(DashController observer) => onDash += observer.Dash;
-    public void Unsubscribe(DashController observer) => onDash -= observer.Dash;
+    public void Subscribe(IDashController observer) => onDash += observer.Dash;
+    public void Unsubscribe(IDashController observer) => onDash -= observer.Dash;
 }
+

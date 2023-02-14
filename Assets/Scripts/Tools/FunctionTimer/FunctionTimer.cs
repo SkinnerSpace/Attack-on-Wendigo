@@ -4,45 +4,40 @@ using System;
 
 public class FunctionTimer : MonoBehaviour, IFunctionTimer
 {
-    private Dictionary<string, FunctionTimerInstance> activeTimers = new Dictionary<string, FunctionTimerInstance>();
-    private Action onUpdate;
+    private Dictionary<string, DelayedAction> delayedActions = new Dictionary<string, DelayedAction>();
+    private IChronos chronos;
 
-    private void Update()
-    {
-        onUpdate?.Invoke();
-    }
+    private event Action<float> onTick;
 
-    public void Set(string timerName, float time, Action action) => Set(timerName, time, new Clock(), action);
+    private void Awake() => chronos = new Chronos();
 
-    public void Set(string timerName, float time, IClock clock, Action action)
+    private void Update() => onTick?.Invoke(chronos.DeltaTime);
+
+    public void Set(string timerName, float time, Action action)
     {
         Stop(timerName);
 
-        FunctionTimerInstance functionTimer = new FunctionTimerInstance(timerName, time, clock, action, this);
-        onUpdate += functionTimer.Update;
+        DelayedAction delayedAction = new DelayedAction(timerName, time, action, RemoveTimer);
+        onTick += delayedAction.Update;
 
-        activeTimers.Add(timerName, functionTimer);
+        delayedActions.Add(timerName, delayedAction);
     }
 
     public void Stop(string timerName)
     {
         if (TimerExist(timerName))
-            activeTimers[timerName].Stop();
+            delayedActions[timerName].Stop();
     }
 
     public void RemoveTimer(string timerName)
     {
         if (TimerExist(timerName))
         {
-            onUpdate -= activeTimers[timerName].Update;
-            activeTimers.Remove(timerName);
+            onTick -= delayedActions[timerName].Update;
+            delayedActions.Remove(timerName);
         }
     }
 
-    public bool TimerExist(string timerName) => activeTimers.ContainsKey(timerName);
-}
-
-public interface IFunctionTimer
-{
-
+    public bool TimerExist(string timerName) => delayedActions.ContainsKey(timerName);
+    public float GetTimeLeft(string timeName) => delayedActions[timeName].GetTimeLeft();
 }
