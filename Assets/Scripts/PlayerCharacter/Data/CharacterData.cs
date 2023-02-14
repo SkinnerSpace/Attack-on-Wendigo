@@ -24,12 +24,15 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     [Header("Components")]
     [SerializeField] private CharacterController controller;
+    [SerializeField] private Camera cam;
 
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
     public Vector3 Forward => transform.forward;
     public Vector3 Right => transform.right;
     public Vector3 Up => transform.up;
-    public Vector3 Euler => transform.eulerAngles;
+    public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
+    public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }
+    public Vector3 CameraEuler { get { return cam.transform.eulerAngles; } set { cam.transform.eulerAngles = value; } }
 
     public float Height => controller.height;
 
@@ -40,7 +43,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float AirDeceleration => airDeceleration;
 
     public bool IsAbleToDash { get; set; }
-    public Vector3 DashDirection { get; set; }
+    public Vector2 DashDirection { get; set; }
     public float DashDistance => dashDistance;
     public float DashCoolDownTime => dashCoolDownTime;
     public Vector3 Velocity => new Vector3(flatVelocity.x, verticalVelocity, flatVelocity.y);

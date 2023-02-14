@@ -4,12 +4,10 @@ using System;
 
 public class FunctionTimer : MonoBehaviour, IFunctionTimer
 {
+    [SerializeField] private Chronos chronos;
     private Dictionary<string, DelayedAction> delayedActions = new Dictionary<string, DelayedAction>();
-    private IChronos chronos;
 
     private event Action<float> onTick;
-
-    private void Awake() => chronos = new Chronos();
 
     private void Update() => onTick?.Invoke(chronos.DeltaTime);
 

@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &466748505696404022
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7559064758374433838}
-  - component: {fileID: 5364586115138098924}
-  m_Layer: 13
-  m_Name: StompHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7559064758374433838
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466748505696404022}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5364586115138098924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466748505696404022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b009417a51205ef42971f598084ead2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 61735261016310312}
-  surfaceDetectorSubject: {fileID: 5349332055050671111}
 --- !u!1 &1446330999445019643
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5914274010727276762
 MonoBehaviour:
@@ -88,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e7d7b776a2c0243b28816790cff9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovement: {fileID: 5716060233150994623}
-  groundDetector: {fileID: 0}
+  data: {fileID: 61735261016310312}
+  chronos: {fileID: 8860424869380561027}
   snowFootstepSFX:
     Guid:
       Data1: -1602073474
@@ -104,10 +59,6 @@ MonoBehaviour:
       Data3: 1686102408
       Data4: 639327713
     Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
-  stepSpacing: 5
-  variety: 5
-  minPitch: -2
-  maxPitch: 2
 --- !u!1 &2170787529287074303
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,9 +87,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3136951233119545342
+--- !u!1 &6071368221266126489
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,57 +97,56 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 253600506425781668}
-  - component: {fileID: 5349332055050671111}
-  - component: {fileID: 6522881295719323651}
+  - component: {fileID: 6173026020805357737}
+  - component: {fileID: 7884197101967193383}
+  - component: {fileID: 8336202739660824350}
   m_Layer: 13
-  m_Name: SurfaceDetector
+  m_Name: DetectorsRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &253600506425781668
+--- !u!4 &6173026020805357737
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136951233119545342}
+  m_GameObject: {fileID: 6071368221266126489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5349332055050671111
+--- !u!114 &7884197101967193383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136951233119545342}
+  m_GameObject: {fileID: 6071368221266126489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce30b82a8ed41640bcd646fe178808b, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe328895cca50d4c9091639934291b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 61735261016310312}
-  probeTaker: {fileID: 6522881295719323651}
-  groundDetectorSubject: {fileID: 2175779166000222748}
---- !u!114 &6522881295719323651
+--- !u!114 &8336202739660824350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136951233119545342}
+  m_GameObject: {fileID: 6071368221266126489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cb1c536d77a934c8bfd5f14d78993b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09ebb3b23eac5fc4b983dbac2d504633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 61735261016310312}
 --- !u!1 &6176119535850529057
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,14 +156,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6176119535850529056}
-  - component: {fileID: 6146795615001241510}
   - component: {fileID: 61735261016310312}
-  - component: {fileID: 5845931283795517954}
-  - component: {fileID: 5716060233150994623}
-  - component: {fileID: 6036142253385846663}
-  - component: {fileID: 7254224541728550267}
-  - component: {fileID: 7181526249658469568}
   - component: {fileID: 402587302504087578}
+  - component: {fileID: 5845931283795517954}
+  - component: {fileID: 7254224541728550267}
+  - component: {fileID: 8860424869380561027}
+  - component: {fileID: 7181526249658469568}
   m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
@@ -232,40 +180,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7934790393680627930}
-  - {fileID: 253600506425781668}
-  - {fileID: 7559064758374433838}
+  - {fileID: 6173026020805357737}
   - {fileID: 4249632368387092724}
   - {fileID: 8752990138465119577}
-  - {fileID: 4424905859504793801}
   - {fileID: 5801301066778041583}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6146795615001241510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176119535850529057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 671c0149394e8574fbb916f49561fb78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  movementController: {fileID: 0}
-  weaponHandler: {fileID: 0}
-  minSpeed: 10
-  maxSpeed: 15
-  acceleration: 0.5
-  deceleration: 10
-  dashDistance: 10
-  jumpHeight: 3
-  gravity: 26
-  horizontalVelocity: {x: 0, y: 0, z: 0}
-  verticalVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &61735261016310312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +210,24 @@ MonoBehaviour:
   groundDetectionRadius: 0.6
   groundDetectionHeight: 0.5
   controller: {fileID: 7181526249658469568}
+  cam: {fileID: 0}
+--- !u!114 &402587302504087578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainInputReader: {fileID: 0}
+  data: {fileID: 61735261016310312}
+  controller: {fileID: 7181526249658469568}
+  timer: {fileID: 7254224541728550267}
+  chronos: {fileID: 8860424869380561027}
 --- !u!114 &5845931283795517954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,35 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63badfdaffbbc584e927d278d2391644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5716060233150994623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176119535850529057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237eae9efec128f4aa215b1267b9a64e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 6146795615001241510}
-  characterController: {fileID: 7181526249658469568}
-  speedometer: {fileID: 764975185769255422}
-  cam: {fileID: 0}
---- !u!114 &6036142253385846663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176119535850529057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 908f90fffef56304d9c2c6ce512dcd61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  look: {fileID: 0}
 --- !u!114 &7254224541728550267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +250,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chronos: {fileID: 8860424869380561027}
+--- !u!114 &8860424869380561027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!143 &7181526249658469568
@@ -360,23 +283,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &402587302504087578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176119535850529057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainInputReader: {fileID: 0}
-  data: {fileID: 61735261016310312}
-  controller: {fileID: 7181526249658469568}
-  groundDetector: {fileID: 2175779166000222748}
-  timer: {fileID: 7254224541728550267}
 --- !u!1 &7584302398406140779
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,106 +311,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8799828410786061720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7934790393680627930}
-  - component: {fileID: 2175779166000222748}
-  - component: {fileID: 3885848036782461580}
-  m_Layer: 13
-  m_Name: GroundDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7934790393680627930
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8799828410786061720}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2175779166000222748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8799828410786061720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a9f4575c30e3c459b015353bae4ba8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 61735261016310312}
-  detector: {fileID: 3885848036782461580}
---- !u!114 &3885848036782461580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8799828410786061720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cac4d9d6ef415442a3515455dff0f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &8827623575968643476
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4424905859504793801}
-  - component: {fileID: 764975185769255422}
-  m_Layer: 13
-  m_Name: Speedometer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4424905859504793801
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827623575968643476}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6176119535850529056}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &764975185769255422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827623575968643476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f9e013650348fb4a9d29187e9142270, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

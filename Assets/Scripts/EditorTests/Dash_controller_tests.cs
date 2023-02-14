@@ -88,8 +88,48 @@ namespace Tests
             MockFunctionTimer timer = new MockFunctionTimer();
 
             DashController dashController = new DashController(data, chronos, timer);
+            dashController.Move(Vector3.forward);
 
-            Assert.That(true);
+            Assert.AreEqual(new Vector2(0f, 1f), data.DashDirection.Round(1));
+        }
+
+        [Test]
+        public void Dash_right()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            MockFunctionTimer timer = new MockFunctionTimer();
+
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Move(Vector3.right);
+
+            Assert.AreEqual(new Vector2(1f, 0f), data.DashDirection.Round(1));
+        }
+
+        [Test]
+        public void Dash_backward()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            MockFunctionTimer timer = new MockFunctionTimer();
+
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Move(Vector3.back);
+
+            Assert.AreEqual(new Vector2(0f, -1f), data.DashDirection.Round(1));
+        }
+
+        [Test]
+        public void Dash_left()
+        {
+            ICharacterData data = Substitute.For<ICharacterData>();
+            IChronos chronos = Substitute.For<IChronos>();
+            MockFunctionTimer timer = new MockFunctionTimer();
+
+            DashController dashController = new DashController(data, chronos, timer);
+            dashController.Move(Vector3.left);
+
+            Assert.AreEqual(new Vector2(-1f, 0f), data.DashDirection.Round(1));
         }
     }
 }

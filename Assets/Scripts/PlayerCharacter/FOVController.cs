@@ -9,11 +9,10 @@ public class FOVController : MonoBehaviour
 {
     private const float ADDITIONAL_FOV_MULTIPLIER = 0.75f;
 
-    [SerializeField] PlayerHorizontalMover horizontalMovement;
-
     [SerializeField] private float minFOV = 80f;
     [SerializeField] private float maxFOV = 100f;
     [SerializeField] private float defaultSmooth = 5f;
+    [SerializeField] private CharacterData data;
     
     private float additionalFOV;
     private float currentFOV;
@@ -29,7 +28,8 @@ public class FOVController : MonoBehaviour
 
     private void Update()
     {
-        UpdateFOV(horizontalMovement.velocityFOVModifier);
+        //Debug.Log(data.FlatVelocity.magnitude);
+        //UpdateFOV(horizontalMovement.velocityFOVModifier);
     }
 
     private void UpdateFOV(float magnitude)

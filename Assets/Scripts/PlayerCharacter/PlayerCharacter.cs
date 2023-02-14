@@ -6,7 +6,6 @@ public class PlayerCharacter : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private CharacterData data;
-    [SerializeField] private PlayerHorizontalMover movementController;
     [SerializeField] private WeaponHandler weaponHandler;
 
     [Header("Horizontal movement")]
@@ -38,7 +37,7 @@ public class PlayerCharacter : MonoBehaviour
     public Vector3 horizontalVelocity;
     public Vector3 verticalVelocity;
 
-    public static PlayerCharacter Instance { get; private set; }
+    //public static PlayerCharacter Instance { get; private set; }
 
     private bool isActive;
 
@@ -50,9 +49,9 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    private void Awake()
+    /*private void Awake()
     {
         Instance = this;
         Speed = MinSpeed;
-    }
+    }*/
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class KeyBinds : MonoBehaviour, IKeyBinds
 {
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     [Header("Mouse")]
     [Range(0f, 1000f)]
     [SerializeField] private float mouseSensitivity = 100f;
@@ -40,6 +41,5 @@ public class KeyBinds : MonoBehaviour, IKeyBinds
     public KeyCode Jump => jump;
     public KeyCode Dash => dash;
     public KeyCode Interact => interact;
-    
 }
 

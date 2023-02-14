@@ -26,7 +26,7 @@ public class DashController : IDashController, IMovementController
         if (direction.z > 0f) dashAngle = 0f;
 
         float rads = (data.Euler.y + dashAngle) * Mathf.Deg2Rad;
-        data.DashDirection = new Vector3(Mathf.Sin(rads), Mathf.Cos(rads));
+        data.DashDirection = new Vector2(Mathf.Sin(rads), Mathf.Cos(rads));
     }
 
     public void Dash()

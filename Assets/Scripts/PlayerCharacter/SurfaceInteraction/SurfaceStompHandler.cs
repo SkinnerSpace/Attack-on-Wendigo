@@ -1,14 +1,10 @@
 ﻿using UnityEngine;
 
-public class SurfaceStompHandler : MonoBehaviour, ISurfaceObserver
+public class SurfaceStompHandler : ISurfaceObserver
 {
-    [SerializeField] private CharacterData data;
-    [SerializeField] private SurfaceDetectorBehavior surfaceDetectorSubject;
+    private ICharacterData data;
 
-    private void Start()
-    {
-        surfaceDetectorSubject.Subscribe(this);
-    }
+    public SurfaceStompHandler(ICharacterData data) => this.data = data;
 
     public void OnSurfaceFound(SurfaceProbe probe) => HitTheSurface(probe);
 

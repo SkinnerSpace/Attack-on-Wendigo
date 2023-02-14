@@ -1,27 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
-public class GroundDetectionHandler
+public class GroundDetectorController
 {
     private ICharacterData data;
     private IGroundDetector detector;
 
     private event Action notifyOnGrounded;
-    private event Action notifyOnOffTheGround;
 
-    public GroundDetectionHandler(ICharacterData data, IGroundDetector detector)
+    public GroundDetectorController(ICharacterData data, IGroundDetector detector)
     {
         this.data = data;
         this.detector = detector;
     }
 
     public void Subscribe(IGroundObserver observer) => notifyOnGrounded += observer.OnGrounded;
-
     public void Unsubscribe(IGroundObserver observer) => notifyOnGrounded -= observer.OnGrounded;
-
-    public void SubscribeOnOffTheGround(IOffTheGroundObserver observer) => notifyOnOffTheGround += observer.OnOffTheGround;
-
-    public void UnsubscribeFromOffTheGround(IOffTheGroundObserver observer) => notifyOnOffTheGround -= observer.OnOffTheGround;
 
     public void Update()
     {
@@ -36,10 +30,7 @@ public class GroundDetectionHandler
 
     private void NotifyOnChange()
     {
-        if ((data.WasGrounded != data.IsGrounded))
-        {
-            if (data.IsGrounded) notifyOnGrounded?.Invoke();
-            else notifyOnOffTheGround?.Invoke();
-        }
+        if ((data.WasGrounded != data.IsGrounded) && data.IsGrounded)
+            notifyOnGrounded?.Invoke();
     }
 }

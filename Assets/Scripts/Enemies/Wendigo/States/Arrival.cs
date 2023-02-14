@@ -25,7 +25,7 @@ public class Arrival : IState
 
     private void SetTarget()
     {
-        wendigo.SetTarget(PlayerCharacter.Instance.transform);
+        //wendigo.SetTarget(PlayerCharacter.Instance.transform);
     }
 }
 

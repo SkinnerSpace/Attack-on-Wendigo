@@ -6,7 +6,9 @@ public interface ICharacterData
     Vector3 Forward { get; }
     Vector3 Right { get; }
     Vector3 Up { get; }
-    Vector3 Euler { get; }
+    Vector3 Euler { get; set; }
+    Quaternion CameraRotation { get; set; }
+    Vector3 CameraEuler { get; set; }
 
     float Height { get; }
     Vector3 Velocity { get; }
@@ -30,7 +32,7 @@ public interface ICharacterData
     float AirDeceleration { get; }
 
     bool IsAbleToDash { get; set; }
-    Vector3 DashDirection { get; set; }
+    Vector2 DashDirection { get; set; }
     float DashDistance { get; }
     float DashCoolDownTime { get; }
 }

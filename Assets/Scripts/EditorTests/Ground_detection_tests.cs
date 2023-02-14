@@ -11,7 +11,7 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData();
             IGroundDetector detector = Substitute.For<IGroundDetector>();
-            GroundDetectionHandler groundDetectionHandler = new GroundDetectionHandler(data, detector);
+            GroundDetectorController groundDetectionHandler = new GroundDetectorController(data, detector);
 
             Assert.That(groundDetectionHandler != null);
         }
@@ -22,7 +22,7 @@ namespace Tests
             ICharacterData data = new MockCharacterData();
             IGroundDetector detector = new MockGroundDetector(true);
 
-            GroundDetectionHandler groundDetectionHandler = new GroundDetectionHandler(data, detector);
+            GroundDetectorController groundDetectionHandler = new GroundDetectorController(data, detector);
             groundDetectionHandler.Update();
 
             Assert.That(data.IsGrounded);
@@ -33,7 +33,7 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData();
             IGroundDetector detector = new MockGroundDetector(true);
-            GroundDetectionHandler groundDetectionHandler = new GroundDetectionHandler(data, detector);
+            GroundDetectorController groundDetectionHandler = new GroundDetectorController(data, detector);
 
             IGroundObserver observer = Substitute.For<IGroundObserver>();
             groundDetectionHandler.Subscribe(observer);
@@ -49,29 +49,12 @@ namespace Tests
             ICharacterData data = new MockCharacterData();
             MockGroundDetector detector = new MockGroundDetector(true);
 
-            GroundDetectionHandler groundDetectionHandler = new GroundDetectionHandler(data, detector);
+            GroundDetectorController groundDetectionHandler = new GroundDetectorController(data, detector);
             groundDetectionHandler.Update();
             detector.SetState(false);
             groundDetectionHandler.Update();
 
             Assert.That(!data.IsGrounded);
-        }
-
-        [Test]
-        public void Ground_observers_are_notified_on_off_the_ground()
-        {
-            ICharacterData data = new MockCharacterData();
-            MockGroundDetector detector = new MockGroundDetector(true);
-            GroundDetectionHandler groundDetectionHandler = new GroundDetectionHandler(data, detector);
-
-            IOffTheGroundObserver observer = Substitute.For<IOffTheGroundObserver>();
-            groundDetectionHandler.SubscribeOnOffTheGround(observer);
-
-            groundDetectionHandler.Update();
-            detector.SetState(false);
-            groundDetectionHandler.Update();
-
-            observer.Received().OnOffTheGround();
         }
     }
 }

@@ -1,70 +1,32 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class FootstepsSFXPlayer : MonoBehaviour
 {
-    [Header("Required Components")]
-    [SerializeField] private PlayerHorizontalMover horizontalMovement;
-    [SerializeField] private GroundDetectorBehavior groundDetector;
+    [Header("Components")]
+    [SerializeField] private CharacterData data;
+    [SerializeField] private Chronos chronos;
 
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference snowFootstepSFX;
     [SerializeField] private FMODUnity.EventReference concreteFootStepSFX;
 
-    [Header("Settings")]
-    [SerializeField] private float stepSpacing = 5f;
-    [SerializeField] private int variety = 5;
-    [SerializeField] private float minPitch = -2f;
-    [SerializeField] private float maxPitch = 2f;
-
-    private float stepProgress;
-    private bool firstStepIsMade = false;
-
     private AudioPlayer audioPlayer;
+    private Walker walker;
 
     private void Awake()
     {
-        audioPlayer = AudioPlayer.Create(snowFootstepSFX).WithPitch(minPitch, maxPitch).WithVariety(variety);
+        audioPlayer = AudioPlayer.Create(snowFootstepSFX).WithPitch(-2f, 2f).WithVariety(5);
+        walker = new Walker(data, chronos);
     }
 
     private void Update()
     {
-        bool isGrounded = true;//groundDetector.isGrounded;
-        float distance = horizontalMovement.velocity.magnitude * Time.deltaTime;
-
-        Walk(isGrounded, distance);
-        PlaySFXIfStepped();
+        walker.Walk(PlaySFX);
     }
 
-    private void Walk(bool isGrounded, float distance)
+    private void PlaySFX()
     {
-        if (isGrounded && distance > 0.1f)
-        {
-            MakeAStep(distance);
-        }
-        else
-        {
-            Interrupt();
-        }
-    }
-
-    private void MakeAStep(float distance)
-    {
-        stepProgress = firstStepIsMade ? (stepProgress + distance) : stepSpacing;
-        firstStepIsMade = true;
-    }
-
-    private void Interrupt()
-    {
-        firstStepIsMade = false;
-        stepProgress = 0f;
-    }
-
-    private void PlaySFXIfStepped()
-    {
-        if (stepProgress >= stepSpacing)
-        {
-            stepProgress -= stepSpacing;
-            audioPlayer.PlayOneShot();
-        }
+        audioPlayer.PlayOneShot();
     }
 }

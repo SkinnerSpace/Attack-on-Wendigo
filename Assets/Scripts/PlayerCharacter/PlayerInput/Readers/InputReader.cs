@@ -3,12 +3,12 @@ using UnityEngine;
 
 public abstract class InputReader : MonoBehaviour
 {
-    protected UniversalInputReader input;
+    protected UnityInputReader input;
     protected KeyBinds keys;
 
     private void Awake()
     {
-        input = GetComponent<UniversalInputReader>();
+        input = GetComponent<UnityInputReader>();
         keys = GetComponent<KeyBinds>();
     }
 }

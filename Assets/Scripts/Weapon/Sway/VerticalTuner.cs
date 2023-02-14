@@ -9,18 +9,20 @@ public static class VerticalTuner
 {
     public static float ReduceVerticalInput(float inputY)
     {
-        float lerp = Mathf.Abs(PlayerVerticalMovement.velocityMagnitude);
+        /*float lerp = Mathf.Abs(PlayerVerticalMovement.velocityMagnitude);
         float adjustedInputY = Mathf.Lerp(inputY, 0f, lerp);
 
-        return adjustedInputY;
+        return adjustedInputY;*/
+        return 1f;
     }
 
     public static float IncreaseVerticalInput(float inputY, float verticalAdjustment, float landAdjustment)
     {
-        float adjustedInputY = inputY +
+        /*float adjustedInputY = inputY +
             (PlayerVerticalMovement.velocityMagnitude * verticalAdjustment);// + 
             //(PlayerGroundDetector.landMagnitude);
 
-        return adjustedInputY;
+        return adjustedInputY;*/
+        return 1f;
     }
 }

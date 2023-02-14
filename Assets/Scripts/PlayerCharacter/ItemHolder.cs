@@ -50,7 +50,7 @@ public class ItemHolder : MonoBehaviour, IHolder
 
     private void DropAnItem()
     {
-        if (OldInputReader.interact && weapon.isReady)
+        if (Input.GetKey(KeyCode.E) && weapon.isReady)
         {
             Vector3 dropVelocity = GetDropVelocity();
             ResetWeapon();

@@ -58,9 +58,9 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
     {
         Vector2 oscillation = oscillationOn ? oscillator.movement : Vector2.one;
 
-        input = new Vector2(
+        /*input = new Vector2(
             OldInputReader.mouse.x + oscillation.x,
-            OldInputReader.mouse.y + oscillation.y);
+            OldInputReader.mouse.y + oscillation.y);*/
     }
 
     private void UpdateActiveDisplacers()

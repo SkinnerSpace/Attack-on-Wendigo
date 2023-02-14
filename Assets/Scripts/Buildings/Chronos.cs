@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Chronos : IChronos
+public class Chronos : MonoBehaviour, IChronos
 {
     public float DeltaTime => Time.deltaTime;
 }

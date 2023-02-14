@@ -12,6 +12,7 @@ public class WendigoSpawner : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject wendigoPrefab;
+    [SerializeField] private Transform target;
 
     public void Launch()
     {
@@ -32,7 +33,7 @@ public class WendigoSpawner : MonoBehaviour
 
     private void TurnToTarget(Transform wendigo)
     {
-        wendigo.LookAt(PlayerCharacter.Instance.transform);
+        wendigo.LookAt(target.transform);
         wendigo.eulerAngles = new Vector3(0f, wendigo.eulerAngles.y, 0f);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SurfaceProbeTaker : MonoBehaviour, ISurfaceProbeTaker
+public class SurfaceProbeTaker : ISurfaceProbeTaker
 {
     public SurfaceProbe TakeAProbe(Ray ray)
     {

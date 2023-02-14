@@ -5,35 +5,46 @@ public class MainController : MonoBehaviour
     [SerializeField] private MainInputReader mainInputReader;
     [SerializeField] private CharacterData data;
     [SerializeField] private CharacterController controller;
-    [SerializeField] private GroundDetectorBehavior groundDetector;
     [SerializeField] private FunctionTimer timer;
-
-    private IChronos chronos;
-
+    [SerializeField] private Chronos chronos;
+    
     private MovementController movementController;
     private JumpController jumpController;
     private DashController dashController;
+
+    private GroundDetectorController groundDetector;
+    private SurfaceDetector surfaceDetector;
+    private SurfaceStompHandler stompHandler;
+
     private GravityController gravityController;
     private DecelerationController decelerationController;
+    private CameraController cameraController;
 
     private void Awake()
     {
-        chronos = new Chronos();
-
+        cameraController = new CameraController(data, chronos);
         movementController = new MovementController(data, chronos);
         jumpController = new JumpController(data);
         dashController = new DashController(data, chronos, timer);
+
+        groundDetector = new GroundDetectorController(data, new GroundDetector());
+        surfaceDetector = new SurfaceDetector(data, new SurfaceProbeTaker());
+        stompHandler = new SurfaceStompHandler(data);
+
         gravityController = new GravityController(data, chronos);
         decelerationController = new DecelerationController(data, chronos);
-        
+
+        groundDetector.Subscribe(surfaceDetector);
         groundDetector.Subscribe(gravityController);
         groundDetector.Subscribe(jumpController);
+        surfaceDetector.Subscribe(stompHandler);
     }
 
     private void Start() => ConnectInputReaders();
 
     private void ConnectInputReaders()
     {
+        mainInputReader.GetInputReader<CameraInputReader>().Subscribe(cameraController);
         mainInputReader.GetInputReader<MovementInputReader>().Subscribe(movementController);
         mainInputReader.GetInputReader<MovementInputReader>().Subscribe(dashController);
         mainInputReader.GetInputReader<JumpInputReader>().Subscribe(jumpController);
@@ -42,6 +53,7 @@ public class MainController : MonoBehaviour
 
     private void Update()
     {
+        groundDetector.Update();
         gravityController.ApplyGravity();
         decelerationController.Decelerate();
     }

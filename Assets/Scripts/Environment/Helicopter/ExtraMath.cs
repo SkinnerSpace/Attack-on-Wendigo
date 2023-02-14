@@ -21,6 +21,13 @@ public static class ExtraMath
         return vector;
     }
 
+    public static Vector2 Round(this Vector2 vector, int size)
+    {
+        vector.x = Mathf.Round(vector.x / size) * size;
+        vector.y = Mathf.Round(vector.y / size) * size;
+        return vector;
+    }
+
     public static float QuadEaseOut(float t) => 1f - QuadEaseIn(1f - t);
 
     public static float QuadEaseIn(float t) => t * t;
