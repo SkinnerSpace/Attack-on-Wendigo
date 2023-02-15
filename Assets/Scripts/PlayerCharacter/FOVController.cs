@@ -5,42 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class FOVController : MonoBehaviour 
+public class FOVController
 {
-    private const float ADDITIONAL_FOV_MULTIPLIER = 0.75f;
+    // Max FOV
+    // Min FOV
 
-    [SerializeField] private float minFOV = 80f;
-    [SerializeField] private float maxFOV = 100f;
-    [SerializeField] private float defaultSmooth = 5f;
-    [SerializeField] private CharacterData data;
+    private ICharacterData data;
     
-    private float additionalFOV;
-    private float currentFOV;
-
-    private Camera cam;
-
-    private void Awake()
+    public FOVController(ICharacterData data)
     {
-        cam = GetComponent<Camera>();
-        currentFOV = minFOV;
-        additionalFOV = (maxFOV - minFOV) * ADDITIONAL_FOV_MULTIPLIER;
+        this.data = data;
     }
 
-    private void Update()
+    public void Update()
     {
-        //Debug.Log(data.FlatVelocity.magnitude);
-        //UpdateFOV(horizontalMovement.velocityFOVModifier);
-    }
-
-    private void UpdateFOV(float magnitude)
-    {
-        float targetFOV = minFOV + (additionalFOV * magnitude);
-        targetFOV = Mathf.Min(maxFOV, targetFOV);
-
-        float smooth = magnitude > 0f ? magnitude : (defaultSmooth * Time.deltaTime);
-
-        currentFOV = Mathf.Lerp(currentFOV, targetFOV, smooth);
-
-        cam.fieldOfView = currentFOV;
+        float maxVelocity = (data.Speed / data.Deceleration) * 4f;
+        float power = data.FlatVelocity.magnitude / maxVelocity;
+        power = Mathf.Clamp(power, 0f, 1f);
+        power = Easing.QuadEaseInOut(power);
     }
 }

@@ -19,6 +19,9 @@ public class MainController : MonoBehaviour
     private GravityController gravityController;
     private DecelerationController decelerationController;
     private CameraController cameraController;
+    private DampedSpring dampingSpring;
+
+    private FOVController fOVController;
 
     private void Awake()
     {
@@ -34,6 +37,11 @@ public class MainController : MonoBehaviour
         gravityController = new GravityController(data, chronos);
         decelerationController = new DecelerationController(data, chronos);
 
+        dampingSpring = new DampedSpring(data, chronos);
+
+        fOVController = new FOVController(data);
+
+        groundDetector.Subscribe(dampingSpring);
         groundDetector.Subscribe(surfaceDetector);
         groundDetector.Subscribe(gravityController);
         groundDetector.Subscribe(jumpController);
@@ -55,7 +63,9 @@ public class MainController : MonoBehaviour
     {
         groundDetector.Update();
         gravityController.ApplyGravity();
+        fOVController.Update();
         decelerationController.Decelerate();
+        dampingSpring.Update();
     }
 
     private void FixedUpdate()

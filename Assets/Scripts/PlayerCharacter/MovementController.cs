@@ -13,8 +13,8 @@ public class MovementController : IMovementController
     public void Move(Vector3 inDirection)
     {
         Vector2 direction = ((inDirection.x * data.Right) + (inDirection.z * data.Forward)).FlatV2();
-        Vector2 velocity = direction * data.Speed * chronos.DeltaTime;
-        data.FlatVelocity += velocity;
+        Vector2 acceleration = direction * data.Speed * chronos.DeltaTime;
+        data.FlatVelocity += acceleration;
     }
 }
 

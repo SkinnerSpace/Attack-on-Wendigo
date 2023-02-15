@@ -27,6 +27,7 @@ public class MockCharacterData : ICharacterData
     public Vector3 Euler { get; set; }
     public Quaternion CameraRotation { get; set; }
     public Vector3 CameraEuler { get; set; }
+    public Vector3 CameraLocalPos { get; set; }
 
     public float Speed { get; set; }
 
@@ -38,4 +39,12 @@ public class MockCharacterData : ICharacterData
     public float Deceleration { get; set; }
     public float GroundDeceleration { get; set; }
     public float AirDeceleration { get; set; }
+
+    public float DampedSpringPower { get; set; }
+    public float DampedSpringTime { get; set; }
+    public float DampedSpringAmplitude { get; set; }
+    public float CurrentDampedSpringTime { get; set; }
+
+    public float MinFOV { get; }
+    public float MaxFOV { get; }
 }

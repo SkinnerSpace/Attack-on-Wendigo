@@ -22,6 +22,14 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private float groundDetectionRadius;
     [SerializeField] private float groundDetectionHeight;
 
+    [Header("Damped Spring")]
+    [SerializeField] private float dampedSpringPower;
+    [SerializeField] private float dampedSpringTime;
+
+    [Header("FOV")]
+    [SerializeField] private float minFOV;
+    [SerializeField] private float maxFOV;
+
     [Header("Components")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Camera cam;
@@ -33,6 +41,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
     public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }
     public Vector3 CameraEuler { get { return cam.transform.eulerAngles; } set { cam.transform.eulerAngles = value; } }
+    public Vector3 CameraLocalPos { get { return cam.transform.localPosition; } set { cam.transform.localPosition = value; } }
 
     public float Height => controller.height;
 
@@ -65,4 +74,12 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     public float GroundDetectionRadius { get { return groundDetectionRadius; } set { groundDetectionRadius = value; } }
     public float GroundDetectionHeight { get { return groundDetectionHeight; } set { groundDetectionHeight = value; } }
+
+    public float DampedSpringPower => dampedSpringPower;
+    public float DampedSpringTime => dampedSpringTime;
+    public float DampedSpringAmplitude { get; set; }
+    public float CurrentDampedSpringTime { get; set; }
+
+    public float MinFOV => minFOV;
+    public float MaxFOV => maxFOV;
 }

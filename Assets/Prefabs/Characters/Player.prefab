@@ -209,6 +209,8 @@ MonoBehaviour:
   maxJumpCount: 2
   groundDetectionRadius: 0.6
   groundDetectionHeight: 0.5
+  dampedSpringPower: 1
+  dampedSpringTime: 0.5
   controller: {fileID: 7181526249658469568}
   cam: {fileID: 0}
 --- !u!114 &402587302504087578

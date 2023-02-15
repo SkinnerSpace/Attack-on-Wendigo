@@ -13,6 +13,8 @@ public static class ExtraMath
 
     public static Vector2 FlatV2(this Vector3 vector) => new Vector2(vector.x, vector.z);
 
+    public static float Round(this float value, float digits) => Mathf.Round(value * 10f * digits) / (10f * digits);
+
     public static Vector3 Round(this Vector3 vector, int size)
     {
         vector.x = Mathf.Round(vector.x / size) * size;
