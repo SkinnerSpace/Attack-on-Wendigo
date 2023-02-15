@@ -7,8 +7,8 @@ public class Shakeable : MonoBehaviour
 
     public void Displace(ShakeDisplacement displacement)
     {
-        if (positionAcceptor != null) positionAcceptor.localPosition = displacement.position;
-        if (angleAcceptor != null) angleAcceptor.localEulerAngles = GetModifiedAngle(displacement.angle.z);
+        /*if (positionAcceptor != null) positionAcceptor.localPosition = displacement.position;
+        if (angleAcceptor != null) angleAcceptor.localEulerAngles = GetModifiedAngle(displacement.angle.z);*/
     }
 
     private Vector3 GetModifiedAngle(float zAngle)

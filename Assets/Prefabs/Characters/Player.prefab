@@ -211,6 +211,9 @@ MonoBehaviour:
   groundDetectionHeight: 0.5
   dampedSpringPower: 1
   dampedSpringTime: 0.5
+  minFOV: 80
+  maxFOV: 120
+  fOVChangeSpeed: 10
   controller: {fileID: 7181526249658469568}
   cam: {fileID: 0}
 --- !u!114 &402587302504087578

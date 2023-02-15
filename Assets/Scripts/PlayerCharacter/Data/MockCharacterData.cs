@@ -26,8 +26,11 @@ public class MockCharacterData : ICharacterData
     public Vector3 Up { get; set; } = Vector3.up;
     public Vector3 Euler { get; set; }
     public Quaternion CameraRotation { get; set; }
+    public Quaternion CameraViewRotation { get; set; }
     public Vector3 CameraEuler { get; set; }
+    public Vector3 CameraViewEuler { get; set; }
     public Vector3 CameraLocalPos { get; set; }
+    public Vector3 CameraTiltEuler { get; set; }
 
     public float Speed { get; set; }
 
@@ -45,6 +48,9 @@ public class MockCharacterData : ICharacterData
     public float DampedSpringAmplitude { get; set; }
     public float CurrentDampedSpringTime { get; set; }
 
-    public float MinFOV { get; }
-    public float MaxFOV { get; }
+    public float MinFOV { get; set; }
+    public float MaxFOV { get; set; }
+    public float FOV { get; set; }
+    public float FOVChangeSpeed { get; set; }
+    public float FOVPower { get; set; }
 }

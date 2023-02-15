@@ -8,8 +8,13 @@ public interface ICharacterData
     Vector3 Up { get; }
     Vector3 Euler { get; set; }
     Quaternion CameraRotation { get; set; }
+
     Vector3 CameraEuler { get; set; }
+    Vector3 CameraViewEuler { get; set; }
+    Quaternion CameraViewRotation { get; set; }
+
     Vector3 CameraLocalPos { get; set; }
+    Vector3 CameraTiltEuler { get; set; }
 
     float Height { get; }
     Vector3 Velocity { get; }
@@ -44,4 +49,7 @@ public interface ICharacterData
 
     float MinFOV { get; }
     float MaxFOV { get; }
+    float FOV { get; set; }
+    float FOVChangeSpeed { get; }
+    float FOVPower { get; set; }
 }

@@ -29,6 +29,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [Header("FOV")]
     [SerializeField] private float minFOV;
     [SerializeField] private float maxFOV;
+    [SerializeField] private float fOVChangeSpeed;
 
     [Header("Components")]
     [SerializeField] private CharacterController controller;
@@ -39,9 +40,12 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 Right => transform.right;
     public Vector3 Up => transform.up;
     public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
+    public Vector3 CameraViewEuler { get; set; }
     public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }
+    public Quaternion CameraViewRotation { get; set; }
     public Vector3 CameraEuler { get { return cam.transform.eulerAngles; } set { cam.transform.eulerAngles = value; } }
     public Vector3 CameraLocalPos { get { return cam.transform.localPosition; } set { cam.transform.localPosition = value; } }
+    public Vector3 CameraTiltEuler { get; set; }
 
     public float Height => controller.height;
 
@@ -82,4 +86,8 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     public float MinFOV => minFOV;
     public float MaxFOV => maxFOV;
+    public float FOV { get { return cam.fieldOfView; } set { cam.fieldOfView = value; } }
+    public float FOVChangeSpeed => fOVChangeSpeed;
+    public float FOVPower { get; set; }
 }
+

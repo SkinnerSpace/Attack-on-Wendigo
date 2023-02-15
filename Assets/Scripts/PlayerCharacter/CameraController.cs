@@ -27,10 +27,12 @@ public class CameraController : ICamera
 
     private void UpdateCameraRotation()
     {
-        data.CameraRotation = Quaternion.Euler(new Vector3(
+        data.CameraViewEuler = new Vector3(yAngle, xAngle, data.CameraViewEuler.z);
+
+        /*data.CameraViewRotation = Quaternion.Euler(new Vector3(
             x: yAngle, 
             y: xAngle, 
-            z: data.CameraEuler.z));
+            z: data.CameraEuler.z));*/
     }
 
     private void UpdateBodyRotation() => data.Euler = new Vector3(0f, xAngle, 0f);

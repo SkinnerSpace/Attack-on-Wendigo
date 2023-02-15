@@ -22,6 +22,7 @@ public class MainController : MonoBehaviour
     private DampedSpring dampingSpring;
 
     private FOVController fOVController;
+    private CameraTiltController tiltController;
 
     private void Awake()
     {
@@ -38,8 +39,8 @@ public class MainController : MonoBehaviour
         decelerationController = new DecelerationController(data, chronos);
 
         dampingSpring = new DampedSpring(data, chronos);
-
-        fOVController = new FOVController(data);
+        fOVController = new FOVController(data, chronos);
+        tiltController = new CameraTiltController(data, chronos);
 
         groundDetector.Subscribe(dampingSpring);
         groundDetector.Subscribe(surfaceDetector);
@@ -53,8 +54,11 @@ public class MainController : MonoBehaviour
     private void ConnectInputReaders()
     {
         mainInputReader.GetInputReader<CameraInputReader>().Subscribe(cameraController);
+
         mainInputReader.GetInputReader<MovementInputReader>().Subscribe(movementController);
         mainInputReader.GetInputReader<MovementInputReader>().Subscribe(dashController);
+        mainInputReader.GetInputReader<MovementInputReader>().Subscribe(tiltController);
+
         mainInputReader.GetInputReader<JumpInputReader>().Subscribe(jumpController);
         mainInputReader.GetInputReader<DashInputReader>().Subscribe(dashController);
     }
@@ -66,6 +70,8 @@ public class MainController : MonoBehaviour
         fOVController.Update();
         decelerationController.Decelerate();
         dampingSpring.Update();
+
+        data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler);
     }
 
     private void FixedUpdate()
