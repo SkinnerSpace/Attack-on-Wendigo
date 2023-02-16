@@ -2,6 +2,9 @@
 
 public class DampedSpring : IGroundObserver
 {
+    private const float MAX_MULTIPLIER = 2f;
+    private const float MAX_AMPLITUDE = 1.8f;
+
     private ICharacterData data;
     private IChronos chronos;
 
@@ -15,8 +18,9 @@ public class DampedSpring : IGroundObserver
     {
         data.CurrentDampedSpringTime = 0f;
 
-        float maxVerticalVelocity = Mathf.Sqrt(data.JumpHeight * data.MaxJumpCount * data.Gravity * 2f);
+        float maxVerticalVelocity = Mathf.Sqrt(data.JumpHeight * data.MaxJumpCount * data.Gravity * MAX_MULTIPLIER);
         data.DampedSpringAmplitude = Mathf.Abs(data.VerticalVelocity / maxVerticalVelocity) * data.DampedSpringPower;
+        data.DampedSpringAmplitude = Mathf.Clamp(data.DampedSpringAmplitude, 0f, MAX_AMPLITUDE);
     }
 
     public void Update()

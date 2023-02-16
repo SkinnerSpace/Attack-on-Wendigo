@@ -14,14 +14,7 @@ public class GunSight : MonoBehaviour
 
     public bool targetExist { get; private set; }
 
-    private void Start() => SubscribeObservers();
-
     private void Update() => TakeAim();
-
-    private void SubscribeObservers()
-    {
-        onTarget += Aim.Instance.SetOnTarget;
-    }
 
     private void TakeAim()
     {

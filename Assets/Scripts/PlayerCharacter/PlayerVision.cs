@@ -22,7 +22,6 @@ public class PlayerVision : MonoBehaviour
         InitializeComponents();
     }
 
-    private void Start() => SubscribeEventListeners();
     private void Update() { } //=> Observe();
 
     private void InitializeComponents()
@@ -30,10 +29,6 @@ public class PlayerVision : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    private void SubscribeEventListeners()
-    {
-        notifyOnTarget += Aim.Instance.SetOnTarget;
-    }
 
     private void Observe()
     {

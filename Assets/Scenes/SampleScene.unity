@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5348,6 +5348,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -12.803777
       objectReference: {fileID: 0}
+    - target: {fileID: 4148312152885667295, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 219536285}
     - target: {fileID: 4239248345874036419, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7309,6 +7314,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.3297591
       objectReference: {fileID: 0}
+    - target: {fileID: 9177377054892190023, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 219536285}
     - target: {fileID: 9194006559805999033, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7346,6 +7356,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &1165287146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9177377054892190023, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1165287136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165287137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babf0b3092826ff46942c596efa1df60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1217603044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9269,6 +9291,8 @@ GameObject:
   - component: {fileID: 1700708890}
   - component: {fileID: 1700708889}
   - component: {fileID: 1700708891}
+  - component: {fileID: 1700708892}
+  - component: {fileID: 1700708893}
   m_Layer: 5
   m_Name: Aim
   m_TagString: Untagged
@@ -9344,6 +9368,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30940f8b967e84d4eaece8c016d808c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1700708892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46e485a43e806447bb0c61bfc185fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionBehavior: {fileID: 1165287146}
+  visionEvaluator: {fileID: 1700708893}
+  aim: {fileID: 1700708891}
+--- !u!114 &1700708893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64593c770a558e24395ff0078e6ca1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appropriateTargets:
+  - type: IPickable
+    distance: 3
+  - type: IDamageable
+    distance: Infinity
 --- !u!114 &1701243480 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8860424869380561027, guid: 0ea713909dd9e6146bb0cb59bddba2b9,

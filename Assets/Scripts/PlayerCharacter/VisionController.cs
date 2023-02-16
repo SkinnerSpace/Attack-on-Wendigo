@@ -2,13 +2,11 @@
 
 public class VisionController
 {
-    private ICharacterData data;
     private IVisionDetector detector;
     private event Action<VisionTarget> onUpdate;
 
-    public VisionController(ICharacterData data, IVisionDetector detector)
+    public VisionController(IVisionDetector detector)
     {
-        this.data = data;
         this.detector = detector;
     }
 
