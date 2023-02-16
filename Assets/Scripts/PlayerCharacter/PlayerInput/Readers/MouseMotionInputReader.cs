@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System;
 
-public class CameraInputReader : InputReader
+public class MouseMotionInputReader : InputReader
 {
     private event Action<Vector2> onMotionUpdate;
 
     private void Update()
     {
-        Vector2 motion = input.MousePos * keys.MouseSensitivity * keys.MouseInversion;
+        Vector2 motion = input.MouseMotion * keys.MouseSensitivity * keys.MouseInversion;
         onMotionUpdate?.Invoke(motion);
     }
 

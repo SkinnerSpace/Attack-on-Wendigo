@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 219536283}
   - component: {fileID: 219536284}
   - component: {fileID: 219536286}
+  - component: {fileID: 219536281}
   - component: {fileID: 219536287}
   - component: {fileID: 219536285}
   - component: {fileID: 219536279}
@@ -413,6 +414,18 @@ MonoBehaviour:
   moveBackward: 115
   jump: 32
   dash: 304
+--- !u!114 &219536281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fad768f677b13842aac34c22fb23af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &219536282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +495,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 219536277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2426d7b401970a24892f24ed16ca7be8, type: 3}
+  m_Script: {fileID: 11500000, guid: 461b2bbddac85d240a44c4155ce18b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &225116403
@@ -1220,6 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chronos: {fileID: 0}
 --- !u!1 &546784221
 GameObject:
   m_ObjectHideFlags: 0
@@ -5618,7 +5632,7 @@ PrefabInstance:
         type: 3}
       propertyPath: speedometer
       value: 
-      objectReference: {fileID: 6176119535213450039}
+      objectReference: {fileID: 0}
     - target: {fileID: 4902129331834518017, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: weaponHandler
@@ -7332,18 +7346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
---- !u!114 &1165287141 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1652087050669785381, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1165287136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165287137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f0731b1a0b6f454c92c136a7e5e6e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1217603044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8841,6 +8843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chronos: {fileID: 0}
 --- !u!143 &1575509711
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10073,7 +10076,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fovController
       value: 
-      objectReference: {fileID: 1165287141}
+      objectReference: {fileID: 0}
     - target: {fileID: 1416451892556028029, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: stepsFrequency
@@ -10193,7 +10196,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fovController
       value: 
-      objectReference: {fileID: 1165287141}
+      objectReference: {fileID: 0}
     - target: {fileID: 6146795615001241510, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: gravity
@@ -10327,18 +10330,6 @@ CharacterController:
     type: 3}
   m_PrefabInstance: {fileID: 6176119535213450037}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6176119535213450039 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 764975185769255422, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 6176119535213450037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f9e013650348fb4a9d29187e9142270, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6705627010780941525
 PrefabInstance:
   m_ObjectHideFlags: 0

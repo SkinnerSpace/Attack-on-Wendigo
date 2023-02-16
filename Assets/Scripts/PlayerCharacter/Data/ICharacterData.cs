@@ -7,14 +7,16 @@ public interface ICharacterData
     Vector3 Right { get; }
     Vector3 Up { get; }
     Vector3 Euler { get; set; }
-    Quaternion CameraRotation { get; set; }
 
+    Camera Cam { get; }
+    Quaternion CameraRotation { get; set; }
     Vector3 CameraEuler { get; set; }
     Vector3 CameraViewEuler { get; set; }
     Quaternion CameraViewRotation { get; set; }
-
     Vector3 CameraLocalPos { get; set; }
     Vector3 CameraTiltEuler { get; set; }
+    float TiltSpeed { get; }
+    float TiltMaxAngle { get; }
 
     float Height { get; }
     Vector3 Velocity { get; }

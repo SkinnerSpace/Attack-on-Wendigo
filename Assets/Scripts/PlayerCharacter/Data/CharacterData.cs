@@ -5,31 +5,35 @@ using UnityEngine;
 public class CharacterData : MonoBehaviour, ICharacterData
 {
     [Header("Movement")]
-    [SerializeField] private float speed;
-    [SerializeField] private float groundDeceleration;
-    [SerializeField] private float airDeceleration;
+    [SerializeField] private float speed = 300f;
+    [SerializeField] private float groundDeceleration = 20f;
+    [SerializeField] private float airDeceleration = 15f;
 
     [Header("Dash")]
-    [SerializeField] private float dashDistance;
-    [SerializeField] private float dashCoolDownTime;
+    [SerializeField] private float dashDistance = 10f;
+    [SerializeField] private float dashCoolDownTime = 0.3f;
 
     [Header("Jump")]
-    [SerializeField] private float gravity;
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private int maxJumpCount;
+    [SerializeField] private float gravity = 26f;
+    [SerializeField] private float jumpHeight = 10f;
+    [SerializeField] private int maxJumpCount = 2;
 
     [Header("Ground Detection")]
-    [SerializeField] private float groundDetectionRadius;
-    [SerializeField] private float groundDetectionHeight;
+    [SerializeField] private float groundDetectionRadius = 0.6f;
+    [SerializeField] private float groundDetectionHeight = 0.5f;
 
     [Header("Damped Spring")]
-    [SerializeField] private float dampedSpringPower;
-    [SerializeField] private float dampedSpringTime;
+    [SerializeField] private float dampedSpringPower = 1f;
+    [SerializeField] private float dampedSpringTime = 0.5f;
 
     [Header("FOV")]
-    [SerializeField] private float minFOV;
-    [SerializeField] private float maxFOV;
-    [SerializeField] private float fOVChangeSpeed;
+    [SerializeField] private float minFOV = 80f;
+    [SerializeField] private float maxFOV = 120f;
+    [SerializeField] private float fOVChangeSpeed = 10f;
+
+    [Header("Camera tilt")]
+    [SerializeField] private float tiltSpeed = 5f;
+    [SerializeField] private float tiltMaxAngle = 5f;
 
     [Header("Components")]
     [SerializeField] private CharacterController controller;
@@ -40,12 +44,16 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 Right => transform.right;
     public Vector3 Up => transform.up;
     public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
+
+    public Camera Cam => cam;
     public Vector3 CameraViewEuler { get; set; }
     public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }
     public Quaternion CameraViewRotation { get; set; }
     public Vector3 CameraEuler { get { return cam.transform.eulerAngles; } set { cam.transform.eulerAngles = value; } }
     public Vector3 CameraLocalPos { get { return cam.transform.localPosition; } set { cam.transform.localPosition = value; } }
     public Vector3 CameraTiltEuler { get; set; }
+    public float TiltSpeed => tiltSpeed;
+    public float TiltMaxAngle => tiltMaxAngle;
 
     public float Height => controller.height;
 

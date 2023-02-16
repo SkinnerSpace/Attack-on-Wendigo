@@ -23,7 +23,7 @@ public class PlayerVision : MonoBehaviour
     }
 
     private void Start() => SubscribeEventListeners();
-    private void Update() => Observe();
+    private void Update() { } //=> Observe();
 
     private void InitializeComponents()
     {

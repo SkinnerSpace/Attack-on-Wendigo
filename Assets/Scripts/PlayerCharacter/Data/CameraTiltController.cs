@@ -4,6 +4,8 @@ public class CameraTiltController : IMovementController
 {
     private ICharacterData data;
     private IChronos chronos;
+    private float tiltSpeed = 5f;
+    private float tiltMaxAngle = 5f;
 
     public CameraTiltController(ICharacterData data, IChronos chronos)
     {
@@ -13,10 +15,8 @@ public class CameraTiltController : IMovementController
 
     public void Move(Vector3 inDirection)
     {
-        Vector3 direction = new Vector3(0f, 0f, -inDirection.x);
-
-        data.CameraTiltEuler += direction * chronos.DeltaTime;
-        // Make it tilt till some threshold and then go back movement stops
+        float tiltAngle = -1 * inDirection.x * tiltMaxAngle;
+        data.CameraTiltEuler = Vector3.Lerp(data.CameraTiltEuler, new Vector3(0f, 0f, tiltAngle), tiltSpeed * chronos.DeltaTime);
     }
 }
 
