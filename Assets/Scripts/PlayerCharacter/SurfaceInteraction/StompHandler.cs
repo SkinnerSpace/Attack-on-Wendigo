@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 
-public class SurfaceStompHandler : ISurfaceObserver
+public class StompHandler : BaseController, ISurfaceObserver
 {
+    private MainController main;
     private ICharacterData data;
 
-    public SurfaceStompHandler(ICharacterData data) => this.data = data;
+    public override void Initialize(MainController main)
+    {
+        this.main = main;
+        data = main.Data;
+    }
+
+    public override void Connect() => main.GetController<SurfaceDetector>().Subscribe(this);
 
     public void OnSurfaceFound(SurfaceProbe probe) => HitTheSurface(probe);
 

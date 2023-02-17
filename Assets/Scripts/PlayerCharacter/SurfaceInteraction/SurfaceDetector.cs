@@ -1,18 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public class SurfaceDetector : IGroundObserver
+public class SurfaceDetector : BaseController, IGroundObserver
 {
+    private MainController main;
     private ICharacterData data;
     private ISurfaceProbeTaker probeTaker;
 
     private event Action<SurfaceProbe> notifyOnSurfaceFound;
-
-    public SurfaceDetector(ICharacterData data, ISurfaceProbeTaker probeTaker)
-    {
-        this.data = data;
-        this.probeTaker = probeTaker;
-    }
 
     public void Subscribe(ISurfaceObserver observer) => notifyOnSurfaceFound += observer.OnSurfaceFound;
     public void Unsubscribe(ISurfaceObserver observer) => notifyOnSurfaceFound -= observer.OnSurfaceFound;
@@ -37,4 +32,13 @@ public class SurfaceDetector : IGroundObserver
     }
 
     public static Vector3 GetRayPosition(Vector3 position, float height) => position - new Vector3(0f, height / 2f, 0f);
+
+    public override void Initialize(MainController main)
+    {
+        this.main = main;
+        data = main.Data;
+        probeTaker = new SurfaceProbeTaker();
+    }
+
+    public override void Connect() => main.GetController<GroundDetector>().Subscribe(this);
 }

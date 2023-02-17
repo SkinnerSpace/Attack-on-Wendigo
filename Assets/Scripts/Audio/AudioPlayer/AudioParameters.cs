@@ -4,36 +4,25 @@ using UnityEngine;
 
 public class AudioParameters
 {
-    public int Count => parameters.Count;
-    private Dictionary<Type, AudioParam> parameters;
+    private List<AudioParam> parameters;
 
-    public AudioParameters() => parameters = new Dictionary<Type, AudioParam>();
+    public AudioParameters() => parameters = new List<AudioParam>();
 
-    public AudioParam Get(Type parameter)
+    public T Get<T>() where T : AudioParam
     {
-        if (NoInstanceOf(parameter))
-            parameters.Add(parameter, Create(parameter));
+        foreach (AudioParam audioParam in parameters)
+        {
+            if (audioParam is T) 
+                return audioParam as T;
+        }
 
-        return parameters[parameter];
+        parameters.Add(Activator.CreateInstance<T>());
+        return parameters[parameters.Count - 1] as T;
     }
 
     public void ApplyTo(AudioEvent audioEvent)
     {
-        foreach (AudioParam param in parameters.Values)
+        foreach (AudioParam param in parameters)
             param.ApplyTo(audioEvent);
-    }
-
-    private bool NoInstanceOf(Type parameter) => !parameters.ContainsKey(parameter);
-
-    private AudioParam Create(Type parameter)
-    {
-        if (parameter == AudioPitch.parameter) return new AudioPitch();
-        if (parameter == AudioVariety.parameter) return new AudioVariety();
-        if (parameter == AudioVolume.parameter) return new AudioVolume();
-        if (parameter == AudioPosition.parameter) return new AudioPosition();
-        if (parameter == AudioAnchor.parameter) return new AudioAnchor();
-        if (parameter == AudioTimelinePosition.parameter) return new AudioTimelinePosition();
-
-        return null;
     }
 }

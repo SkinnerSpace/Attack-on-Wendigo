@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 
-public class VisionDetector : IVisionDetector, IMousePosObserver
+public class VisionDetector : IMousePosObserver
 {
     private Camera cam;
+    private VisionController visionController;
     private VisionTarget target;
 
-    public VisionDetector(Camera cam) => this.cam = cam;
-
-    public VisionTarget GetTarget() => target;
+    public VisionDetector(Camera cam, VisionController visionController)
+    {
+        this.cam = cam;
+        this.visionController = visionController;
+    }
 
     public void OnMousePosUpdate(Vector2 pos)
     {
@@ -22,5 +25,7 @@ public class VisionDetector : IVisionDetector, IMousePosObserver
         {
             target.IsValid = false;
         }
+
+        visionController.Update(target);
     }
 }

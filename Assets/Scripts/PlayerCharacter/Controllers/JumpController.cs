@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
 
-public class JumpController : IJumpController, IGroundObserver
+public class JumpController : BaseController, IGroundObserver
 {
+    private MainController main;
     private ICharacterData data;
-    public JumpController(ICharacterData data) => this.data = data;
+
+    public override void Initialize(MainController main)
+    {
+        this.main = main;
+        data = main.Data;
+    }
+
+    public override void Connect()
+    {
+        main.GetController<GroundDetector>().Subscribe(this);
+        MainInputReader.Get<JumpInputReader>().Subscribe(this);
+    }
 
     public void OnJump()
     {

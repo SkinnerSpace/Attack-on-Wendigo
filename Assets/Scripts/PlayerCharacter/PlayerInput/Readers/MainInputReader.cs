@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MainInputReader : MonoBehaviour
+public static class MainInputReader
 {
-    private InputReader[] inputReaders;
+    private static List<InputReader> inputReaders = new List<InputReader>();
 
-    private void Awake() => FindInputReaders();
+    public static void Add(InputReader inputReader) => inputReaders.Add(inputReader);
 
-    private void FindInputReaders() => inputReaders = GetComponents<InputReader>(); 
-
-    public T GetInputReader<T>() where T : InputReader
+    public static T Get<T>() where T : InputReader
     {
         foreach (InputReader reader in inputReaders)
         {

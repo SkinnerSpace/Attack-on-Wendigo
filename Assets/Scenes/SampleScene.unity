@@ -355,7 +355,6 @@ GameObject:
   - component: {fileID: 219536286}
   - component: {fileID: 219536281}
   - component: {fileID: 219536287}
-  - component: {fileID: 219536285}
   - component: {fileID: 219536279}
   m_Layer: 0
   m_Name: InputReader
@@ -462,18 +461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa12eb37e811194592d81941d164a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &219536285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219536277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52bd95b119766a46817de700dd4e6e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &219536286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +539,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1299419545}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &232636908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 402587302504087578, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6176119535213450037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &239066281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5352,7 +5351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputReader
       value: 
-      objectReference: {fileID: 219536285}
+      objectReference: {fileID: 0}
     - target: {fileID: 4239248345874036419, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7318,7 +7317,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputReader
       value: 
-      objectReference: {fileID: 219536285}
+      objectReference: {fileID: 0}
     - target: {fileID: 9194006559805999033, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7356,18 +7355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
---- !u!114 &1165287146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9177377054892190023, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1165287136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165287137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: babf0b3092826ff46942c596efa1df60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1217603044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9288,11 +9275,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700708888}
-  - component: {fileID: 1700708890}
-  - component: {fileID: 1700708889}
   - component: {fileID: 1700708891}
   - component: {fileID: 1700708892}
   - component: {fileID: 1700708893}
+  - component: {fileID: 1700708890}
+  - component: {fileID: 1700708889}
   m_Layer: 5
   m_Name: Aim
   m_TagString: Untagged
@@ -9380,9 +9367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46e485a43e806447bb0c61bfc185fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionBehavior: {fileID: 1165287146}
   visionEvaluator: {fileID: 1700708893}
   aim: {fileID: 1700708891}
+  controller: {fileID: 232636908}
 --- !u!114 &1700708893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10080,6 +10067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402587302504087578, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 402587302504087578, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
       propertyPath: jumpInputReader
       value: 
       objectReference: {fileID: 219536284}
@@ -10087,7 +10079,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mainInputReader
       value: 
-      objectReference: {fileID: 219536285}
+      objectReference: {fileID: 0}
     - target: {fileID: 891318553643976312, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -10167,6 +10159,16 @@ PrefabInstance:
         type: 3}
       propertyPath: sensitivity
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382584355082009816, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1640929652}
+    - target: {fileID: 3382584355082009816, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: inputReader
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4107918066658702461, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}

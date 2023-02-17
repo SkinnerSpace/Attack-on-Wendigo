@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 6176119535850529056}
   - component: {fileID: 61735261016310312}
   - component: {fileID: 402587302504087578}
+  - component: {fileID: 2146012073234770375}
   - component: {fileID: 5845931283795517954}
   - component: {fileID: 7254224541728550267}
   - component: {fileID: 8860424869380561027}
@@ -214,6 +215,8 @@ MonoBehaviour:
   minFOV: 80
   maxFOV: 120
   fOVChangeSpeed: 10
+  tiltSpeed: 5
+  tiltMaxAngle: 5
   controller: {fileID: 7181526249658469568}
   cam: {fileID: 0}
 --- !u!114 &402587302504087578
@@ -228,10 +231,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainInputReader: {fileID: 0}
   data: {fileID: 61735261016310312}
-  controller: {fileID: 7181526249658469568}
+  mover: {fileID: 2146012073234770375}
   timer: {fileID: 7254224541728550267}
+  chronos: {fileID: 8860424869380561027}
+--- !u!114 &2146012073234770375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176119535850529057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c69232bcc96dc4482fa15676f96c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 61735261016310312}
   chronos: {fileID: 8860424869380561027}
 --- !u!114 &5845931283795517954
 MonoBehaviour:

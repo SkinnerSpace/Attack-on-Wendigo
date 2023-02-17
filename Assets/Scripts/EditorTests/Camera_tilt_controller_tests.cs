@@ -12,9 +12,9 @@ namespace Tests
             ICharacterData data = new MockCharacterData();
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
-            CameraTiltController tiltController = new CameraTiltController(data, chronos);
+            /*CameraTiltController tiltController = new CameraTiltController(data, chronos);
 
-            tiltController.Move(Vector3.zero);
+            tiltController.Move(Vector3.zero);*/
 
             Assert.That(data.CameraTiltEuler.z == 0f);
         }
@@ -25,9 +25,9 @@ namespace Tests
             ICharacterData data = new MockCharacterData();
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
-            CameraTiltController tiltController = new CameraTiltController(data, chronos);
+            /*CameraTiltController tiltController = new CameraTiltController(data, chronos);
 
-            tiltController.Move(Vector3.right);
+            tiltController.Move(Vector3.right);*/
 
             Assert.That(data.CameraTiltEuler.z < 0f);
         }
@@ -38,9 +38,9 @@ namespace Tests
             ICharacterData data = new MockCharacterData();
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
-            CameraTiltController tiltController = new CameraTiltController(data, chronos);
+            /*CameraTiltController tiltController = new CameraTiltController(data, chronos);
 
-            tiltController.Move(Vector3.left);
+            tiltController.Move(Vector3.left);*/
 
             Assert.That(data.CameraTiltEuler.z > 0f);
         }

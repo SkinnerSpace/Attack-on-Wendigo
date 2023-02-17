@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 
-public class DecelerationController
+public class DecelerationController : BaseController, IMoverObserver
 {
+    private MainController main;
     private ICharacterData data;
     private IChronos chronos;
 
-    public DecelerationController(ICharacterData data, IChronos chronos)
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
+        this.main = main;
+        data = main.Data;
+        chronos = main.Chronos;
     }
 
-    public void Decelerate()
+    public override void Connect() => main.Mover.Subscribe(this);
+
+    public void Update()
     {
         SetDeceleration();
         ApplyDeceleration();

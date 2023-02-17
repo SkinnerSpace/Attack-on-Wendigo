@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
+using System;
 
-public class CameraTiltController : IMovementController
+public class CameraTiltController : BaseController, IMovementController
 {
     private ICharacterData data;
     private IChronos chronos;
-    private float tiltSpeed = 5f;
-    private float tiltMaxAngle = 5f;
 
-    public CameraTiltController(ICharacterData data, IChronos chronos)
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
+        data = main.Data;
+        chronos = main.Chronos;
     }
+
+    public override void Connect() => MainInputReader.Get<MovementInputReader>().Subscribe(this);
 
     public void Move(Vector3 inDirection)
     {
-        float tiltAngle = -1 * inDirection.x * tiltMaxAngle;
-        data.CameraTiltEuler = Vector3.Lerp(data.CameraTiltEuler, new Vector3(0f, 0f, tiltAngle), tiltSpeed * chronos.DeltaTime);
+        float tiltAngle = -1 * inDirection.x * data.TiltMaxAngle;
+        data.CameraTiltEuler = Vector3.Lerp(data.CameraTiltEuler, new Vector3(0f, 0f, tiltAngle), data.TiltSpeed * chronos.DeltaTime);
     }
 }
 

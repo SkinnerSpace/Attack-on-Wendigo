@@ -8,6 +8,7 @@ public abstract class InputReader : MonoBehaviour
 
     private void Awake()
     {
+        MainInputReader.Add(this);
         input = GetComponent<UnityInputReader>();
         keys = GetComponent<KeyBinds>();
     }

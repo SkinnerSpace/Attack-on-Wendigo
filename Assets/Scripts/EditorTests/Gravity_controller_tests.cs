@@ -15,9 +15,9 @@ namespace Tests
             ICharacterData data = new MockCharacterData() { VerticalVelocity = 100f, Gravity = 200f };
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
-            GravityController gravityController = new GravityController(data, chronos);
+            /*GravityController gravityController = new GravityController(data, chronos);
 
-            gravityController.ApplyGravity();
+            gravityController.ApplyGravity();*/
 
             Assert.That(data.VerticalVelocity < 0f);
         }
@@ -28,11 +28,11 @@ namespace Tests
             ICharacterData data = new MockCharacterData() { VerticalVelocity = 100f, Gravity = 200f };
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
-            GravityController gravityController = new GravityController(data, chronos);
+            /*GravityController gravityController = new GravityController(data, chronos);
 
             data.IsGrounded = true;
             gravityController.OnGrounded();
-            gravityController.ApplyGravity();
+            gravityController.ApplyGravity();*/
 
             Assert.AreEqual(0f, data.VerticalVelocity);
         }

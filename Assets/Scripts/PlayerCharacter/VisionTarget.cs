@@ -9,5 +9,4 @@ public struct VisionTarget
 
     public string type;
     public float distance;
-    
 }

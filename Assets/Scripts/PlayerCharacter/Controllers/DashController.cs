@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public class DashController : IDashController, IMovementController
+public class DashController : BaseController, IDashController, IMovementController
 {
     private const string COOL_DOWN = "CoolDown";
 
@@ -9,11 +9,17 @@ public class DashController : IDashController, IMovementController
     private IChronos chronos;
     private IFunctionTimer timer;
 
-    public DashController(ICharacterData data, IChronos chronos, IFunctionTimer timer)
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
-        this.timer = timer;
+        data = main.Data;
+        chronos = main.Chronos;
+        timer = main.Timer;
+    }
+
+    public override void Connect()
+    {
+        MainInputReader.Get<MovementInputReader>().Subscribe(this);
+        MainInputReader.Get<DashInputReader>().Subscribe(this);
     }
 
     public void Move(Vector3 direction)

@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
 
-public class DampedSpring : IGroundObserver
+public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
 {
     private const float MAX_MULTIPLIER = 2f;
     private const float MAX_AMPLITUDE = 1.8f;
 
+    private MainController main;
     private ICharacterData data;
     private IChronos chronos;
 
-    public DampedSpring(ICharacterData data, IChronos chronos)
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
+        this.main = main;
+        data = main.Data;
+        chronos = main.Chronos;
+    }
+
+    public override void Connect()
+    {
+        main.Mover.Subscribe(this);
+        main.GetController<GroundDetector>().Subscribe(this);
     }
 
     public void OnGrounded()
@@ -19,7 +27,7 @@ public class DampedSpring : IGroundObserver
         data.CurrentDampedSpringTime = 0f;
 
         float maxVerticalVelocity = Mathf.Sqrt(data.JumpHeight * data.MaxJumpCount * data.Gravity * MAX_MULTIPLIER);
-        data.DampedSpringAmplitude = Mathf.Abs(data.VerticalVelocity / maxVerticalVelocity) * data.DampedSpringPower;
+        data.DampedSpringAmplitude = Mathf.Abs(data.PreviousVerticalVelocity / maxVerticalVelocity) * data.DampedSpringPower;
         data.DampedSpringAmplitude = Mathf.Clamp(data.DampedSpringAmplitude, 0f, MAX_AMPLITUDE);
     }
 

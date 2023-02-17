@@ -22,6 +22,7 @@ public interface ICharacterData
     Vector3 Velocity { get; }
     Vector2 FlatVelocity { get; set; }
     float VerticalVelocity { get; set; }
+    float PreviousVerticalVelocity { get; }
     float Gravity { get; }
     float JumpHeight { get; }
     int JumpCount { get; set; }

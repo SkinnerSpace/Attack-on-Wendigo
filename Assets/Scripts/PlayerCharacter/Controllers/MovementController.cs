@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class MovementController : IMovementController
+public class MovementController : BaseController, IMovementController
 {
     private ICharacterData data;
     private IChronos chronos;
-    public MovementController(ICharacterData data, IChronos chronos)
+
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
+        data = main.Data;
+        chronos = main.Chronos;
     }
+
+    public override void Connect() => MainInputReader.Get<MovementInputReader>().Subscribe(this);
 
     public void Move(Vector3 inDirection)
     {

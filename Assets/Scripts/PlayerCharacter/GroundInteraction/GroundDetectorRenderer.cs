@@ -16,7 +16,7 @@ public class GroundDetectorRenderer : MonoBehaviour
         Handles.DrawWireCube(data.Position, new Vector3(0.5f, data.Height, 0.5f));
 
         Handles.color = Color.red;
-        Vector3 position = GroundDetectorController.GetDetectionPosition(data.Position, data.GroundDetectionHeight);
+        Vector3 position = GroundDetector.GetDetectionPosition(data.Position, data.GroundDetectionHeight);
 
         Handles.DrawWireDisc(position, Vector3.up, data.GroundDetectionRadius);
         Handles.DrawWireDisc(position, Vector3.forward, data.GroundDetectionRadius);

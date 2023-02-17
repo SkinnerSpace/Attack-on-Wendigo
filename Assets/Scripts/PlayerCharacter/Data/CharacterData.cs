@@ -46,6 +46,8 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
 
     public Camera Cam => cam;
+    public CharacterController Controller => controller;
+
     public Vector3 CameraViewEuler { get; set; }
     public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }
     public Quaternion CameraViewRotation { get; set; }
@@ -67,11 +69,12 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector2 DashDirection { get; set; }
     public float DashDistance => dashDistance;
     public float DashCoolDownTime => dashCoolDownTime;
-    public Vector3 Velocity => new Vector3(flatVelocity.x, verticalVelocity, flatVelocity.y);
+    public Vector3 Velocity { get; set; }
 
     public Vector2 FlatVelocity { get { return flatVelocity; } set { flatVelocity = value; } }
     private Vector2 flatVelocity;
 
+    public float PreviousVerticalVelocity { get; set; }
     public float VerticalVelocity { get { return verticalVelocity; } set { verticalVelocity = value; } }
     private float verticalVelocity;
 

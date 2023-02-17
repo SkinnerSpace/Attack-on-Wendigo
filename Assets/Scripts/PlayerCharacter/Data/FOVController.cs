@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
+using System;
 
-public class FOVController
+public class FOVController : BaseController, IMoverObserver
 {
+    private MainController main;
     private ICharacterData data;
     private IChronos chronos;
 
-    public FOVController(ICharacterData data, IChronos chronos)
+    public override void Initialize(MainController main)
     {
-        this.data = data;
-        this.chronos = chronos;
+        this.main = main;
+
+        data = main.Data;
+        chronos = main.Chronos;
     }
+
+    public override void Connect() => main.Mover.Subscribe(this);
 
     public void Update()
     {

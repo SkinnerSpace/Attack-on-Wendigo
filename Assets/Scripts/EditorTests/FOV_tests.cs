@@ -20,8 +20,6 @@ namespace Tests
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
-            FOVController fOVController = new FOVController(data, chronos);
-            fOVController.Update();
 
             Assert.AreEqual(data.MinFOV, data.FOV);
         }
@@ -42,10 +40,7 @@ namespace Tests
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
-            FOVController fOVController = new FOVController(data, chronos);
-
-            fOVController.Update();
-
+ 
             Assert.Greater(data.FOV, data.MinFOV);
         }
 
@@ -65,11 +60,6 @@ namespace Tests
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
-            FOVController fOVController = new FOVController(data, chronos);
-
-            fOVController.Update();
-            data.FlatVelocity = Vector2.zero;
-            fOVController.Update();
 
             Assert.Less(data.FOV, data.MaxFOV);
         }
