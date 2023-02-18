@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisionEvaluator : MonoBehaviour, IVisionEvaluator
+public class VisionEvaluator : IVisionEvaluator
 {
-    [SerializeField] private List<VisionTarget> appropriateTargets = new List<VisionTarget>();
+    private List<VisionTarget> samples = new List<VisionTarget>();
 
-    public bool TargetIsSuitable(VisionTarget target)
+    public void AddSample(Type type, float distance) => samples.Add(new VisionTarget() { type = type, distance = distance });
+
+    public bool IsSuitable(VisionTarget target)
     {
         if (target.IsValid)
         {
-            foreach (VisionTarget appropriate in appropriateTargets)
-                if (Suits(target, appropriate)) return true;
+            foreach (VisionTarget sample in samples)
+                return Suits(target, sample);
         }
 
         return false;
     }
 
-    private bool Suits(VisionTarget target, VisionTarget appropriate)
+    private bool Suits(VisionTarget target, VisionTarget sample)
     {
-        return target.Transform.GetComponent(appropriate.type) != null && 
-               target.distance <= appropriate.distance;
+        bool suitableType = (target.type != null) ? (target.type == sample.type) : (target.Transform.GetComponent(sample.type) != null);
+        bool suitableDistance = target.distance <= sample.distance;
+
+        return suitableType && suitableDistance;
     }
 }

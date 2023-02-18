@@ -7,6 +7,6 @@ public struct VisionTarget
     public bool IsValid { get; set; }
     public Transform Transform { get; set; }
 
-    public string type;
+    public Type type;
     public float distance;
 }

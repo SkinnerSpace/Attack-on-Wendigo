@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface IVisionObserver
 {
-    void OnUpdate(VisionTarget target);
+    void OnTargetUpdate(VisionTarget target);
 }

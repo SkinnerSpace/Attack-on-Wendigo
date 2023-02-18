@@ -27,14 +27,14 @@ public class MainController : MonoBehaviour
         AddController(typeof(CameraController));
         AddController(typeof(FOVController));
         AddController(typeof(CameraTiltController));
-        AddController(typeof(VisionController));
+        AddController(typeof(VisionDetector));
         AddController(typeof(GroundDetector));
         AddController(typeof(SurfaceDetector));
         AddController(typeof(StompHandler));
         AddController(typeof(GravityController));
         AddController(typeof(DecelerationController));
         AddController(typeof(DampedSpring));
-        AddController(typeof(InteractionController));
+        AddController(typeof(PickUpController));
     }
 
     private void AddController(Type type)

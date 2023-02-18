@@ -1,38 +1,70 @@
 ﻿using System.Collections.Generic;
 using System;
 
-public class VisionTrigger
+public class VisionTrigger : IVisionObserver
 {
     private List<VisionTrigger> triggers = new List<VisionTrigger>();
+    private IVisionEvaluator evaluator;
+
     public bool IsActive { get; private set; }
     private bool wasActive;
 
-    Action notifyOnUpdate;
+    Action notifyDependee;
+    Action<VisionTarget> notifyObservers;
 
-    public void Subscribe(VisionTrigger trigger)
+    public void SetEvaluator(IVisionEvaluator evaluator) => this.evaluator = evaluator;
+
+    public void AddDependee(VisionTrigger dependee)
     {
-        notifyOnUpdate += trigger.OnUpdate;
-        trigger.Add(this);
+        notifyDependee += dependee.OnTriggerUpdate;
+        dependee.SetDependenceOn(this);
     }
 
-    public void SetActive(bool isActive)
-    {
-        IsActive = isActive;
-        notifyOnUpdate?.Invoke();
-    }
+    public void SetDependenceOn(VisionTrigger trigger) => triggers.Add(trigger);
 
-    public void Add(VisionTrigger trigger) => triggers.Add(trigger);
+    public void AddObserver(IVisionTriggerObserver observer) => notifyObservers += observer.OnTargetUpdate; 
 
-    public void OnUpdate()
+    public void OnTriggerUpdate()
     {
         bool atLeastOneIsActive = false;
 
         foreach (VisionTrigger trigger in triggers)
             if (trigger.IsActive) atLeastOneIsActive = true;
 
-        IsActive = atLeastOneIsActive;
-        if (wasActive != IsActive) notifyOnUpdate?.Invoke();
+        if (StateHasChanged(atLeastOneIsActive))
+            notifyDependee?.Invoke();
+    }
 
+    public void OnTargetUpdate(VisionTarget target)
+    {
+        bool targetIsSuitable = evaluator.IsSuitable(target);
+
+        if (!targetIsSuitable) 
+            target.IsValid = false;
+
+        if (StateHasChanged(target.IsValid))
+        {
+            notifyDependee?.Invoke();
+            notifyObservers?.Invoke(target);
+        }
+    }
+
+    public void SetActive(bool isActive)
+    {
+        if (StateHasChanged(isActive)) 
+            notifyDependee?.Invoke();
+    }
+
+    private bool StateHasChanged(bool currentState)
+    {
+        IsActive = currentState;
+        bool hasChanged = wasActive != IsActive;
         wasActive = IsActive;
+
+        return hasChanged;
     }
 }
+
+
+
+

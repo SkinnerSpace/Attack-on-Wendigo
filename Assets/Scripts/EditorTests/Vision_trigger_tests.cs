@@ -19,7 +19,7 @@ namespace Tests
             VisionTrigger firstTrigger = new VisionTrigger();
             VisionTrigger secondTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
+            secondTrigger.AddDependee(firstTrigger);
             secondTrigger.SetActive(true);
 
             Assert.That(firstTrigger.IsActive);
@@ -32,10 +32,10 @@ namespace Tests
             VisionTrigger secondTrigger = new VisionTrigger();
             VisionTrigger thirdTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
+            secondTrigger.AddDependee(firstTrigger);
             secondTrigger.SetActive(true);
 
-            thirdTrigger.Subscribe(firstTrigger);
+            thirdTrigger.AddDependee(firstTrigger);
             thirdTrigger.SetActive(false);
 
             Assert.That(firstTrigger.IsActive);
@@ -48,10 +48,10 @@ namespace Tests
             VisionTrigger secondTrigger = new VisionTrigger();
             VisionTrigger thirdTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
+            secondTrigger.AddDependee(firstTrigger);
             secondTrigger.SetActive(false);
 
-            thirdTrigger.Subscribe(firstTrigger);
+            thirdTrigger.AddDependee(firstTrigger);
             thirdTrigger.SetActive(false);
 
             Assert.That(!firstTrigger.IsActive);
@@ -64,8 +64,8 @@ namespace Tests
             VisionTrigger secondTrigger = new VisionTrigger();
             VisionTrigger thirdTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
-            thirdTrigger.Subscribe(secondTrigger);
+            secondTrigger.AddDependee(firstTrigger);
+            thirdTrigger.AddDependee(secondTrigger);
             thirdTrigger.SetActive(true);
 
             Assert.That(firstTrigger.IsActive);
@@ -78,8 +78,8 @@ namespace Tests
             VisionTrigger secondTrigger = new VisionTrigger();
             VisionTrigger thirdTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
-            thirdTrigger.Subscribe(secondTrigger);
+            secondTrigger.AddDependee(firstTrigger);
+            thirdTrigger.AddDependee(secondTrigger);
 
             secondTrigger.SetActive(true);
 
@@ -94,8 +94,8 @@ namespace Tests
             VisionTrigger secondTrigger = new VisionTrigger();
             VisionTrigger thirdTrigger = new VisionTrigger();
 
-            secondTrigger.Subscribe(firstTrigger);
-            thirdTrigger.Subscribe(firstTrigger);
+            secondTrigger.AddDependee(firstTrigger);
+            thirdTrigger.AddDependee(firstTrigger);
             
             firstTrigger.SetActive(true);
             secondTrigger.SetActive(true);

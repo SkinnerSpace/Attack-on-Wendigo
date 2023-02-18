@@ -1,4 +1,7 @@
-﻿public interface IVisionEvaluator
+﻿using System;
+
+public interface IVisionEvaluator
 {
-    bool TargetIsSuitable(VisionTarget target);
+    bool IsSuitable(VisionTarget target);
+    void AddSample(Type type, float distance);
 }

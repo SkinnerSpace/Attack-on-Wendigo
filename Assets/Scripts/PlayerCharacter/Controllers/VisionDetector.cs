@@ -1,16 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class VisionDetector : IMousePosObserver
+public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
 {
     private Camera cam;
-    private VisionController visionController;
     private VisionTarget target;
 
-    public VisionDetector(Camera cam, VisionController visionController)
-    {
-        this.cam = cam;
-        this.visionController = visionController;
-    }
+    public event Action<VisionTarget> onTargetUpdate;
+
+    public override void Initialize(MainController main) => cam = main.Data.Cam;
+    public override void Connect() => MainInputReader.Get<MousePositionInputReader>().Subscribe(this);
+
+    public void AddObserver(IVisionObserver observer) => onTargetUpdate += observer.OnTargetUpdate;
+    public void Unsubscribe(IVisionObserver observer) => onTargetUpdate -= observer.OnTargetUpdate;
 
     public void OnMousePosUpdate(Vector2 pos)
     {
@@ -26,6 +28,8 @@ public class VisionDetector : IMousePosObserver
             target.IsValid = false;
         }
 
-        visionController.Update(target);
+        NotifyOnUpdate(target);
     }
+
+    public void NotifyOnUpdate(VisionTarget target) => onTargetUpdate?.Invoke(target);
 }
