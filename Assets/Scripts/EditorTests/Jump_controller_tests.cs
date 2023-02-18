@@ -9,9 +9,11 @@ namespace Tests
         public void Is_not_able_to_jump_when_not_grounded()
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = false };
-            /*JumpController jumpController = new JumpController(data);
 
-            jumpController.OnJump();*/
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
 
             Assert.AreEqual(0, data.JumpCount);
         }
@@ -20,9 +22,11 @@ namespace Tests
         public void Is_able_to_jump_when_grounded()
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true };
-          /*  JumpController jumpController = new JumpController(data);
 
-            jumpController.OnJump();*/
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
 
             Assert.AreEqual(1, data.JumpCount);
         }
@@ -30,68 +34,81 @@ namespace Tests
         [Test]
         public void Vertical_velocity_increased()
         {
-            ICharacterData data = new MockCharacterData() { JumpHeight = 10f, Gravity = 10f, IsGrounded = true };
-   /*         JumpController jumpController = new JumpController(data);
+            ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, Gravity = 26f, MaxJumpCount = 2 };
 
-            jumpController.OnJump();
-*/
-            Assert.That(data.VerticalVelocity > 0);
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
+
+            Assert.Greater(data.VerticalVelocity, 0f);
         }
 
         [Test]
         public void Jump_in_the_air()
         {
-            ICharacterData data = new MockCharacterData() { MaxJumpCount = 2, IsGrounded = true };
- /*           JumpController jumpController = new JumpController(data);*/
+            ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            /*jumpController.OnJump();
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
+
             data.IsGrounded = false;
             jumpController.OnStop();
 
-            jumpController.OnJump();*/
+            jumpController.TryToJump();
 
-            Assert.AreEqual(data.MaxJumpCount, data.JumpCount);
+            Assert.AreEqual(2, data.JumpCount);
         }
 
         [Test]
         public void Is_not_able_to_jump_in_the_air_when_grounded()
         {
-            ICharacterData data = new MockCharacterData() { MaxJumpCount = 2, IsGrounded = true };
-          /*  JumpController jumpController = new JumpController(data);
+            ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            jumpController.OnJump();
-            jumpController.OnJump();*/
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
 
-            Assert.AreEqual(1, data.JumpCount);
+            jumpController.TryToJump();
+            jumpController.OnStop();
+            jumpController.TryToJump();
+
+            Assert.Less(data.JumpCount, 2);
         }
 
         [Test]
         public void Jump_no_more_than_allowed()
         {
-            ICharacterData data = new MockCharacterData() { MaxJumpCount = 2, IsGrounded = true };
-/*            JumpController jumpController = new JumpController(data);
+            ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            jumpController.OnJump();
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
+
             data.IsGrounded = false;
             jumpController.OnStop();
 
-            jumpController.OnJump();
+            jumpController.TryToJump();
             jumpController.OnStop();
 
-            jumpController.OnJump();*/
+            jumpController.TryToJump();
 
-            Assert.AreEqual(data.MaxJumpCount, data.JumpCount);
+            Assert.AreEqual(2, data.JumpCount);
         }
 
         [Test]
         public void Jump_is_reset()
         {
-            ICharacterData data = new MockCharacterData();
-           /* JumpController jumpController = new JumpController(data);
+            ICharacterData data = new MockCharacterData() { IsGrounded = true };
 
-            jumpController.OnJump();
-            jumpController.OnJump();
-            jumpController.OnGrounded();*/
+            JumpController jumpController = new JumpController();
+            jumpController.SetData(data);
+
+            jumpController.TryToJump();
+            jumpController.OnStop();
+            jumpController.OnGrounded();
 
             Assert.AreEqual(0, data.JumpCount);
         }

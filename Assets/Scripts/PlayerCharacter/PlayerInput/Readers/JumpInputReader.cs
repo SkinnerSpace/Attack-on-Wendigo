@@ -14,13 +14,13 @@ public class JumpInputReader : InputReader
 
     public void Subscribe(JumpController observer)
     {
-        onJump += observer.OnJump;
+        onJump += observer.TryToJump;
         onStop += observer.OnStop;
     }
 
     public void Unsubscribe(JumpController observer)
     {
-        onJump -= observer.OnJump;
+        onJump -= observer.TryToJump;
         onStop -= observer.OnStop;
     }
 }

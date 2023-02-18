@@ -11,13 +11,15 @@ public class JumpController : BaseController, IGroundObserver
         data = main.Data;
     }
 
+    public void SetData(ICharacterData data) => this.data = data;
+
     public override void Connect()
     {
         main.GetController<GroundDetector>().Subscribe(this);
         MainInputReader.Get<JumpInputReader>().Subscribe(this);
     }
 
-    public void OnJump()
+    public void TryToJump()
     {
         JumpOffTheGround();
         JumpInTheAir();

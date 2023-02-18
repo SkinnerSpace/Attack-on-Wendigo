@@ -5,10 +5,11 @@ public class MovementController : BaseController, IMovementController
     private ICharacterData data;
     private IChronos chronos;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(MainController main) => Initialize(main.Data, main.Chronos);
+    public void Initialize(ICharacterData data, IChronos chronos)
     {
-        data = main.Data;
-        chronos = main.Chronos;
+        this.data = data;
+        this.chronos = chronos;
     }
 
     public override void Connect() => MainInputReader.Get<MovementInputReader>().Subscribe(this);
