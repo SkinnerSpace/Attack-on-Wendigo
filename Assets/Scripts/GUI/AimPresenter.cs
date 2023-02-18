@@ -3,23 +3,17 @@
 public class AimPresenter : MonoBehaviour
 {
     [SerializeField] private Aim aim;
-    [SerializeField] private MainController controller;
+    [SerializeField] private EventManager eventManager;
 
-    private VisionTrigger visionTrigger;
+    private EventListener targetPresenceListener;
+    private EventListener targetAbsenceListener;
 
-    private void Start()
+    private void Awake()
     {
-        visionTrigger = new VisionTrigger();
+        targetPresenceListener = new EventListener(aim.SetOnTarget);
+        eventManager.Subscribe(targetPresenceListener, "TargetIsPresent");
 
-    }
-
-    public void OnUpdate(VisionTarget target)
-    {
-        
-    }
-
-    public void OnTargetUpdate(VisionTarget target)
-    {
-        throw new System.NotImplementedException();
+        targetAbsenceListener = new EventListener(aim.SetOffTarget);
+        eventManager.Subscribe(targetAbsenceListener, "TargetIsAbsent");
     }
 }

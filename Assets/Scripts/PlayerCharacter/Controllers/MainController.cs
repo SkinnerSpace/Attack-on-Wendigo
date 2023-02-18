@@ -8,11 +8,13 @@ public class MainController : MonoBehaviour
     [SerializeField] private CharacterMover mover;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
+    [SerializeField] private EventManager events;
 
     public CharacterData Data => data;
     public CharacterMover Mover => mover;
     public FunctionTimer Timer => timer;
     public Chronos Chronos => chronos;
+    public EventManager Events => events;
 
     private List<BaseController> controllers;
     private event Action onConnectControlles;

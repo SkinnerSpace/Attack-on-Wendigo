@@ -1,10 +1,20 @@
 ﻿using System;
 
-public class EventTrigger : ProtoTrigger
+public class EventTrigger 
 {
+    public bool IsActive { get; protected set; }
     private event Action onUpdate;
-    public override void AddObserver(ITriggerObserver observer) => onUpdate += observer.OnTriggerUpdate;
-    protected override void Notify() => onUpdate?.Invoke();
+
+    public void AddObserver(ITriggerObserver observer) => onUpdate += observer.OnTriggerUpdate;
+
+    public virtual void SetActive(bool active)
+    {
+        bool wasActive = IsActive;
+        IsActive = active;
+
+        if (wasActive != IsActive)
+            onUpdate?.Invoke();
+    }
 }
 
 

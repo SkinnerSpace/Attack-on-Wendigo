@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
+﻿using System.Collections;
 using System;
 
 public class PickUpController : BaseController, IVisionTriggerObserver, IVisionObserver
@@ -8,7 +6,9 @@ public class PickUpController : BaseController, IVisionTriggerObserver, IVisionO
     private MainController main;
     private IVisionEvaluator evaluator;
     private VisionTarget target;
-    private EventTrigger targetStatusTrigget;
+
+    private EventTrigger targetPresenceTrigger;
+    private EventTrigger targetAbsenceTrigger;
 
     private bool hasTarget;
 
@@ -19,7 +19,11 @@ public class PickUpController : BaseController, IVisionTriggerObserver, IVisionO
         evaluator = new VisionEvaluator();
         evaluator.AddSample(typeof(IPickable), 3f);
 
-        main.GetController<EventsController>().ConnectTrigger(targetStatusTrigget);
+        targetPresenceTrigger = new EventTrigger();
+        main.Events.ConnectTrigger(targetPresenceTrigger, "TargetIsPresent");
+
+        targetAbsenceTrigger = new EventTrigger();
+        main.Events.ConnectTrigger(targetAbsenceTrigger, "TargetIsAbsent");
     }
 
     public override void Connect() => main.GetController<VisionDetector>().AddObserver(this);
@@ -32,29 +36,17 @@ public class PickUpController : BaseController, IVisionTriggerObserver, IVisionO
         if (hasTarget != target.IsValid)
         {
             hasTarget = isSuitable;
-            targetStatusTrigget.Set(hasTarget);
+
+            if (hasTarget)
+            {
+                targetPresenceTrigger.SetActive(true);
+                targetAbsenceTrigger.SetActive(false);
+            }
+            else
+            {
+                targetPresenceTrigger.SetActive(false);
+                targetAbsenceTrigger.SetActive(true);
+            }
         }
-    }
-}
-
-public class EventsController : BaseController
-{
-    private Dictionary<string, EventReceiver> events = new Dictionary<string, EventReceiver>();
-
-    public override void Initialize(MainController main)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Connect()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ConnectTrigger(EventTrigger eventTrigger, string eventName)
-    {
-        events[eventName].SubscribeOn(eventTrigger);
-
-        // MAKE EVENET TRIGGER SYSTEM!!!
     }
 }

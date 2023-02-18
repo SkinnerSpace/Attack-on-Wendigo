@@ -4,7 +4,7 @@
 
     public abstract void AddObserver(ITriggerObserver observer);
 
-    public virtual void Set(bool active)
+    public virtual void SetActive(bool active)
     {
         if (IsActive != active)
             Notify();
