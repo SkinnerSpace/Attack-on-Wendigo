@@ -25,5 +25,5 @@ public class GravityController : BaseController, IGroundObserver, IMoverObserver
             data.VerticalVelocity -= data.Gravity * chronos.DeltaTime;
     }
 
-    public void OnGrounded() => data.VerticalVelocity = 0f;
+    public void Land() => data.VerticalVelocity = 0f;
 }

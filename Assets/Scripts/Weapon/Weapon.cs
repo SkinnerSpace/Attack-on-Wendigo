@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
+public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser, IPickable
 {
     [Header("Required Components")]
     [SerializeField] private Transform shooterImp;
@@ -10,9 +10,12 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
 
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
-    [SerializeField] private SkinnedMeshRenderer arms;
 
     [SerializeField] private List<Transform> cameraUsers;
+
+    [SerializeField] private Rigidbody physics;
+    [SerializeField] private Collider collision;
+    private LayerChanger[] layerChangers;
 
     private IShooter shooter;
     private Collider collisionBox;
@@ -26,6 +29,8 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
     {
         shooter = shooterImp.GetComponent<IShooter>();
         collisionBox = GetComponent<Collider>();
+
+        layerChangers = GetComponentsInChildren<LayerChanger>();
     }
 
     public void PullTheTrigger()
@@ -47,7 +52,6 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
         this.isReady = isReady;
         onReady?.Invoke(isReady);
         magazine.GetReady(isReady);
-        arms.enabled = isReady;
 
         if (isReady){
             collisionBox.enabled = false;
@@ -67,6 +71,39 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
             ICameraUser cameraUser = user.GetComponent<ICameraUser>();
             cameraUser.ConnectCamera(cam);
         }
+    }
+
+    private Transform originalParent;
+
+    public void PickUp(IKeeper keeper, Action callback)
+    {
+        originalParent = transform.parent;
+        transform.SetParent(keeper.Root);
+
+        DisablePhysics(true);
+        SwapTheLayers();
+    }
+
+    public void Drop(Vector3 force)
+    {
+        transform.SetParent(originalParent);
+
+        DisablePhysics(false);
+        SwapTheLayers();
+        physics.AddForce(force);
+    }
+
+    private void DisablePhysics(bool disabled)
+    {
+        collision.enabled = !disabled;
+        physics.isKinematic = disabled;
+        physics.useGravity = !disabled;
+    }
+
+    private void SwapTheLayers()
+    {
+        foreach (LayerChanger changer in layerChangers)
+            changer.SwapTheLayer();
     }
 }
 

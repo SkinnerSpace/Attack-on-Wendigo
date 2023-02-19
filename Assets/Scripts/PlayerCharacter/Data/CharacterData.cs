@@ -18,6 +18,9 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private int maxJumpCount = 2;
 
+    [Header("Interaction")]
+    [SerializeField] private float dropItemStrength = 1000f;
+
     [Header("Ground Detection")]
     [SerializeField] private float groundDetectionRadius = 0.6f;
     [SerializeField] private float groundDetectionHeight = 0.5f;
@@ -56,6 +59,10 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 CameraTiltEuler { get; set; }
     public float TiltSpeed => tiltSpeed;
     public float TiltMaxAngle => tiltMaxAngle;
+
+    public Vector3 CameraForward => transform.forward;
+    public Vector3 CameraRight => transform.right;
+    public Vector3 CameraUp => transform.up;
 
     public float Height => controller.height;
 
@@ -100,5 +107,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float FOV { get { return cam.fieldOfView; } set { cam.fieldOfView = value; } }
     public float FOVChangeSpeed => fOVChangeSpeed;
     public float FOVPower { get; set; }
+
+    public float DropItemStrength => dropItemStrength;
 }
 

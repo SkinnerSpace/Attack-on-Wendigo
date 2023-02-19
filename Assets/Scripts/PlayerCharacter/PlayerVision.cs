@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerVision : MonoBehaviour
 {
-    [SerializeField] private ItemHolder weaponHolder;
+    [SerializeField] private OldItemHolder weaponHolder;
     [SerializeField] private PlayerVisionInteractor interactor;
     [SerializeField] private VisionTypeChecker typeChecker;
 

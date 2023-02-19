@@ -16,7 +16,7 @@ public class WeaponAimController : MonoBehaviour
     public Vector3 DefaultPosition => defaultPosition;
 
     [Header("Required Components")]
-    [SerializeField] private IPickable pickableItem;
+    [SerializeField] private IOldPickable pickableItem;
     [SerializeField] private WeaponData data;
 
     [Header("Settings")]

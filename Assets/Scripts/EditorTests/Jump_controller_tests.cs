@@ -10,7 +10,7 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = false };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
@@ -23,7 +23,7 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
@@ -36,7 +36,7 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, Gravity = 26f, MaxJumpCount = 2 };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
@@ -49,13 +49,13 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
 
             data.IsGrounded = false;
-            jumpController.OnStop();
+            jumpController.Stop();
 
             jumpController.TryToJump();
 
@@ -67,11 +67,11 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
-            jumpController.OnStop();
+            jumpController.Stop();
             jumpController.TryToJump();
 
             Assert.Less(data.JumpCount, 2);
@@ -82,16 +82,16 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true, JumpHeight = 10f, MaxJumpCount = 2 };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
 
             data.IsGrounded = false;
-            jumpController.OnStop();
+            jumpController.Stop();
 
             jumpController.TryToJump();
-            jumpController.OnStop();
+            jumpController.Stop();
 
             jumpController.TryToJump();
 
@@ -103,12 +103,12 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData() { IsGrounded = true };
 
-            JumpController jumpController = new JumpController();
+            IJumpController jumpController = new JumpController();
             jumpController.SetData(data);
 
             jumpController.TryToJump();
-            jumpController.OnStop();
-            jumpController.OnGrounded();
+            jumpController.Stop();
+            jumpController.Land();
 
             Assert.AreEqual(0, data.JumpCount);
         }

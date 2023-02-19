@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8425617499996812408}
   - component: {fileID: 5052864313933649279}
   - component: {fileID: 4873663919095250494}
-  - component: {fileID: 4902129331834518017}
   - component: {fileID: 7820593142600697943}
   - component: {fileID: 1358747189775576019}
   m_Layer: 0
@@ -126,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a59ff4825122245af68b2a49f2ab64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 4902129331834518017}
+  weaponHolder: {fileID: 0}
   interactor: {fileID: 5052864313933649279}
   typeChecker: {fileID: 4873663919095250494}
 --- !u!114 &5052864313933649279
@@ -141,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a29a6af69444343ad3eae2d206996b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 4902129331834518017}
+  weaponHolder: {fileID: 0}
   typeChecker: {fileID: 4873663919095250494}
 --- !u!114 &4873663919095250494
 MonoBehaviour:
@@ -155,21 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10040380f3677284e84218035fa3ec53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4902129331834518017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680944993474019683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60d189c0dd8efae43ad69f9873d5b704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHandler: {fileID: 0}
-  speedometer: {fileID: 0}
-  vision: {fileID: 8425617499996812408}
 --- !u!81 &7820593142600697943
 AudioListener:
   m_ObjectHideFlags: 0

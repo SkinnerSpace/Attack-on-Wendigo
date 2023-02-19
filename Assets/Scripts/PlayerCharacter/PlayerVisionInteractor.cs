@@ -6,7 +6,7 @@ public class PlayerVisionInteractor : MonoBehaviour
 {
     private const float REACH_DISTANCE = 4f;
 
-    [SerializeField] private ItemHolder weaponHolder;
+    [SerializeField] private OldItemHolder weaponHolder;
     [SerializeField] private VisionTypeChecker typeChecker;
 
     public void InteractIfPossible(Transform item)
@@ -20,7 +20,7 @@ public class PlayerVisionInteractor : MonoBehaviour
 
     private bool IsAbleToTakeAnItem(Transform item) => IsSuitable(item) &&
                                          GetDistanceTo(item) <= REACH_DISTANCE &&
-                                         typeChecker.CheckType(item) == typeof(IPickable);
+                                         typeChecker.CheckType(item) == typeof(IOldPickable);
 
     private bool IsSuitable(Transform targetTransform)
     {

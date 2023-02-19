@@ -10,7 +10,7 @@ public class VisionTypeChecker : MonoBehaviour
 
     private void InitializeTargets()
     {
-        targetTypes.Add(typeof(IPickable));
+        targetTypes.Add(typeof(IOldPickable));
         targetTypes.Add(typeof(IDamageable));
     }
 

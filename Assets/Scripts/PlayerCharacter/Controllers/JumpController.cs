@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class JumpController : BaseController, IGroundObserver
+public class JumpController : BaseController, IJumpController, IGroundObserver
 {
     private MainController main;
     private ICharacterData data;
@@ -25,7 +25,7 @@ public class JumpController : BaseController, IGroundObserver
         JumpInTheAir();
     }
 
-    public void OnStop() => data.IsJumping = false;
+    public void Stop() => data.IsJumping = false;
 
     public void JumpOffTheGround()
     {
@@ -53,7 +53,5 @@ public class JumpController : BaseController, IGroundObserver
 
     private float GetJumpVelocity() => Mathf.Sqrt(data.JumpHeight * 2f * data.Gravity);
 
-    public void OnGrounded() => data.JumpCount = 0;
+    public void Land() => data.JumpCount = 0;
 }
-
-

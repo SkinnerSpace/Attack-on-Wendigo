@@ -1,4 +1,4 @@
 ﻿public interface IGroundObserver
 {
-    void OnGrounded();
+    void Land();
 }

@@ -4,7 +4,7 @@ using System;
 public class VisionTrigger : IVisionObserver
 {
     private List<VisionTrigger> triggers = new List<VisionTrigger>();
-    private IVisionEvaluator evaluator;
+    private IVisionValidator evaluator;
 
     public bool IsActive { get; private set; }
     private bool wasActive;
@@ -12,7 +12,7 @@ public class VisionTrigger : IVisionObserver
     Action notifyDependee;
     Action<VisionTarget> notifyObservers;
 
-    public void SetEvaluator(IVisionEvaluator evaluator) => this.evaluator = evaluator;
+    public void SetEvaluator(IVisionValidator evaluator) => this.evaluator = evaluator;
 
     public void AddDependee(VisionTrigger dependee)
     {
@@ -37,7 +37,7 @@ public class VisionTrigger : IVisionObserver
 
     public void OnTargetUpdate(VisionTarget target)
     {
-        bool targetIsSuitable = evaluator.IsSuitable(target);
+        bool targetIsSuitable = false;//evaluator.Validate(target);
 
         if (!targetIsSuitable) 
             target.IsValid = false;

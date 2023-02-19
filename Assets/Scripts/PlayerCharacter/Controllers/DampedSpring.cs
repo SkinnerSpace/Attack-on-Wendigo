@@ -22,7 +22,7 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
         main.GetController<GroundDetector>().Subscribe(this);
     }
 
-    public void OnGrounded()
+    public void Land()
     {
         data.CurrentDampedSpringTime = 0f;
 

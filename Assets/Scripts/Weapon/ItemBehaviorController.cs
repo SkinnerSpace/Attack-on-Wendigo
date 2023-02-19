@@ -8,7 +8,7 @@ public class ItemBehaviorController : MonoBehaviour
     [SerializeField] private Rigidbody physics;
     [SerializeField] private List<LayerChanger> layerChangers;
 
-    public void GetReadyToHands(IHolder holder)
+    public void GetReadyToHands()
     {
         SetPhysics(false);
         SwapTheLayers();

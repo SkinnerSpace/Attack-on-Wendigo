@@ -4,7 +4,7 @@ using UnityEngine;
 public class DispenserStorage : MonoBehaviour
 {
     [SerializeField] private List<GameObject> weapon = new List<GameObject>();
-    private List<IPickable> items = new List<IPickable>();
+    private List<IOldPickable> items = new List<IOldPickable>();
 
     public bool hasItems = true;
 

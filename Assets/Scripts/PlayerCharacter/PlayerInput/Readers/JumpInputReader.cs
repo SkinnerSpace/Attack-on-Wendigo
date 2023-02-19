@@ -12,15 +12,15 @@ public class JumpInputReader : InputReader
         if (input.Released(keys.Jump)) onStop?.Invoke();
     }
 
-    public void Subscribe(JumpController observer)
+    public void Subscribe(IJumpController observer)
     {
         onJump += observer.TryToJump;
-        onStop += observer.OnStop;
+        onStop += observer.Stop;
     }
 
-    public void Unsubscribe(JumpController observer)
+    public void Unsubscribe(IJumpController observer)
     {
         onJump -= observer.TryToJump;
-        onStop -= observer.OnStop;
+        onStop -= observer.Stop;
     }
 }

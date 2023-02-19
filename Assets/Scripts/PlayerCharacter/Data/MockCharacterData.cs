@@ -37,6 +37,11 @@ public class MockCharacterData : ICharacterData
     public float TiltSpeed { get; set; } 
     public float TiltMaxAngle { get; set; }
 
+    public Vector3 CameraForward { get; set; } = Vector3.forward;
+    public Vector3 CameraRight { get; set; } = Vector3.right;
+    public Vector3 CameraUp { get; set; } = Vector3.up;
+
+
     public float Speed { get; set; }
 
     public bool IsAbleToDash { get; set; }
@@ -58,4 +63,7 @@ public class MockCharacterData : ICharacterData
     public float FOV { get; set; }
     public float FOVChangeSpeed { get; set; }
     public float FOVPower { get; set; }
+
+
+    public float DropItemStrength { get; set; }
 }

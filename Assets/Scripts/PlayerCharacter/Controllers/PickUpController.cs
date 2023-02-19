@@ -1,52 +1,49 @@
 ﻿using System.Collections;
 using System;
+using UnityEngine;
 
-public class PickUpController : BaseController, IVisionTriggerObserver, IVisionObserver
+public class PickUpController : BaseController, IVisionTriggerObserver, IVisionObserver, IInteractor
 {
     private MainController main;
-    private IVisionEvaluator evaluator;
-    private VisionTarget target;
-
-    private EventTrigger targetPresenceTrigger;
-    private EventTrigger targetAbsenceTrigger;
-
-    private bool hasTarget;
+    private IVisionValidator evaluator;
+    private VisionTarget currentTarget;
+    private IKeeper keeper;
+    private PickUpTriggers triggers;
 
     public override void Initialize(MainController main)
     {
         this.main = main;
+        keeper = main.GetController<WeaponKeeper>();
 
-        evaluator = new VisionEvaluator();
+        evaluator = new VisionValidator();
         evaluator.AddSample(typeof(IPickable), 3f);
 
-        targetPresenceTrigger = new EventTrigger();
-        main.Events.ConnectTrigger(targetPresenceTrigger, "TargetIsPresent");
-
-        targetAbsenceTrigger = new EventTrigger();
-        main.Events.ConnectTrigger(targetAbsenceTrigger, "TargetIsAbsent");
+        triggers = new PickUpTriggers();
+        triggers.SetUp(main.Events);
     }
 
-    public override void Connect() => main.GetController<VisionDetector>().AddObserver(this);
-
-    public void OnTargetUpdate(VisionTarget target)
+    public override void Connect()
     {
-        bool isSuitable = evaluator.IsSuitable(target);
-        if (!isSuitable) target.IsValid = false;
+        MainInputReader.Get<InteractionInputReader>().Subscribe(this);
+        main.GetController<VisionDetector>().AddObserver(this);
+    }
 
-        if (hasTarget != target.IsValid)
+    public void OnTargetUpdate(VisionTarget newTarget)
+    {
+        VisionTarget testedTarget = evaluator.Validate(newTarget);
+
+        if (TargetHasChanged(testedTarget))
         {
-            hasTarget = isSuitable;
-
-            if (hasTarget)
-            {
-                targetPresenceTrigger.SetActive(true);
-                targetAbsenceTrigger.SetActive(false);
-            }
-            else
-            {
-                targetPresenceTrigger.SetActive(false);
-                targetAbsenceTrigger.SetActive(true);
-            }
+            currentTarget = testedTarget;
+            triggers.Activate(currentTarget.IsValid);
         }
+    }
+
+    private bool TargetHasChanged(VisionTarget testedTarget) => currentTarget.IsValid != testedTarget.IsValid || currentTarget.type != testedTarget.type;
+
+    public void Interact()
+    {
+        if (currentTarget.IsValid)
+            keeper.TakeAnItem(currentTarget.Transform);
     }
 }

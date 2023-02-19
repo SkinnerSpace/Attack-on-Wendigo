@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ItemHolder : MonoBehaviour, IHolder
+public class OldItemHolder : MonoBehaviour, IHolder
 {
     private const float dropForce = 1000f;
 
@@ -13,7 +13,7 @@ public class ItemHolder : MonoBehaviour, IHolder
     public Vector3 targetPosition =>  weapon.DefaultPosition;
 
     private Transform item;
-    private IPickable pickable;
+    private IOldPickable pickable;
     private IWeapon weapon;
 
     public Action onPickedUp;
@@ -77,7 +77,7 @@ public class ItemHolder : MonoBehaviour, IHolder
 
     private void PickUp(Transform item)
     {
-        pickable = item.GetComponent<IPickable>();
+        pickable = item.GetComponent<IOldPickable>();
         pickable.PickUp(this, onPickedUp);
     }
 

@@ -9,8 +9,8 @@ public class GroundDetector : BaseController, IMoverObserver
 
     private event Action notifyOnGrounded;
 
-    public void Subscribe(IGroundObserver observer) => notifyOnGrounded += observer.OnGrounded;
-    public void Unsubscribe(IGroundObserver observer) => notifyOnGrounded -= observer.OnGrounded;
+    public void Subscribe(IGroundObserver observer) => notifyOnGrounded += observer.Land;
+    public void Unsubscribe(IGroundObserver observer) => notifyOnGrounded -= observer.Land;
 
     public override void Initialize(MainController main)
     {

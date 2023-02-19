@@ -3,6 +3,7 @@
 public static class ComplexLayers
 {
     public static LayerMask Vision = ~(
+        1 << (int)Layers.Weapon |
         1 << (int)Layers.Props |
         1 << (int)Layers.Player |
         1 << (int)Layers.PropDestroyers |

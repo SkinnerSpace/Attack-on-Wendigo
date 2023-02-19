@@ -12,7 +12,7 @@ public class SurfaceDetector : BaseController, IGroundObserver
     public void Subscribe(ISurfaceObserver observer) => notifyOnSurfaceFound += observer.OnSurfaceFound;
     public void Unsubscribe(ISurfaceObserver observer) => notifyOnSurfaceFound -= observer.OnSurfaceFound;
 
-    public void OnGrounded() => Update();
+    public void Land() => Update();
 
     public void Update()
     {

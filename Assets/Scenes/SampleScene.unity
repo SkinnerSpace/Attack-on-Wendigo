@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 219536286}
   - component: {fileID: 219536281}
   - component: {fileID: 219536287}
+  - component: {fileID: 219536285}
   - component: {fileID: 219536279}
   m_Layer: 0
   m_Name: InputReader
@@ -459,6 +460,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfa12eb37e811194592d81941d164a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &219536285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219536277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e992189e8f2d94544a715085944f7539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &219536286
@@ -1410,6 +1423,50 @@ Transform:
   m_Father: {fileID: 348362390}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &596777956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 596777957}
+  - component: {fileID: 596777958}
+  m_Layer: 0
+  m_Name: TestVisualizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &596777957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596777956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1006532234}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &596777958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596777956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec3cc0b5f314c847b327d0783f13bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawSphere: 0
 --- !u!1001 &597772994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2518,6 +2575,7 @@ Transform:
   - {fileID: 219536278}
   - {fileID: 353433194}
   - {fileID: 1497846041}
+  - {fileID: 596777957}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -36,6 +36,7 @@ public class MainController : MonoBehaviour
         AddController(typeof(GravityController));
         AddController(typeof(DecelerationController));
         AddController(typeof(DampedSpring));
+        AddController(typeof(WeaponKeeper));
         AddController(typeof(PickUpController));
     }
 

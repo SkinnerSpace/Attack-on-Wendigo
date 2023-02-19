@@ -10,13 +10,13 @@ public class ItemPositionSetter
 
     public ItemPositionSetter(Transform item) => this.item = item;
 
-    public void SetUp(IHolder holder)
+    public void SetUp(IKeeper keeper)
     {
-        originalParent = item.parent;
-        item.SetParent(holder.transform, true);
+        /*originalParent = item.parent;
+        item.SetParent(keeper.transform, true);
         
         originalPos = item.localPosition;
-        targetPos = holder.targetPosition;
+        targetPos = keeper.targetPosition;*/
     }
 
     public void Reset()

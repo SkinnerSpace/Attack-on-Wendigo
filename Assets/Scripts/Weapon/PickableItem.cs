@@ -13,10 +13,10 @@ public class PickableItem : MonoBehaviour, IPickable
 
     private void Awake() => positionSetter = new ItemPositionSetter(transform);
 
-    public void PickUp(IHolder holder, Action onPickedUp)
+    public void PickUp(IKeeper keeper, Action onPickedUp)
     {
-        behaviorController.GetReadyToHands(holder);
-        positionSetter.SetUp(holder);
+        behaviorController.GetReadyToHands();
+        positionSetter.SetUp(keeper);
         transitionController.Launch(positionSetter, onPickedUp);
         sFXPlayer.PlayTakeSFX();
     }
