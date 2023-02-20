@@ -17,8 +17,6 @@ public interface ICharacterData
     Vector3 CameraForward { get; }
     Vector3 CameraRight { get; }
     Vector3 CameraUp { get; }
-
-    
     Vector3 CameraViewEuler { get; set; }
     Quaternion CameraViewRotation { get; set; }
 
@@ -58,11 +56,7 @@ public interface ICharacterData
     float GroundDetectionHeight { get; set; }
 
 
-    float DampedSpringPower { get; }
-    float DampedSpringTime { get; }
-    float DampedSpringAmplitude { get; set; }
-    float CurrentDampedSpringTime { get; set; }
-
+    IDampedSpringData DampedSpring { get; }
 
 
     bool IsAbleToDash { get; set; }

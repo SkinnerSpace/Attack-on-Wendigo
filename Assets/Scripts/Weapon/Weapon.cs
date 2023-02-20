@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser, IPick
 
     [SerializeField] private List<Transform> cameraUsers;
 
+    [SerializeField] private WeaponData data;
+
     [SerializeField] private Rigidbody physics;
     [SerializeField] private Collider collision;
     private LayerChanger[] layerChangers;
@@ -78,15 +80,16 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser, IPick
     public void PickUp(IKeeper keeper, Action callback)
     {
         originalParent = transform.parent;
-        transform.SetParent(keeper.Root);
+        data.Parent = keeper.Root;
 
         DisablePhysics(true);
         SwapTheLayers();
     }
 
-    public void Drop(Vector3 force)
+    public void Drop(Vector3 pos, Vector3 force)
     {
-        transform.SetParent(originalParent);
+        data.Position = pos;
+        data.Parent = originalParent;
 
         DisablePhysics(false);
         SwapTheLayers();

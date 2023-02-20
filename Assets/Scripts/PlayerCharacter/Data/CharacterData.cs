@@ -25,9 +25,9 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private float groundDetectionRadius = 0.6f;
     [SerializeField] private float groundDetectionHeight = 0.5f;
 
-    [Header("Damped Spring")]
-    [SerializeField] private float dampedSpringPower = 1f;
-    [SerializeField] private float dampedSpringTime = 0.5f;
+
+    [SerializeField] private DampedSpringData dampedSpringData;
+    public IDampedSpringData DampedSpring => dampedSpringData;
 
     [Header("FOV")]
     [SerializeField] private float minFOV = 80f;
@@ -97,10 +97,6 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float GroundDetectionRadius { get { return groundDetectionRadius; } set { groundDetectionRadius = value; } }
     public float GroundDetectionHeight { get { return groundDetectionHeight; } set { groundDetectionHeight = value; } }
 
-    public float DampedSpringPower => dampedSpringPower;
-    public float DampedSpringTime => dampedSpringTime;
-    public float DampedSpringAmplitude { get; set; }
-    public float CurrentDampedSpringTime { get; set; }
 
     public float MinFOV => minFOV;
     public float MaxFOV => maxFOV;

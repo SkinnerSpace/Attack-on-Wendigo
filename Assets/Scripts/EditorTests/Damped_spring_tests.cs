@@ -9,36 +9,44 @@ namespace Tests
         [Test]
         public void Amplitude_grows_when_grounded()
         {
-            ICharacterData data = new MockCharacterData() { VerticalVelocity = 10f, JumpHeight = 10f, MaxJumpCount = 2, Gravity = 26, DampedSpringPower = 1f };
-            IChronos chronos = Substitute.For<IChronos>();
-            chronos.DeltaTime.Returns(1f);
-
-            /*DampedSpring dampedSpring = new DampedSpring(data, chronos);
-            dampedSpring.OnGrounded();
-
-            float amplitude = data.DampedSpringAmplitude.Round(1);
-            Assert.AreEqual(0.3f, amplitude);*/
-        }
-
-        [Test]
-        public void Position_updates_when_current_time_less_than_max()
-        {
             ICharacterData data = new MockCharacterData() { 
-                VerticalVelocity = 10f, 
+                PreviousVerticalVelocity = 10f, 
                 JumpHeight = 10f, 
                 MaxJumpCount = 2, 
-                Gravity = 26,
-                DampedSpringPower = 1f, 
-                DampedSpringTime = 1f 
+                Gravity = 26, 
+                DampedSpring = new MockDampedSpringData() { Power = 10f, Time = 0.5f }
             };
 
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
-            /*DampedSpring dampedSpring = new DampedSpring(data, chronos);
-            dampedSpring.OnGrounded();
-            dampedSpring.Update();*/
+            DampedSpring dampedSpring = new DampedSpring();
+            dampedSpring.Initialize(data, chronos);
 
+            dampedSpring.Land();
+            Assert.AreEqual(1.8f, data.DampedSpring.Amplitude.Round(1));
+        }
+
+        [Test]
+        public void Position_updates_when_current_time_less_than_max()
+        {
+            ICharacterData data = new MockCharacterData()
+            {
+                PreviousVerticalVelocity = 10f,
+                JumpHeight = 10f,
+                MaxJumpCount = 2,
+                Gravity = 26,
+                DampedSpring = new MockDampedSpringData() { Power = 10f, Time = 0.5f }
+            };
+
+            IChronos chronos = Substitute.For<IChronos>();
+            chronos.DeltaTime.Returns(0.1f);
+
+            DampedSpring dampedSpring = new DampedSpring();
+            dampedSpring.Initialize(data, chronos);
+
+            dampedSpring.Land();
+            dampedSpring.Update();
             Assert.AreNotEqual(Vector3.zero, data.CameraLocalPos);
         }
 
@@ -47,23 +55,22 @@ namespace Tests
         {
             ICharacterData data = new MockCharacterData()
             {
-                VerticalVelocity = 10f,
+                PreviousVerticalVelocity = 10f,
                 JumpHeight = 10f,
                 MaxJumpCount = 2,
                 Gravity = 26,
-                DampedSpringPower = 1f,
-                DampedSpringTime = 1f
+                DampedSpring = new MockDampedSpringData() { Power = 10f, Time = 0.5f }
             };
 
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
-            /*DampedSpring dampedSpring = new DampedSpring(data, chronos);
-            dampedSpring.OnGrounded();
-            data.CurrentDampedSpringTime = data.DampedSpringTime;
-            dampedSpring.Update();*/
+            DampedSpring dampedSpring = new DampedSpring();
+            dampedSpring.Initialize(data, chronos);
 
-            Assert.AreEqual(Vector3.zero, data.CameraLocalPos);
+            dampedSpring.Land();
+            dampedSpring.Update();
+            Assert.AreEqual(Vector3.zero, data.CameraLocalPos.Round(1));
         }
     }
 }

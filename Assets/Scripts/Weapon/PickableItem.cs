@@ -21,7 +21,7 @@ public class PickableItem : MonoBehaviour, IPickable
         sFXPlayer.PlayTakeSFX();
     }
 
-    public void Drop(Vector3 force)
+    public void Drop(Vector3 pos, Vector3 force)
     {
         behaviorController.ThrowAway(force);
         positionSetter.Reset();

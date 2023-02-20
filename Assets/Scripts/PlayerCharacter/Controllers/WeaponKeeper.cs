@@ -10,11 +10,16 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
     public Transform Root => data.Cam.transform;
 
     private Weapon weapon;
+    private WeaponThrower thrower;
+
+    private Vector3 dropPos;
 
     public override void Initialize(MainController main)
     {
         this.main = main;
-        data = main.Data; 
+        data = main.Data;
+
+        thrower = new WeaponThrower(data);
     }
 
     public override void Connect()
@@ -40,48 +45,13 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
     {
         if (weapon != null)
         {
-            weapon.Drop(data.CameraForward * data.DropItemStrength);
+            Vector3 force = data.CameraForward * data.DropItemStrength;
+            weapon.Drop(dropPos, force);
             weapon = null;
-
-            // IF there is an obstacle before the weapon then offset its position
         }
-
-        
     }
 
     private void CallMeBack() => Debug.Log("Item PICKED UP!");
 
-    Vector3 lineStart;
-    Vector3 lineEnd;
-
-    public void OnMousePosUpdate(Vector2 pos)
-    {
-        Ray ray = data.Cam.ScreenPointToRay(pos);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Vision))
-        {
-            if (weapon != null)
-            {
-                
-                Vector3 shortVec = ray.direction * (hit.distance - 2);
-                Vector3 closerPoint = ray.origin + shortVec;
-
-                Vector3 weaponVec = (weapon.transform.position - closerPoint);
-
-                float dot = Vector3.Dot(ray.direction, weaponVec);
-
-                if (dot > 0f)
-                    Debug.Log(dot);
-
-                (Vector3 pos, Color col) point;
-                point.pos = closerPoint;
-                point.col = Color.red;
-
-                TestVisualizer.Instance.DrawPoint(point);
-
-                // When weapon clips through the wall make an offeset position of the weapon with a distance equal the dot product
-                // When You drop a weapon the weapon would be set in that position so that it would not be in the wall!
-            }
-        }
-    }
+    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(weapon, screenPoint);
 }

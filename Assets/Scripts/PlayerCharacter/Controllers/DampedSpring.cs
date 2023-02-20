@@ -12,8 +12,13 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
     public override void Initialize(MainController main)
     {
         this.main = main;
-        data = main.Data;
-        chronos = main.Chronos;
+        Initialize(main.Data, main.Chronos);
+    }
+
+    public void Initialize(ICharacterData data, IChronos chronos)
+    {
+        this.data = data;
+        this.chronos = chronos;
     }
 
     public override void Connect()
@@ -24,23 +29,23 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
 
     public void Land()
     {
-        data.CurrentDampedSpringTime = 0f;
+        data.DampedSpring.CurrentTime = 0f;
 
         float maxVerticalVelocity = Mathf.Sqrt(data.JumpHeight * data.MaxJumpCount * data.Gravity * MAX_MULTIPLIER);
-        data.DampedSpringAmplitude = Mathf.Abs(data.PreviousVerticalVelocity / maxVerticalVelocity) * data.DampedSpringPower;
-        data.DampedSpringAmplitude = Mathf.Clamp(data.DampedSpringAmplitude, 0f, MAX_AMPLITUDE);
+        data.DampedSpring.Amplitude = Mathf.Abs(data.PreviousVerticalVelocity / maxVerticalVelocity) * data.DampedSpring.Power;
+        data.DampedSpring.Amplitude = Mathf.Clamp(data.DampedSpring.Amplitude, 0f, MAX_AMPLITUDE);
     }
 
     public void Update()
     {
-        if (data.CurrentDampedSpringTime < data.DampedSpringTime)
+        if (data.DampedSpring.CurrentTime < data.DampedSpring.Time)
         {
-            data.CurrentDampedSpringTime += chronos.DeltaTime;
+            data.DampedSpring.CurrentTime += chronos.DeltaTime;
 
-            float interpolation = (data.CurrentDampedSpringTime / data.DampedSpringTime).Clamp01();
+            float interpolation = (data.DampedSpring.CurrentTime / data.DampedSpring.Time).Clamp01();
             interpolation = Easing.QuadEaseOut(interpolation);
 
-            float motion = -1 * Mathf.Sin(interpolation * Mathf.PI) * data.DampedSpringAmplitude;
+            float motion = -1 * Mathf.Sin(interpolation * Mathf.PI) * data.DampedSpring.Amplitude;
             data.CameraLocalPos = new Vector3(data.CameraLocalPos.x, motion, data.CameraLocalPos.z);
         }
     }

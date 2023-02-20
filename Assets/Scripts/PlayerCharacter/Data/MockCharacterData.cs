@@ -53,10 +53,7 @@ public class MockCharacterData : ICharacterData
     public float GroundDeceleration { get; set; }
     public float AirDeceleration { get; set; }
 
-    public float DampedSpringPower { get; set; }
-    public float DampedSpringTime { get; set; }
-    public float DampedSpringAmplitude { get; set; }
-    public float CurrentDampedSpringTime { get; set; }
+    public IDampedSpringData DampedSpring { get; set; }
 
     public float MinFOV { get; set; }
     public float MaxFOV { get; set; }
