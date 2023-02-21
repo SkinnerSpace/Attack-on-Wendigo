@@ -11,13 +11,15 @@ public class PickableItem : MonoBehaviour, IPickable
 
     private ItemPositionSetter positionSetter;
 
+    public Vector3 Position => throw new NotImplementedException();
+
     private void Awake() => positionSetter = new ItemPositionSetter(transform);
 
     public void PickUp(IKeeper keeper, Action onPickedUp)
     {
         behaviorController.GetReadyToHands();
         positionSetter.SetUp(keeper);
-        transitionController.Launch(positionSetter, onPickedUp);
+        //transitionController.Launch(positionSetter, onPickedUp);
         sFXPlayer.PlayTakeSFX();
     }
 
@@ -25,5 +27,10 @@ public class PickableItem : MonoBehaviour, IPickable
     {
         behaviorController.ThrowAway(force);
         positionSetter.Reset();
+    }
+
+    public T Get<T>() where T : Component
+    {
+        throw new NotImplementedException();
     }
 }

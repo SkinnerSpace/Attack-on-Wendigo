@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Arms : MonoBehaviour
+public class Arms : MonoBehaviour, IWeaponObserver
 {
     [SerializeField] private Weapon weapon;
     private SkinnedMeshRenderer meshRenderer;
@@ -8,9 +8,9 @@ public class Arms : MonoBehaviour
     private void Awake()
     {
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
-        weapon.onReady += Show;
+        weapon.Subscribe(this);
     }
 
-    public void Show(bool isVisible) => meshRenderer.enabled = isVisible;
+    public void OnReady(bool isVisible) => meshRenderer.enabled = isVisible;
 }
 

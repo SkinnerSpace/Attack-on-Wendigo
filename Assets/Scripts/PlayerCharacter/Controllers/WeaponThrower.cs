@@ -9,10 +9,10 @@ public class WeaponThrower
 
     public WeaponThrower(ICharacterData data) => this.data = data;
 
-    public Vector3 GetDropPos(Weapon weapon, Vector2 screenPoint)
+    public Vector3 GetDropPos(IPickable item, Vector2 screenPoint)
     {
-        if (weapon == null) return Vector3.zero;
-        Vector3 originalPos = weapon.transform.position;
+        if (item == null) return Vector3.zero;
+        Vector3 originalPos = item.Position;
 
         Ray ray = data.Cam.ScreenPointToRay(screenPoint);
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WeaponData : MonoBehaviour, IWeaponData
+public class WeaponData : MonoBehaviour
 {
     [SerializeField] private float damage;
     [SerializeField] private float impact;
@@ -12,9 +12,6 @@ public class WeaponData : MonoBehaviour, IWeaponData
     [SerializeField] private float aimPrecision;
 
     [SerializeField] private float rate;
-
-    public Transform Parent { get { return transform.parent; } set { transform.SetParent(value); } }
-    public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
 
     public float Damage => damage;
     public float Impact => impact;

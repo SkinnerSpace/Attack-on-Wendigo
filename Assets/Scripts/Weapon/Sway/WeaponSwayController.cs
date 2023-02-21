@@ -36,6 +36,8 @@ public class WeaponSwayController : MonoBehaviour, ISpeedObserver
         tilter = GetComponent<WeaponTilter>();
         oscillator = GetComponent<WeaponOscillator>();
         corrector = GetComponent<DisplacementCorrector>();
+
+       // MainInputReader.Get<mou>().Subscribe()
     }
 
     private void Update() => Sway();

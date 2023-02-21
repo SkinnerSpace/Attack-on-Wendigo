@@ -44,6 +44,8 @@ public class PickUpController : BaseController, IVisionTriggerObserver, IVisionO
     public void Interact()
     {
         if (currentTarget.IsValid)
-            keeper.TakeAnItem(currentTarget.Transform);
+        {
+            keeper.TakeAnItem(currentTarget.Transform.GetComponent<IPickable>());
+        }
     }
 }

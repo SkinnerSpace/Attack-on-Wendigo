@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class ItemTransitionController : MonoBehaviour
 {
-    private ItemPositionSetter positionSetter;
     private Action onPickedUp;
 
     private float currentTime = 0f;
     private float pickTime = 0.3f;
 
-    public void Launch(ItemPositionSetter positionSetter, Action onPickedUp)
+    private Vector3 originalPos;
+    private Vector3 targetPos;
+
+    private bool isMoving;
+
+    public void Launch(IPickable item, Action onPickedUp)
     {
-        this.positionSetter = positionSetter;
         this.onPickedUp = onPickedUp;
 
+        originalPos = transform.localPosition;
+        targetPos = item.Get<Weapon>().DefaultPosition;
+
         currentTime = 0f;
+        isMoving = true;
         StartCoroutine(ComeIntoPosition());
     }
 
+    public void Stop() => isMoving = false;
+
     private IEnumerator ComeIntoPosition()
     {
-        while (currentTime < pickTime)
+        while (currentTime < pickTime && isMoving)
         {
             CarryOn();
             yield return null;
@@ -34,7 +43,7 @@ public class ItemTransitionController : MonoBehaviour
     {
         currentTime += OldChronos.DeltaTime;
         float transition = GetTransition(currentTime);
-        positionSetter.Displace(transition);
+        Displace(transition);
     }
 
     private float GetTransition(float currentTime)
@@ -46,4 +55,10 @@ public class ItemTransitionController : MonoBehaviour
     }
 
     private float FadeOut(float value) => Mathf.Sqrt(value);
+
+    public void Displace(float transition)
+    {
+        transform.localPosition = Vector3.Lerp(originalPos, targetPos, transition);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 0, 0), transition);
+    }
 }

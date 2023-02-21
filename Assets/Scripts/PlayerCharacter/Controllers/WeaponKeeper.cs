@@ -5,10 +5,10 @@ using UnityEditor;
 
 public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObserver
 {
-    private MainController main;
     private ICharacterData data;
     public Transform Root => data.Cam.transform;
 
+    private IPickable item;
     private Weapon weapon;
     private WeaponThrower thrower;
 
@@ -16,9 +16,7 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
 
     public override void Initialize(MainController main)
     {
-        this.main = main;
         data = main.Data;
-
         thrower = new WeaponThrower(data);
     }
 
@@ -28,14 +26,14 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         MainInputReader.Get<MousePositionInputReader>().Subscribe(this);
     }
 
-    public void TakeAnItem(Transform item)
+    public void TakeAnItem(IPickable item)
     {
-        Weapon takenWeapon = item.GetComponent<Weapon>();
-
-        if (takenWeapon != weapon)
+        if (this.item != item)
         {
-            weapon = takenWeapon;
-            weapon.PickUp(this, CallMeBack);
+            this.item = item;
+            weapon = item.Get<Weapon>();
+            item.PickUp(this, CallMeBack);
+            weapon.ConnectCamera(data.Cam);
         }
     }
 
@@ -43,15 +41,17 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
 
     public void DropAnItem()
     {
-        if (weapon != null)
+        if (item != null)
         {
+            weapon.SetReady(false);
+
             Vector3 force = data.CameraForward * data.DropItemStrength;
-            weapon.Drop(dropPos, force);
-            weapon = null;
+            item.Drop(dropPos, force);
+            item = null;
         }
     }
 
-    private void CallMeBack() => Debug.Log("Item PICKED UP!");
+    private void CallMeBack() => weapon.SetReady(true);
 
-    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(weapon, screenPoint);
+    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(item, screenPoint);
 }
