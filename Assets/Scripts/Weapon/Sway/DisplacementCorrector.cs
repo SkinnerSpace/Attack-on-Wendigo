@@ -9,10 +9,16 @@ public class DisplacementCorrector : MonoBehaviour
     private Vector3 twistedPosition;
     private Quaternion twistedRotation;
 
-    private Vector3 fixedPosition = Vector3.zero;
-    private Quaternion fixedRotation = Quaternion.identity;
+    private Vector3 fixedPosition;
+    private Quaternion fixedRotation;
 
     private IWeapon weapon;
+
+    private void Awake()
+    {
+        fixedPosition = transform.localPosition;
+        fixedRotation = transform.localRotation;
+    }
 
     public void Fix(IWeapon weapon)
     {

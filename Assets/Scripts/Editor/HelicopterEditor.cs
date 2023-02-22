@@ -32,10 +32,6 @@ public class HelicopterEditor : Editor
             {
                 if (GUILayout.Button("Launch", GUILayout.Width(100))) helicopter.Launch();
                 if (GUILayout.Button("Stop", GUILayout.Width(100))) helicopter.Stop();
-            /*    if (GUILayout.Toggle(false, "Auto pilot"))
-                {
-                    Debug.Log("AUTO");
-                }*/
             }
         }
     }

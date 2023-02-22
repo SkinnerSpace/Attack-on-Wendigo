@@ -13,6 +13,7 @@ public class MovementController : BaseController, IMovementController
     }
 
     public override void Connect() => MainInputReader.Get<MovementInputReader>().Subscribe(this);
+    public void Disconnect() => MainInputReader.Get<MovementInputReader>().Unsubscribe(this);
 
     public void Move(Vector3 inDirection)
     {

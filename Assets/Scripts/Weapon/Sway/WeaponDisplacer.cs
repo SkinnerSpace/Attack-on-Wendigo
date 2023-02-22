@@ -2,7 +2,7 @@
 
 public class WeaponDisplacer : MonoBehaviour
 {
-    private const float VERTICAL_ADJUSTMENT = 5f;
+    private const float VERTICAL_ADJUSTMENT = 0.2f;
     private const float LAND_ADJUSTMENT = 6f;
     private const float STABILITY_MODIFIER = 0.95f;
 
@@ -11,6 +11,7 @@ public class WeaponDisplacer : MonoBehaviour
     [SerializeField] private float smoothDisplacement = 6f;
     [SerializeField] private WeaponAimController aimController;
 
+    private VerticalTuner verticalTuner;
     private WeaponSwayController controller;
     private Vector3 originalPosition;
 
@@ -22,14 +23,21 @@ public class WeaponDisplacer : MonoBehaviour
         originalPosition = transform.localPosition;
     }
 
+    public WeaponDisplacer Initialize(VerticalTuner verticalTuner)
+    {
+        this.verticalTuner = verticalTuner;
+        return this;
+    }
+
     public void ReadInput()
     {
         float inputY = controller.input.y;
-        inputY = VerticalTuner.IncreaseVerticalInput(inputY, VERTICAL_ADJUSTMENT, LAND_ADJUSTMENT);
+
+        inputY = verticalTuner.IncreaseVerticalInput(inputY, VERTICAL_ADJUSTMENT);
 
         input = new Vector2(
             controller.input.x,
-            inputY);
+            inputY) * 0.5f;
 
         input *= aimController.GetStability(STABILITY_MODIFIER);
     }

@@ -14,7 +14,6 @@ public class Helicopter : MonoBehaviour
     [SerializeField] private FunctionTimer timer;
 
     private bool isMoving;
-    private float idleTime = 2f;
 
     public float DistancePassed => distancePassed;
     public float RouteCompletion => (trajectory != null) ? Mathf.Round((distancePassed / trajectory.Length) * 100f) : 0f;
@@ -23,7 +22,12 @@ public class Helicopter : MonoBehaviour
     private float distancePassed;
     private Vector3 prevPos;
 
-    private void Awake() => SynchronizeComponents();
+    [SerializeField] private bool needToDrop;
+
+    private void Awake()
+    {
+        SynchronizeComponents();
+    }
 
     private void SynchronizeComponents()
     {
@@ -35,7 +39,6 @@ public class Helicopter : MonoBehaviour
     public void Launch()
     {
         arrived = false;
-
         isMoving = true;
 
         distancePassed = 0f;
@@ -65,7 +68,14 @@ public class Helicopter : MonoBehaviour
     {
         arrived = true;
         isMoving = false;
-        dispenserManager.DropAnItem(Launch);
-        //timer.Set("Launch", idleTime, Launch); ONLY AFTER THE DOORS ARE SHUT!
+
+        if (needToDrop)
+        {
+            dispenserManager.DropAnItem(Launch);
+        }
+        else
+        {
+            Launch();
+        }
     }
 }

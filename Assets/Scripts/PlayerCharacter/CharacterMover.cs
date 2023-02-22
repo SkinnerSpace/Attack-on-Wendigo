@@ -1,26 +1,41 @@
 ﻿using UnityEngine;
 using System;
 
-public class CharacterMover : MonoBehaviour
+public class CharacterMover : MonoBehaviour, IBaseController
 {
-    [SerializeField] private CharacterData data;
-    [SerializeField] private Chronos chronos;
+    private CharacterData data;
+    private Chronos chronos;
 
     private event Action onUpdate;
+    private bool isReady;
+
+    public void Initialize(MainController main)
+    {
+        data = main.Data;
+        chronos = main.Chronos;
+    }
+
+    public void Connect() => isReady = true;
 
     public void Subscribe(IMoverObserver observer) => onUpdate += observer.Update;
 
     private void Update()
     {
-        data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler);
-        onUpdate?.Invoke();
+        if (isReady)
+        {
+            data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler);
+            onUpdate?.Invoke();
+        }
     }
 
     private void FixedUpdate()
     {
-        data.PreviousVerticalVelocity = data.VerticalVelocity;
-        data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y);
-        data.Controller.Move(data.Velocity * chronos.DeltaTime);
+        if (isReady)
+        {
+            data.PreviousVerticalVelocity = data.VerticalVelocity;
+            data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y);
+            data.Controller.Move(data.Velocity * chronos.DeltaTime);
+        }
     }
 }
 

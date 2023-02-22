@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public static class VerticalTuner
+public class VerticalTuner
 {
-    public static float ReduceVerticalInput(float inputY)
+    private ICharacterData data;
+
+    public VerticalTuner(ICharacterData data) => this.data = data;
+
+    public float ReduceVerticalInput(float inputY)
     {
-        /*float lerp = Mathf.Abs(PlayerVerticalMovement.velocityMagnitude);
+        float lerp = Mathf.Abs(data.VerticalVelocity);
         float adjustedInputY = Mathf.Lerp(inputY, 0f, lerp);
 
-        return adjustedInputY;*/
-        return 1f;
+        return adjustedInputY;
     }
 
-    public static float IncreaseVerticalInput(float inputY, float verticalAdjustment, float landAdjustment)
+    public float IncreaseVerticalInput(float inputY, float verticalAdjustment)
     {
-        /*float adjustedInputY = inputY +
-            (PlayerVerticalMovement.velocityMagnitude * verticalAdjustment);// + 
-            //(PlayerGroundDetector.landMagnitude);
+        float adjustedInputY = inputY + (data.VerticalVelocity * verticalAdjustment);
 
-        return adjustedInputY;*/
-        return 1f;
+        return adjustedInputY;
     }
 }

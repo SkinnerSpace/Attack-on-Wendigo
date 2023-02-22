@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class CameraController : BaseController, ICamera
+public class CameraController : BaseController, IMouseMotionObserver
 {
     private ICharacterData data;
     private IChronos chronos;
@@ -10,7 +10,7 @@ public class CameraController : BaseController, ICamera
     private float xAngle;
     private float yAngle;
 
-    public void Rotate(Vector2 motion)
+    public void ReceiveMotion(Vector2 motion)
     {
         xAngle += motion.x * chronos.DeltaTime;
         yAngle += motion.y * chronos.DeltaTime;

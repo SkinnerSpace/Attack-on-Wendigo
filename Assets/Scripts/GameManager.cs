@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Required Components")]
     [SerializeField] private WendigoSpawner wendigoSpawner;
+    [SerializeField] private MainController character;
+    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private MainMenu menu;
 
     [Header("Settings")]
     [SerializeField] private int wendigoMaxCount;
@@ -22,18 +26,46 @@ public class GameManager : MonoBehaviour
 
     private FunctionTimer timer;
 
+    public static GameManager Instance;
+
+    private event Action onStart;
+
     private void Awake()
     {
+        Instance = this;
+
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
         timer = GetComponent<FunctionTimer>();
+
+        cameraManager.SetLookAtTheHelicopter();
+
     }
 
     private void Update()
     {
-        StartTheGame();
+        StarInvasion();
     }
 
-    private void StartTheGame()
+    public void StartTheGame()
+    {
+        CursorManager.LockCursor();
+        menu.gameObject.SetActive(false);
+
+        character.SetActive(true);
+        cameraManager.SetLookAtTheCharacter();
+    }
+
+    public void OpenSettings()
+    {
+        Debug.Log("Settings");
+    }
+
+    public void QuitTheGame()
+    {
+        Debug.Log("QUIT");
+    }
+
+    private void StarInvasion()
     {
         if (state == States.Pause && Input.GetKeyDown(KeyCode.G))
         {

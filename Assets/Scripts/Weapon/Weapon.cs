@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
+public class Weapon : MonoBehaviour, IWeapon, ICameraUser
 {
     [Header("Required Components")]
     [SerializeField] private Transform shooterImp;
@@ -25,6 +25,11 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
         shooter = shooterImp.GetComponent<IShooter>();
     }
 
+    public void Initialize(ICharacterData characterData)
+    {
+        swayController.Initialize(characterData);
+    }
+
     public void PullTheTrigger()
     {
         if (magazine.HasAmmo()){
@@ -39,7 +44,7 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
 
     private void OnShot() => magazine.ReduceCount();
 
-    public void Aim(bool isAiming) { } //=> aimController.Aim(isAiming);
+    public void Aim(bool isAiming) => aimController.Aim(isAiming);
     public void Reload() { }
     public void SetReady(bool isReady)
     {
@@ -54,11 +59,8 @@ public class Weapon : MonoBehaviour, IWeapon, ISpeedObserver, ICameraUser
 
         else if (!isReady){
             MainInputReader.Get<CombatInputReader>().Unsubscribe(this);
-            swayController.ResetSway();
         }
     }
-
-    public void ConnectSpeedometer(Speedometer speedometer) => swayController.ConnectSpeedometer(speedometer);
 
     public void ConnectCamera(Camera cam)
     {

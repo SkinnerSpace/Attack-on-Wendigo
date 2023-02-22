@@ -10,6 +10,8 @@ public class WeaponTilter : MonoBehaviour
     [SerializeField] private float smoothTilt = 12f;
     [SerializeField] private WeaponAimController aimController;
 
+    private VerticalTuner verticalTuner;
+
     private WeaponSwayController controller;
     private Quaternion originalRotation;
 
@@ -21,14 +23,19 @@ public class WeaponTilter : MonoBehaviour
         originalRotation = transform.localRotation;
     }
 
+    public WeaponTilter Initialize(VerticalTuner verticalTuner)
+    {
+        this.verticalTuner = verticalTuner;
+        return this;
+    }
+
     public void ReadInput()
     {
         float inputY = controller.input.y;
-        inputY = VerticalTuner.ReduceVerticalInput(inputY);
 
         input = new Vector2(
-            controller.input.x, 
-            inputY);
+            controller.input.x * 0.2f, 
+            inputY * 0.1f);
 
         input *= aimController.GetStability(STABILITY_MODIFIER);
     }

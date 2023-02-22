@@ -2,12 +2,6 @@
 
 public class KeyBinds : MonoBehaviour, IKeyBinds
 {
-    private void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     [Header("Mouse")]
     [Range(0f, 1000f)]
     [SerializeField] private float mouseSensitivity = 100f;

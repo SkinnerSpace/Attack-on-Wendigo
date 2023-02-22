@@ -11,6 +11,6 @@ public class MouseMotionInputReader : InputReader
         onMotionUpdate?.Invoke(motion);
     }
 
-    public void Subscribe(ICamera observer) => onMotionUpdate += observer.Rotate;
-    public void Unsubscribe(ICamera observer) => onMotionUpdate -= observer.Rotate;
+    public void Subscribe(IMouseMotionObserver observer) => onMotionUpdate += observer.ReceiveMotion;
+    public void Unsubscribe(IMouseMotionObserver observer) => onMotionUpdate -= observer.ReceiveMotion;
 }

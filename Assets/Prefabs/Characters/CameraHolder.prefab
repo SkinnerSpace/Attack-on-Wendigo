@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 1680944993474019684}
   - component: {fileID: 1680944993474019686}
   - component: {fileID: 874012968601863398}
-  - component: {fileID: 8425617499996812408}
-  - component: {fileID: 5052864313933649279}
-  - component: {fileID: 4873663919095250494}
   - component: {fileID: 7820593142600697943}
   - component: {fileID: 1358747189775576019}
   m_Layer: 0
@@ -113,47 +110,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &8425617499996812408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680944993474019683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1a59ff4825122245af68b2a49f2ab64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 0}
-  interactor: {fileID: 5052864313933649279}
-  typeChecker: {fileID: 4873663919095250494}
---- !u!114 &5052864313933649279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680944993474019683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a29a6af69444343ad3eae2d206996b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 0}
-  typeChecker: {fileID: 4873663919095250494}
---- !u!114 &4873663919095250494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680944993474019683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10040380f3677284e84218035fa3ec53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &7820593142600697943
 AudioListener:
   m_ObjectHideFlags: 0
@@ -449,7 +405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5950e18763aa97b4abf0c73e8ece8f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 0}
+  cameraPivot: {fileID: 0}
+  trackTarget: {fileID: 0}
+  testMode: 0
 --- !u!1 &7290335171503858707
 GameObject:
   m_ObjectHideFlags: 0

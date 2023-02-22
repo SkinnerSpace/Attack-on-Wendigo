@@ -32,7 +32,7 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         {
             this.item = item;
             weapon = item.Get<Weapon>();
-            item.PickUp(this, CallMeBack);
+            item.PickUp(this, OnKept);
             weapon.ConnectCamera(data.Cam);
         }
     }
@@ -51,7 +51,11 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         }
     }
 
-    private void CallMeBack() => weapon.SetReady(true);
+    private void OnKept()
+    {
+        weapon.Initialize(data);
+        weapon.SetReady(true);
+    }
 
     public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(item, screenPoint);
 }

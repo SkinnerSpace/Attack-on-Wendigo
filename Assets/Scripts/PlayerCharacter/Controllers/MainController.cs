@@ -23,6 +23,9 @@ public class MainController : MonoBehaviour
     {
         controllers = new List<BaseController>();
 
+        mover.Initialize(this);
+        onConnectControlles += mover.Connect;
+
         AddController(typeof(MovementController));
         AddController(typeof(JumpController));
         AddController(typeof(DashController));
@@ -58,5 +61,8 @@ public class MainController : MonoBehaviour
         return null;
     }
 
-    private void Start() => onConnectControlles?.Invoke();
+    public void SetActive(bool isActive)
+    {
+        if (isActive) onConnectControlles?.Invoke();
+    }
 }
