@@ -3,25 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo : MonoBehaviour, IRagdoll
+public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
 {
     [Header("Required Components")]
     [SerializeField] private PropDestroyer mainPropDestroyer;
     [SerializeField] private RagDollController ragDollController;
     [SerializeField] private WendigoHeadTarget headTarget;
+    [SerializeField] private WendigoPooledObject pool;
+
+    [SerializeField] private FunctionTimer timer;
+    public FunctionTimer Timer => timer;
+
+    [SerializeField] private WendigoData data;
+    public WendigoData Data => data;
 
     [HideInInspector] public HealthSystem healthSystem;
     [HideInInspector] public StateMachine stateMachine;
 
     [HideInInspector] public WendigoRotator rotator;
     [HideInInspector] public WendigoMover mover;
-    [HideInInspector] public FunctionTimer timer;
-
-    [HideInInspector] public WendigoTarget target { get; private set; }
     
     [HideInInspector] public bool testDeath;
 
-    private void Awake()
+    private void Awake() => pool.Subscribe(this);
+
+    public void OnSpawn() => Initialize();
+
+    public void Initialize()
     {
         InitializeComponents();
         WendigoStateMachineInstaller.SetUp(this, stateMachine);
@@ -29,23 +37,27 @@ public class Wendigo : MonoBehaviour, IRagdoll
         healthSystem.SubscribeOnRagdoll(this);
     }
 
-    private void FixedUpdate() => stateMachine.Tick();
+    private void Update()
+    {
+        if (stateMachine != null)
+            stateMachine.Tick();
+    }
 
     private void InitializeComponents()
     {
         rotator = GetComponent<WendigoRotator>();
         mover = GetComponent<WendigoMover>();
-        timer = GetComponent<FunctionTimer>();
         healthSystem = GetComponent<HealthSystem>();
 
         stateMachine = new StateMachine();
-        target = new WendigoTarget();
     }
 
-    public void SetTarget(Transform rawTarget)
+    public void SetTarget(Transform target)
     {
-        target.Set(rawTarget);
-        headTarget.SetTarget(rawTarget);
+        Data.Target = target;
+
+        //target.Set(rawTarget);
+        //headTarget.SetTarget(rawTarget);
     }
 
     public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)

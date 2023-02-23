@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MainController character;
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private MenuManager menu;
+    [SerializeField] private InvasionCounter counter;
     
-    private FunctionTimer timer;
+    [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
 
     private void Awake()
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-        timer = GetComponent<FunctionTimer>();
 
         cameraManager.SetLookAtTheHelicopter();
     }
@@ -66,24 +66,14 @@ public class GameManager : MonoBehaviour
 
         character.SetActive(true);
         cameraManager.SetLookAtTheCharacter();
+
+        counter.Launch();
     }
 
     public void RestartTheGame()
     {
         Debug.Log("Restart");
     }
-/*
-    public void ToMain()
-    {
-        state = States.Menu;
-
-        CursorManager.UnlockCursor();
-        menu.OpenMenu("Main");
-
-        character.SetActive(false);
-        Debug.Log("Back to main");
-        //cameraManager.SetLookAtTheHelicopter();
-    }*/
 
     private void StarTheInvasion()
     {

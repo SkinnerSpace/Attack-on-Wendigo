@@ -5,11 +5,17 @@ public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
 {
     private Camera cam;
     private VisionTarget target;
+    private IInputReader input;
 
     public event Action<VisionTarget> onTargetUpdate;
 
-    public override void Initialize(MainController main) => cam = main.Data.Cam;
-    public override void Connect() => MainInputReader.Get<MousePositionInputReader>().Subscribe(this);
+    public override void Initialize(MainController main)
+    {
+        cam = main.Data.Cam;
+        input = main.InputReader;
+    }
+
+    public override void Connect() => input.Get<MousePositionInputReader>().Subscribe(this);
 
     public void AddObserver(IVisionObserver observer) => onTargetUpdate += observer.OnTargetUpdate;
     public void Unsubscribe(IVisionObserver observer) => onTargetUpdate -= observer.OnTargetUpdate;

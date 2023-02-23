@@ -5,14 +5,16 @@ public class CameraTiltController : BaseController, IMovementController
 {
     private ICharacterData data;
     private IChronos chronos;
+    private IInputReader input;
 
     public override void Initialize(MainController main)
     {
         data = main.Data;
         chronos = main.Chronos;
+        input = main.InputReader;
     }
 
-    public override void Connect() => MainInputReader.Get<MovementInputReader>().Subscribe(this);
+    public override void Connect() => input.Get<MovementInputReader>().Subscribe(this);
 
     public void Move(Vector3 inDirection)
     {

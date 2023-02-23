@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4058788711753654398}
   - component: {fileID: 4058788711753654393}
   - component: {fileID: 1841619444459426677}
+  - component: {fileID: 5236096112068699213}
   m_Layer: 9
   m_Name: EnergyShield
   m_TagString: Untagged
@@ -47,8 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldRenderer: {fileID: 4974421215194494016}
   bottomRenderer: {fileID: 4974421214811939980}
-  testMode: 0
-  testEnergy: 0
 --- !u!114 &1841619444459426677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +58,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chronos: {fileID: 5236096112068699213}
+--- !u!114 &5236096112068699213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058788711753654392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4974421214811939982

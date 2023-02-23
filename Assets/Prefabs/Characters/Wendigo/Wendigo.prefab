@@ -2332,6 +2332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2604546528073915769}
   - component: {fileID: 2604546528073915768}
+  - component: {fileID: 562342211922332664}
   - component: {fileID: 2604546528073915770}
   - component: {fileID: 2604546528073915771}
   - component: {fileID: 6902924081060343994}
@@ -2339,6 +2340,7 @@ GameObject:
   - component: {fileID: 7983178196965110879}
   - component: {fileID: 157347938491257906}
   - component: {fileID: 1058818208207837215}
+  - component: {fileID: 6855492014976806890}
   m_Layer: 18
   m_Name: Wendigo
   m_TagString: Untagged
@@ -2381,11 +2383,25 @@ MonoBehaviour:
   mainPropDestroyer: {fileID: 54220094663826474}
   ragDollController: {fileID: 2173253743383517456}
   headTarget: {fileID: 3525949941872728741}
+  pool: {fileID: 1058818208207837215}
+  timer: {fileID: 6902924081060343994}
+  data: {fileID: 562342211922332664}
   healthSystem: {fileID: 0}
   rotator: {fileID: 0}
   mover: {fileID: 0}
-  timer: {fileID: 0}
   testDeath: 0
+--- !u!114 &562342211922332664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604546528073915766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153aab91725cd7d4b9d14e242d7e09f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2604546528073915770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,6 +2444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chronos: {fileID: 6855492014976806890}
 --- !u!114 &5289369853755172427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,6 +2499,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec23b4fa14fd5444aa5460d9c11234d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6855492014976806890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604546528073915766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2632328545549931799

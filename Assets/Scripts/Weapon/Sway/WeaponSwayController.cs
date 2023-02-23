@@ -28,10 +28,11 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
     private Quaternion offsettedRotation = Quaternion.identity;
 
     public Vector2 input { get; private set; }
+    private IInputReader inputReader;
 
     private bool isReady;
 
-    public void Initialize(ICharacterData characterData)
+    public void Initialize(ICharacterData characterData, IInputReader inputReader)
     {
         verticalTuner = new VerticalTuner(characterData);
         displacer = GetComponent<WeaponDisplacer>().Initialize(verticalTuner);
@@ -42,6 +43,8 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
 
         weapon = weaponImp.GetComponent<Weapon>();
         weapon.Subscribe(this);
+
+        this.inputReader = inputReader;
     }
 
     public void OnReady(bool isReady)
@@ -50,11 +53,11 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
 
         if (isReady)
         {
-            MainInputReader.Get<MouseMotionInputReader>().Subscribe(this);
+            inputReader.Get<MouseMotionInputReader>().Subscribe(this);
         }
         else if (!isReady)
         {
-            MainInputReader.Get<MouseMotionInputReader>().Unsubscribe(this);
+            inputReader.Get<MouseMotionInputReader>().Unsubscribe(this);
             corrector.Fix(weapon);
         }
     }

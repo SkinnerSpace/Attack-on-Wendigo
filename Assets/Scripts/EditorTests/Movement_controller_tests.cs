@@ -61,8 +61,9 @@ namespace Tests
             IChronos chronos = Substitute.For<IChronos>();
             chronos.DeltaTime.Returns(1f);
 
+            IInputReader inputReader = Substitute.For<IInputReader>();
             MovementController movementController = new MovementController();
-            movementController.Initialize(data, chronos);
+            movementController.Initialize(data, chronos, inputReader);
 
             return movementController;
         }

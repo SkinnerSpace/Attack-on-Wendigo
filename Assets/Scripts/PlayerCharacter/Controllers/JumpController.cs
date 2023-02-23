@@ -4,11 +4,13 @@ public class JumpController : BaseController, IJumpController, IGroundObserver
 {
     private MainController main;
     private ICharacterData data;
+    private IInputReader input;
 
     public override void Initialize(MainController main)
     {
         this.main = main;
         data = main.Data;
+        input = main.InputReader;
     }
 
     public void SetData(ICharacterData data) => this.data = data;
@@ -16,7 +18,7 @@ public class JumpController : BaseController, IJumpController, IGroundObserver
     public override void Connect()
     {
         main.GetController<GroundDetector>().Subscribe(this);
-        MainInputReader.Get<JumpInputReader>().Subscribe(this);
+        input.Get<JumpInputReader>().Subscribe(this);
     }
 
     public void TryToJump()

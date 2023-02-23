@@ -6,6 +6,7 @@ using UnityEditor;
 public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObserver
 {
     private ICharacterData data;
+    private IInputReader input;
     public Transform Root => data.Cam.transform;
 
     private IPickable item;
@@ -18,12 +19,13 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
     {
         data = main.Data;
         thrower = new WeaponThrower(data);
+        input = main.InputReader;
     }
 
     public override void Connect()
     {
-        MainInputReader.Get<InteractionInputReader>().Subscribe(this);
-        MainInputReader.Get<MousePositionInputReader>().Subscribe(this);
+        input.Get<InteractionInputReader>().Subscribe(this);
+        input.Get<MousePositionInputReader>().Subscribe(this);
     }
 
     public void TakeAnItem(IPickable item)
@@ -53,7 +55,7 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
 
     private void OnKept()
     {
-        weapon.Initialize(data);
+        weapon.Initialize(data, input);
         weapon.SetReady(true);
     }
 

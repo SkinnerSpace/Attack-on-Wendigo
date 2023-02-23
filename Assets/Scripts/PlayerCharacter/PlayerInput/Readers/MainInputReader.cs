@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MainInputReader
+public class MainInputReader : MonoBehaviour, IInputReader
 {
-    private static List<InputReader> inputReaders = new List<InputReader>();
+    private List<InputReader> inputReaders = new List<InputReader>();
 
-    public static void Add(InputReader inputReader) => inputReaders.Add(inputReader);
+    public void Add(InputReader inputReader) => inputReaders.Add(inputReader);
 
-    public static T Get<T>() where T : InputReader
+    public T Get<T>() where T : InputReader
     {
         foreach (InputReader reader in inputReaders)
         {

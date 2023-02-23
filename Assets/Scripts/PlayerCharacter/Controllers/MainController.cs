@@ -9,12 +9,14 @@ public class MainController : MonoBehaviour
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
     [SerializeField] private EventManager events;
+    [SerializeField] private MainInputReader inputReader;
 
     public CharacterData Data => data;
     public CharacterMover Mover => mover;
     public FunctionTimer Timer => timer;
     public Chronos Chronos => chronos;
     public EventManager Events => events;
+    public MainInputReader InputReader => inputReader;
 
     private List<BaseController> controllers;
     private event Action onConnectControlles;
@@ -63,8 +65,6 @@ public class MainController : MonoBehaviour
 
     public void SetActive(bool isActive)
     {
-        Debug.Log("Character is active " + isActive);
-
         if (isActive) onConnectControlles?.Invoke();
     }
 }

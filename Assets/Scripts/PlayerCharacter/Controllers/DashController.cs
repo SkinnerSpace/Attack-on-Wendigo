@@ -8,18 +8,20 @@ public class DashController : BaseController, IDashController, IMovementControll
     private ICharacterData data;
     private IChronos chronos;
     private IFunctionTimer timer;
+    private IInputReader input;
 
     public override void Initialize(MainController main)
     {
         data = main.Data;
         chronos = main.Chronos;
         timer = main.Timer;
+        input = main.InputReader;
     }
 
     public override void Connect()
     {
-        MainInputReader.Get<MovementInputReader>().Subscribe(this);
-        MainInputReader.Get<DashInputReader>().Subscribe(this);
+        input.Get<MovementInputReader>().Subscribe(this);
+        input.Get<DashInputReader>().Subscribe(this);
     }
 
     public void Move(Vector3 direction)

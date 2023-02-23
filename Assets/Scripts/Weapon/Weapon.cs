@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
     [SerializeField] private List<Transform> cameraUsers;
 
     private IShooter shooter;
+    private IInputReader inputReader;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
     public bool isReady { get; private set; }
@@ -25,9 +26,10 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
         shooter = shooterImp.GetComponent<IShooter>();
     }
 
-    public void Initialize(ICharacterData characterData)
+    public void Initialize(ICharacterData characterData, IInputReader inputReader)
     {
-        swayController.Initialize(characterData);
+        swayController.Initialize(characterData, inputReader);
+        this.inputReader = inputReader;
     }
 
     public void PullTheTrigger()
@@ -54,11 +56,11 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
 
         if (isReady)
         {
-            MainInputReader.Get<CombatInputReader>().Subscribe(this);
+            inputReader.Get<CombatInputReader>().Subscribe(this);
         }
 
         else if (!isReady){
-            MainInputReader.Get<CombatInputReader>().Unsubscribe(this);
+            inputReader.Get<CombatInputReader>().Unsubscribe(this);
         }
     }
 

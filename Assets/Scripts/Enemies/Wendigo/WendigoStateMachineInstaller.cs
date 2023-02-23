@@ -7,11 +7,10 @@ public static class WendigoStateMachineInstaller
     {
         var arrival = new Arrival(wendigo);
         var idle = new Idle();
-        var chase = new Chase(wendigo.rotator, wendigo.mover, wendigo.target);
+        var chase = new Chase(wendigo.rotator, wendigo.mover, wendigo.Data.Target);
         var dead = new Dead();
 
-        Add(arrival, idle, HasNoTarget());
-        Add(arrival, chase, HasTarget());
+        Add(arrival, idle, IsArrived());
 
         Add(idle, chase, HasTarget());
         Add(chase, idle, HasNoTarget());
@@ -22,8 +21,9 @@ public static class WendigoStateMachineInstaller
         stateMachine.SetState(arrival);
 
         void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
-        Func<bool> HasTarget() => () => wendigo.target.Exist;
-        Func<bool> HasNoTarget() => () => !wendigo.target.Exist;
+        Func<bool> IsArrived() => () => wendigo.Data.IsArrived;
+        Func<bool> HasTarget() => () => wendigo.Data.Target != null;
+        Func<bool> HasNoTarget() => () => wendigo.Data.Target == null;
         Func<bool> IsDead() => () => !wendigo.healthSystem.IsAlive() || wendigo.testDeath;
     }
 }

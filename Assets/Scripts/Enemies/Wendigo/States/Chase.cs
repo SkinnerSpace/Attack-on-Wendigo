@@ -11,9 +11,9 @@ public class Chase : IState
 
     private WendigoRotator rotator;
     private WendigoMover mover;
-    private readonly WendigoTarget target;
+    private Transform target;
 
-    public Chase(WendigoRotator rotator, WendigoMover mover, WendigoTarget target)
+    public Chase(WendigoRotator rotator, WendigoMover mover, Transform target)
     {
         this.rotator = rotator;
         this.mover = mover;
@@ -23,10 +23,10 @@ public class Chase : IState
     public void Tick()
     {
         mover.MoveForward();
-        if (ShouldRotate()) rotator.RotateToTarget(target.Position);
+        if (ShouldRotate()) rotator.RotateToTarget(target.position);
     }
 
-    private bool ShouldRotate() => (target.Exist) && (mover.velocityMagn >= ROTATION_THRESHOLD);
+    private bool ShouldRotate() => (mover.velocityMagn >= ROTATION_THRESHOLD);
 
     public void OnEnter() { }
 

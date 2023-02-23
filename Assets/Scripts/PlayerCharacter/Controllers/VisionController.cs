@@ -8,7 +8,7 @@ public class VisionController : BaseController
     public override void Initialize(MainController main) { }
     public void SetDetector(IVisionDetector detector) => this.detector = detector;
 
-    public override void Connect() => MainInputReader.Get<MousePositionInputReader>().Subscribe(detector as IMousePosObserver);
+    public override void Connect() { }// MainInputReader.Get<MousePositionInputReader>().Subscribe(detector as IMousePosObserver);
 
     public void OnTargetUpdate(VisionTarget target) => onUpdate?.Invoke(target);
 

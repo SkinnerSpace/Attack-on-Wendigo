@@ -6,9 +6,17 @@ public class CameraController : BaseController, IMouseMotionObserver
 {
     private ICharacterData data;
     private IChronos chronos;
+    private IInputReader input;
     
     private float xAngle;
     private float yAngle;
+
+    public override void Initialize(MainController main)
+    {
+        data = main.Data;
+        chronos = main.Chronos;
+        input = main.InputReader;
+    }
 
     public void ReceiveMotion(Vector2 motion)
     {
@@ -24,11 +32,5 @@ public class CameraController : BaseController, IMouseMotionObserver
 
     private void UpdateBodyRotation() => data.Euler = new Vector3(0f, xAngle, 0f);
 
-    public override void Initialize(MainController main)
-    {
-        data = main.Data;
-        chronos = main.Chronos;
-    }
-
-    public override void Connect() => MainInputReader.Get<MouseMotionInputReader>().Subscribe(this);
+    public override void Connect() => input.Get<MouseMotionInputReader>().Subscribe(this);
 }

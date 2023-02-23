@@ -5,15 +5,18 @@ using UnityEngine;
 public class PickUpController : BaseController, IVisionTriggerObserver, IVisionObserver, IInteractor
 {
     private MainController main;
+    private IKeeper keeper;
+    private IInputReader input;
+
     private IVisionValidator evaluator;
     private VisionTarget currentTarget;
-    private IKeeper keeper;
     private PickUpTriggers triggers;
 
     public override void Initialize(MainController main)
     {
         this.main = main;
         keeper = main.GetController<WeaponKeeper>();
+        input = main.InputReader;
 
         evaluator = new VisionValidator();
         evaluator.AddSample(typeof(IPickable), 3f);
@@ -24,7 +27,7 @@ public class PickUpController : BaseController, IVisionTriggerObserver, IVisionO
 
     public override void Connect()
     {
-        MainInputReader.Get<InteractionInputReader>().Subscribe(this);
+        input.Get<InteractionInputReader>().Subscribe(this);
         main.GetController<VisionDetector>().AddObserver(this);
     }
 

@@ -5,12 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            ReloadScene();
-    }
-
     public void ReloadScene()
     {
         FMOD.ChannelGroup mcg;
