@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WendigoSpawner : MonoBehaviour
 {
@@ -9,22 +7,32 @@ public class WendigoSpawner : MonoBehaviour
     [SerializeField] private EnergyShieldSpawner shieldSpawner;
     [SerializeField] private RadPosGenerator radPosGenerator;
     [SerializeField] private Transform characters;
+    [SerializeField] private FunctionTimer timer;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject wendigoPrefab;
     [SerializeField] private Transform target;
 
-    public void Launch()
+    [Header("Settings")]
+    [SerializeField] private int wendigoMaxCount;
+    [SerializeField] private float spawnInterval;
+    private int wendigoCount = 0;
+
+    public void Spawn()
     {
         Vector3 position = radPosGenerator.GetPosition();
 
-        SpawnWendigo(position);
+        InstantiateWendigo(position);
         shieldSpawner.Spawn(position);
         lightningThrower.Throw(position);
+
+        if (wendigoCount < wendigoMaxCount)
+            timer.Set("Spawn", spawnInterval, Spawn);
     }
 
-    private void SpawnWendigo(Vector3 position)
+    private void InstantiateWendigo(Vector3 position)
     {
+        wendigoCount += 1;
         Transform wendigo = CreateIn(position);
         TurnToTarget(wendigo);
     }

@@ -63,6 +63,8 @@ public class MainController : MonoBehaviour
 
     public void SetActive(bool isActive)
     {
+        Debug.Log("Character is active " + isActive);
+
         if (isActive) onConnectControlles?.Invoke();
     }
 }

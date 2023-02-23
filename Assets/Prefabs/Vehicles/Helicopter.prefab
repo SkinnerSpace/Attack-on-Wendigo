@@ -59,6 +59,7 @@ MonoBehaviour:
   synchronizer: {fileID: 1006917162978430101}
   data: {fileID: 1006917162978430102}
   timer: {fileID: 1630779641384377885}
+  chronos: {fileID: 9215758063044485939}
   needToDrop: 0
 --- !u!114 &1006917162978430102
 MonoBehaviour:

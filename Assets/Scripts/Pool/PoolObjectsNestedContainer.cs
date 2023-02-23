@@ -4,7 +4,7 @@ using UnityEngine;
 public class PoolObjectsNestedContainer
 {
     private Transform anchor;
-    private static Dictionary<string, Transform> containers = new Dictionary<string, Transform>();
+    private Dictionary<string, Transform> containers = new Dictionary<string, Transform>();
 
     public PoolObjectsNestedContainer(Transform anchor) => this.anchor = anchor; 
 

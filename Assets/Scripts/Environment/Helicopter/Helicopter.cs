@@ -13,6 +13,8 @@ public class Helicopter : MonoBehaviour
     [SerializeField] private HelicopterData data;
     [SerializeField] private FunctionTimer timer;
 
+    [SerializeField] private Chronos chronos;
+
     private bool isMoving;
 
     public float DistancePassed => distancePassed;
@@ -38,7 +40,6 @@ public class Helicopter : MonoBehaviour
 
     public void Launch()
     {
-        arrived = false;
         isMoving = true;
 
         distancePassed = 0f;
@@ -52,7 +53,7 @@ public class Helicopter : MonoBehaviour
 
     public void Move()
     {
-        if (isMoving)
+        if (isMoving && chronos.IsTicking)
         {
             synchronizer.UpdateTime();
             transform.position = mover.Move(trajectory, Arrived);
@@ -62,11 +63,8 @@ public class Helicopter : MonoBehaviour
         }
     }
 
-    private bool arrived;
-
     public void Arrived()
     {
-        arrived = true;
         isMoving = false;
 
         if (needToDrop)

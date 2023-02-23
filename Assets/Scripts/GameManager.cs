@@ -7,28 +7,21 @@ public class GameManager : MonoBehaviour
 {
     private enum States
     {
-        Pause,
-        Play
+        Menu,
+        Play,
+        Pause
     }
+
+    private States state = States.Menu;
 
     [Header("Required Components")]
     [SerializeField] private WendigoSpawner wendigoSpawner;
     [SerializeField] private MainController character;
     [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private MainMenu menu;
-
-    [Header("Settings")]
-    [SerializeField] private int wendigoMaxCount;
-    [SerializeField] private float spawnInterval;
-
-    private States state = States.Pause;
-    private int wendigoCount = 0;
-
+    [SerializeField] private MenuManager menu;
+    
     private FunctionTimer timer;
-
     public static GameManager Instance;
-
-    private event Action onStart;
 
     private void Awake()
     {
@@ -38,21 +31,80 @@ public class GameManager : MonoBehaviour
         timer = GetComponent<FunctionTimer>();
 
         cameraManager.SetLookAtTheHelicopter();
+    }
 
+    private void Start()
+    {
+        menu.OpenMenu("Main");
     }
 
     private void Update()
     {
-        StarInvasion();
+        switch (state)
+        {
+            case States.Play:
+                StarTheInvasion();
+
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    PauseTheGame();
+
+                break;
+
+            case States.Pause:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    UnpauseTheGame();
+
+                break;
+        }
     }
 
     public void StartTheGame()
     {
-        CursorManager.LockCursor();
-        menu.gameObject.SetActive(false);
+        state = States.Play;
+
+        menu.CloseMenu();
 
         character.SetActive(true);
         cameraManager.SetLookAtTheCharacter();
+    }
+
+    public void RestartTheGame()
+    {
+        Debug.Log("Restart");
+    }
+/*
+    public void ToMain()
+    {
+        state = States.Menu;
+
+        CursorManager.UnlockCursor();
+        menu.OpenMenu("Main");
+
+        character.SetActive(false);
+        Debug.Log("Back to main");
+        //cameraManager.SetLookAtTheHelicopter();
+    }*/
+
+    private void StarTheInvasion()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+            wendigoSpawner.Spawn();
+    }
+
+    private void PauseTheGame()
+    {
+        state = States.Pause;
+
+        menu.OpenMenu("Pause");
+        Time.timeScale = 0f;
+    }
+
+    public void UnpauseTheGame()
+    {
+        state = States.Play;
+
+        menu.CloseMenu();
+        Time.timeScale = 1f;
     }
 
     public void OpenSettings()
@@ -63,24 +115,5 @@ public class GameManager : MonoBehaviour
     public void QuitTheGame()
     {
         Debug.Log("QUIT");
-    }
-
-    private void StarInvasion()
-    {
-        if (state == States.Pause && Input.GetKeyDown(KeyCode.G))
-        {
-            Spawn();
-        }
-    }
-
-    private void Spawn()
-    {
-        wendigoSpawner.Launch();
-        wendigoCount += 1;
-
-        if (wendigoCount < wendigoMaxCount)
-        {
-            timer.Set("Spawn", spawnInterval, Spawn);
-        }
     }
 }
