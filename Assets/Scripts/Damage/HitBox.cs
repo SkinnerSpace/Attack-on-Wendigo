@@ -6,10 +6,14 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour, IDamageable
 {
-    [SerializeField] private HealthSystem healthSystem;
+    private event Action<DamagePackage> onDamage;
 
-    public void ReceiveDamage(DamagePackage damagePackage)
+    public void Subscribe(IDamageable damageable)
     {
-        healthSystem.ReceiveDamage(damagePackage);
+        Debug.Log("Subscribe");
+        onDamage += damageable.ReceiveDamage;
     }
+    public void Unsubscribe(IDamageable damageable) => onDamage -= damageable.ReceiveDamage;
+
+    public void ReceiveDamage(DamagePackage damagePackage) => onDamage(damagePackage);
 }

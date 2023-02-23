@@ -9,24 +9,24 @@ public class Chase : IState
 {
     public const float ROTATION_THRESHOLD = 1f;
 
-    private WendigoRotator rotator;
-    private WendigoMover mover;
-    private Transform target;
+    private WendigoData data;
+    private WendigoRotationController rotationController;
+    private WendigoMovementController movementController;
 
-    public Chase(WendigoRotator rotator, WendigoMover mover, Transform target)
+    public Chase(Wendigo wendigo)
     {
-        this.rotator = rotator;
-        this.mover = mover;
-        this.target = target;
+        data = wendigo.Data;
+        rotationController = wendigo.RotationController;
+        movementController = wendigo.MovementController;
     }
 
     public void Tick()
     {
-        mover.MoveForward();
-        if (ShouldRotate()) rotator.RotateToTarget(target.position);
+        movementController.MoveForward();
+        if (ShouldRotate()) rotationController.RotateToTarget(data.Target.position);
     }
 
-    private bool ShouldRotate() => (mover.velocityMagn >= ROTATION_THRESHOLD);
+    private bool ShouldRotate() => false;
 
     public void OnEnter() { }
 
