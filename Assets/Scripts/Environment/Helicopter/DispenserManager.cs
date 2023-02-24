@@ -6,17 +6,24 @@ public class DispenserManager : MonoBehaviour
     [Header("Required Components")]
     [SerializeField] private Transform target;
     [SerializeField] private DispenserData data;
+    [SerializeField] private DispenserStorage storage;
 
     [Header("Dispensers")]
     [SerializeField] private Dispenser rightDispenser;
     [SerializeField] private Dispenser leftDispenser;
 
+    private FunctionTimer timer;
     private IObjectPooler pooler;
 
     private void Awake()
     {
         rightDispenser.SetData(data);
         leftDispenser.SetData(data);
+    }
+
+    public void Initialize(Helicopter helicopter)
+    {
+        timer = helicopter.Timer;
     }
 
     private void Start()
@@ -26,9 +33,16 @@ public class DispenserManager : MonoBehaviour
 
     public void DropAnItem(Action moveOn)
     {
-        Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
-        GameObject crate = pooler.SpawnFromThePool("Crate");
-        dispenser.Launch(crate, moveOn);
+        if (!storage.IsEmpty())
+        {
+            Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
+            GameObject crate = pooler.SpawnFromThePool("Crate");
+            dispenser.Launch(crate, moveOn);
+        }
+        else
+        {
+            timer.Set("MoveOn", 2f, moveOn);
+        }
     }
 
     private bool TargetOnTheRightSide()

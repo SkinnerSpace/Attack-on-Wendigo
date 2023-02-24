@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
+    [SerializeField] private Airdrop airdrop;
     
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
@@ -43,8 +44,6 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case States.Play:
-                StarTheInvasion();
-
                 if (Input.GetKeyDown(KeyCode.Escape))
                     PauseTheGame();
 
@@ -67,18 +66,14 @@ public class GameManager : MonoBehaviour
         character.SetActive(true);
         cameraManager.SetLookAtTheCharacter();
 
-        counter.Launch();
+        airdrop.DropPistol();
+        //helicopter
+        //counter.Launch();
     }
 
     public void RestartTheGame()
     {
         Debug.Log("Restart");
-    }
-
-    private void StarTheInvasion()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-            wendigoSpawner.Spawn();
     }
 
     private void PauseTheGame()

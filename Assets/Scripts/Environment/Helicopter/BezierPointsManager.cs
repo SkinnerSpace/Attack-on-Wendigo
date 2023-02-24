@@ -33,7 +33,7 @@ public class BezierPointsManager : MonoBehaviour
         Vector3 meanArithmetic = bezierPoints[0].Position;
 
         for (int i = 1; i < bezierPoints.Length; i++)
-            meanArithmetic = meanArithmetic.Mean(bezierPoints[i].Position);
+            meanArithmetic = meanArithmetic.Average(bezierPoints[i].Position);
 
         center = meanArithmetic;
     }

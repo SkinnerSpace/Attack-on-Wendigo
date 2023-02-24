@@ -56,11 +56,11 @@ MonoBehaviour:
   rotator: {fileID: 1006917162978430103}
   sway: {fileID: 7312109861332469447}
   dispenserManager: {fileID: 1056638609630317292}
+  storage: {fileID: 7261413878735653690}
   synchronizer: {fileID: 1006917162978430101}
   data: {fileID: 1006917162978430102}
   timer: {fileID: 1630779641384377885}
   chronos: {fileID: 9215758063044485939}
-  needToDrop: 0
 --- !u!114 &1006917162978430102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad691d351a1d7ef4894142883e3b4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon:
-  - {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d, type: 3}
-  - {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94, type: 3}
   hasItems: 1
 --- !u!1 &1206149503641186970
 GameObject:
@@ -504,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   data: {fileID: 6047146114537331998}
+  storage: {fileID: 7261413878735653690}
   rightDispenser: {fileID: 881964518253523129}
   leftDispenser: {fileID: 2820582263639390175}
 --- !u!114 &106448554005381371

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
 {
@@ -15,31 +19,40 @@ public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
     [SerializeField] private Transform target;
 
     [Header("Settings")]
-    [SerializeField] private int wendigoMaxCount;
-    [SerializeField] private float spawnInterval;
+    [SerializeField] private int maxCount;
+    [SerializeField] private int concurrentCount;
+    [SerializeField] private float minInterval = 5f;
+    [SerializeField] private float maxInterval = 15f;
+
     private int wendigoCount = 0;
 
     private IObjectPooler pooler;
+    private List<Transform> wendigos = new List<Transform>();
 
     private void Awake() => counter.SubscribeOnTimeOut(this);
     private void Start() => pooler = PoolHolder.Instance;
 
     public void Spawn()
     {
-        Vector3 position = radPosGenerator.GetPosition();
+        Vector3 position = radPosGenerator.CalculatePos(wendigos);
 
         InstantiateWendigo(position);
         shieldSpawner.Spawn(position);
         lightningThrower.Throw(position);
 
-        if (wendigoCount < wendigoMaxCount)
-            timer.Set("Spawn", spawnInterval, Spawn);
+        float density = wendigoCount / (float)concurrentCount;
+        float interval = Mathf.Lerp(minInterval, maxInterval, density);
+
+        if (wendigoCount < concurrentCount)
+            timer.Set("Spawn", interval, Spawn);
     }
 
     private void InstantiateWendigo(Vector3 position)
     {
         wendigoCount += 1;
+
         Transform wendigo = pooler.SpawnFromThePool("Wendigo").transform;
+        wendigos.Add(wendigo);
         wendigo.GetComponent<IWendigo>().SetTarget(target);
         SetInPlace(wendigo, position);
     }
@@ -54,4 +67,9 @@ public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
     }
 
     public void OnTimeOut() => Spawn();
+
+    public void OnDeath(Transform wendigo)
+    {
+
+    }
 }

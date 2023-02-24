@@ -3,14 +3,10 @@ using UnityEngine;
 
 public class DispenserStorage : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> weapon = new List<GameObject>();
-    private List<IOldPickable> items = new List<IOldPickable>();
+    private Stack<GameObject> cargo = new Stack<GameObject>();
 
-    public bool hasItems = true;
+    public GameObject GetAnItem() => cargo.Pop();
+    public void AddAnItem(GameObject item) => cargo.Push(item);
 
-    public GameObject GetAnItem()
-    {
-        int randomIndex = Rand.Range(0, weapon.Count);
-        return weapon[randomIndex];
-    }
+    public bool IsEmpty() => cargo.Count <= 0;
 }

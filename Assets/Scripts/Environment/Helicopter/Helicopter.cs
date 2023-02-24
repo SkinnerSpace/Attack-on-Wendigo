@@ -8,12 +8,14 @@ public class Helicopter : MonoBehaviour
     [SerializeField] private HelicopterRotator rotator;
     [SerializeField] private HelicopterSway sway;
     [SerializeField] private DispenserManager dispenserManager;
+    [SerializeField] private DispenserStorage storage;
 
     [SerializeField] private HelicopterTimer synchronizer;
     [SerializeField] private HelicopterData data;
     [SerializeField] private FunctionTimer timer;
-
     [SerializeField] private Chronos chronos;
+
+    public FunctionTimer Timer => timer;
 
     private bool isMoving;
 
@@ -24,8 +26,6 @@ public class Helicopter : MonoBehaviour
     private float distancePassed;
     private Vector3 prevPos;
 
-    [SerializeField] private bool needToDrop;
-
     private void Awake()
     {
         SynchronizeComponents();
@@ -33,14 +33,19 @@ public class Helicopter : MonoBehaviour
 
     private void SynchronizeComponents()
     {
+        dispenserManager.Initialize(this);
+
         synchronizer.Subscribe(mover);
         synchronizer.Subscribe(rotator);
         synchronizer.Subscribe(sway);
     }
 
+    private bool skipFrame;
+
     public void Launch()
     {
         isMoving = true;
+        skipFrame = true;
 
         distancePassed = 0f;
         trajectory.GenerateTrajectory();
@@ -55,25 +60,24 @@ public class Helicopter : MonoBehaviour
     {
         if (isMoving && chronos.IsTicking)
         {
-            synchronizer.UpdateTime();
-            transform.position = mover.Move(trajectory, Arrived);
-            transform.rotation = rotator.Rotate(transform.rotation, prevPos);
+            if (!skipFrame)
+            {
+                synchronizer.UpdateTime();
+                transform.position = mover.Move(trajectory, Arrived);
+                transform.rotation = rotator.Rotate(transform.rotation, prevPos);
 
-            prevPos = transform.position;
+                prevPos = transform.position;
+            }
+            else
+            {
+                skipFrame = false;
+            }
         }
     }
 
     public void Arrived()
     {
         isMoving = false;
-
-        if (needToDrop)
-        {
-            dispenserManager.DropAnItem(Launch);
-        }
-        else
-        {
-            Launch();
-        }
+        dispenserManager.DropAnItem(Launch);
     }
 }
