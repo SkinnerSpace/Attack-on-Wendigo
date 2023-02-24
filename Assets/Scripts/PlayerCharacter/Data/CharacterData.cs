@@ -4,6 +4,8 @@ using UnityEngine;
 [Serializable]
 public class CharacterData : MonoBehaviour, ICharacterData
 {
+    public static CharacterData Instance;
+
     [Header("Movement")]
     [SerializeField] private float speed = 300f;
     [SerializeField] private float groundDeceleration = 20f;
@@ -43,6 +45,8 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private Camera cam;
 
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
+    public Vector3 CameraDampedPos { get; set; }
+
     public Vector3 Forward => transform.forward;
     public Vector3 Right => transform.right;
     public Vector3 Up => transform.up;
@@ -59,6 +63,10 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 CameraTiltEuler { get; set; }
     public float TiltSpeed => tiltSpeed;
     public float TiltMaxAngle => tiltMaxAngle;
+
+    public Vector3 ShakePosition { get; set; }
+    public Vector3 ShakeEuler { get; set; }
+
 
     public Vector3 CameraForward => transform.forward;
     public Vector3 CameraRight => transform.right;
@@ -105,5 +113,10 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float FOVPower { get; set; }
 
     public float DropItemStrength => dropItemStrength;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 }
 

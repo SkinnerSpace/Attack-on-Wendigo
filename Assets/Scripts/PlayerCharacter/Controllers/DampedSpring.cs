@@ -46,7 +46,7 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
             interpolation = Easing.QuadEaseOut(interpolation);
 
             float motion = -1 * Mathf.Sin(interpolation * Mathf.PI) * data.DampedSpring.Amplitude;
-            data.CameraLocalPos = new Vector3(data.CameraLocalPos.x, motion, data.CameraLocalPos.z);
+            data.CameraDampedPos = new Vector3(data.CameraDampedPos.x, motion, data.CameraDampedPos.z);
         }
     }
 }

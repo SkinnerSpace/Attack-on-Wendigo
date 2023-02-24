@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Idle : IState
+public class Idle : LoggableState, IState
 {
     public void Tick() { }
 
-    public void OnEnter() { }
+    public void OnEnter()
+    {
+        LogEnter();
+    }
 
-    public void OnExit() { }
+    public void OnExit()
+    {
+        LogExit();
+    }
 }

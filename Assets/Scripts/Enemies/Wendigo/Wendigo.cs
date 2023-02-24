@@ -1,72 +1,82 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
 {
+    public static int id;
+
+    [SerializeField] private WendigoSerializableData serializableData;
+
     [Header("Required Components")]
+    [SerializeField] private WendigoMover mover;
+    [SerializeField] private CharacterController controller;
     [SerializeField] private PropDestroyer mainPropDestroyer;
     [SerializeField] private RagDollController ragDollController;
     [SerializeField] private WendigoPooledObject pool;
-
     [SerializeField] private Animator animator;
-    [SerializeField] private CharacterController controller;
-    [SerializeField] private WendigoMover mover;
-    [SerializeField] private WendigoSerializableData serializableData;
+    
+    [Header("Timer")]
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
 
     public Animator Animator => animator;
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;
-
     public WendigoData Data { get; set; }
     public IChronos Chronos => chronos;
-
-    public WendigoRotationController RotationController { get; set; }
-    public WendigoMovementController MovementController { get; set; }
-    public WendigoHealthSystem HealthSystem { get; set; }
-    public WendigoAnimatorController AnimatorController { get; set; }
-    public WendigoTargetManager targetManager { get; set; }
     public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
-
     public IHitBox[] HitBoxes { get; private set; }
 
     [HideInInspector] public bool testDeath;
 
-    private void Awake()
-    {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        Data = new WendigoData(serializableData, new ProxyTransform(transform));
-        HitBoxes = GetComponentsInChildren<IHitBox>();
-
-        InitializeComponents();
-        WendigoStateMachineInstaller.SetUp(this, stateMachine);
-
-        pool.Subscribe(this);
-        HealthSystem.SubscribeOnRagdoll(this);
-    }
+    private List<WendigoBaseController> controllers;
 
     public void OnSpawn() => Data.IsActive = true;
-
-    private void Update() => stateMachine.Tick();
-
-    private void InitializeComponents()
+    private void Update()
     {
+        stateMachine.Tick();
+    }
+
+    private void Awake()
+    {
+        transform.name = "Wendigo_" + (id++);
+
+        Data = new WendigoData(serializableData, transform);
+        HitBoxes = GetComponentsInChildren<IHitBox>();
         mover.Initialize(this);
 
-        RotationController = new WendigoRotationController(this);
-        MovementController = new WendigoMovementController(this);
-        HealthSystem = new WendigoHealthSystem(this);
-        targetManager = new WendigoTargetManager(this);
-        AnimatorController = new WendigoAnimatorController(this);
-        stateMachine = new StateMachine();
+        controllers = new List<WendigoBaseController>();
 
-        MovementController.Subscribe(AnimatorController);
+        AddController(typeof(WendigoRotationController));
+        AddController(typeof(WendigoMovementController));
+        AddController(typeof(WendigoHealthSystem));
+        AddController(typeof(WendigoTargetManager));
+        AddController(typeof(WendigoAnimatorController));
+
+        stateMachine = WendigoStateMachineFactory.Create(this);
+
+        GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimatorController>());
+        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(this);
+        pool.Subscribe(this);
+    }
+
+    private void AddController(Type type)
+    {
+        WendigoBaseController controller = Activator.CreateInstance(type) as WendigoBaseController;
+        controller.Initialize(this);
+        controllers.Add(controller);
+    }
+
+    public T GetController<T>() where T : WendigoBaseController
+    {
+        foreach (WendigoBaseController controller in controllers)
+        {
+            if (controller is T) return controller as T;
+        }
+
+        return null;
     }
 
     public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
@@ -76,5 +86,5 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         testDeath = true;
     }
 
-    public void SetTarget(Transform target) => targetManager.SetTarget(target);
+    public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);
 }

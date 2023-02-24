@@ -14,17 +14,15 @@ public class WendigoHeadTarget : MonoBehaviour
     private Vector3 velocity;
     private Vector3 targetPosition;
 
-    private bool isReady;
-
-
+    private void Awake() => wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
 
     private void Update()
     {
-        /*if (wendigo.Data.Target != null)
+        if (target != null)
         {
             targetPosition = TargetIsVisible() ? target.position : defaultPoint.position;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
-        }*/
+        }
     }
 
     private bool TargetIsVisible() => (target != null) && inSightChecker.TargetIsVisibleFromPointOfView(target);

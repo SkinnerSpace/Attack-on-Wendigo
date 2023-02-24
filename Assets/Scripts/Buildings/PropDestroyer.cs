@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PropDestroyer : MonoBehaviour
 {
-    [SerializeField] private Transform pivot;
     private Collider destroyerCollider;
 
     private void Awake()
@@ -25,6 +24,4 @@ public class PropDestroyer : MonoBehaviour
     }
 
     public void SwitchOff() => destroyerCollider.enabled = false;
-
-    public void SetPivot(Transform pivot) => this.pivot = pivot;
 }

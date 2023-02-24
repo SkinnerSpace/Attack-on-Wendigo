@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class WendigoRotationController 
+public class WendigoRotationController : WendigoBaseController
 {
-    private Wendigo wendigo;
+    private IWendigo wendigo;
     private WendigoData data;
     private IChronos chronos;
 
-    public WendigoRotationController(Wendigo wendigo)
+    public override void Initialize(IWendigo wendigo)
     {
         this.wendigo = wendigo;
         data = wendigo.Data;
         chronos = wendigo.Chronos;
-    }
+    } 
 
     public void RotateToTarget(Vector3 targetPos)
     {

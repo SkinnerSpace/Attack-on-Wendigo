@@ -1,15 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-public class WendigoHealthSystem : IDamageable
+public class WendigoHealthSystem : WendigoBaseController, IDamageable
 {
     private WendigoData data;
-    private HitBoxBehavior[] HitBoxes;
 
     private event Action onDied;
     private event Action<Vector3, Vector3> triggerRagdoll;
 
-    public WendigoHealthSystem(IWendigo wendigo)
+    public override void Initialize(IWendigo wendigo)
     {
         data = wendigo.Data;
 

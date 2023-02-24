@@ -21,9 +21,9 @@ public class ProxyTransform : ITransform
     public Quaternion Rotation { get; set; }
 
 
-    public Vector3 Right { get; set; } = Vector3.right;
-    public Vector3 Up { get; set; } = Vector3.up;
-    public Vector3 Forward { get; set; } = Vector3.forward;
+    public Vector3 Right => transform.right;
+    public Vector3 Up => transform.up;
+    public Vector3 Forward => transform.forward;
 
 
     private readonly Transform transform;

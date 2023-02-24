@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System;
 
-public static class WendigoStateMachineInstaller
+public static class WendigoStateMachineFactory
 {
-    public static void SetUp(Wendigo wendigo, IStateMachine stateMachine)
+    public static IStateMachine Create(Wendigo wendigo)
     {
+        IStateMachine stateMachine = new StateMachine();
+
         IState disabled = new Disabled();
         IState arrival = new Arrival(wendigo);
         IState idle = new Idle();
@@ -20,13 +22,15 @@ public static class WendigoStateMachineInstaller
         Add(idle, dead, IsDead());
         Add(chase, dead, IsDead());
 
-        stateMachine.SetState(arrival);
+        stateMachine.SetState(disabled);
 
         void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
         Func<bool> IsActive() => () => wendigo.Data.IsActive;
         Func<bool> IsArrived() => () => wendigo.Data.IsArrived;
         Func<bool> HasTarget() => () => wendigo.Data.Target != null;
         Func<bool> HasNoTarget() => () => wendigo.Data.Target == null;
-        Func<bool> IsDead() => () => !wendigo.HealthSystem.IsAlive() || wendigo.testDeath;
+        Func<bool> IsDead() => () => !wendigo.GetController<WendigoHealthSystem>().IsAlive() || wendigo.testDeath;
+
+        return stateMachine;
     }
 }

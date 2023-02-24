@@ -10,6 +10,7 @@ public class WendigoMover : MonoBehaviour
     public void Initialize(Wendigo wendigo)
     {
         controller = wendigo.Controller;
+        chronos = wendigo.Chronos;
         data = wendigo.Data;
     }
 

@@ -6,7 +6,6 @@ public class RagDollController : MonoBehaviour
 {
     private Animator animator;
     private RagdollBoneStorage storage;
-    private SkeletonRestructurer restructurer;
 
     private bool ragdollIsEnabled;
 
@@ -16,7 +15,6 @@ public class RagDollController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         storage = GetComponent<RagdollBoneStorage>();
-        restructurer = GetComponent<SkeletonRestructurer>();
     }
 
     private void Start() => SwitchOff();

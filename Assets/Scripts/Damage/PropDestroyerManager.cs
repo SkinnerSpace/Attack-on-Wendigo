@@ -24,8 +24,8 @@ public class PropDestroyerManager : MonoBehaviour
     {
         if (pivot != null)
         {
-            foreach (PropDestroyer destroyer in destroyers)
-                destroyer.SetPivot(pivot);
+            /*foreach (PropDestroyer destroyer in destroyers)
+                destroyer.SetPivot(pivot);*/
         }
     }
 }

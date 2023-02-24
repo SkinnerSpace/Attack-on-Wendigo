@@ -10,7 +10,7 @@ public interface ITransform
     Vector3 LocalEuler { get; set; }
     Quaternion Rotation { get; set; }
 
-    Vector3 Right { get; set; }
-    Vector3 Up { get; set; }
-    Vector3 Forward { get; set; }
+    Vector3 Right { get; }
+    Vector3 Up { get; }
+    Vector3 Forward { get; }
 }

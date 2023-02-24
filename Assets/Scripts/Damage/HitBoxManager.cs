@@ -6,11 +6,11 @@ public class HitBoxManager : MonoBehaviour
 {
     [SerializeField] private Transform hitBoxesRoot;
 
-    public HitBoxBehavior[] hits;
+    public HitBox[] hits;
 
     private void OnEnable()
     {
         if (hitBoxesRoot != null) 
-            hits = hitBoxesRoot.GetComponentsInChildren<HitBoxBehavior>();
+            hits = hitBoxesRoot.GetComponentsInChildren<HitBox>();
     }
 }

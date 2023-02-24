@@ -879,7 +879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &253291921884985562
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1218,7 +1217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &736346191175814653
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1709,6 +1707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFXPlayer: {fileID: 6783199577854852569}
+  wendigo: {fileID: 0}
 --- !u!114 &8100390333917869422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,7 +1998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &4619298484323713660
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2286,7 +2284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &3875530105219378564
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2373,12 +2370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6263c3adc0bac5b40b758332b9ee2d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializableData: {fileID: 2065092290385512157}
+  mover: {fileID: 8875712469989729354}
+  controller: {fileID: 157347938491257906}
   mainPropDestroyer: {fileID: 54220094663826474}
   ragDollController: {fileID: 2173253743383517456}
   pool: {fileID: 1058818208207837215}
-  animator: {fileID: 0}
-  controller: {fileID: 157347938491257906}
-  mover: {fileID: 8875712469989729354}
+  animator: {fileID: 4718767853038179663}
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
   testDeath: 0
@@ -2395,9 +2393,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 30
-  rotationSpeed: 30
-  deceleration: 0.5
+  movementSpeed: 10
+  rotationSpeed: 20
+  deceleration: 1
 --- !u!114 &6902924081060343994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3082,7 +3080,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &9022864338969678538
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3158,7 +3155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &2848618342027025491
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3723,7 +3719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!1 &3714499124755324782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,7 +4324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &4748900798720725748
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4985,7 +4979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16b80d9344b8494caec48cd6c55680d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wendigo: {fileID: 0}
+  wendigo: {fileID: 2604546528073915768}
   rigController: {fileID: 5114566614934186673}
   inSightChecker: {fileID: 3860029956233993437}
   defaultPoint: {fileID: 907572237431750394}
@@ -5575,7 +5569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &7626058685945517925
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6890,7 +6883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &3521816046476369881
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7093,7 +7085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &207218171666460266
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7169,7 +7160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &8194997433996861850
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7276,7 +7266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 2604546528073915769}
 --- !u!136 &5009852186337095348
 CapsuleCollider:
   m_ObjectHideFlags: 0

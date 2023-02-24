@@ -7,9 +7,3 @@ public abstract class BaseController
     public abstract void Connect();
     //public abstract void Disconnect();
 }
-
-public interface IBaseController
-{
-    void Initialize(MainController main);
-    void Connect();
-}

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Chase : IState
+public class Chase : LoggableState, IState
 {
     public const float ROTATION_THRESHOLD = 1f;
 
@@ -16,8 +16,8 @@ public class Chase : IState
     public Chase(Wendigo wendigo)
     {
         data = wendigo.Data;
-        rotationController = wendigo.RotationController;
-        movementController = wendigo.MovementController;
+        rotationController = wendigo.GetController<WendigoRotationController>();
+        movementController = wendigo.GetController<WendigoMovementController>();
     }
 
     public void Tick()
@@ -26,9 +26,18 @@ public class Chase : IState
         if (ShouldRotate()) rotationController.RotateToTarget(data.Target.position);
     }
 
-    private bool ShouldRotate() => false;
+    private bool ShouldRotate()
+    {
+        return data.Velocity.magnitude > 1f;
+    }
 
-    public void OnEnter() { }
+    public void OnEnter()
+    {
+        LogEnter();
+    }
 
-    public void OnExit() { }
+    public void OnExit()
+    {
+        LogExit();
+    }
 }

@@ -23,7 +23,8 @@ public class CharacterMover : MonoBehaviour, IBaseController
     {
         if (isReady)
         {
-            data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler);
+            data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler + data.ShakeEuler);
+            data.CameraLocalPos = data.CameraDampedPos + data.ShakePosition;
             onUpdate?.Invoke();
         }
     }

@@ -7101,6 +7101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 1701243481}
+    - target: {fileID: 5708966445217698579, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
       propertyPath: angleAcceptor
       value: 
       objectReference: {fileID: 2065355997}
@@ -9149,7 +9154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052116353f148c04da256f61c886db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 1323597736}
 --- !u!1 &1326193597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9786,7 +9790,7 @@ MonoBehaviour:
   wendigoPrefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
     type: 3}
   target: {fileID: 1302925505}
-  wendigoMaxCount: 5
+  wendigoMaxCount: 1
   spawnInterval: 3
 --- !u!4 &1488656788
 Transform:
@@ -11858,7 +11862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 2138429413}
-  countDownTime: 5
+  countDownTime: 1
 --- !u!114 &2138429412
 MonoBehaviour:
   m_ObjectHideFlags: 0

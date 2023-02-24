@@ -1,8 +1,14 @@
-﻿public class Disabled : IState
+﻿public class Disabled : LoggableState, IState
 {
     public void Tick() { }
 
-    public void OnEnter() { }
+    public void OnEnter()
+    {
+        LogEnter();
+    }
 
-    public void OnExit() { }
+    public void OnExit()
+    {
+        LogExit();
+    }
 } 

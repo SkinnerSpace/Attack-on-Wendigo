@@ -1,15 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class WendigoMovementController 
+public class WendigoMovementController : WendigoBaseController
 {
-    private Wendigo wendigo;
+    private IWendigo wendigo;
     private WendigoData data;
     private IChronos chronos;
 
     public Action<float> onVelocityUpdate;
 
-    public WendigoMovementController(Wendigo wendigo)
+    public override void Initialize(IWendigo wendigo)
     {
         this.wendigo = wendigo;
         data = wendigo.Data;

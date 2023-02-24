@@ -12,6 +12,8 @@ public interface ICharacterData
 
     Camera Cam { get; }
     Vector3 CameraLocalPos { get; set; }
+    Vector3 CameraDampedPos { get; set; }
+
     Vector3 CameraEuler { get; set; }
     Quaternion CameraRotation { get; set; }
     Vector3 CameraForward { get; }
@@ -24,6 +26,8 @@ public interface ICharacterData
     float TiltSpeed { get; }
     float TiltMaxAngle { get; }
 
+    Vector3 ShakePosition { get; set; }
+    Vector3 ShakeEuler { get; set; }
 
 
 

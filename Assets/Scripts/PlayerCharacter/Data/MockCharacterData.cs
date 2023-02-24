@@ -33,9 +33,13 @@ public class MockCharacterData : ICharacterData
     public Vector3 CameraEuler { get; set; }
     public Vector3 CameraViewEuler { get; set; }
     public Vector3 CameraLocalPos { get; set; }
+    public Vector3 CameraDampedPos { get; set; }
     public Vector3 CameraTiltEuler { get; set; }
     public float TiltSpeed { get; set; } 
     public float TiltMaxAngle { get; set; }
+
+    public Vector3 ShakePosition { get; set; }
+    public Vector3 ShakeEuler { get; set; }
 
     public Vector3 CameraForward { get; set; } = Vector3.forward;
     public Vector3 CameraRight { get; set; } = Vector3.right;

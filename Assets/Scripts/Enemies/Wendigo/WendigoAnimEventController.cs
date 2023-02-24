@@ -6,6 +6,7 @@ public class WendigoAnimEventController : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private WendigoSFXPlayer sFXPlayer;
+    [SerializeField] private Wendigo wendigo;
 
     public void Stomp()
     {
@@ -15,11 +16,11 @@ public class WendigoAnimEventController : MonoBehaviour
 
     private void ShakeTheEarth()
     {
-        /*if (PlayerCharacter.Instance.IsGrounded)
+        if (CharacterData.Instance.IsGrounded)
         {
-            float dist = Vector3.Distance(transform.position, PlayerCharacter.Instance.transform.position);
+            float dist = Vector3.Distance(transform.position, CharacterData.Instance.Position);
             ScreenShake.Create().withTime(0.3f).WithAxis(1f, 1f, 0f).WithStrength(0.25f, 2f).WithCurve(4f, 0.1f, 0.25f).WithAttenuation(dist, 200f).Launch();
-        }*/
+        }
     }
 
     public void RoarOnArrival()

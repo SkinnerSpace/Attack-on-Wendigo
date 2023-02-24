@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Arrival : IState
+public class Arrival : LoggableState, IState
 {
     private const float ARRIVAL_TIME = 3.2f;
     private Wendigo wendigo;
@@ -13,9 +12,16 @@ public class Arrival : IState
 
     public void Tick() { }
 
-    public void OnEnter() => wendigo.Timer.Set("Arrival", ARRIVAL_TIME, OnArrived);
+    public void OnEnter()
+    {
+        LogEnter();
+        wendigo.Timer.Set("Arrival", ARRIVAL_TIME, OnArrived);
+    }
 
-    public void OnExit() { }
+    public void OnExit()
+    {
+        LogExit();
+    }
 
     public void OnArrived() => wendigo.Data.IsArrived = true;
 }
