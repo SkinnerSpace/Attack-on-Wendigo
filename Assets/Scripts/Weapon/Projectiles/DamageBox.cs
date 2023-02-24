@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DamageBox : MonoBehaviour
 {
-    [SerializeField] private float damage = 1f;
+    [SerializeField] private int damage = 1;
     private Collider collisionBox;
     private IDamageable damageable;
 

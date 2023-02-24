@@ -4,7 +4,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class HitBox : MonoBehaviour, IDamageable
+public class HitBoxBehavior : MonoBehaviour, IHitBox
+{
+    private HitBox hitBox;
+
+    public void Subscribe(IDamageable damageable) => hitBox.Subscribe(damageable);
+    public void Unsubscribe(IDamageable damageable) => hitBox.Unsubscribe(damageable);
+
+    public void ReceiveDamage(DamagePackage damagePackage) => hitBox.ReceiveDamage(damagePackage);
+}
+
+public class HitBox : IDamageable, IHitBox
 {
     private event Action<DamagePackage> onDamage;
 

@@ -19,5 +19,3 @@ public class Arrival : IState
 
     public void OnArrived() => wendigo.Data.IsArrived = true;
 }
-
-

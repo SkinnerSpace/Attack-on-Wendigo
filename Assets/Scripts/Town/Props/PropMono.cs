@@ -11,7 +11,7 @@ public class PropMono : MonoBehaviour, IDestructible
 
     private void Awake()
     {
-        PropConfigurator.Configure(propSetup, new TransformProxy(transform));
+        PropConfigurator.Configure(propSetup, new ProxyTransform(transform));
         prop = PropAssembly.CreateProp(propSetup, transform);
         hitBox = GetComponent<Collider>();
 

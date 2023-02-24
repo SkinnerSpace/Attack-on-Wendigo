@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterController controller;
     [SerializeField] private WendigoMover mover;
-    [SerializeField] private WendigoData data;
+    [SerializeField] private WendigoSerializableData serializableData;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
 
@@ -21,41 +20,40 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;
 
-    public HitBox[] HitBoxes { get; set; }
-    public WendigoData Data => data;
+    public WendigoData Data { get; set; }
     public IChronos Chronos => chronos;
 
     public WendigoRotationController RotationController { get; set; }
     public WendigoMovementController MovementController { get; set; }
     public WendigoHealthSystem HealthSystem { get; set; }
     public WendigoAnimatorController AnimatorController { get; set; }
-    public StateMachine stateMachine { get; set; }
+    public WendigoTargetManager targetManager { get; set; }
+    public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
+
+    public IHitBox[] HitBoxes { get; private set; }
 
     [HideInInspector] public bool testDeath;
 
-    private event Action<Transform> onTargetSet;
-
     private void Awake()
     {
-        pool.Subscribe(this);
-        HitBoxes = GetComponentsInChildren<HitBox>();
+        Initialize();
     }
-
-    public void OnSpawn() => Initialize();
 
     public void Initialize()
     {
+        Data = new WendigoData(serializableData, new ProxyTransform(transform));
+        HitBoxes = GetComponentsInChildren<IHitBox>();
+
         InitializeComponents();
         WendigoStateMachineInstaller.SetUp(this, stateMachine);
 
+        pool.Subscribe(this);
         HealthSystem.SubscribeOnRagdoll(this);
     }
 
-    private void Update()
-    {
-        if (stateMachine != null)
-            stateMachine.Tick();
-    }
+    public void OnSpawn() => Data.IsActive = true;
+
+    private void Update() => stateMachine.Tick();
 
     private void InitializeComponents()
     {
@@ -64,24 +62,19 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         RotationController = new WendigoRotationController(this);
         MovementController = new WendigoMovementController(this);
         HealthSystem = new WendigoHealthSystem(this);
+        targetManager = new WendigoTargetManager(this);
         AnimatorController = new WendigoAnimatorController(this);
+        stateMachine = new StateMachine();
 
         MovementController.Subscribe(AnimatorController);
-
-        stateMachine = new StateMachine();
     }
 
     public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
     {
-        //headTarget.SetTarget(null);
         SetTarget(null);
         ragDollController.TriggerRagdoll(impact, hitPoint);
         testDeath = true;
     }
 
-    public void SetTarget(Transform target)
-    {
-        Data.Target = target;
-        onTargetSet?.Invoke(target);
-    }
+    public void SetTarget(Transform target) => targetManager.SetTarget(target);
 }

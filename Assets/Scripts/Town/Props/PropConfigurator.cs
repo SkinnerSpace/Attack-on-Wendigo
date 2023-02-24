@@ -3,13 +3,13 @@ using UnityEngine;
 
 public static class PropConfigurator
 {
-    public static void Configure(PropSetup propSetup, ITransformProxy transform)
+    public static void Configure(PropSetup propSetup, ITransform transform)
     {
         SetRandomScale(transform, propSetup.minScale, propSetup.maxScale);
         SetRandomAngle(transform, propSetup.angles);
     }
 
-    public static void SetRandomScale(ITransformProxy transform, float minScale, float maxScale)
+    public static void SetRandomScale(ITransform transform, float minScale, float maxScale)
     {
         float scale = UnityEngine.Random.Range(minScale, maxScale);
         transform.LocalScale = new Vector3(
@@ -18,16 +18,16 @@ public static class PropConfigurator
             transform.LocalScale.z * scale);
     }
 
-    public static void SetRandomAngle(ITransformProxy transform, List<float> angles)
+    public static void SetRandomAngle(ITransform transform, List<float> angles)
     {
         if (angles.Count > 0)
         {
             int index = UnityEngine.Random.Range(0, angles.Count);
-            transform.Angle = new Vector3(0f, angles[index], 0f);
+            transform.Euler = new Vector3(0f, angles[index], 0f);
         }
         else
         {
-            transform.Angle = new Vector3(0f, UnityEngine.Random.Range(0f, 360f), 0f);
+            transform.Euler = new Vector3(0f, UnityEngine.Random.Range(0f, 360f), 0f);
         }
     }
 }

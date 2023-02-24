@@ -2327,7 +2327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2604546528073915769}
   - component: {fileID: 2604546528073915768}
-  - component: {fileID: 562342211922332664}
+  - component: {fileID: 2065092290385512157}
   - component: {fileID: 6902924081060343994}
   - component: {fileID: 8875712469989729354}
   - component: {fileID: 5289369853755172427}
@@ -2376,13 +2376,13 @@ MonoBehaviour:
   mainPropDestroyer: {fileID: 54220094663826474}
   ragDollController: {fileID: 2173253743383517456}
   pool: {fileID: 1058818208207837215}
+  animator: {fileID: 0}
   controller: {fileID: 157347938491257906}
   mover: {fileID: 8875712469989729354}
-  data: {fileID: 562342211922332664}
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
   testDeath: 0
---- !u!114 &562342211922332664
+--- !u!114 &2065092290385512157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2391,13 +2391,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2604546528073915766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153aab91725cd7d4b9d14e242d7e09f3, type: 3}
+  m_Script: {fileID: 11500000, guid: ea114005006162b43a7333b5f3d8b9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 8
-  deceleration: 0.5
+  movementSpeed: 30
   rotationSpeed: 30
+  deceleration: 0.5
 --- !u!114 &6902924081060343994
 MonoBehaviour:
   m_ObjectHideFlags: 0

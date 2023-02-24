@@ -2,16 +2,16 @@
 
 public class DamagePackage
 {
-    public float damage;
+    public int damage;
     public Vector3 impact;
     public Vector3 point;
 
-    public DamagePackage(float damage)
+    public DamagePackage(int damage)
     {
         this.damage = damage;
     }
 
-    public DamagePackage(float damage, Vector3 impact, Vector3 point)
+    public DamagePackage(int damage, Vector3 impact, Vector3 point)
     {
         this.damage = damage;
         this.impact = impact;

@@ -3,5 +3,5 @@
 public interface IProp
 {
     IPropData data { get; }
-    List<ITransformProxy> transforms { get; }
+    List<ITransform> transforms { get; }
 }

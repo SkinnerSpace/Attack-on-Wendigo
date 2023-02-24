@@ -2,7 +2,7 @@
 using NSubstitute;
 using UnityEngine;
 
-namespace Tests
+namespace Testsndi
 {
     public class Camera_tilt_controller_tests
     {

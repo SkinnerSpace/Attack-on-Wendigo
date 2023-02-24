@@ -4,15 +4,16 @@ using UnityEngine;
 public class WendigoHealthSystem : IDamageable
 {
     private WendigoData data;
+    private HitBoxBehavior[] HitBoxes;
 
     private event Action onDied;
     private event Action<Vector3, Vector3> triggerRagdoll;
 
-    public WendigoHealthSystem(Wendigo wendigo)
+    public WendigoHealthSystem(IWendigo wendigo)
     {
         data = wendigo.Data;
 
-        foreach (HitBox hitBox in wendigo.HitBoxes)
+        foreach (IHitBox hitBox in wendigo.HitBoxes)
             hitBox.Subscribe(this);
     }
 

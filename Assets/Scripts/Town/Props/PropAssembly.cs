@@ -14,7 +14,7 @@ public static class PropAssembly
         Prop prop = PropFactory.CreateProp(setup.type);
         prop.SetData(data);
 
-        List<ITransformProxy> transforms = GetAllTransforms(transform);
+        List<ITransform> transforms = GetAllTransforms(transform);
         prop.SetTransforms(transforms);
 
         return prop;
@@ -30,13 +30,13 @@ public static class PropAssembly
         return data;
     }
 
-    public static List<ITransformProxy> GetAllTransforms(Transform transform)
+    public static List<ITransform> GetAllTransforms(Transform transform)
     {
         Transform[] childTransforms = transform.GetComponentsInChildren<Transform>();
-        List<ITransformProxy> transforms = new List<ITransformProxy>();
+        List<ITransform> transforms = new List<ITransform>();
 
         foreach (Transform childTransform in childTransforms)
-            transforms.Add(new TransformProxy(childTransform.transform));
+            transforms.Add(new ProxyTransform(childTransform.transform));
 
         return transforms;
     }

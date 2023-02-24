@@ -2,7 +2,7 @@
 
 public class WeaponData : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     [SerializeField] private float impact;
 
     [SerializeField] private int ammo;
@@ -13,7 +13,7 @@ public class WeaponData : MonoBehaviour
 
     [SerializeField] private float rate;
 
-    public float Damage => damage;
+    public int Damage => damage;
     public float Impact => impact;
     public int Ammo => ammo;
     public float Precision => Mathf.Lerp(precision, 1f, precisionAdjustment);

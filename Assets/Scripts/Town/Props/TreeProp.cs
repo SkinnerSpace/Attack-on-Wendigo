@@ -21,12 +21,12 @@ public class TreeProp : Prop
         isCollapsing = true;
         bounciness = UnityEngine.Random.Range(MIN_BOUNCINESS, MAX_BOUNCINESS);
 
-        float angleY = (Mathf.Atan2(impact.x, impact.z) * Mathf.Rad2Deg) + transforms[0].Angle.y;
+        float angleY = (Mathf.Atan2(impact.x, impact.z) * Mathf.Rad2Deg) + transforms[0].Euler.y;
         Vector3 fallDirection = new Vector3(0f, angleY, 0f);
         Vector3 invertedFallDirection = new Vector3(0f, -angleY, 0f);
 
-        transforms[COLLAPSE_TRANSFORM].LocalAngle = fallDirection;
-        transforms[ADJUSTMENT_TRANSFORM].LocalAngle = invertedFallDirection;
+        transforms[COLLAPSE_TRANSFORM].LocalEuler = fallDirection;
+        transforms[ADJUSTMENT_TRANSFORM].LocalEuler = invertedFallDirection;
 
         beforeCollapse = new Vector3(0f, angleY, 0f);
         afterCollapse = new Vector3(0f, angleY, 80f);
@@ -41,7 +41,7 @@ public class TreeProp : Prop
         if (lerp >= 1f)
             BounceOrStop();
 
-        transforms[COLLAPSE_TRANSFORM].LocalAngle = Vector3.Lerp(beforeCollapse, afterCollapse, lerp);
+        transforms[COLLAPSE_TRANSFORM].LocalEuler = Vector3.Lerp(beforeCollapse, afterCollapse, lerp);
     } 
 
     private void BounceOrStop()
