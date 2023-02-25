@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IPickUpObserver
+public interface IInteractionObserver
 {
     void OnTargetUpdate(Transform target);
 }

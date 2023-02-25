@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AimPresenter : MonoBehaviour
 {
     [SerializeField] private Aim aim;
     [SerializeField] private EventManager eventManager;
+    [SerializeField] private MainController player;
 
     private EventListener targetPresenceListener;
     private EventListener targetAbsenceListener;
@@ -12,13 +14,11 @@ public class AimPresenter : MonoBehaviour
     private EventListener gameOnPauseListener;
     private EventListener gameOnResumeListener;
 
+    private List<Transform> targets = new List<Transform>();
+
     private void Awake()
     {
-        targetPresenceListener = new EventListener(aim.SetOnTarget);
-        eventManager.Subscribe(targetPresenceListener, "TargetIsPresent");
-
-        targetAbsenceListener = new EventListener(aim.SetOffTarget);
-        eventManager.Subscribe(targetAbsenceListener, "TargetIsAbsent");
+        player.GetController<PickUpController>().Subscribe(AddTarget, RemoveTarget);
 
         gameOnStartListener = new EventListener(aim.Show);
         eventManager.Subscribe(gameOnStartListener, "OnGameStart");
@@ -28,5 +28,28 @@ public class AimPresenter : MonoBehaviour
 
         gameOnResumeListener = new EventListener(aim.Show);
         eventManager.Subscribe(gameOnResumeListener, "OnGameResume");
+    }
+
+    public void AddTarget(Transform target)
+    {
+        targets.Add(target);
+        UpdateAimTargetState();
+    }
+    public void RemoveTarget(Transform target)
+    {
+        targets.Remove(target);
+        UpdateAimTargetState();
+    }
+
+    private void UpdateAimTargetState()
+    {
+        if (targets.Count > 0)
+        {
+            aim.SetOnTarget();
+        }
+        else
+        {
+            aim.SetOffTarget();
+        }
     }
 }

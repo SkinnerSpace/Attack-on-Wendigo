@@ -5,6 +5,6 @@ public interface IPickable
 {
     Transform Transform { get; }
     Vector3 Position { get; }
-    void PickUp(IKeeper holder, Action callback);
+    void PickUp(WeaponKeeper keeper, Action callback);
     void Drop(Vector3 pos, Vector3 force);
 }

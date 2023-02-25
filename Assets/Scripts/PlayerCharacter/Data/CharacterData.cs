@@ -21,6 +21,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private int maxJumpCount = 2;
 
     [Header("Interaction")]
+    [SerializeField] private float reachDistance = 3f;
     [SerializeField] private float dropItemStrength = 1000f;
 
     [Header("Ground Detection")]
@@ -112,6 +113,7 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float FOVChangeSpeed => fOVChangeSpeed;
     public float FOVPower { get; set; }
 
+    public float ReachDistance => reachDistance;
     public float DropItemStrength => dropItemStrength;
 
     private void Awake()

@@ -66,5 +66,6 @@ public class MockCharacterData : ICharacterData
     public float FOVPower { get; set; }
 
 
+    public float ReachDistance { get; set; }
     public float DropItemStrength { get; set; }
 }

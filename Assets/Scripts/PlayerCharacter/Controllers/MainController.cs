@@ -43,6 +43,7 @@ public class MainController : MonoBehaviour
         AddController(typeof(DampedSpring));
         AddController(typeof(WeaponKeeper));
         AddController(typeof(PickUpController));
+        //AddController(typeof(InteractionController));
     }
 
     private void AddController(Type type)

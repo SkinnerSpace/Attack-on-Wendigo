@@ -17,7 +17,7 @@ public class Pickable : MonoBehaviour, IPickable
     public void Subscribe(IPickableObserver observer) => onPickedUp += observer.OnPickedUp;
     public void Unsubscribe(IPickableObserver observer) => onPickedUp -= observer.OnPickedUp;
 
-    public void PickUp(IKeeper keeper, Action callback)
+    public void PickUp(WeaponKeeper keeper, Action callback)
     {
         originalParent = item.parent;
         item.SetParent(keeper.Root);

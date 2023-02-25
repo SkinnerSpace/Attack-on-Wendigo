@@ -1,4 +1,6 @@
-﻿public class BinaryTrigger 
+﻿using UnityEngine;
+
+public class BinaryTrigger 
 {
     private EventTrigger positiveTrigger;
     private EventTrigger negativeTrigger;

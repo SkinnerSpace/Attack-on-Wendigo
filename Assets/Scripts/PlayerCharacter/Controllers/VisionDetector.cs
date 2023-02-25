@@ -4,10 +4,11 @@ using UnityEngine;
 public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
 {
     private Camera cam;
-    private VisionTarget target;
+    private Transform target;
     private IInputReader input;
 
     public event Action<VisionTarget> onTargetUpdate;
+    public event Action<Transform> onTargetTfUpdate;
 
     public override void Initialize(MainController main)
     {
@@ -17,25 +18,24 @@ public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
 
     public override void Connect() => input.Get<MousePositionInputReader>().Subscribe(this);
 
-    public void AddObserver(IVisionObserver observer) => onTargetUpdate += observer.OnTargetUpdate;
-    public void Unsubscribe(IVisionObserver observer) => onTargetUpdate -= observer.OnTargetUpdate;
+    public void Subscribe(Action<Transform> onTargetTfUpdate) => this.onTargetTfUpdate += onTargetTfUpdate;
 
     public void OnMousePosUpdate(Vector2 pos)
     {
         Ray ray = cam.ScreenPointToRay(pos);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Vision))
-        {
-            target.IsValid = true;
-            target.Transform = hit.transform;
-            target.distance = Vector3.Distance(ray.origin, hit.point);
-        }
-        else
-        {
-            target.IsValid = false;
-        }
+        Transform currentTarget = null;
 
-        NotifyOnUpdate(target);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Interactables))
+            currentTarget = hit.transform;
+
+        if (target != currentTarget)
+        {
+            target = currentTarget;
+            onTargetTfUpdate?.Invoke(target);
+        }
     }
-
-    public void NotifyOnUpdate(VisionTarget target) => onTargetUpdate?.Invoke(target);
 }
+
+// Raycast with extension method
+// Create a raycast class 
+// Generalize PickUpController to interact with objects based on polymorphism

@@ -76,5 +76,6 @@ public interface ICharacterData
     float FOVPower { get; set; }
 
 
+    float ReachDistance { get; }
     float DropItemStrength { get; }
 }

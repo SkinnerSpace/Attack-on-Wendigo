@@ -13,7 +13,7 @@ public static class ComplexLayers
         1 << (int)Layers.RagDoll
         );
 
-    public static LayerMask Vision =
+    public static LayerMask Interactables =
         1 << (int)Layers.Interactables;
 
     public static LayerMask Combat = ~(

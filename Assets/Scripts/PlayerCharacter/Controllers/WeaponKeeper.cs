@@ -9,7 +9,7 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
     private IInputReader input;
     public Transform Root => data.Cam.transform;
 
-    private IPickable item;
+    private IPickable pickableItem;
     private Weapon weapon;
     private WeaponThrower thrower;
 
@@ -28,14 +28,15 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         input.Get<MousePositionInputReader>().Subscribe(this);
     }
 
-    public void TakeAnItem(IPickable item)
+    public void TakeAnItem(Transform item)
     {
-        if (this.item != item)
+        pickableItem = item.GetComponent<IPickable>();
+
+        if (pickableItem != null)
         {
-            this.item = item;
-            weapon = item.Transform.GetComponent<Weapon>();
-            item.PickUp(this, OnKept);
+            weapon = item.parent.GetComponent<Weapon>();
             weapon.ConnectCamera(data.Cam);
+            pickableItem.PickUp(this, OnKept);
         }
     }
 
@@ -43,13 +44,13 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
 
     public void DropAnItem()
     {
-        if (item != null)
+        if (pickableItem != null)
         {
             weapon.SetReady(false);
 
             Vector3 force = data.CameraForward * data.DropItemStrength;
-            item.Drop(dropPos, force);
-            item = null;
+            pickableItem.Drop(dropPos, force);
+            pickableItem = null;
         }
     }
 
@@ -59,5 +60,5 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         weapon.SetReady(true);
     }
 
-    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(item, screenPoint);
+    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(pickableItem, screenPoint);
 }
