@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class KeyBinds : MonoBehaviour, IKeyBinds
 {
+    public static KeyBinds Instance;
+    public enum Binds
+    {
+        Interact
+    };
+
     [Header("Mouse")]
     [Range(0f, 1000f)]
     [SerializeField] private float mouseSensitivity = 100f;
@@ -35,5 +42,13 @@ public class KeyBinds : MonoBehaviour, IKeyBinds
     public KeyCode Jump => jump;
     public KeyCode Dash => dash;
     public KeyCode Interact => interact;
+
+    public Dictionary<Binds, KeyCode> Keys { get; private set; } = new Dictionary<Binds, KeyCode>();
+
+    private void Awake()
+    {
+        Instance = this;
+        Keys.Add(Binds.Interact, interact);
+    }
 }
 

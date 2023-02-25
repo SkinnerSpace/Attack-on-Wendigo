@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 1607797182059835321}
   - component: {fileID: 1773212329327441019}
   - component: {fileID: 4553111135022422771}
-  - component: {fileID: 1369091227733174530}
   - component: {fileID: 5860300381809212781}
   - component: {fileID: 3075366320668066102}
   m_Layer: 16
@@ -98,12 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooterImp: {fileID: 7115549839052237860}
-  gunSight: {fileID: 1773212329327441019}
-  gunMagazine: {fileID: 1607797182059835321}
-  gunBarrel: {fileID: 6661431121530865469}
+  magazine: {fileID: 0}
+  data: {fileID: 0}
   aimController: {fileID: 3250259004418562365}
-  recoilController: {fileID: 2095351248543235470}
   swayController: {fileID: 8910493458843740853}
+  cameraUsers: []
 --- !u!114 &6661431121530865469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,23 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1369091227733174530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 922826383803172420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87df3bea829908e43bf75c0427e23288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portablePart: {fileID: 1621975479460991466}
-  layerTransitiveParts:
-  - {fileID: 922826383803172420}
-  - {fileID: 3761939237155909008}
-  physics: {fileID: 3075366320668066102}
+  chronos: {fileID: 0}
 --- !u!65 &5860300381809212781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -250,9 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f3dd25a5f6b9943a4bdf19cf09393f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   defaultPosition: {x: 0.81, y: -0.4, z: 1}
   aimingPosition: {x: 0, y: -0.4, z: 0.5}
-  aimingSpeed: 10
   testMode: 0
 --- !u!1 &3132422130739130433
 GameObject:
@@ -302,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad76d8128f93b240a6ffb8b4655e206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 2632156444435108034}
+  weaponImp: {fileID: 0}
   displacementOn: 1
   rotationOn: 1
   tiltOn: 1
@@ -322,6 +304,7 @@ MonoBehaviour:
   displacementIntensity: 0.2
   maxDisplacement: 0.5
   smoothDisplacement: 6
+  aimController: {fileID: 0}
 --- !u!114 &9091706186425075399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationIntensity: 3
   smoothRotation: 5
+  aimController: {fileID: 0}
 --- !u!114 &95748473686747858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +335,7 @@ MonoBehaviour:
   tiltIntensity: 4
   maxTilt: 5
   smoothTilt: 12
+  aimController: {fileID: 0}
 --- !u!114 &1245686224671108525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chronos: {fileID: 0}
 --- !u!1 &4530678324731544831
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,8 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoilPower: 2
-  recoilSpeed: 10
-  recoilDeceleration: 10
+  recoilTime: 1
 --- !u!1 &7928093928461223905
 GameObject:
   m_ObjectHideFlags: 0

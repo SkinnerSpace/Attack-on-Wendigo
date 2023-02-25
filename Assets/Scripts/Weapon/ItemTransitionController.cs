@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ItemTransitionController : MonoBehaviour
 {
-    private Action onPickedUp;
+    [SerializeField] private Weapon weapon;
+
+    private Transform item;
 
     private float currentTime = 0f;
     private float pickTime = 0.3f;
@@ -14,12 +16,15 @@ public class ItemTransitionController : MonoBehaviour
 
     private bool isMoving;
 
-    public void Launch(IPickable item, Action onPickedUp)
+    private Action onPickedUp;
+
+    public void Launch(Transform item, Action onPickedUp)
     {
         this.onPickedUp = onPickedUp;
+        this.item = item;
 
-        originalPos = transform.localPosition;
-        targetPos = item.Get<Weapon>().DefaultPosition;
+        originalPos = item.localPosition;
+        targetPos = weapon.DefaultPosition;
 
         currentTime = 0f;
         isMoving = true;
@@ -58,7 +63,7 @@ public class ItemTransitionController : MonoBehaviour
 
     public void Displace(float transition)
     {
-        transform.localPosition = Vector3.Lerp(originalPos, targetPos, transition);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 0, 0), transition);
+        item.localPosition = Vector3.Lerp(originalPos, targetPos, transition);
+        item.localRotation = Quaternion.Slerp(item.localRotation, Quaternion.Euler(0, 0, 0), transition);
     }
 }

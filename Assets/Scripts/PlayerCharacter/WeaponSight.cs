@@ -17,7 +17,7 @@ public class WeaponSight
     {
         Ray ray = GetExactDirection();
         ray.direction = ApplyScatter(ray.direction);
-        Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Vision);
+        Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.VisionExclusion);
 
         return new WeaponTarget(ray, hit);
     }

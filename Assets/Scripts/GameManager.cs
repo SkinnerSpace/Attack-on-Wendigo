@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private enum States
+    public enum States
     {
         Menu,
         Play,
@@ -21,22 +21,37 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
     [SerializeField] private Airdrop airdrop;
-    
+
+    [SerializeField] private EventManager eventManager;
+    private TriggersManager triggers;
+
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
+
+    public MenuManager Menu => menu;
+    public MainController Character => character;
+    public CameraManager CameraManager => cameraManager;
+    public Airdrop Airdrop => airdrop;
+    public TriggersManager Triggers => triggers;
+
+    private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
 
     private void Awake()
     {
         Instance = this;
-
+        triggers = new TriggersManager(eventManager);
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
         cameraManager.SetLookAtTheHelicopter();
+
+        commands.Add("Start", new GameStartCommand(this));
+        commands.Add("Pause", new GamePauseCommand(this));
+        commands.Add("Resume", new GameResumeCommand(this));
     }
 
     private void Start()
     {
-        menu.OpenMenu("Main");
+        menu.Open("Main");
     }
 
     private void Update()
@@ -45,51 +60,25 @@ public class GameManager : MonoBehaviour
         {
             case States.Play:
                 if (Input.GetKeyDown(KeyCode.Escape))
-                    PauseTheGame();
+                    ExecuteCommand("Pause");
 
                 break;
 
             case States.Pause:
                 if (Input.GetKeyDown(KeyCode.Escape))
-                    UnpauseTheGame();
+                    ExecuteCommand("Resume");
 
                 break;
         }
     }
 
-    public void StartTheGame()
-    {
-        state = States.Play;
+    public void SetState(States state) => this.state = state;
 
-        menu.CloseMenu();
-
-        character.SetActive(true);
-        cameraManager.SetLookAtTheCharacter();
-
-        airdrop.DropPistol();
-        //helicopter
-        //counter.Launch();
-    }
+    public void ExecuteCommand(string command) => commands[command].Execute();
 
     public void RestartTheGame()
     {
         Debug.Log("Restart");
-    }
-
-    private void PauseTheGame()
-    {
-        state = States.Pause;
-
-        menu.OpenMenu("Pause");
-        Time.timeScale = 0f;
-    }
-
-    public void UnpauseTheGame()
-    {
-        state = States.Play;
-
-        menu.CloseMenu();
-        Time.timeScale = 1f;
     }
 
     public void OpenSettings()

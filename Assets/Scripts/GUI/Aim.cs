@@ -13,12 +13,8 @@ public class Aim : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    public void SetOnTarget()
-    {
-        image.color = Color.red;
-    }
-    public void SetOffTarget()
-    {
-        image.color = Color.black;
-    }
+    public void Show() => image.enabled = true;
+    public void Hid() => image.enabled = false;
+    public void SetOnTarget() => image.color = Color.red;
+    public void SetOffTarget() => image.color = Color.black;
 }

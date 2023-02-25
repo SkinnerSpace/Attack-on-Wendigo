@@ -31,4 +31,9 @@ public class Crate : MonoBehaviour
         physics.useGravity = false;
         physics.velocity = Vector3.zero;
     }
+
+    public void PrepareToBeUnpacked()
+    {
+        ResetPhysics();
+    }
 }

@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
             Menus.Add(menu.name, menu.buttons);
     }
 
-    public void OpenMenu(string name)
+    public void Open(string name)
     {
         CursorManager.UnlockCursor();
         gameObject.SetActive(true);
@@ -57,7 +57,7 @@ public class MenuManager : MonoBehaviour
             button.gameObject.SetActive(false);
     }
 
-    public void CloseMenu()
+    public void Close()
     {
         CursorManager.LockCursor();
         gameObject.SetActive(false);

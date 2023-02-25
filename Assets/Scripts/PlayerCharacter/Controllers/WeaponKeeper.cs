@@ -33,7 +33,7 @@ public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObser
         if (this.item != item)
         {
             this.item = item;
-            weapon = item.Get<Weapon>();
+            weapon = item.Transform.GetComponent<Weapon>();
             item.PickUp(this, OnKept);
             weapon.ConnectCamera(data.Cam);
         }

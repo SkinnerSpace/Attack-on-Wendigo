@@ -34,7 +34,7 @@ public class PlayerVision : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        Physics.Raycast(ray, out spot, Mathf.Infinity, ComplexLayers.Vision);
+        Physics.Raycast(ray, out spot, Mathf.Infinity, ComplexLayers.VisionExclusion);
         hasTarget = spot.transform != null;
 
         UpdateTargetStatus();

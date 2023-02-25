@@ -12,5 +12,6 @@
     Damaging = 17,
     Barriers = 18,
     RagDoll = 19,
-    Landscape = 20
+    Landscape = 20,
+    Interactables = 21
 }

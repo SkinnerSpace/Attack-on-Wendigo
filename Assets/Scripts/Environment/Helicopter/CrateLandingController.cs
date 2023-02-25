@@ -17,7 +17,7 @@ public class CrateLandingController : MonoBehaviour
         if (!isDisabled && isGrounded && physics.velocity.magnitude <= 0f)
         {
             isDisabled = true;
-            crate.ResetPhysics();
+            crate.PrepareToBeUnpacked();
             laserBeam.SwitchOn();
         }
     }
@@ -28,17 +28,25 @@ public class CrateLandingController : MonoBehaviour
         isDisabled = false;
     }
 
-    Vector3 collisionPoint;
-
     private void OnCollisionEnter(Collision collision)
     {
-        Surface surface = collision.transform.GetComponent<Surface>();
+        JumpOffTheWrongSurface(collision);
+        Vector3 hitPoint = GetHitPoint(collision);
+        HitTheSurface(collision, hitPoint);
+    }
 
-        collisionPoint = collision.contacts[0].point;
+    private Vector3 GetHitPoint(Collision collision)
+    {
+        Vector3 hitPoint = collision.contacts[0].point;
 
         foreach (ContactPoint contact in collision.contacts)
-            collisionPoint = collisionPoint.Average(contact.point);
-        
+            hitPoint = hitPoint.Average(contact.point);
+
+        return hitPoint;
+    }
+
+    private void JumpOffTheWrongSurface(Collision collision)
+    {
         if (collision.gameObject.layer == (int)Layers.Landscape)
         {
             isGrounded = true;
@@ -50,17 +58,18 @@ public class CrateLandingController : MonoBehaviour
         }
     }
 
-    /*private void HitTheSurface()
+    private void HitTheSurface(Collision collision, Vector3 hitPoint)
     {
-        Surface surface = probe.surface;
-        Vector3 position = probe.position;
-        Vector3 direction = data.FlatVelocity.normalized;
+        Surface surface = collision.transform.GetComponent<Surface>();
 
-        surface.Hit().
-                WithPosition(position).
-                WithAngle(direction, Vector3.up).
-                WithShape(1f, 70f).
-                WithCount(5, 10).
-                Launch();
-    }*/
+        if (surface != null)
+        {
+            surface.Hit().
+                    WithPosition(hitPoint).
+                    WithAngle(Vector3.down, Vector3.up).
+                    WithShape(1f, 70f).
+                    WithCount(5, 10).
+                    Launch();
+        }
+    }
 }

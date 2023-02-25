@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Pickable : MonoBehaviour, IPickable
 {
+    [SerializeField] private Transform item;
     [SerializeField] private Rigidbody physics;
     [SerializeField] private Collider collision;
     [SerializeField] private ItemTransitionController transitionController;
     [SerializeField] private ItemSFXPlayer sFXPlayer;
 
-    public Vector3 Position => transform.position;
+    public Transform Transform => item;
+    public Vector3 Position => item.position;
     private Transform originalParent;
     private event Action<bool> onPickedUp;
 
@@ -17,20 +19,20 @@ public class Pickable : MonoBehaviour, IPickable
 
     public void PickUp(IKeeper keeper, Action callback)
     {
-        originalParent = transform.parent;
-        transform.SetParent(keeper.Root);
+        originalParent = item.parent;
+        item.SetParent(keeper.Root);
         SetPhysicsDisabled(true);
         sFXPlayer.PlayTakeSFX();
 
-        transitionController.Launch(this, callback);
+        transitionController.Launch(item, callback);
 
         onPickedUp?.Invoke(true);
     }
 
     public void Drop(Vector3 pos, Vector3 force)
     {
-        transform.position = pos;
-        transform.SetParent(originalParent);
+        item.position = pos;
+        item.SetParent(originalParent);
 
         transitionController.Stop();
 
@@ -48,6 +50,4 @@ public class Pickable : MonoBehaviour, IPickable
         physics.isKinematic = disabled;
         physics.useGravity = !disabled;
     }
-
-    T IPickable.Get<T>() => GetComponent<T>();
 }

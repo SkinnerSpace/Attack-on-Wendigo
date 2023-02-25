@@ -16,7 +16,7 @@ public class WeaponThrower
 
         Ray ray = data.Cam.ScreenPointToRay(screenPoint);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Vision))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.VisionExclusion))
         {
             if (IsClippingThroughTheWall(originalPos, ray, hit))
             {

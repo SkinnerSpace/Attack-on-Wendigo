@@ -2,12 +2,13 @@
 
 public class LayerSwapManager : MonoBehaviour, IPickableObserver
 {
+    [SerializeField] private Pickable pickable;
     private LayerChanger[] layerChangers;
 
     private void Awake()
     {
         layerChangers = GetComponentsInChildren<LayerChanger>();
-        GetComponent<Pickable>().Subscribe(this);
+        pickable.Subscribe(this);
     }
 
     public void SwapTheLayers()
