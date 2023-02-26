@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crate : MonoBehaviour
+public class Crate : MonoBehaviour, IOpenable
 {
     [SerializeField] private Rigidbody physics;
     [SerializeField] private CrateSFXPlayer sfxPlayer;
-    private GameObject item;
+    [SerializeField] private MeshRenderer model;
+    [SerializeField] private LaserBeam laserBeam;
+    private string itemName;
+
+    private bool isOpened;
 
     private void Awake()
     {
         sfxPlayer = GetComponent<CrateSFXPlayer>();
     }
 
-    public void Pack(GameObject item) => this.item = item;
+    public void Pack(string itemName) => this.itemName = itemName;
 
     public void Throw(float force)
     {
@@ -35,5 +39,16 @@ public class Crate : MonoBehaviour
     public void PrepareToBeUnpacked()
     {
         ResetPhysics();
+    }
+
+    public void Open()
+    {
+        if (!isOpened)
+        {
+            model.enabled = false;
+            laserBeam.SwitchOff();
+            isOpened = true;
+            PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
+        }
     }
 }

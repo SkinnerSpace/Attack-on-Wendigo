@@ -35,7 +35,3 @@ public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
         }
     }
 }
-
-// Raycast with extension method
-// Create a raycast class 
-// Generalize PickUpController to interact with objects based on polymorphism

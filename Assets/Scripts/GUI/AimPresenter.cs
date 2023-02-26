@@ -6,6 +6,7 @@ public class AimPresenter : MonoBehaviour
     [SerializeField] private Aim aim;
     [SerializeField] private EventManager eventManager;
     [SerializeField] private MainController player;
+    [SerializeField] private UGUIElement uGUIElement;
 
     private EventListener targetPresenceListener;
     private EventListener targetAbsenceListener;
@@ -18,7 +19,9 @@ public class AimPresenter : MonoBehaviour
 
     private void Awake()
     {
-        player.GetController<PickUpController>().Subscribe(AddTarget, RemoveTarget);
+        /*player.GetController<PickUpController>().Subscribe(AddTarget, RemoveTarget);*/
+
+        uGUIElement.Subscribe(OnTargetUpdate);
 
         gameOnStartListener = new EventListener(aim.Show);
         eventManager.Subscribe(gameOnStartListener, "OnGameStart");
@@ -39,6 +42,18 @@ public class AimPresenter : MonoBehaviour
     {
         targets.Remove(target);
         UpdateAimTargetState();
+    }
+
+    public void OnTargetUpdate(bool targetExist)
+    {
+        if (targetExist)
+        {
+            aim.SetOnTarget();
+        }
+        else
+        {
+            aim.SetOffTarget();
+        }
     }
 
     private void UpdateAimTargetState()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UGUIElement : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UGUIElement : MonoBehaviour
     private RectTransform element;
     private TextMeshProUGUI label;
 
+    private event Action<bool> onTargetUpdate;
+
     private void Awake()
     {
         element = GetComponent<RectTransform>();
@@ -24,7 +27,7 @@ public class UGUIElement : MonoBehaviour
     {
         cam = player.Data.Cam;
         label.text = KeyBinds.Instance.Keys[key].ToString();
-        player.GetController<PickUpController>().Subscribe(AddTarget, RemoveTarget);
+        player.GetController<InteractionController>().Subscribe(AddTarget, RemoveTarget);
     }
 
     private void Update()
@@ -33,7 +36,7 @@ public class UGUIElement : MonoBehaviour
         {
             Vector2 screenPoint = cam.WorldToScreenPoint(target.position);
             element.position = screenPoint;
-            label.enabled = true; 
+            label.enabled = true;
         }
         else
         {
@@ -43,6 +46,17 @@ public class UGUIElement : MonoBehaviour
 
     private bool IsCloseEnough() => Vector3.Distance(player.transform.position, target.position) < maxDistance;
 
-    private void AddTarget(Transform target) => this.target = target;
-    private void RemoveTarget(Transform target) => this.target = null;
+    public void Subscribe(Action<bool> onTargetUpdate) => this.onTargetUpdate += onTargetUpdate;
+
+    private void AddTarget(Transform target)
+    {
+        this.target = target;
+        onTargetUpdate(true);
+    }
+
+    private void RemoveTarget(Transform target)
+    {
+        this.target = null;
+        onTargetUpdate(false);
+    }
 }

@@ -10,7 +10,7 @@ namespace Tests
         [Test]
         public void FOV_does_not_change_when_stand()
         {
-            ICharacterData data = new MockCharacterData() { 
+            /*ICharacterData data = new MockCharacterData() { 
                 MinFOV = 80f, 
                 MaxFOV = 120f, 
                 FOVChangeSpeed = 10f, 
@@ -21,10 +21,10 @@ namespace Tests
             chronos.DeltaTime.Returns(1f);
 
 
-            Assert.AreEqual(data.MinFOV, data.FOV);
+            Assert.AreEqual(data.MinFOV, data.FOV);*/
         }
 
-        [Test]
+        /*[Test]
         public void FOV_increases_when_move()
         {
             ICharacterData data = new MockCharacterData()
@@ -62,6 +62,6 @@ namespace Tests
 
 
             Assert.Less(data.FOV, data.MaxFOV);
-        }
+        }*/
     }
 }

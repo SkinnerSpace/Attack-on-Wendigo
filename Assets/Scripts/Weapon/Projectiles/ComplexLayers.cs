@@ -16,6 +16,9 @@ public static class ComplexLayers
     public static LayerMask Interactables =
         1 << (int)Layers.Interactables;
 
+    public static LayerMask Landscape =
+        1 << (int)Layers.Landscape;
+
     public static LayerMask Combat = ~(
         1 << (int)Layers.Props |
         1 << (int)Layers.Player |

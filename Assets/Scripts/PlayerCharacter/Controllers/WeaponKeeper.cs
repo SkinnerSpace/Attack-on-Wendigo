@@ -3,62 +3,53 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-public class WeaponKeeper : BaseController, IKeeper, IInteractor, IMousePosObserver
+public class WeaponKeeper : IKeeper
 {
     private ICharacterData data;
     private IInputReader input;
     public Transform Root => data.Cam.transform;
 
-    private IPickable pickableItem;
+    private Pickable pickable;
     private Weapon weapon;
     private WeaponThrower thrower;
 
-    private Vector3 dropPos;
-
-    public override void Initialize(MainController main)
+    public WeaponKeeper(CharacterData data, IInputReader input)
     {
-        data = main.Data;
+        this.data = data;
+        this.input = input;
+
         thrower = new WeaponThrower(data);
-        input = main.InputReader;
     }
 
-    public override void Connect()
+    public void Take(Pickable pickable, Weapon weapon)
     {
-        input.Get<InteractionInputReader>().Subscribe(this);
-        input.Get<MousePositionInputReader>().Subscribe(this);
+        this.pickable = pickable;
+        this.weapon = weapon;
+
+        pickable.PickUp(this, OnCameToHands);
     }
 
-    public void TakeAnItem(Transform item)
+    public void DropAnItem(Vector2 screenPoint)
     {
-        pickableItem = item.GetComponent<IPickable>();
-
-        if (pickableItem != null)
-        {
-            weapon = item.parent.GetComponent<Weapon>();
-            weapon.ConnectCamera(data.Cam);
-            pickableItem.PickUp(this, OnKept);
-        }
-    }
-
-    public void Interact() => DropAnItem();
-
-    public void DropAnItem()
-    {
-        if (pickableItem != null)
+        if (pickable != null)
         {
             weapon.SetReady(false);
+            weapon = null;
 
+            Vector3 dropPos = thrower.GetDropPos(pickable, screenPoint);
             Vector3 force = data.CameraForward * data.DropItemStrength;
-            pickableItem.Drop(dropPos, force);
-            pickableItem = null;
+
+            pickable.Drop(dropPos, force);
+            pickable = null;
         }
     }
 
-    private void OnKept()
+    private void OnCameToHands()
     {
-        weapon.Initialize(data, input);
-        weapon.SetReady(true);
+        if (weapon != null)
+        {
+            weapon.Initialize(data, input);
+            weapon.SetReady(true);
+        }
     }
-
-    public void OnMousePosUpdate(Vector2 screenPoint) => dropPos = thrower.GetDropPos(pickableItem, screenPoint);
 }

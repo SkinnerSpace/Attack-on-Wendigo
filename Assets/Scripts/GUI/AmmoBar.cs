@@ -27,8 +27,6 @@ public class AmmoBar : MonoBehaviour, IAmmoObserver
         EnforcedPlayAnimation(updateAnimation);
     }
 
-    public void UpdateOutOfAmmo() => EnforcedPlayAnimation(emptyAnimation);
-
     public void SetActive(bool active) => label.enabled = active;
 
     private void PlayAnimation(int animation) => animator.Play(animation);

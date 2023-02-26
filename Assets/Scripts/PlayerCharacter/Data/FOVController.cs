@@ -7,6 +7,19 @@ public class FOVController : BaseController, IMoverObserver
     private ICharacterData data;
     private IChronos chronos;
 
+    private float runMultiplier = 0.2f;
+    private float dashMultiplier = 0.8f;
+    
+    private (float run, float dash) multipliers;
+    private float targetRunMultiplier;
+
+    private float totalMultiplier;
+
+    private float fOVMultiplierLerp = 4f;
+    private float fOVChangeLerp = 10f;
+
+    private float targetFOV;
+
     public override void Initialize(MainController main)
     {
         this.main = main;
@@ -15,17 +28,25 @@ public class FOVController : BaseController, IMoverObserver
         chronos = main.Chronos;
     }
 
-    public override void Connect() => main.Mover.Subscribe(this);
+    public override void Connect()
+    {
+        main.Mover.Subscribe(this);
+        main.GetController<MovementController>().Subscribe(OnRunUpdate);
+        main.GetController<DashController>().Subscribe(OnDash);
+    }
 
     public void Update()
     {
-        float maxVelocity = (data.Speed / data.GroundDeceleration) * 4f;
-        float maxPower = data.FlatVelocity.magnitude / maxVelocity;
-        maxPower = Mathf.Clamp(maxPower, 0f, 1f);
-        maxPower = Easing.QuadEaseInOut(maxPower);
-        data.FOVPower = Mathf.Lerp(data.FOVPower, maxPower, data.FOVChangeSpeed * chronos.DeltaTime);
+        totalMultiplier = multipliers.run + multipliers.dash;
+        multipliers.run = Mathf.Lerp(multipliers.run, targetRunMultiplier, fOVMultiplierLerp * Time.deltaTime);
+        multipliers.dash = Mathf.Lerp(multipliers.dash, 0f, fOVMultiplierLerp * chronos.DeltaTime);
 
-        data.FOV = Mathf.Lerp(data.MinFOV, data.MaxFOV, data.FOVPower);
+        targetFOV = data.DefaultFOV + (data.AdditionalFOV * totalMultiplier);
+        data.FOV = Mathf.Lerp(data.FOV, targetFOV, fOVChangeLerp * chronos.DeltaTime);
     }
+
+    public void OnRunUpdate(bool isRunning) => targetRunMultiplier = isRunning ? runMultiplier : 0f;
+
+    public void OnDash() => multipliers.dash = dashMultiplier;
 }
 

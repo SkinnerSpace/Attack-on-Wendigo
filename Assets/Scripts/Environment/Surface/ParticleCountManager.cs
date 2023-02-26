@@ -28,4 +28,6 @@ public class ParticleCountManager
 
         emission.SetBurst(0, burst);
     }
+
+    public float GetAverageCount() => minCount.AverageWith(maxCount);
 }

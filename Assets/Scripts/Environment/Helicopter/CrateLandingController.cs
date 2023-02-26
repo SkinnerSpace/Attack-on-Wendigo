@@ -31,18 +31,7 @@ public class CrateLandingController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         JumpOffTheWrongSurface(collision);
-        Vector3 hitPoint = GetHitPoint(collision);
-        HitTheSurface(collision, hitPoint);
-    }
-
-    private Vector3 GetHitPoint(Collision collision)
-    {
-        Vector3 hitPoint = collision.contacts[0].point;
-
-        foreach (ContactPoint contact in collision.contacts)
-            hitPoint = hitPoint.Average(contact.point);
-
-        return hitPoint;
+        HitTheSurface(collision);
     }
 
     private void JumpOffTheWrongSurface(Collision collision)
@@ -54,18 +43,18 @@ public class CrateLandingController : MonoBehaviour
         else
         {
             isGrounded = false;
-            physics.velocity = new Vector3(0f, jumpForce, 0f);
+            physics.velocity = new Vector3(Rand.Range(-0.5f, 0.5f), Rand.Range(0.6f, 1f), Rand.Range(-0.5f, 0.5f)) * jumpForce;
         }
     }
 
-    private void HitTheSurface(Collision collision, Vector3 hitPoint)
+    private void HitTheSurface(Collision collision)
     {
         Surface surface = collision.transform.GetComponent<Surface>();
 
         if (surface != null)
         {
             surface.Hit().
-                    WithPosition(hitPoint).
+                    WithPosition(collision.GetHitPoint()).
                     WithAngle(Vector3.down, Vector3.up).
                     WithShape(1f, 70f).
                     WithCount(5, 10).

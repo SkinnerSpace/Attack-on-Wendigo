@@ -16,7 +16,7 @@
         if (ableToReport)
         {
             ableToReport = false;
-            AmmoBar.Instance.UpdateOutOfAmmo();
+            AmmoBar.Instance.UpdateAmmo(0);
             sfxPlayer.PlayIsEmptySFX();
 
             timer.Set("Enable Report", 0.5f, EnableReport);

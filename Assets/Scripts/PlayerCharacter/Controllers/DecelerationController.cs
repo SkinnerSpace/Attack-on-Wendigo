@@ -23,5 +23,8 @@ public class DecelerationController : BaseController, IMoverObserver
 
     public void SetDeceleration() => data.Deceleration = data.IsGrounded ? data.GroundDeceleration : data.AirDeceleration;
 
-    public void ApplyDeceleration() => data.FlatVelocity = Vector2.Lerp(data.FlatVelocity, Vector2.zero, data.Deceleration * chronos.DeltaTime);
+    public void ApplyDeceleration()
+    {
+        data.FlatVelocity = Vector2.Lerp(data.FlatVelocity, Vector2.zero, data.Deceleration * chronos.DeltaTime);
+    }
 }

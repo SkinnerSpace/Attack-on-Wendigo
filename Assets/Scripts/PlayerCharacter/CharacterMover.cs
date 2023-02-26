@@ -35,7 +35,7 @@ public class CharacterMover : MonoBehaviour, IBaseController
         {
             data.PreviousVerticalVelocity = data.VerticalVelocity;
             data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y);
-            data.Controller.Move(data.Velocity * chronos.DeltaTime);
+            data.Controller.Move(data.Velocity * Time.fixedDeltaTime);
         }
     }
 }

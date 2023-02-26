@@ -8,6 +8,7 @@ public class SurfaceHitBuilder
     private ParticleCountManager countManager;
 
     private float tangent;
+    private float sfxVolume;
 
     public SurfaceHitBuilder(ParticleSystem particle, SurfaceSFXManager sfxManager)
     {
@@ -35,9 +36,11 @@ public class SurfaceHitBuilder
     public SurfaceHitBuilder WithShape(float radius, float angle)
     {
         ParticleSystem.ShapeModule shape = particle.shape;
+
         shape.radius = radius;
         shape.angle = angle;
 
+        sfxVolume = Easing.QuadEaseOut((radius / 1f).Clamp01());
         sfxManager.ChooseSFX(radius);
 
         return this;
@@ -52,6 +55,8 @@ public class SurfaceHitBuilder
 
     public void Launch()
     {
+        sfxManager.SetVolume(sfxVolume);
+
         countManager.AdjustCount(tangent);
         countManager.ApplyCount(particle);
 

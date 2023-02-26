@@ -3,6 +3,6 @@
 public interface IKeeper
 {
     Transform Root { get; }
-    void TakeAnItem(Transform item);
-    void DropAnItem();
+    void Take(Pickable pickable, Weapon weapon);
+    void DropAnItem(Vector2 screenPoint);
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeapon, ICameraUser
+public class Weapon : MonoBehaviour, IWeapon
 {
     [Header("Required Components")]
     [SerializeField] private Transform shooterImp;
@@ -10,11 +10,13 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
     [SerializeField] private WeaponData data;
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
+    [SerializeField] private Pickable pickable;
 
     [SerializeField] private List<Transform> cameraUsers;
 
     private IShooter shooter;
     private IInputReader inputReader;
+    private WeaponHitSurfaceHandler surfaceHitHandler;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
 
     public bool isReady { get; private set; }
@@ -24,12 +26,24 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
     private void Awake()
     {
         shooter = shooterImp.GetComponent<IShooter>();
+        surfaceHitHandler = new WeaponHitSurfaceHandler();
     }
 
     public void Initialize(ICharacterData characterData, IInputReader inputReader)
     {
         swayController.Initialize(characterData, inputReader);
         this.inputReader = inputReader;
+
+        ConnectCamera(characterData.Cam);
+    }
+
+    private void ConnectCamera(Camera cam)
+    {
+        foreach (Transform user in cameraUsers)
+        {
+            ICameraUser cameraUser = user.GetComponent<ICameraUser>();
+            cameraUser.ConnectCamera(cam);
+        }
     }
 
     public void PullTheTrigger()
@@ -64,14 +78,11 @@ public class Weapon : MonoBehaviour, IWeapon, ICameraUser
         }
     }
 
-    public void ConnectCamera(Camera cam)
+    private void OnCollisionEnter(Collision collision)
     {
-        foreach (Transform user in cameraUsers)
-        {
-            ICameraUser cameraUser = user.GetComponent<ICameraUser>();
-            cameraUser.ConnectCamera(cam);
-        }
+        if (magazine.IsEmpty() && pickable.IsReadyToHand)
+            pickable.SwitchOff();
+
+        surfaceHitHandler.HitTheSurface(collision);
     }
 }
-
-

@@ -3,11 +3,12 @@
 public class Airdrop : MonoBehaviour
 {
     [SerializeField] private DispenserStorage storage;
-    [SerializeField] private GameObject pistol;
+    private IObjectPooler pooler;
 
-    private void Awake()
+    private void Start()
     {
-        AddItems(10);
+        pooler = PoolHolder.Instance;
+        AddItems(5);
     }
 
     private void AddItems(int amount)
@@ -18,6 +19,6 @@ public class Airdrop : MonoBehaviour
 
     public void DropPistol()
     {
-        storage.AddAnItem(pistol);
+        storage.AddAnItem("Pistol");
     }
 }

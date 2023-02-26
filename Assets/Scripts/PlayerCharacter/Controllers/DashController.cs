@@ -10,6 +10,8 @@ public class DashController : BaseController, IDashController, IMovementControll
     private IFunctionTimer timer;
     private IInputReader input;
 
+    private event Action onDash;
+
     public override void Initialize(MainController main)
     {
         data = main.Data;
@@ -23,6 +25,8 @@ public class DashController : BaseController, IDashController, IMovementControll
         input.Get<MovementInputReader>().Subscribe(this);
         input.Get<DashInputReader>().Subscribe(this);
     }
+
+    public void Subscribe(Action onDash) => this.onDash += onDash;
 
     public void Move(Vector3 direction)
     {
@@ -46,6 +50,7 @@ public class DashController : BaseController, IDashController, IMovementControll
             data.FlatVelocity += dashVelocity;
 
             timer.Set(COOL_DOWN, data.DashCoolDownTime, CoolDown);
+            onDash?.Invoke();
         }
     }
 

@@ -68,12 +68,10 @@ public interface ICharacterData
     float DashDistance { get; }
     float DashCoolDownTime { get; }
 
-
-    float MinFOV { get; }
-    float MaxFOV { get; }
+    
     float FOV { get; set; }
-    float FOVChangeSpeed { get; }
-    float FOVPower { get; set; }
+    float DefaultFOV { get; }
+    float AdditionalFOV { get; }
 
 
     float ReachDistance { get; }

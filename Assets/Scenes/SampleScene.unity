@@ -685,7 +685,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 1559680915}
-  pistol: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d, type: 3}
 --- !u!1 &225116403
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +881,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573619074}
     m_Modifications:
+    - target: {fileID: 3281898898999005978, guid: d711c01ed670b8c428966b9dd627cc94,
+        type: 3}
+      propertyPath: magnitude
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281898898999005978, guid: d711c01ed670b8c428966b9dd627cc94,
+        type: 3}
+      propertyPath: minHeight
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5764452896203316476, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
       propertyPath: m_RootOrder
@@ -10889,6 +10898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1077207054}
   key: 0
+  maxDistance: 3
 --- !u!114 &1648774214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11351,6 +11361,7 @@ MonoBehaviour:
   aim: {fileID: 1700708891}
   eventManager: {fileID: 1497846042}
   player: {fileID: 1077207054}
+  uGUIElement: {fileID: 1648774213}
 --- !u!114 &1701243480 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8860424869380561027, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
@@ -13126,6 +13137,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573619074}
     m_Modifications:
+    - target: {fileID: 167394209420275762, guid: cb7019212e5c65c4faad82eba323307d,
+        type: 3}
+      propertyPath: isActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 167394209420275762, guid: cb7019212e5c65c4faad82eba323307d,
+        type: 3}
+      propertyPath: magnitude
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 167394209420275762, guid: cb7019212e5c65c4faad82eba323307d,
+        type: 3}
+      propertyPath: minHeight
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1301059137115634182, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

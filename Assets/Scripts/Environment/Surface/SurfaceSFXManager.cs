@@ -13,6 +13,12 @@ public class SurfaceSFXManager : MonoBehaviour
             sfxPlayer.SetPosition(position);
     }
 
+    public void SetVolume(float volume)
+    {
+        foreach (SurfaceHitSFXPlayer sfxPlayer in sfxPlayers)
+            sfxPlayer.SetVolume(volume);
+    }
+
     public void ChooseSFX(float radius)
     {
         highestThreshold = 0f;

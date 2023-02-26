@@ -59,11 +59,10 @@ public class MockCharacterData : ICharacterData
 
     public IDampedSpringData DampedSpring { get; set; }
 
-    public float MinFOV { get; set; }
-    public float MaxFOV { get; set; }
+
     public float FOV { get; set; }
-    public float FOVChangeSpeed { get; set; }
-    public float FOVPower { get; set; }
+    public float DefaultFOV { get; }
+    public float AdditionalFOV { get; }
 
 
     public float ReachDistance { get; set; }

@@ -26,7 +26,9 @@ public class SurfaceHitSFXPlayer : MonoBehaviour
         manager.AddSFXPlayer(this);
     }
 
-    public void SetPosition(Vector3 position) => audioPlayer.WithPosition(position); 
+    public void SetPosition(Vector3 position) => audioPlayer.WithPosition(position);
+
+    public void SetVolume(float volume) => audioPlayer.WithVolume(volume);
 
     public void ShiftPitch(float shift)
     {

@@ -42,6 +42,8 @@ public class Magazine : MonoBehaviour
 
     public bool HasAmmo() => data.Ammo > 0;
 
+    public bool IsEmpty() => data.Ammo <= 0;
+
     public void ReduceCount()
     {
         data.SetAmmo(data.Ammo - 1);

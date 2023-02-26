@@ -33,9 +33,8 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public IDampedSpringData DampedSpring => dampedSpringData;
 
     [Header("FOV")]
-    [SerializeField] private float minFOV = 80f;
-    [SerializeField] private float maxFOV = 120f;
-    [SerializeField] private float fOVChangeSpeed = 10f;
+    [SerializeField] private float defaultFOV = 80f;
+    [SerializeField] private float additionalFOV = 40f;
 
     [Header("Camera tilt")]
     [SerializeField] private float tiltSpeed = 5f;
@@ -107,11 +106,10 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float GroundDetectionHeight { get { return groundDetectionHeight; } set { groundDetectionHeight = value; } }
 
 
-    public float MinFOV => minFOV;
-    public float MaxFOV => maxFOV;
     public float FOV { get { return cam.fieldOfView; } set { cam.fieldOfView = value; } }
-    public float FOVChangeSpeed => fOVChangeSpeed;
-    public float FOVPower { get; set; }
+    public float DefaultFOV => defaultFOV;
+    public float AdditionalFOV => additionalFOV;
+
 
     public float ReachDistance => reachDistance;
     public float DropItemStrength => dropItemStrength;
