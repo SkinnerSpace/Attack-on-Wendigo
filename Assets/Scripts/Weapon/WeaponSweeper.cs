@@ -3,17 +3,39 @@ using UnityEngine;
 
 public class WeaponSweeper : MonoBehaviour
 {
-    [SerializeField] private Rigidbody weapon;
+    [Header("Required Components")]
+    [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private WeaponPooledObject pooledObject;
+    [SerializeField] private FunctionTimer timer;
 
-    public void SweepTheWeapon() => StartCoroutine(Sweep());
+    [Header("Settings")]
+    [SerializeField] private float fallSpeed = 0.5f;
+    [SerializeField] private float sweepTime = 3f;
 
-    private IEnumerator Sweep()
+    private bool isSwept;
+
+    public void SweepTheWeapon() => StartCoroutine(WaitForRest());
+
+    private IEnumerator WaitForRest()
     {
-        Debug.Log("Sweep!");
-        while (weapon.velocity.magnitude != 0f)
+        while (physics.Velocity.magnitude != 0f)
+            yield return null;
+
+        StartCoroutine(FallThrough());
+    }
+
+    private IEnumerator FallThrough()
+    {
+        physics.SetPhysicsDisabled(true);
+        timer.Set("OnSwept", sweepTime, () => isSwept = true);
+
+        while (!isSwept)
         {
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
             yield return null;
         }
-        Debug.Log("FELL ASLEEP!");
+
+        isSwept = false;
+        pooledObject.BackToPool();
     }
 }

@@ -3,42 +3,38 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
+public class RaycastShooter 
 {
-    [Header("Required Components")]
-    [SerializeField] private WeaponData data;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private WeaponVFXController vFXController;
-    [SerializeField] private WeaponSFXPlayer sFXPlayer;
-
-    private WeaponSight sight;
+    private WeaponData data;
     private FunctionTimer timer;
+    private WeaponSight sight;
 
-    private bool isReady = true;
+    public bool IsReady { get; set; } = true;
 
-    private void Awake()
+    private event Action onShot;
+    private event Action<WeaponTarget> onShotTarget;
+
+    public RaycastShooter(WeaponData data, FunctionTimer timer)
     {
-        timer = GetComponent<FunctionTimer>();
+        this.data = data;
+        this.timer = timer;
     }
 
-    public void Shoot(bool isFiring, Action onShot)
+    public void SetCamera(Camera cam) => sight = new WeaponSight(data, cam);
+
+    public void SubscribeOnShot(Action onShot) => this.onShot += onShot;
+    public void SubscribeOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
+
+    public void Shoot()
     {
-        if (isFiring && isReady)
+        if (IsReady)
         {
-            DoShoot();
+            IsReady = false;
+            HitTheTarget(sight.GetTarget());
             onShot?.Invoke();
+
+            timer.Set("CoolDown", data.Rate, CoolDown);
         }
-    }
-
-    private void DoShoot()
-    {
-        isReady = false;
-        HitTheTarget(sight.GetTarget());
-
-        sFXPlayer.PlayShootSFX();
-        vFXController.PlayShootVFX();
-
-        timer.Set("CoolDown", data.Rate, CoolDown);
     }
 
     private void HitTheTarget(WeaponTarget target)
@@ -47,7 +43,7 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
         {
             DamageTheTarget(target);
             BlowUpTheSurface(target);
-            vFXController.Hit(target);
+            onShotTarget?.Invoke(target);
         }
     }
 
@@ -75,7 +71,7 @@ public class RaycastShooter : MonoBehaviour, IShooter, ICameraUser
                     Launch();
         }
     }
-    private void CoolDown() => isReady = true;
+    private void CoolDown() => IsReady = true;
     public void ConnectCamera(Camera cam) => sight = new WeaponSight(data, cam);
     private Vector3 CalculateImpact(Vector3 direction, float force) => direction * force;
 }

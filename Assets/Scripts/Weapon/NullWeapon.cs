@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NullWeapon : IWeapon
 {
-    public bool isReady => false;
+    public bool IsReady => false;
     public Vector3 DefaultPosition => default;
 
     private static IWeapon instance;
@@ -20,7 +20,7 @@ public class NullWeapon : IWeapon
 
     public void Aim(bool isAiming){}
 
-    public void PullTheTrigger(){}
-
+    public void HoldTheTrigger(){}
+    public void PressTheTrigger() {}
     public void Reload(){}
 }

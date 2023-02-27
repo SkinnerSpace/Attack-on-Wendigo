@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class PoolObjectSpawner
 {
-    public GameObject SpawnFromThePool(Dictionary<string, Queue<IPooledObject>> pools, PoolObjectOrder order)
+    public GameObject SpawnFromThePool(Dictionary<string, Queue<IPooledObject>> pools, List<IPooledObject> disposedObjects, PoolObjectOrder order)
     {
-        if (!pools.ContainsKey(order.tag)) return null;
-
         IPooledObject objectToSpawn = TakeFromThePool(pools, order.tag);
         ActivateObject(objectToSpawn, order);
-        PutIntoThePool(pools, objectToSpawn, order.tag);
+        disposedObjects.Add(objectToSpawn);
+        //PutIntoThePool(pools, objectToSpawn, order.tag);
 
         return objectToSpawn.Object;
     }

@@ -5,84 +5,89 @@ using UnityEngine;
 public class Weapon : MonoBehaviour, IWeapon
 {
     [Header("Required Components")]
-    [SerializeField] private Transform shooterImp;
-    [SerializeField] private Magazine magazine;
     [SerializeField] private WeaponData data;
     [SerializeField] private WeaponAimController aimController;
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private Pickable pickable;
+    [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private FunctionTimer timer;
 
-    [SerializeField] private List<Transform> cameraUsers;
+    [Header("Effects")]
+    [SerializeField] private WeaponVFXController vFXController;
+    [SerializeField] private WeaponSFXPlayer sFXPlayer;
 
-    private IShooter shooter;
+    
     private IInputReader inputReader;
+    private RaycastShooter shooter;
+    private Magazine magazine;
     private WeaponHitSurfaceHandler surfaceHitHandler;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
-
-    public bool isReady { get; private set; }
+    public WeaponData Data => data;
+    public FunctionTimer Timer => timer;
 
     private event Action<bool> onReady;
 
     private void Awake()
     {
-        shooter = shooterImp.GetComponent<IShooter>();
         surfaceHitHandler = new WeaponHitSurfaceHandler();
+
+        physics.SubscribeOnCollision(surfaceHitHandler.HitTheSurface);
+        physics.SubscribeOnCollision(DisposeUsedWeapon);
+
+        shooter = new RaycastShooter(data, timer);
+        magazine = new Magazine(data, timer);
+
+        shooter.SubscribeOnShot(vFXController.PlayShootVFX);
+        shooter.SubscribeOnShot(sFXPlayer.PlayShootSFX);
+        shooter.SubscribeOnShotTarget(vFXController.Hit);
+
+        magazine.SubscribeOnEmpty(sFXPlayer.PlayIsEmptySFX);
+
+        SubscribeOnReady(magazine.OnReady);
     }
 
     public void Initialize(ICharacterData characterData, IInputReader inputReader)
     {
-        swayController.Initialize(characterData, inputReader);
         this.inputReader = inputReader;
-
-        ConnectCamera(characterData.Cam);
+        swayController.Initialize(this, characterData, inputReader);
+        shooter.SetCamera(characterData.Cam);
     }
 
-    private void ConnectCamera(Camera cam)
+    public void PressTheTrigger()
     {
-        foreach (Transform user in cameraUsers)
+        if (!magazine.HasAmmo())
+            magazine.NotifyOnEmpty();
+    }
+
+    public void HoldTheTrigger()
+    {
+        if (magazine.HasAmmo() && shooter.IsReady)
         {
-            ICameraUser cameraUser = user.GetComponent<ICameraUser>();
-            cameraUser.ConnectCamera(cam);
+            magazine.ReduceCount();
+            shooter.Shoot();
         }
     }
 
-    public void PullTheTrigger()
-    {
-        if (magazine.HasAmmo()){
-            shooter.Shoot(true, OnShot);
-        }
-        else{
-            magazine.ReportIsEmpty();
-        }
-    }
-
-    public void Subscribe(IWeaponObserver observer) => onReady += observer.OnReady;
-
-    private void OnShot() => magazine.ReduceCount();
+    public void SubscribeOnReady(Action<bool> onReady) => this.onReady += onReady;
 
     public void Aim(bool isAiming) => aimController.Aim(isAiming);
-    public void Reload() { }
+    public void Reload() => magazine.RestoreAmmo();
     public void SetReady(bool isReady)
     {
-        this.isReady = isReady;
+        data.IsReady = isReady;
         onReady?.Invoke(isReady);
-        magazine.GetReady(isReady);
 
         if (isReady)
-        {
             inputReader.Get<CombatInputReader>().Subscribe(this);
-        }
 
-        else if (!isReady){
+        else if (!isReady)
             inputReader.Get<CombatInputReader>().Unsubscribe(this);
-        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void DisposeUsedWeapon()
     {
         if (magazine.IsEmpty() && pickable.IsReadyToHand)
             pickable.SwitchOff();
-
-        surfaceHitHandler.HitTheSurface(collision);
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component
 {
@@ -36,6 +37,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
         else
         {
             Destroy(gameObject);
+            throw new Exception("SINGLETON SUCKS");
         }
     }
 }

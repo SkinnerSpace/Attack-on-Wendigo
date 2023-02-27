@@ -1,14 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeaponObserver
+public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
 {
     private const float SLOW_DOWN = 0.01f;
-    [Header("RequiredComponents")]
-    [SerializeField] private Transform weaponImp;
-    private Weapon weapon;
 
-    [Header("Settings")]
     [SerializeField] private bool displacementOn = true;
     private WeaponDisplacer displacer;
 
@@ -21,6 +17,7 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
     [SerializeField] private bool oscillationOn = true;
     private WeaponOscillator oscillator;
 
+    private Weapon weapon;
     private DisplacementCorrector corrector;
     private VerticalTuner verticalTuner;
 
@@ -32,8 +29,9 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
 
     private bool isReady;
 
-    public void Initialize(ICharacterData characterData, IInputReader inputReader)
+    public void Initialize(Weapon weapon, ICharacterData characterData, IInputReader inputReader)
     {
+        this.weapon = weapon;
         verticalTuner = new VerticalTuner(characterData);
         displacer = GetComponent<WeaponDisplacer>().Initialize(verticalTuner);
         rotator = GetComponent<WeaponRotator>().Initialize(verticalTuner);
@@ -41,9 +39,7 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
         oscillator = GetComponent<WeaponOscillator>().Initialize(characterData);
         corrector = GetComponent<DisplacementCorrector>();
 
-        weapon = weaponImp.GetComponent<Weapon>();
-        weapon.Subscribe(this);
-
+        weapon.SubscribeOnReady(OnReady);
         this.inputReader = inputReader;
     }
 
@@ -58,7 +54,7 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver, IWeapon
         else if (!isReady)
         {
             inputReader.Get<MouseMotionInputReader>().Unsubscribe(this);
-            corrector.Fix(weapon);
+            corrector.Fix(weapon.Data);
         }
     }
 

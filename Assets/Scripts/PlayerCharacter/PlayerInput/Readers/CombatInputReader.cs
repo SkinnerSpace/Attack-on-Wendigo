@@ -2,12 +2,14 @@
 
 public class CombatInputReader : InputReader
 {
-    private event Action onAttack;
+    private event Action onHold;
+    private event Action onPress;
     private event Action<bool> onAim;
 
     private void Update()
     {
-        if (input.Hold(keys.Shoot)) onAttack?.Invoke();
+        if (input.Pressed(keys.Shoot)) onPress?.Invoke();
+        if (input.Hold(keys.Shoot)) onHold?.Invoke();
 
         if (input.Pressed(keys.Aim)) onAim?.Invoke(true);
         if (input.Released(keys.Aim)) onAim?.Invoke(false);
@@ -15,12 +17,14 @@ public class CombatInputReader : InputReader
 
     public void Subscribe(IWeapon observer)
     {
-        onAttack += observer.PullTheTrigger;
+        onPress += observer.PressTheTrigger;
+        onHold += observer.HoldTheTrigger;
         onAim += observer.Aim;
     }
     public void Unsubscribe(IWeapon observer)
     {
-        onAttack -= observer.PullTheTrigger;
+        onPress -= observer.PressTheTrigger;
+        onHold -= observer.HoldTheTrigger;
         onAim -= observer.Aim;
     }
 }

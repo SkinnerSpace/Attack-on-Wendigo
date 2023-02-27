@@ -12,7 +12,7 @@ public class DisplacementCorrector : MonoBehaviour
     private Vector3 fixedPosition;
     private Quaternion fixedRotation;
 
-    private IWeapon weapon;
+    private WeaponData data;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class DisplacementCorrector : MonoBehaviour
         fixedRotation = transform.localRotation;
     }
 
-    public void Fix(IWeapon weapon)
+    public void Fix(WeaponData data)
     {
-        this.weapon = weapon;
+        this.data = data;
         StartCoroutine(Fixing());
     }
 
@@ -45,7 +45,7 @@ public class DisplacementCorrector : MonoBehaviour
         twistedRotation = transform.localRotation;
     }
 
-    private bool IsNotReady() => !weapon.isReady && currentTime < resetTime;
+    private bool IsNotReady() => !data.IsReady && currentTime < resetTime;
 
     private void DoTransition()
     {

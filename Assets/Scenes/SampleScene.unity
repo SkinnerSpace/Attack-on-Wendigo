@@ -1082,7 +1082,7 @@ MonoBehaviour:
   - tag: SnowParticle
     prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
       type: 3}
-    size: 12
+    size: 30
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0

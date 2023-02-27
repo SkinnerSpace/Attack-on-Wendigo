@@ -1,30 +1,41 @@
 ﻿using System;
 using UnityEngine;
 
-public class Magazine : MonoBehaviour
+public class Magazine
 {
-    [Header("Required Components")]
-    [SerializeField] private WeaponSFXPlayer sfxPlayer;
-    [SerializeField] private WeaponData data;
-
+    private WeaponData data;
     private FunctionTimer timer;
-    private AmmoReporter reporter;
+
+    private bool ableToReport = true;
 
     public event Action<int> onUpdate;
+    private event Action onEmpty;
 
-    private void Awake()
+    public Magazine(WeaponData data, FunctionTimer timer)
     {
-        timer = GetComponent<FunctionTimer>();
-        reporter = new AmmoReporter(timer, sfxPlayer);
+        this.data = data;
+        this.timer = timer;
     }
 
-    public void GetReady(bool isReady)
+    public void OnReady(bool isReady)
     {
         if (isReady) Subscribe(AmmoBar.Instance);
         else Unsubscribe(AmmoBar.Instance);
     }
 
-    public void ReportIsEmpty() => reporter.ReportIsEmpty();
+    public void SubscribeOnEmpty(Action onEmpty) => this.onEmpty += onEmpty;
+
+    public void NotifyOnEmpty()
+    {
+        if (ableToReport)
+        {
+            ableToReport = false;
+            AmmoBar.Instance.UpdateAmmo(0);
+            onEmpty?.Invoke();
+
+            timer.Set("EnableReport", 0.5f, () => ableToReport = true);
+        }
+    }
 
     public void Subscribe(IAmmoObserver observer)
     {
@@ -47,6 +58,8 @@ public class Magazine : MonoBehaviour
     public void ReduceCount()
     {
         data.SetAmmo(data.Ammo - 1);
-        onUpdate(data.Ammo);
+        onUpdate?.Invoke(data.Ammo);
     }
+
+    public void RestoreAmmo() => data.SetAmmo(data.AmmoCapacity);
 }

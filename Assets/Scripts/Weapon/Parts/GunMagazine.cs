@@ -52,11 +52,5 @@ public class GunMagazine : MonoBehaviour
         }
     }
 
-    public void RestoreAmmo()
-    {
-        isReloading = false;
-        ammo = capacity;
-
-        updateAmmo?.Invoke(ammo);
-    }
+    public void RestoreAmmo() => ammo = capacity;
 }

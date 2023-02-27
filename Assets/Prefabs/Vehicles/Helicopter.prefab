@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad691d351a1d7ef4894142883e3b4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasItems: 1
 --- !u!1 &1206149503641186970
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +523,7 @@ MonoBehaviour:
   - tag: Pistol
     prefab: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d,
       type: 3}
-    size: 5
+    size: 1
   - tag: Rifle
     prefab: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
       type: 3}

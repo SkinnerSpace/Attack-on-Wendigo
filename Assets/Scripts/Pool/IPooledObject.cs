@@ -2,6 +2,7 @@
 
 public interface IPooledObject
 {
+    string PoolTag { get; set; }
     GameObject Object { get; }
     void OnObjectSpawn();
     void SetActive(bool active);

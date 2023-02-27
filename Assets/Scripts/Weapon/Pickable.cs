@@ -19,20 +19,19 @@ public class Pickable : MonoBehaviour
     public void Subscribe(IPickableObserver observer) => onPickedUp += observer.OnPickedUp;
     public void Unsubscribe(IPickableObserver observer) => onPickedUp -= observer.OnPickedUp;
 
-    public void ResetState()
-    {
-        IsReadyToHand = true;
-    }
-
     public void SwitchOff()
     {
         IsReadyToHand = false;
         gameObject.layer = (int)Layers.DisabledInteractables;
-        Debug.Log("Switch OFF");
+        
         sweeper.SweepTheWeapon();
     }
 
-    public void SwitchOn() => gameObject.layer = (int)Layers.Interactables;
+    public void SwitchOn()
+    {
+        IsReadyToHand = true;
+        gameObject.layer = (int)Layers.Interactables;
+    }
 
     public void PickUp(WeaponKeeper keeper, Action onCameToHands)
     {

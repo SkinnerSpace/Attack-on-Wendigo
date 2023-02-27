@@ -21,4 +21,5 @@ public class PoolHolder : Singleton<PoolHolder>, IObjectPooler
 
     public GameObject SpawnFromThePool(string tag, Vector3 position, Quaternion rotation) => objectPooler.SpawnFromThePool(tag, position, rotation);
     public GameObject SpawnFromThePool(string tag) => objectPooler.SpawnFromThePool(tag);
+    public void PutIntoThePool(IPooledObject obj) => objectPooler.PutIntoThePool(obj);
 }

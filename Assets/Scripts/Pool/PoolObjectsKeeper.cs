@@ -10,6 +10,7 @@ public class PoolObjectsKeeper : IPoolObjectsKeeper
     {
         Transform container = nestedContainer.GetContainer(poolData.tag);
         IPooledObject obj = Object.Instantiate(poolData.prefab, container).GetComponent<IPooledObject>();
+        obj.PoolTag = poolData.tag;
         obj.SetActive(false);
 
         return obj;

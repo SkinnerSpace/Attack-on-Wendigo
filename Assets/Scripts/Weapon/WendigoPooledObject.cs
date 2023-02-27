@@ -3,6 +3,7 @@ using System;
 
 public class WendigoPooledObject : MonoBehaviour, IPooledObject
 {
+    public string PoolTag { get; set; }
     public GameObject Object => gameObject;
     private Action onSpawn;
 

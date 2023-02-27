@@ -406,7 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserBeam: {fileID: 6744949977964748514}
   crate: {fileID: 137477694732360836}
-  jumpForce: 5
+  jumpForce: 15
 --- !u!114 &711807515168722588
 MonoBehaviour:
   m_ObjectHideFlags: 0
