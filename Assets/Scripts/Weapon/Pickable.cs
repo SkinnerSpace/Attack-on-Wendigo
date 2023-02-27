@@ -12,12 +12,17 @@ public class Pickable : MonoBehaviour
     public Transform Transform => item;
     public Vector3 Position => item.position;
     private Transform originalParent;
-    private event Action<bool> onPickedUp;
+    private event Action onInteract;
 
     public bool IsReadyToHand { get; private set; } = true;
 
-    public void Subscribe(IPickableObserver observer) => onPickedUp += observer.OnPickedUp;
-    public void Unsubscribe(IPickableObserver observer) => onPickedUp -= observer.OnPickedUp;
+    public void Subscribe(Action onInteract) => this.onInteract += onInteract;
+    public void Unsubscribe(Action onInteract) => this.onInteract -= onInteract;
+
+
+    private static int pickUpCount;
+    private static event Action onFirstPickUp;
+    public static void SubscribeOnFirstPickUp(Action onPickedUp) => onFirstPickUp += onPickedUp;
 
     public void SwitchOff()
     {
@@ -42,7 +47,11 @@ public class Pickable : MonoBehaviour
 
         transitionController.Launch(item, onCameToHands);
 
-        onPickedUp?.Invoke(true);
+        onInteract?.Invoke();
+
+        pickUpCount++;
+        if (pickUpCount == 1)
+            onFirstPickUp?.Invoke();
     }
 
     public void Drop(Vector3 pos, Vector3 force)
@@ -58,7 +67,7 @@ public class Pickable : MonoBehaviour
         Vector3 torque = new Vector3(Rand.GetBisigned(), Rand.Range(-1f, 1f), Rand.GetBisigned()) * 25f;
         physics.AddTorque(torque);
 
-        onPickedUp(false);
+        onInteract?.Invoke();
     }
 
     private void SetPhysicsDisabled(bool disabled)

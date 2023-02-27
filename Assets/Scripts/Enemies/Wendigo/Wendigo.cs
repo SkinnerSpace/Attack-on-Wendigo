@@ -29,8 +29,6 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
     public IHitBox[] HitBoxes { get; private set; }
 
-    [HideInInspector] public bool testDeath;
-
     private List<WendigoBaseController> controllers;
 
     public void OnSpawn() => Data.IsActive = true;
@@ -58,7 +56,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         stateMachine = WendigoStateMachineFactory.Create(this);
 
         GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimatorController>());
-        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(this);
+        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
         pool.Subscribe(this);
     }
 
@@ -83,7 +81,6 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     {
         SetTarget(null);
         ragDollController.TriggerRagdoll(impact, hitPoint);
-        testDeath = true;
     }
 
     public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);

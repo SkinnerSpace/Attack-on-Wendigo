@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LayerSwapManager : MonoBehaviour, IPickableObserver
+public class LayerSwapManager : MonoBehaviour
 {
     [SerializeField] private Pickable pickable;
     private LayerChanger[] layerChangers;
@@ -8,7 +8,7 @@ public class LayerSwapManager : MonoBehaviour, IPickableObserver
     private void Awake()
     {
         layerChangers = GetComponentsInChildren<LayerChanger>();
-        pickable.Subscribe(this);
+        pickable.Subscribe(SwapTheLayers);
     }
 
     public void SwapTheLayers()
@@ -16,8 +16,6 @@ public class LayerSwapManager : MonoBehaviour, IPickableObserver
         foreach (LayerChanger changer in layerChangers)
             changer.SwapTheLayer();
     }
-
-    public void OnPickedUp(bool pickedUp) => SwapTheLayers();
 }
 
 

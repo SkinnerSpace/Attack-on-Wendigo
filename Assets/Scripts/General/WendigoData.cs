@@ -12,6 +12,8 @@ public class WendigoData
     }
 
     public int Health { get { return serializable.Health; } set { serializable.Health = value; } }
+    public bool IsAlive => Health > 0f;
+
     public float MovementSpeed => serializable.MovementSpeed;
     public float Deceleration => serializable.Deceleration;
     public float RotationSpeed => serializable.RotationSpeed;

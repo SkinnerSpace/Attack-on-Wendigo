@@ -10,8 +10,8 @@ public class InvasionCounter : MonoBehaviour
     private event Action<int> onTimeUpdate;
     private event Action onTimeOut;
 
-    public void SubscribeOnUpdate(ITimeObserver observer) => onTimeUpdate += observer.OnTimeUpdate;
-    public void SubscribeOnTimeOut(ITimeOutObserver observer) => onTimeOut += observer.OnTimeOut;
+    public void SubscribeOnUpdate(Action<int> onTimeUpdate) => this.onTimeUpdate += onTimeUpdate;
+    public void SubscribeOnTimeOut(Action onTimeOut) => this.onTimeOut -= onTimeOut;
 
     public void Launch()
     {

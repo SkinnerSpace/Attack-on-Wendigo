@@ -8,7 +8,7 @@ public class TimeCountGUI : MonoBehaviour, ITimeObserver
 
     private void Awake()
     {
-        counter.SubscribeOnUpdate(this);
+        counter.SubscribeOnUpdate(OnTimeUpdate);
     }
 
     public void OnTimeUpdate(int time)
@@ -16,9 +16,4 @@ public class TimeCountGUI : MonoBehaviour, ITimeObserver
         display.text = time.ToString();
         //display.rectTransform.localScale += Vector3.one;
     }
-}
-
-public class SimpleAnimator
-{
-
 }

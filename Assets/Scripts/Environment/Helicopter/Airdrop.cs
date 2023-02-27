@@ -1,24 +1,37 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Airdrop : MonoBehaviour
 {
     [SerializeField] private DispenserStorage storage;
-    private IObjectPooler pooler;
+    [SerializeField] private int maxCargoCount = 5;
+    [SerializeField] private List<string> cargo = new List<string>();
 
-    private void Start()
+    private int cargoCount;
+
+    private void Awake()
     {
-        pooler = PoolHolder.Instance;
-        AddItems(5);
+        Pickable.SubscribeOnFirstPickUp(LoadCargo);
+        WeaponSweeper.SubscribeOnSweptAway(CargoDisappeared);
     }
 
-    private void AddItems(int amount)
+    private void LoadCargo()
     {
-        for (int i = 0; i < amount; i++)
-            DropPistol();
+        int dropCount = maxCargoCount - cargoCount;
+
+        for (int i = 0; i < dropCount; i++)
+            AddCargo(Rand.Range(0, cargo.Count));
     }
 
-    public void DropPistol()
+    public void AddCargo(int index)
     {
-        storage.AddAnItem("Pistol");
+        cargoCount += 1;
+        storage.AddAnItem(cargo[index]);
+    }
+
+    public void CargoDisappeared()
+    {
+        cargoCount -= 1;
+        LoadCargo();
     }
 }

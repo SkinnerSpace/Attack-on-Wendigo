@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class WeaponSweeper : MonoBehaviour
@@ -13,6 +14,9 @@ public class WeaponSweeper : MonoBehaviour
     [SerializeField] private float sweepTime = 3f;
 
     private bool isSwept;
+
+    public static event Action onSweptAway;
+    public static void SubscribeOnSweptAway(Action onSwept) => onSweptAway += onSwept;
 
     public void SweepTheWeapon() => StartCoroutine(WaitForRest());
 
@@ -36,6 +40,7 @@ public class WeaponSweeper : MonoBehaviour
         }
 
         isSwept = false;
+        onSweptAway?.Invoke();
         pooledObject.BackToPool();
     }
 }

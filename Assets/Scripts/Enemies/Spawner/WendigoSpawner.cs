@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
+public class WendigoSpawner : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private LightningThrower lightningThrower;
@@ -29,7 +29,12 @@ public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
     private IObjectPooler pooler;
     private List<Transform> wendigos = new List<Transform>();
 
-    private void Awake() => counter.SubscribeOnTimeOut(this);
+    private void Awake()
+    {
+        counter.SubscribeOnTimeOut(Spawn);
+        Pickable.SubscribeOnFirstPickUp(Spawn);
+    }
+
     private void Start() => pooler = PoolHolder.Instance;
 
     public void Spawn()
@@ -65,8 +70,6 @@ public class WendigoSpawner : MonoBehaviour, ITimeOutObserver
         wendigo.LookAt(target.transform);
         wendigo.eulerAngles = new Vector3(0f, wendigo.eulerAngles.y, 0f);
     }
-
-    public void OnTimeOut() => Spawn();
 
     public void OnDeath(Transform wendigo)
     {

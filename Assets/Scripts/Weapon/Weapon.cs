@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour, IWeapon
     [Header("Effects")]
     [SerializeField] private WeaponVFXController vFXController;
     [SerializeField] private WeaponSFXPlayer sFXPlayer;
-
     
     private IInputReader inputReader;
     private RaycastShooter shooter;

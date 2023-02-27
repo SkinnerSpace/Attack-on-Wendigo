@@ -5,8 +5,8 @@ public class WendigoHealthSystem : WendigoBaseController, IDamageable
 {
     private WendigoData data;
 
-    private event Action onDied;
-    private event Action<Vector3, Vector3> triggerRagdoll;
+    private event Action onDeath;
+    private event Action<Vector3, Vector3> onTriggerRagdoll;
 
     public override void Initialize(IWendigo wendigo)
     {
@@ -16,22 +16,19 @@ public class WendigoHealthSystem : WendigoBaseController, IDamageable
             hitBox.Subscribe(this);
     }
 
-    public void Subscribe(IHealthObserver observer)
-    {
-        onDied += observer.Die;
-    }
+    public void Subscribe(Action onDeath) => this.onDeath += onDeath;
 
-    public void SubscribeOnRagdoll(IRagdoll ragdoll)
-    {
-        triggerRagdoll += ragdoll.TriggerRagdoll;
-    }
+    public void SubscribeOnRagdoll(Action<Vector3, Vector3> onTriggerRagdoll) => this.onTriggerRagdoll += onTriggerRagdoll;
 
     public void ReceiveDamage(DamagePackage damagePackage)
     {
         data.Health -= damagePackage.damage;
 
-        if (!IsAlive()) 
-            triggerRagdoll?.Invoke(damagePackage.impact, damagePackage.point);
+        if (!IsAlive())
+        {
+            onTriggerRagdoll?.Invoke(damagePackage.impact, damagePackage.point);
+            onDeath?.Invoke();
+        }
     }
 
     public bool IsAlive() => data.Health > 0;

@@ -519,15 +519,15 @@ MonoBehaviour:
   - tag: Crate
     prefab: {fileID: 6715555677677968425, guid: f735480e936003a489e6d5c688ab4a85,
       type: 3}
-    size: 15
+    size: 25
   - tag: Pistol
     prefab: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d,
       type: 3}
-    size: 1
+    size: 10
   - tag: Rifle
     prefab: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
       type: 3}
-    size: 5
+    size: 10
 --- !u!1 &5203709847934754149
 GameObject:
   m_ObjectHideFlags: 0

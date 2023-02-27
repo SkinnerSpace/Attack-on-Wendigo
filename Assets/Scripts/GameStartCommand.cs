@@ -10,7 +10,7 @@
         gameManager.Menu.Close();
         gameManager.Character.SetActive(true);
         gameManager.CameraManager.SetLookAtTheCharacter();
-        gameManager.Airdrop.DropPistol();
+        gameManager.Airdrop.AddCargo(0);
         gameManager.Triggers.Trigger("OnGameStart");
     }
 }

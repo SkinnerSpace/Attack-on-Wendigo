@@ -39,7 +39,9 @@ public class WeaponPhysics : MonoBehaviour
         weaponBody.velocity = Vector3.zero;
 
         foreach (Collider weaponCollider in weaponColliders)
+        {
             weaponCollider.enabled = !disabled;
+        }
 
         weaponBody.isKinematic = disabled;
         weaponBody.useGravity = !disabled;

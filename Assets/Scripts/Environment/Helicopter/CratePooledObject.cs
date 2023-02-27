@@ -16,7 +16,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-        crate.ResetPhysics();
+        crate.ResetState();
         landingController.ResetLanding();
         laserBeam.SwitchOff();
     }

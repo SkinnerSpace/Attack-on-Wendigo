@@ -18,6 +18,12 @@ public class Crate : MonoBehaviour, IOpenable
         sfxPlayer = GetComponent<CrateSFXPlayer>();
     }
 
+    public void ResetState()
+    {
+        isOpened = false;
+        ResetPhysics();
+    }
+
     public void Pack(string itemName) => this.itemName = itemName;
 
     public void Throw(float force)
