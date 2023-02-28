@@ -2379,7 +2379,6 @@ MonoBehaviour:
   animator: {fileID: 4718767853038179663}
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
-  testDeath: 0
 --- !u!114 &2065092290385512157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2446,7 +2445,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 50
-  m_Radius: 18
+  m_Radius: 14
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

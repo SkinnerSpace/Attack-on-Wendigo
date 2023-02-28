@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractionController : BaseController, IInteractor, IMousePosObserver
 {
+    private MainController main;
     private CharacterData data;
     private WeaponKeeper keeper;
     private IInputReader input;
@@ -20,17 +21,26 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
 
     public override void Initialize(MainController main)
     {
+        this.main = main;
         data = main.Data;
         input = main.InputReader;
 
         keeper = new WeaponKeeper(data, input);
+        
         visionRaycast = new VisionRaycast(data.Cam, ComplexLayers.Interactables);
     }
 
     public override void Connect()
     {
+        main.GetController<CharacterHealthSystem>().SubscribeOnDeath(DropAnItem);
         input.Get<InteractionInputReader>().Subscribe(this);
         input.Get<MousePositionInputReader>().Subscribe(this);
+    }
+
+    public override void Disconnect()
+    {
+        input.Get<InteractionInputReader>().Unsubscribe(this);
+        input.Get<MousePositionInputReader>().Unsubscribe(this);
     }
 
     public void Subscribe(Action<Transform> addTarget, Action<Transform> removeTarget)
@@ -70,6 +80,8 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
             keeper.DropAnItem(mousePos);
         }
     }
+
+    private void DropAnItem() => keeper.DropAnItem(mousePos);
 
     private void ActUponTarget()
     {

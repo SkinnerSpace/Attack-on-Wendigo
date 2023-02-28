@@ -23,14 +23,14 @@ public class AimPresenter : MonoBehaviour
 
         uGUIElement.Subscribe(OnTargetUpdate);
 
-        gameOnStartListener = new EventListener(aim.Show);
+        /*gameOnStartListener = new EventListener(aim.Show);
         eventManager.Subscribe(gameOnStartListener, "OnGameStart");
 
         gameOnPauseListener = new EventListener(aim.Hid);
         eventManager.Subscribe(gameOnPauseListener, "OnGamePause");
 
         gameOnResumeListener = new EventListener(aim.Show);
-        eventManager.Subscribe(gameOnResumeListener, "OnGameResume");
+        eventManager.Subscribe(gameOnResumeListener, "OnGameResume");*/
     }
 
     public void AddTarget(Transform target)

@@ -21,6 +21,12 @@ public class JumpController : BaseController, IJumpController, IGroundObserver
         input.Get<JumpInputReader>().Subscribe(this);
     }
 
+    public override void Disconnect()
+    {
+        main.GetController<GroundDetector>().Unsubscribe(this);
+        input.Get<JumpInputReader>().Unsubscribe(this);
+    }
+
     public void TryToJump()
     {
         JumpOffTheGround();

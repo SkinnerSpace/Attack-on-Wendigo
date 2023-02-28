@@ -30,7 +30,7 @@ public class Magazine
         if (ableToReport)
         {
             ableToReport = false;
-            AmmoBar.Instance.UpdateAmmo(0);
+            onUpdate?.Invoke(data.Ammo);
             onEmpty?.Invoke();
 
             timer.Set("EnableReport", 0.5f, () => ableToReport = true);
@@ -40,15 +40,14 @@ public class Magazine
     public void Subscribe(IAmmoObserver observer)
     {
         observer.SetActive(true);
-        onUpdate += observer.UpdateAmmo;
-        
+        onUpdate += observer.OnUpdate;
         onUpdate?.Invoke(data.Ammo);
     }
 
     public void Unsubscribe(IAmmoObserver observer)
     {
         observer.SetActive(false);
-        onUpdate -= observer.UpdateAmmo;
+        onUpdate -= observer.OnUpdate;
     }
 
     public bool HasAmmo() => data.Ammo > 0;

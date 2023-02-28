@@ -12,6 +12,8 @@ public class GamePauseCommand : ICommand
         gameManager.Menu.Open("Pause");
         Time.timeScale = 0f;
 
+        gameManager.Triggers.ResetTrigger("OnGameStart");
+        gameManager.Triggers.ResetTrigger("OnGameResume");
         gameManager.Triggers.Trigger("OnGamePause");
     }
 }

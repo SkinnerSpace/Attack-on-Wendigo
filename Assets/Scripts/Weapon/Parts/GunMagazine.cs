@@ -22,7 +22,7 @@ public class GunMagazine : MonoBehaviour
 
     private void Start()
     {
-        updateAmmo += AmmoBar.Instance.UpdateAmmo;
+        updateAmmo += AmmoBar.Instance.OnUpdate;
         updateAmmo?.Invoke(ammo);
     }
 

@@ -4,20 +4,16 @@ using System;
 public class CharacterMover : MonoBehaviour, IBaseController
 {
     private CharacterData data;
-    private Chronos chronos;
 
     private event Action onUpdate;
     private bool isReady;
 
-    public void Initialize(MainController main)
-    {
-        data = main.Data;
-        chronos = main.Chronos;
-    }
+    public void Initialize(MainController main) => data = main.Data;
 
     public void Connect() => isReady = true;
 
     public void Subscribe(IMoverObserver observer) => onUpdate += observer.Update;
+    public void Unsubscribe(IMoverObserver observer) => onUpdate -= observer.Update;
 
     private void Update()
     {

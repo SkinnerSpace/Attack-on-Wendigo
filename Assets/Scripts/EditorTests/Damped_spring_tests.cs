@@ -47,7 +47,7 @@ namespace Tests
 
             dampedSpring.Land();
             dampedSpring.Update();
-            Assert.AreNotEqual(Vector3.zero, data.CameraLocalPos);
+            Assert.That(data.CameraLocalPos.magnitude < 1f);
         }
 
         [Test]

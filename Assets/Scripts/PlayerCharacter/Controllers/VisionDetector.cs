@@ -17,6 +17,8 @@ public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
     }
 
     public override void Connect() => input.Get<MousePositionInputReader>().Subscribe(this);
+    public override void Disconnect() => input.Get<MousePositionInputReader>().Unsubscribe(this);
+
 
     public void Subscribe(Action<Transform> onTargetTfUpdate) => this.onTargetTfUpdate += onTargetTfUpdate;
 

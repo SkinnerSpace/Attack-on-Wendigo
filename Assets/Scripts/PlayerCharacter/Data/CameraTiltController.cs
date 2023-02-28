@@ -15,6 +15,7 @@ public class CameraTiltController : BaseController, IMovementController
     }
 
     public override void Connect() => input.Get<MovementInputReader>().Subscribe(this);
+    public override void Disconnect() => input.Get<MovementInputReader>().Unsubscribe(this);
 
     public void Move(Vector3 inDirection)
     {

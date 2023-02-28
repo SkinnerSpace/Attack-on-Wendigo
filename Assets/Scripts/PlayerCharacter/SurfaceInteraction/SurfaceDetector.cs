@@ -41,4 +41,8 @@ public class SurfaceDetector : BaseController, IGroundObserver
     }
 
     public override void Connect() => main.GetController<GroundDetector>().Subscribe(this);
+    public override void Disconnect()
+    {
+        //main.GetController<GroundDetector>().Unsubscribe(this);
+    }
 }

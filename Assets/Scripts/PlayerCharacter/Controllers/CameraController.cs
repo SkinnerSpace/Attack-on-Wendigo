@@ -33,4 +33,5 @@ public class CameraController : BaseController, IMouseMotionObserver
     private void UpdateBodyRotation() => data.Euler = new Vector3(0f, xAngle, 0f);
 
     public override void Connect() => input.Get<MouseMotionInputReader>().Subscribe(this);
+    public override void Disconnect() => input.Get<MouseMotionInputReader>().Unsubscribe(this);
 }

@@ -21,6 +21,10 @@ public class GroundDetector : BaseController, IMoverObserver
     }
 
     public override void Connect() => main.Mover.Subscribe(this);
+    public override void Disconnect()
+    {
+        //main.Mover.Unsubscribe(this);
+    }
 
     public void Update()
     {

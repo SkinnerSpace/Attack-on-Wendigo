@@ -6,6 +6,9 @@ public class CharacterData : MonoBehaviour, ICharacterData
 {
     public static CharacterData Instance;
 
+    [Header("Health")]
+    [SerializeField] private int health;
+
     [Header("Movement")]
     [SerializeField] private float speed = 300f;
     [SerializeField] private float groundDeceleration = 20f;
@@ -47,13 +50,15 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
     public Vector3 CameraDampedPos { get; set; }
 
-    public Vector3 Forward => transform.forward;
+    public Vector3 Forward => transform.forward; 
     public Vector3 Right => transform.right;
     public Vector3 Up => transform.up;
     public Vector3 Euler { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
 
     public Camera Cam => cam;
     public CharacterController Controller => controller;
+
+    public int Health { get { return health; } set { health = value; } }
 
     public Vector3 CameraViewEuler { get; set; }
     public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }

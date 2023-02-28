@@ -5,6 +5,10 @@ public class MockCharacterData : ICharacterData
     public Vector3 Position { get; set; }
     public float Height { get; set; }
 
+
+    public int Health { get; set; }
+
+
     public Vector3 Velocity => new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
     public Vector2 FlatVelocity { get; set; }
     public float VerticalVelocity { get; set; }

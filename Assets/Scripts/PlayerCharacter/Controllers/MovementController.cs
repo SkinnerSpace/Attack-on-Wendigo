@@ -20,9 +20,10 @@ public class MovementController : BaseController, IMovementController
     }
 
     public override void Connect() => input.Get<MovementInputReader>().Subscribe(this);
-    public void Disconnect() => input.Get<MovementInputReader>().Unsubscribe(this);
+    public override void Disconnect() => input.Get<MovementInputReader>().Unsubscribe(this);
 
     public void Subscribe(Action<bool> onMove) => this.onMove += onMove;
+    public void Unsubscribe(Action<bool> onMove) => this.onMove -= onMove;
 
     public void Move(Vector3 inDirection)
     {

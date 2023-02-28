@@ -26,7 +26,14 @@ public class DashController : BaseController, IDashController, IMovementControll
         input.Get<DashInputReader>().Subscribe(this);
     }
 
+    public override void Disconnect()
+    {
+        input.Get<MovementInputReader>().Unsubscribe(this);
+        input.Get<DashInputReader>().Unsubscribe(this);
+    }
+
     public void Subscribe(Action onDash) => this.onDash += onDash;
+    public void Unsubscribe(Action onDash) => this.onDash -= onDash;
 
     public void Move(Vector3 direction)
     {

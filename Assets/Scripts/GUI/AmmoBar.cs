@@ -6,22 +6,16 @@ using TMPro;
 
 public class AmmoBar : MonoBehaviour, IAmmoObserver
 {
-    private TextMeshProUGUI label;
-    private Animator animator;
+    [SerializeField] private TextMeshProUGUI label;
+    [SerializeField] private Animator animator;
 
     private static int updateAnimation = Animator.StringToHash("Update");
-    private static int emptyAnimation = Animator.StringToHash("Empty");
 
     public static AmmoBar Instance;
 
-    private void Awake()
-    {
-        Instance = this;
-        label = GetComponent<TextMeshProUGUI>();
-        animator = GetComponent<Animator>();
-    }
+    private void Awake() => Instance = this;
 
-    public void UpdateAmmo(int ammo)
+    public void OnUpdate(int ammo)
     {
         label.text = ammo.ToString();
         EnforcedPlayAnimation(updateAnimation);

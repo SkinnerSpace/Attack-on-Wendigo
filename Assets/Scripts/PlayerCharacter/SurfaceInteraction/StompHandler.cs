@@ -12,6 +12,10 @@ public class StompHandler : BaseController, ISurfaceObserver
     }
 
     public override void Connect() => main.GetController<SurfaceDetector>().Subscribe(this);
+    public override void Disconnect()
+    {
+        //main.GetController<SurfaceDetector>().Unsubscribe(this);
+    }
 
     public void OnSurfaceFound(SurfaceProbe probe) => HitTheSurface(probe);
 

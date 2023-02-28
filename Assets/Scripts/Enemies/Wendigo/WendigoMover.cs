@@ -16,6 +16,7 @@ public class WendigoMover : MonoBehaviour
 
     private void Update()
     {
-        controller.Move(data.Velocity * chronos.DeltaTime);
+        if (data.IsAlive)
+            controller.Move(data.Velocity * chronos.DeltaTime);
     }
 }

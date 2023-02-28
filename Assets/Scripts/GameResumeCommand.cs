@@ -12,6 +12,7 @@ public class GameResumeCommand : ICommand
         gameManager.Menu.Close();
         Time.timeScale = 1f;
 
+        gameManager.Triggers.ResetTrigger("OnGamePause");
         gameManager.Triggers.Trigger("OnGameResume");
     }
 }

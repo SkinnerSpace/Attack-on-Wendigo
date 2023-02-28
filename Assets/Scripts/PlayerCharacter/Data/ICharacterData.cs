@@ -10,6 +10,9 @@ public interface ICharacterData
     float Height { get; }
 
 
+    int Health { get; set; }
+
+
     Camera Cam { get; }
     Vector3 CameraLocalPos { get; set; }
     Vector3 CameraDampedPos { get; set; }
