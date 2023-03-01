@@ -1,4 +1,6 @@
-﻿public class Disabled : LoggableState, IState
+﻿using UnityEngine;
+
+public class Disabled : LoggableState, IState
 {
     public void Tick() { }
 

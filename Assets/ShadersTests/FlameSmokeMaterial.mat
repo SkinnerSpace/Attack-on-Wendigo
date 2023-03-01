@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlameMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: b917a824144be144aa5c688ca6fd149f,
+  m_Name: FlameSmokeMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: d6d16beaf3227354b8e133990c7ba273,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -92,7 +92,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_6814F753: {r: 3.795795, g: 14.928529, b: 3.5171924, a: 0}
+    - Color_6814F753: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
     - Vector2_B53260D3: {r: 0, g: -0.6, b: 0, a: 0}
     - Vector2_EB8E8BF7: {r: -0.1, g: -0.5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

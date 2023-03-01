@@ -8,8 +8,26 @@ public class WendigoAnimEventController : MonoBehaviour
     [SerializeField] private WendigoSFXPlayer sFXPlayer;
     [SerializeField] private Wendigo wendigo;
 
+    [Header("Stomp")]
+    [SerializeField] private StompDamageBox leftStompBox;
+    [SerializeField] private StompDamageBox rightStompBox;
+
     public void Stomp()
     {
+        ShakeTheEarth();
+        sFXPlayer.PlayStompSFX();
+    }
+
+    public void LeftStomp()
+    {
+        leftStompBox.Activate();
+        ShakeTheEarth();
+        sFXPlayer.PlayStompSFX();
+    }
+
+    public void RightStomp()
+    {
+        rightStompBox.Activate();
         ShakeTheEarth();
         sFXPlayer.PlayStompSFX();
     }

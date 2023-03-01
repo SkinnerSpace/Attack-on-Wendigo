@@ -28,6 +28,6 @@ public class WendigoData
 
     public bool IsActive { get; set; }
     public bool IsArrived { get; set; }
-    public Transform Target { get; set; }
+    public Transform Target { get { return serializable.Target; } set { serializable.Target = value; } }
 }
 

@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8375871497819918662
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,23 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlameMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: b917a824144be144aa5c688ca6fd149f,
+  m_Name: FireballCoreMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 54e43cbb0d1015345af085749e8e7d36,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_B599062B:
-        m_Texture: {fileID: 2800000, guid: 68adaff591d77b640886df0aa6f8103e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -66,10 +49,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1FDE9612: 0.1
-    - Vector1_3ACDE9BC: 3
-    - Vector1_606B97DA: 1.2
-    - Vector1_63B4B173: 6
+    - Speed: 1
+    - Vector1_E1A9A6E4: 320
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -92,10 +73,24 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_6814F753: {r: 3.795795, g: 14.928529, b: 3.5171924, a: 0}
-    - Vector2_B53260D3: {r: 0, g: -0.6, b: 0, a: 0}
-    - Vector2_EB8E8BF7: {r: -0.1, g: -0.5, b: 0, a: 0}
+    - Color_C1A46820: {r: 0.1573989, g: 1, b: 0, a: 0}
+    - CoreColor: {r: 216.07585, g: 581.2745, b: 0, a: 0}
+    - FirstColor: {r: 0, g: 0.49056602, b: 0, a: 0}
+    - SecondColor: {r: 0.043033123, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+--- !u!114 &1482759564380119452
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2

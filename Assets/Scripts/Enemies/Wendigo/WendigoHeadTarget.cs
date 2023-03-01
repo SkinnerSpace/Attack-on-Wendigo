@@ -14,7 +14,7 @@ public class WendigoHeadTarget : MonoBehaviour
     private Vector3 velocity;
     private Vector3 targetPosition;
 
-    private void Awake() => wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
+    private void Start() => wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
 
     private void Update()
     {

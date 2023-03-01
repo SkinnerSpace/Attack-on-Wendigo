@@ -98,6 +98,19 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float VerticalVelocity { get { return verticalVelocity; } set { verticalVelocity = value; } }
     private float verticalVelocity;
 
+    public void AddVelocity(Vector3 inVelocity)
+    {
+        flatVelocity += inVelocity.FlatV2();
+        verticalVelocity += inVelocity.y;
+    }
+
+    public void UpdateVelocity()
+    {
+        PreviousVerticalVelocity = VerticalVelocity;
+        Velocity = new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
+    }
+
+
     public float Gravity => gravity;
     public float JumpHeight => jumpHeight;
     public int JumpCount { get; set; }

@@ -18,14 +18,18 @@ public class CharacterHealthSystem : BaseController, IDamageable
 
     public void ReceiveDamage(DamagePackage damagePackage)
     {
+        //Debug.Log(damagePackage);
+
         if (IsAlive)
         {
             data.Health -= damagePackage.damage;
 
-            onHealthUpdate?.Invoke(data.Health);
-
             if (data.Health <= 0)
                 Die();
+
+            onHealthUpdate?.Invoke(data.Health);
+
+            data.AddVelocity(damagePackage.impact);        
         }
     }
 
@@ -35,11 +39,12 @@ public class CharacterHealthSystem : BaseController, IDamageable
     public override void Initialize(MainController main)
     {
         this.main = main;
+        data = main.Data;
         hitBox = main.HitBox;
-        Initialize(main.Data);
         eventManager = main.Events;
 
         onDeathTrigger = new EventTrigger();
+        SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
 
         SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
     }
@@ -55,10 +60,10 @@ public class CharacterHealthSystem : BaseController, IDamageable
 
     public override void Disconnect() => hitBox.Unsubscribe(this);
 
-    private void Die()
+    public void Die()
     {
+        data.Health = 0;
         onDeath?.Invoke();
-        onDeathTrigger.SetActive(true);
     }
 }
 

@@ -38,7 +38,8 @@ public interface ICharacterData
     Vector2 FlatVelocity { get; set; }
     float VerticalVelocity { get; set; }
     float PreviousVerticalVelocity { get; }
-
+    void AddVelocity(Vector3 inVelocity);
+    void UpdateVelocity();
 
 
     float Speed { get; }

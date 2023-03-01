@@ -14,5 +14,6 @@
     RagDoll = 19,
     Landscape = 20,
     Interactables = 21,
-    DisabledInteractables = 22
+    DisabledInteractables = 22,
+    PlayerHitBox = 23
 }

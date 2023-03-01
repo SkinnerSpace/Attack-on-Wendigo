@@ -13,6 +13,14 @@ public static class ComplexLayers
         1 << (int)Layers.RagDoll
         );
 
+    public static LayerMask Exploding =
+        1 << (int)Layers.Ground |
+        1 << (int)Layers.Damageable |
+        1 << (int)Layers.Player |
+        1 << (int)Layers.Projectiles |
+        1 << (int)Layers.Landscape |
+        1 << (int)Layers.PlayerHitBox;
+
     public static LayerMask Interactables =
         1 << (int)Layers.Interactables;
 

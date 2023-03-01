@@ -21,6 +21,9 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
 
+    [SerializeField] private Transform pendingTarget;
+    public Transform PendingTarget => pendingTarget;
+
     public Animator Animator => animator;
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;

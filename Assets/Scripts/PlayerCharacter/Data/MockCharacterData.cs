@@ -9,10 +9,20 @@ public class MockCharacterData : ICharacterData
     public int Health { get; set; }
 
 
-    public Vector3 Velocity => new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
+    public Vector3 Velocity { get; private set; }
     public Vector2 FlatVelocity { get; set; }
     public float VerticalVelocity { get; set; }
     public float PreviousVerticalVelocity { get; set; }
+    public void AddVelocity(Vector3 inVelocity)
+    {
+        FlatVelocity += inVelocity.FlatV2();
+        VerticalVelocity += inVelocity.y;
+    }
+    public void UpdateVelocity()
+    {
+        PreviousVerticalVelocity = VerticalVelocity;
+        Velocity = new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
+    }
 
     public float Gravity { get; set; }
 

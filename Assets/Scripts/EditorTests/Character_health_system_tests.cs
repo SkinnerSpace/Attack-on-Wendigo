@@ -42,6 +42,49 @@ namespace Tests
         }
 
         [Test]
+        public void Health_never_falls_below_zero()
+        {
+            int initialHealth = 10;
+            int damageAmount = 20;
+
+            ICharacterData data = new MockCharacterData() { Health = initialHealth };
+
+            CharacterHealthSystem healthSystem = new CharacterHealthSystem();
+            healthSystem.Initialize(data);
+
+            DamagePackage damage = new DamagePackage(damageAmount);
+            healthSystem.ReceiveDamage(damage);
+
+            Assert.AreEqual(0, healthSystem.Health);
+        }
+
+        [Test]
+        public void If_is_dead_then_health_is_below_zero()
+        {
+            ICharacterData data = new MockCharacterData() { Health = 10 };
+
+            CharacterHealthSystem healthSystem = new CharacterHealthSystem();
+            healthSystem.Initialize(data);
+
+            healthSystem.Die();
+
+            Assert.AreEqual(0, healthSystem.Health);
+        }
+
+        [Test]
+        public void If_is_dead_then_not_alive()
+        {
+            ICharacterData data = new MockCharacterData() { Health = 10 };
+
+            CharacterHealthSystem healthSystem = new CharacterHealthSystem();
+            healthSystem.Initialize(data);
+
+            healthSystem.Die();
+
+            Assert.False(healthSystem.IsAlive);
+        }
+
+        [Test]
         public void Health_observer_is_notified_on_update()
         {
             int initialHealth = 10;
@@ -101,6 +144,25 @@ namespace Tests
             healthSystem.ReceiveDamage(damage);
 
             observer.DidNotReceive().OnDeath();
+        }
+
+        [Test]
+        public void Character_receives_impact()
+        {
+            int initialHealth = 10;
+            int damageAmount = 1;
+            Vector3 impactForce = Vector3.one;
+
+            ICharacterData data = new MockCharacterData() { Health = initialHealth };
+
+            CharacterHealthSystem healthSystem = new CharacterHealthSystem();
+            healthSystem.Initialize(data);
+
+            DamagePackage damage = new DamagePackage(damageAmount, impactForce, Vector3.zero);
+            healthSystem.ReceiveDamage(damage);
+            data.UpdateVelocity();
+
+            Assert.AreEqual(impactForce, data.Velocity);
         }
     }
 }

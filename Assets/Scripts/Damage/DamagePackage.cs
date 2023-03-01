@@ -17,4 +17,6 @@ public class DamagePackage
         this.impact = impact;
         this.point = point;
     }
+
+    public override string ToString() => "Damage: " + damage + ", Impact: " + impact + ", Point: " + point;
 }

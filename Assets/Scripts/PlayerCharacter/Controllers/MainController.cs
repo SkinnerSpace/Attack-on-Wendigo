@@ -48,14 +48,14 @@ public class MainController : MonoBehaviour
         AddController(typeof(CharacterHealthSystem));
     }
 
-    private void Update()
+/*    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
             DamagePackage damage = new DamagePackage(1);
             hitBox.ReceiveDamage(damage);
         }
-    }
+    }*/
 
     private void AddController(Type type)
     {
