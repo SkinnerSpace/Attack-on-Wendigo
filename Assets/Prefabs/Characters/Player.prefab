@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b246af76d89b744e83c38a481e2991f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 30
   speed: 500
   groundDeceleration: 20
   airDeceleration: 15
@@ -223,6 +223,18 @@ MonoBehaviour:
   tiltMaxAngle: 5
   controller: {fileID: 7181526249658469568}
   cam: {fileID: 0}
+  screenShakes:
+  - name: Impact
+    axis: {x: 1, y: 1, z: 0}
+    minTime: 0.3
+    maxTime: 0.5
+    minStrength: 0.15
+    maxStrength: 0.5
+    minAngleMult: 1
+    maxAngleMult: 2
+    frequency: 4
+    attack: 0.1
+    release: 0.5
 --- !u!114 &402587302504087578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +254,7 @@ MonoBehaviour:
   chronos: {fileID: 8860424869380561027}
   events: {fileID: 0}
   inputReader: {fileID: 0}
+  shakePower: 1
 --- !u!114 &2146012073234770375
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ namespace Tests
 {
     public class Damped_spring_tests
     {
+#pragma warning disable CS1701
+
         [Test]
         public void Amplitude_grows_when_grounded()
         {

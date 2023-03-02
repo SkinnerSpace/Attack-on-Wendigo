@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MockCharacterData : ICharacterData
 {
@@ -22,6 +23,11 @@ public class MockCharacterData : ICharacterData
     {
         PreviousVerticalVelocity = VerticalVelocity;
         Velocity = new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
+    }
+
+    public ShakeConfig GetShake(string key)
+    {
+        return null;
     }
 
     public float Gravity { get; set; }

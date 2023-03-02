@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1254637721475016606}
   - component: {fileID: 4094294382131515010}
+  - component: {fileID: 1637509636446271723}
   m_Layer: 8
   m_Name: CollisionBox
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3393914020713856306, guid: 2bfa71e5a9c1ade4db21fb68f0461d7a, type: 3}
+--- !u!114 &1637509636446271723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3924339957779903520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083f98d0f0e74f74594057c982a8483c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collapsible: {fileID: 1461025392453318955}
 --- !u!1 &7565031895521387153
 GameObject:
   m_ObjectHideFlags: 0

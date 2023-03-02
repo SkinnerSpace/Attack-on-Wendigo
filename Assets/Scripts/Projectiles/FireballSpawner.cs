@@ -5,18 +5,23 @@ using UnityEngine;
 
 public class FireballSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject fireaball;
+    private IObjectPooler pooler;
 
-    private void Update()
+    private void Start()
+    {
+        pooler = PoolHolder.Instance;
+    }
+
+    /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
             SpawnFireball();
         }
-    }
+    }*/
 
-    private void SpawnFireball()
+    public void SpawnFireball()
     {
-        Instantiate(fireaball, transform.position, Quaternion.identity);
+        pooler.SpawnFromThePool("Fireball", transform.position, transform.rotation);
     }
 }

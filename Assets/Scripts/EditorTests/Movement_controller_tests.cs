@@ -6,6 +6,8 @@ namespace Tests
 {
     public class Movement_controller_tests 
     {
+#pragma warning disable CS1701
+
         [Test]
         public void Velocity_is_increasing()
         {

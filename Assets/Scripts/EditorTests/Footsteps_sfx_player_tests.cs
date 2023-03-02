@@ -7,6 +7,8 @@ namespace Tests
 {
     public class Footsteps_sfx_player_tests
     {
+#pragma warning disable CS1701
+
         [Test]
         public void First_step_is_made()
         {

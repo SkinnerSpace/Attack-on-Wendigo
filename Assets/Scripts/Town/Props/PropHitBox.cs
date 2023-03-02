@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PropHitBox : MonoBehaviour
 {
-    public void Collapse()
-    {
-        throw new System.NotImplementedException();
-    }
+    [SerializeField] private CollapseController collapsible;
+
+    public void PullDown(Vector3 collapseDirection) => collapsible.PullDown(collapseDirection);
 }

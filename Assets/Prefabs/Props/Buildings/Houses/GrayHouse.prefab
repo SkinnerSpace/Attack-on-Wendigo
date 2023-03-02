@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 918645784364997659}
   - component: {fileID: 8046295432710741775}
   - component: {fileID: 7355269380469640033}
+  - component: {fileID: 4877954795952257205}
   m_Layer: 8
   m_Name: CollisionBox
   m_TagString: Untagged
@@ -138,6 +139,19 @@ MonoBehaviour:
     prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
       type: 3}
     size: 1
+--- !u!114 &4877954795952257205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469008446883903003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083f98d0f0e74f74594057c982a8483c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collapsible: {fileID: 2789702383926972558}
 --- !u!1 &6138566354844142283
 GameObject:
   m_ObjectHideFlags: 0

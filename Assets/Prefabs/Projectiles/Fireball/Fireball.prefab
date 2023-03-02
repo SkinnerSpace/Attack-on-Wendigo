@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6894375513939352394}
   - component: {fileID: 7163896400682800314}
+  - component: {fileID: 1856510823618422518}
+  - component: {fileID: 5475918390870447353}
+  - component: {fileID: 1454400714194500862}
   m_Layer: 15
   m_Name: Fireball
   m_TagString: Untagged
@@ -44,11 +47,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee86a10fd4964ca4292944803141528e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionVFX: {fileID: 2542683929975215567, guid: d2503b4730ee26b4395c5c0a9a12e2b3,
+    type: 3}
+  data: {fileID: 1856510823618422518}
+  chronos: {fileID: 5475918390870447353}
+--- !u!114 &1856510823618422518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894375513939352395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0024765ed93874b4ab4264f62ac6cff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   speed: 20
-  collisionRadius: 0.5
-  explosionRadius: 10
+  collisionRadius: 1.2
+  explosionRadius: 15
   damage: 5
   impact: 500
+--- !u!114 &5475918390870447353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894375513939352395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1454400714194500862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894375513939352395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b01f94be206f4f9d49cbd15835b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6894375514214660328
 GameObject:
   m_ObjectHideFlags: 0
@@ -9702,7 +9745,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6894375515801233186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

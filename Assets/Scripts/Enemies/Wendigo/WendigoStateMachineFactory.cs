@@ -11,8 +11,9 @@ public static class WendigoStateMachineFactory
 
         IState disabled = new Disabled();
         IState arrival = new Arrival(wendigo);
-        IState idle = new Idle();
+        IState idle = new Idle(wendigo);
         IState chase = new Chase(wendigo);
+        IState fireball = new FireballLaunch(wendigo);
         IState dead = new Dead(wendigo);
 
         Add(disabled, arrival, IsActive());
@@ -20,6 +21,11 @@ public static class WendigoStateMachineFactory
 
         Add(idle, chase, HasTarget());
         Add(chase, idle, HasNoTarget());
+
+        Add(idle, fireball, ReadyToShoot());
+        Add(chase, fireball, ReadyToShoot());
+
+        Add(fireball, idle, NotReadyToShoot());
 
         Add(idle, dead, IsDead());
         Add(chase, dead, IsDead());
@@ -31,6 +37,8 @@ public static class WendigoStateMachineFactory
         Func<bool> IsArrived() => () => data.IsArrived;
         Func<bool> HasTarget() => () => data.Target != null;
         Func<bool> HasNoTarget() => () => data.Target == null;
+        Func<bool> ReadyToShoot() => () => data.IsReadyToShoot;
+        Func<bool> NotReadyToShoot() => () => !data.IsReadyToShoot;
         Func<bool> IsDead() => () => !wendigo.Data.IsAlive;
 
         return stateMachine;

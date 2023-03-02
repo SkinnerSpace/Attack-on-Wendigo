@@ -62,8 +62,6 @@ public class CollapseController : MonoBehaviour
             KeepDestroying();
             yield return null;
         }
-
-        //acceptor.Disappear();
     }
 
     private void KeepDestroying()

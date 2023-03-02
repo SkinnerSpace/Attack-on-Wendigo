@@ -12,6 +12,7 @@ public static class ExtraMath
     public static float Negative(this float value) => value * -1f;
 
     public static Vector2 FlatV2(this Vector3 vector) => new Vector2(vector.x, vector.z);
+    public static Vector3 FlatV3(this Vector3 vector) => new Vector3(vector.x, 0f, vector.z);
 
     public static float Round(this float value, float digits) => Mathf.Round(value * 10f * digits) / (10f * digits);
 

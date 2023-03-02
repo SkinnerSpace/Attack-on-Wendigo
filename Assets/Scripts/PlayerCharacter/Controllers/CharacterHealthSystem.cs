@@ -15,11 +15,10 @@ public class CharacterHealthSystem : BaseController, IDamageable
 
     private event Action<int> onHealthUpdate;
     private event Action onDeath;
+    private event Action<float> onImpact;
 
     public void ReceiveDamage(DamagePackage damagePackage)
     {
-        //Debug.Log(damagePackage);
-
         if (IsAlive)
         {
             data.Health -= damagePackage.damage;
@@ -29,12 +28,15 @@ public class CharacterHealthSystem : BaseController, IDamageable
 
             onHealthUpdate?.Invoke(data.Health);
 
-            data.AddVelocity(damagePackage.impact);        
+            data.AddVelocity(damagePackage.impact);
+            onImpact?.Invoke(damagePackage.impact.magnitude);
         }
     }
 
     public void SubscribeOnUpdate(Action<int> onHealthUpdate) => this.onHealthUpdate += onHealthUpdate;
     public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
+    public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
+    public void UnsubscribeFromImpact(Action<float> onImpact) => this.onImpact -= onImpact;
 
     public override void Initialize(MainController main)
     {

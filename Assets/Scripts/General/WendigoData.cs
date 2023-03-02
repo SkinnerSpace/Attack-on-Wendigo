@@ -29,5 +29,13 @@ public class WendigoData
     public bool IsActive { get; set; }
     public bool IsArrived { get; set; }
     public Transform Target { get { return serializable.Target; } set { serializable.Target = value; } }
+
+    public GameObject Fireball => serializable.Fireball;
+    public float FireballMinDistance => serializable.FireballMinDistance;
+    public float FireballMaxDistance => serializable.FireballMaxDistance;
+    public bool IsReadyToShoot { get; set; }
+    public float FireballCastTime => serializable.FireballCastTime;
+    public float FireballChargeTime => serializable.FireballChargeTime;
+    public bool FireballIsReady { get; set; } = true;
 }
 

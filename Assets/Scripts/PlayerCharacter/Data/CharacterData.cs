@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -31,7 +32,6 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [SerializeField] private float groundDetectionRadius = 0.6f;
     [SerializeField] private float groundDetectionHeight = 0.5f;
 
-
     [SerializeField] private DampedSpringData dampedSpringData;
     public IDampedSpringData DampedSpring => dampedSpringData;
 
@@ -46,6 +46,9 @@ public class CharacterData : MonoBehaviour, ICharacterData
     [Header("Components")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Camera cam;
+
+    [Header("Screeen shakes")]
+    [SerializeField] private List<ShakeConfig> screenShakes;
 
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
     public Vector3 CameraDampedPos { get; set; }
@@ -131,6 +134,19 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     public float ReachDistance => reachDistance;
     public float DropItemStrength => dropItemStrength;
+
+    public ShakeConfig GetShake(string key)
+    {
+        ShakeConfig screenShake = null;
+
+        foreach (ShakeConfig shake in screenShakes)
+        {
+            if (shake.Name == key)
+                screenShake = shake;
+        }
+
+        return screenShake;
+    }
 
     private void Awake()
     {

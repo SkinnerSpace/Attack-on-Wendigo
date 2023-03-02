@@ -60,4 +60,3 @@ public class ScreenShake
         ShakeManager.Instance.AddAndLaunch(shake);
     }
 }
-

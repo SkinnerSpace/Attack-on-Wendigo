@@ -26,6 +26,12 @@ public class WendigoMovementController : WendigoBaseController
         onVelocityUpdate?.Invoke(data.Velocity.magnitude);
     }
 
+    public void Stop()
+    {
+        Decelerate();
+        onVelocityUpdate?.Invoke(data.Velocity.magnitude);
+    }
+
     private void Accelerate()
     {
         Vector3 acceleration = data.Forward * data.MovementSpeed * chronos.DeltaTime;

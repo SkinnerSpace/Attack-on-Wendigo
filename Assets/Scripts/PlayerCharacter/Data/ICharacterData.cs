@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public interface ICharacterData
 {
@@ -80,4 +81,6 @@ public interface ICharacterData
 
     float ReachDistance { get; }
     float DropItemStrength { get; }
+
+    ShakeConfig GetShake(string key);
 }

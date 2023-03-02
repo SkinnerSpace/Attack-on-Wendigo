@@ -16,6 +16,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     [SerializeField] private RagDollController ragDollController;
     [SerializeField] private WendigoPooledObject pool;
     [SerializeField] private Animator animator;
+    [SerializeField] private FireballSpawner fireballSpawner;
     
     [Header("Timer")]
     [SerializeField] private FunctionTimer timer;
@@ -28,6 +29,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;
     public WendigoData Data { get; set; }
+    public FireballSpawner FireballSpawner => fireballSpawner;
     public IChronos Chronos => chronos;
     public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
     public IHitBox[] HitBoxes { get; private set; }
@@ -38,6 +40,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     private void Update()
     {
         stateMachine.Tick();
+        //Debug.Log(Data.Velocity.magnitude);
     }
 
     private void Awake()
@@ -55,6 +58,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         AddController(typeof(WendigoHealthSystem));
         AddController(typeof(WendigoTargetManager));
         AddController(typeof(WendigoAnimatorController));
+        AddController(typeof(WendigoRangeCombatManager));
 
         stateMachine = WendigoStateMachineFactory.Create(this);
 

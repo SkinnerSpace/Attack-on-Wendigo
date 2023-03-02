@@ -4,88 +4,40 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private float speed = 100f;
-    [SerializeField] private float collisionRadius = 0.5f;
-    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private GameObject ExplosionVFX;
 
-    [Header("Damage")]
-    [SerializeField] private int damage;
-    [SerializeField] private float impact;
+    [SerializeField] private FireballData data;
+    [SerializeField] private Chronos chronos;
+    private FireballMover mover;
+    private FireballCollider fireballCollider;
+    private FireballExplosion fireballExplosion;
 
-    private int maxColliders = 20;
     private bool isActive = true;
-    private bool isExploded;
+
+    private void Awake()
+    {
+        mover = new FireballMover(data, chronos);
+        fireballCollider = new FireballCollider(data, OnCollision);
+        fireballExplosion = new FireballExplosion(data);
+    }
 
     private void Update()
     {
         if (isActive)
-            CheckCollision();
+            fireballCollider.Update();
     }
 
     private void FixedUpdate()
     {
         if (isActive)
-            Move();
+            mover.Move();
     }
 
-    private void Move()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
-
-    private void CheckCollision()
-    {
-        Collider[] hitColliders = new Collider[1];
-        Physics.OverlapSphereNonAlloc(transform.position, collisionRadius, hitColliders, ComplexLayers.Exploding);
-        Collide(hitColliders[0]);
-    }
-
-    private void Collide(Collider hitCollider)
-    {
-        if (hitCollider != null)
-        {
-            Explode();
-        }
-    }
-
-    private void Explode()
+    private void OnCollision()
     {
         isActive = false;
-
-        Collider[] hitColliders = new Collider[maxColliders];
-        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, hitColliders, ComplexLayers.Exploding);
-
-        for (int i = 0; i < numColliders; i++)
-            Damage(hitColliders[i]);
-
-        isActive = false;
-        isExploded = true;
+        fireballExplosion.Explode();
+        Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
-    }
-
-    private void Damage(Collider hitCollider)
-    {
-        float distance = Vector3.Distance(transform.position, hitCollider.transform.position) - collisionRadius;
-        float distancePercent = (1f - (distance / explosionRadius)).Clamp01();
-        float power = Easing.QuadEaseIn(distancePercent);
-
-        int adjustedDamage = Mathf.RoundToInt(damage * power);
-        float adjustedImpact = impact * power;
-        Vector3 impactForce = (hitCollider.transform.position - transform.position).normalized * adjustedImpact;
-
-        //Debug.Log(hitCollider.transform.name + " Dist " + distance + " Power " + power + " Damage " + adjustedDamage + " Impact " + adjustedImpact);
-
-        DamagePackage damagePackage = new DamagePackage(adjustedDamage, impactForce, transform.position);
-        hitCollider.gameObject.SendMessage("ReceiveDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawWireSphere(transform.position, radius);
-
-        if (isExploded)
-        {
-            Gizmos.DrawWireSphere(transform.position, explosionRadius);
-        }
     }
 }
