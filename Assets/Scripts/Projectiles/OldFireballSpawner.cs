@@ -3,22 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballSpawner : MonoBehaviour
+public class OldFireballSpawner : MonoBehaviour
 {
     private IObjectPooler pooler;
+
+    [Range(0, 180)]
+    [SerializeField] private float verticalAngle;
+    [Range(0, 180)]
+    [SerializeField] private float horizontalAngle;
+
+    public float VerticalAngle => verticalAngle;
+    public float HorizontalAngle => horizontalAngle;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         pooler = PoolHolder.Instance;
     }
 
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SpawnFireball();
-        }
-    }*/
 
     public void SpawnFireball()
     {

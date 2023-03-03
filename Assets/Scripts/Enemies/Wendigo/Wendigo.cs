@@ -50,6 +50,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         Data = new WendigoData(serializableData, transform);
         HitBoxes = GetComponentsInChildren<IHitBox>();
         mover.Initialize(this);
+        fireballSpawner.Initialize(Data);
 
         controllers = new List<WendigoBaseController>();
 

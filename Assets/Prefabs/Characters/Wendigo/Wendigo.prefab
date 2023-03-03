@@ -2318,7 +2318,7 @@ MonoBehaviour:
   ragDollController: {fileID: 2173253743383517456}
   pool: {fileID: 1058818208207837215}
   animator: {fileID: 4718767853038179663}
-  fireballSpawner: {fileID: 6084212401134545196}
+  fireballSpawner: {fileID: 7483865602147209108}
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
   pendingTarget: {fileID: 0}
@@ -9335,16 +9335,16 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8703226117386561586}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6084212401134545196 stripped
+--- !u!114 &7483865602147209108 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3217651491151855902, guid: 1db420e3cdf12ef409644c4524fbb209,
+  m_CorrespondingSourceObject: {fileID: 2239443604756342694, guid: 1db420e3cdf12ef409644c4524fbb209,
     type: 3}
   m_PrefabInstance: {fileID: 8703226117386561586}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0a1391968c234d419f19c34762cef97, type: 3}
+  m_Script: {fileID: 11500000, guid: 61604212d0bef3948a65d0af88a4b813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8945209469530079516
