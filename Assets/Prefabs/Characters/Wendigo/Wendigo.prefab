@@ -1645,7 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFXPlayer: {fileID: 6783199577854852569}
-  wendigo: {fileID: 0}
+  wendigo: {fileID: 2604546528073915768}
+  fireballSpawner: {fileID: 7483865602147209108}
   leftStompBox: {fileID: 8276341001527102250}
   rightStompBox: {fileID: 5801282812329675613}
 --- !u!114 &8100390333917869422
@@ -9267,6 +9268,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2604546528073915769}
     m_Modifications:
+    - target: {fileID: 3217651491151855900, guid: 1db420e3cdf12ef409644c4524fbb209,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3217651491151855900, guid: 1db420e3cdf12ef409644c4524fbb209,
         type: 3}
       propertyPath: m_Name

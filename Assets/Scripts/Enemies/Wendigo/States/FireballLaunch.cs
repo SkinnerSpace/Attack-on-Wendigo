@@ -7,6 +7,7 @@ public class FireballLaunch : LoggableState, IState
     private FunctionTimer timer;
     private WendigoRangeCombatManager rangeCombatManager;
     private WendigoMovementController movementController;
+    private WendigoAnimatorController animatorController;
     private FireballSpawner fireballSpawner;
 
     private float chargeTime = 1f;
@@ -19,6 +20,7 @@ public class FireballLaunch : LoggableState, IState
         fireballSpawner = wendigo.FireballSpawner;
         rangeCombatManager = wendigo.GetController<WendigoRangeCombatManager>();
         movementController = wendigo.GetController<WendigoMovementController>();
+        animatorController = wendigo.GetController<WendigoAnimatorController>();
     }
 
     public void Tick()
@@ -29,18 +31,19 @@ public class FireballLaunch : LoggableState, IState
 
     public void OnEnter()
     {
-        timer.Set("Launch", data.FireballCastTime, Launch);
+        animatorController.PlayCastAnimation();
+        //timer.Set("Launch", data.FireballCastTime, Launch);
     }
 
     public void OnExit()
     {
-        
+        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballIsReady = true);
     }
 
     private void Launch()
     {
-        fireballSpawner.SpawnFireball();
+        /*fireballSpawner.SpawnFireball();
         data.FireballIsReady = false;
-        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballIsReady = true);
+        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballIsReady = true);*/
     }
 }
