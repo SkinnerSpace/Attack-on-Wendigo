@@ -46,6 +46,12 @@ public class SurfaceHitBuilder
         return this;
     }
 
+    public SurfaceHitBuilder WithScale(float scale)
+    {
+        particle.transform.localScale = new Vector3(scale, scale, scale);
+        return this;
+    }
+
     public SurfaceHitBuilder WithCount(short minCount, short maxCount)
     {
         countManager.SetCount(minCount, maxCount);

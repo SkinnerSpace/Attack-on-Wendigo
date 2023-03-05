@@ -2,20 +2,29 @@
 
 public class InSightChecker : MonoBehaviour
 {
-    [SerializeField] private float angleOfView;
-    private float maxDotProduct;
+    [SerializeField] private Wendigo wendigo;
 
-    private void Awake() => CalculateAngleOfView();
+    private WendigoData data;
 
-    public void CalculateAngleOfView() => maxDotProduct = (angleOfView * Mathf.Deg2Rad) / Mathf.PI;
+    private void Start()
+    {
+        data = wendigo.Data;
+    }
 
-    public bool TargetIsVisibleFromPointOfView(Transform target)
+    private void Update()
+    {
+        float dotToTarget = (data.Target != null) ? GetDotToTarget(data.Target) : 0f;
+        data.TargetFitsLookAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.LookAngleOfView) : false;
+        data.TargetFitsFireballAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.AttackAngleOfView) : false;
+    }
+
+    private float GetDotToTarget(Transform target)
     {
         Vector2 forwardDir = GetForwardDir();
         Vector2 dirToTarget = GetDirToTarget(target);
         float dotToTarget = GetDotToTarget(forwardDir, dirToTarget);
 
-        return dotToTarget <= maxDotProduct;
+        return dotToTarget;
     }
 
     private Vector2 GetForwardDir() => new Vector2(transform.forward.x, transform.forward.z);
@@ -37,9 +46,6 @@ public class InSightChecker : MonoBehaviour
 
         return dotToTarget;
     }
-}
 
-public static class VectorExtention
-{
-    public static Vector2 Flatten(this Vector3 v) => new Vector2(v.x, v.z);
+    private float GetMaxDotProduct(float angle) => (angle * Mathf.Deg2Rad) / Mathf.PI;
 }

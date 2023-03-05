@@ -12,6 +12,8 @@ public class FireballExplosion
 
     public void Explode()
     {
+        PoolHolder.Instance.SpawnFromThePool("FireballExplosion", data.Position, Quaternion.identity);
+
         Collider[] hitColliders = new Collider[MAX_COLLIDERS];
         int numColliders = Physics.OverlapSphereNonAlloc(data.Position, data.ExplosionRadius, hitColliders, ComplexLayers.Exploding);
 

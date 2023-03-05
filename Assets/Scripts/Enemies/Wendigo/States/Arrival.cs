@@ -6,16 +6,28 @@ using System.Threading.Tasks;
 public class Arrival : LoggableState, IState
 {
     private const float ARRIVAL_TIME = 3.2f;
-    private Wendigo wendigo;
+    private WendigoData data;
+    private IFunctionTimer timer;
 
-    public Arrival(Wendigo wendigo) => this.wendigo = wendigo;
+    private WendigoRangeCombatManager rangeCombatManager;
 
-    public void Tick() { }
+    public Arrival(Wendigo wendigo)
+    {
+        data = wendigo.Data;
+        timer = wendigo.Timer;
+
+        rangeCombatManager = wendigo.GetController<WendigoRangeCombatManager>();
+    }
+
+    public void Tick()
+    {
+        rangeCombatManager.CheckReadinessToShoot();
+    }
 
     public void OnEnter()
     {
         LogEnter();
-        wendigo.Timer.Set("Arrival", ARRIVAL_TIME, OnArrived);
+        timer.Set("Arrival", ARRIVAL_TIME, OnArrived);
     }
 
     public void OnExit()
@@ -23,5 +35,5 @@ public class Arrival : LoggableState, IState
         LogExit();
     }
 
-    public void OnArrived() => wendigo.Data.IsArrived = true;
+    public void OnArrived() => data.IsArrived = true;
 }

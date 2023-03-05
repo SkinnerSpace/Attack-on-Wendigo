@@ -15,5 +15,6 @@
     Landscape = 20,
     Interactables = 21,
     DisabledInteractables = 22,
-    PlayerHitBox = 23
+    PlayerHitBox = 23,
+    Background = 24
 }

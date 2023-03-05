@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletExplosion : MonoBehaviour, IPooledObject
+public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 {
     public string PoolTag { get; set; }
     public GameObject Object => gameObject;

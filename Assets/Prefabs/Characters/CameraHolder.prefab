@@ -67,7 +67,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1702711
+    m_Bits: 18479927
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPivot: {fileID: 0}
-  trackTarget: {fileID: 0}
+  state: 0
   testMode: 0
 --- !u!1 &7290335171503858707
 GameObject:
@@ -466,5 +466,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86885d000bbbc104e9cbbff754dae43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionAcceptor: {fileID: 0}
-  angleAcceptor: {fileID: 0}
+  data: {fileID: 0}

@@ -14,12 +14,10 @@ public class WendigoAnimEventController : MonoBehaviour
     [SerializeField] private StompDamageBox leftStompBox;
     [SerializeField] private StompDamageBox rightStompBox;
 
-    private WendigoAnimatorController animatorController;
     private WendigoData data;
 
     private void Start()
     {
-        animatorController = wendigo.GetController<WendigoAnimatorController>();
         data = wendigo.Data;
     }
 
@@ -52,9 +50,13 @@ public class WendigoAnimEventController : MonoBehaviour
         }
     }
 
+    public void StartCastingFireball()
+    {
+        fireballSpawner.PlayCastVFX();
+        sFXPlayer.PlayFireballCastSFX(fireballSpawner.transform.position);
+    }
     public void SpawnFireball() => fireballSpawner.SpawnFireball();
-    public void StopCastAnimation() => animatorController.StopCastAnimation();
-    public void FireballCastIsOver() => data.FireballIsReady = false;
+    public void FireballCastIsOver() => data.FireballCastIsOver = true;
 
     public void RoarOnArrival()
     {

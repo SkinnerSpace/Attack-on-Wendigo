@@ -16,6 +16,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     [SerializeField] private RagDollController ragDollController;
     [SerializeField] private WendigoPooledObject pool;
     [SerializeField] private Animator animator;
+    [SerializeField] private WendigoSFXPlayer sFXPlayer;
     [SerializeField] private FireballSpawner fireballSpawner;
     
     [Header("Timer")]
@@ -26,6 +27,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public Transform PendingTarget => pendingTarget;
 
     public Animator Animator => animator;
+    public WendigoSFXPlayer SFXPlayer => sFXPlayer;
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;
     public WendigoData Data { get; set; }
@@ -39,8 +41,8 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public void OnSpawn() => Data.IsActive = true;
     private void Update()
     {
-        stateMachine.Tick();
-        //Debug.Log(Data.Velocity.magnitude);
+        if (chronos.IsTicking)
+            stateMachine.Tick();
     }
 
     private void Awake()
@@ -51,21 +53,25 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         HitBoxes = GetComponentsInChildren<IHitBox>();
         mover.Initialize(this);
         fireballSpawner.Initialize(Data);
+        AddControllers();
 
+        stateMachine = WendigoStateMachineFactory.Create(this);
+
+        GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationPlayer>());
+        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
+        pool.Subscribe(this);
+    }
+
+    private void AddControllers()
+    {
         controllers = new List<WendigoBaseController>();
 
         AddController(typeof(WendigoRotationController));
         AddController(typeof(WendigoMovementController));
         AddController(typeof(WendigoHealthSystem));
         AddController(typeof(WendigoTargetManager));
-        AddController(typeof(WendigoAnimatorController));
+        AddController(typeof(WendigoAnimationPlayer));
         AddController(typeof(WendigoRangeCombatManager));
-
-        stateMachine = WendigoStateMachineFactory.Create(this);
-
-        GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimatorController>());
-        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
-        pool.Subscribe(this);
     }
 
     private void AddController(Type type)

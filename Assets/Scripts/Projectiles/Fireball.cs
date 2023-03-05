@@ -1,43 +1,69 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private GameObject ExplosionVFX;
-
     [SerializeField] private FireballData data;
     [SerializeField] private Chronos chronos;
+    [SerializeField] private FireballSFXPlayer sFXPlayer;
+
     private FireballMover mover;
     private FireballCollider fireballCollider;
     private FireballExplosion fireballExplosion;
+    private RadialSurfaceHitHandler hitHandler;
 
-    private bool isActive = true;
+    private event Action onExplosion;
 
     private void Awake()
     {
         mover = new FireballMover(data, chronos);
-        fireballCollider = new FireballCollider(data, OnCollision);
+        fireballCollider = new FireballCollider(data, Explode);
         fireballExplosion = new FireballExplosion(data);
+        hitHandler = new RadialSurfaceHitHandler(data);
     }
 
     private void Update()
     {
-        if (isActive)
+        if (data.IsActive)
+        {
             fireballCollider.Update();
+            ExplodeWhenBeyondTheBoundaries();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (isActive)
+        if (data.IsActive)
             mover.Move();
     }
 
-    private void OnCollision()
+    private void ExplodeWhenBeyondTheBoundaries()
     {
-        isActive = false;
+        if (IsBeyondTheBoundaries())
+            Explode();
+    }
+
+    private bool IsBeyondTheBoundaries()
+    {
+        return (transform.position.x <= 0f ||
+                transform.position.x >= data.MaxHorizontalBoundary ||
+                transform.position.z <= 0f ||
+                transform.position.z >= data.MaxHorizontalBoundary ||
+                transform.position.y >= data.MaxVerticalBoundary
+                );
+    }
+
+    public void Subscribe(Action onExplosion) => this.onExplosion += onExplosion;
+
+    private void Explode()
+    {
+        data.IsActive = false;
+        sFXPlayer.PlayExplosionSFX();
         fireballExplosion.Explode();
-        Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        onExplosion?.Invoke();
+
+        hitHandler.RadiallyHitTheSurface();
     }
 }

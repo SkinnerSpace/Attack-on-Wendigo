@@ -1126,7 +1126,7 @@ MonoBehaviour:
   - tag: SnowParticle
     prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
       type: 3}
-    size: 30
+    size: 80
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8713,7 +8713,7 @@ GameObject:
   - component: {fileID: 1298024281}
   - component: {fileID: 1298024283}
   - component: {fileID: 1298024282}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Terrain_0_0_076e2d40-f1a2-46e3-9633-0747853b201f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9837,7 +9837,11 @@ MonoBehaviour:
   - tag: Fireball
     prefab: {fileID: 6894375513939352395, guid: 1053d71a1d9c45b48a27b4d600e34939,
       type: 3}
-    size: 10
+    size: 15
+  - tag: FireballExplosion
+    prefab: {fileID: 2542683929975215567, guid: d2503b4730ee26b4395c5c0a9a12e2b3,
+      type: 3}
+    size: 15
 --- !u!114 &1488656794
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,25 +7,27 @@ public class WendigoHeadTarget : MonoBehaviour
 {
     [SerializeField] private Wendigo wendigo;
     [SerializeField] private RigController rigController;
-    [SerializeField] private InSightChecker inSightChecker;
     [SerializeField] private Transform defaultPoint;
 
     private Transform target;
     private Vector3 velocity;
     private Vector3 targetPosition;
+    private WendigoData data;
 
-    private void Start() => wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
+    private void Start()
+    {
+        wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
+        data = wendigo.Data;
+    }
 
     private void Update()
     {
         if (target != null)
         {
-            targetPosition = TargetIsVisible() ? target.position : defaultPoint.position;
+            targetPosition = data.TargetFitsLookAngle ? target.position : defaultPoint.position;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
         }
     }
-
-    private bool TargetIsVisible() => (target != null) && inSightChecker.TargetIsVisibleFromPointOfView(target);
 
     public void SetTarget(Transform target)
     {

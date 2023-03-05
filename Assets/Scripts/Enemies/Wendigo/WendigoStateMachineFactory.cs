@@ -13,19 +13,19 @@ public static class WendigoStateMachineFactory
         IState arrival = new Arrival(wendigo);
         IState idle = new Idle(wendigo);
         IState chase = new Chase(wendigo);
-        IState fireball = new FireballLaunch(wendigo);
+        IState cast = new FireballCast(wendigo);
         IState dead = new Dead(wendigo);
 
         Add(disabled, arrival, IsActive());
         Add(arrival, idle, IsArrived());
 
+        Add(idle, cast, ReadyToShoot());
+        Add(chase, cast, ReadyToShoot());
+
         Add(idle, chase, HasTarget());
         Add(chase, idle, HasNoTarget());
 
-        Add(idle, fireball, ReadyToShoot());
-        Add(chase, fireball, ReadyToShoot());
-
-        Add(fireball, idle, NotReadyToShoot());
+        Add(cast, idle, FireballCastIsOver());
 
         Add(idle, dead, IsDead());
         Add(chase, dead, IsDead());
@@ -38,7 +38,7 @@ public static class WendigoStateMachineFactory
         Func<bool> HasTarget() => () => data.Target != null;
         Func<bool> HasNoTarget() => () => data.Target == null;
         Func<bool> ReadyToShoot() => () => data.IsReadyToShoot;
-        Func<bool> NotReadyToShoot() => () => !data.IsReadyToShoot;
+        Func<bool> FireballCastIsOver() => () => data.FireballCastIsOver;
         Func<bool> IsDead() => () => !wendigo.Data.IsAlive;
 
         return stateMachine;

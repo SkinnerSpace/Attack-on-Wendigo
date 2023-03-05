@@ -15,6 +15,10 @@ public class WendigoSerializableData : MonoBehaviour, IWendigoSerializableData
     [SerializeField] private float fireballChargeTime;
     [SerializeField] private float fireballCastTime;
 
+    [Header("Angle of View")]
+    [SerializeField] private float lookAngleOfView;
+    [SerializeField] private float attackAngleOfView;
+
     public int Health { get { return health; } set { health = value; } }
     public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
     public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
@@ -25,4 +29,7 @@ public class WendigoSerializableData : MonoBehaviour, IWendigoSerializableData
     public float FireballMaxDistance => fireballMaxDistance;
     public float FireballChargeTime => fireballChargeTime;
     public float FireballCastTime => fireballCastTime;
+
+    public float LookAngleOfView => lookAngleOfView;
+    public float AttackAngleOfView => attackAngleOfView;
 }

@@ -11,6 +11,8 @@ public class FireballSpawner : MonoBehaviour
     [Range(0, 180)]
     [SerializeField] private float horizontalAngle;
 
+    [SerializeField] private GameObject castVFX;
+
     private float XPositive => verticalAngle / 2f;
     private float XNegative => 360f - XPositive;
 
@@ -20,6 +22,8 @@ public class FireballSpawner : MonoBehaviour
     private void Start() => pooler = PoolHolder.Instance;
 
     public void Initialize(WendigoData data) => this.data = data;
+
+    public void PlayCastVFX() => Instantiate(castVFX, transform.position, transform.rotation);
 
     public void SpawnFireball()
     {

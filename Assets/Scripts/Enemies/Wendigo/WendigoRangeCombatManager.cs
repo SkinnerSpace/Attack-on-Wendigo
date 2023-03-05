@@ -11,7 +11,7 @@ public class WendigoRangeCombatManager : WendigoBaseController
 
     public void CheckReadinessToShoot()
     {
-        if (data.Target != null && data.FireballIsReady)
+        if (data.Target != null && data.TargetFitsFireballAngle && data.FireballIsReady)
         {
             float distanceToTarget = (data.Target.position.FlatV3() - data.Position.FlatV3()).magnitude;
             data.IsReadyToShoot = distanceToTarget >= data.FireballMinDistance && distanceToTarget <= data.FireballMaxDistance;

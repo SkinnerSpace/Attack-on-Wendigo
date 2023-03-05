@@ -12,5 +12,8 @@ public interface IWendigoSerializableData
     float FireballMaxDistance { get; }
     float FireballChargeTime { get; }
     float FireballCastTime { get; }
+
+    float LookAngleOfView { get; }
+    float AttackAngleOfView { get; }
 }
 

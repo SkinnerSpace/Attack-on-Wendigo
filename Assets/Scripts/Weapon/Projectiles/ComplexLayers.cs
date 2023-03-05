@@ -15,11 +15,11 @@ public static class ComplexLayers
 
     public static LayerMask Exploding =
         1 << (int)Layers.Ground |
-        1 << (int)Layers.Damageable |
         1 << (int)Layers.Player |
         1 << (int)Layers.Projectiles |
         1 << (int)Layers.Landscape |
-        1 << (int)Layers.PlayerHitBox;
+        1 << (int)Layers.PlayerHitBox |
+        1 << (int)Layers.Background;
 
     public static LayerMask Interactables =
         1 << (int)Layers.Interactables;

@@ -72,6 +72,7 @@ public class Architect : MonoBehaviour
     {
         float totalSize = mapSize * scale;
         center = new Vector3(totalSize / 2, 0, totalSize / 2);
+
     }
 
     public void AddMarks(Mark mark, float likelyhood)
