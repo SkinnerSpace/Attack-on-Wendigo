@@ -17,8 +17,11 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     [SerializeField] private WendigoPooledObject pool;
     [SerializeField] private Animator animator;
     [SerializeField] private WendigoSFXPlayer sFXPlayer;
+
+    [Header("Combat")]
     [SerializeField] private FireballSpawner fireballSpawner;
-    
+    [SerializeField] private Firebreath firebreath;
+
     [Header("Timer")]
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
@@ -31,7 +34,10 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     public CharacterController Controller => controller;
     public FunctionTimer Timer => timer;
     public WendigoData Data { get; set; }
+    
     public FireballSpawner FireballSpawner => fireballSpawner;
+    public Firebreath Firebreath => firebreath;
+
     public IChronos Chronos => chronos;
     public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
     public IHitBox[] HitBoxes { get; private set; }
@@ -53,6 +59,7 @@ public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
         HitBoxes = GetComponentsInChildren<IHitBox>();
         mover.Initialize(this);
         fireballSpawner.Initialize(Data);
+        firebreath.Initialize(Data);
         AddControllers();
 
         stateMachine = WendigoStateMachineFactory.Create(this);

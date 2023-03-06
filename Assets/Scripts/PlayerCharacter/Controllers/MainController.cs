@@ -49,20 +49,6 @@ public class MainController : MonoBehaviour
         AddController(typeof(ScreenshakesController));
     }
 
-    private void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.N))
-        {
-            DamagePackage damage = new DamagePackage(1);
-            hitBox.ReceiveDamage(damage);
-        }*/
-
-        /*if (Input.GetKeyDown(KeyCode.G))
-        {
-            data.GetShake("Impact").SetPower(shakePower).Launch();
-        }*/
-    }
-
     private void AddController(Type type)
     {
         BaseController controller = Activator.CreateInstance(type) as BaseController;

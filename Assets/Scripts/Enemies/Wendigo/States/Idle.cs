@@ -18,7 +18,7 @@ public class Idle : LoggableState, IState
     public void Tick()
     {
         movementController.Stop();
-        rangeCombatManager.CheckReadinessToShoot();
+        rangeCombatManager.PrepareToAttack();
     }
 
     public void OnEnter()

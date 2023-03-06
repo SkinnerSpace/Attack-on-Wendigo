@@ -28,4 +28,6 @@ public class ScreenshakesController : BaseController
         float shakePower = (impact / maxImpact).Clamp01();
         data.GetShake("Impact").SetPower(shakePower).Launch();
     }
+
+
 }

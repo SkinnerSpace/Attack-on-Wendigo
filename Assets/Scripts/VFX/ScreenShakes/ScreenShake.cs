@@ -8,6 +8,10 @@ public class ScreenShake
     private ShakeCurve curve;
     private float attenuation = 1f;
 
+    private Transform recipient;
+    private Vector3 position;
+    private float maxDistance;
+
     private ScreenShake()
     {
         timer = new ShakeTimer(1f);
@@ -54,9 +58,26 @@ public class ScreenShake
         return this;
     }
 
+    public ScreenShake WithAttenuationToObj(Transform recipient, Vector3 position, float maxDistance)
+    {
+        this.recipient = recipient;
+        this.position = position;
+        this.maxDistance = maxDistance;
+
+        return this;
+    }
+
     public void Launch()
     {
-        Shake shake = new Shake(axis, strength, curve, attenuation, timer);
+        Shake shake = CreateShake();
         ShakeManager.Instance.AddAndLaunch(shake);
+    }
+
+    private Shake CreateShake()
+    {
+        if (recipient != null)
+            return new Shake(axis, strength, curve, recipient, position, maxDistance, timer);
+
+        return new Shake(axis, strength, curve, attenuation, timer);
     }
 }

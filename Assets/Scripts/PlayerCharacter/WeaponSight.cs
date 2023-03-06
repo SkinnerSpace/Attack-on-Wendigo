@@ -24,7 +24,7 @@ public class WeaponSight
 
     private Vector3 ApplyScatter(Vector3 direction)
     {
-        Vector3 deviation = GetRandomDirection();
+        Vector3 deviation = ExtraMath.GetRandomVector3();
         float scatterDegree = Mathf.Lerp(MAX_SCATTER, 0f, data.Precision);
         Vector3 scatter = deviation * scatterDegree;
         Vector3 scatteredDirection = (direction + scatter).normalized;
@@ -33,5 +33,4 @@ public class WeaponSight
     }
 
     private Ray GetExactDirection() => cam.ScreenPointToRay(Input.mousePosition);
-    private Vector3 GetRandomDirection() => new Vector3(x: Rand.Range(-1f, 1f), y: Rand.Range(-1f, 1f), z: Rand.Range(-1f, 1f)).normalized;
 }

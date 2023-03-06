@@ -29,7 +29,7 @@ public class Chase : LoggableState, IState
         if (ShouldRotate) 
             rotationController.RotateToTarget(data.Target.position);
 
-        rangeCombatManager.CheckReadinessToShoot();
+        rangeCombatManager.PrepareToAttack();
     }
 
     private bool ShouldRotate => data.Velocity.magnitude > 1f;

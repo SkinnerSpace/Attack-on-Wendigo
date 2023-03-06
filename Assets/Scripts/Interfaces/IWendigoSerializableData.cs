@@ -7,7 +7,6 @@ public interface IWendigoSerializableData
     float RotationSpeed { get; set; }
     float Deceleration { get; set; }
     Transform Target { get; set; }
-    GameObject Fireball { get; }
     float FireballMinDistance { get; }
     float FireballMaxDistance { get; }
     float FireballChargeTime { get; }
@@ -15,5 +14,12 @@ public interface IWendigoSerializableData
 
     float LookAngleOfView { get; }
     float AttackAngleOfView { get; }
+    float FirebreathAngleOfView { get; }
+    float FirebreathMinDistance { get; }
+    float FirebreathMaxDistance { get; }
+
+    float FireRange { get; }
+    float FireScatter { get; }
+    int FirePrecision { get; }
 }
 

@@ -9,16 +9,21 @@ public class WendigoRangeCombatManager : WendigoBaseController
         data = wendigo.Data;
     }
 
-    public void CheckReadinessToShoot()
+    public void PrepareToAttack()
     {
-        if (data.Target != null && data.TargetFitsFireballAngle && data.FireballIsReady)
-        {
-            float distanceToTarget = (data.Target.position.FlatV3() - data.Position.FlatV3()).magnitude;
-            data.IsReadyToShoot = distanceToTarget >= data.FireballMinDistance && distanceToTarget <= data.FireballMaxDistance;
-        }
-        else
-        {
-            data.IsReadyToShoot = false;
-        }
+        float distance = TargetExist() ? GetDistance() : 0f;
+        PrepareToBreathFire(distance);
+        PrepareToCastAFireball(distance);
     }
+
+    private bool TargetExist() => (data.Target != null);
+    private float GetDistance() => (data.Target.position.FlatV3() - data.Position.FlatV3()).magnitude;
+
+    private void PrepareToBreathFire(float distance) => data.IsReadyToBreathFire = IsAbleToUseAFirebreath() ? OnTheFirebreathDistance(distance) : false;
+    private bool IsAbleToUseAFirebreath() => data.Target != null && data.TargetFitsFirebreathAngle && data.FirebreathAbilityIsCharged;
+    private bool OnTheFirebreathDistance(float distance) => data.IsReadyToBreathFire = distance >= data.FirebreathMinDistance && distance <= data.FirebreathMaxDistance;
+
+    private void PrepareToCastAFireball(float distance) => data.IsReadyToCast = IsAbleToUseAFireball() ? OnTheFireballDistance(distance) : false;
+    private bool IsAbleToUseAFireball() => data.Target != null && data.TargetFitsFireballAngle && data.FireballAbilityIsCharged;
+    private bool OnTheFireballDistance(float distance) => data.IsReadyToCast = distance >= data.FireballMinDistance && distance <= data.FireballMaxDistance;
 }

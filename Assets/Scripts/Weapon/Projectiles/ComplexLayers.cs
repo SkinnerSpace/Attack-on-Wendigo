@@ -24,6 +24,9 @@ public static class ComplexLayers
     public static LayerMask Interactables =
         1 << (int)Layers.Interactables;
 
+    public static LayerMask Inflammable =
+        1 << (int)Layers.Inflammable;
+
     public static LayerMask Landscape =
         1 << (int)Layers.Landscape;
 

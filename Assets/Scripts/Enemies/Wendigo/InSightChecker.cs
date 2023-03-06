@@ -15,6 +15,7 @@ public class InSightChecker : MonoBehaviour
     {
         float dotToTarget = (data.Target != null) ? GetDotToTarget(data.Target) : 0f;
         data.TargetFitsLookAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.LookAngleOfView) : false;
+        data.TargetFitsFirebreathAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.FirebreathAngleOfView) : false;
         data.TargetFitsFireballAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.AttackAngleOfView) : false;
     }
 

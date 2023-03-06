@@ -9,7 +9,15 @@ public class Shake
     public Vector3 MaxAngleDisplacement => angle * strength.amount * strength.angleMultiplier;
     public Vector3 Dir => direction;
     public Vector3 Axis => axis;
-    public float Attenuation => attenuation;
+    public float Attenuation
+    {
+        get{
+            if (recipient != null)
+                CalculateAttenuation();
+
+            return attenuation;
+        }
+    }
 
     public float FQ => curve.frequency;
     public float Attack => curve.attack;
@@ -28,6 +36,10 @@ public class Shake
     private float exWave;
     private float wave;
 
+    private Transform recipient;
+    private float maxDistance;
+    private Vector3 position;
+
     public Shake(Vector3 axis, ShakeStrength strength, ShakeCurve curve, float attenuation, ShakeTimer timer = null)
     {
         this.axis = axis;
@@ -35,6 +47,25 @@ public class Shake
         this.curve = curve;
         this.attenuation = attenuation;
         this.timer = timer;
+    }
+
+    public Shake(Vector3 axis, ShakeStrength strength, ShakeCurve curve, Transform recipient, Vector3 position, float maxDistance, ShakeTimer timer = null)
+    {
+        this.axis = axis;
+        this.strength = strength;
+        this.curve = curve;
+        this.recipient = recipient;
+        this.position = position;
+        this.maxDistance = maxDistance;
+        this.timer = timer;
+    }
+
+    private void CalculateAttenuation()
+    {
+        float distance = Vector3.Distance(recipient.position, position);
+        attenuation = 1f - (distance / maxDistance);
+        if (attenuation <= 0f) attenuation = 0f;
+        else attenuation *= attenuation;
     }
 
     public void Launch(Vector3 dir, float angle)

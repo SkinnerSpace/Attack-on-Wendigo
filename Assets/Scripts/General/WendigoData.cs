@@ -28,20 +28,39 @@ public class WendigoData
 
     public bool IsActive { get; set; }
     public bool IsArrived { get; set; }
+
+
     public Transform Target { get { return serializable.Target; } set { serializable.Target = value; } }
     public bool TargetFitsLookAngle { get; set; }
     public bool TargetFitsFireballAngle { get; set; }
+    
 
-    public GameObject Fireball => serializable.Fireball;
     public float FireballMinDistance => serializable.FireballMinDistance;
     public float FireballMaxDistance => serializable.FireballMaxDistance;
-    public bool IsReadyToShoot { get; set; }
+
+    public bool IsReadyToCast { get; set; }
+    public bool IsReadyToBreathFire { get; set; }
+
     public float FireballCastTime => serializable.FireballCastTime;
     public float FireballChargeTime => serializable.FireballChargeTime;
-    public bool FireballIsReady { get; set; } = true;
+
+    public bool FireballAbilityIsCharged { get; set; } = true;
     public bool FireballCastIsOver { get; set; } = false;
+
+    
 
     public float LookAngleOfView => serializable.LookAngleOfView;
     public float AttackAngleOfView => serializable.AttackAngleOfView;
+
+
+    public float FirebreathMinDistance => serializable.FirebreathMinDistance;
+    public float FirebreathMaxDistance => serializable.FirebreathMaxDistance;
+    public float FirebreathAngleOfView => serializable.FirebreathAngleOfView;
+    public bool TargetFitsFirebreathAngle { get; set; }
+    public bool FirebreathAbilityIsCharged { get; set; } = true;
+    public bool FirebreathIsOver { get; set; } = false;
+    public float FireRange => serializable.FireRange;
+    public float FireScatter => serializable.FireScatter;
+    public int FirePrecision => serializable.FirePrecision;
 }
 

@@ -34,6 +34,7 @@ public class CollapseController : MonoBehaviour
         estimations = CollapseEstimator.EstimateFor(acceptor.height);
         dropper = new PropDropper(acceptor, depthMultiplier);
         shaker = new PropShaker(estimations.frequency);
+
     }
 
     private void SubscribeComponents()
@@ -52,6 +53,8 @@ public class CollapseController : MonoBehaviour
 
             dropper.Launch(pushDir);
             shaker.Launch();
+            ShakeTheEarth();
+
             StartCoroutine(Collapse());
         }
     }
@@ -71,5 +74,15 @@ public class CollapseController : MonoBehaviour
         notifyOnUpdate(completeness);
 
         acceptor.Add(dropper.posDisplacement).Add(dropper.rotDisplacement).Add(shaker.GetPosDisplacement()).Apply();
+    }
+
+    private void ShakeTheEarth()
+    {
+        ScreenShake.Create().
+                withTime(estimations.time).
+                WithAxis(1f, 1f, 0f).
+                WithStrength(0.1f, 1.5f).
+                WithCurve(estimations.frequency, 0.3f, 0.3f).
+                WithAttenuationToObj(CharacterData.Instance.transform, transform.position, 100f).Launch();
     }
 }

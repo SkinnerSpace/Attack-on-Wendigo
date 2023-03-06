@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class FireballCast : LoggableState, IState
+﻿public class FireballCast : LoggableState, IState
 {
     private WendigoData data;
     private FunctionTimer timer;
@@ -26,8 +24,8 @@ public class FireballCast : LoggableState, IState
     {
         LogEnter();
 
-        data.IsReadyToShoot = false;
-        data.FireballIsReady = false;
+        data.IsReadyToCast = false;
+        data.FireballAbilityIsCharged = false;
         animationPlayer.PlayCastAnimation();
         sFXPlayer.PlayShortRoarSFX();
     }
@@ -35,8 +33,7 @@ public class FireballCast : LoggableState, IState
     public void OnExit()
     {
         LogExit();
-
         data.FireballCastIsOver = false;
-        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballIsReady = true);
+        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballAbilityIsCharged = true);
     }
 }

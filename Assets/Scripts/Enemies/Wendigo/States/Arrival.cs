@@ -21,7 +21,7 @@ public class Arrival : LoggableState, IState
 
     public void Tick()
     {
-        rangeCombatManager.CheckReadinessToShoot();
+        rangeCombatManager.PrepareToAttack();
     }
 
     public void OnEnter()

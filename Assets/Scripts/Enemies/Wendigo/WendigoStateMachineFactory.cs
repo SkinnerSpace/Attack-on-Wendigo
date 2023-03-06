@@ -11,24 +11,52 @@ public static class WendigoStateMachineFactory
 
         IState disabled = new Disabled();
         IState arrival = new Arrival(wendigo);
+
         IState idle = new Idle(wendigo);
         IState chase = new Chase(wendigo);
+
+        IState burn = new FirebreathAttack(wendigo);
         IState cast = new FireballCast(wendigo);
+
         IState dead = new Dead(wendigo);
 
-        Add(disabled, arrival, IsActive());
-        Add(arrival, idle, IsArrived());
+        SetArrival();
+        SetFirebreath();
+        //SetFireball();
+        SetMovement();
+        SetDeath();
 
-        Add(idle, cast, ReadyToShoot());
-        Add(chase, cast, ReadyToShoot());
+        void SetArrival()
+        {
+            Add(disabled, arrival, IsActive());
+            Add(arrival, idle, IsArrived());
+        }
 
-        Add(idle, chase, HasTarget());
-        Add(chase, idle, HasNoTarget());
+        void SetFirebreath()
+        {
+            Add(idle, burn, ReadyToBurn());
+            Add(chase, burn, ReadyToBurn());
+            Add(burn, idle, FireBreathIsOver());
+        }
 
-        Add(cast, idle, FireballCastIsOver());
+        void SetFireball()
+        {
+            Add(idle, cast, ReadyToCast());
+            Add(chase, cast, ReadyToCast());
+            Add(cast, idle, FireballCastIsOver());
+        }
 
-        Add(idle, dead, IsDead());
-        Add(chase, dead, IsDead());
+        void SetMovement()
+        {
+            Add(idle, chase, HasTarget());
+            Add(chase, idle, HasNoTarget());
+        }
+
+        void SetDeath()
+        {
+            Add(idle, dead, IsDead());
+            Add(chase, dead, IsDead());
+        }
 
         stateMachine.SetState(disabled);
 
@@ -37,8 +65,13 @@ public static class WendigoStateMachineFactory
         Func<bool> IsArrived() => () => data.IsArrived;
         Func<bool> HasTarget() => () => data.Target != null;
         Func<bool> HasNoTarget() => () => data.Target == null;
-        Func<bool> ReadyToShoot() => () => data.IsReadyToShoot;
+
+        Func<bool> ReadyToCast() => () => data.IsReadyToCast;
         Func<bool> FireballCastIsOver() => () => data.FireballCastIsOver;
+
+        Func<bool> ReadyToBurn() => () => data.IsReadyToBreathFire;
+        Func<bool> FireBreathIsOver() => () => data.FirebreathIsOver;
+
         Func<bool> IsDead() => () => !wendigo.Data.IsAlive;
 
         return stateMachine;

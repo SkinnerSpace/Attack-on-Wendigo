@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4871,7 +4871,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5823,12 +5823,12 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0.08653071
-          outSlope: 0.08653071
+          value: 0.0044403076
+          inSlope: -5.3605666
+          outSlope: -5.3605666
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.20545077
+          inWeight: 0.059214618
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -8592,12 +8592,12 @@ ParticleSystem:
       emitter: {fileID: 526120465188995569}
       type: 1
       properties: 0
-      emitProbability: 1
+      emitProbability: 0.3
     - serializedVersion: 3
       emitter: {fileID: 526120466635665410}
       type: 1
       properties: 0
-      emitProbability: 1
+      emitProbability: 0.3
   LightsModule:
     enabled: 0
     ratio: 0
@@ -9638,7 +9638,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -14458,7 +14458,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -15400,22 +15400,31 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0.06289308
         - serializedVersion: 3
-          time: 0.08988264
-          value: 0.56508535
-          inSlope: 1.8514681
-          outSlope: 1.8514681
+          time: 0.08589063
+          value: 0.52508533
+          inSlope: 1.2017133
+          outSlope: 1.2017133
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.95352215
+          outWeight: 0.111781314
+        - serializedVersion: 3
+          time: 0.9538637
+          value: 0.55320483
+          inSlope: -2.77769
+          outSlope: -2.77769
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.07286874
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0.08653071
-          outSlope: 0.08653071
+          value: 0
+          inSlope: -5.2736735
+          outSlope: -5.2736735
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.20545077
+          inWeight: 0.04148763
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

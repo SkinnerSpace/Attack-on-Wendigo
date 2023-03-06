@@ -37,6 +37,7 @@ Transform:
   - {fileID: 8885503266744455762}
   - {fileID: 6238133608942363257}
   - {fileID: 8082463787128483861}
+  - {fileID: 3071082108301598928}
   m_Father: {fileID: 5978288324500241329}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 22.487228, y: -179.99985, z: -0.0000019888641}
@@ -2030,6 +2031,54 @@ Transform:
   m_Father: {fileID: 429680503242453467}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 39.87183, y: 0.00018744516, z: -179.99988}
+--- !u!1 &2438043030923435616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3071082108301598928}
+  - component: {fileID: 1885422165180894026}
+  m_Layer: 0
+  m_Name: Firebreath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3071082108301598928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438043030923435616}
+  m_LocalRotation: {x: 0.7197883, y: 0.000000819564, z: -0.0000011622905, w: -0.6941937}
+  m_LocalPosition: {x: 0, y: 0.07893865, z: 0.011588347}
+  m_LocalScale: {x: 0.01, y: 0.009999998, z: 0.009999998}
+  m_Children:
+  - {fileID: 1449796521417748721}
+  m_Father: {fileID: 6940807762538346782}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1885422165180894026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438043030923435616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18db85ee275f4c7429aaa0a99e19b34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firebreathVFX: {fileID: 1449796521417748723}
+  flameVFX: {fileID: 7048311266900181509, guid: 3b14b1155bd1f4245890118d1a714813,
+    type: 3}
+  visualizeRaycast: 1
 --- !u!1 &2494348140181123556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2370,7 @@ MonoBehaviour:
   animator: {fileID: 4718767853038179663}
   sFXPlayer: {fileID: 6783199577854852569}
   fireballSpawner: {fileID: 7483865602147209108}
+  firebreath: {fileID: 1885422165180894026}
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
   pendingTarget: {fileID: 0}
@@ -2341,13 +2391,18 @@ MonoBehaviour:
   rotationSpeed: 20
   deceleration: 1
   target: {fileID: 0}
-  fireball: {fileID: 0}
   fireballMinDistance: 50
   fireballMaxDistance: 100
   fireballChargeTime: 8
   fireballCastTime: 2
+  firebreathMinDistance: 10
+  firebreathMaxDistance: 45
+  fireRange: 50
+  fireScatter: 0.12
+  firePrecision: 3
   lookAngleOfView: 45
   attackAngleOfView: 2
+  firebreathAngleOfView: 8
 --- !u!114 &6902924081060343994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8604,6 +8659,107 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8ecfa87a1e8ddcf4fab92f79df276f4e,
     type: 3}
   m_PrefabInstance: {fileID: 896291757315114250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1392616721666246459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3071082108301598928}
+    m_Modifications:
+    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526120465322489803, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+        type: 3}
+      propertyPath: m_Name
+      value: FirebreathVFX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74e2dfbc41ce03f4bb324670fa5164d3, type: 3}
+--- !u!4 &1449796521417748721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392616721666246459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1449796521417748723 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392616721666246459}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3771881098663896165
 PrefabInstance:
