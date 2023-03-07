@@ -7,6 +7,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     [SerializeField] private Crate crate;
     [SerializeField] private CrateLandingController landingController;
     [SerializeField] private LaserBeam laserBeam;
+    [SerializeField] private Openable openable;
 
     private IObjectPooler pooler;
 
@@ -19,6 +20,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
         crate.ResetState();
         landingController.ResetLanding();
         laserBeam.SwitchOff();
+        openable.ActivateCollision();
     }
 
     public void SetActive(bool active) => gameObject.SetActive(active);

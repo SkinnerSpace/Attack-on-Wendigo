@@ -27,11 +27,7 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
         main.GetController<GroundDetector>().Subscribe(this);
     }
 
-    public override void Disconnect()
-    {
-        /*main.Mover.Unsubscribe(this);
-        main.GetController<GroundDetector>().Unsubscribe(this);*/
-    }
+    public override void Disconnect() { }
 
     public void Land()
     {

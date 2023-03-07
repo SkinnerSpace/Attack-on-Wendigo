@@ -35,11 +35,7 @@ public class FOVController : BaseController, IMoverObserver
         main.GetController<DashController>().Subscribe(OnDash);
     }
 
-    public override void Disconnect()
-    {
-        /*main.GetController<MovementController>().Unsubscribe(OnRunUpdate);
-        main.GetController<DashController>().Unsubscribe(OnDash);*/
-    }
+    public override void Disconnect() { }
 
     public void Update()
     {

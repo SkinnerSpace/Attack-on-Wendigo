@@ -7,6 +7,7 @@ public class MainController : MonoBehaviour
     [SerializeField] private CharacterData data;
     [SerializeField] private CharacterMover mover;
     [SerializeField] private HitBox hitBox;
+    [SerializeField] private FireHitBox fireHitBox;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
     [SerializeField] private EventManager events;
@@ -19,6 +20,7 @@ public class MainController : MonoBehaviour
     public EventManager Events => events;
     public MainInputReader InputReader => inputReader;
     public HitBox HitBox => hitBox;
+    public FireHitBox FireHitBox => fireHitBox;
 
     private List<BaseController> controllers;
     private event Action onConnectControlles;
@@ -47,6 +49,7 @@ public class MainController : MonoBehaviour
         AddController(typeof(InteractionController));
         AddController(typeof(CharacterHealthSystem));
         AddController(typeof(ScreenshakesController));
+        AddController(typeof(CharacterBurnController));
     }
 
     private void AddController(Type type)

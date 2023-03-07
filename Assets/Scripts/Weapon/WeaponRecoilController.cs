@@ -29,6 +29,7 @@ public class WeaponRecoilController : MonoBehaviour
         CountDown();
         float percent = GetRecoilPercent();
         transform.localPosition = Vector3.Lerp(Vector3.zero, RecoiledPosition, percent);
+        //Debug.Log(percent);
     }
 
     private void CountDown()
@@ -45,7 +46,10 @@ public class WeaponRecoilController : MonoBehaviour
     private float GetRecoilPercent()
     {
         float percent = Mathf.InverseLerp(0f, recoilTime, currentTime);
+        percent = Easing.QuadEaseOut(percent);
+
         float lerp = Mathf.Lerp(-0.5f, 1f, percent);
-        return Easing.QuadEaseOut(lerp);
+        return lerp;
+        //return Easing.QuadEaseOut(lerp);
     }
 }

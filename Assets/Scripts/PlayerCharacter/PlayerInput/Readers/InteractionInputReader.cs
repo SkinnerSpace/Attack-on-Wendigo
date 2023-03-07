@@ -9,6 +9,6 @@ public class InteractionInputReader : InputReader
         if (input.Pressed(keys.Interact)) onInteract?.Invoke();
     }
 
-    public void Subscribe(IInteractor interactor) => onInteract += interactor.Interact;
-    public void Unsubscribe(IInteractor interactor) => onInteract -= interactor.Interact;
+    public void Subscribe(Action onInteract) => this.onInteract += onInteract;
+    public void Unsubscribe(Action onInteract) => this.onInteract -= onInteract;
 }

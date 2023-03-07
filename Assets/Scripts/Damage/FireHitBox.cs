@@ -15,6 +15,15 @@ public class FireHitBox : MonoBehaviour, IInflammable
     private float time;
     private bool isOnFire;
 
+    private event Action onFire;
+    private event Action putOutTheFire;
+
+    public void Subscribe(Action onFire, Action putOutTheFire)
+    {
+        this.onFire += onFire;
+        this.putOutTheFire += putOutTheFire;
+    }
+
     private void Update()
     {
         if (isOnFire)
@@ -30,6 +39,8 @@ public class FireHitBox : MonoBehaviour, IInflammable
         isOnFire = true;
         boxCollider.enabled = false;
         time = 0f;
+
+        onFire.Invoke();
     }
 
     private void EnableCollisionOnTimeOut()
@@ -41,26 +52,9 @@ public class FireHitBox : MonoBehaviour, IInflammable
     private void PutOutTheFireOnTimeOut()
     {
         if (time >= putOutTheFireTime)
+        {
             isOnFire = false;
-    }
-}
-
-public class BurnHandler : BaseController
-{
-    private FireHitBox fireHitBox;
-
-    public override void Connect()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Disconnect()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Initialize(MainController main)
-    {
-        throw new System.NotImplementedException();
+            putOutTheFire.Invoke();
+        }
     }
 }

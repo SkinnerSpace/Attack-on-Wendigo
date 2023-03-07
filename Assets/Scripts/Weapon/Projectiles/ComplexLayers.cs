@@ -10,7 +10,9 @@ public static class ComplexLayers
         1 << (int)Layers.Projectiles |
         1 << (int)Layers.Damaging |
         1 << (int)Layers.Barriers |
-        1 << (int)Layers.RagDoll
+        1 << (int)Layers.RagDoll |
+        1 << (int)Layers.PlayerHitBox |
+        1 << (int)Layers.Inflammable
         );
 
     public static LayerMask Exploding =

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public class CharacterMover : MonoBehaviour, IBaseController
+public class CharacterMover : MonoBehaviour
 {
     private CharacterData data;
 
@@ -11,6 +11,8 @@ public class CharacterMover : MonoBehaviour, IBaseController
     public void Initialize(MainController main) => data = main.Data;
 
     public void Connect() => isReady = true;
+
+    public void Disconnect() { }
 
     public void Subscribe(IMoverObserver observer) => onUpdate += observer.Update;
     public void Unsubscribe(IMoverObserver observer) => onUpdate -= observer.Update;

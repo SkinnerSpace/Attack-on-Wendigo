@@ -11,10 +11,9 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private VisionRaycast visionRaycast;
     private Transform target;
 
-    private Pickable pickable;
-    private IOpenable openable;
-
     private Vector2 mousePos;
+
+    private ItemInteractor itemInteractor;
 
     private event Action<Transform> onTargetAdded;
     private event Action<Transform> onTargetRemoved;
@@ -26,6 +25,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         input = main.InputReader;
 
         keeper = new WeaponKeeper(data, input);
+        itemInteractor = ItemInteractor.CreateWithDataTakeAndDrop(data, TakeAnItem, DropAnItem);
         
         visionRaycast = new VisionRaycast(data.Cam, ComplexLayers.Interactables);
     }
@@ -33,13 +33,13 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public override void Connect()
     {
         main.GetController<CharacterHealthSystem>().SubscribeOnDeath(DropAnItem);
-        input.Get<InteractionInputReader>().Subscribe(this);
+        input.Get<InteractionInputReader>().Subscribe(Interact);
         input.Get<MousePositionInputReader>().Subscribe(this);
     }
 
     public override void Disconnect()
     {
-        input.Get<InteractionInputReader>().Unsubscribe(this);
+        input.Get<InteractionInputReader>().Unsubscribe(Interact);
         input.Get<MousePositionInputReader>().Unsubscribe(this);
     }
 
@@ -69,38 +69,8 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         this.target = target;
     }
 
-    public void Interact()
-    {
-        if (target != null && IsCloseEnough())
-        {
-            ActUponTarget();
-        }
-        else
-        {
-            keeper.DropAnItem(mousePos);
-        }
-    }
+    public void Interact() => itemInteractor.Interact(target);
 
     private void DropAnItem() => keeper.DropAnItem(mousePos);
-
-    private void ActUponTarget()
-    {
-        pickable = target.GetComponent<Pickable>();
-
-        if (pickable != null)
-        {
-            keeper.DropAnItem(mousePos);
-
-            Weapon weapon = target.parent.GetComponent<Weapon>();
-            keeper.Take(pickable, weapon);
-            return;
-        }
-
-        openable = target.GetComponent<IOpenable>();
-
-        if (openable != null)
-            openable.Open();
-    }
-
-    private bool IsCloseEnough() => Vector3.Distance(data.Position, target.position) < data.ReachDistance;
+    private void TakeAnItem(Pickable pickable, Weapon weapon) => keeper.Take(pickable, weapon);
 }

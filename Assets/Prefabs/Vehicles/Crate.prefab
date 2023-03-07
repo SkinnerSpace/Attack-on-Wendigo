@@ -441,3 +441,4 @@ MonoBehaviour:
   crate: {fileID: 137477694732360836}
   landingController: {fileID: 340786710075545641}
   laserBeam: {fileID: 6744949977964748514}
+  openable: {fileID: 1090654136677401993}

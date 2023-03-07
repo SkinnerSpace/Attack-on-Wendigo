@@ -251,6 +251,7 @@ MonoBehaviour:
   data: {fileID: 61735261016310312}
   mover: {fileID: 2146012073234770375}
   hitBox: {fileID: 6543368184488871078}
+  fireHitBox: {fileID: 3576839576228049924}
   timer: {fileID: 7254224541728550267}
   chronos: {fileID: 8860424869380561027}
   events: {fileID: 0}

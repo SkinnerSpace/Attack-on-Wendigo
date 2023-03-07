@@ -18,6 +18,9 @@ public class CameraController : BaseController, IMouseMotionObserver
         input = main.InputReader;
     }
 
+    public override void Connect() => input.Get<MouseMotionInputReader>().Subscribe(this);
+    public override void Disconnect() => input.Get<MouseMotionInputReader>().Unsubscribe(this);
+
     public void ReceiveMotion(Vector2 motion)
     {
         xAngle += motion.x * chronos.DeltaTime;
@@ -31,7 +34,4 @@ public class CameraController : BaseController, IMouseMotionObserver
     private void UpdateCameraRotation() => data.CameraViewEuler = new Vector3(yAngle, xAngle, data.CameraViewEuler.z);
 
     private void UpdateBodyRotation() => data.Euler = new Vector3(0f, xAngle, 0f);
-
-    public override void Connect() => input.Get<MouseMotionInputReader>().Subscribe(this);
-    public override void Disconnect() => input.Get<MouseMotionInputReader>().Unsubscribe(this);
 }

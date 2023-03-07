@@ -13,15 +13,9 @@ public class ScreenshakesController : BaseController
         data = main.Data;
     }
 
-    public override void Connect()
-    {
-        main.GetController<CharacterHealthSystem>().SubscribeOnImpact(ShakeOnImpactReceived);
-    }
+    public override void Connect() => main.GetController<CharacterHealthSystem>().SubscribeOnImpact(ShakeOnImpactReceived);
 
-    public override void Disconnect()
-    {
-        
-    }
+    public override void Disconnect() { }
 
     private void ShakeOnImpactReceived(float impact)
     {
