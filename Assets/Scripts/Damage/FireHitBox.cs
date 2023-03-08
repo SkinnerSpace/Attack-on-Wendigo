@@ -14,6 +14,7 @@ public class FireHitBox : MonoBehaviour, IInflammable
 
     private float time;
     private bool isOnFire;
+    private bool isActive = true;
 
     private event Action onFire;
     private event Action putOutTheFire;
@@ -24,6 +25,27 @@ public class FireHitBox : MonoBehaviour, IInflammable
         this.putOutTheFire += putOutTheFire;
     }
 
+    public void Subscribe(Action onFire) => this.onFire += onFire;
+
+    public void SetActive(bool isActive)
+    {
+        this.isActive = isActive;
+        enabled = isActive;
+        boxCollider.enabled = isActive;
+    }
+
+    public void SetOnFire()
+    {
+        if (isActive)
+        {
+            isOnFire = true;
+            boxCollider.enabled = false;
+            time = 0f;
+
+            onFire.Invoke();
+        }
+    }
+
     private void Update()
     {
         if (isOnFire)
@@ -32,15 +54,6 @@ public class FireHitBox : MonoBehaviour, IInflammable
             EnableCollisionOnTimeOut();
             PutOutTheFireOnTimeOut();
         }
-    }
-
-    public void SetOnFire()
-    {
-        isOnFire = true;
-        boxCollider.enabled = false;
-        time = 0f;
-
-        onFire.Invoke();
     }
 
     private void EnableCollisionOnTimeOut()

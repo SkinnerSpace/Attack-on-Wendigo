@@ -9,11 +9,10 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private WeaponKeeper keeper;
     private IInputReader input;
     private VisionRaycast visionRaycast;
+    private ItemInteractor itemInteractor;
     private Transform target;
 
     private Vector2 mousePos;
-
-    private ItemInteractor itemInteractor;
 
     private event Action<Transform> onTargetAdded;
     private event Action<Transform> onTargetRemoved;

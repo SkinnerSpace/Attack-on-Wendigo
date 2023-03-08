@@ -5,6 +5,9 @@ public class ItemInteractor
 {
     private CharacterData data;
 
+    private Pickable pickable;
+    private IOpenable openable;
+
     private Action<Pickable, Weapon> takeAnItem;
     private Action dropAnItem;
 
@@ -37,7 +40,7 @@ public class ItemInteractor
 
     private void PickPickable(Transform target)
     {
-        Pickable pickable = target.GetComponent<Pickable>();
+        pickable = target.GetComponent<Pickable>();
 
         if (pickable != null)
         {
@@ -50,7 +53,7 @@ public class ItemInteractor
 
     private void OpenOpenable(Transform target)
     {
-        IOpenable openable = target.GetComponent<IOpenable>();
+        openable = target.GetComponent<IOpenable>();
 
         if (openable != null)
             openable.Open();

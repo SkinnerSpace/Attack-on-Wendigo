@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Firebreath : MonoBehaviour
 {
-    private const float INFLAMMATION_PROBABILITY = 0.01f;
+    private const float INFLAMMATION_PROBABILITY = 0.5f;
 
+    [Header("Required Components")]
     [SerializeField] private ParticleSystem firebreathVFX;
     [SerializeField] private GameObject flameVFX;
+    [SerializeField] private Chronos chronos;
+
+    [Header("Settings")]
     [SerializeField] private bool visualizeRaycast;
     [SerializeField] private float deviation = 0.1f;
+    [SerializeField] private float flameVFXTime = 0.3f;
 
     private WendigoData data;
     private IObjectPooler pooler;
 
     private List<Vector3> testHitPoints = new List<Vector3>();
+    private float currentFlameVFXTime;
 
     private void Start()
     {
@@ -41,35 +47,51 @@ public class Firebreath : MonoBehaviour
     private void Cast()
     {
         testHitPoints.Clear();
+/*        currentFlameVFXTime += chronos.DeltaTime;*/
 
+        CastRayFountain();
+
+/*        if (FlameVFXTimeOut())
+        {
+            currentFlameVFXTime = 0f;
+        }*/
+    }
+
+    private void CastRayFountain()
+    {
         for (int x = -data.FirePrecision; x < data.FirePrecision + 1; x++)
         {
             for (int y = -data.FirePrecision; y < data.FirePrecision + 1; y++)
             {
-                Detect(x, y, ComplexLayers.Exploding, PlayFlameVFX);
-                Detect(x, y, ComplexLayers.Inflammable, SetOnFire);
-
-                if (visualizeRaycast) 
-                    Detect(x, y, ComplexLayers.Exploding, TestRaycast);
+                ExecuteDetection(x, y);
             }
         }
     }
 
-    private void Detect(int x, int y, LayerMask mask, Action<RaycastHit> onDetected)
+    private void ExecuteDetection(int x, int y)
     {
-        Vector3 direction = GetDirection(x, y);
+        IntVector2 vector = new IntVector2(x, y);
+
+        Detect(vector, ComplexLayers.Inflammable, SetOnFire);
+        //PlayFlameVFXOnTime(vector);
+
+        if (visualizeRaycast)
+            Detect(vector, ComplexLayers.Exploding, TestRaycast);
+    }
+
+    private void Detect(IntVector2 vector, LayerMask mask, Action<RaycastHit> onDetected)
+    {
+        Vector3 direction = GetDirection(vector);
         direction = RandomizeDirection(direction);
 
         if (Physics.Raycast(transform.position, direction, out RaycastHit hit, data.FireRange, mask))
-        {
             onDetected(hit);
-        }
     }
 
-    private Vector3 GetDirection(int x, int y)
+    private Vector3 GetDirection(IntVector2 vector)
     {
-        float xOffset = GetOffset(x);
-        float yOffset = GetOffset(y);
+        float xOffset = GetOffset(vector.x);
+        float yOffset = GetOffset(vector.y);
         Vector3 dir = new Vector3(xOffset, yOffset, 0f) + transform.forward;
         dir = dir.normalized;
 
@@ -86,10 +108,20 @@ public class Firebreath : MonoBehaviour
 
     private float GetOffset(int value) => (value / (float)data.FirePrecision) * data.FireScatter;
 
+    private void PlayFlameVFXOnTime(IntVector2 vector)
+    {
+        if (FlameVFXTimeOut())
+            Detect(vector, ComplexLayers.Exploding, PlayFlameVFX);
+    }
+
+    private bool FlameVFXTimeOut() => currentFlameVFXTime >= flameVFXTime;
+
     private void PlayFlameVFX(RaycastHit hit)
     {
-        if (Rand.Range01() <= INFLAMMATION_PROBABILITY)
-            pooler.SpawnFromThePool("SmallFlame", hit.point, Quaternion.identity);
+        pooler.SpawnFromThePool("SmallFlame", hit.point, Quaternion.identity);
+        Debug.Log("PLAY!");
+      /*  if (Rand.Range01() >= INFLAMMATION_PROBABILITY)
+            pooler.SpawnFromThePool("SmallFlame", hit.point, Quaternion.identity);*/
     }
 
     private void SetOnFire(RaycastHit hit)

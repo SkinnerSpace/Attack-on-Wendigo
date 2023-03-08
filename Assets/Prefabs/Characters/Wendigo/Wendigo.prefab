@@ -2078,7 +2078,10 @@ MonoBehaviour:
   firebreathVFX: {fileID: 1449796521417748723}
   flameVFX: {fileID: 7048311266900181509, guid: 3b14b1155bd1f4245890118d1a714813,
     type: 3}
-  visualizeRaycast: 1
+  chronos: {fileID: 6855492014976806890}
+  visualizeRaycast: 0
+  deviation: 0.1
+  flameVFXTime: 1
 --- !u!1 &2494348140181123556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +2402,7 @@ MonoBehaviour:
   firebreathMaxDistance: 45
   fireRange: 50
   fireScatter: 0.12
-  firePrecision: 3
+  firePrecision: 2
   lookAngleOfView: 45
   attackAngleOfView: 2
   firebreathAngleOfView: 8
