@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WendigoSerializableData : MonoBehaviour, IWendigoSerializableData
+public class WendigoSerializableData : MonoBehaviour
 {
     [SerializeField] private int health;
     [SerializeField] private float movementSpeed;

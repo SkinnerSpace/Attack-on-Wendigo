@@ -3,106 +3,110 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
+namespace WendigoCharacter
 {
-    public static int id;
-
-    [SerializeField] private WendigoSerializableData serializableData;
-
-    [Header("Required Components")]
-    [SerializeField] private WendigoMover mover;
-    [SerializeField] private CharacterController controller;
-    [SerializeField] private PropDestroyer mainPropDestroyer;
-    [SerializeField] private RagDollController ragDollController;
-    [SerializeField] private WendigoPooledObject pool;
-    [SerializeField] private Animator animator;
-    [SerializeField] private WendigoSFXPlayer sFXPlayer;
-
-    [Header("Combat")]
-    [SerializeField] private FireballSpawner fireballSpawner;
-    [SerializeField] private Firebreath firebreath;
-
-    [Header("Timer")]
-    [SerializeField] private FunctionTimer timer;
-    [SerializeField] private Chronos chronos;
-
-    [SerializeField] private Transform pendingTarget;
-    public Transform PendingTarget => pendingTarget;
-
-    public Animator Animator => animator;
-    public WendigoSFXPlayer SFXPlayer => sFXPlayer;
-    public CharacterController Controller => controller;
-    public FunctionTimer Timer => timer;
-    public WendigoData Data { get; set; }
-    
-    public FireballSpawner FireballSpawner => fireballSpawner;
-    public Firebreath Firebreath => firebreath;
-
-    public IChronos Chronos => chronos;
-    public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
-    public IHitBox[] HitBoxes { get; private set; }
-
-    private List<WendigoBaseController> controllers;
-
-    public void OnSpawn() => Data.IsActive = true;
-    private void Update()
+    public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     {
-        if (chronos.IsTicking)
-            stateMachine.Tick();
-    }
+        public static int id;
 
-    private void Awake()
-    {
-        transform.name = "Wendigo_" + (id++);
+        [SerializeField] private WendigoSerializableData serializableData;
+        [SerializeField] private WendigoData data;
 
-        Data = new WendigoData(serializableData, transform);
-        HitBoxes = GetComponentsInChildren<IHitBox>();
-        mover.Initialize(this);
-        fireballSpawner.Initialize(Data);
-        firebreath.Initialize(Data);
-        AddControllers();
+        [Header("Required Components")]
+        [SerializeField] private WendigoMover mover;
+        [SerializeField] private CharacterController controller;
+        [SerializeField] private PropDestroyer mainPropDestroyer;
+        [SerializeField] private RagDollController ragDollController;
+        [SerializeField] private WendigoPooledObject pool;
+        [SerializeField] private Animator animator;
+        [SerializeField] private WendigoSFXPlayer sFXPlayer;
 
-        stateMachine = WendigoStateMachineFactory.Create(this);
+        [Header("Combat")]
+        [SerializeField] private FireballSpawner fireballSpawner;
+        [SerializeField] private Firebreath firebreath;
 
-        GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationPlayer>());
-        GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
-        pool.Subscribe(this);
-    }
+        [Header("Timer")]
+        [SerializeField] private FunctionTimer timer;
+        [SerializeField] private Chronos chronos;
 
-    private void AddControllers()
-    {
-        controllers = new List<WendigoBaseController>();
+        [SerializeField] private Transform pendingTarget;
+        public Transform PendingTarget => pendingTarget;
 
-        AddController(typeof(WendigoRotationController));
-        AddController(typeof(WendigoMovementController));
-        AddController(typeof(WendigoHealthSystem));
-        AddController(typeof(WendigoTargetManager));
-        AddController(typeof(WendigoAnimationPlayer));
-        AddController(typeof(WendigoRangeCombatManager));
-    }
+        public Animator Animator => animator;
+        public WendigoSFXPlayer SFXPlayer => sFXPlayer;
+        public CharacterController Controller => controller;
+        public FunctionTimer Timer => timer;
+        public WendigoData Data => data;
 
-    private void AddController(Type type)
-    {
-        WendigoBaseController controller = Activator.CreateInstance(type) as WendigoBaseController;
-        controller.Initialize(this);
-        controllers.Add(controller);
-    }
+        public FireballSpawner FireballSpawner => fireballSpawner;
+        public Firebreath Firebreath => firebreath;
 
-    public T GetController<T>() where T : WendigoBaseController
-    {
-        foreach (WendigoBaseController controller in controllers)
+        public IChronos Chronos => chronos;
+        public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
+        public IHitBox[] HitBoxes { get; private set; }
+
+        private List<WendigoBaseController> controllers;
+
+        public void OnSpawn() => Data.IsActive = true;
+        private void Update()
         {
-            if (controller is T) return controller as T;
+            if (chronos.IsTicking)
+                stateMachine.Tick();
         }
 
-        return null;
-    }
+        private void Awake()
+        {
+            transform.name = "Wendigo_" + (id++);
 
-    public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
-    {
-        SetTarget(null);
-        ragDollController.TriggerRagdoll(impact, hitPoint);
-    }
+            //Data = new WendigoData(serializableData, transform);
+            HitBoxes = GetComponentsInChildren<IHitBox>();
+            mover.Initialize(this);
+            fireballSpawner.Initialize(Data);
+            firebreath.Initialize(Data);
+            AddControllers();
 
-    public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);
+            stateMachine = WendigoStateMachineFactory.Create(this);
+
+            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>());
+            GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
+            pool.Subscribe(this);
+        }
+
+        private void AddControllers()
+        {
+            controllers = new List<WendigoBaseController>();
+
+            AddController(typeof(WendigoRotationController));
+            AddController(typeof(WendigoMovementController));
+            AddController(typeof(WendigoHealthSystem));
+            AddController(typeof(WendigoTargetManager));
+            AddController(typeof(WendigoAnimationController));
+            AddController(typeof(WendigoRangeCombatManager));
+        }
+
+        private void AddController(Type type)
+        {
+            WendigoBaseController controller = Activator.CreateInstance(type) as WendigoBaseController;
+            controller.Initialize(this);
+            controllers.Add(controller);
+        }
+
+        public T GetController<T>() where T : WendigoBaseController
+        {
+            foreach (WendigoBaseController controller in controllers)
+            {
+                if (controller is T) return controller as T;
+            }
+
+            return null;
+        }
+
+        public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
+        {
+            SetTarget(null);
+            ragDollController.TriggerRagdoll(impact, hitPoint);
+        }
+
+        public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);
+    }
 }

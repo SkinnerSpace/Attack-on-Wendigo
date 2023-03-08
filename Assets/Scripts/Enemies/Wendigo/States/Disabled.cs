@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
-public class Disabled : LoggableState, IState
-{
-    public void Tick() { }
-
-    public void OnEnter()
+namespace WendigoCharacter{
+    public class Disabled : LoggableState, IState
     {
-        LogEnter();
-    }
+        public void Tick() { }
 
-    public void OnExit()
-    {
-        LogExit();
+        public void OnEnter()
+        {
+            LogEnter();
+        }
+
+        public void OnExit()
+        {
+            LogExit();
+        }
     }
-} 
+}

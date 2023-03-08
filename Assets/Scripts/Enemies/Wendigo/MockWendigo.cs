@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 
-public class MockWendigo : IWendigo
+namespace WendigoCharacter
 {
-    public WendigoData Data { get; set; }
-    public IChronos Chronos { get; set; }
-    public Animator Animator { get; }
-    public IHitBox[] HitBoxes { get; set; }
-
-    public MockWendigo(WendigoData data) => Data = data;
-
-    public MockWendigo WithHitBoxes(int amount)
+    public class MockWendigo
     {
-        HitBoxes = new DetachedHitBox[amount];
+        public WendigoData Data { get; set; }
+        public IChronos Chronos { get; set; }
+        public Animator Animator { get; }
+        public IHitBox[] HitBoxes { get; set; }
 
-        for (int i = 0; i < amount; i++)
-            HitBoxes[i] = new DetachedHitBox();
+        public MockWendigo(WendigoData data) => Data = data;
 
-        return this;
-    }
+        public MockWendigo WithHitBoxes(int amount)
+        {
+            HitBoxes = new DetachedHitBox[amount];
 
-    public void SetTarget(Transform target)
-    {
-        
+            for (int i = 0; i < amount; i++)
+                HitBoxes[i] = new DetachedHitBox();
+
+            return this;
+        }
+
+        public void SetTarget(Transform target)
+        {
+
+        }
     }
 }

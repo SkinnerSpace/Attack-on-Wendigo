@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class WendigoAnimationController : MonoBehaviour
+public class WendigoAnimationController : WendigoBaseController, IWendigoMovementObserver
 {
-    private static int speedParam = Animator.StringToHash("Speed");
+    private static int velocity = Animator.StringToHash("Speed");
+    public static int castTrigger = Animator.StringToHash("Cast");
+    public static int firebreathTrigger = Animator.StringToHash("Firebreath");
+    private Animator animator;
 
-    [SerializeField] private Animator animator;
-
-    public void UpdateSpeed(float wendigoSpeed)
+    public override void Initialize(IWendigo wendigo)
     {
-        animator.SetFloat(speedParam, wendigoSpeed);
+        animator = wendigo.Animator;
     }
+
+    public void OnVelocityUpdate(float velocityMagnitude) => animator.SetFloat(velocity, velocityMagnitude);
+
+    public void PlayCastAnimation() => animator.SetTrigger(castTrigger);
+    public void PlayFirebreathAnimation() => animator.SetTrigger(firebreathTrigger);
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WendigoCharacter;
 
 public interface IWendigo
 {

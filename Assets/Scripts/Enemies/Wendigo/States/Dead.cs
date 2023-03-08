@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 
-public class Dead : LoggableState, IState
+namespace WendigoCharacter
 {
-    private WendigoData data;
-    private CharacterController controller;
-
-    public Dead(Wendigo wendigo)
+    public class Dead : LoggableState, IState
     {
-        data = wendigo.Data;
-        controller = wendigo.Controller;
-    }
+        private WendigoData data;
+        private CharacterController controller;
 
-    public void Tick() { }
-    public void OnEnter()
-    {
-        data.Velocity = Vector3.zero;
-        controller.enabled = false;
-        LogEnter();
-    }
+        public Dead(Wendigo wendigo)
+        {
+            data = wendigo.Data;
+            controller = wendigo.Controller;
+        }
 
-    public void OnExit()
-    {
-        LogExit();
+        public void Tick() { }
+        public void OnEnter()
+        {
+            data.Movement.Velocity = Vector3.zero;
+            controller.enabled = false;
+            LogEnter();
+        }
+
+        public void OnExit()
+        {
+            LogExit();
+        }
     }
 }

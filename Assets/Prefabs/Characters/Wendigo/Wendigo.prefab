@@ -1648,6 +1648,7 @@ MonoBehaviour:
   sFXPlayer: {fileID: 6783199577854852569}
   wendigo: {fileID: 2604546528073915768}
   fireballSpawner: {fileID: 7483865602147209108}
+  firebreath: {fileID: 1885422165180894026}
   leftStompBox: {fileID: 8276341001527102250}
   rightStompBox: {fileID: 5801282812329675613}
 --- !u!114 &8100390333917869422
@@ -2041,6 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3071082108301598928}
   - component: {fileID: 1885422165180894026}
+  - component: {fileID: 1886362725647329307}
   m_Layer: 0
   m_Name: Firebreath
   m_TagString: Untagged
@@ -2079,9 +2081,27 @@ MonoBehaviour:
   flameVFX: {fileID: 7048311266900181509, guid: 3b14b1155bd1f4245890118d1a714813,
     type: 3}
   chronos: {fileID: 6855492014976806890}
-  visualizeRaycast: 0
+  visualizeRaycast: 1
   deviation: 0.1
   flameVFXTime: 1
+--- !u!114 &1886362725647329307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438043030923435616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7796760fd0abd54ab684cb0ed0c3d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiusOuter: 30.45
+  radiusInner: 8.3
+  fovDeg: 30
+  distanceOffset: -7.32
+  coneDetail: 10
+  coneTarget: {fileID: 0}
 --- !u!1 &2494348140181123556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,10 +2337,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2604546528073915769}
   - component: {fileID: 2604546528073915768}
+  - component: {fileID: 8273375489332084520}
   - component: {fileID: 2065092290385512157}
   - component: {fileID: 6902924081060343994}
   - component: {fileID: 8875712469989729354}
-  - component: {fileID: 5289369853755172427}
   - component: {fileID: 157347938491257906}
   - component: {fileID: 1058818208207837215}
   - component: {fileID: 6855492014976806890}
@@ -2365,6 +2385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializableData: {fileID: 2065092290385512157}
+  data: {fileID: 8273375489332084520}
   mover: {fileID: 8875712469989729354}
   controller: {fileID: 157347938491257906}
   mainPropDestroyer: {fileID: 54220094663826474}
@@ -2377,6 +2398,34 @@ MonoBehaviour:
   timer: {fileID: 6902924081060343994}
   chronos: {fileID: 6855492014976806890}
   pendingTarget: {fileID: 0}
+--- !u!114 &8273375489332084520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604546528073915766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153aab91725cd7d4b9d14e242d7e09f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializable: {fileID: 2065092290385512157}
+  Health:
+    Amount: 10
+  Movement:
+    WalkSpeed: 10
+    RotationSpeed: 20
+    Deceleration: 1
+  Firebreath:
+    MinDistance: 10
+    MaxDistance: 45
+    AngleOfView: 8
+  Fireball:
+    MinDistance: 50
+    MaxDistance: 100
+    AngleOfView: 2
+    RechargeTime: 8
 --- !u!114 &2065092290385512157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2431,19 +2480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ea53afa9a699e4497db1734af7c053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5289369853755172427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2604546528073915766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc0b11592d715864e9bbebb3ff41cd02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 4718767853038179663}
 --- !u!143 &157347938491257906
 CharacterController:
   m_ObjectHideFlags: 0

@@ -3,37 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class WendigoHeadTarget : MonoBehaviour
+namespace WendigoCharacter
 {
-    [SerializeField] private Wendigo wendigo;
-    [SerializeField] private RigController rigController;
-    [SerializeField] private Transform defaultPoint;
-
-    private Transform target;
-    private Vector3 velocity;
-    private Vector3 targetPosition;
-    private WendigoData data;
-
-    private void Start()
+    public class WendigoHeadTarget : MonoBehaviour
     {
-        wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
-        data = wendigo.Data;
-    }
+        [SerializeField] private Wendigo wendigo;
+        [SerializeField] private RigController rigController;
+        [SerializeField] private Transform defaultPoint;
 
-    private void Update()
-    {
-        if (target != null)
+        private Transform target;
+        private Vector3 velocity;
+        private Vector3 targetPosition;
+        private WendigoData data;
+
+        private void Start()
         {
-            targetPosition = data.TargetFitsLookAngle ? target.position : defaultPoint.position;
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
+            wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
+            data = wendigo.Data;
         }
-    }
 
-    public void SetTarget(Transform target)
-    {
-        this.target = target;
+        private void Update()
+        {
+            if (target != null)
+            {
+                targetPosition = data.TargetFitsLookAngle ? target.position : defaultPoint.position;
+                transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
+            }
+        }
 
-        if (target != null) rigController.SwitchOn();
-        else rigController.SwitchOff();
+        public void SetTarget(Transform target)
+        {
+            this.target = target;
+
+            if (target != null) rigController.SwitchOn();
+            else rigController.SwitchOff();
+        }
     }
 }

@@ -4,30 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Idle : LoggableState, IState
+namespace WendigoCharacter
 {
-    private WendigoMovementController movementController;
-    private WendigoRangeCombatManager rangeCombatManager;
-
-    public Idle(Wendigo wendigo)
+    public class Idle : LoggableState, IState
     {
-        movementController = wendigo.GetController<WendigoMovementController>();
-        rangeCombatManager = wendigo.GetController<WendigoRangeCombatManager>();
-    }
+        private WendigoMovementController movementController;
+        private WendigoRangeCombatManager rangeCombatManager;
 
-    public void Tick()
-    {
-        movementController.Stop();
-        rangeCombatManager.PrepareToAttack();
-    }
+        public Idle(Wendigo wendigo)
+        {
+            movementController = wendigo.GetController<WendigoMovementController>();
+            rangeCombatManager = wendigo.GetController<WendigoRangeCombatManager>();
+        }
 
-    public void OnEnter()
-    {
-        LogEnter();
-    }
+        public void Tick()
+        {
+            movementController.Stop();
+            rangeCombatManager.PrepareToAttack();
+        }
 
-    public void OnExit()
-    {
-        LogExit();
+        public void OnEnter()
+        {
+            LogEnter();
+        }
+
+        public void OnExit()
+        {
+            LogExit();
+        }
     }
 }

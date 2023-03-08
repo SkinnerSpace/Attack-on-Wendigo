@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using WendigoCharacter;
 
 public class FireballSpawner : MonoBehaviour
 {

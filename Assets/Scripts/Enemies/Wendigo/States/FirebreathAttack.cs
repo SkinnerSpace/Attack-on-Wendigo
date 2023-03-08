@@ -1,42 +1,46 @@
 ﻿using UnityEngine;
 
-public class FirebreathAttack : LoggableState, IState
+namespace WendigoCharacter
 {
-    private WendigoData data;
-    private WendigoMovementController movementController;
-    private Firebreath firebreath;
-    private FunctionTimer timer;
-
-    public FirebreathAttack(Wendigo wendigo)
+    public class FirebreathAttack : LoggableState, IState
     {
-        data = wendigo.Data;
-        timer = wendigo.Timer;
-        firebreath = wendigo.Firebreath;
-        movementController = wendigo.GetController<WendigoMovementController>();
-    }
+        private WendigoData data;
+        private WendigoMovementController movementController;
+        private WendigoAnimationController animationPlayer;
+        private Firebreath firebreath;
+        private FunctionTimer timer;
 
-    public void Tick()
-    {
-        movementController.Stop();
-        firebreath.UpdateFire();
-    }
+        private float restoreTime = 5f;
 
-    public void OnEnter()
-    {
-        LogEnter();
-        firebreath.Fire();
+        public FirebreathAttack(Wendigo wendigo)
+        {
+            data = wendigo.Data;
+            timer = wendigo.Timer;
+            firebreath = wendigo.Firebreath;
+            movementController = wendigo.GetController<WendigoMovementController>();
+            animationPlayer = wendigo.GetController<WendigoAnimationController>();
+        }
 
-        data.IsReadyToBreathFire = false;
-        data.FirebreathAbilityIsCharged = false;
-        timer.Set("FirebreathIsOver", 5f, () => data.FirebreathIsOver = true);
-    }
+        public void Tick()
+        {
+            movementController.Stop();
+            firebreath.UpdateFire();
+        }
 
-    public void OnExit()
-    {
-        firebreath.Stop();
+        public void OnEnter()
+        {
+            LogEnter();
 
-        LogExit();
-        data.FirebreathIsOver = false;
-        timer.Set("FirebreathIsRestored", 5f, () => data.FirebreathAbilityIsCharged = true);
+            data.Firebreath.IsReadyToUse = false;
+            data.Firebreath.IsCharged = false;
+            animationPlayer.PlayFirebreathAnimation();
+        }
+
+        public void OnExit()
+        {
+            LogExit();
+            data.Firebreath.IsOver = false;
+            timer.Set("FirebreathIsRestored", restoreTime, () => data.Firebreath.IsCharged = true);
+        }
     }
 }

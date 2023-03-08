@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WendigoCharacter;
 
 public class InSightChecker : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class InSightChecker : MonoBehaviour
 
     private void Update()
     {
-        float dotToTarget = (data.Target != null) ? GetDotToTarget(data.Target) : 0f;
-        data.TargetFitsLookAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.LookAngleOfView) : false;
-        data.TargetFitsFirebreathAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.FirebreathAngleOfView) : false;
-        data.TargetFitsFireballAngle = (data.Target != null) ? dotToTarget <= GetMaxDotProduct(data.AttackAngleOfView) : false;
+        bool targetExist = data.Target != null;
+
+        float dotToTarget = targetExist ? GetDotToTarget(data.Target) : 0f;
+        data.TargetFitsLookAngle = targetExist ? dotToTarget <= GetMaxDotProduct(data.LookAngleOfView) : false;
+        data.Firebreath.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Firebreath.AngleOfView) : false;
+        data.Fireball.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Fireball.AngleOfView) : false;
     }
 
     private float GetDotToTarget(Transform target)

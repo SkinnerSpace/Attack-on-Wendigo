@@ -2,35 +2,38 @@
 using UnityEditor;
 
 
-[CustomEditor(typeof(Wendigo))]
-public class WendigoEditor : Editor
+namespace WendigoCharacter
 {
-    private Wendigo wendigo;
-
-    private void OnEnable()
+    [CustomEditor(typeof(Wendigo))]
+    public class WendigoEditor : Editor
     {
-        wendigo = serializedObject.targetObject as Wendigo;
-    }
+        private Wendigo wendigo;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        GUILayout.Space(25);
-
-        using (new GUILayout.HorizontalScope())
+        private void OnEnable()
         {
-            if (GUILayout.Button("Activate", GUILayout.Width(100)))
-            {
-                wendigo.Data.IsActive = true;
-                wendigo.Data.IsArrived = true;
-                wendigo.SetTarget(wendigo.PendingTarget);
-            }
+            wendigo = serializedObject.targetObject as Wendigo;
+        }
 
-            /*if (GUILayout.Button("Set Target", GUILayout.Width(100)))
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            GUILayout.Space(25);
+
+            using (new GUILayout.HorizontalScope())
             {
-                wendigo.SetTarget(wendigo.PendingTarget);
-            }*/
+                if (GUILayout.Button("Activate", GUILayout.Width(100)))
+                {
+                    wendigo.Data.IsActive = true;
+                    wendigo.Data.IsArrived = true;
+                    wendigo.SetTarget(wendigo.PendingTarget);
+                }
+
+                /*if (GUILayout.Button("Set Target", GUILayout.Width(100)))
+                {
+                    wendigo.SetTarget(wendigo.PendingTarget);
+                }*/
+            }
         }
     }
 }

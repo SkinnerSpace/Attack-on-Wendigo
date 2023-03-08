@@ -1,39 +1,43 @@
-﻿public class FireballCast : LoggableState, IState
+﻿
+namespace WendigoCharacter
 {
-    private WendigoData data;
-    private FunctionTimer timer;
-    private WendigoMovementController movementController;
-    private WendigoAnimationPlayer animationPlayer;
-    private WendigoSFXPlayer sFXPlayer;
-
-    public FireballCast(Wendigo wendigo)
+    public class FireballCast : LoggableState, IState
     {
-        data = wendigo.Data;
-        timer = wendigo.Timer;
-        movementController = wendigo.GetController<WendigoMovementController>();
-        animationPlayer = wendigo.GetController<WendigoAnimationPlayer>();
-        sFXPlayer = wendigo.SFXPlayer;
-    }
+        private WendigoData data;
+        private FunctionTimer timer;
+        private WendigoMovementController movementController;
+        private WendigoAnimationController animationPlayer;
+        private WendigoSFXPlayer sFXPlayer;
 
-    public void Tick()
-    {
-        movementController.Stop();
-    }
+        public FireballCast(Wendigo wendigo)
+        {
+            data = wendigo.Data;
+            timer = wendigo.Timer;
+            movementController = wendigo.GetController<WendigoMovementController>();
+            animationPlayer = wendigo.GetController<WendigoAnimationController>();
+            sFXPlayer = wendigo.SFXPlayer;
+        }
 
-    public void OnEnter()
-    {
-        LogEnter();
+        public void Tick()
+        {
+            movementController.Stop();
+        }
 
-        data.IsReadyToCast = false;
-        data.FireballAbilityIsCharged = false;
-        animationPlayer.PlayCastAnimation();
-        sFXPlayer.PlayShortRoarSFX();
-    }
+        public void OnEnter()
+        {
+            LogEnter();
 
-    public void OnExit()
-    {
-        LogExit();
-        data.FireballCastIsOver = false;
-        timer.Set("Recharge", data.FireballChargeTime, () => data.FireballAbilityIsCharged = true);
+            data.Fireball.IsReadyToUse = false;
+            data.Fireball.IsCharged = false;
+            animationPlayer.PlayCastAnimation();
+            sFXPlayer.PlayShortRoarSFX();
+        }
+
+        public void OnExit()
+        {
+            LogExit();
+            data.Fireball.IsOver = false;
+            timer.Set("Recharge", data.Fireball.RechargeTime, () => data.Fireball.IsCharged = true);
+        }
     }
 }

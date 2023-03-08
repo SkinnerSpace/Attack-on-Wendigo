@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using WendigoCharacter;
 
 public static class WendigoStateMachineFactory
 {
@@ -66,13 +67,13 @@ public static class WendigoStateMachineFactory
         Func<bool> HasTarget() => () => data.Target != null;
         Func<bool> HasNoTarget() => () => data.Target == null;
 
-        Func<bool> ReadyToCast() => () => data.IsReadyToCast;
-        Func<bool> FireballCastIsOver() => () => data.FireballCastIsOver;
+        Func<bool> ReadyToCast() => () => data.Fireball.IsReadyToUse;
+        Func<bool> FireballCastIsOver() => () => data.Fireball.IsOver;
 
-        Func<bool> ReadyToBurn() => () => data.IsReadyToBreathFire;
-        Func<bool> FireBreathIsOver() => () => data.FirebreathIsOver;
+        Func<bool> ReadyToBurn() => () => data.Firebreath.IsReadyToUse;
+        Func<bool> FireBreathIsOver() => () => data.Firebreath.IsOver;
 
-        Func<bool> IsDead() => () => !wendigo.Data.IsAlive;
+        Func<bool> IsDead() => () => !wendigo.Data.Health.IsAlive;
 
         return stateMachine;
     }

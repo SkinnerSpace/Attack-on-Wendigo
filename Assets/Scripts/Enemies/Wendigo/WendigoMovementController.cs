@@ -1,45 +1,49 @@
 ﻿using System;
 using UnityEngine;
 
-public class WendigoMovementController : WendigoBaseController
+namespace WendigoCharacter
 {
-    private IWendigo wendigo;
-    private WendigoData data;
-    private IChronos chronos;
-
-    public Action<float> onVelocityUpdate;
-
-    public override void Initialize(IWendigo wendigo)
+    public class WendigoMovementController : WendigoBaseController
     {
-        this.wendigo = wendigo;
-        data = wendigo.Data;
-        chronos = wendigo.Chronos;
-    }
+        private IWendigo wendigo;
+        private WendigoData data;
+        private IChronos chronos;
 
-    public void Subscribe(IWendigoMovementObserver observer) => onVelocityUpdate += observer.OnVelocityUpdate;
+        public Action<float> onVelocityUpdate;
 
-    public void MoveForward()
-    {
-        Accelerate();
-        Decelerate();
+        public override void Initialize(IWendigo wendigo)
+        {
+            this.wendigo = wendigo;
+            data = wendigo.Data;
+            chronos = wendigo.Chronos;
+        }
 
-        onVelocityUpdate?.Invoke(data.Velocity.magnitude);
-    }
+        public void Subscribe(IWendigoMovementObserver observer) => onVelocityUpdate += observer.OnVelocityUpdate;
 
-    public void Stop()
-    {
-        Decelerate();
-        onVelocityUpdate?.Invoke(data.Velocity.magnitude);
-    }
+        public void MoveForward()
+        {
+            Accelerate();
+            Decelerate();
 
-    private void Accelerate()
-    {
-        Vector3 acceleration = data.Forward * data.MovementSpeed * chronos.DeltaTime;
-        data.Velocity += acceleration;
-    }
+            onVelocityUpdate?.Invoke(data.Movement.Velocity.magnitude);
+        }
 
-    private void Decelerate()
-    {
-        data.Velocity = Vector3.Lerp(data.Velocity, Vector3.zero, data.Deceleration * chronos.DeltaTime);
+        public void Stop()
+        {
+            Decelerate();
+            onVelocityUpdate?.Invoke(data.Movement.Velocity.magnitude);
+        }
+
+        private void Accelerate()
+        {
+            Vector3 acceleration = data.Transform.Forward * data.Movement.WalkSpeed * chronos.DeltaTime;
+            data.Movement.Velocity += acceleration;
+        }
+
+        private void Decelerate()
+        {
+            float percent = data.Movement.Deceleration * chronos.DeltaTime;
+            data.Movement.Velocity = Vector3.Lerp(data.Movement.Velocity, Vector3.zero, percent);
+        }
     }
 }
