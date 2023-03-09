@@ -42,7 +42,7 @@ public class FireHitBox : MonoBehaviour, IInflammable
             boxCollider.enabled = false;
             time = 0f;
 
-            onFire.Invoke();
+            onFire?.Invoke();
         }
     }
 
@@ -67,7 +67,7 @@ public class FireHitBox : MonoBehaviour, IInflammable
         if (time >= putOutTheFireTime)
         {
             isOnFire = false;
-            putOutTheFire.Invoke();
+            putOutTheFire?.Invoke();
         }
     }
 }

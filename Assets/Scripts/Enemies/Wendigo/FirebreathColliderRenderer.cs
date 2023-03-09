@@ -8,19 +8,18 @@ namespace WendigoCharacter
         [SerializeField] private FirebreathCollider firebreathCollider;
         [SerializeField] private WendigoData data;
 
-        private int detail;
+        private FirebreathColliderData colliderData => data.Firebreath.Collider;
+        private FirebreathColliderRendererData rendererData => data.Firebreath.ColliderRenderer;
         private bool atLeastOneCollider;
 
         private void OnDrawGizmos()
         {
-            if (data.Firebreath.ColliderRenderer.IsActive && firebreathCollider != null)
+            if (rendererData.IsActive && firebreathCollider != null)
                 Visualize();
         }
 
         public void Visualize()
         {
-            detail = data.Firebreath.ColliderRenderer.Detail;
-
             firebreathCollider.ActUponColliders(ShowColliders);
             SetUpMatrix();
             DrawSpheres();
@@ -48,13 +47,12 @@ namespace WendigoCharacter
         private void DrawSpheres()
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(firebreathCollider.Center, firebreathCollider.RadiusOuter);
-            Gizmos.DrawWireSphere(firebreathCollider.Center, firebreathCollider.RadiusInner);
+            Gizmos.DrawWireSphere(colliderData.ObservableCenter, colliderData.ObservableRadius);
         }
 
         private void DrawRings()
         {
-            for (int i = 0; i < detail + 1; i++)
+            for (int i = 0; i < rendererData.Detail + 1; i++)
                 DrawRingAlongTheLine(i);
 
             atLeastOneCollider = false;
@@ -62,18 +60,18 @@ namespace WendigoCharacter
 
         private void DrawRingAlongTheLine(int i)
         {
-            float percent = i / (float)detail;
-            float rad = Mathf.Lerp(firebreathCollider.RadiusInner, firebreathCollider.RadiusOuter, percent);
+            float percent = i / (float)rendererData.Detail;
+            float rad = Mathf.Lerp(colliderData.RadiusInner, colliderData.RadiusOuter, percent);
             DrawRingWithRadius(rad);
         }
 
         private void DrawRingWithRadius(float inRadius)
         {
-            float halfFovRad = firebreathCollider.FOVRad / 2;
+            float halfFovRad = colliderData.FOVRad / 2;
 
             float dist = GetDistance(inRadius, halfFovRad);
             float radius = inRadius * Mathf.Sin(halfFovRad);
-            Vector3 ringCenter = transform.position + (transform.forward * dist) + (transform.forward * firebreathCollider.DistanceOffset);
+            Vector3 ringCenter = transform.position + (transform.forward * dist) + (transform.forward * colliderData.DistanceOffset);
 
             DrawRing(ringCenter, radius);
         }

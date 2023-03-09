@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class CharacterData : MonoBehaviour, ICharacterData
 {
     public static CharacterData Instance;
@@ -49,6 +48,8 @@ public class CharacterData : MonoBehaviour, ICharacterData
 
     [Header("Screeen shakes")]
     [SerializeField] private List<ShakeConfig> screenShakes;
+
+    [SerializeField] private float defense;
 
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
     public Vector3 CameraDampedPos { get; set; }

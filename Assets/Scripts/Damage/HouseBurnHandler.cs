@@ -8,6 +8,7 @@ public class HouseBurnHandler : MonoBehaviour
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private Chronos chronos;
     [SerializeField] private FireHitBox fireHitBox;
+    [SerializeField] private ParticleSystem flame;
     [SerializeField] private float burnSpeed = 0.5f;
 
     private MaterialPropertyBlock propBlock;
@@ -16,7 +17,7 @@ public class HouseBurnHandler : MonoBehaviour
     
     private void Awake()
     {
-        fireHitBox.Subscribe(SetOnFire, CoolDown);
+        fireHitBox.Subscribe(SetOnFire);
         propBlock = new MaterialPropertyBlock();
         enabled = false;
 
@@ -63,6 +64,7 @@ public class HouseBurnHandler : MonoBehaviour
 
     private void SetOnFire()
     {
+        flame.Play();
         isOnFire = true;
         enabled = true;
     }

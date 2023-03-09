@@ -2098,11 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7796760fd0abd54ab684cb0ed0c3d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fovDeg: 35
-  radiusOuter: 31.08
-  radiusInner: 9.1
-  distanceOffset: -7.32
-  collidersLimit: 16
+  data: {fileID: 8273375489332084520}
 --- !u!114 &7745144468172433066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2398,7 +2394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6263c3adc0bac5b40b758332b9ee2d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializableData: {fileID: 0}
   data: {fileID: 8273375489332084520}
   mover: {fileID: 8875712469989729354}
   controller: {fileID: 157347938491257906}
@@ -2434,9 +2429,17 @@ MonoBehaviour:
     MinDistance: 10
     MaxDistance: 45
     AngleOfView: 8
+    Collider:
+      FOVDeg: 13
+      RadiusOuter: 85
+      RadiusInner: 25
+      DistanceOffset: -24
+      ObservableRadius: 32
+      ObservableDistanceOffset: 32
+      CollidersLimit: 32
     ColliderRenderer:
-      Detail: 10
-      IsActive: 0
+      Detail: 20
+      IsActive: 1
   Fireball:
     MinDistance: 50
     MaxDistance: 100

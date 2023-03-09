@@ -5,37 +5,16 @@ namespace WendigoCharacter
 {
     public class FirebreathCollider : MonoBehaviour
     {
-        [Range(0, 360)]
-        [SerializeField] private float fovDeg = 45;
-        [SerializeField] private float radiusOuter = 10f;
-        [SerializeField] private float radiusInner = 1f;
-        [SerializeField] private float distanceOffset;
-        [SerializeField] private int collidersLimit = 16;
+        [SerializeField] private WendigoData data;
+        private FirebreathColliderData colliderData => data.Firebreath.Collider;
 
-        public float FOVRad { get; private set; }
-        public float RadiusOuter => radiusOuter;
-        public float RadiusInner => radiusInner;
-        public float DistanceOffset => distanceOffset;
-
-        public Vector3 Center { get; private set; }
-
-        private void GworCone()
-        {
-            // Make a lerp between 0 and 1
-            // So that the cone grows and detects objects gradually
-            // Then it disappears from the center
-            // DO IT!
-        }
-
-        private Vector3 GetCenter() => transform.position + (transform.forward * distanceOffset);
-        private float GetFOVRad() => fovDeg * Mathf.Deg2Rad;
 
         public void ActUponColliders(Action<Collider> actUpon)
         {
             UpdateDerivatives();
 
-            Collider[] hitColliders = new Collider[collidersLimit];
-            int collidersCount = Physics.OverlapSphereNonAlloc(Center, radiusOuter, hitColliders, ComplexLayers.Inflammable);
+            Collider[] hitColliders = new Collider[colliderData.CollidersLimit];
+            int collidersCount = Physics.OverlapSphereNonAlloc(colliderData.ObservableCenter, colliderData.ObservableRadius, hitColliders, ComplexLayers.Inflammable);
 
             for (int i = 0; i < collidersCount; i++)
                 ActUponCollidersInTheArea(hitColliders[i], actUpon);
@@ -43,15 +22,17 @@ namespace WendigoCharacter
 
         public void UpdateDerivatives()
         {
-            Center = GetCenter();
-            FOVRad = GetFOVRad();
+            colliderData.ObservableCenter = transform.position + (transform.forward * colliderData.ObservableDistanceOffset);
+            colliderData.CollisionCenter = transform.position + (transform.forward * colliderData.DistanceOffset);
+            colliderData.FOVRad = colliderData.FOVDeg * Mathf.Deg2Rad;
         }
 
         private void ActUponCollidersInTheArea(Collider hitCollider, Action<Collider> actUpon)
         {
             Vector3 closestPoint = hitCollider.ClosestPoint(transform.position);
+            Vector3 centralPoint = hitCollider.bounds.center;
 
-            if (ConeContains(closestPoint))
+            if (ConeContains(centralPoint) || ConeContains(closestPoint))
                 actUpon(hitCollider);
         }
 
@@ -60,17 +41,17 @@ namespace WendigoCharacter
             if (SphereContains(position) == false)
                 return false;
 
-            Vector3 dirToTarget = (position - Center).normalized;
+            Vector3 dirToTarget = (position - colliderData.CollisionCenter).normalized;
             float angleRad = AngleBetweenNormalizedVectors(transform.forward, dirToTarget);
-            bool fitsTheAngle = angleRad < FOVRad / 2;
+            bool fitsTheAngle = angleRad < colliderData.FOVRad / 2;
 
             return fitsTheAngle; 
         }
 
         private bool SphereContains(Vector3 position)
         {
-            float distance = Vector3.Distance(Center, position);
-            bool inTheArea = distance >= radiusInner && distance <= radiusOuter;
+            float distance = Vector3.Distance(colliderData.ObservableCenter, position);
+            bool inTheArea = distance <= colliderData.ObservableRadius;
 
             return inTheArea;
         }
