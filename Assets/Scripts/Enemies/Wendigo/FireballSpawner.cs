@@ -4,7 +4,7 @@ using WendigoCharacter;
 
 public class FireballSpawner : MonoBehaviour
 {
-    private WendigoData data;
+    [SerializeField] private WendigoData data;
     private IObjectPooler pooler;
 
     [Range(0, 180)]
@@ -21,8 +21,6 @@ public class FireballSpawner : MonoBehaviour
     private float YNegative => 360f - YPositive;
 
     private void Start() => pooler = PoolHolder.Instance;
-
-    public void Initialize(WendigoData data) => this.data = data;
 
     public void PlayCastVFX() => Instantiate(castVFX, transform.position, transform.rotation);
 

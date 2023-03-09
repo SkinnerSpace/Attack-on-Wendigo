@@ -1,19 +1,23 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
+using UnityEngine;
 
 namespace WendigoCharacter
 {
     public class FirebreathCollider : MonoBehaviour
     {
-        [SerializeField] private float radiusOuter = 10f;
-        [SerializeField] private float radiusInner = 1f;
         [Range(0, 360)]
         [SerializeField] private float fovDeg = 45;
+        [SerializeField] private float radiusOuter = 10f;
+        [SerializeField] private float radiusInner = 1f;
         [SerializeField] private float distanceOffset;
-        [SerializeField] private int coneDetail = 10;
-        [SerializeField] private Transform coneTarget;
+        [SerializeField] private int collidersLimit = 16;
 
-        private float FovRad => fovDeg * Mathf.Deg2Rad;
+        public float FOVRad { get; private set; }
+        public float RadiusOuter => radiusOuter;
+        public float RadiusInner => radiusInner;
+        public float DistanceOffset => distanceOffset;
+
+        public Vector3 Center { get; private set; }
 
         private void GworCone()
         {
@@ -23,35 +27,49 @@ namespace WendigoCharacter
             // DO IT!
         }
 
-        private void FindObject()
+        private Vector3 GetCenter() => transform.position + (transform.forward * distanceOffset);
+        private float GetFOVRad() => fovDeg * Mathf.Deg2Rad;
+
+        public void ActUponColliders(Action<Collider> actUpon)
         {
-            // Do sphere cast on the inflammable layer
-            // Put inflammables into the list
-            // Go through the list and check if an object inside the cone
-            // If so then burn it down
+            UpdateDerivatives();
+
+            Collider[] hitColliders = new Collider[collidersLimit];
+            int collidersCount = Physics.OverlapSphereNonAlloc(Center, radiusOuter, hitColliders, ComplexLayers.Inflammable);
+
+            for (int i = 0; i < collidersCount; i++)
+                ActUponCollidersInTheArea(hitColliders[i], actUpon);
         }
 
-        public bool ConeContains(Vector3 position)
+        public void UpdateDerivatives()
+        {
+            Center = GetCenter();
+            FOVRad = GetFOVRad();
+        }
+
+        private void ActUponCollidersInTheArea(Collider hitCollider, Action<Collider> actUpon)
+        {
+            Vector3 closestPoint = hitCollider.ClosestPoint(transform.position);
+
+            if (ConeContains(closestPoint))
+                actUpon(hitCollider);
+        }
+
+        private bool ConeContains(Vector3 position)
         {
             if (SphereContains(position) == false)
                 return false;
 
-            Vector3 ownPosition = transform.position + (transform.forward * distanceOffset);
-            Vector3 dirToTarget = (position - ownPosition).normalized;
+            Vector3 dirToTarget = (position - Center).normalized;
             float angleRad = AngleBetweenNormalizedVectors(transform.forward, dirToTarget);
-            bool fitsTheAngle = angleRad < FovRad / 2;
+            bool fitsTheAngle = angleRad < FOVRad / 2;
 
             return fitsTheAngle; 
         }
 
         private bool SphereContains(Vector3 position)
         {
-            Vector3 ownPosition = transform.position + (transform.forward * distanceOffset);
-            float distance = Vector3.Distance(ownPosition, position);
-
-            Gizmos.DrawWireSphere(ownPosition, radiusOuter);
-            Gizmos.DrawWireSphere(ownPosition, radiusInner);
-
+            float distance = Vector3.Distance(Center, position);
             bool inTheArea = distance >= radiusInner && distance <= radiusOuter;
 
             return inTheArea;
@@ -65,55 +83,5 @@ namespace WendigoCharacter
 
             return angleRads;
         }
-
-        private void OnDrawGizmos() => DrawCone();
-
-        public void DrawCone()
-        {
-            ReactOnCollision();
-            SetUpMatrix();
-            DrawRings();
-        }
-
-        private void ReactOnCollision()
-        {
-            if (coneTarget != null)
-                Gizmos.color = Handles.color = ConeContains(coneTarget.position) ? Color.white : Color.red;
-        }
-
-        private void SetUpMatrix()
-        {
-            Matrix4x4 prevMtx = Gizmos.matrix;
-            SetGizmoMatrix(Gizmos.matrix * Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one));
-            SetGizmoMatrix(prevMtx);
-        }
-
-        private void SetGizmoMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
-
-        private void DrawRings()
-        {
-            for (int i = 0; i < coneDetail + 1; i++)
-                DrawRing(i);
-        }
-
-        private void DrawRing(int i)
-        {
-            float percent = i / (float)coneDetail;
-            float rad = Mathf.Lerp(radiusInner, radiusOuter, percent);
-            DrawRingWithRadius(rad);
-        }
-
-        private void DrawRingWithRadius(float inRadius)
-        {
-            float halfFovRad = FovRad / 2;
-
-            float dist = GetDistance(inRadius, halfFovRad);
-            float radius = inRadius * Mathf.Sin(halfFovRad);
-
-            Vector3 center = transform.position + (transform.forward * dist) + (transform.forward * distanceOffset);
-            Handles.DrawWireDisc(center, transform.forward, radius);
-        }
-
-        private float GetDistance(float radius, float halfFovRad) => radius * Mathf.Cos(halfFovRad);
     }
 }

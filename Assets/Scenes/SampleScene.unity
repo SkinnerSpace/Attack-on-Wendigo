@@ -1159,6 +1159,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleName: SnowParticle
   sfxManager: {fileID: 640821270}
+--- !u!1 &305713271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305713272}
+  - component: {fileID: 305713273}
+  m_Layer: 25
+  m_Name: ConeTarget (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &305713272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305713271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.97, y: 16.1, z: 30.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 963580476}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &305713273
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305713271}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &344315469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1585,6 +1629,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.000000028405339
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: Firebreath.ColliderRenderer.IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8284029998754483544, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -3359,7 +3408,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 736890815}
-  m_Layer: 0
+  - component: {fileID: 736890816}
+  m_Layer: 25
   m_Name: ConeTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3374,12 +3424,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736890814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 15.4, z: 1.8}
+  m_LocalPosition: {x: 0.4, y: 16.1, z: 42.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963580476}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &736890816
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736890814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &762023330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3766,6 +3829,7 @@ Transform:
   - {fileID: 344315470}
   - {fileID: 1302925505}
   - {fileID: 736890815}
+  - {fileID: 305713272}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

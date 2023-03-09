@@ -9,7 +9,6 @@ namespace WendigoCharacter
     {
         public static int id;
 
-        [SerializeField] private WendigoSerializableData serializableData;
         [SerializeField] private WendigoData data;
 
         [Header("Required Components")]
@@ -61,8 +60,6 @@ namespace WendigoCharacter
             //Data = new WendigoData(serializableData, transform);
             HitBoxes = GetComponentsInChildren<IHitBox>();
             mover.Initialize(this);
-            fireballSpawner.Initialize(Data);
-            firebreath.Initialize(Data);
             AddControllers();
 
             stateMachine = WendigoStateMachineFactory.Create(this);

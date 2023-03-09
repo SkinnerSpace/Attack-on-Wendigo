@@ -5,7 +5,7 @@ public class CharacterHealthSystem : BaseController, IDamageable
 {
     private MainController main;
     private ICharacterData data;
-    private HitBox hitBox;
+    private HitBoxProxy hitBox;
     private EventManager eventManager;
 
     public int Health => data.Health;

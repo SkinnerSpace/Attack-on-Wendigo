@@ -9,6 +9,9 @@ namespace WendigoCharacter
         public float MaxDistance;
         public float AngleOfView;
 
+        public FirebreathColliderData Collider;
+        public FirebreathColliderRendererData ColliderRenderer;
+
         public bool OnTarget { get; set; }
         public bool IsReadyToUse { get; set; }
         public bool IsCharged { get; set; } = true;

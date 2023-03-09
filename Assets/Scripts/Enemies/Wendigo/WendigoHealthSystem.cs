@@ -5,18 +5,22 @@ namespace WendigoCharacter
 {
     public class WendigoHealthSystem : WendigoBaseController, IDamageable
     {
-        private WendigoData data;
+        private HealthData data;
 
         private event Action onDeath;
         private event Action<Vector3, Vector3> onTriggerRagdoll;
 
         public override void Initialize(IWendigo wendigo)
         {
-            data = wendigo.Data;
+            SetData(wendigo.Data.Health);
 
             foreach (IHitBox hitBox in wendigo.HitBoxes)
-                hitBox.Subscribe(this);
+                ConnectToHitBox(hitBox);
         }
+
+        public void SetData(HealthData data) => this.data = data;
+        public void ConnectToHitBox(IHitBox hitBox) => hitBox.Subscribe(this);
+
 
         public void Subscribe(Action onDeath) => this.onDeath += onDeath;
 
@@ -24,9 +28,9 @@ namespace WendigoCharacter
 
         public void ReceiveDamage(DamagePackage damagePackage)
         {
-            data.Health.Amount -= damagePackage.damage;
+            data.Amount -= damagePackage.damage;
 
-            if (!data.Health.IsAlive)
+            if (!data.IsAlive)
             {
                 onTriggerRagdoll?.Invoke(damagePackage.impact, damagePackage.point);
                 onDeath?.Invoke();

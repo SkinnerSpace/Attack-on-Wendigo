@@ -6,7 +6,7 @@ public class MainController : MonoBehaviour
 {
     [SerializeField] private CharacterData data;
     [SerializeField] private CharacterMover mover;
-    [SerializeField] private HitBox hitBox;
+    [SerializeField] private HitBoxProxy hitBox;
     [SerializeField] private FireHitBox fireHitBox;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
@@ -19,7 +19,7 @@ public class MainController : MonoBehaviour
     public Chronos Chronos => chronos;
     public EventManager Events => events;
     public MainInputReader InputReader => inputReader;
-    public HitBox HitBox => hitBox;
+    public HitBoxProxy HitBox => hitBox;
     public FireHitBox FireHitBox => fireHitBox;
 
     private List<BaseController> controllers;

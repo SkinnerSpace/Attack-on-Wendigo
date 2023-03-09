@@ -2043,6 +2043,7 @@ GameObject:
   - component: {fileID: 3071082108301598928}
   - component: {fileID: 1885422165180894026}
   - component: {fileID: 1886362725647329307}
+  - component: {fileID: 7745144468172433066}
   m_Layer: 0
   m_Name: Firebreath
   m_TagString: Untagged
@@ -2077,6 +2078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18db85ee275f4c7429aaa0a99e19b34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firebreathCollider: {fileID: 1886362725647329307}
   firebreathVFX: {fileID: 1449796521417748723}
   flameVFX: {fileID: 7048311266900181509, guid: 3b14b1155bd1f4245890118d1a714813,
     type: 3}
@@ -2096,12 +2098,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7796760fd0abd54ab684cb0ed0c3d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusOuter: 30.45
-  radiusInner: 8.3
-  fovDeg: 30
+  fovDeg: 35
+  radiusOuter: 31.08
+  radiusInner: 9.1
   distanceOffset: -7.32
-  coneDetail: 10
-  coneTarget: {fileID: 0}
+  collidersLimit: 16
+--- !u!114 &7745144468172433066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438043030923435616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac33a89b8a3b104d825a30022457d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firebreathCollider: {fileID: 1886362725647329307}
+  data: {fileID: 8273375489332084520}
 --- !u!1 &2494348140181123556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2353,6 @@ GameObject:
   - component: {fileID: 2604546528073915769}
   - component: {fileID: 2604546528073915768}
   - component: {fileID: 8273375489332084520}
-  - component: {fileID: 2065092290385512157}
   - component: {fileID: 6902924081060343994}
   - component: {fileID: 8875712469989729354}
   - component: {fileID: 157347938491257906}
@@ -2384,7 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6263c3adc0bac5b40b758332b9ee2d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializableData: {fileID: 2065092290385512157}
+  serializableData: {fileID: 0}
   data: {fileID: 8273375489332084520}
   mover: {fileID: 8875712469989729354}
   controller: {fileID: 157347938491257906}
@@ -2410,7 +2424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153aab91725cd7d4b9d14e242d7e09f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializable: {fileID: 2065092290385512157}
   Health:
     Amount: 10
   Movement:
@@ -2421,40 +2434,17 @@ MonoBehaviour:
     MinDistance: 10
     MaxDistance: 45
     AngleOfView: 8
+    ColliderRenderer:
+      Detail: 10
+      IsActive: 0
   Fireball:
     MinDistance: 50
     MaxDistance: 100
     AngleOfView: 2
     RechargeTime: 8
---- !u!114 &2065092290385512157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2604546528073915766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea114005006162b43a7333b5f3d8b9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
-  movementSpeed: 10
-  rotationSpeed: 20
-  deceleration: 1
-  target: {fileID: 0}
-  fireballMinDistance: 50
-  fireballMaxDistance: 100
-  fireballChargeTime: 8
-  fireballCastTime: 2
-  firebreathMinDistance: 10
-  firebreathMaxDistance: 45
-  fireRange: 50
-  fireScatter: 0.12
-  firePrecision: 2
-  lookAngleOfView: 45
-  attackAngleOfView: 2
-  firebreathAngleOfView: 8
+  Head:
+    LookAngleOfView: 45
+  Target: {fileID: 0}
 --- !u!114 &6902924081060343994
 MonoBehaviour:
   m_ObjectHideFlags: 0

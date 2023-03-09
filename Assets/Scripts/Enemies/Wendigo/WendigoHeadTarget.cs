@@ -26,7 +26,7 @@ namespace WendigoCharacter
         {
             if (target != null)
             {
-                targetPosition = data.TargetFitsLookAngle ? target.position : defaultPoint.position;
+                targetPosition = data.Head.OnTarget ? target.position : defaultPoint.position;
                 transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.5f);
             }
         }
