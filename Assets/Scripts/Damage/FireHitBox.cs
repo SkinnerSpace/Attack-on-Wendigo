@@ -11,6 +11,7 @@ public class FireHitBox : MonoBehaviour, IInflammable
     [Header("Settings")]
     [SerializeField] private float enableCollisionTime = 0.2f;
     [SerializeField] private float putOutTheFireTime = 0.3f;
+    [SerializeField] private bool isDisposable;
 
     private float time;
     private bool isOnFire;
@@ -51,14 +52,17 @@ public class FireHitBox : MonoBehaviour, IInflammable
         if (isOnFire)
         {
             time += chronos.DeltaTime;
-            EnableCollisionOnTimeOut();
+
+            if (!isDisposable)
+                EnableCollisionOnTimeOut();
+
             PutOutTheFireOnTimeOut();
         }
     }
 
     private void EnableCollisionOnTimeOut()
     {
-        if (time >= enableCollisionTime)
+        if (time >= enableCollisionTime && !boxCollider.enabled)
             boxCollider.enabled = true;
     }
 

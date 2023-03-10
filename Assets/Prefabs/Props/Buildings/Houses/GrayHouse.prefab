@@ -443,6 +443,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5332729756622189812, guid: f24ac08c666d39845aab30098040b1fc,
+        type: 3}
+      propertyPath: isDisposable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5497260416896458747, guid: f24ac08c666d39845aab30098040b1fc,
         type: 3}
       propertyPath: m_RootOrder

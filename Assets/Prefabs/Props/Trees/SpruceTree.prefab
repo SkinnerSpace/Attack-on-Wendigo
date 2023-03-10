@@ -393,6 +393,7 @@ MonoBehaviour:
   chronos: {fileID: 4529412533325819154}
   enableCollisionTime: 0.2
   putOutTheFireTime: 0.3
+  isDisposable: 1
 --- !u!114 &4529412533325819154
 MonoBehaviour:
   m_ObjectHideFlags: 0

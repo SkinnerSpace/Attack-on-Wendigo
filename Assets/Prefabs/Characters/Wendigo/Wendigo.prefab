@@ -2439,7 +2439,7 @@ MonoBehaviour:
       CollidersLimit: 32
     ColliderRenderer:
       Detail: 20
-      IsActive: 1
+      IsActive: 0
   Fireball:
     MinDistance: 50
     MaxDistance: 100
@@ -9465,6 +9465,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2604546528073915769}
     m_Modifications:
+    - target: {fileID: 2239443604756342694, guid: 1db420e3cdf12ef409644c4524fbb209,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 8273375489332084520}
     - target: {fileID: 2239443604756342694, guid: 1db420e3cdf12ef409644c4524fbb209,
         type: 3}
       propertyPath: castVFX

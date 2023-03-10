@@ -48,6 +48,10 @@ namespace WendigoCharacter {
         private void SetOnFire(Collider subject)
         {
             IInflammable inflammable = subject.GetComponent<IInflammable>();
+
+            if (inflammable == null)
+                Debug.Log(subject.transform.parent.name);
+
             inflammable.SetOnFire();
         }
     }

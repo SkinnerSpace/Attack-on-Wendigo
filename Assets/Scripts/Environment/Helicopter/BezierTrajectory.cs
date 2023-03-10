@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[ExecuteAlways]
+/*[ExecuteAlways]*/
 public class BezierTrajectory : MonoBehaviour
 {
     [Header("Required Components")]
@@ -28,9 +28,6 @@ public class BezierTrajectory : MonoBehaviour
 
     private void OnValidate() => UpdatePoints();
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos() => RenderBezierCurve();
-#endif
 
     public Vector3 GetPosition(float inDistance, Action onFinish)
     {
@@ -67,4 +64,8 @@ public class BezierTrajectory : MonoBehaviour
         constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
         pointsManager.PushThePoints();
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos() => RenderBezierCurve();
+#endif
 }

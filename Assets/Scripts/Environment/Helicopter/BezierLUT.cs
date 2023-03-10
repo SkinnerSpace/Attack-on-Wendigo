@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[ExecuteAlways]
+/*[ExecuteAlways]*/
 public class BezierLUT : MonoBehaviour
 {
     [SerializeField] private BezierProjector projector;

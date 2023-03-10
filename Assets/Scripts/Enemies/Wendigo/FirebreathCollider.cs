@@ -8,16 +8,22 @@ namespace WendigoCharacter
         [SerializeField] private WendigoData data;
         private FirebreathColliderData colliderData => data.Firebreath.Collider;
 
+        private Collider[] hitColliders;
+
+        private void Awake()
+        {
+            hitColliders = new Collider[colliderData.CollidersLimit];
+        }
 
         public void ActUponColliders(Action<Collider> actUpon)
         {
             UpdateDerivatives();
-
-            Collider[] hitColliders = new Collider[colliderData.CollidersLimit];
             int collidersCount = Physics.OverlapSphereNonAlloc(colliderData.ObservableCenter, colliderData.ObservableRadius, hitColliders, ComplexLayers.Inflammable);
 
             for (int i = 0; i < collidersCount; i++)
                 ActUponCollidersInTheArea(hitColliders[i], actUpon);
+
+            CastSurfaceFlameRay();
         }
 
         public void UpdateDerivatives()
@@ -63,6 +69,16 @@ namespace WendigoCharacter
             angleRads = Mathf.Clamp(angleRads, -1f, 1f);
 
             return angleRads;
+        }
+
+        private void CastSurfaceFlameRay()
+        {
+            
+        }
+
+        private void OnDrawGizmos()
+        {
+            //Gizmos.DrawRay(transform.position, transform.forward * data.Firebreath.Collider.)
         }
     }
 }
