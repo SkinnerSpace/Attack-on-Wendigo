@@ -1196,6 +1196,31 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 9.313227e-10
       objectReference: {fileID: 0}
+    - target: {fileID: 1449796521417748721, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449796521417748721, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449796521417748721, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449796521417748721, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449796521417748721, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1885422165180894026, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: fovDeg
@@ -1593,8 +1618,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: Firebreath.Collider.ExpansionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: Firebreath.Collider.CollidersLimit
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: Firebreath.Collider.ObservableScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -9754,10 +9789,6 @@ MonoBehaviour:
     prefab: {fileID: 2542683929975215567, guid: d2503b4730ee26b4395c5c0a9a12e2b3,
       type: 3}
     size: 15
-  - tag: SmallFlame
-    prefab: {fileID: 7048311266900181509, guid: 3b14b1155bd1f4245890118d1a714813,
-      type: 3}
-    size: 200
 --- !u!114 &1488656794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9871,7 +9902,7 @@ PrefabInstance:
     - target: {fileID: 6798294994245517823, guid: 132c06743fb7cac4fa38976242260280,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6798294994245517823, guid: 132c06743fb7cac4fa38976242260280,
         type: 3}
@@ -12818,7 +12849,7 @@ PrefabInstance:
     - target: {fileID: 6705627011588671551, guid: ec5586c8e7b5f114ba681e3824b5315f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6705627011588671551, guid: ec5586c8e7b5f114ba681e3824b5315f,
         type: 3}

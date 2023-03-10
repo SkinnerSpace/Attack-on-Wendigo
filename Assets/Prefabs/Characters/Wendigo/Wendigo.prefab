@@ -2099,6 +2099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 8273375489332084520}
+  chronos: {fileID: 6855492014976806890}
 --- !u!114 &7745144468172433066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,11 +2436,13 @@ MonoBehaviour:
       RadiusInner: 25
       DistanceOffset: -24
       ObservableRadius: 32
-      ObservableDistanceOffset: 32
+      ExpansionTime: 1
+      CurrentExpansionTime: 0
+      ObservableExpansion: 0
       CollidersLimit: 32
     ColliderRenderer:
       Detail: 20
-      IsActive: 0
+      IsActive: 1
   Fireball:
     MinDistance: 50
     MaxDistance: 100
@@ -8699,26 +8702,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3071082108301598928}
     m_Modifications:
-    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
         type: 3}
       propertyPath: m_RootOrder

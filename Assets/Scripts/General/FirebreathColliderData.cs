@@ -15,7 +15,10 @@ namespace WendigoCharacter
 
         [Header("Observable Area")]
         public float ObservableRadius = 10f;
-        public float ObservableDistanceOffset = 5f;
+        public float ExpansionTime = 1f;
+        public float CurrentExpansionTime = 0f;
+        [Range(0f, 1f)]
+        public float ObservableExpansion = 0f;
         public int CollidersLimit = 16;
 
         public float FOVRad { get; set; }

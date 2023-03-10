@@ -6,6 +6,8 @@ namespace WendigoCharacter
     public class FirebreathCollider : MonoBehaviour
     {
         [SerializeField] private WendigoData data;
+        [SerializeField] private Chronos chronos;
+
         private FirebreathColliderData colliderData => data.Firebreath.Collider;
 
         private Collider[] hitColliders;
@@ -15,20 +17,37 @@ namespace WendigoCharacter
             hitColliders = new Collider[colliderData.CollidersLimit];
         }
 
+        public void Expand()
+        {
+            if (colliderData.CurrentExpansionTime < colliderData.ExpansionTime)
+            {
+                colliderData.CurrentExpansionTime += chronos.DeltaTime;
+                colliderData.ObservableExpansion = (colliderData.CurrentExpansionTime / colliderData.ExpansionTime).Clamp01();
+            }
+        }
+
+        public void Shrink()
+        {
+            colliderData.CurrentExpansionTime = 0f;
+            colliderData.ObservableExpansion = 0f;
+        }
+
         public void ActUponColliders(Action<Collider> actUpon)
         {
             UpdateDerivatives();
-            int collidersCount = Physics.OverlapSphereNonAlloc(colliderData.ObservableCenter, colliderData.ObservableRadius, hitColliders, ComplexLayers.Inflammable);
+
+            Vector3 center = colliderData.ObservableCenter;
+            float radius = colliderData.ObservableRadius * colliderData.ObservableExpansion;
+
+            int collidersCount = Physics.OverlapSphereNonAlloc(center, radius, hitColliders, ComplexLayers.Inflammable);
 
             for (int i = 0; i < collidersCount; i++)
                 ActUponCollidersInTheArea(hitColliders[i], actUpon);
-
-            CastSurfaceFlameRay();
         }
 
         public void UpdateDerivatives()
         {
-            colliderData.ObservableCenter = transform.position + (transform.forward * colliderData.ObservableDistanceOffset);
+            colliderData.ObservableCenter = transform.position + (transform.forward * colliderData.ObservableRadius * colliderData.ObservableExpansion);
             colliderData.CollisionCenter = transform.position + (transform.forward * colliderData.DistanceOffset);
             colliderData.FOVRad = colliderData.FOVDeg * Mathf.Deg2Rad;
         }
@@ -69,16 +88,6 @@ namespace WendigoCharacter
             angleRads = Mathf.Clamp(angleRads, -1f, 1f);
 
             return angleRads;
-        }
-
-        private void CastSurfaceFlameRay()
-        {
-            
-        }
-
-        private void OnDrawGizmos()
-        {
-            //Gizmos.DrawRay(transform.position, transform.forward * data.Firebreath.Collider.)
         }
     }
 }

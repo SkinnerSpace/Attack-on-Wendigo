@@ -22,7 +22,7 @@ namespace WendigoCharacter
         {
             firebreathCollider.ActUponColliders(ShowColliders);
             SetUpMatrix();
-            DrawSpheres();
+            DrawObservableArea();
             DrawRings();
         }
 
@@ -44,10 +44,10 @@ namespace WendigoCharacter
 
         private void SetGizmoMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
 
-        private void DrawSpheres()
+        private void DrawObservableArea()
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(colliderData.ObservableCenter, colliderData.ObservableRadius);
+            Gizmos.DrawWireSphere(colliderData.ObservableCenter, colliderData.ObservableRadius * colliderData.ObservableExpansion);
         }
 
         private void DrawRings()

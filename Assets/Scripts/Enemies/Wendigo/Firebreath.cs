@@ -36,13 +36,17 @@ namespace WendigoCharacter {
         public void Stop()
         {
             isSpewingFire = false;
+            firebreathCollider.Shrink();
             firebreathVFX.Stop();
         }
 
         public void UpdateFire()
         {
             if (isSpewingFire)
+            {
+                firebreathCollider.Expand();
                 firebreathCollider.ActUponColliders(SetOnFire);
+            }
         }
 
         private void SetOnFire(Collider subject)

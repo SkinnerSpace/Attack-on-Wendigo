@@ -22,8 +22,8 @@ public static class WendigoStateMachineFactory
         IState dead = new Dead(wendigo);
 
         SetArrival();
-        SetFirebreath();
-        //SetFireball();
+        //SetFirebreath();
+        SetFireball();
         SetMovement();
         SetDeath();
 
