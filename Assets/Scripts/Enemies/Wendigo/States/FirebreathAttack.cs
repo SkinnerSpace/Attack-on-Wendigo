@@ -4,7 +4,7 @@ namespace WendigoCharacter
 {
     public class FirebreathAttack : LoggableState, IState
     {
-        private WendigoData data;
+        private FirebreathAbilityData data;
         private WendigoMovementController movementController;
         private WendigoAnimationController animationPlayer;
         private Firebreath firebreath;
@@ -14,7 +14,7 @@ namespace WendigoCharacter
 
         public FirebreathAttack(Wendigo wendigo)
         {
-            data = wendigo.Data;
+            data = wendigo.Data.Firebreath;
             timer = wendigo.Timer;
             firebreath = wendigo.Firebreath;
             movementController = wendigo.GetController<WendigoMovementController>();
@@ -31,16 +31,18 @@ namespace WendigoCharacter
         {
             LogEnter();
 
-            data.Firebreath.IsReadyToUse = false;
-            data.Firebreath.IsCharged = false;
+            data.IsReadyToUse = false;
+            data.IsCharged = false;
             animationPlayer.PlayFirebreathAnimation();
         }
 
         public void OnExit()
         {
             LogExit();
-            data.Firebreath.IsOver = false;
-            timer.Set("FirebreathIsRestored", restoreTime, () => data.Firebreath.IsCharged = true);
+            data.IsOver = false;
+
+            float time = Rand.Range(data.MinTime, data.MaxTime);
+            timer.Set("FirebreathIsRestored", time, () => data.IsCharged = true);
         }
     }
 }

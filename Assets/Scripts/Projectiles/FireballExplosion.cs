@@ -27,18 +27,36 @@ public class FireballExplosion
 
         DamageACharacter(hitCollider, hitPos);
         PullDownAProp(hitCollider, hitPos);
+        SetOnFire(hitCollider);
     }
 
     private void DamageACharacter(Collider hitCollider, Vector3 hitPos)
     {
-        DamagePackage damagePackage = GetDamagePackage(hitPos);
-        hitCollider.gameObject.SendMessage("ReceiveDamage", damagePackage, SendMessageOptions.DontRequireReceiver);
+        IHitBox character = hitCollider.GetComponent<IHitBox>();
+
+        if (character != null){
+            DamagePackage damagePackage = GetDamagePackage(hitPos);
+            character.ReceiveDamage(damagePackage);
+        }
     }
 
     private void PullDownAProp(Collider hitCollider, Vector3 hitPos)
     {
-        Vector3 collapseDirection = (hitPos.FlatV3() - data.Position.FlatV3()).normalized;
-        hitCollider.gameObject.SendMessage("PullDown", collapseDirection, SendMessageOptions.DontRequireReceiver);
+        PropHitBox prop = hitCollider.GetComponent<PropHitBox>();
+
+        if (prop != null) {
+            Vector3 collapseDirection = (hitPos.FlatV3() - data.Position.FlatV3()).normalized;
+            prop.PullDown(collapseDirection);
+        }
+    }
+
+    private void SetOnFire(Collider hitCollider)
+    {
+        IInflammable inflammable = hitCollider.GetComponent<IInflammable>();
+
+        if (inflammable != null){
+            inflammable.SetOnFire();
+        }
     }
 
     private DamagePackage GetDamagePackage(Vector3 colliderPosition)

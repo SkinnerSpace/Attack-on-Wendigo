@@ -68,7 +68,16 @@ namespace WendigoCharacter
             sFXPlayer.PlayArrivalBoneCrackSFX();
         }
 
-        public void LaunchFirebreath() => firebreath.Launch();
+        public void Inhale(){
+            sFXPlayer.PlayInhaleSFX();
+        }
+
+        public void LaunchFirebreath()
+        {
+            firebreath.Launch();
+            sFXPlayer.PlayExhaleSFX();
+        }
+
         public void StopFirebreath()
         {
             firebreath.Stop();

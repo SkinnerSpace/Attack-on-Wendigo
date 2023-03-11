@@ -21,7 +21,8 @@ public static class ComplexLayers
         1 << (int)Layers.Projectiles |
         1 << (int)Layers.Landscape |
         1 << (int)Layers.PlayerHitBox |
-        1 << (int)Layers.Background;
+        1 << (int)Layers.Background |
+        1 << (int)Layers.Inflammable;
 
     public static LayerMask Interactables =
         1 << (int)Layers.Interactables;

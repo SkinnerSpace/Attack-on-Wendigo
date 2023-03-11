@@ -1,13 +1,19 @@
 ﻿using System;
+using UnityEngine;
 
 namespace WendigoCharacter
 {
     [Serializable]
     public class FirebreathAbilityData
     {
+        [Header("Distance")]
         public float MinDistance;
         public float MaxDistance;
         public float AngleOfView;
+
+        [Header("Recharge")]
+        public float MinTime;
+        public float MaxTime;
 
         public FirebreathColliderData Collider;
         public FirebreathColliderRendererData ColliderRenderer;

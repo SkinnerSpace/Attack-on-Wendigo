@@ -6,10 +6,14 @@ namespace WendigoCharacter
     [Serializable]
     public class FireballAbilityData
     {
+        [Header("Distance")]
         public float MinDistance;
         public float MaxDistance;
         public float AngleOfView;
-        public float RechargeTime;
+
+        [Header("Recharge")]
+        public float MinTime;
+        public float MaxTime;
 
         public bool OnTarget { get; set; }
         public bool IsReadyToUse { get; set; }

@@ -23,7 +23,7 @@ public static class WendigoStateMachineFactory
 
         SetArrival();
         //SetFirebreath();
-        SetFireball();
+        //SetFireball();
         SetMovement();
         SetDeath();
 

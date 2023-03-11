@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public class HouseBurnHandler : MonoBehaviour
+public class ObjectBurnHandler : MonoBehaviour, IInflammable
 {
     private static int soot = Shader.PropertyToID("Soot");
     private static int sootPattern = Shader.PropertyToID("SootPattern");
 
     [SerializeField] private MeshRenderer mesh;
+    [SerializeField] private BoxCollider hitBox;
     [SerializeField] private Chronos chronos;
-    [SerializeField] private FireHitBox fireHitBox;
-    [SerializeField] private ParticleSystem flame;
+    [SerializeField] private ParticleSystem flameVFX;
+    [SerializeField] private BurnSFXPlayer burnSFXPlayer;
     [SerializeField] private float burnSpeed = 0.5f;
 
     private MaterialPropertyBlock propBlock;
@@ -17,7 +18,6 @@ public class HouseBurnHandler : MonoBehaviour
     
     private void Awake()
     {
-        fireHitBox.Subscribe(SetOnFire);
         propBlock = new MaterialPropertyBlock();
         enabled = false;
 
@@ -25,6 +25,17 @@ public class HouseBurnHandler : MonoBehaviour
     }
 
     private void SetSootPattern() => SetMaterialProperty(sootPattern, Rand.Range(0f, 1000f));
+
+    public void SetOnFire()
+    {
+        hitBox.enabled = false;
+
+        flameVFX.Play();
+        burnSFXPlayer.Play();
+
+        isOnFire = true;
+        enabled = true;
+    }
 
     private void Update() => Burn();
 
@@ -42,11 +53,16 @@ public class HouseBurnHandler : MonoBehaviour
         burntness += burnSpeed * chronos.DeltaTime;
 
         if (burntness >= 1f)
-        {
-            burntness = 1f;
-            fireHitBox.SetActive(false);
-            CoolDown();
-        }
+            BurnDown();
+    }
+
+    private void BurnDown()
+    {
+        burnSFXPlayer.Stop();
+
+        burntness = 1f;
+        isOnFire = false;
+        enabled = false;
     }
 
     private void ApplyBurntness()
@@ -60,18 +76,5 @@ public class HouseBurnHandler : MonoBehaviour
         mesh.GetPropertyBlock(propBlock);
         propBlock.SetFloat(prop, value);
         mesh.SetPropertyBlock(propBlock);
-    }
-
-    private void SetOnFire()
-    {
-        flame.Play();
-        isOnFire = true;
-        enabled = true;
-    }
-
-    private void CoolDown()
-    {
-        isOnFire = false;
-        enabled = false;
     }
 }

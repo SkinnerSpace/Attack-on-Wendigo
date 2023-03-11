@@ -3,7 +3,7 @@ namespace WendigoCharacter
 {
     public class FireballCast : LoggableState, IState
     {
-        private WendigoData data;
+        private FireballAbilityData data;
         private FunctionTimer timer;
         private WendigoMovementController movementController;
         private WendigoAnimationController animationPlayer;
@@ -11,7 +11,7 @@ namespace WendigoCharacter
 
         public FireballCast(Wendigo wendigo)
         {
-            data = wendigo.Data;
+            data = wendigo.Data.Fireball;
             timer = wendigo.Timer;
             movementController = wendigo.GetController<WendigoMovementController>();
             animationPlayer = wendigo.GetController<WendigoAnimationController>();
@@ -27,8 +27,8 @@ namespace WendigoCharacter
         {
             LogEnter();
 
-            data.Fireball.IsReadyToUse = false;
-            data.Fireball.IsCharged = false;
+            data.IsReadyToUse = false;
+            data.IsCharged = false;
             animationPlayer.PlayCastAnimation();
             sFXPlayer.PlayShortRoarSFX();
         }
@@ -36,8 +36,10 @@ namespace WendigoCharacter
         public void OnExit()
         {
             LogExit();
-            data.Fireball.IsOver = false;
-            timer.Set("Recharge", data.Fireball.RechargeTime, () => data.Fireball.IsCharged = true);
+            data.IsOver = false;
+
+            float time = Rand.Range(data.MinTime, data.MaxTime);
+            timer.Set("Recharge", time, () => data.IsCharged = true);
         }
     }
 }

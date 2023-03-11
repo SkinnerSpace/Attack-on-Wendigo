@@ -15,6 +15,13 @@ public class WendigoSFXPlayer : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private FMODUnity.EventReference fireballCastSFX;
 
+    [Header("Firebreath")]
+    [SerializeField] private FMODUnity.EventReference inhaleSFX;
+    [SerializeField] private FMODUnity.EventReference exhaleSFX;
+
+    [Header("Sound Sources")]
+    [SerializeField] private Transform head;
+
     private AudioPlayer arrivalRoarAudioPlayer;
     private AudioPlayer arrivalBoneCrackAudioPlayer;
     private AudioPlayer stompAudioPlayer;
@@ -22,14 +29,22 @@ public class WendigoSFXPlayer : MonoBehaviour
 
     private AudioPlayer fireballCastAudioPlayer;
 
+    private AudioPlayer inhalePlayer;
+    private AudioPlayer exhalePlayer;
+
     private void Awake()
     {
-        arrivalRoarAudioPlayer = AudioPlayer.Create(arrivalRoarSFX).WithPitch(-2f, 2f);
+        arrivalRoarAudioPlayer = AudioPlayer.Create(arrivalRoarSFX).WithAnchor(head).WithPitch(-2f, 2f);
         arrivalBoneCrackAudioPlayer = AudioPlayer.Create(arrivalBoneCrackSFX).WithPitch(-2f, 2f);
+
         stompAudioPlayer = AudioPlayer.Create(stompSFX).WithPitch(0f, 4f).WithVariety(3);
-        shortRoarPlayer = AudioPlayer.Create(movementRoarSFX).WithPitch(-2f, 2f).WithVariety(3);
+
+        shortRoarPlayer = AudioPlayer.Create(movementRoarSFX).WithAnchor(head).WithPitch(-2f, 2f).WithVariety(3);
 
         fireballCastAudioPlayer = AudioPlayer.Create(fireballCastSFX).WithPitch(-3f, 3f);
+
+        inhalePlayer = AudioPlayer.Create(inhaleSFX).WithAnchor(head).WithPitch(-1f, 1f).WithVariety(2);
+        exhalePlayer = AudioPlayer.Create(exhaleSFX).WithAnchor(head).WithPitch(-1f, 1f).WithVariety(2);
     }
 
     public void PlayStompSFX(){
@@ -37,7 +52,7 @@ public class WendigoSFXPlayer : MonoBehaviour
     }
 
     public void PlayArrivalRoarSFX(){
-        arrivalRoarAudioPlayer.WithPosition(transform.position).PlayOneShot();
+        arrivalRoarAudioPlayer.PlayOneShot();
     }
 
     public void PlayArrivalBoneCrackSFX(){
@@ -45,10 +60,18 @@ public class WendigoSFXPlayer : MonoBehaviour
     }
 
     public void PlayShortRoarSFX(){
-        shortRoarPlayer.WithAnchor(transform).PlayOneShot();
+        shortRoarPlayer.PlayOneShot();
     }
 
     public void PlayFireballCastSFX(Vector3 position){
         fireballCastAudioPlayer.WithPosition(position).PlayOneShot();
+    }
+
+    public void PlayInhaleSFX(){
+        inhalePlayer.PlayOneShot();
+    }
+
+    public void PlayExhaleSFX(){
+        exhalePlayer.PlayOneShot();
     }
 }

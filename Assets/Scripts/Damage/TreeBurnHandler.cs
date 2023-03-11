@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeBurnHandler : MonoBehaviour
+public class TreeBurnHandler : MonoBehaviour, IInflammable
 {
     private static int baseColor = Shader.PropertyToID("_BaseColor");
     private static int cutOff = Shader.PropertyToID("_Cutoff");
 
     [SerializeField] private Chronos chronos;
-    [SerializeField] private FireHitBox fireHitBox;
-    [SerializeField] private ParticleSystem flame;
+    [SerializeField] private BoxCollider hitBox;
+    [SerializeField] private ParticleSystem flameVFX;
     [SerializeField] private float burnSpeed = 0.5f;
 
     [SerializeField] private MeshRenderer mesh;
@@ -23,9 +23,17 @@ public class TreeBurnHandler : MonoBehaviour
 
     private void Awake()
     {
-        fireHitBox.Subscribe(SetOnFire);
         propBlock = new MaterialPropertyBlock();
         enabled = false;
+    }
+
+    public void SetOnFire()
+    {
+        hitBox.enabled = false;
+
+        flameVFX.Play();
+        isOnFire = true;
+        enabled = true;
     }
 
     private void Update() => Burn();
@@ -68,13 +76,5 @@ public class TreeBurnHandler : MonoBehaviour
         propBlock.SetColor(baseColor, burnColor);
         propBlock.SetFloat(cutOff, burnCutoff);
         mesh.SetPropertyBlock(propBlock);
-    }
-
-    private void SetOnFire()
-    {
-        fireHitBox.SetActive(false);
-        flame.Play();
-        isOnFire = true;
-        enabled = true;
     }
 }

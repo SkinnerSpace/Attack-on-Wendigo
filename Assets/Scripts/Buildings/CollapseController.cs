@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollapseController : MonoBehaviour
 {
     [SerializeField] private CollapseAcceptor acceptor;
+    [SerializeField] private ParticleSystem dustVFX;
     private BoxCollider collapseCollider;
 
     [SerializeField] private float depthMultiplier = 1f;
@@ -50,6 +51,7 @@ public class CollapseController : MonoBehaviour
         if (!started){
             started = true;
             collapseCollider.enabled = false;
+            dustVFX.Play();
 
             dropper.Launch(pushDir);
             shaker.Launch();
