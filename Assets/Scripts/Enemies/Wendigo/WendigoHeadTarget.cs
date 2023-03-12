@@ -5,18 +5,24 @@ using UnityEngine.Animations;
 
 namespace WendigoCharacter
 {
-    public class WendigoHeadTarget : MonoBehaviour
+    public class WendigoHeadTarget : MonoBehaviour, IPooledObjectObserver
     {
         [SerializeField] private Wendigo wendigo;
         [SerializeField] private RigController rigController;
         [SerializeField] private Transform defaultPoint;
+        [SerializeField] private WendigoPooledObject pooledObject;
 
         private Transform target;
         private Vector3 velocity;
         private Vector3 targetPosition;
         private WendigoData data;
 
-        private void Start()
+        private void Awake()
+        {
+            pooledObject.Subscribe(this);
+        }
+
+        public void OnSpawn()
         {
             wendigo.GetController<WendigoTargetManager>().Subscribe(SetTarget);
             data = wendigo.Data;

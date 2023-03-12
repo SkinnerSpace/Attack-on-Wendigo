@@ -315,116 +315,101 @@ MonoBehaviour:
       Data3: 672349877
       Data4: 1549719663
     Path: event:/SFX/Game/Gameplay/Trees/Fall
---- !u!1001 &238335901215865689
-PrefabInstance:
+--- !u!1 &8702874323431417456
+GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 497096379076534055}
-    m_Modifications:
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427567582014150947, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427567582014150947, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427567582014150947, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427567582014150947, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427567582014150947, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3047415371994030784, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: mesh
-      value: 
-      objectReference: {fileID: 1634004404738892872}
-    - target: {fileID: 3047415371994030784, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: flameVFX
-      value: 
-      objectReference: {fileID: 8828895532381939843}
-    - target: {fileID: 8901486894337940777, guid: aaf898879de511f47accc51547427e52,
-        type: 3}
-      propertyPath: m_Name
-      value: DisposableFireHitBox
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aaf898879de511f47accc51547427e52, type: 3}
---- !u!4 &189146165757893901 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
-    type: 3}
-  m_PrefabInstance: {fileID: 238335901215865689}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189146165757893901}
+  - component: {fileID: 1189231895584481914}
+  - component: {fileID: 7278340346600273488}
+  - component: {fileID: 4132657621793033292}
+  - component: {fileID: 3783448379488336947}
+  m_Layer: 25
+  m_Name: DisposableFireHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &189146165757893901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702874323431417456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 497096379076534055}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1189231895584481914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702874323431417456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 16, z: 11}
+  m_Center: {x: 0, y: 8, z: 0}
+--- !u!114 &7278340346600273488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702874323431417456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faafa498d12502a4786169a99b384a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chronos: {fileID: 4132657621793033292}
+  hitBox: {fileID: 1189231895584481914}
+  flameVFX: {fileID: 8828895532381939843}
+  burnSpeed: 0.5
+  mesh: {fileID: 1634004404738892872}
+--- !u!114 &4132657621793033292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702874323431417456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3783448379488336947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702874323431417456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4569ac87649c4594bb210e6cb77c389f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnSFX:
+    Guid:
+      Data1: 688853838
+      Data2: 1232439661
+      Data3: -96284022
+      Data4: -587339386
+    Path: event:/SFX/Game/Gameplay/Fire/Flame
 --- !u!1001 &7351150261807706143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -576,22 +561,27 @@ PrefabInstance:
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 8
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 30
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816135, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}

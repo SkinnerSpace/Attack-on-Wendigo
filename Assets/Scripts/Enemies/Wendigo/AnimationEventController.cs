@@ -8,40 +8,38 @@ namespace WendigoCharacter
     public class AnimationEventController : MonoBehaviour
     {
         [Header("Required Components")]
+        [SerializeField] private WendigoData data;
         [SerializeField] private WendigoSFXPlayer sFXPlayer;
-        [SerializeField] private Wendigo wendigo;
         [SerializeField] private FireballSpawner fireballSpawner;
         [SerializeField] private Firebreath firebreath;
 
         [Header("Stomp")]
         [SerializeField] private StompDamageBox leftStompBox;
         [SerializeField] private StompDamageBox rightStompBox;
+        [SerializeField] private Transform leftStompPoint;
+        [SerializeField] private Transform rightStompPoint;
 
-        private WendigoData data;
+        private IObjectPooler pooler;
 
         private void Start()
         {
-            data = wendigo.Data;
-        }
-
-        public void Stomp()
-        {
-            ShakeTheEarth();
-            sFXPlayer.PlayStompSFX();
+            pooler = PoolHolder.Instance;
         }
 
         public void LeftStomp()
         {
             leftStompBox.Activate();
             ShakeTheEarth();
-            sFXPlayer.PlayStompSFX();
+            sFXPlayer.PlayStompSFX(leftStompPoint.position);
+            pooler.SpawnFromThePool("StompSnow", leftStompPoint.position, Quaternion.identity);
         }
 
         public void RightStomp()
         {
             rightStompBox.Activate();
             ShakeTheEarth();
-            sFXPlayer.PlayStompSFX();
+            sFXPlayer.PlayStompSFX(rightStompPoint.position);
+            pooler.SpawnFromThePool("StompSnow", rightStompPoint.position, Quaternion.identity);
         }
 
         private void ShakeTheEarth()

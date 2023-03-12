@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8314286997772649539}
   - component: {fileID: 8314286997772649538}
   - component: {fileID: 8314286997772649537}
-  - component: {fileID: 8337543436546903680}
+  - component: {fileID: 2912562471633044489}
   m_Layer: 8
   m_Name: SnowParticle
   m_TagString: Untagged
@@ -4892,7 +4892,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8337543436546903680
+--- !u!114 &2912562471633044489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

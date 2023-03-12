@@ -4,6 +4,9 @@ public class LaserBeam : MonoBehaviour
 {
     private const float EMISSION_HEIGHT = 100f;
 
+    [SerializeField] private LaserBeamFader fader;
+    [SerializeField] private CrateSFXPlayer sFXPlayer;
+
     private LineRenderer line;
     private UpDirFinder upDirFinder;
 
@@ -21,7 +24,16 @@ public class LaserBeam : MonoBehaviour
         line.SetPosition(0, transform.position);
         line.SetPosition(1, upPos);
         line.enabled = true;
+
+        fader.FadeIn();
+        sFXPlayer.PlayLightOn();
     }
 
-    public void SwitchOff() => line.enabled = false;
+    public void ResetLaserBeam()
+    {
+        fader.ResetFade();
+        line.enabled = false;
+    }
+
+    public void SwitchOff() => fader.FadeOut();
 }

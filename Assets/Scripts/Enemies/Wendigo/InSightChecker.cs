@@ -3,14 +3,7 @@ using WendigoCharacter;
 
 public class InSightChecker : MonoBehaviour
 {
-    [SerializeField] private Wendigo wendigo;
-
-    private WendigoData data;
-
-    private void Start()
-    {
-        data = wendigo.Data;
-    }
+    [SerializeField] private WendigoData data;
 
     private void Update()
     {

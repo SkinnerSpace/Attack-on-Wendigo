@@ -4,7 +4,8 @@ public class CrateLandingController : MonoBehaviour
 {
     [SerializeField] private LaserBeam laserBeam;
     [SerializeField] private Crate crate;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private CrateSFXPlayer sFXPlayer;
+    [SerializeField] private float jumpForce = 7f;
 
     private Rigidbody physics;
     private bool isGrounded;
@@ -14,7 +15,7 @@ public class CrateLandingController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDisabled && isGrounded && physics.velocity.magnitude <= 0f)
+        if (!isDisabled && isGrounded && physics.velocity.magnitude <= 0.01f)
         {
             isDisabled = true;
             crate.PrepareToBeUnpacked();
@@ -32,6 +33,7 @@ public class CrateLandingController : MonoBehaviour
     {
         JumpOffTheWrongSurface(collision);
         HitTheSurface(collision);
+        sFXPlayer.PlayBump();
     }
 
     private void JumpOffTheWrongSurface(Collision collision)

@@ -12,7 +12,7 @@ public class Surface : MonoBehaviour
 
     public SurfaceHitBuilder Hit()
     {
-        ParticleSystem particle = pooler.SpawnFromThePool(particleName, Vector3.zero, Quaternion.identity).transform.GetComponent<ParticleSystem>();
+        ParticleSystem particle = pooler.SpawnFromThePool(particleName).transform.GetComponent<ParticleSystem>();
         return new SurfaceHitBuilder(particle, sfxManager);
     }
 }

@@ -174,7 +174,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8239632340764624749}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -548,6 +548,21 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Scale.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816135, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}

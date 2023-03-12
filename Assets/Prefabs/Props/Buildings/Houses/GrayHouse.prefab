@@ -497,23 +497,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
-      propertyPath: startDelay.scalar
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
-        type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
-        type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816133, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816135, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}

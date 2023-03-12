@@ -19,7 +19,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     {
         crate.ResetState();
         landingController.ResetLanding();
-        laserBeam.SwitchOff();
+        laserBeam.ResetLaserBeam();
         openable.ActivateCollision();
     }
 

@@ -528,6 +528,10 @@ MonoBehaviour:
     prefab: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
       type: 3}
     size: 10
+  - tag: RedSparks
+    prefab: {fileID: 4005881168588452409, guid: 65d57663398a61a4ab73d2b6d49c9a32,
+      type: 3}
+    size: 20
 --- !u!1 &5203709847934754149
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,8 +47,8 @@ public class WendigoSFXPlayer : MonoBehaviour
         exhalePlayer = AudioPlayer.Create(exhaleSFX).WithAnchor(head).WithPitch(-1f, 1f).WithVariety(2);
     }
 
-    public void PlayStompSFX(){
-        stompAudioPlayer.WithPosition(transform.position).PlayOneShot();
+    public void PlayStompSFX(Vector3 position){
+        stompAudioPlayer.WithPosition(position).PlayOneShot();
     }
 
     public void PlayArrivalRoarSFX(){
