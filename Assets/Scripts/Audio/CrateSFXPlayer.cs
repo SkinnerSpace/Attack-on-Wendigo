@@ -52,4 +52,3 @@ public class CrateSFXPlayer : MonoBehaviour
 
     private void Play(string sfx) => players[sfx].PlayOneShot();
 }
-

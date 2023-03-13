@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 # if UNITY_EDITOR
-using UnityEditor;
 # endif
 
 public class Architect : MonoBehaviour
 {
-    [SerializeField] private bool debugMode;
+    private const float BUILDING_CHANCE = 0.05f;
 
-    [SerializeField] private int mapSize;
-    [SerializeField] private int forestSize;
-    [SerializeField] private int townSize;
-    [SerializeField] private float scale;
-    private Vector3 center;
+    [SerializeField] public bool debugMode;
+
+    [SerializeField] public int mapSize;
+    [SerializeField] public int forestSize;
+    [SerializeField] public int townSize;
+    [SerializeField] public float scale;
+    public Vector3 center { get; set; }
 
     private DesignDepartment designDepartment;
     [SerializeField] private Builder builder;
@@ -25,7 +22,6 @@ public class Architect : MonoBehaviour
     [SerializeField] private CentralizedObjects centralizedObjects;
 
     private Mark[,] map;
-    private const float BUILDING_CHANCE = 0.05f;
 
     private void Awake()
     {

@@ -20,7 +20,9 @@ public class LightningThrower : MonoBehaviour
         Instantiate(lightningBolt, position, Quaternion.identity, transform);
 
         float dist = Vector3.Distance(position, attenuationPoint.position);
+
         ScreenShake.Create().withTime(1f).WithAxis(1f, 1f, 0f).WithStrength(1f, 4f).WithCurve(10f, 0.1f, 0.25f).WithAttenuation(dist, MAX_DISTANCE).Launch();
+
         thunderSFXPlayer.WithPosition(position).PlayOneShot();
     }
 }

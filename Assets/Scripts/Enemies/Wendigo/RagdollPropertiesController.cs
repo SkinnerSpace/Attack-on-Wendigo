@@ -15,6 +15,11 @@ public class RagdollPropertiesController : MonoBehaviour
     [Range(0f, 10f)]
     public float projectionDistance = 1f;
 
+    public float contactDistance = 0f;
+
+    public float damper = 0f;
+    public float spring = 0f;
+
     [SerializeField] private bool interpolate;
 
     [SerializeField] private bool continuousDetection;
@@ -40,8 +45,13 @@ public class RagdollPropertiesController : MonoBehaviour
             bone.SetDrag(drag);
             bone.SetAngularDrag(angularDrag);
             bone.SetInterpolate(interpolate);
+            bone.SetMass(mass);
             bone.SetDetection(continuousDetection);
             bone.SetProjectionDistance(projectionDistance);
+            bone.SetContactDistance(contactDistance);
+            bone.SetDamper(damper);
+            bone.SetSpring(spring);
+
             //bone.SetMass(mass);
         }
     }

@@ -9,11 +9,49 @@ public class RagdollBone : MonoBehaviour
     private Collider boneCollider;
     private CharacterJoint boneJoint;
 
+    private Vector3 frozenVelocity;
+
     public Vector3 Position => transform.position;
+
+    private float freezing;
+
+    private bool isUnfreezing;
+    private float unfreezeTime = 2f;
+    private float currentTime = 0f;
+
+    private bool stuck;
+    private float stuckTime = 1f;
 
     private void Awake()
     {
         InitializeComponents();
+    }
+
+    private void Update()
+    {
+        /*if (isUnfreezing)
+        {
+            boneBody.velocity = boneBody.velocity * freezing;
+            boneBody.angularVelocity = boneBody.angularVelocity * freezing;
+
+            currentTime += Time.deltaTime;
+            float lerp = Easing.QuadEaseOut(Mathf.InverseLerp(0f, unfreezeTime, currentTime));
+            freezing = Mathf.Lerp(0f, 1f, lerp);
+
+            if (freezing >= 1f)
+            {
+                isUnfreezing = false;
+            }
+        }*/
+/*
+        if (stuck)
+        {
+            if (currentTime >= stuckTime)
+            {
+                stuck = false;
+                boneBody.constraints = RigidbodyConstraints.None;
+            }
+        }*/
     }
 
     public void InitializeComponents()
@@ -33,11 +71,19 @@ public class RagdollBone : MonoBehaviour
         SetRigidBody(isRagdoll);
         boneCollider.enabled = isRagdoll;
         if (boneJoint != null) boneJoint.enableCollision = isRagdoll;
+
+        if (isRagdoll)
+        {
+            //boneBody.constraints = RigidbodyConstraints.FreezeAll;
+            //stuck = true;
+            isUnfreezing = true;
+        }
     }
 
     private void SetRigidBody(bool isRagdoll)
     {
-        boneBody.velocity = Vector3.zero;
+/*        boneBody.velocity = Vector3.zero;
+        boneBody.angularVelocity = Vector3.zero;*/
         boneBody.isKinematic = !isRagdoll;
 
         boneBody.useGravity = isRagdoll;
@@ -55,6 +101,56 @@ public class RagdollBone : MonoBehaviour
         if (boneJoint != null)
         {
             boneJoint.projectionDistance = projectionDistance;
+        }
+    }
+
+    public void SetContactDistance(float contactDistance)
+    {
+        if (boneJoint != null)
+        {
+            SoftJointLimit jointLimit1 = boneJoint.swing1Limit;
+            jointLimit1.contactDistance = contactDistance;
+            boneJoint.swing1Limit = jointLimit1;
+
+            SoftJointLimit jointLimit2 = boneJoint.swing2Limit;
+            jointLimit2.contactDistance = contactDistance;
+            boneJoint.swing2Limit = jointLimit2;
+
+            SoftJointLimit highTwist = boneJoint.highTwistLimit;
+            highTwist.contactDistance = contactDistance;
+            boneJoint.highTwistLimit = highTwist;
+
+            SoftJointLimit lowTwist = boneJoint.lowTwistLimit;
+            lowTwist.contactDistance = contactDistance;
+            boneJoint.lowTwistLimit = lowTwist;
+        }
+    }
+
+    public void SetDamper(float damper)
+    {
+        if (boneJoint != null)
+        {
+            SoftJointLimitSpring twistLimit = boneJoint.twistLimitSpring;
+            twistLimit.damper = damper;
+            boneJoint.twistLimitSpring = twistLimit;
+
+            SoftJointLimitSpring swingLimit = boneJoint.swingLimitSpring;
+            swingLimit.damper = damper;
+            boneJoint.swingLimitSpring = swingLimit;
+        }
+    }
+
+    public void SetSpring(float spring)
+    {
+        if (boneJoint != null)
+        {
+            SoftJointLimitSpring twistLimit = boneJoint.twistLimitSpring;
+            twistLimit.spring = spring;
+            boneJoint.twistLimitSpring = twistLimit;
+
+            SoftJointLimitSpring swingLimit = boneJoint.swingLimitSpring;
+            swingLimit.spring = spring;
+            boneJoint.swingLimitSpring = swingLimit;
         }
     }
 }
