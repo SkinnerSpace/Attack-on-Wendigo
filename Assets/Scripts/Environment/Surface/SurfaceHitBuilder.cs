@@ -4,23 +4,23 @@ using UnityEngine;
 public class SurfaceHitBuilder
 {
     private ParticleSystem particle;
-    private SurfaceSFXManager sfxManager;
+    private AudioPlayer audioPlayer;
     private ParticleCountManager countManager;
 
     private float tangent;
     private float sfxVolume;
 
-    public SurfaceHitBuilder(ParticleSystem particle, SurfaceSFXManager sfxManager)
+    public SurfaceHitBuilder(ParticleSystem particle, AudioPlayer audioPlayer)
     {
         this.particle = particle;
-        this.sfxManager = sfxManager;
+        this.audioPlayer = audioPlayer;
         countManager = new ParticleCountManager();
     }
 
     public SurfaceHitBuilder WithPosition(Vector3 position)
     {
         particle.transform.position = position;
-        sfxManager.SetPosition(position);
+        audioPlayer.WithPosition(position);
 
         return this;
     }
@@ -41,8 +41,6 @@ public class SurfaceHitBuilder
         shape.angle = angle;
 
         sfxVolume = Easing.QuadEaseOut((radius / 1f).Clamp01());
-        sfxManager.ChooseSFX(radius);
-
         return this;
     }
 
@@ -61,12 +59,12 @@ public class SurfaceHitBuilder
 
     public void Launch()
     {
-        sfxManager.SetVolume(sfxVolume);
+        audioPlayer.WithVolume(sfxVolume);
 
-        countManager.AdjustCount(tangent);
-        countManager.ApplyCount(particle);
+/*        countManager.AdjustCount(tangent);
+        countManager.ApplyCount(particle);*/
 
         particle.Play();
-        sfxManager.PlaySFX();
+        audioPlayer.PlayOneShot();
     }
 }

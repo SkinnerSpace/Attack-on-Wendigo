@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Crate : MonoBehaviour, IOpenable
 {
-    [SerializeField] private Rigidbody physics;
+    [SerializeField] private CratePhysics physics;
     [SerializeField] private CrateSFXPlayer sFXPlayer;
     [SerializeField] private MeshRenderer model;
     [SerializeField] private LaserBeam laserBeam;
@@ -24,19 +21,13 @@ public class Crate : MonoBehaviour, IOpenable
 
     public void Throw(float force)
     {
-        physics.isKinematic = false;
-        physics.useGravity = true;
-        physics.AddForce(transform.forward * force, ForceMode.Impulse);
+        physics.SwitchOn();
+        physics.AddForce(force);
 
         sFXPlayer.PlayDrop();
     }
 
-    public void ResetPhysics()
-    {
-        physics.isKinematic = true;
-        physics.useGravity = false;
-        physics.velocity = Vector3.zero;
-    }
+    public void ResetPhysics() => physics.SetKinematic();
 
     public void PrepareToBeUnpacked()
     {
@@ -49,12 +40,10 @@ public class Crate : MonoBehaviour, IOpenable
             isOpened = true;
 
             model.enabled = false;
+            physics.SwitchOff();
             laserBeam.SwitchOff();
             destructionParticles.Play();
-
             sFXPlayer.PlayOpen();
-            sFXPlayer.PlayFlash();
-            sFXPlayer.PlaySmoke();
 
             PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
         }

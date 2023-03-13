@@ -101,9 +101,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1158720301979629332}
+  - component: {fileID: 1090654136677401993}
   - component: {fileID: 1303321171627160712}
   - component: {fileID: 5099876636886211447}
-  - component: {fileID: 1090654136677401993}
   m_Layer: 21
   m_Name: Openable
   m_TagString: Untagged
@@ -125,6 +125,19 @@ Transform:
   m_Father: {fileID: 3461862813649877309}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1090654136677401993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487358306755392819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73d8ddfce9a1a24d960dce26b23c86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crate: {fileID: 137477694732360836}
 --- !u!135 &1303321171627160712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,19 +167,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1090654136677401993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487358306755392819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73d8ddfce9a1a24d960dce26b23c86e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crate: {fileID: 137477694732360836}
 --- !u!1 &1197762591707306055
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,7 +5069,6 @@ GameObject:
   - component: {fileID: 4522776785581042991}
   - component: {fileID: 6744949977964748514}
   - component: {fileID: 6143223655137451496}
-  - component: {fileID: 1949052402497373695}
   - component: {fileID: 7956985559628058523}
   m_Layer: 16
   m_Name: LaserBeam
@@ -5122,18 +5121,6 @@ MonoBehaviour:
   chronos: {fileID: 8351341909458789206}
   fadeInTime: 10
   fadeOutTime: 1
---- !u!114 &1949052402497373695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3591963385797958648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f9d94384b6d0b44870e7ea2b5893dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!120 &7956985559628058523
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -19639,12 +19626,11 @@ GameObject:
   - component: {fileID: 3913650606176296814}
   - component: {fileID: 137477694732360836}
   - component: {fileID: 340786710075545641}
+  - component: {fileID: 5350540118256880488}
   - component: {fileID: 2257178372747876790}
-  - component: {fileID: 8351341909458789206}
   - component: {fileID: 542304009633892959}
-  - component: {fileID: 807267789010131364}
-  - component: {fileID: 8317810452120711342}
-  m_Layer: 16
+  - component: {fileID: 8351341909458789206}
+  m_Layer: 26
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19711,7 +19697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5541bc80fa25a124eab650a4e4424974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physics: {fileID: 3913650606176296814}
+  physics: {fileID: 5350540118256880488}
   sFXPlayer: {fileID: 7705346738062873578}
   model: {fileID: 7317556293849801138}
   laserBeam: {fileID: 6744949977964748514}
@@ -19730,8 +19716,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserBeam: {fileID: 6744949977964748514}
   crate: {fileID: 137477694732360836}
+  physics: {fileID: 5350540118256880488}
   sFXPlayer: {fileID: 7705346738062873578}
   jumpForce: 15
+--- !u!114 &5350540118256880488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715555677677968425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c291f2322cd05f458fd04f97ae67fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 3913650606176296814}
+  collisionBox: {fileID: 7502010529216458409}
 --- !u!114 &2257178372747876790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19748,18 +19749,6 @@ MonoBehaviour:
   landingController: {fileID: 340786710075545641}
   laserBeam: {fileID: 6744949977964748514}
   openable: {fileID: 1090654136677401993}
---- !u!114 &8351341909458789206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715555677677968425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &542304009633892959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19773,8 +19762,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleName: RedSparks
-  sfxManager: {fileID: 807267789010131364}
---- !u!114 &807267789010131364
+  sFXData:
+    reference:
+      Guid:
+        Data1: -394331513
+        Data2: 1125145045
+        Data3: -1288010578
+        Data4: -1133156338
+      Path: event:/SFX/Game/Gameplay/Crate/CrateShoot
+    variety: 1
+    minPitch: -2
+    maxPitch: 2
+--- !u!114 &8351341909458789206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19783,31 +19782,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6715555677677968425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089a61499e2c96741a8fdddc2867c0b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8317810452120711342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715555677677968425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2720118cefaa18f42933acbf98aed002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitSFX:
-    Guid:
-      Data1: -394331513
-      Data2: 1125145045
-      Data3: -1288010578
-      Data4: -1133156338
-    Path: event:/SFX/Game/Gameplay/Crate/CrateShoot
-  threshold: 0
-  variety: 0
-  pitchRange: 1
 --- !u!1001 &881222740070319019
 PrefabInstance:
   m_ObjectHideFlags: 0

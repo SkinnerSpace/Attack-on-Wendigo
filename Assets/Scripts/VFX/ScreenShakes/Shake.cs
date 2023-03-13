@@ -103,4 +103,3 @@ public class Shake
     public void SetDir(Vector3 direction) => this.direction = direction;
     public void SetAngle(float zAngle) => angle = new Vector3(0f, 0f, zAngle);
 }
-

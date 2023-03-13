@@ -13,6 +13,8 @@ public class CrateSFXPlayer : MonoBehaviour
 
     private Dictionary<string, AudioPlayer> players = new Dictionary<string, AudioPlayer>();
 
+    private AudioPlayer audioPlayer;
+
     private void Awake()
     {
         players.Add("Drop", 
@@ -40,11 +42,13 @@ public class CrateSFXPlayer : MonoBehaviour
 
     public void PlayDrop() => Play("Drop");
     public void PlayBump() => Play("Bump");
-    public void PlayFlash() => Play("Flash");
     public void PlayLightOn() => Play("LightOn");
-    public void PlayOpen() => Play("Open");
     public void PlayShoot() => Play("Shoot");
-    public void PlaySmoke() => Play("Smoke");
+    public void PlayOpen(){
+        Play("Open");
+        Play("Flash");
+        Play("Smoke");
+    }
 
     private void Play(string sfx) => players[sfx].PlayOneShot();
 }

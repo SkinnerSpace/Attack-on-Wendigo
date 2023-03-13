@@ -66,8 +66,8 @@ public class RaycastShooter
             surface.Hit().
                     WithPosition(target.hitPosition).
                     WithAngle(target.hitDirection, target.normal).
-                    WithShape(0f, 45f).
-                    WithCount(20, 30).
+                  /*  WithShape(0f, 45f).
+                    WithCount(20, 30).*/
                     Launch();
         }
     }

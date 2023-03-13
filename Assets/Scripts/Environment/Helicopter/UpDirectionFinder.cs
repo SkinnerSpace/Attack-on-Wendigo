@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-public class UpDirFinder : MonoBehaviour
+public class UpDirectionFinder
 {
     private Vector3[] directions = new Vector3[3];
     float highestUpwardness = 0f;
     int upwardSide = 0;
     int sign = 1;
 
-    public Vector3 GetUpwardDirection()
+    public Vector3 GetUpwardDirection(Transform transform)
     {
-        UpdateDirections();
+        UpdateDirections(transform);
 
         for (int i = 0; i < directions.Length; i++)
             FindUpwardSide(i);
@@ -17,7 +17,7 @@ public class UpDirFinder : MonoBehaviour
         return directions[upwardSide] * sign;
     }
 
-    private void UpdateDirections()
+    private void UpdateDirections(Transform transform)
     {
         directions[0] = transform.right;
         directions[1] = transform.up;

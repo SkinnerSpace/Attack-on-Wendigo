@@ -32,7 +32,7 @@ public class WendigoSpawner : MonoBehaviour
     private void Awake()
     {
         counter.SubscribeOnTimeOut(Spawn);
-        Pickable.SubscribeOnFirstPickUp(Spawn);
+        //Pickable.SubscribeOnFirstPickUp(Spawn);
     }
 
     private void Start() => pooler = PoolHolder.Instance;

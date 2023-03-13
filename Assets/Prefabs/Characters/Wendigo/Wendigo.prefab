@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 1709658053938037733}
   - component: {fileID: 1468843511131248852}
   - component: {fileID: 871203280192798116}
+  - component: {fileID: 7872369192153809920}
   m_Layer: 12
   m_Name: LowerArmLeftHitBox
   m_TagString: Untagged
@@ -338,6 +339,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7872369192153809920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404958210390101900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &480528591518986275
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +650,7 @@ GameObject:
   - component: {fileID: 1379475162819397396}
   - component: {fileID: 4840237531554999390}
   - component: {fileID: 7276305151037286429}
+  - component: {fileID: 9106819196241456520}
   m_Layer: 12
   m_Name: SpineHitBox
   m_TagString: Untagged
@@ -688,6 +714,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9106819196241456520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974895726673871034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &993951852299401430
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +940,7 @@ GameObject:
   - component: {fileID: 2083715845249296249}
   - component: {fileID: 5974335890776307916}
   - component: {fileID: 3186432933012174124}
+  - component: {fileID: 34220214027220663}
   m_Layer: 12
   m_Name: LowerLegLeftHitBox
   m_TagString: Untagged
@@ -953,6 +1004,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &34220214027220663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202201926809220404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &1215776031429790935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,6 +2257,7 @@ GameObject:
   - component: {fileID: 7387629403777385768}
   - component: {fileID: 1743777722664072676}
   - component: {fileID: 6484732339368796966}
+  - component: {fileID: 8640786444244495963}
   m_Layer: 12
   m_Name: LowerLegRightHitBox
   m_TagString: Untagged
@@ -2245,6 +2321,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8640786444244495963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494348140181123556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &2555649344426256135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,6 +2357,7 @@ GameObject:
   - component: {fileID: 51235060904844682}
   - component: {fileID: 234521046518893739}
   - component: {fileID: 444214012873186312}
+  - component: {fileID: 2712009477470145072}
   m_Layer: 12
   m_Name: UpperArmRightHitBox
   m_TagString: Untagged
@@ -2320,6 +2421,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2712009477470145072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555649344426256135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &2577550725365397327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,6 +2714,7 @@ GameObject:
   - component: {fileID: 7581754005067373125}
   - component: {fileID: 5386617088416821688}
   - component: {fileID: 552378838419340962}
+  - component: {fileID: 8934464007619748438}
   m_Layer: 12
   m_Name: HandRightHitBox
   m_TagString: Untagged
@@ -2652,6 +2778,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8934464007619748438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632328545549931799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &2655317146100164590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,6 +3680,7 @@ GameObject:
   - component: {fileID: 8082030989651858429}
   - component: {fileID: 7959237052950026209}
   - component: {fileID: 3532037576188302992}
+  - component: {fileID: 5541858825772950078}
   m_Layer: 12
   m_Name: HandLeftHitBox
   m_TagString: Untagged
@@ -3593,6 +3744,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5541858825772950078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362983475442406585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &3437268600921390553
 GameObject:
   m_ObjectHideFlags: 0
@@ -4623,6 +4798,7 @@ GameObject:
   - component: {fileID: 2072463688579717889}
   - component: {fileID: 5960372080557144323}
   - component: {fileID: 7277462181717563974}
+  - component: {fileID: 3967010822562334540}
   m_Layer: 12
   m_Name: LowerArmRightHitBox
   m_TagString: Untagged
@@ -4686,6 +4862,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3967010822562334540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590274401699473280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &4650740556524086241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4851,6 +5051,7 @@ GameObject:
   - component: {fileID: 5415795530292463760}
   - component: {fileID: 3007836223013777477}
   - component: {fileID: 2402199524921332344}
+  - component: {fileID: 5494831351099788274}
   m_Layer: 12
   m_Name: ChestHitBox
   m_TagString: Untagged
@@ -4914,6 +5115,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5494831351099788274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700962156814263049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &4895680750390430426
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,6 +5274,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBoxesRoot: {fileID: 429680503242453467}
+  surfaceData:
+    particleName: WoundBlood
+    sFXData:
+      reference:
+        Guid:
+          Data1: -1017058278
+          Data2: 1198547612
+          Data3: -154582880
+          Data4: 1228721202
+        Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      variety: 2
+      minPitch: -2
+      maxPitch: 2
   hits:
   - {fileID: 2896210601795268563}
   - {fileID: 8082030989651858429}
@@ -5743,6 +5981,7 @@ GameObject:
   - component: {fileID: 8759548127607196590}
   - component: {fileID: 4784753438143549564}
   - component: {fileID: 4781707239409111288}
+  - component: {fileID: 6462523822555388913}
   m_Layer: 12
   m_Name: TorsoHitBox
   m_TagString: Untagged
@@ -5806,6 +6045,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6462523822555388913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042478334214949530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &6085345994621559868
 GameObject:
   m_ObjectHideFlags: 0
@@ -5914,6 +6177,7 @@ GameObject:
   - component: {fileID: 6274594484036095103}
   - component: {fileID: 95617682861329486}
   - component: {fileID: 7844125745743150110}
+  - component: {fileID: 318252748516116866}
   m_Layer: 12
   m_Name: UpperLegLeftHitBox
   m_TagString: Untagged
@@ -5977,6 +6241,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &318252748516116866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6415092964129285843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &6706057981759731135
 GameObject:
   m_ObjectHideFlags: 0
@@ -6081,6 +6369,7 @@ GameObject:
   - component: {fileID: 8328430738668033664}
   - component: {fileID: 1436647386470012355}
   - component: {fileID: 378151739295854358}
+  - component: {fileID: 7382743254999179642}
   m_Layer: 12
   m_Name: NeckHitBox
   m_TagString: Untagged
@@ -6144,6 +6433,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7382743254999179642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747660664933114489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &6748325884116418214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,6 +6689,7 @@ GameObject:
   - component: {fileID: 8294612304243969778}
   - component: {fileID: 8596519499714441311}
   - component: {fileID: 6751251950777105147}
+  - component: {fileID: 1727525112168830141}
   m_Layer: 12
   m_Name: HipsHitBox
   m_TagString: Untagged
@@ -6439,6 +6753,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1727525112168830141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949925313050838285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &7146040082212238232
 GameObject:
   m_ObjectHideFlags: 0
@@ -7948,6 +8286,7 @@ GameObject:
   - component: {fileID: 2896210601795268563}
   - component: {fileID: 1459399366676293042}
   - component: {fileID: 5396938903875150705}
+  - component: {fileID: 6816296324970505169}
   m_Layer: 12
   m_Name: HeadHitBox
   m_TagString: Untagged
@@ -8011,6 +8350,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6816296324970505169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656429960533754628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &8797472720865795521
 GameObject:
   m_ObjectHideFlags: 0
@@ -8023,6 +8386,7 @@ GameObject:
   - component: {fileID: 3671265228725775564}
   - component: {fileID: 3892779191291099982}
   - component: {fileID: 2069485310603159921}
+  - component: {fileID: 5343363524281091697}
   m_Layer: 12
   m_Name: FootLeftHitBox
   m_TagString: Untagged
@@ -8085,6 +8449,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5343363524281091697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797472720865795521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &9016226187238205831
 GameObject:
   m_ObjectHideFlags: 0
@@ -8268,6 +8656,7 @@ GameObject:
   - component: {fileID: 7022989601367549752}
   - component: {fileID: 226026580094568087}
   - component: {fileID: 8370337153383087953}
+  - component: {fileID: 6213876803277071468}
   m_Layer: 12
   m_Name: UpperLegRightHitBox
   m_TagString: Untagged
@@ -8331,6 +8720,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6213876803277071468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117070848904905472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &9123887102132083627
 GameObject:
   m_ObjectHideFlags: 0
@@ -8377,6 +8790,7 @@ GameObject:
   - component: {fileID: 7773375745746664394}
   - component: {fileID: 7911746611983371210}
   - component: {fileID: 8576239236877273764}
+  - component: {fileID: 303397967897310119}
   m_Layer: 12
   m_Name: FootRightHitBox
   m_TagString: Untagged
@@ -8439,6 +8853,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &303397967897310119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148930464205871794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1 &9175474856025134201
 GameObject:
   m_ObjectHideFlags: 0
@@ -8579,6 +9017,7 @@ GameObject:
   - component: {fileID: 2988096097454721414}
   - component: {fileID: 7862351046502520490}
   - component: {fileID: 1705477748225021671}
+  - component: {fileID: 2231037284988367845}
   m_Layer: 12
   m_Name: UpperArmLeftHitBox
   m_TagString: Untagged
@@ -8642,6 +9081,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2231037284988367845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211106622801728780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleName: WoundBlood
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1017058278
+        Data2: 1198547612
+        Data3: -154582880
+        Data4: 1228721202
+      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!1001 &154347241016811699
 PrefabInstance:
   m_ObjectHideFlags: 0

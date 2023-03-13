@@ -90,8 +90,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8607343110206788955}
+  m_Children: []
   m_Father: {fileID: 6808107000943480945}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,7 +121,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleName: SnowParticle
-  sfxManager: {fileID: 8607343110206788952}
+  sFXData:
+    reference:
+      Guid:
+        Data1: -1255389845
+        Data2: 1137691111
+        Data3: -1542338911
+        Data4: 2027693125
+      Path: event:/SFX/Game/Gameplay/Environment/Bricks
+    variety: 2
+    minPitch: -2
+    maxPitch: 2
 --- !u!114 &7355269380469640033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,72 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44555e63143a29c4a89aa10ce527f567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8607343110206788954
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8607343110206788955}
-  - component: {fileID: 8607343110206788952}
-  - component: {fileID: 8607343110206788950}
-  m_Layer: 8
-  m_Name: SurfaceSFXManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8607343110206788955
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8607343110206788954}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1656811629480797877}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8607343110206788952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8607343110206788954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089a61499e2c96741a8fdddc2867c0b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8607343110206788950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8607343110206788954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2720118cefaa18f42933acbf98aed002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitSFX:
-    Guid:
-      Data1: -1095516405
-      Data2: 1337899629
-      Data3: 2005530760
-      Data4: 1203934452
-    Path: event:/SFX/Game/Gameplay/Environment/Concrete/ConcreteHit
-  threshold: 0
-  variety: 3
-  pitchRange: 2
 --- !u!1001 &3250479251733128744
 PrefabInstance:
   m_ObjectHideFlags: 0

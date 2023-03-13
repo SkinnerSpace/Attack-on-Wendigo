@@ -11,7 +11,9 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 
     private void Start() => pooler = PoolHolder.Instance;
 
-    public void OnObjectSpawn() => particle.Play();
+    public void OnObjectSpawn(){
+        particle.Play();
+    }
 
     public void SetActive(bool active) => gameObject.SetActive(active);
 

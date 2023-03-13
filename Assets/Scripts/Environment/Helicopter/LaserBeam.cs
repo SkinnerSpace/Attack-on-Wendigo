@@ -8,17 +8,17 @@ public class LaserBeam : MonoBehaviour
     [SerializeField] private CrateSFXPlayer sFXPlayer;
 
     private LineRenderer line;
-    private UpDirFinder upDirFinder;
+    private UpDirectionFinder upDirFinder;
 
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
-        upDirFinder = GetComponent<UpDirFinder>();
+        upDirFinder = new UpDirectionFinder();
     }
 
     public void SwitchOn()
     {
-        Vector3 upDir = upDirFinder.GetUpwardDirection();
+        Vector3 upDir = upDirFinder.GetUpwardDirection(transform);
         Vector3 upPos = transform.position + (upDir * EMISSION_HEIGHT);
 
         line.SetPosition(0, transform.position);

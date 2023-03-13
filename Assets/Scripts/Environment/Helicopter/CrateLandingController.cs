@@ -2,20 +2,21 @@
 
 public class CrateLandingController : MonoBehaviour
 {
+    [Header("Required Components")]
     [SerializeField] private LaserBeam laserBeam;
     [SerializeField] private Crate crate;
+    [SerializeField] private CratePhysics physics;
     [SerializeField] private CrateSFXPlayer sFXPlayer;
+
+    [Header("Settings")]
     [SerializeField] private float jumpForce = 7f;
 
-    private Rigidbody physics;
     private bool isGrounded;
     private bool isDisabled;
 
-    private void Awake() => physics = GetComponent<Rigidbody>();
-
     private void Update()
     {
-        if (!isDisabled && isGrounded && physics.velocity.magnitude <= 0.01f)
+        if (!isDisabled && isGrounded && physics.IsAtRest())
         {
             isDisabled = true;
             crate.PrepareToBeUnpacked();
@@ -45,7 +46,13 @@ public class CrateLandingController : MonoBehaviour
         else
         {
             isGrounded = false;
-            physics.velocity = new Vector3(Rand.Range(-0.5f, 0.5f), Rand.Range(0.6f, 1f), Rand.Range(-0.5f, 0.5f)) * jumpForce;
+
+            physics.SetVelocity(
+                new Vector3(x: Rand.Range(-0.5f, 0.5f), 
+                            y: Rand.Range(0.6f, 1f), 
+                            z: Rand.Range(-0.5f, 0.5f)) 
+                               * jumpForce
+                );
         }
     }
 

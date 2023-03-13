@@ -29,13 +29,13 @@ public class SurfaceSFXManager : MonoBehaviour
 
     private void SetCurrentSFXPlayer(float radius, SurfaceHitSFXPlayer sfxPlayer)
     {
-        float threshold = sfxPlayer.Threshold;
+/*        float threshold = sfxPlayer.Threshold;
 
         if (Crosses(radius, threshold))
         {
             highestThreshold = threshold;
             currentSFXPlayer = sfxPlayer;
-        }
+        }*/
     }
 
     private bool Crosses(float radius, float threshold) => (radius >= threshold) && (threshold >= highestThreshold);
