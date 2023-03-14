@@ -13,7 +13,7 @@ public class HelicopterSway : MonoBehaviour, IHelicopterTimeObserver
 
     public void UpdateCompletion(float completion)
     {
-        movement = ExtraMath.QuadInOut(completion) * Mathf.PI;
+        movement = Easing.QuadEaseInOut(completion) * Mathf.PI;
         movement = Mathf.Sin(movement);
     }
 

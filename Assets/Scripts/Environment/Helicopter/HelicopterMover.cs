@@ -5,7 +5,7 @@ public class HelicopterMover : MonoBehaviour, IHelicopterTimeObserver
 {
     private float completion;
 
-    public void UpdateCompletion(float completion) => this.completion = ExtraMath.QuadInOut(completion);
+    public void UpdateCompletion(float completion) => this.completion = Easing.QuadEaseInOut(completion);
 
     public Vector3 Move(BezierTrajectory trajectory, Action onFinish)
     {

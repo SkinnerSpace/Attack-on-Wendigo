@@ -4,7 +4,7 @@ public class HelicopterRotator : MonoBehaviour, IHelicopterTimeObserver
 {
     private float completion;
 
-    public void UpdateCompletion(float completion) => this.completion = ExtraMath.QuadInOut(completion);
+    public void UpdateCompletion(float completion) => this.completion = Easing.QuadEaseInOut(completion);
 
     public Quaternion Rotate(Quaternion prevRotation, Vector3 prevPos)
     {

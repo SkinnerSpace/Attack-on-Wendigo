@@ -44,7 +44,7 @@ namespace WendigoCharacter
         public IStateMachine stateMachine { get; set; } = NullStateMachine.Instance;
         public IHitBox[] HitBoxes { get; private set; }
 
-        private List<WendigoBaseController> controllers;
+        private List<WendigoPlugableComponent> controllers;
 
         public void OnSpawn() => Data.IsActive = true;
         private void Update()
@@ -62,33 +62,33 @@ namespace WendigoCharacter
 
             stateMachine = WendigoStateMachineFactory.Create(this);
 
-            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>());
+            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
             GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
             pool.Subscribe(this);
         }
 
         private void AddControllers()
         {
-            controllers = new List<WendigoBaseController>();
+            controllers = new List<WendigoPlugableComponent>();
 
             AddController(typeof(WendigoRotationController));
             AddController(typeof(WendigoMovementController));
             AddController(typeof(WendigoHealthSystem));
             AddController(typeof(WendigoTargetManager));
             AddController(typeof(WendigoAnimationController));
-            AddController(typeof(WendigoRangeCombatManager));
+            AddController(typeof(RangeCombatManager));
         }
 
         private void AddController(Type type)
         {
-            WendigoBaseController controller = Activator.CreateInstance(type) as WendigoBaseController;
+            WendigoPlugableComponent controller = Activator.CreateInstance(type) as WendigoPlugableComponent;
             controller.Initialize(this);
             controllers.Add(controller);
         }
 
-        public T GetController<T>() where T : WendigoBaseController
+        public T GetController<T>() where T : WendigoPlugableComponent
         {
-            foreach (WendigoBaseController controller in controllers)
+            foreach (WendigoPlugableComponent controller in controllers)
             {
                 if (controller is T) return controller as T;
             }
