@@ -4,15 +4,15 @@ namespace WendigoCharacter
 {
     public class WendigoMover : MonoBehaviour
     {
-        private WendigoData data;
-        private CharacterController controller;
-        private IChronos chronos;
+        [SerializeField] private WendigoData data;
+        [SerializeField] private CharacterController controller;
+        [SerializeField] private Chronos chronos;
 
-        public void Initialize(Wendigo wendigo)
-        {
-            controller = wendigo.Controller;
-            chronos = wendigo.Chronos;
-            data = wendigo.Data;
+        public void SwitchOn() => controller.enabled = true;
+
+        public void SwitchOff(){
+            controller.enabled = false;
+            data.Movement.Velocity = Vector3.zero;
         }
 
         private void Update()

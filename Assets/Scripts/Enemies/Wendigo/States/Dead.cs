@@ -4,25 +4,21 @@ namespace WendigoCharacter
 {
     public class Dead : LoggableState, IState
     {
-        private WendigoData data;
-        private CharacterController controller;
+        private WendigoMover mover;
 
         public Dead(Wendigo wendigo)
         {
-            data = wendigo.Data;
-            controller = wendigo.Controller;
+            mover = wendigo.Mover;
         }
 
         public void Tick() { }
         public void OnEnter()
         {
-            data.Movement.Velocity = Vector3.zero;
-            controller.enabled = false;
+            mover.SwitchOff();
             LogEnter();
         }
 
-        public void OnExit()
-        {
+        public void OnExit(){
             LogExit();
         }
     }

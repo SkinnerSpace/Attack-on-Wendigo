@@ -32,8 +32,8 @@ namespace WendigoCharacter
         public Transform PendingTarget => pendingTarget;
 
         public Animator Animator => animator;
+        public WendigoMover Mover => mover;
         public WendigoSFXPlayer SFXPlayer => sFXPlayer;
-        public CharacterController Controller => controller;
         public FunctionTimer Timer => timer;
         public WendigoData Data => data;
 
@@ -57,9 +57,7 @@ namespace WendigoCharacter
         {
             transform.name = "Wendigo_" + (id++);
 
-            //Data = new WendigoData(serializableData, transform);
             HitBoxes = GetComponentsInChildren<IHitBox>();
-            mover.Initialize(this);
             AddControllers();
 
             stateMachine = WendigoStateMachineFactory.Create(this);

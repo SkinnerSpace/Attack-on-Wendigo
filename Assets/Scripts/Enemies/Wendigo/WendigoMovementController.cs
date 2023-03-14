@@ -5,7 +5,6 @@ namespace WendigoCharacter
 {
     public class WendigoMovementController : WendigoBaseController
     {
-        private IWendigo wendigo;
         private WendigoData data;
         private IChronos chronos;
 
@@ -13,7 +12,6 @@ namespace WendigoCharacter
 
         public override void Initialize(IWendigo wendigo)
         {
-            this.wendigo = wendigo;
             data = wendigo.Data;
             chronos = wendigo.Chronos;
         }
