@@ -2,11 +2,11 @@
 
 public class GameFlowManager : MonoBehaviour
 {
-    private WendigoSpawner wendigoSpawner;
+    [SerializeField] private WendigoSpawner wendigoSpawner;
 
-    private void Awake()
+    private void Start()
     {
-        
+        //EventN1();
     }
 
     private void EventN1()

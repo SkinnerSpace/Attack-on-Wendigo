@@ -67,10 +67,10 @@ public class ScreenShake
         return this;
     }
 
-    public void Launch()
+    public void Launch(IShakeManager shakeManager)
     {
         Shake shake = CreateShake();
-        ShakeManager.Instance.AddAndLaunch(shake);
+        shakeManager.AddAndLaunch(shake);
     }
 
     private Shake CreateShake()

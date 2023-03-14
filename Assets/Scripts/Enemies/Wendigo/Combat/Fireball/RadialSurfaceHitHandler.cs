@@ -45,7 +45,7 @@ public class RadialSurfaceHitHandler
 
     private void BlowUpTheSurface(RaycastHit hit)
     {
-        Surface surface = hit.transform.GetComponent<Surface>();
+        ISurface surface = hit.transform.GetComponent<ISurface>();
 
         if (surface != null)
         {

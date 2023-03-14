@@ -42,7 +42,7 @@ public class FireballExplosion
 
     private void PullDownAProp(Collider hitCollider, Vector3 hitPos)
     {
-        PropHitBox prop = hitCollider.GetComponent<PropHitBox>();
+        ICollapsible prop = hitCollider.GetComponent<ICollapsible>();
 
         if (prop != null) {
             Vector3 collapseDirection = (hitPos.FlatV3() - data.Position.FlatV3()).normalized;

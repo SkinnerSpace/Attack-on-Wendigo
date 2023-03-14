@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Surface : MonoBehaviour
+public class Surface : MonoBehaviour, ISurface
 {
     [SerializeField] private string particleName;
     [SerializeField] private SurfaceHitSFXData sFXData;
@@ -20,7 +20,7 @@ public class Surface : MonoBehaviour
         audioPlayer = AudioPlayer.Create(sFXData.reference).WithVariety(sFXData.variety).WithPitch(sFXData.minPitch, sFXData.maxPitch);
     }
 
-    public SurfaceHitBuilder Hit()
+    public ISurfaceHitBuilder Hit()
     {
         ParticleSystem particle = pooler.SpawnFromThePool(particleName).transform.GetComponent<ParticleSystem>();
         SurfaceHitBuilder hitBuilder = new SurfaceHitBuilder(particle, audioPlayer);

@@ -2,27 +2,21 @@
 using UnityEngine;
 using WendigoCharacter;
 
-public class FireballSpawner : MonoBehaviour
+public class FireballSpawnerComponent : MonoBehaviour
 {
     [SerializeField] private WendigoData data;
+    [SerializeField] private ParticleSystem castVFX;
     private IObjectPooler pooler;
 
-    [Range(0, 180)]
-    [SerializeField] private float verticalAngle;
-    [Range(0, 180)]
-    [SerializeField] private float horizontalAngle;
-
-    [SerializeField] private GameObject castVFX;
-
-    private float XPositive => verticalAngle / 2f;
+    private float XPositive => data.FireballSpawner.VerticalAngle / 2f;
     private float XNegative => 360f - XPositive;
 
-    private float YPositive => horizontalAngle / 2f;
+    private float YPositive => data.FireballSpawner.HorizontalAngle / 2f;
     private float YNegative => 360f - YPositive;
 
     private void Start() => pooler = PoolHolder.Instance;
 
-    public void PlayCastVFX() => Instantiate(castVFX, transform.position, transform.rotation);
+    public void PlayCastVFX() => castVFX.Play();
 
     public void SpawnFireball()
     {
@@ -61,4 +55,9 @@ public class FireballSpawner : MonoBehaviour
 
         return yAngle;
     }
+}
+
+public class FireballSpawner
+{
+
 }

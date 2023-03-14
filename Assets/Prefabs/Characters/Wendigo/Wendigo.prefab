@@ -2629,6 +2629,9 @@ MonoBehaviour:
     ColliderRenderer:
       Detail: 20
       IsActive: 0
+  FireballSpawner:
+    VerticalAngle: 70
+    HorizontalAngle: 50
   Fireball:
     MinDistance: 50
     MaxDistance: 100
@@ -9370,15 +9373,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74e2dfbc41ce03f4bb324670fa5164d3, type: 3}
---- !u!198 &1449796521417748723 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1392616721666246459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1449796521417748721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392616721666246459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1449796521417748723 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
     type: 3}
   m_PrefabInstance: {fileID: 1392616721666246459}
   m_PrefabAsset: {fileID: 0}
@@ -10063,8 +10066,7 @@ PrefabInstance:
         type: 3}
       propertyPath: castVFX
       value: 
-      objectReference: {fileID: 8288049134065587089, guid: 8e76d0a460e44d94ea047850444dfcf7,
-        type: 3}
+      objectReference: {fileID: 4406182721403245825}
     - target: {fileID: 3217651491151855900, guid: 1db420e3cdf12ef409644c4524fbb209,
         type: 3}
       propertyPath: m_Icon
@@ -10138,6 +10140,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8703226117386561586}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &4406182721403245825 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5038953891158179123, guid: 1db420e3cdf12ef409644c4524fbb209,
+    type: 3}
+  m_PrefabInstance: {fileID: 8703226117386561586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7483865602147209108 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2239443604756342694, guid: 1db420e3cdf12ef409644c4524fbb209,
@@ -10147,7 +10155,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61604212d0bef3948a65d0af88a4b813, type: 3}
+  m_Script: {fileID: 11500000, guid: 62d8416d04ade594b9e9f4ed212abdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8945209469530079516

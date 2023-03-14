@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WendigoCharacter;
 
 public class WendigoAnimationController : WendigoPlugableComponent
 {
@@ -7,7 +8,7 @@ public class WendigoAnimationController : WendigoPlugableComponent
     public static int firebreathTrigger = Animator.StringToHash("Firebreath");
     private Animator animator;
 
-    public override void Initialize(IWendigo wendigo)
+    public override void Initialize(Wendigo wendigo)
     {
         animator = wendigo.Animator;
     }

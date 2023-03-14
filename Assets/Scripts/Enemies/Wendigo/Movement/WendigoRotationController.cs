@@ -8,7 +8,7 @@ namespace WendigoCharacter
         private WendigoData data;
         private IChronos chronos;
 
-        public override void Initialize(IWendigo wendigo)
+        public override void Initialize(Wendigo wendigo)
         {
             this.wendigo = wendigo;
             data = wendigo.Data;

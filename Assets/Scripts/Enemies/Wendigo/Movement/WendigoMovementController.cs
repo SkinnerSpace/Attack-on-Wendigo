@@ -10,7 +10,7 @@ namespace WendigoCharacter
 
         public Action<float> onVelocityUpdate;
 
-        public override void Initialize(IWendigo wendigo)
+        public override void Initialize(Wendigo wendigo)
         {
             data = wendigo.Data;
             chronos = wendigo.Chronos;

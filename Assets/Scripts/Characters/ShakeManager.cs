@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ShakeManager : MonoBehaviour
+public class ShakeManager : MonoBehaviour, IShakeManager
 {
     private List<Shake> shakes = new List<Shake>();
     private ShakeDisplacement displacementSum = new ShakeDisplacement();
 
     [SerializeField] private Shakeable shakeable;
 
-    public static ShakeManager Instance { get; private set; }
+    public static IShakeManager Instance { get; private set; }
 
     private void Awake() => Instance = this;
 

@@ -7,6 +7,7 @@ namespace WendigoCharacter
         public HealthData Health;
         public MovementData Movement;
         public FirebreathAbilityData Firebreath;
+        public FireballSpawnerData FireballSpawner;
         public FireballAbilityData Fireball;
         public HeadData Head;
         public Transform Target;

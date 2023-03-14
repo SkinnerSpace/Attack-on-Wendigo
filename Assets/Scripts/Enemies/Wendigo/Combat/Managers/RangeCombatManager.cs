@@ -8,7 +8,7 @@ namespace WendigoCharacter
     {
         private WendigoData data;
 
-        public override void Initialize(IWendigo wendigo) => data = wendigo.Data;
+        public override void Initialize(Wendigo wendigo) => data = wendigo.Data;
 
         public void PrepareToAttack()
         {

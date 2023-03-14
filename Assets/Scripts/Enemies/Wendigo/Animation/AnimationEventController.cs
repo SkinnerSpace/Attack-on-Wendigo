@@ -10,7 +10,7 @@ namespace WendigoCharacter
         [Header("Required Components")]
         [SerializeField] private WendigoData data;
         [SerializeField] private WendigoSFXPlayer sFXPlayer;
-        [SerializeField] private FireballSpawner fireballSpawner;
+        [SerializeField] private FireballSpawnerComponent fireballSpawner;
         [SerializeField] private Firebreath firebreath;
 
         [Header("Stomp")]
@@ -44,11 +44,11 @@ namespace WendigoCharacter
 
         private void ShakeTheEarth()
         {
-            if (CharacterData.Instance.IsGrounded)
+            /*if (CharacterData.Instance.IsGrounded)
             {
                 float dist = Vector3.Distance(transform.position, CharacterData.Instance.Position);
                 ScreenShake.Create().withTime(0.3f).WithAxis(1f, 1f, 0f).WithStrength(0.25f, 2f).WithCurve(4f, 0.1f, 0.25f).WithAttenuation(dist, 200f).Launch();
-            }
+            }*/
         }
 
         public void StartCastingFireball()

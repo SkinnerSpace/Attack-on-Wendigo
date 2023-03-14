@@ -1,4 +1,6 @@
-﻿public abstract class WendigoPlugableComponent
+﻿using WendigoCharacter;
+
+public abstract class WendigoPlugableComponent
 {
-    public abstract void Initialize(IWendigo wendigo);
+    public abstract void Initialize(Wendigo wendigo);
 }

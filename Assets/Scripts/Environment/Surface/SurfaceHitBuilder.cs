@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class SurfaceHitBuilder
+public class SurfaceHitBuilder : ISurfaceHitBuilder
 {
     private ParticleSystem particle;
     private AudioPlayer audioPlayer;
@@ -17,7 +17,7 @@ public class SurfaceHitBuilder
         countManager = new ParticleCountManager();
     }
 
-    public SurfaceHitBuilder WithPosition(Vector3 position)
+    public ISurfaceHitBuilder WithPosition(Vector3 position)
     {
         particle.transform.position = position;
         audioPlayer.WithPosition(position);
@@ -25,7 +25,7 @@ public class SurfaceHitBuilder
         return this;
     }
 
-    public SurfaceHitBuilder WithAngle(Vector3 direction, Vector3 normal)
+    public ISurfaceHitBuilder WithAngle(Vector3 direction, Vector3 normal)
     {
         particle.transform.rotation = SurfaceHitMirror.ReflectRotation(direction, normal);
         tangent = Mathf.Abs(Vector3.Dot(direction, normal));
@@ -33,7 +33,7 @@ public class SurfaceHitBuilder
         return this;
     }
 
-    public SurfaceHitBuilder WithShape(float radius, float angle)
+    public ISurfaceHitBuilder WithShape(float radius, float angle)
     {
         ParticleSystem.ShapeModule shape = particle.shape;
 
@@ -44,13 +44,13 @@ public class SurfaceHitBuilder
         return this;
     }
 
-    public SurfaceHitBuilder WithScale(float scale)
+    public ISurfaceHitBuilder WithScale(float scale)
     {
         particle.transform.localScale = new Vector3(scale, scale, scale);
         return this;
     }
 
-    public SurfaceHitBuilder WithCount(short minCount, short maxCount)
+    public ISurfaceHitBuilder WithCount(short minCount, short maxCount)
     {
         countManager.SetCount(minCount, maxCount);
 

@@ -21,7 +21,7 @@ namespace WendigoCharacter
         [SerializeField] private WendigoSFXPlayer sFXPlayer;
 
         [Header("Combat")]
-        [SerializeField] private FireballSpawner fireballSpawner;
+        [SerializeField] private FireballSpawnerComponent fireballSpawner;
         [SerializeField] private Firebreath firebreath;
 
         [Header("Timer")]
@@ -37,7 +37,7 @@ namespace WendigoCharacter
         public FunctionTimer Timer => timer;
         public WendigoData Data => data;
 
-        public FireballSpawner FireballSpawner => fireballSpawner;
+        public FireballSpawnerComponent FireballSpawner => fireballSpawner;
         public Firebreath Firebreath => firebreath;
 
         public IChronos Chronos => chronos;

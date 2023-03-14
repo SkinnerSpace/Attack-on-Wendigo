@@ -9,7 +9,7 @@ public class WendigoTargetManager : WendigoPlugableComponent
 
     public void Subscribe(Action<Transform> onTargetSet) => this.onTargetSet += onTargetSet;
 
-    public override void Initialize(IWendigo wendigo) => data = wendigo.Data;
+    public override void Initialize(Wendigo wendigo) => data = wendigo.Data;
 
     public void SetTarget(Transform target)
     {

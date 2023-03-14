@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CollapseController : MonoBehaviour
+public class CollapseController : MonoBehaviour, ICollapsible
 {
     [SerializeField] private CollapseAcceptor acceptor;
     [SerializeField] private ParticleSystem dustVFX;
@@ -85,6 +85,6 @@ public class CollapseController : MonoBehaviour
                 WithAxis(1f, 1f, 0f).
                 WithStrength(0.1f, 1.5f).
                 WithCurve(estimations.frequency, 0.3f, 0.3f).
-                WithAttenuationToObj(CharacterData.Instance.transform, transform.position, 100f).Launch();
+                WithAttenuationToObj(CharacterData.Instance.transform, transform.position, 100f).Launch(ShakeManager.Instance);
     }
 }

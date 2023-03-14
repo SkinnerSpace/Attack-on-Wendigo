@@ -13,7 +13,7 @@ public class PropDestroyer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CollapseController collapsible = other.GetComponent<CollapseController>();
+        ICollapsible collapsible = other.GetComponent<ICollapsible>();
 
         Vector3 itsPosition = new Vector3(collapsible.Position.x, 0f, collapsible.Position.z);
         Vector3 ownPosition = new Vector3(transform.position.x, 0f, transform.position.z);

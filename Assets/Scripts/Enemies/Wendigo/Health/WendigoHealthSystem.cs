@@ -10,7 +10,7 @@ namespace WendigoCharacter
         private event Action onDeath;
         private event Action<Vector3, Vector3> onTriggerRagdoll;
 
-        public override void Initialize(IWendigo wendigo)
+        public override void Initialize(Wendigo wendigo)
         {
             SetData(wendigo.Data.Health);
 

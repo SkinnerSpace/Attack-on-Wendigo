@@ -41,8 +41,8 @@ public class ShakeConfig
         return this;
     }
 
-    public void Launch()
+    public void Launch(IShakeManager shakeManager)
     {
-        ScreenShake.Create().withTime(Time).WithAxis(Axis.x, Axis.y, Axis.z).WithStrength(Strength, AngleMultiplier).WithCurve(Frenquency, Attack, Release).Launch();
+        ScreenShake.Create().withTime(Time).WithAxis(Axis.x, Axis.y, Axis.z).WithStrength(Strength, AngleMultiplier).WithCurve(Frenquency, Attack, Release).Launch(shakeManager);
     }
 }
