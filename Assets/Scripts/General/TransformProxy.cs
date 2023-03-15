@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ProxyTransform : ITransform
+public class TransformProxy : ITransform
 {
     public Vector3 Position { get; set; }
 
@@ -27,5 +27,5 @@ public class ProxyTransform : ITransform
 
 
     private readonly Transform transform;
-    public ProxyTransform(Transform transform) => this.transform = transform;
+    public TransformProxy(Transform transform) => this.transform = transform;
 }

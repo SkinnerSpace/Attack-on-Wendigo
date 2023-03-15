@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     private States state = States.Menu;
 
     [Header("Required Components")]
-    [SerializeField] private WendigoSpawner wendigoSpawner;
-    [SerializeField] private MainController character;
+    [SerializeField] private Transform character;
     [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private ShakeManager shakeManager;
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
     [SerializeField] private Airdrop airdrop;
@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
 
-    public MenuManager Menu => menu;
-    public MainController Character => character;
+    public IMenu Menu => menu;
+    public ISwitchable PlayerCharacter { get; private set; }
     public CameraManager CameraManager => cameraManager;
     public Airdrop Airdrop => airdrop;
     public TriggersManager Triggers => triggers;
@@ -40,11 +40,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayerCharacter = character.GetComponent<ISwitchable>();
+
         Instance = this;
         triggers = new TriggersManager(eventManager);
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
-        cameraManager.SetLookAtTheHelicopter();
+        cameraManager.TrackTheHelicopter();
 
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));

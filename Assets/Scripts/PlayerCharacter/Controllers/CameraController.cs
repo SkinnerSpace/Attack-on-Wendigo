@@ -11,7 +11,7 @@ public class CameraController : BaseController, IMouseMotionObserver
     private float xAngle;
     private float yAngle;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         data = main.Data;
         chronos = main.Chronos;

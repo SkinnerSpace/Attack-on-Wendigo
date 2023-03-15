@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterHealthSystem : BaseController, IDamageable
 {
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private HitBoxProxy hitBox;
     private EventManager eventManager;
@@ -38,7 +38,7 @@ public class CharacterHealthSystem : BaseController, IDamageable
     public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
     public void UnsubscribeFromImpact(Action<float> onImpact) => this.onImpact -= onImpact;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         data = main.Data;

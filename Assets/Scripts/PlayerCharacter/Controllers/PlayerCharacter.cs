@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-public class MainController : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour, ISwitchable
 {
     [SerializeField] private CharacterData data;
     [SerializeField] private CharacterMover mover;
@@ -71,6 +71,9 @@ public class MainController : MonoBehaviour
 
         return null;
     }
+
+    public void SwitchOn() => SetActive(true);
+    public void SwitchOff() => SetActive(false);
 
     public void SetActive(bool isActive)
     {

@@ -7,7 +7,7 @@ public class CameraTiltController : BaseController, IMovementController
     private IChronos chronos;
     private IInputReader input;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         data = main.Data;
         chronos = main.Chronos;

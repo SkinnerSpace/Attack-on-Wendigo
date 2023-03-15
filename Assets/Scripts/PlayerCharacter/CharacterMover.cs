@@ -8,7 +8,7 @@ public class CharacterMover : MonoBehaviour
     private event Action onUpdate;
     private bool isReady;
 
-    public void Initialize(MainController main) => data = main.Data;
+    public void Initialize(PlayerCharacter main) => data = main.Data;
 
     public void Connect() => isReady = true;
 

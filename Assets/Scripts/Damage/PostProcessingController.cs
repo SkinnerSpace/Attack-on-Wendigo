@@ -5,7 +5,7 @@ public class PostProcessingController : MonoBehaviour, IBurnObserver
     private static int wentOutTrigger = Animator.StringToHash("WentOut");
     private static int damageTrigger = Animator.StringToHash("Damage");
 
-    [SerializeField] private MainController player;
+    [SerializeField] private PlayerCharacter player;
 
     private Animator animator;
 

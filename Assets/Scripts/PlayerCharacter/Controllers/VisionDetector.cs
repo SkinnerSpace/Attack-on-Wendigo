@@ -10,7 +10,7 @@ public class VisionDetector : BaseController, IVisionDetector, IMousePosObserver
     public event Action<VisionTarget> onTargetUpdate;
     public event Action<Transform> onTargetTfUpdate;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         cam = main.Data.Cam;
         input = main.InputReader;

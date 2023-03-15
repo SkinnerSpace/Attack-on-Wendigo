@@ -13,7 +13,7 @@ public class WendigoTargetManager : WendigoPlugableComponent
 
     public void SetTarget(Transform target)
     {
-        data.Target = target;
+        data.Target = new WendigoTarget(target);
         onTargetSet?.Invoke(target);
     } 
 }

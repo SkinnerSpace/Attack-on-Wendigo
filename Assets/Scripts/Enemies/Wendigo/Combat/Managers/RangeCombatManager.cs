@@ -18,7 +18,7 @@ namespace WendigoCharacter
         }
 
         private bool TargetExist() => (data.Target != null);
-        private float GetDistance() => (data.Target.position.FlatV3() - data.Transform.Position.FlatV3()).magnitude;
+        private float GetDistance() => (data.Target.Position.FlatV3() - data.Transform.Position.FlatV3()).magnitude;
 
         private void PrepareToBreathFire(float distance){
             data.Firebreath.IsReadyToUse = IsAbleToUseAFirebreath() ? OnTheFirebreathDistance(distance) : false;

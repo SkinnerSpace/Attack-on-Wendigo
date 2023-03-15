@@ -10,7 +10,7 @@ public class MovementController : BaseController, IMovementController
     private bool isRunning;
     private event Action<bool> onMove;
 
-    public override void Initialize(MainController main) => Initialize(main.Data, main.Chronos, main.InputReader);
+    public override void Initialize(PlayerCharacter main) => Initialize(main.Data, main.Chronos, main.InputReader);
 
     public void Initialize(ICharacterData data, IChronos chronos, IInputReader input)
     {

@@ -5,7 +5,7 @@ public class AimPresenter : MonoBehaviour
 {
     [SerializeField] private Aim aim;
     [SerializeField] private EventManager eventManager;
-    [SerializeField] private MainController player;
+    [SerializeField] private PlayerCharacter player;
     [SerializeField] private UGUIElement uGUIElement;
 
     private EventListener targetPresenceListener;

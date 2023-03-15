@@ -36,7 +36,7 @@ public static class PropAssembly
         List<ITransform> transforms = new List<ITransform>();
 
         foreach (Transform childTransform in childTransforms)
-            transforms.Add(new ProxyTransform(childTransform.transform));
+            transforms.Add(new TransformProxy(childTransform.transform));
 
         return transforms;
     }

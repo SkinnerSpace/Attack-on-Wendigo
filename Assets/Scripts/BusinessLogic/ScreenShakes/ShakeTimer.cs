@@ -1,40 +1,27 @@
-﻿using UnityEngine;
-
-public class ShakeTimer
+﻿public class ShakeTimer
 {
-    public float TimeScaled => currentTimeScaled;
-
     private float waitTime;
     private float currentTime;
-    private float currentTimeScaled;
 
     public ShakeTimer(float waitTime)
     {
         this.waitTime = waitTime;
-
         currentTime = 0f;
-        currentTimeScaled = 0f;
     }
 
     public void SetWaitTime(float waitTime) => this.waitTime = waitTime;
-    public bool TimeOut() => (currentTimeScaled >= 1f);
 
-    public void CountDown()
+    public void CountDown() => currentTime += GlobalTime.DeltaTime;
+
+    public float GetCompleteness()
     {
-        currentTime += Time.deltaTime;
-        CalculateScaledTime();
-    }
+        float completeness = currentTime / waitTime;
 
-    public void SetCompleteness(float progress) => currentTimeScaled = progress;
-
-    private void CalculateScaledTime()
-    {
-        currentTimeScaled = currentTime / waitTime;
-
-        if (currentTime >= waitTime)
-        {
+        if (currentTime >= waitTime){
             currentTime = waitTime;
-            currentTimeScaled = 1f;
+            completeness = 1f;
         }
+
+        return completeness;
     }
 }

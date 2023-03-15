@@ -8,8 +8,8 @@
     {
         gameManager.SetState(GameManager.States.Play);
         gameManager.Menu.Close();
-        gameManager.Character.SetActive(true);
-        gameManager.CameraManager.SetLookAtTheCharacter();
+        gameManager.PlayerCharacter.SwitchOn();
+        gameManager.CameraManager.TrackTheCharacter();
         gameManager.Airdrop.AddCargo(0);
         gameManager.Triggers.Trigger("OnGameStart");
     }

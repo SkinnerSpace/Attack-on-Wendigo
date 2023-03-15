@@ -29,7 +29,7 @@ namespace WendigoCharacter
             movementController.MoveForward();
 
             if (ShouldRotate)
-                rotationController.RotateToTarget(data.Target.position);
+                rotationController.RotateToTarget(data.Target.Position);
 
             rangeCombatManager.PrepareToAttack();
         }

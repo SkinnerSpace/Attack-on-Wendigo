@@ -6,7 +6,7 @@ using System;
 
 public class UGUIElement : MonoBehaviour
 {
-    [SerializeField] private MainController player;
+    [SerializeField] private PlayerCharacter player;
     [SerializeField] private KeyBinds.Binds key;
     [SerializeField] private float maxDistance = 3f;
 

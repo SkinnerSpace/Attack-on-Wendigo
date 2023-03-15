@@ -2,11 +2,11 @@
 
 public class JumpController : BaseController, IJumpController, IGroundObserver
 {
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private IInputReader input;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         data = main.Data;

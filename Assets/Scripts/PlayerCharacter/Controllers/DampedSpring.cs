@@ -5,11 +5,11 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
     private const float MAX_MULTIPLIER = 2f;
     private const float MAX_AMPLITUDE = 1.8f;
 
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private IChronos chronos;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         Initialize(main.Data, main.Chronos);

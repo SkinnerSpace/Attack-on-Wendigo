@@ -9,49 +9,9 @@ public class RagdollBone : MonoBehaviour
     private Collider boneCollider;
     private CharacterJoint boneJoint;
 
-    private Vector3 frozenVelocity;
-
-    public Vector3 Position => transform.position;
-
-    private float freezing;
-
-    private bool isUnfreezing;
-    private float unfreezeTime = 2f;
-    private float currentTime = 0f;
-
-    private bool stuck;
-    private float stuckTime = 1f;
-
     private void Awake()
     {
         InitializeComponents();
-    }
-
-    private void Update()
-    {
-        /*if (isUnfreezing)
-        {
-            boneBody.velocity = boneBody.velocity * freezing;
-            boneBody.angularVelocity = boneBody.angularVelocity * freezing;
-
-            currentTime += Time.deltaTime;
-            float lerp = Easing.QuadEaseOut(Mathf.InverseLerp(0f, unfreezeTime, currentTime));
-            freezing = Mathf.Lerp(0f, 1f, lerp);
-
-            if (freezing >= 1f)
-            {
-                isUnfreezing = false;
-            }
-        }*/
-/*
-        if (stuck)
-        {
-            if (currentTime >= stuckTime)
-            {
-                stuck = false;
-                boneBody.constraints = RigidbodyConstraints.None;
-            }
-        }*/
     }
 
     public void InitializeComponents()
@@ -71,21 +31,11 @@ public class RagdollBone : MonoBehaviour
         SetRigidBody(isRagdoll);
         boneCollider.enabled = isRagdoll;
         if (boneJoint != null) boneJoint.enableCollision = isRagdoll;
-
-        if (isRagdoll)
-        {
-            //boneBody.constraints = RigidbodyConstraints.FreezeAll;
-            //stuck = true;
-            isUnfreezing = true;
-        }
     }
 
     private void SetRigidBody(bool isRagdoll)
     {
-/*        boneBody.velocity = Vector3.zero;
-        boneBody.angularVelocity = Vector3.zero;*/
         boneBody.isKinematic = !isRagdoll;
-
         boneBody.useGravity = isRagdoll;
     }
 

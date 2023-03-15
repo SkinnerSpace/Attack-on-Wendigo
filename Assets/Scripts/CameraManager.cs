@@ -6,13 +6,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform characterPivot;
     [SerializeField] private Transform helicopterPivot;
 
-    public void SetLookAtTheCharacter()
+    public void TrackTheCharacter()
     {
         cam.SetState(CameraHolder.States.Gameplay);
         cam.SetPivot(characterPivot);
     }
 
-    public void SetLookAtTheHelicopter()
+    public void TrackTheHelicopter()
     {
         cam.SetState(CameraHolder.States.Demo);
         cam.SetPivot(helicopterPivot);

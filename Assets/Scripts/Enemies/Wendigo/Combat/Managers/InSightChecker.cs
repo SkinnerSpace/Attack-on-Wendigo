@@ -9,16 +9,16 @@ public class InSightChecker : MonoBehaviour
     {
         bool targetExist = data.Target != null;
 
-        float dotToTarget = targetExist ? GetDotToTarget(data.Target) : 0f;
+        float dotToTarget = targetExist ? GetDotToTarget(data.Target.Position) : 0f;
         data.Head.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Head.LookAngleOfView) : false;
         data.Firebreath.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Firebreath.AngleOfView) : false;
         data.Fireball.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Fireball.AngleOfView) : false;
     }
 
-    private float GetDotToTarget(Transform target)
+    private float GetDotToTarget(Vector3 targetPosition)
     {
         Vector2 forwardDir = GetForwardDir();
-        Vector2 dirToTarget = GetDirToTarget(target);
+        Vector2 dirToTarget = GetDirToTarget(targetPosition);
         float dotToTarget = GetDotToTarget(forwardDir, dirToTarget);
 
         return dotToTarget;
@@ -26,11 +26,11 @@ public class InSightChecker : MonoBehaviour
 
     private Vector2 GetForwardDir() => new Vector2(transform.forward.x, transform.forward.z);
 
-    private Vector2 GetDirToTarget(Transform target)
+    private Vector2 GetDirToTarget(Vector3 targetPosition)
     {
         Vector2 position = transform.position.FlatV2();
-        Vector2 targetPosition = target.position.FlatV2();
-        Vector2 dirToTarget = (targetPosition - position).normalized;
+        Vector2 flatTargetPosition = targetPosition.FlatV2();
+        Vector2 dirToTarget = (flatTargetPosition - position).normalized;
 
         return dirToTarget;
     }

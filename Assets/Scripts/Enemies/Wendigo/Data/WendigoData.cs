@@ -10,7 +10,9 @@ namespace WendigoCharacter
         public FireballSpawnerData FireballSpawner;
         public FireballAbilityData Fireball;
         public HeadData Head;
-        public Transform Target;
+
+        public WendigoTarget Target;
+        //public Transform Target;
 
         public TransformData Transform { get; private set; }
 

@@ -33,12 +33,17 @@ public class Shake
 
     private ShakeTimer timer;
 
-    private float exWave;
-    private float wave;
+    public float exWave { get; private set; }
+    public float wave { get; private set; }
 
     private Transform recipient;
     private float maxDistance;
     private Vector3 position;
+
+    public Shake() { }
+
+    public void SetTimer(ShakeTimer timer) => this.timer = timer;
+    public void SetCurve(ShakeCurve curve) => this.curve = curve;
 
     public Shake(Vector3 axis, ShakeStrength strength, ShakeCurve curve, float attenuation, ShakeTimer timer = null)
     {
@@ -81,9 +86,10 @@ public class Shake
     public void Proceed()
     {
         timer.CountDown();
+        Completeness = timer.GetCompleteness();
 
-        Completeness = timer.TimeScaled;
-        isActive = !timer.TimeOut();
+        if (Completeness >= 1f)
+            isActive = false;
     }
 
     public void SetCompleteness(float completeness)

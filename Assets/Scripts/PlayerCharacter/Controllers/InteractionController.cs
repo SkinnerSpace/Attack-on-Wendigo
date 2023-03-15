@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractionController : BaseController, IInteractor, IMousePosObserver
 {
-    private MainController main;
+    private PlayerCharacter main;
     private CharacterData data;
     private WeaponKeeper keeper;
     private IInputReader input;
@@ -17,7 +17,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private event Action<Transform> onTargetAdded;
     private event Action<Transform> onTargetRemoved;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         data = main.Data;

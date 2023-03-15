@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GroundDetector : BaseController, IMoverObserver
 {
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private IGroundDetector detector;
 
@@ -12,7 +12,7 @@ public class GroundDetector : BaseController, IMoverObserver
     public void Subscribe(IGroundObserver observer) => notifyOnGrounded += observer.Land;
     public void Unsubscribe(IGroundObserver observer) => notifyOnGrounded -= observer.Land;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
 

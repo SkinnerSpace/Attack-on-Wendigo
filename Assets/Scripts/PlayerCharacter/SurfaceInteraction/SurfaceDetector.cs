@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SurfaceDetector : BaseController, IGroundObserver
 {
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private ISurfaceProbeTaker probeTaker;
 
@@ -33,7 +33,7 @@ public class SurfaceDetector : BaseController, IGroundObserver
 
     public static Vector3 GetRayPosition(Vector3 position, float height) => position - new Vector3(0f, height / 2f, 0f);
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         data = main.Data;

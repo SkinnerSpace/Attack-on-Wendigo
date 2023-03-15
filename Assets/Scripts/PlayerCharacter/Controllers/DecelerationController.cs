@@ -2,11 +2,11 @@
 
 public class DecelerationController : BaseController, IMoverObserver
 {
-    private MainController main;
+    private PlayerCharacter main;
     private ICharacterData data;
     private IChronos chronos;
 
-    public override void Initialize(MainController main)
+    public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
         data = main.Data;
