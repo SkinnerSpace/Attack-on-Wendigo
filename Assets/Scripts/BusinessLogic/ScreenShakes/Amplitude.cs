@@ -2,26 +2,24 @@
 
 public static class Amplitude
 {
-    public static float Calculate(float time, float attack, float release)
+    public static float Calculate(float percent, float attack, float release)
     {
         float amplitude = 1f;
 
-        if (time < attack)
-        {
-            amplitude = GetSmoothAttack(time, attack);
+        if (percent < attack){
+            amplitude = GetSmoothAttack(percent, attack);
         }
-        else if (time > release)
-        {
-            amplitude = GetSmoothRelease(time, release);
+        else if (percent > release){
+            amplitude = GetSmoothRelease(percent, release);
         }
 
         return amplitude;
     }
 
-    private static float GetSmoothAttack(float time, float attack) => Mathf.Sqrt(time / attack);
-    private static float GetSmoothRelease(float time, float release)
+    private static float GetSmoothAttack(float percent, float attack) => Mathf.Sqrt(percent / attack);
+    private static float GetSmoothRelease(float percent, float release)
     {
-        float amplitude = (1f - time) / (1f - release);
+        float amplitude = (1f - percent) / (1f - release);
         amplitude *= amplitude;
 
         return amplitude;

@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using System;
 
 namespace WendigoCharacter
 {
+    [Serializable]
     public class WendigoTarget
     {
-        public Vector3 Position => transform.position;
+        public Transform Target;
+        public Vector3 Position => Target.position;
         public bool IsGrounded { get; set; }
-        private Transform transform;
+        public bool Exist => Target != null;
 
-        public WendigoTarget(Transform transform) => this.transform = transform;
+        public void Set(Transform target) => Target = target;
     }
 }

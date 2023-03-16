@@ -236,6 +236,7 @@ MonoBehaviour:
     frequency: 4
     attack: 0.1
     release: 0.5
+  defense: 0
 --- !u!114 &402587302504087578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6176119535850529057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74f488ce9e737245918e803d8e1a5a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e1922da00fb4884f97ddf8d702d8c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 61735261016310312}
@@ -471,3 +472,4 @@ MonoBehaviour:
   chronos: {fileID: 8860424869380561027}
   enableCollisionTime: 0.2
   putOutTheFireTime: 1
+  isDisposable: 0

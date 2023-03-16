@@ -29,8 +29,6 @@ public class RagDollController : MonoBehaviour
     {
         RagdollBone closestBone = storage.ragdollBones.OrderBy(bone => Vector3.Distance(bone.transform.position, hitPoint)).First();
         closestBone.AddForceAtPosition(force, hitPoint);
-
-        Debug.Log("Force " + force);
     }
 
     public void SwitchOff() => EnableRagdoll(false);

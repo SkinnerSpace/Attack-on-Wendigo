@@ -20,6 +20,6 @@ public class ScreenshakesController : BaseController
     private void ShakeOnImpactReceived(float impact)
     {
         float shakePower = (impact / maxImpact).Clamp01();
-        data.GetShake("Impact").SetPower(shakePower).Launch(ShakeManager.Instance);
+        data.GetShake("Impact").SetPower(shakePower).Launch(ShakeManagerComponent.Instance);
     }
 }

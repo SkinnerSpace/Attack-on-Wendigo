@@ -18,8 +18,8 @@ public class PropShaker : ICollapseObserver
         shake = new Shake(axis, strength, curve, attenuation);
     }
 
-    public void Launch() => ShakeHandler.Launch(shake);
-    public void ReceiveCollapseUpdate(float progress) => ShakeHandler.Handle(shake, progress);
-    public Vector3 GetPosDisplacement() => ShakeHandler.GetDisplacement(shake).position;
+    public void Launch() => shake.Launch();
+    public void ReceiveCollapseUpdate(float progress) => shake.SetCompleteness(progress); 
+    public Vector3 GetPosDisplacement() => shake.GetDisplacement().position;
 }
 

@@ -7,7 +7,7 @@ public class InSightChecker : MonoBehaviour
 
     private void Update()
     {
-        bool targetExist = data.Target != null;
+        bool targetExist = data.Target.Exist;
 
         float dotToTarget = targetExist ? GetDotToTarget(data.Target.Position) : 0f;
         data.Head.OnTarget = targetExist ? dotToTarget <= GetMaxDotProduct(data.Head.LookAngleOfView) : false;
