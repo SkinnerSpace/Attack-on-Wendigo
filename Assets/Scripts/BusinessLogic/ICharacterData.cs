@@ -82,5 +82,5 @@ public interface ICharacterData
     float ReachDistance { get; }
     float DropItemStrength { get; }
 
-    ShakeConfig GetShake(string key);
+    IShakeConfig GetShake(string key);
 }

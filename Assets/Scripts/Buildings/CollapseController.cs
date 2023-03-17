@@ -54,7 +54,6 @@ public class CollapseController : MonoBehaviour, ICollapsible
             dustVFX.Play();
 
             dropper.Launch(pushDir);
-            shaker.Launch();
             ShakeTheEarth();
 
             StartCoroutine(Collapse());
@@ -80,11 +79,12 @@ public class CollapseController : MonoBehaviour, ICollapsible
 
     private void ShakeTheEarth()
     {
-        ScreenShake.Create().
+        ShakeBuilder.Create().
                 withTime(estimations.time).
                 WithAxis(1f, 1f, 0f).
                 WithStrength(0.1f, 1.5f).
                 WithCurve(estimations.frequency, 0.3f, 0.3f).
-                WithAttenuationToObj(CharacterData.Instance.transform, transform.position, 100f).Launch(ShakeManagerComponent.Instance);
+                WithAttenuation(transform.position, CharacterData.Instance.transform, 100f).
+                BuildAndLaunch(ShakeManagerComponent.Instance);
     }
 }

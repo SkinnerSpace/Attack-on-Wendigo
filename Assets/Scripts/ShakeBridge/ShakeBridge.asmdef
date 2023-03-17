@@ -1,12 +1,8 @@
 {
-    "name": "Wendigo",
+    "name": "ShakeBridge",
     "references": [
-        "Unity.Animation.Rigging.Editor",
-        "Unity.Animation.Rigging",
-        "BusinessLogic",
-        "FMODUnity",
-        "FMODUnityEditor",
-        "ShakeBridge"
+        "GUID:a4372140b34cbb6459c27a96085ba0eb",
+        "GUID:cb229b8d3384b6f479993c404d3a78bd"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

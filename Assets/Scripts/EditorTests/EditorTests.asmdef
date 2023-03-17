@@ -5,7 +5,8 @@
         "UnityEditor.TestRunner",
         "Scripts",
         "Wendigo",
-        "BusinessLogic"
+        "BusinessLogic",
+        "Shakes"
     ],
     "includePlatforms": [
         "Editor"

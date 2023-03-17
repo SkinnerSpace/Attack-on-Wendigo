@@ -9,7 +9,7 @@ public static class Amplitude
         if (percent < attack){
             amplitude = GetSmoothAttack(percent, attack);
         }
-        else if (percent > release){
+        else if (percent > (1f - release)){
             amplitude = GetSmoothRelease(percent, release);
         }
 

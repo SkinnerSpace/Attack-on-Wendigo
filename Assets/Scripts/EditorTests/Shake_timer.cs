@@ -2,7 +2,7 @@
 
 namespace Tests
 {
-    namespace ScreenShakes
+    namespace Shake_tests
     {
         public class Shake_timer
         {
@@ -13,7 +13,7 @@ namespace Tests
                 ShakeTimer shakeTimer = new ShakeTimer(1f);
                 shakeTimer.CountDown();
 
-                Assert.AreEqual(1f, shakeTimer.GetCompleteness());
+                Assert.AreEqual(1f, shakeTimer.Progress);
             }
         }
     }

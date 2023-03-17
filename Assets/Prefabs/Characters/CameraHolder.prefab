@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b105d5442914045800d95f9205b65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeable: {fileID: 0}
+  shakeableImp: {fileID: 7745797158065002892}
 --- !u!114 &5708966445217698579
 MonoBehaviour:
   m_ObjectHideFlags: 0

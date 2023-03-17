@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Required Components")]
     [SerializeField] private Transform character;
     [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private ShakeManagerComponent shakeManager;
+    [SerializeField] private Transform shakeManager;
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
     [SerializeField] private Airdrop airdrop;

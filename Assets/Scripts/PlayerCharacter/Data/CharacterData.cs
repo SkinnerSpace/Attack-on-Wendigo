@@ -136,11 +136,11 @@ public class CharacterData : MonoBehaviour, ICharacterData
     public float ReachDistance => reachDistance;
     public float DropItemStrength => dropItemStrength;
 
-    public ShakeConfig GetShake(string key)
+    public IShakeConfig GetShake(string key)
     {
-        ShakeConfig screenShake = null;
+        IShakeConfig screenShake = null;
 
-        foreach (ShakeConfig shake in screenShakes)
+        foreach (IShakeConfig shake in screenShakes)
         {
             if (shake.Name == key)
                 screenShake = shake;

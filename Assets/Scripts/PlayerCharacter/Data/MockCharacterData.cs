@@ -25,7 +25,7 @@ public class MockCharacterData : ICharacterData
         Velocity = new Vector3(FlatVelocity.x, VerticalVelocity, FlatVelocity.y);
     }
 
-    public ShakeConfig GetShake(string key)
+    public IShakeConfig GetShake(string key)
     {
         return null;
     }

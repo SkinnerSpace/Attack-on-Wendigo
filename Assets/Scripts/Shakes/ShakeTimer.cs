@@ -1,7 +1,11 @@
-﻿public class ShakeTimer
+﻿using System;
+
+public class ShakeTimer
 {
     private float waitTime;
     private float currentTime;
+
+    public float Progress { get; private set; }
 
     public ShakeTimer(float waitTime)
     {
@@ -11,9 +15,13 @@
 
     public void SetWaitTime(float waitTime) => this.waitTime = waitTime;
 
-    public void CountDown() => currentTime += GlobalTime.DeltaTime;
+    public void CountDown()
+    {
+        currentTime += GlobalTime.DeltaTime;
+        Progress = GetCompleteness();
+    }
 
-    public float GetCompleteness()
+    private float GetCompleteness()
     {
         float completeness = currentTime / waitTime;
 

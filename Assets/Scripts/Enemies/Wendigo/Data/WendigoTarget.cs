@@ -6,11 +6,11 @@ namespace WendigoCharacter
     [Serializable]
     public class WendigoTarget
     {
-        public Transform Target;
-        public Vector3 Position => Target.position;
+        public Transform transform;
+        public Vector3 Position => transform.position;
         public bool IsGrounded { get; set; }
-        public bool Exist => Target != null;
+        public bool Exist => transform != null;
 
-        public void Set(Transform target) => Target = target;
+        public void Set(Transform target) => transform = target;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class ShakeConfig
+public class ShakeConfig : IShakeConfig
 {
     [SerializeField] private string name;
     [SerializeField] private Vector3 axis;
@@ -35,7 +35,7 @@ public class ShakeConfig
     public float Attack => attack;
     public float Release => release;
 
-    public ShakeConfig SetPower(float power)
+    public IShakeConfig SetPower(float power)
     {
         this.power = power;
         return this;
@@ -43,6 +43,11 @@ public class ShakeConfig
 
     public void Launch(IShakeManager shakeManager)
     {
-        ScreenShake.Create().withTime(Time).WithAxis(Axis.x, Axis.y, Axis.z).WithStrength(Strength, AngleMultiplier).WithCurve(Frenquency, Attack, Release).Launch(shakeManager);
+        ShakeBuilder.Create().
+                        withTime(Time).
+                        WithAxis(Axis.x, Axis.y, Axis.z).
+                        WithStrength(Strength, AngleMultiplier).
+                        WithCurve(Frenquency, Attack, Release).
+                        BuildAndLaunch(shakeManager);
     }
 }

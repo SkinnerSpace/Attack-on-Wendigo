@@ -2,17 +2,16 @@
 
 public class ShakeManager : IShakeManager
 {
-    private List<Shake> shakes = new List<Shake>();
+    private List<IShake> shakes = new List<IShake>();
     private ShakeDisplacement displacementTotal = new ShakeDisplacement();
 
     private IShakeable shakeable;
 
     public ShakeManager(IShakeable shakeable) => this.shakeable = shakeable;
 
-    public void AddAndLaunch(Shake shake)
+    public void AddAndLaunch(IShake shake)
     {
         shakes.Add(shake);
-        shake.Launch();
     }
 
     public void Update()
@@ -27,18 +26,18 @@ public class ShakeManager : IShakeManager
 
     private void HandleIfActive(int index)
     {
-        if (shakes[index].isActive){
+        if (shakes[index].IsActive){
             Handle(shakes[index]);
         }
-        else if (!shakes[index].isActive){
+        else if (!shakes[index].IsActive){
             shakes.RemoveAt(index);
         }
     }
 
-    public void Handle(Shake shake)
+    public void Handle(IShake shake)
     {
-        shake.Proceed();
-        ShakeDisplacement displacement = shake.GetDisplacement();
+        shake.Update();
+        IShakeDisplacement displacement = shake.GetDisplacement();
         displacementTotal.Accumulate(displacement);
     }
 

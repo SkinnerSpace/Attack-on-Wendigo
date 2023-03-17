@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tests
 {
-    namespace ScreenShakes
+    namespace Shake_tests
     {
         public class Shake_manager
         {
@@ -14,8 +14,7 @@ namespace Tests
                 IShakeable shakeable = Substitute.For<IShakeable>();
                 ShakeManager shakeManager = new ShakeManager(shakeable);
 
-                Shake shake = new Shake();
-                shakeManager.AddAndLaunch(shake);
+                ShakeBuilderImp.Create().BuildAndLaunch(shakeManager);
 
                 Assert.AreEqual(1, shakeManager.GetShakesCount());
             }
@@ -24,8 +23,8 @@ namespace Tests
             public void Displacement_is_set()
             {
                 ShakeDisplacement displacement = new ShakeDisplacement(Vector3.one, Vector3.one);
-                Assert.AreEqual(Vector3.one, displacement.position);
-                Assert.AreEqual(Vector3.one, displacement.angle);
+                Assert.AreEqual(Vector3.one, displacement.Position);
+                Assert.AreEqual(Vector3.one, displacement.Angle);
             }
 
             [Test]
@@ -35,8 +34,8 @@ namespace Tests
                 ShakeDisplacement secondDisplacement = new ShakeDisplacement(Vector3.one, Vector3.one);
                 firstDisplacement.Accumulate(secondDisplacement);
 
-                Assert.AreEqual(Vector3.one * 2f, firstDisplacement.position);
-                Assert.AreEqual(Vector3.one * 2f, firstDisplacement.angle);
+                Assert.AreEqual(Vector3.one * 2f, firstDisplacement.Position);
+                Assert.AreEqual(Vector3.one * 2f, firstDisplacement.Angle);
             }
 
             [Test]
@@ -44,8 +43,8 @@ namespace Tests
             {
                 ShakeDisplacement displacement = new ShakeDisplacement(Vector3.one, Vector3.one);
                 displacement.Clear();
-                Assert.AreEqual(Vector3.zero, displacement.position);
-                Assert.AreEqual(Vector3.zero, displacement.angle);
+                Assert.AreEqual(Vector3.zero, displacement.Position);
+                Assert.AreEqual(Vector3.zero, displacement.Angle);
             }
         }
     }
