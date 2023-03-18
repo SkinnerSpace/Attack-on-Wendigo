@@ -16,8 +16,6 @@ namespace WendigoCharacter
 
         [Header("Settings")]
         [SerializeField] private bool visualizeRaycast;
-        [SerializeField] private float deviation = 0.1f;
-        [SerializeField] private float flameVFXTime = 0.3f;
 
         private bool isSpewingFire;
 

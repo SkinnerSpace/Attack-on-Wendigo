@@ -2,11 +2,18 @@
 
 public class GameFlowManager : MonoBehaviour
 {
+    [Header("Required Components")]
     [SerializeField] private WendigoSpawner wendigoSpawner;
+
+    [Header("Settings")]
+    [SerializeField] private bool spawnWendigo;
 
     private void Start()
     {
-        //EventN1();
+        if (spawnWendigo)
+        {
+            EventN1();
+        }
     }
 
     private void EventN1()

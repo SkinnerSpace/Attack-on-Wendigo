@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace WendigoCharacter
+﻿namespace WendigoCharacter
 {
     public class FirebreathAttack : LoggableState, IState
     {
@@ -9,8 +7,6 @@ namespace WendigoCharacter
         private WendigoAnimationController animationPlayer;
         private Firebreath firebreath;
         private FunctionTimer timer;
-
-        private float restoreTime = 5f;
 
         public FirebreathAttack(Wendigo wendigo)
         {

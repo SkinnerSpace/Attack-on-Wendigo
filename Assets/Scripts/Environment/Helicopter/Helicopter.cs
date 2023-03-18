@@ -80,4 +80,6 @@ public class Helicopter : MonoBehaviour
         isMoving = false;
         dispenserManager.DropAnItem(Launch);
     }
+
+    public void UpdateDistance(float distancePassed) => this.distancePassed = distancePassed;
 }

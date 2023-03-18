@@ -6,7 +6,9 @@
         "Scripts",
         "Wendigo",
         "BusinessLogic",
-        "Shakes"
+        "Shakes",
+        "PlayerCharacter",
+        "Pool"
     ],
     "includePlatforms": [
         "Editor"

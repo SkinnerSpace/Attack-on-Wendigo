@@ -1,31 +1,34 @@
 ﻿using UnityEngine;
 
-public class DecelerationController : BaseController, IMoverObserver
+namespace Character
 {
-    private PlayerCharacter main;
-    private ICharacterData data;
-    private IChronos chronos;
-
-    public override void Initialize(PlayerCharacter main)
+    public class DecelerationController : BaseController, IMoverObserver
     {
-        this.main = main;
-        data = main.Data;
-        chronos = main.Chronos;
-    }
+        private PlayerCharacter main;
+        private ICharacterData data;
+        private IChronos chronos;
 
-    public override void Connect() => main.Mover.Subscribe(this);
-    public override void Disconnect() { }
+        public override void Initialize(PlayerCharacter main)
+        {
+            this.main = main;
+            data = main.OldData;
+            chronos = main.Chronos;
+        }
 
-    public void Update()
-    {
-        SetDeceleration();
-        ApplyDeceleration();
-    }
+        public override void Connect() => main.Mover.Subscribe(this);
+        public override void Disconnect() { }
 
-    public void SetDeceleration() => data.Deceleration = data.IsGrounded ? data.GroundDeceleration : data.AirDeceleration;
+        public void Update()
+        {
+            SetDeceleration();
+            ApplyDeceleration();
+        }
 
-    public void ApplyDeceleration()
-    {
-        data.FlatVelocity = Vector2.Lerp(data.FlatVelocity, Vector2.zero, data.Deceleration * chronos.DeltaTime);
+        public void SetDeceleration() => data.Deceleration = data.IsGrounded ? data.GroundDeceleration : data.AirDeceleration;
+
+        public void ApplyDeceleration()
+        {
+            data.FlatVelocity = Vector2.Lerp(data.FlatVelocity, Vector2.zero, data.Deceleration * chronos.DeltaTime);
+        }
     }
 }

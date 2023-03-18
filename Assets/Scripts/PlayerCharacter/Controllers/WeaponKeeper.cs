@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using UnityEditor;
+using Character;
 
 public class WeaponKeeper : IKeeper
 {
@@ -9,8 +10,8 @@ public class WeaponKeeper : IKeeper
     private IInputReader input;
     public Transform Root => data.Cam.transform;
 
-    private Pickable pickable;
-    private Weapon weapon;
+    private IPickable pickable;
+    private IWeapon weapon;
     private WeaponThrower thrower;
 
     public WeaponKeeper(CharacterData data, IInputReader input)
@@ -21,7 +22,7 @@ public class WeaponKeeper : IKeeper
         thrower = new WeaponThrower(data);
     }
 
-    public void Take(Pickable pickable, Weapon weapon)
+    public void Take(IPickable pickable, IWeapon weapon)
     {
         this.pickable = pickable;
         this.weapon = weapon;

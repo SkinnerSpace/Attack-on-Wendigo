@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RagdollBone : MonoBehaviour
 {
+    private const float FORCE_MULTIPLIER = 20f;
+
     public RagdollBoneStorage storage;
 
     private Rigidbody boneBody;
@@ -12,6 +14,7 @@ public class RagdollBone : MonoBehaviour
     private void Awake()
     {
         InitializeComponents();
+        
     }
 
     public void InitializeComponents()
@@ -42,7 +45,11 @@ public class RagdollBone : MonoBehaviour
     public void SetDrag(float drag) => boneBody.drag = drag;
     public void SetAngularDrag(float angularDrag) => boneBody.angularDrag = angularDrag;
     public void SetMass(float mass) => boneBody.mass = mass;
-    public void AddForceAtPosition(Vector3 force, Vector3 position) => boneBody.AddForceAtPosition(force, position, ForceMode.Impulse);
+    public void AddForceAtPosition(Vector3 force, Vector3 position)
+    {
+        boneBody.AddForceAtPosition(force * FORCE_MULTIPLIER, position, ForceMode.Impulse);
+    }
+
     public void SetInterpolate(bool interpolate) => boneBody.interpolation = interpolate ? RigidbodyInterpolation.Interpolate : RigidbodyInterpolation.None;
 
     public void SetDetection(bool continuous) => boneBody.collisionDetectionMode = continuous ? CollisionDetectionMode.ContinuousSpeculative : CollisionDetectionMode.Discrete;

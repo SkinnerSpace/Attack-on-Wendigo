@@ -42,6 +42,7 @@ public class RagDollController : MonoBehaviour
 
             DisableAnimator(isRagdoll);
             EnableBones(isRagdoll);
+            EnablePullers();
         }
     }
 

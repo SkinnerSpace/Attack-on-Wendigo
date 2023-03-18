@@ -13,10 +13,10 @@ public class WendigoSpawner : MonoBehaviour
     [SerializeField] private Transform characters;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private InvasionCounter counter;
+    [SerializeField] private Transform characterImp;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject wendigoPrefab;
-    [SerializeField] private Transform target;
 
     [Header("Settings")]
     [SerializeField] private int maxCount;
@@ -29,9 +29,12 @@ public class WendigoSpawner : MonoBehaviour
     private IObjectPooler pooler;
     private List<Transform> wendigos = new List<Transform>();
 
+    private ICharacterData character;
+
     private void Awake()
     {
         counter.SubscribeOnTimeOut(Spawn);
+        character = characterImp.GetComponent<ICharacterData>();
         //Pickable.SubscribeOnFirstPickUp(Spawn);
     }
 
@@ -56,10 +59,12 @@ public class WendigoSpawner : MonoBehaviour
     {
         wendigoCount += 1;
 
-        Transform wendigo = pooler.SpawnFromThePool("Wendigo").transform;
-        wendigos.Add(wendigo);
-        wendigo.GetComponent<IWendigo>().SetTarget(target);
-        SetInPlace(wendigo, position);
+        Transform wendigoImp = pooler.SpawnFromThePool("Wendigo").transform;
+        wendigos.Add(wendigoImp);
+
+        IWendigo wendigo = wendigoImp.GetComponent<IWendigo>();
+        wendigo.SetTarget(characterImp);
+        SetInPlace(wendigoImp, position);
     }
 
     private void SetInPlace(Transform wendigo, Vector3 position)
@@ -67,7 +72,7 @@ public class WendigoSpawner : MonoBehaviour
         wendigo.SetParent(characters);
         wendigo.position = position;
 
-        wendigo.LookAt(target.transform);
+        wendigo.LookAt(characterImp.transform);
         wendigo.eulerAngles = new Vector3(0f, wendigo.eulerAngles.y, 0f);
     }
 

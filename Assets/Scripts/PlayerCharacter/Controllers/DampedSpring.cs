@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Character;
+using UnityEngine;
 
 public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
 {
@@ -12,7 +13,7 @@ public class DampedSpring : BaseController, IGroundObserver, IMoverObserver
     public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
-        Initialize(main.Data, main.Chronos);
+        Initialize(main.OldData, main.Chronos);
     }
 
     public void Initialize(ICharacterData data, IChronos chronos)

@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
 
+    public Transform Character => character;
+
     public IMenu Menu => menu;
     public ISwitchable PlayerCharacter { get; private set; }
     public CameraManager CameraManager => cameraManager;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
         triggers = new TriggersManager(eventManager);
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
-        cameraManager.TrackTheHelicopter();
+        
 
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         menu.Open("Main");
+        cameraManager.TrackTheHelicopter();
     }
 
     private void Update()

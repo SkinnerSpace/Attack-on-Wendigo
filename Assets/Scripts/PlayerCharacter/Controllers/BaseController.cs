@@ -1,8 +1,11 @@
 ﻿using System;
 
-public abstract class BaseController
+namespace Character
 {
-    public abstract void Initialize(PlayerCharacter main);
-    public abstract void Connect();
-    public abstract void Disconnect();
+    public abstract class BaseController
+    {
+        public abstract void Initialize(PlayerCharacter main);
+        public abstract void Connect();
+        public abstract void Disconnect();
+    }
 }

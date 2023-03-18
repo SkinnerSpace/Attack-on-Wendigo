@@ -1,71 +1,99 @@
 ﻿using System;
 using UnityEngine;
 
-public class CharacterHealthSystem : BaseController, IDamageable
+namespace Character
 {
-    private PlayerCharacter main;
-    private ICharacterData data;
-    private HitBoxProxy hitBox;
-    private EventManager eventManager;
-
-    public int Health => data.Health;
-    public bool IsAlive => Health > 0;
-
-    private EventTrigger onDeathTrigger;
-
-    private event Action<int> onHealthUpdate;
-    private event Action onDeath;
-    private event Action<float> onImpact;
-
-    public void ReceiveDamage(DamagePackage damagePackage)
+    public class CharacterHealthSystem : BaseController, IDamageable
     {
-        if (IsAlive)
+        private PlayerCharacter main;
+        private HealthData healthData;
+        private HitBoxProxy hitBox;
+        private EventManager eventManager;
+
+        private EventTrigger onDeathTrigger;
+
+        private event Action<int> onHealthUpdate;
+        private event Action onDeath;
+
+        public void ReceiveDamage(DamagePackage damagePackage)
         {
-            data.Health -= damagePackage.damage;
+            if (healthData.IsAlive)
+            {
+                healthData.Amount -= damagePackage.damage;
 
-            if (data.Health <= 0)
-                Die();
+                if (!healthData.IsAlive){
+                    Die();
+                }
 
-            onHealthUpdate?.Invoke(data.Health);
+                onHealthUpdate?.Invoke(healthData.Amount);
+            }
+        }
 
-            data.AddVelocity(damagePackage.impact);
-            onImpact?.Invoke(damagePackage.impact.magnitude);
+        public void SubscribeOnUpdate(Action<int> onHealthUpdate) => this.onHealthUpdate += onHealthUpdate;
+        public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
+
+        public override void Initialize(PlayerCharacter main)
+        {
+            this.main = main;
+            healthData = main.Data.Health;
+            hitBox = main.HitBox;
+            eventManager = main.Events;
+
+            onDeathTrigger = new EventTrigger();
+            SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
+
+            SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
+        }
+
+        public void Initialize(HealthData data) => this.healthData = data;
+
+        public override void Connect()
+        {
+            hitBox.Subscribe(this);
+            SubscribeOnDeath(() => main.SetActive(false));
+            eventManager.ConnectTrigger(onDeathTrigger, "PlayerDied");
+        }
+
+        public override void Disconnect() => hitBox.Unsubscribe(this);
+
+        public void Die()
+        {
+            healthData.Amount = 0;
+            onDeath?.Invoke();
         }
     }
 
-    public void SubscribeOnUpdate(Action<int> onHealthUpdate) => this.onHealthUpdate += onHealthUpdate;
-    public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
-    public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
-    public void UnsubscribeFromImpact(Action<float> onImpact) => this.onImpact -= onImpact;
-
-    public override void Initialize(PlayerCharacter main)
+    public class ImpactReceiver : BaseController, IDamageable
     {
-        this.main = main;
-        data = main.Data;
-        hitBox = main.HitBox;
-        eventManager = main.Events;
+        private ICharacterData oldData;
+        private HitBoxProxy hitBox;
 
-        onDeathTrigger = new EventTrigger();
-        SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
+        private event Action<float> onImpact;
 
-        SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
-    }
+        public override void Initialize(PlayerCharacter main)
+        {
+            oldData = main.OldData;
+            hitBox = main.HitBox;
+        }
 
-    public void Initialize(ICharacterData data) => this.data = data;
+        public void Initialize(ICharacterData oldData) => this.oldData = oldData;
 
-    public override void Connect()
-    {
-        hitBox.Subscribe(this);
-        SubscribeOnDeath(() => main.SetActive(false));
-        eventManager.ConnectTrigger(onDeathTrigger, "PlayerDied");
-    }
+        public override void Connect()
+        {
+            hitBox.Subscribe(this);
+        }
 
-    public override void Disconnect() => hitBox.Unsubscribe(this);
+        public override void Disconnect()
+        {
+            hitBox.Unsubscribe(this);
+        }
 
-    public void Die()
-    {
-        data.Health = 0;
-        onDeath?.Invoke();
+        public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
+
+        public void ReceiveDamage(DamagePackage damagePackage)
+        {
+            oldData.AddVelocity(damagePackage.impact);
+            onImpact?.Invoke(damagePackage.impact.magnitude);
+        }
     }
 }
-

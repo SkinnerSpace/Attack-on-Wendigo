@@ -2,5 +2,5 @@
 
 public interface IRagdoll
 {
-    void TriggerRagdoll(Vector3 impact, Vector3 hitPoint);
+    void OnDeath(Vector3 impact, Vector3 hitPoint);
 }

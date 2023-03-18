@@ -8,6 +8,7 @@ namespace WendigoCharacter
     public class WendigoEditor : Editor
     {
         private Wendigo wendigo;
+        private WendigoPooledObject pooledObject;
 
         private void OnEnable()
         {
@@ -26,6 +27,8 @@ namespace WendigoCharacter
                 {
                     wendigo.Data.IsActive = true;
                     wendigo.Data.IsArrived = true;
+
+                    wendigo.PoolObject.OnObjectSpawn();
                     wendigo.SetTarget(wendigo.PendingTarget);
                 }
             }

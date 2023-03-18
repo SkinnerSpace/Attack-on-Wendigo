@@ -4,21 +4,32 @@ using UnityEngine;
 public class RagdollPuller : MonoBehaviour
 {
     [SerializeField] private Vector3 direction;
+
+    [SerializeField] private float minForce;
     [SerializeField] private float maxForce;
 
-    private float force;
+    [SerializeField] private float minTime = 1f;
+    [SerializeField] private float maxTime = 2f;
 
-    private float timeOut = 2f;
+    private float force;
     private float currentTime;
 
     private Rigidbody body;
     private bool isPulling;
 
-    private void Awake() => body = GetComponent<Rigidbody>();
+    private float randomMaxForce;
+    private float randomTime;
+
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody>();
+        randomMaxForce = Rand.Range(minForce, maxForce);
+        randomTime = Rand.Range(minTime, maxTime);
+    }
 
     public void Launch()
     {
-        force = maxForce;
+        force = randomMaxForce;
         isPulling = true;
     }
 
@@ -28,16 +39,15 @@ public class RagdollPuller : MonoBehaviour
     {
         if (isPulling)
         {
-            Debug.Log("PULL");
             currentTime += OldChronos.DeltaTime;
 
-            float forcePercent = Mathf.InverseLerp(0f, timeOut, currentTime);
-            force = Mathf.Lerp(maxForce, 0f, forcePercent);
+            float forcePercent = Mathf.InverseLerp(0f, randomTime, currentTime);
+            force = Mathf.Lerp(randomMaxForce, 0f, forcePercent);
             body.velocity = direction * force;
 
             StopPulling();
         }
     }
 
-    private void StopPulling() => isPulling = currentTime < timeOut;
+    private void StopPulling() => isPulling = currentTime < randomTime;
 }

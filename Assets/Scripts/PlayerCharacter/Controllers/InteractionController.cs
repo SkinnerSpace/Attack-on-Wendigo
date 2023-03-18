@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System;
 using UnityEngine;
+using Character;
 
 public class InteractionController : BaseController, IInteractor, IMousePosObserver
 {
@@ -20,7 +21,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
-        data = main.Data;
+        data = main.OldData;
         input = main.InputReader;
 
         keeper = new WeaponKeeper(data, input);

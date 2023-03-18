@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Character;
+using System;
 using UnityEngine;
 
 public class SurfaceDetector : BaseController, IGroundObserver
@@ -36,7 +37,7 @@ public class SurfaceDetector : BaseController, IGroundObserver
     public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
-        data = main.Data;
+        data = main.OldData;
         probeTaker = new SurfaceProbeTaker();
     }
 

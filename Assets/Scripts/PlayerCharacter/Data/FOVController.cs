@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using Character;
 
 public class FOVController : BaseController, IMoverObserver
 {
@@ -24,7 +25,7 @@ public class FOVController : BaseController, IMoverObserver
     {
         this.main = main;
 
-        data = main.Data;
+        data = main.OldData;
         chronos = main.Chronos;
     }
 

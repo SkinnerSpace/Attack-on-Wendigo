@@ -13,7 +13,15 @@ public class WendigoTargetManager : WendigoPlugableComponent
 
     public void SetTarget(Transform target)
     {
-        data.Target.Set(target);
+        ICharacterData character = target.GetComponent<ICharacterData>();
+
+        data.Target.Set(character, target);
         onTargetSet?.Invoke(target);
     } 
+
+    public void ResetTarget()
+    {
+        data.Target.ResetTarget();
+        onTargetSet?.Invoke(null);
+    }
 }

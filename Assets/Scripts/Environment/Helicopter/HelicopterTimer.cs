@@ -25,7 +25,7 @@ public class HelicopterTimer : MonoBehaviour
         currentTime += OldChronos.DeltaTime;
         completion = (currentTime / travelTime).Clamp01();
 
-        onTimeUpdate(completion);
+        onTimeUpdate?.Invoke(completion);
     }
 }
 

@@ -2,19 +2,20 @@
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private CameraHolder cam;
+    [SerializeField] private Transform cameraHolderImp;
+
+    [Header("Pivots")]
     [SerializeField] private Transform characterPivot;
     [SerializeField] private Transform helicopterPivot;
 
-    public void TrackTheCharacter()
+    private ICameraHolder cameraHolder;
+
+    private void Awake()
     {
-        cam.SetState(CameraHolder.States.Gameplay);
-        cam.SetPivot(characterPivot);
+        cameraHolder = cameraHolderImp.GetComponent<ICameraHolder>();
     }
 
-    public void TrackTheHelicopter()
-    {
-        cam.SetState(CameraHolder.States.Demo);
-        cam.SetPivot(helicopterPivot);
-    }
+    public void TrackTheCharacter() => cameraHolder.SetGameMode(characterPivot);
+
+    public void TrackTheHelicopter() => cameraHolder.SetDemoMode(helicopterPivot);
 }

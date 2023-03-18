@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+//using Character;
 
 public class UGUIElement : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacter player;
+    //[SerializeField] private PlayerCharacter player;
     [SerializeField] private KeyBinds.Binds key;
+    [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance = 3f;
 
-    private Camera cam;
     private Transform target;
     private RectTransform element;
     private TextMeshProUGUI label;
@@ -25,9 +26,7 @@ public class UGUIElement : MonoBehaviour
 
     private void Start()
     {
-        cam = player.Data.Cam;
         label.text = KeyBinds.Instance.Keys[key].ToString();
-        player.GetController<InteractionController>().Subscribe(AddTarget, RemoveTarget);
     }
 
     private void Update()
@@ -44,17 +43,17 @@ public class UGUIElement : MonoBehaviour
         }
     }
 
-    private bool IsCloseEnough() => Vector3.Distance(player.transform.position, target.position) < maxDistance;
+    private bool IsCloseEnough() => Vector3.Distance(cam.transform.position, target.position) < maxDistance;
 
     public void Subscribe(Action<bool> onTargetUpdate) => this.onTargetUpdate += onTargetUpdate;
 
-    private void AddTarget(Transform target)
+    public void AddTarget(Transform target)
     {
         this.target = target;
         onTargetUpdate(true);
     }
 
-    private void RemoveTarget(Transform target)
+    public void RemoveTarget(Transform target)
     {
         this.target = null;
         onTargetUpdate(false);

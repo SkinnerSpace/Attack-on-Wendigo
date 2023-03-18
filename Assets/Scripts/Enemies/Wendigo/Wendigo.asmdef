@@ -6,7 +6,8 @@
         "BusinessLogic",
         "FMODUnity",
         "FMODUnityEditor",
-        "ShakeBridge"
+        "ShakeBridge",
+        "Pool"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

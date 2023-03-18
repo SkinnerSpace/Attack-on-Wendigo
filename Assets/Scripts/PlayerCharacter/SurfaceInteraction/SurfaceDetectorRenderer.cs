@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using Character;
 
 public class SurfaceDetectorRenderer : MonoBehaviour
 {

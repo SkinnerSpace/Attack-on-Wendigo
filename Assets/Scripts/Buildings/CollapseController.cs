@@ -84,7 +84,7 @@ public class CollapseController : MonoBehaviour, ICollapsible
                 WithAxis(1f, 1f, 0f).
                 WithStrength(0.1f, 1.5f).
                 WithCurve(estimations.frequency, 0.3f, 0.3f).
-                WithAttenuation(transform.position, CharacterData.Instance.transform, 100f).
+                WithAttenuation(transform.position, GameManager.Instance.Character, 100f).
                 BuildAndLaunch(ShakeManagerComponent.Instance);
     }
 }

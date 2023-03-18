@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Character;
+using UnityEngine;
 
 public class Shakeable : MonoBehaviour, IShakeable
 {

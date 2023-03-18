@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CameraHolder : MonoBehaviour
+public class CameraHolder : MonoBehaviour, ICameraHolder
 {
     public enum States
     {
@@ -8,7 +8,7 @@ public class CameraHolder : MonoBehaviour
         Gameplay
     }
 
-    [SerializeField] private Transform cameraPivot;
+    [SerializeField] private Transform pivot;
     [SerializeField] private States state;
     [SerializeField] private bool testMode;
 
@@ -16,20 +16,30 @@ public class CameraHolder : MonoBehaviour
 
     public void Follow()
     {
-        if (cameraPivot != null)
+        if (pivot != null)
         {
-            transform.position = cameraPivot.position;
+            transform.position = pivot.position;
 
             if (state == States.Demo) 
-                transform.rotation = cameraPivot.rotation;
+                transform.rotation = pivot.rotation;
         }
     }
 
-    public void SetPivot(Transform cameraPivot) => this.cameraPivot = cameraPivot;
-    public void SetState(States state) => this.state = state;
+    public void SetGameMode(Transform pivot)
+    {
+        state = States.Gameplay;
+        this.pivot = pivot;
+    }
+
+    public void SetDemoMode(Transform pivot)
+    {
+        state = States.Demo;
+        this.pivot = pivot;
+    }
 
     private void OnDrawGizmos()
     {
         if (testMode) Follow();
     }
+
 }

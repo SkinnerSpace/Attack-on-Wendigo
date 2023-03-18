@@ -46,23 +46,16 @@ namespace WendigoCharacter
 
         public void ShakeTheEarth(Vector3 sourcePos)
         {
-            ShakeBuilder.Create().
-                    withTime(0.3f).
-                    WithAxis(1f, 1f, 0f).
-                    WithStrength(0.25f, 2f).
-                    WithCurve(4f, 0.1f, 0.25f).
-                    WithAttenuation(sourcePos, data.Target.transform, SHAKE_MAX_DISTANCE).
-                    BuildAndLaunch(ShakeManagerComponent.Instance);
-            /*if (data.Target.IsGrounded)
+            if (data.Target.IsGrounded)
             {
                 ShakeBuilder.Create().
                     withTime(0.3f).
                     WithAxis(1f, 1f, 0f).
-                    WithStrength(0.25f, 2f).
+                    WithStrength(0.12f, 1.7f).
                     WithCurve(4f, 0.1f, 0.25f).
                     WithAttenuation(sourcePos, data.Target.transform, SHAKE_MAX_DISTANCE).
                     BuildAndLaunch(ShakeManagerComponent.Instance);
-            }*/
+            }
         }
 
         public void StartCastingFireball()

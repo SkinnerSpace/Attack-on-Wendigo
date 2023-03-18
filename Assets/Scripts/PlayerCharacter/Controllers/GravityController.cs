@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Character;
+using UnityEngine;
 
 public class GravityController : BaseController, IGroundObserver, IMoverObserver
 {
@@ -9,7 +10,7 @@ public class GravityController : BaseController, IGroundObserver, IMoverObserver
     public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
-        data = main.Data;
+        data = main.OldData;
         chronos = main.Chronos;
     }
 

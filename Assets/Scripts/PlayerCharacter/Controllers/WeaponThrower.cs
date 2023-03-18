@@ -9,7 +9,7 @@ public class WeaponThrower
 
     public WeaponThrower(ICharacterData data) => this.data = data;
 
-    public Vector3 GetDropPos(Pickable item, Vector2 screenPoint)
+    public Vector3 GetDropPos(IPickable item, Vector2 screenPoint)
     {
         if (item == null) return Vector3.zero;
         Vector3 originalPos = item.Position;

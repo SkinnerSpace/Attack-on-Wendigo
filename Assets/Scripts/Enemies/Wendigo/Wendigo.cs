@@ -16,7 +16,7 @@ namespace WendigoCharacter
         [SerializeField] private CharacterController controller;
         [SerializeField] private PropDestroyer mainPropDestroyer;
         [SerializeField] private RagDollController ragDollController;
-        [SerializeField] private WendigoPooledObject pool;
+        [SerializeField] private WendigoPooledObject poolObject;
         [SerializeField] private Animator animator;
         [SerializeField] private WendigoSFXPlayer sFXPlayer;
 
@@ -35,6 +35,7 @@ namespace WendigoCharacter
         public WendigoMover Mover => mover;
         public WendigoSFXPlayer SFXPlayer => sFXPlayer;
         public FunctionTimer Timer => timer;
+        public WendigoPooledObject PoolObject => poolObject;
         public WendigoData Data => data;
 
         public FireballSpawnerComponent FireballSpawner => fireballSpawner;
@@ -63,8 +64,8 @@ namespace WendigoCharacter
             stateMachine = WendigoStateMachineFactory.Create(this);
 
             GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
-            GetController<WendigoHealthSystem>().SubscribeOnRagdoll(TriggerRagdoll);
-            pool.Subscribe(this);
+            GetController<WendigoHealthSystem>().SubscribeOnRagdoll(OnDeath);
+            poolObject.Subscribe(this);
         }
 
         private void AddControllers()
@@ -96,9 +97,9 @@ namespace WendigoCharacter
             return null;
         }
 
-        public void TriggerRagdoll(Vector3 impact, Vector3 hitPoint)
+        public void OnDeath(Vector3 impact, Vector3 hitPoint)
         {
-            SetTarget(null);
+            GetController<WendigoTargetManager>().ResetTarget();
             ragDollController.TriggerRagdoll(impact, hitPoint);
         }
 

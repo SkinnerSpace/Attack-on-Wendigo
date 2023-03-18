@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8122978470444825256}
   - component: {fileID: 2532376649612274090}
   - component: {fileID: 8517874847025723103}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1, z: 0}
-  maxForce: 20
+  minForce: 10
+  maxForce: 15
+  minTime: 1.5
+  maxTime: 2
 --- !u!1 &214086072357772131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1044,7 @@ GameObject:
   - component: {fileID: 8052028001855878403}
   - component: {fileID: 2036046271372153590}
   - component: {fileID: 3450741644503631852}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: LowerArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1536,7 +1539,7 @@ GameObject:
   - component: {fileID: 3543485175666575028}
   - component: {fileID: 9019530688743755357}
   - component: {fileID: 5605730839354197699}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: LowerLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1662,7 +1665,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
+  minForce: 0
   maxForce: 0
+  minTime: 1
+  maxTime: 2
 --- !u!1 &2078290438083712399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,6 +1928,10 @@ MonoBehaviour:
   - {fileID: 9019530688743755357}
   pullers:
   - {fileID: 8517874847025723103}
+  - {fileID: 8222439745535925001}
+  - {fileID: 5944569634848704325}
+  - {fileID: 6082413547149204729}
+  - {fileID: 4035587144910639857}
   - {fileID: 1960720742295965060}
   - {fileID: 5605730839354197699}
 --- !u!114 &6542073817647212200
@@ -2197,8 +2207,6 @@ MonoBehaviour:
     type: 3}
   chronos: {fileID: 6855492014976806890}
   visualizeRaycast: 1
-  deviation: 0.1
-  flameVFXTime: 1
 --- !u!114 &1886362725647329307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2584,7 +2592,7 @@ MonoBehaviour:
   controller: {fileID: 157347938491257906}
   mainPropDestroyer: {fileID: 54220094663826474}
   ragDollController: {fileID: 2173253743383517456}
-  pool: {fileID: 1058818208207837215}
+  poolObject: {fileID: 1058818208207837215}
   animator: {fileID: 4718767853038179663}
   sFXPlayer: {fileID: 6783199577854852569}
   fireballSpawner: {fileID: 7483865602147209108}
@@ -2605,7 +2613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health:
-    Amount: 10
+    Amount: 1
   Movement:
     WalkSpeed: 10
     RotationSpeed: 20
@@ -2640,7 +2648,8 @@ MonoBehaviour:
     MaxTime: 10
   Head:
     LookAngleOfView: 45
-  Target: {fileID: 0}
+  Target:
+    transform: {fileID: 0}
 --- !u!114 &6902924081060343994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3009,7 +3018,7 @@ GameObject:
   - component: {fileID: 6963824817811528513}
   - component: {fileID: 8933316923171546991}
   - component: {fileID: 5208535728372830696}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: UpperLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3136,7 +3145,7 @@ GameObject:
   - component: {fileID: 482734159287141324}
   - component: {fileID: 4968317561929404806}
   - component: {fileID: 1960720742295965060}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: LowerLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3263,7 +3272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
+  minForce: 0
   maxForce: 0
+  minTime: 1
+  maxTime: 2
 --- !u!1 &3097627273818083130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3821,7 +3833,7 @@ GameObject:
   - component: {fileID: 6477469945635046957}
   - component: {fileID: 2763238300435263781}
   - component: {fileID: 5433973188847832909}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4303,7 +4315,7 @@ GameObject:
   - component: {fileID: 6037386650941525133}
   - component: {fileID: 3502197488477651198}
   - component: {fileID: 4605627362710363562}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Shoulder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4653,7 +4665,7 @@ GameObject:
   - component: {fileID: 918897713643664815}
   - component: {fileID: 8284029998754483544}
   - component: {fileID: 3823809823309240956}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: LowerArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4939,7 +4951,7 @@ GameObject:
   - component: {fileID: 5033531786349808171}
   - component: {fileID: 3023647178426051422}
   - component: {fileID: 3008984774623055462}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Shoulder.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5375,7 +5387,7 @@ GameObject:
   - component: {fileID: 578581555906273557}
   - component: {fileID: 3011467293587890648}
   - component: {fileID: 5664012590703452630}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: UpperLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6541,7 +6553,8 @@ GameObject:
   - component: {fileID: 4556142986943200684}
   - component: {fileID: 5660723310571544896}
   - component: {fileID: 3585962117768935945}
-  m_Layer: 19
+  - component: {fileID: 5944569634848704325}
+  m_Layer: 27
   m_Name: Hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6656,6 +6669,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
+--- !u!114 &5944569634848704325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888048981436851462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  minForce: 0.1
+  maxForce: 1
+  minTime: 0.5
+  maxTime: 1
 --- !u!1 &6897714850849252518
 GameObject:
   m_ObjectHideFlags: 0
@@ -6830,7 +6860,8 @@ GameObject:
   - component: {fileID: 6744286435887070462}
   - component: {fileID: 5137895175893068989}
   - component: {fileID: 3348436622492761926}
-  m_Layer: 19
+  - component: {fileID: 6082413547149204729}
+  m_Layer: 27
   m_Name: UppderArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6944,6 +6975,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
+--- !u!114 &6082413547149204729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165021405115223427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  minForce: 2
+  maxForce: 7
+  minTime: 0.5
+  maxTime: 1.5
 --- !u!1 &7341291120456902916
 GameObject:
   m_ObjectHideFlags: 0
@@ -7019,7 +7067,7 @@ GameObject:
   - component: {fileID: 8458531705149458538}
   - component: {fileID: 2430372493639346268}
   - component: {fileID: 2207397200400634435}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7207,7 +7255,7 @@ GameObject:
   - component: {fileID: 1339317242646775803}
   - component: {fileID: 5968913261875346274}
   - component: {fileID: 3712385781850540430}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7468,7 +7516,8 @@ GameObject:
   - component: {fileID: 1974584241436508402}
   - component: {fileID: 853337575238424335}
   - component: {fileID: 3413342013734332140}
-  m_Layer: 19
+  - component: {fileID: 8222439745535925001}
+  m_Layer: 27
   m_Name: UppderArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7582,6 +7631,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
+--- !u!114 &8222439745535925001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7828300437711467371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  minForce: 2
+  maxForce: 7
+  minTime: 0.5
+  maxTime: 1.5
 --- !u!1 &7840524395696256475
 GameObject:
   m_ObjectHideFlags: 0
@@ -8035,7 +8101,7 @@ GameObject:
   - component: {fileID: 4506627089130588024}
   - component: {fileID: 7676347385920981742}
   - component: {fileID: 7966956647847077741}
-  m_Layer: 19
+  m_Layer: 27
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8899,7 +8965,8 @@ GameObject:
   - component: {fileID: 4921500968123391309}
   - component: {fileID: 8205894040025749494}
   - component: {fileID: 1232155569011304710}
-  m_Layer: 19
+  - component: {fileID: 4035587144910639857}
+  m_Layer: 27
   m_Name: Hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9014,6 +9081,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 2523814211013476484}
+--- !u!114 &4035587144910639857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175474856025134201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ecf7801d49dee42ab32d0e59313011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  minForce: 0.1
+  maxForce: 1
+  minTime: 0.5
+  maxTime: 1
 --- !u!1 &9211106622801728780
 GameObject:
   m_ObjectHideFlags: 0
@@ -9373,15 +9457,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74e2dfbc41ce03f4bb324670fa5164d3, type: 3}
---- !u!4 &1449796521417748721 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1392616721666246459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1449796521417748723 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 526120465322489800, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392616721666246459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1449796521417748721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 526120465322489802, guid: 74e2dfbc41ce03f4bb324670fa5164d3,
     type: 3}
   m_PrefabInstance: {fileID: 1392616721666246459}
   m_PrefabAsset: {fileID: 0}
@@ -10134,18 +10218,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db420e3cdf12ef409644c4524fbb209, type: 3}
---- !u!4 &6084212401134545197 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3217651491151855903, guid: 1db420e3cdf12ef409644c4524fbb209,
-    type: 3}
-  m_PrefabInstance: {fileID: 8703226117386561586}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &4406182721403245825 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5038953891158179123, guid: 1db420e3cdf12ef409644c4524fbb209,
-    type: 3}
-  m_PrefabInstance: {fileID: 8703226117386561586}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7483865602147209108 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2239443604756342694, guid: 1db420e3cdf12ef409644c4524fbb209,
@@ -10158,6 +10230,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d8416d04ade594b9e9f4ed212abdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &4406182721403245825 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5038953891158179123, guid: 1db420e3cdf12ef409644c4524fbb209,
+    type: 3}
+  m_PrefabInstance: {fileID: 8703226117386561586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6084212401134545197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3217651491151855903, guid: 1db420e3cdf12ef409644c4524fbb209,
+    type: 3}
+  m_PrefabInstance: {fileID: 8703226117386561586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8945209469530079516
 PrefabInstance:
   m_ObjectHideFlags: 0

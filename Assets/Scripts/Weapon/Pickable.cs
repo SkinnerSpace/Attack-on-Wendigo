@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Pickable : MonoBehaviour
+public class Pickable : MonoBehaviour, IPickable
 {
     [SerializeField] private Transform item;
     [SerializeField] private ItemTransitionController transitionController;
@@ -38,10 +38,11 @@ public class Pickable : MonoBehaviour
         gameObject.layer = (int)Layers.Interactables;
     }
 
-    public void PickUp(WeaponKeeper keeper, Action onCameToHands)
+    public void PickUp(IKeeper keeper, Action onCameToHands)
     {
         originalParent = item.parent;
-        item.SetParent(keeper.Root);
+        item.parent = keeper.Root;
+
         SetPhysicsDisabled(true);
         sFXPlayer.PlayTakeSFX();
 
