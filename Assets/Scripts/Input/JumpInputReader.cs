@@ -6,8 +6,9 @@ public class JumpInputReader : InputReader
     private event Action onJump;
     private event Action onStop;
 
-    private void Update()
-    {
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput(){
         if (input.Hold(keys.Jump)) onJump?.Invoke();
         if (input.Released(keys.Jump)) onStop?.Invoke();
     }

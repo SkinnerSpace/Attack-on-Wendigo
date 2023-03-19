@@ -5,8 +5,9 @@ public class DashInputReader : InputReader
 {
     private event Action onDash;
 
-    private void Update()
-    {
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput(){
         if (input.Pressed(keys.Dash)) onDash?.Invoke();
     }
 

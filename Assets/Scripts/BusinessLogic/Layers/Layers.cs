@@ -17,5 +17,6 @@
     DisabledInteractables = 22,
     PlayerHitBox = 23,
     Background = 24,
-    Inflammable = 25
+    Inflammable = 25,
+    SolidItems = 26
 }

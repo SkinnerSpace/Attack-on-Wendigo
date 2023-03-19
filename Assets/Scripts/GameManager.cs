@@ -5,15 +5,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public enum States
-    {
-        Menu,
-        Play,
-        Pause
-    }
-
-    private States state = States.Menu;
-
     [Header("Required Components")]
     [SerializeField] private Transform character;
     [SerializeField] private CameraManager cameraManager;
@@ -48,8 +39,6 @@ public class GameManager : MonoBehaviour
         triggers = new TriggersManager(eventManager);
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
-        
-
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));
         commands.Add("Resume", new GameResumeCommand(this));
@@ -64,23 +53,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        switch (state)
+        switch (GameState.PauseMode)
         {
-            case States.Play:
+            case PauseMode.None:
                 if (Input.GetKeyDown(KeyCode.Escape))
                     ExecuteCommand("Pause");
 
                 break;
 
-            case States.Pause:
+            case PauseMode.Paused:
                 if (Input.GetKeyDown(KeyCode.Escape))
                     ExecuteCommand("Resume");
 
                 break;
         }
     }
-
-    public void SetState(States state) => this.state = state;
 
     public void ExecuteCommand(string command) => commands[command].Execute();
 

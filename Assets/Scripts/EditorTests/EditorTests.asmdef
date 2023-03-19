@@ -8,7 +8,8 @@
         "BusinessLogic",
         "Shakes",
         "PlayerCharacter",
-        "Pool"
+        "Pool",
+        "Damage"
     ],
     "includePlatforms": [
         "Editor"

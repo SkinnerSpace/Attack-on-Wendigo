@@ -2,7 +2,7 @@
 
 public class WeaponTarget
 {
-    public Surface surface { get; private set; }
+    public ISurface surface { get; private set; }
     public IDamageable damageable { get; private set; }
     public Vector3 hitPosition { get; private set; }
     public Vector3 hitDirection { get; private set; }
@@ -18,7 +18,7 @@ public class WeaponTarget
             exist = true;
             name = hit.transform.name;
 
-            surface = hit.transform.GetComponent<Surface>();
+            surface = hit.transform.GetComponent<ISurface>();
             damageable = hit.transform.GetComponent<IDamageable>();
             isDamageable = damageable != null;
 

@@ -10,5 +10,5 @@ public interface IWeapon
     void HoldTheTrigger();
     void PressTheTrigger();
     void Reload();
-    void Initialize(ICharacterData characterData, IInputReader inputReader);
+    void InitializeOnTake(ICharacterData characterData, IInputReader inputReader);
 }

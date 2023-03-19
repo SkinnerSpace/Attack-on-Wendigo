@@ -19,7 +19,7 @@ public class FireballCollider : IFireballCollider
 
     public void Update()
     {
-        Physics.OverlapSphereNonAlloc(data.Position, data.CollisionRadius, hitColliders, ComplexLayers.Exploding);
+        Physics.OverlapSphereNonAlloc(data.Position, data.CollisionRadius, hitColliders, ComplexLayers.ProjectileCollidable);
         NotifyOnCollision();
     }
 

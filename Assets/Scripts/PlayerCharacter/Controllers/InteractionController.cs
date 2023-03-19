@@ -72,5 +72,5 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public void Interact() => itemInteractor.Interact(target);
 
     private void DropAnItem() => keeper.DropAnItem(mousePos);
-    private void TakeAnItem(Pickable pickable, Weapon weapon) => keeper.Take(pickable, weapon);
+    private void TakeAnItem(IPickable pickable, IWeapon weapon) => keeper.Take(pickable, weapon);
 }

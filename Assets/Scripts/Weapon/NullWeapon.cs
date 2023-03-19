@@ -24,7 +24,7 @@ public class NullWeapon : IWeapon
     public void PressTheTrigger() {}
     public void Reload(){}
 
-    public void Initialize(ICharacterData characterData, IInputReader inputReader)
+    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader)
     {
   
     }

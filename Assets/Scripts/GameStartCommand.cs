@@ -6,7 +6,6 @@
 
     public void Execute()
     {
-        gameManager.SetState(GameManager.States.Play);
         gameManager.Menu.Close();
         gameManager.PlayerCharacter.SwitchOn();
         gameManager.CameraManager.TrackTheCharacter();

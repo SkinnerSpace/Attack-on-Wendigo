@@ -8,9 +8,9 @@ public class GameResumeCommand : ICommand
 
     public void Execute()
     {
-        gameManager.SetState(GameManager.States.Play);
+        GameState.PauseMode = PauseMode.None;
+
         gameManager.Menu.Close();
-        Time.timeScale = 1f;
 
         gameManager.Triggers.ResetTrigger("OnGamePause");
         gameManager.Triggers.Trigger("OnGameResume");

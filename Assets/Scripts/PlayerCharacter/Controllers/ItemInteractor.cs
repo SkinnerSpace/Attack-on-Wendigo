@@ -6,18 +6,18 @@ public class ItemInteractor
 {
     private CharacterData data;
 
-    private Pickable pickable;
+    private IPickable pickable;
     private IOpenable openable;
 
-    private Action<Pickable, Weapon> takeAnItem;
+    private Action<IPickable, IWeapon> takeAnItem;
     private Action dropAnItem;
 
-    public static ItemInteractor CreateWithDataTakeAndDrop(CharacterData data, Action<Pickable, Weapon> takeAnItem, Action dropAnItem)
+    public static ItemInteractor CreateWithDataTakeAndDrop(CharacterData data, Action<IPickable, IWeapon> takeAnItem, Action dropAnItem)
     {
         return new ItemInteractor(data, takeAnItem, dropAnItem);
     }
 
-    private ItemInteractor(CharacterData data, Action<Pickable, Weapon> takeAnItem, Action dropAnItem)
+    private ItemInteractor(CharacterData data, Action<IPickable, IWeapon> takeAnItem, Action dropAnItem)
     {
         this.data = data;
         this.takeAnItem = takeAnItem;
@@ -41,13 +41,13 @@ public class ItemInteractor
 
     private void PickPickable(Transform target)
     {
-        pickable = target.GetComponent<Pickable>();
+        pickable = target.GetComponent<IPickable>();
 
         if (pickable != null)
         {
             dropAnItem();
 
-            Weapon weapon = target.parent.GetComponent<Weapon>();
+            IWeapon weapon = target.parent.GetComponent<IWeapon>();
             takeAnItem(pickable, weapon);
         }
     }

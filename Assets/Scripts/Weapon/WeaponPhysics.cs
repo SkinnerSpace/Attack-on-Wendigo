@@ -30,21 +30,40 @@ public class WeaponPhysics : MonoBehaviour
     public void SubscribeOnCollision(Action<Collision> onCollisionQuerry) => this.onCollisionQuerry += onCollisionQuerry;
     public void SubscribeOnCollision(Action onCollision) => this.onCollision += onCollision;
 
-
     public void AddForce(Vector3 force) => weaponBody.AddForce(force);
     public void AddTorque(Vector3 torque) => weaponBody.AddTorque(torque);
 
-    public void SetPhysicsDisabled(bool disabled)
+    public void EnablePhysics()
     {
-        weaponBody.velocity = Vector3.zero;
+        ResetVelocity();
+        SetColliders(true);
+        SetKinematic(false);
 
-        foreach (Collider weaponCollider in weaponColliders)
-        {
-            weaponCollider.enabled = !disabled;
+        SetLevitation(false);
+    }
+
+    public void DisablePhysics()
+    {
+        ResetVelocity();
+        SetColliders(false);
+        SetKinematic(true);
+
+        SetLevitation(false);
+    }
+
+    private void ResetVelocity() => weaponBody.velocity = Vector3.zero;
+
+    private void SetColliders(bool enabled)
+    {
+        foreach (Collider weaponCollider in weaponColliders){
+            weaponCollider.enabled = enabled;
         }
+    }
 
-        weaponBody.isKinematic = disabled;
-        weaponBody.useGravity = !disabled;
+    private void SetKinematic(bool enabled)
+    {
+        weaponBody.isKinematic = enabled;
+        weaponBody.useGravity = !enabled;
     }
 
     public void SetLevitation(bool isLevitating) => this.isLevitating = isLevitating;

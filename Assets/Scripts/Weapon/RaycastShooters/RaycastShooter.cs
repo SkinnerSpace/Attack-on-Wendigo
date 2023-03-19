@@ -30,7 +30,8 @@ public class RaycastShooter
         if (IsReady)
         {
             IsReady = false;
-            HitTheTarget(sight.GetTarget());
+            WeaponTarget target = sight.GetTarget();
+            HitTheTarget(target);
             onShot?.Invoke();
 
             timer.Set("CoolDown", data.Rate, CoolDown);
@@ -59,7 +60,7 @@ public class RaycastShooter
 
     private void BlowUpTheSurface(WeaponTarget target)
     {
-        Surface surface = target.surface;
+        ISurface surface = target.surface;
 
         if (surface != null)
         {

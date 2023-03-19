@@ -11,7 +11,7 @@ public class Airdrop : MonoBehaviour
 
     private void Awake()
     {
-        Pickable.SubscribeOnFirstPickUp(LoadCargo);
+        PickUpManager.SubscribeOnFirstPickUp(LoadCargo);
         WeaponSweeper.SubscribeOnSweptAway(CargoDisappeared);
     }
 

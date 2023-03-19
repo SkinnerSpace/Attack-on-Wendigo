@@ -6,7 +6,9 @@ public class CombatInputReader : InputReader
     private event Action onPress;
     private event Action<bool> onAim;
 
-    private void Update()
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput()
     {
         if (input.Pressed(keys.Shoot)) onPress?.Invoke();
         if (input.Hold(keys.Shoot)) onHold?.Invoke();

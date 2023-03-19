@@ -5,6 +5,11 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
 {
     private const float SLOW_DOWN = 0.01f;
 
+    [Header("Required Components")]
+    [SerializeField] private Weapon weapon;
+    [SerializeField] private WeaponData data;
+
+    [Header("Settings")]
     [SerializeField] private bool displacementOn = true;
     private WeaponDisplacer displacer;
 
@@ -17,7 +22,6 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
     [SerializeField] private bool oscillationOn = true;
     private WeaponOscillator oscillator;
 
-    private Weapon weapon;
     private DisplacementCorrector corrector;
     private VerticalTuner verticalTuner;
 
@@ -29,9 +33,8 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
 
     private bool isReady;
 
-    public void Initialize(Weapon weapon, ICharacterData characterData, IInputReader inputReader)
+    public void Initialize(ICharacterData characterData, IInputReader inputReader)
     {
-        this.weapon = weapon;
         verticalTuner = new VerticalTuner(characterData);
         displacer = GetComponent<WeaponDisplacer>().Initialize(verticalTuner);
         rotator = GetComponent<WeaponRotator>().Initialize(verticalTuner);
@@ -39,7 +42,7 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
         oscillator = GetComponent<WeaponOscillator>().Initialize(characterData);
         corrector = GetComponent<DisplacementCorrector>();
 
-        weapon.SubscribeOnReady(OnReady);
+        weapon.SubscribeOnReadinessUpdate(OnReady);
         this.inputReader = inputReader;
     }
 
@@ -54,7 +57,7 @@ public class WeaponSwayController : MonoBehaviour, IMouseMotionObserver
         else if (!isReady)
         {
             inputReader.Get<MouseMotionInputReader>().Unsubscribe(this);
-            corrector.Fix(weapon.Data);
+            corrector.Fix(data);
         }
     }
 

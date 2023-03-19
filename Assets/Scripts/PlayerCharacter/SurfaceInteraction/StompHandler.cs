@@ -20,7 +20,7 @@ namespace Character
 
         private void HitTheSurface(SurfaceProbe probe)
         {
-            Surface surface = probe.surface;
+            ISurface surface = probe.surface;
             Vector3 position = probe.position;
             Vector3 direction = data.FlatVelocity.normalized;
 

@@ -8,7 +8,7 @@ public class LayerSwapManager : MonoBehaviour
     private void Awake()
     {
         layerChangers = GetComponentsInChildren<LayerChanger>();
-        pickable.Subscribe(SwapTheLayers);
+        pickable.SubscribeOnInteraction(SwapTheLayers);
     }
 
     public void SwapTheLayers()

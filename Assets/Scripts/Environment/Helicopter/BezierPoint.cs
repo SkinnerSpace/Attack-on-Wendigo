@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[ExecuteAlways]
 public class BezierPoint : MonoBehaviour
 {
     public Vector3 Position => transform.position;

@@ -2,10 +2,12 @@
     "name": "PlayerCharacter",
     "references": [
         "GUID:a4372140b34cbb6459c27a96085ba0eb",
-        "GUID:67d5259132ab2a24b861dd2fc0e14392",
         "GUID:cd25c50e9bfbf384fa37a348d37bd470",
         "GUID:0c752da273b17c547ae705acf0f2adf2",
-        "GUID:aab3caaf43456d6449a3e035348ff798"
+        "GUID:aab3caaf43456d6449a3e035348ff798",
+        "GUID:4e63c4bdb4413f742bc0fe5566d7747e",
+        "GUID:39ce6b23b54bbc1459d11d5b9b08ca20",
+        "GUID:0c9a473b0fecfdc40a103609ed6d8aee"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

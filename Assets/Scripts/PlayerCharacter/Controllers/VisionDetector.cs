@@ -9,7 +9,6 @@ namespace Character
         private Transform target;
         private IInputReader input;
 
-        public event Action<VisionTarget> onTargetUpdate;
         public event Action<Transform> onTargetTfUpdate;
 
         public override void Initialize(PlayerCharacter main)

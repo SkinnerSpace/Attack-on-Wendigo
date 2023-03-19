@@ -30,15 +30,25 @@ public class WeaponSweeper : MonoBehaviour
 
     private IEnumerator FallThrough()
     {
-        physics.SetPhysicsDisabled(true);
-        timer.Set("OnSwept", sweepTime, () => isSwept = true);
+        PrepareForSweeping();
 
-        while (!isSwept)
-        {
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-            yield return null;
+        while (!isSwept){
+            MoveDown(); yield return null;
         }
 
+        FinishSweeping();
+    }
+
+    private void PrepareForSweeping()
+    {
+        physics.DisablePhysics();
+        timer.Set("OnSwept", sweepTime, () => isSwept = true);
+    }
+
+    private void MoveDown() => transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+    private void FinishSweeping()
+    {
         isSwept = false;
         onSweptAway?.Invoke();
         pooledObject.BackToPool();

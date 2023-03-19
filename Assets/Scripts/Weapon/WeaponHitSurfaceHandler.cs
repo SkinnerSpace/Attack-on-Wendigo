@@ -4,7 +4,7 @@ public class WeaponHitSurfaceHandler
 {
     public void HitTheSurface(Collision collision)
     {
-        Surface surface = collision.transform.GetComponent<Surface>();
+        ISurface surface = collision.transform.GetComponent<ISurface>();
 
         if (surface != null)
         {

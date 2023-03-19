@@ -18,6 +18,6 @@ public class GameFlowManager : MonoBehaviour
 
     private void EventN1()
     {
-        Pickable.SubscribeOnFirstPickUp(wendigoSpawner.Spawn);
+        PickUpManager.SubscribeOnFirstPickUp(wendigoSpawner.Spawn);
     }
 }

@@ -4,16 +4,16 @@ using UnityEngine;
 public class AimPresenter : MonoBehaviour
 {
     [SerializeField] private Aim aim;
-    [SerializeField] private EventManager eventManager;
+   // [SerializeField] private EventManager eventManager;
     //[SerializeField] private PlayerCharacter player;
     [SerializeField] private UGUIElement uGUIElement;
 
-    private EventListener targetPresenceListener;
+/*    private EventListener targetPresenceListener;
     private EventListener targetAbsenceListener;
 
     private EventListener gameOnStartListener;
     private EventListener gameOnPauseListener;
-    private EventListener gameOnResumeListener;
+    private EventListener gameOnResumeListener;*/
 
     private List<Transform> targets = new List<Transform>();
 

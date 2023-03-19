@@ -6,6 +6,15 @@ public abstract class InputReader : MonoBehaviour
     protected UnityInputReader input;
     protected KeyBinds keys;
 
+    protected virtual void ReadInputWhenActive()
+    {
+        if (GameState.PauseMode == PauseMode.None){
+            ReadInput();
+        }
+    }
+
+    protected abstract void ReadInput();
+
     private void Awake()
     {
         GetComponent<MainInputReader>().Add(this);

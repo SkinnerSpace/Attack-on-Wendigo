@@ -63,7 +63,10 @@ public class ItemTransitionController : MonoBehaviour
 
     public void Displace(float transition)
     {
+/*        item.localPosition = targetPos;
+        item.localRotation = Quaternion.identity;*/
+
         item.localPosition = Vector3.Lerp(originalPos, targetPos, transition);
-        item.localRotation = Quaternion.Slerp(item.localRotation, Quaternion.Euler(0, 0, 0), transition);
+        item.localRotation = Quaternion.Slerp(item.localRotation, Quaternion.identity, transition);
     }
 }

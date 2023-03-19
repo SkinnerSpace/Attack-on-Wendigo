@@ -5,7 +5,9 @@ public class MovementInputReader : InputReader
 {
     private event Action<Vector3> onDirectionUpdate;
 
-    private void Update()
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput()
     {
         float moveRight = input.Hold(keys.MoveRight) ? 1f : 0f;
         float moveLeft = input.Hold(keys.MoveLeft) ? 1f : 0f;

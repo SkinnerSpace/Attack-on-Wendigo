@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: 4678202120696708155
     second: RifleFPS|RifleIdle
+  - first:
+      74: 8529688223440504047
+    second: RifleFPS|RifleShoot
   externalObjects:
   - first:
       type: UnityEngine:Material

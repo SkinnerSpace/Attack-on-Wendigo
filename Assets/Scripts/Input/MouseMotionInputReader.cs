@@ -5,8 +5,9 @@ public class MouseMotionInputReader : InputReader
 {
     private event Action<Vector2> onMotionUpdate;
 
-    private void Update()
-    {
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput(){
         Vector2 motion = input.MouseMotion * keys.MouseSensitivity * keys.MouseInversion;
         onMotionUpdate?.Invoke(motion);
     }

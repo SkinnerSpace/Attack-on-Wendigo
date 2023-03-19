@@ -12,17 +12,22 @@ public class Pickable : MonoBehaviour, IPickable
     public Transform Transform => item;
     public Vector3 Position => item.position;
     private Transform originalParent;
+    public Transform HoldParent { get; private set; }
+
     private event Action onInteract;
+    private event Action onPickedUp;
+    private event Action onDropped;
 
     public bool IsReadyToHand { get; private set; } = true;
 
-    public void Subscribe(Action onInteract) => this.onInteract += onInteract;
-    public void Unsubscribe(Action onInteract) => this.onInteract -= onInteract;
+    private void Awake()
+    {
+        originalParent = item.parent;
+    }
 
-
-    private static int pickUpCount;
-    private static event Action onFirstPickUp;
-    public static void SubscribeOnFirstPickUp(Action onPickedUp) => onFirstPickUp += onPickedUp;
+    public void SubscribeOnInteraction(Action onInteract) => this.onInteract += onInteract;
+    public void SubscribeOnPickedUp(Action onPickedUp) => this.onPickedUp += onPickedUp;
+    public void SubscribeOnDropped(Action onDropped) => this.onDropped += onDropped;
 
     public void SwitchOff()
     {
@@ -40,19 +45,14 @@ public class Pickable : MonoBehaviour, IPickable
 
     public void PickUp(IKeeper keeper, Action onCameToHands)
     {
-        originalParent = item.parent;
-        item.parent = keeper.Root;
+        HoldParent = keeper.Root;
+        item.parent = HoldParent;
+        physics.DisablePhysics();
 
-        SetPhysicsDisabled(true);
         sFXPlayer.PlayTakeSFX();
-
         transitionController.Launch(item, onCameToHands);
 
-        onInteract?.Invoke();
-
-        pickUpCount++;
-        if (pickUpCount == 1)
-            onFirstPickUp?.Invoke();
+        NotifyOnPickedUp();
     }
 
     public void Drop(Vector3 pos, Vector3 force)
@@ -61,19 +61,30 @@ public class Pickable : MonoBehaviour, IPickable
         item.SetParent(originalParent);
 
         transitionController.Stop();
+        Throw(force);
 
-        SetPhysicsDisabled(false);
+        NotifyOnDropped();
+    }
+
+    private void NotifyOnPickedUp()
+    {
+        onInteract?.Invoke();
+        onPickedUp?.Invoke();
+        PickUpManager.PickUp();
+    }
+
+    private void NotifyOnDropped()
+    {
+        onInteract?.Invoke();
+        onDropped?.Invoke();
+    }
+
+    private void Throw(Vector3 force)
+    {
+        physics.EnablePhysics();
         physics.AddForce(force);
 
         Vector3 torque = new Vector3(Rand.GetBisigned(), Rand.Range(-1f, 1f), Rand.GetBisigned()) * 25f;
         physics.AddTorque(torque);
-
-        onInteract?.Invoke();
-    }
-
-    private void SetPhysicsDisabled(bool disabled)
-    {
-        physics.SetPhysicsDisabled(disabled);
-        physics.SetLevitation(false);
     }
 }

@@ -49,7 +49,7 @@ public class WeaponKeeper : IKeeper
     {
         if (weapon != null)
         {
-            weapon.Initialize(data, input);
+            weapon.InitializeOnTake(data, input);
             weapon.SetReady(true);
         }
     }

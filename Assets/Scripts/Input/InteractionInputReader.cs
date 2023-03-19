@@ -4,8 +4,9 @@ public class InteractionInputReader : InputReader
 {
     private event Action onInteract;
 
-    private void Update()
-    {
+    private void Update() => ReadInputWhenActive();
+
+    protected override void ReadInput(){
         if (input.Pressed(keys.Interact)) onInteract?.Invoke();
     }
 

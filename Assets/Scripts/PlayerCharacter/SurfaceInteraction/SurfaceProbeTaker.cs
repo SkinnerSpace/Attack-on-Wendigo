@@ -8,7 +8,7 @@ public class SurfaceProbeTaker : ISurfaceProbeTaker
 
         if (Physics.Raycast(ray, out RaycastHit hit, ComplexLayers.Solid))
         {
-            probe.surface = hit.transform.GetComponent<Surface>();
+            probe.surface = hit.transform.GetComponent<ISurface>();
             probe.position = hit.point;
 
             if (probe.surface != null)

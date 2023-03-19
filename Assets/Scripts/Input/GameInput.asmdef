@@ -1,0 +1,15 @@
+{
+    "name": "GameInput",
+    "references": [
+        "GUID:a4372140b34cbb6459c27a96085ba0eb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
