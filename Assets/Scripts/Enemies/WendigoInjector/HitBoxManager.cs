@@ -36,4 +36,3 @@ public class HitBoxManager : MonoBehaviour
     }
 }
 
-

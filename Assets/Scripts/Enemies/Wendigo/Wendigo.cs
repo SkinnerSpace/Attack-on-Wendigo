@@ -14,11 +14,14 @@ namespace WendigoCharacter
         [Header("Required Components")]
         [SerializeField] private WendigoMover mover;
         [SerializeField] private CharacterController controller;
+        [SerializeField] private Animator animator;
+        [SerializeField] private WendigoSFXPlayer sFXPlayer;        
+        [SerializeField] private WendigoPooledObject poolObject;
+
+        [Header("Death Components")]
         [SerializeField] private PropDestroyer mainPropDestroyer;
         [SerializeField] private RagDollController ragDollController;
-        [SerializeField] private WendigoPooledObject poolObject;
-        [SerializeField] private Animator animator;
-        [SerializeField] private WendigoSFXPlayer sFXPlayer;
+        [SerializeField] private CorpseCollisionController corpseCollisionController;
 
         [Header("Combat")]
         [SerializeField] private FireballSpawnerComponent fireballSpawner;
@@ -56,17 +59,16 @@ namespace WendigoCharacter
 
         private void Awake()
         {
-            transform.name = "Wendigo_" + (id++);
+            AssignName();
 
             HitBoxes = GetComponentsInChildren<IHitBox>();
             AddControllers();
 
             stateMachine = WendigoStateMachineFactory.Create(this);
-
-            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
-            GetController<WendigoHealthSystem>().SubscribeOnRagdoll(OnDeath);
-            poolObject.Subscribe(this);
+            ManageSubscriptions(); 
         }
+
+        private void AssignName() => transform.name = "Wendigo_" + (id++);
 
         private void AddControllers()
         {
@@ -78,6 +80,14 @@ namespace WendigoCharacter
             AddController(typeof(WendigoTargetManager));
             AddController(typeof(WendigoAnimationController));
             AddController(typeof(RangeCombatManager));
+        }
+
+        private void ManageSubscriptions()
+        {
+            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
+            GetController<WendigoHealthSystem>().SubscribeOnDeath(OnDeath);
+            GetController<WendigoHealthSystem>().SubscribeOnImpactApply(OnImpact);
+            poolObject.Subscribe(this);
         }
 
         private void AddController(Type type)
@@ -97,10 +107,16 @@ namespace WendigoCharacter
             return null;
         }
 
-        public void OnDeath(Vector3 impact, Vector3 hitPoint)
+        public void OnDeath()
         {
             GetController<WendigoTargetManager>().ResetTarget();
-            ragDollController.TriggerRagdoll(impact, hitPoint);
+            mainPropDestroyer.enabled = false;
+            ragDollController.SwitchOn();
+            corpseCollisionController.SwitchOn();
+        }
+
+        public void OnImpact(Vector3 impact, Vector3 hitPoint){
+            ragDollController.ApplyForce(impact, hitPoint);
         }
 
         public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);

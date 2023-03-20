@@ -6,6 +6,6 @@ namespace WendigoCharacter
     public class HealthData
     {
         public int Amount;
-        public bool IsAlive => Amount > 0;
+        public bool IsAlive = true;
     }
 }

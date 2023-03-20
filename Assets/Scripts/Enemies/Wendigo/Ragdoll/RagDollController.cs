@@ -19,21 +19,15 @@ public class RagDollController : MonoBehaviour
 
     private void Start() => SwitchOff();
 
-    public void TriggerRagdoll(Vector3 force, Vector3 hitPoint)
-    {
-        SwitchOn();
-        ApplyForce(force, hitPoint);
-    }
-
-    private void ApplyForce(Vector3 force, Vector3 hitPoint)
+    public void ApplyForce(Vector3 force, Vector3 hitPoint)
     {
         RagdollBone closestBone = storage.ragdollBones.OrderBy(bone => Vector3.Distance(bone.transform.position, hitPoint)).First();
         closestBone.AddForceAtPosition(force, hitPoint);
     }
+    public void SwitchOn() => EnableRagdoll(true);
 
     public void SwitchOff() => EnableRagdoll(false);
 
-    public void SwitchOn() => EnableRagdoll(true);
 
     private void EnableRagdoll(bool isRagdoll)
     {
