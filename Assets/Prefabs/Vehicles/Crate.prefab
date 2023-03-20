@@ -19761,18 +19761,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: RedSparks
-  sFXData:
-    reference:
-      Guid:
-        Data1: -394331513
-        Data2: 1125145045
-        Data3: -1288010578
-        Data4: -1133156338
-      Path: event:/SFX/Game/Gameplay/Crate/CrateShoot
-    variety: 1
-    minPitch: -2
-    maxPitch: 2
+  surfaceData:
+  - name: RedSparks
+    sfx:
+      reference:
+        Guid:
+          Data1: -394331513
+          Data2: 1125145045
+          Data3: -1288010578
+          Data4: -1133156338
+        Path: event:/SFX/Game/Gameplay/Crate/CrateShoot
+      variety: 1
+      minPitch: -2
+      maxPitch: 2
 --- !u!114 &8351341909458789206
 MonoBehaviour:
   m_ObjectHideFlags: 0

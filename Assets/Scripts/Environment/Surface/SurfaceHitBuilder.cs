@@ -10,8 +10,7 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
     private float tangent;
     private float sfxVolume;
 
-    public SurfaceHitBuilder(ParticleSystem particle, AudioPlayer audioPlayer)
-    {
+    public void SetUp(ParticleSystem particle, AudioPlayer audioPlayer){
         this.particle = particle;
         this.audioPlayer = audioPlayer;
         countManager = new ParticleCountManager();

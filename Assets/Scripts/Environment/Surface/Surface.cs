@@ -3,28 +3,66 @@ using UnityEngine;
 
 public class Surface : MonoBehaviour, ISurface
 {
-    [SerializeField] private string particleName;
-    [SerializeField] private SurfaceHitSFXData sFXData;
+    private const int DEFAULT = 0;
 
+    [SerializeField] private List<SurfaceData> surfaceData;
+    private SurfaceData data;
+
+    private ParticleSystem particle;
     private AudioPlayer audioPlayer;
+    private SurfaceHitBuilder hitBuilder;
+
     private IObjectPooler pooler;
 
     private void Start() => pooler = PoolHolder.Instance;
 
-    public void Set(string particleName, SurfaceHitSFXData sFXData){
-        this.particleName = particleName;
-        this.sFXData = sFXData;
-    }
-
-    private void Awake(){
-        audioPlayer = AudioPlayer.Create(sFXData.reference).WithVariety(sFXData.variety).WithPitch(sFXData.minPitch, sFXData.maxPitch);
-    }
+    public void Set(List<SurfaceData> surfaceData) => this.surfaceData = surfaceData;
 
     public ISurfaceHitBuilder Hit()
     {
-        ParticleSystem particle = pooler.SpawnFromThePool(particleName).transform.GetComponent<ParticleSystem>();
-        SurfaceHitBuilder hitBuilder = new SurfaceHitBuilder(particle, audioPlayer);
+        data = surfaceData[DEFAULT];
+        SetUpHitBuilder();
 
         return hitBuilder;
+    }
+
+    public ISurfaceHitBuilder Hit(string particleName)
+    {
+        if (NotFound(particleName)){
+            data = FindData(particleName);
+        }
+        SetUpHitBuilder();
+
+        return hitBuilder;
+    }
+
+    private bool NotFound(string particleName){
+        return data == null || 
+               data.name != particleName;
+    }
+
+    private SurfaceData FindData(string particleName)
+    {
+        foreach (SurfaceData data in surfaceData){
+            if (data.name == particleName)
+                return data;
+        }
+
+        Debug.LogError(particleName + " not found");
+        return surfaceData[DEFAULT];
+    }
+
+    private void SetUpHitBuilder()
+    {
+        particle = pooler.SpawnFromThePool(data.name).transform.GetComponent<ParticleSystem>();
+
+        audioPlayer = AudioPlayer.Create(data.sfx.reference).
+                                  WithVariety(data.sfx.variety).
+                                  WithPitch(data.sfx.minPitch, data.sfx.maxPitch);
+
+        if (hitBuilder == null)
+            hitBuilder = new SurfaceHitBuilder();
+
+        hitBuilder.SetUp(particle, audioPlayer);
     }
 }

@@ -10,8 +10,6 @@ namespace WendigoCharacter
 
         private Vector3 FirstPoint => Center + firstPoint;
         private Vector3 SecondPoint => Center + secondPoint;
-        public override Vector3 Center => transform.position + offset;
-
 
         protected override int CheckCollision() => Physics.OverlapCapsuleNonAlloc(FirstPoint, SecondPoint, radius, colliders, mask);
 

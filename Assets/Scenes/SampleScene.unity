@@ -5082,18 +5082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &127278614
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,18 +5131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!114 &165246866 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8743637072618268217, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -5314,18 +5292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &186572985
 GameObject:
   m_ObjectHideFlags: 0
@@ -5387,18 +5354,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
+--- !u!114 &195477096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8291515833215725645, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf916644ae9f9104f8d234acb02cc4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &201314231 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6415092964129285843, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -5417,18 +5385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &213085766
 GameObject:
   m_ObjectHideFlags: 0
@@ -5773,18 +5730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &239066281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5935,18 +5881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &256498851
 GameObject:
   m_ObjectHideFlags: 0
@@ -5998,18 +5933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1001 &275136803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6228,6 +6152,9 @@ MonoBehaviour:
     prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
       type: 3}
     size: 120
+  - tag: WendigoFallSnowParticle
+    prefab: {fileID: 872948489838112112, guid: d7f0697f32c89954bb889b2af29277fe, type: 3}
+    size: 80
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6240,18 +6167,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: SnowParticle
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData:
+  - name: SnowParticle
+    sfx:
+      reference:
+        Guid:
+          Data1: -1017058278
+          Data2: 1198547612
+          Data3: -154582880
+          Data4: 1228721202
+        Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      variety: 2
+      minPitch: -2
+      maxPitch: 2
+  - name: WendigoFallSnowParticle
+    sfx:
+      reference:
+        Guid:
+          Data1: -1017058278
+          Data2: 1198547612
+          Data3: -154582880
+          Data4: 1228721202
+        Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      variety: 2
+      minPitch: -2
+      maxPitch: 2
 --- !u!114 &340835869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7996656611026189452, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -11118,6 +11058,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 34220214027220663, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 34220214027220663, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11163,6 +11108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 303397967897310119, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 303397967897310119, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11205,6 +11155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 318252748516116866, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 318252748516116866, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -11305,6 +11260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727525112168830141, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1727525112168830141, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -11423,6 +11383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2231037284988367845, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231037284988367845, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11535,6 +11500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712009477470145072, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2712009477470145072, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -11668,6 +11638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3967010822562334540, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967010822562334540, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11758,6 +11733,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5343363524281091697, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343363524281091697, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11818,6 +11798,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5494831351099788274, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494831351099788274, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11860,6 +11845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541858825772950078, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5541858825772950078, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -11953,6 +11943,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213876803277071468, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213876803277071468, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -11974,7 +11969,7 @@ PrefabInstance:
     - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: groundColliders.Array.size
-      value: 4
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -11991,6 +11986,31 @@ PrefabInstance:
       propertyPath: groundColliders.Array.data[3]
       value: 
       objectReference: {fileID: 340835869}
+    - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: groundColliders.Array.data[4]
+      value: 
+      objectReference: {fileID: 1225363640}
+    - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: groundColliders.Array.data[5]
+      value: 
+      objectReference: {fileID: 1564430109}
+    - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: groundColliders.Array.data[7]
+      value: 
+      objectReference: {fileID: 1510696462}
+    - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: groundColliders.Array.data[8]
+      value: 
+      objectReference: {fileID: 587386986}
+    - target: {fileID: 6393134112763245682, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: groundColliders.Array.data[10]
+      value: 
+      objectReference: {fileID: 195477096}
     - target: {fileID: 6462523822555388913, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: particleName
@@ -12015,6 +12035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462523822555388913, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6462523822555388913, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -12078,6 +12103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6816296324970505169, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816296324970505169, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -12138,6 +12168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7382743254999179642, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382743254999179642, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -12180,6 +12215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872369192153809920, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7872369192153809920, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -12348,6 +12388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640786444244495963, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640786444244495963, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -12423,6 +12468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8934464007619748438, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934464007619748438, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
       propertyPath: sFXData.reference.Guid.Data1
       value: -1017058278
       objectReference: {fileID: 0}
@@ -12465,6 +12515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sFXData.reference.Path
       value: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106819196241456520, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: surfaceData.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9106819196241456520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -12868,18 +12923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1001 &491694765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12977,18 +13021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &546784221
 GameObject:
   m_ObjectHideFlags: 0
@@ -13064,18 +13097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1001 &557286416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13194,18 +13216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &569947799
 GameObject:
   m_ObjectHideFlags: 0
@@ -22913,6 +22924,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &587386986 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6220971156016297273, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf916644ae9f9104f8d234acb02cc4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &596777956
 GameObject:
   m_ObjectHideFlags: 0
@@ -28541,18 +28564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!4 &703678847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11f052a4cf82b194aba90cd894d4a0ba,
@@ -28681,18 +28693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1001 &762023330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48230,18 +48231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1001 &1217603044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48347,6 +48337,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6176119535213450037}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1225363640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8379400209697785965, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf916644ae9f9104f8d234acb02cc4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1238712297
 GameObject:
   m_ObjectHideFlags: 0
@@ -59056,18 +59058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!4 &1455554736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11f052a4cf82b194aba90cd894d4a0ba,
@@ -64222,10 +64213,6 @@ MonoBehaviour:
     prefab: {fileID: 3908546181673306251, guid: 17bb15ee67ece2f41945573cf61fcebc,
       type: 3}
     size: 50
-  - tag: WoundBlood
-    prefab: {fileID: 3908546181673306251, guid: 17bb15ee67ece2f41945573cf61fcebc,
-      type: 3}
-    size: 50
 --- !u!114 &1488656794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64419,6 +64406,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1503373807}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1510696462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5434010889248041394, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf916644ae9f9104f8d234acb02cc4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1515446539
 GameObject:
   m_ObjectHideFlags: 0
@@ -64531,6 +64530,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad691d351a1d7ef4894142883e3b4160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1564430109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1636645813706757486, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf916644ae9f9104f8d234acb02cc4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1565016040
@@ -75799,18 +75810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &2088778752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6747660664933114489, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -75829,18 +75829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleName: 
-  sFXData:
-    reference:
-      Guid:
-        Data1: -1017058278
-        Data2: 1198547612
-        Data3: -154582880
-        Data4: 1228721202
-      Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-    variety: 2
-    minPitch: -2
-    maxPitch: 2
+  surfaceData: []
 --- !u!1 &2091828322
 GameObject:
   m_ObjectHideFlags: 0

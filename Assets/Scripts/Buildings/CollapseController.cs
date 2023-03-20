@@ -20,7 +20,8 @@ public class CollapseController : MonoBehaviour, ICollapsible
 
     public Vector3 Position => transform.position;
 
-    public event Action<float> notifyOnUpdate;
+    private event Action<float> onUpdate;
+    private event Action onCollapse;
 
     private void Awake()
     {
@@ -35,22 +36,24 @@ public class CollapseController : MonoBehaviour, ICollapsible
         estimations = CollapseEstimator.EstimateFor(acceptor.height);
         dropper = new PropDropper(acceptor, depthMultiplier);
         shaker = new PropShaker(estimations.frequency);
-
     }
 
     private void SubscribeComponents()
     {
-        Subscribe(dropper);
-        Subscribe(shaker);
+        SubscribeOnUpdate(dropper);
+        SubscribeOnUpdate(shaker);
     }
 
-    public void Subscribe(ICollapseObserver observer) => notifyOnUpdate += observer.ReceiveCollapseUpdate;
+    public void SubscribeOnUpdate(ICollapseObserver observer) => onUpdate += observer.ReceiveCollapseUpdate;
+    public void UnsubscribeFromUpdate(ICollapseObserver observer) => onUpdate -= observer.ReceiveCollapseUpdate;
+    public void SubscribeOnCollapse(Action onCollapse) => this.onCollapse += onCollapse;
 
     public void PullDown(Vector3 pushDir)
     {
         if (!started){
             started = true;
             collapseCollider.enabled = false;
+            onCollapse?.Invoke();
             dustVFX.Play();
 
             dropper.Launch(pushDir);
@@ -72,7 +75,7 @@ public class CollapseController : MonoBehaviour, ICollapsible
     {
         currentTime += OldChronos.DeltaTime;
         completeness = currentTime / estimations.time;
-        notifyOnUpdate(completeness);
+        onUpdate?.Invoke(completeness);
 
         acceptor.Add(dropper.posDisplacement).Add(dropper.rotDisplacement).Add(shaker.GetPosDisplacement()).Apply();
     }

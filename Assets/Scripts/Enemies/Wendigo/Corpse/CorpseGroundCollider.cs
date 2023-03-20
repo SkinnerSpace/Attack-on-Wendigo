@@ -59,7 +59,7 @@ namespace WendigoCharacter
         {
             ISurface surface = hit.transform.GetComponent<ISurface>();
 
-            surface.Hit().
+            surface.Hit("WendigoFallSnowParticle").
                 WithPosition(hit.point).
                 WithAngle(Vector3.down, Vector3.up).
                 Launch();
@@ -68,7 +68,6 @@ namespace WendigoCharacter
         private void ShakeTheEarth(RaycastHit hit)
         {
             float power = Mathf.InverseLerp(0f, shake.maxVelocity, body.velocity.magnitude);
-            Debug.Log(transform.name + " " + power);
 
             float time = Rand.Range(shake.minTime, shake.maxTime);
             float strength = shake.strength * power;

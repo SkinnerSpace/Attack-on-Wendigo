@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitBoxManager : MonoBehaviour
 {
     [SerializeField] private Transform hitBoxesRoot;
-    [SerializeField] private WendigoFleshSurfaceData surfaceData;
+    [SerializeField] private List<SurfaceData> surfaceData;
 
     public HitBoxProxy[] hits;
 
@@ -31,7 +31,7 @@ public class HitBoxManager : MonoBehaviour
                 surface = hitBox.gameObject.AddComponent<Surface>();
             }
 
-            surface.Set(surfaceData.particleName, surfaceData.sFXData);
+            surface.Set(surfaceData);
         }
     }
 }

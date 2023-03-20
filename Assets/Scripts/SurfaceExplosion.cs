@@ -10,8 +10,10 @@ public class SurfaceExplosion : MonoBehaviour, IPooledObject
     private void Awake() => particle = GetComponent<ParticleSystem>();
 
     private void Start() => pooler = PoolHolder.Instance;
-
-    public void OnObjectSpawn() => particle.Play();
+    
+    public void OnObjectSpawn(){
+        particle.Play();
+    }
 
     public void SetActive(bool active) => gameObject.SetActive(active);
 

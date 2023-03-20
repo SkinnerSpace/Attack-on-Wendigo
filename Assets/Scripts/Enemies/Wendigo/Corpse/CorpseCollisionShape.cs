@@ -5,15 +5,13 @@ namespace WendigoCharacter
 {
     public abstract class CorpseCollisionShape : MonoBehaviour
     {
-        [SerializeField] protected Vector3 offset;
-
         protected Collider[] colliders;
         protected LayerMask mask => ComplexLayers.Landscape;
 
         private int collidersCount;
         private bool isCollided;
 
-        public abstract Vector3 Center { get; }
+        public Vector3 Center => transform.position;
 
         private event Action onCollisionEnter;
 
