@@ -6,7 +6,7 @@ public class HelicopterDoorSFXPlayer : MonoBehaviour, IHelicopterDoorObserver
     [SerializeField] private FMODUnity.EventReference doorSlideUpSFX;
     [SerializeField] private FMODUnity.EventReference doorSlideDownSFX;
 
-    private HelicopterDoor door;
+    private IHelicopterDoor door;
 
     private AudioPlayer doorSlideUpAudioPlayer;
     private AudioPlayer doorSlideDownAudioPlayer;
@@ -16,7 +16,7 @@ public class HelicopterDoorSFXPlayer : MonoBehaviour, IHelicopterDoorObserver
         doorSlideUpAudioPlayer = AudioPlayer.Create(doorSlideUpSFX).WithAnchor(transform);
         doorSlideDownAudioPlayer = AudioPlayer.Create(doorSlideDownSFX).WithAnchor(transform);
 
-        door = GetComponent<HelicopterDoor>();
+        door = GetComponent<IHelicopterDoor>();
         door.Subscribe(this);
     }
 

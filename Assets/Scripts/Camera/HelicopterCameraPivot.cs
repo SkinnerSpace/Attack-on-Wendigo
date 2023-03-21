@@ -3,7 +3,6 @@
 public class HelicopterCameraPivot : MonoBehaviour
 {
     [SerializeField] private Transform helicopterPoint;
-    [SerializeField] private Helicopter helicopter;
 
     [Header("Settings")]
     [SerializeField] private float speed = 2f;

@@ -60,8 +60,8 @@ namespace Tests
                     pointReceived = inPoint;
                 }
 
-                WendigoHealthSystem healthSystem = new WendigoHealthSystem();
                 HealthData health = new HealthData();
+                WendigoHealthSystem healthSystem = new WendigoHealthSystem();
                 healthSystem.SetData(health);
 
                 healthSystem.SubscribeOnImpactApply(ReceiveImpact);
@@ -69,7 +69,7 @@ namespace Tests
                 DamagePackage damagePackage = new DamagePackage(0, impact, point);
                 healthSystem.ReceiveDamage(damagePackage);
 
-                Assert.AreEqual(impact, impactReceived);
+                Assert.AreEqual(impact * WendigoHealthSystem.DEATH_IMPACT_MULTIPLIER, impactReceived);
                 Assert.AreEqual(point, pointReceived);
             }
 

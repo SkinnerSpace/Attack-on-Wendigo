@@ -7,5 +7,6 @@ public interface ISurfaceHitBuilder
     ISurfaceHitBuilder WithShape(float radius, float angle);
     ISurfaceHitBuilder WithScale(float scale);
     ISurfaceHitBuilder WithCount(short minCount, short maxCount);
+    ISurfaceHitBuilder WithSFXVolume(float volume);
     void Launch();
 }

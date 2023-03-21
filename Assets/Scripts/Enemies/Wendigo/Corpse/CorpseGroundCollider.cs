@@ -11,6 +11,7 @@ namespace WendigoCharacter
         private ShakeSettings shake;
         private WendigoData data;
 
+        private float collisionPower;
         private bool isEnabled;
 
         private void Awake()
@@ -51,8 +52,14 @@ namespace WendigoCharacter
 
         private void ActUponCollisionPoint(RaycastHit hit)
         {
+            CalculateCollisionPower();
             HitTheSurface(hit);
             ShakeTheEarth(hit);
+        }
+
+        private void CalculateCollisionPower(){
+            collisionPower = Mathf.InverseLerp(0f, shake.maxVelocity, body.velocity.magnitude);
+            collisionPower = Easing.QuadEaseIn(collisionPower);
         }
 
         private void HitTheSurface(RaycastHit hit)
@@ -62,16 +69,15 @@ namespace WendigoCharacter
             surface.Hit("WendigoFallSnowParticle").
                 WithPosition(hit.point).
                 WithAngle(Vector3.down, Vector3.up).
+                WithSFXVolume(collisionPower).
                 Launch();
         }
 
         private void ShakeTheEarth(RaycastHit hit)
         {
-            float power = Mathf.InverseLerp(0f, shake.maxVelocity, body.velocity.magnitude);
-
             float time = Rand.Range(shake.minTime, shake.maxTime);
-            float strength = shake.strength * power;
-            float angleMultiplier = shake.angleMultiplier * power;
+            float strength = shake.strength * collisionPower;
+            float angleMultiplier = shake.angleMultiplier * collisionPower;
 
             if (IsAllowedToShakeTheEarth()){
                 ShakeBuilder.Create().

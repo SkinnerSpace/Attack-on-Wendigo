@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6184,14 +6184,14 @@ MonoBehaviour:
     sfx:
       reference:
         Guid:
-          Data1: -1017058278
-          Data2: 1198547612
-          Data3: -154582880
-          Data4: 1228721202
-        Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowFall
-      variety: 2
-      minPitch: -2
-      maxPitch: 2
+          Data1: -236548846
+          Data2: 1173924189
+          Data3: 1790417321
+          Data4: 762888601
+        Path: event:/SFX/Game/Gameplay/Wendigo/GiantFall
+      variety: 3
+      minPitch: 0
+      maxPitch: 4
 --- !u!114 &340835869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7996656611026189452, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -12862,7 +12862,7 @@ MonoBehaviour:
   shakeManager: {fileID: 13202871}
   menu: {fileID: 2019369646}
   counter: {fileID: 2138429411}
-  airdrop: {fileID: 222127165}
+  airdropImp: {fileID: 222127164}
   levelLoader: {fileID: 1793260879}
   eventManager: {fileID: 1497846042}
   timer: {fileID: 394028990}
@@ -70474,7 +70474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helicopterPoint: {fileID: 793925024}
-  helicopter: {fileID: 860728240}
   speed: 1
   offset: {x: 18, y: 10, z: -18}
   testMode: 0
@@ -70521,7 +70520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58143dc8f372b7749983c0c029adde99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helicopter: {fileID: 860728240}
+  helicopterImp: {fileID: 1420892163}
   camPivot: {fileID: 1817865682}
 --- !u!1 &1854148182
 GameObject:

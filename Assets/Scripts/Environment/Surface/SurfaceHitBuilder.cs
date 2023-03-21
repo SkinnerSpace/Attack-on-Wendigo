@@ -56,6 +56,11 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
         return this;
     }
 
+    public ISurfaceHitBuilder WithSFXVolume(float volume){
+        sfxVolume = volume;
+        return this;
+    }
+
     public void Launch()
     {
         audioPlayer.WithVolume(sfxVolume);

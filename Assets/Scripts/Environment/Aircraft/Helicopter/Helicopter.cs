@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Helicopter : MonoBehaviour
+public class Helicopter : MonoBehaviour, ILaunchable
 {
     [SerializeField] private BezierTrajectory trajectory;
     [SerializeField] private HelicopterMover mover;
@@ -33,8 +33,6 @@ public class Helicopter : MonoBehaviour
 
     private void SynchronizeComponents()
     {
-        dispenserManager.Initialize(this);
-
         synchronizer.Subscribe(mover);
         synchronizer.Subscribe(rotator);
         synchronizer.Subscribe(sway);

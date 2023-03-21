@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Crate : MonoBehaviour, IOpenable
+public class Crate : MonoBehaviour, IOpenable, ICrate
 {
     [SerializeField] private CratePhysics physics;
     [SerializeField] private CrateSFXPlayer sFXPlayer;
@@ -49,3 +49,4 @@ public class Crate : MonoBehaviour, IOpenable
         }
     }
 }
+

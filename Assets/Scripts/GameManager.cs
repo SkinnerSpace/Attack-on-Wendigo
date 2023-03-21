@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform shakeManager;
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
-    [SerializeField] private Airdrop airdrop;
+    [SerializeField] private Transform airdropImp;
     [SerializeField] private LevelLoader levelLoader;
 
     [SerializeField] private EventManager eventManager;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public IMenu Menu => menu;
     public ISwitchable PlayerCharacter { get; private set; }
     public CameraManager CameraManager => cameraManager;
-    public Airdrop Airdrop => airdrop;
+    public IAirdrop Airdrop { get; private set; }
     public TriggersManager Triggers => triggers;
     public LevelLoader LevelLoader => levelLoader;
 
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         PlayerCharacter = character.GetComponent<ISwitchable>();
+        Airdrop = airdropImp.GetComponent<IAirdrop>();
 
         Instance = this;
         triggers = new TriggersManager(eventManager);

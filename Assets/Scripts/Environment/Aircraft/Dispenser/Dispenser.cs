@@ -5,14 +5,18 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
 {
     private DispenserData data;
     [SerializeField] private DispenserStorage storage;
-    [SerializeField] private HelicopterDoor door;
+    [SerializeField] private Transform doorImp;
     [SerializeField] private FunctionTimer timer;
 
-
-    private Crate crate;
+    private ICrate crate;
+    private IHelicopterDoor door;
     private Action notifyOnComplete;
 
-    private void Awake() => door.Subscribe(this);
+    private void Awake()
+    {
+        door = doorImp.GetComponent<IHelicopterDoor>();
+        door.Subscribe(this);
+    }
 
     public void SetData(DispenserData data) => this.data = data;
 
@@ -21,7 +25,7 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
         this.notifyOnComplete = notifyOnComplete;
 
         crateObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        crate = crateObject.GetComponent<Crate>();
+        crate = crateObject.GetComponent<ICrate>();
         crate.Pack(storage.GetAnItem());
         
         door.Open();

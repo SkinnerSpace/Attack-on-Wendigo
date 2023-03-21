@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c92b0c04a96e134fa88cc3607323685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  helicopter: {fileID: 0}
 --- !u!114 &1006917162978430103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 7261413878735653690}
-  door: {fileID: 6321098622845438847}
+  doorImp: {fileID: 8149776505857557491}
   timer: {fileID: 1630779641384377885}
 --- !u!1 &3860514765557123674
 GameObject:
@@ -501,6 +502,7 @@ MonoBehaviour:
   target: {fileID: 0}
   data: {fileID: 6047146114537331998}
   storage: {fileID: 7261413878735653690}
+  timer: {fileID: 1630779641384377885}
   rightDispenser: {fileID: 881964518253523129}
   leftDispenser: {fileID: 2820582263639390175}
 --- !u!114 &106448554005381371
@@ -959,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 7261413878735653690}
-  door: {fileID: 2813371742744434699}
+  doorImp: {fileID: 6115379156979578511}
   timer: {fileID: 1630779641384377885}
 --- !u!1 &8615449424028571068
 GameObject:

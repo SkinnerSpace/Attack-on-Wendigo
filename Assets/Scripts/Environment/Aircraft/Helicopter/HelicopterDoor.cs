@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HelicopterDoor : MonoBehaviour
+public class HelicopterDoor : MonoBehaviour, IHelicopterDoor
 {
     [SerializeField] private HelicopterDoorData data;
 

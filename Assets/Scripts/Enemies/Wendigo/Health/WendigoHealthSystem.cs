@@ -5,7 +5,7 @@ namespace WendigoCharacter
 {
     public class WendigoHealthSystem : WendigoPlugableComponent, IDamageable
     {
-        private const float DEATH_IMPACT_MULTIPLIER = 5f;
+        public const float DEATH_IMPACT_MULTIPLIER = 5f;
 
         private HealthData data;
 

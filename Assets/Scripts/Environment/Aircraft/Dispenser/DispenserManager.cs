@@ -7,23 +7,18 @@ public class DispenserManager : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private DispenserData data;
     [SerializeField] private DispenserStorage storage;
+    [SerializeField] private FunctionTimer timer;
 
     [Header("Dispensers")]
     [SerializeField] private Dispenser rightDispenser;
     [SerializeField] private Dispenser leftDispenser;
 
-    private FunctionTimer timer;
     private IObjectPooler pooler;
 
     private void Awake()
     {
         rightDispenser.SetData(data);
         leftDispenser.SetData(data);
-    }
-
-    public void Initialize(Helicopter helicopter)
-    {
-        timer = helicopter.Timer;
     }
 
     private void Start()
