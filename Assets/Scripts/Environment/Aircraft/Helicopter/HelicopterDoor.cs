@@ -5,6 +5,7 @@ using UnityEngine;
 public class HelicopterDoor : MonoBehaviour, IHelicopterDoor
 {
     [SerializeField] private HelicopterDoorData data;
+    [SerializeField] private Transform doorModel;
 
     private event Action onComplete;
     private event Action onOpened;
@@ -55,5 +56,5 @@ public class HelicopterDoor : MonoBehaviour, IHelicopterDoor
         ApplyScale(scale);
     }
 
-    private void ApplyScale(float scale) => transform.localScale = new Vector3(1f, scale, 1f);
+    private void ApplyScale(float scale) => doorModel.localScale = new Vector3(1f, scale, 1f);
 }

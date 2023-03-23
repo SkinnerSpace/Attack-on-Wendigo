@@ -19,7 +19,7 @@ public class BezierPointsManager : MonoBehaviour
             bezierPoint.SetTrajectory(trajectory);
     }
 
-    public void UpdatePoints()
+    public void ExtractPositionOfBezierPoints()
     {
         points = new Vector3[bezierPoints.Length];
 

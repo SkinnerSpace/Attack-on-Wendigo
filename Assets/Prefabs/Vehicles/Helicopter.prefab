@@ -221,6 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1294797246088150514}
+  - component: {fileID: 7764628816809268089}
   m_Layer: 0
   m_Name: HelicopterModel
   m_TagString: Untagged
@@ -246,6 +247,22 @@ Transform:
   m_Father: {fileID: 8152335387003716868}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &7764628816809268089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924122880284337992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6085ac640a374438bd79810d6a23bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newParent: {fileID: 0}
+  anchor: {fileID: 3051558936682772678}
+  movementSpeed: 10
+  rotationSpeed: 10
 --- !u!1 &2112989695497998137
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +551,36 @@ MonoBehaviour:
     prefab: {fileID: 4005881168588452409, guid: 65d57663398a61a4ab73d2b6d49c9a32,
       type: 3}
     size: 20
+--- !u!1 &4841737612848342637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3051558936682772678}
+  m_Layer: 0
+  m_Name: Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3051558936682772678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4841737612848342637}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8152335387003716868}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &5203709847934754149
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     slideTime: 0.5
+  doorModel: {fileID: 6115379156979578511}
 --- !u!114 &9094428133467897590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +732,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1294797246088150514}
+  - {fileID: 3051558936682772678}
   m_Father: {fileID: 1006917162978430111}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,7 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSwayAngle: 30
-  waveMagnitude: 0.3
+  waveMagnitude: 1
   waveSpeed: 30
 --- !u!1 &6742343366095317708
 GameObject:
@@ -797,6 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     slideTime: 0.5
+  doorModel: {fileID: 8149776505857557491}
 --- !u!114 &5927333732730903396
 MonoBehaviour:
   m_ObjectHideFlags: 0

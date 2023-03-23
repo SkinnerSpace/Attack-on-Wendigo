@@ -30,6 +30,8 @@ namespace WendigoCharacter
         {
             data.Amount -= damagePackage.damage;
 
+
+
             if (MustDie()){
                 Die();
                 ApplyDeathImpact(damagePackage);

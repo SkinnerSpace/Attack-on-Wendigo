@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-/*[ExecuteAlways]*/
 public class BezierTrajectory : MonoBehaviour
 {
     [Header("Required Components")]
@@ -45,7 +44,7 @@ public class BezierTrajectory : MonoBehaviour
     public void UpdatePoints()
     {
         pointsManager.SetUpPoints(this);
-        pointsManager.UpdatePoints();
+        pointsManager.ExtractPositionOfBezierPoints();
         bezierLUT.UpdateLUT(pointsManager.Points, details);
     }
 
