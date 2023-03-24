@@ -6192,6 +6192,18 @@ MonoBehaviour:
       variety: 3
       minPitch: 0
       maxPitch: 4
+--- !u!114 &322652847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4827160425468199496, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b59f97c1807d0449559b36236ea6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &340835869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7996656611026189452, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -11476,6 +11488,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2660043211317957201, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: limbs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660043211317957201, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: limbs.Array.data[0]
+      value: 
+      objectReference: {fileID: 322652847}
+    - target: {fileID: 2660043211317957201, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: limbs.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660043211317957201, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: limbGroups.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660043211317957201, guid: 49ab6b7f6631c5e46928697600911e71,
+        type: 3}
+      propertyPath: limbGroups.Array.data[0]
+      value: 
+      objectReference: {fileID: 531369069}
     - target: {fileID: 2712009477470145072, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: particleName
@@ -11544,7 +11581,7 @@ PrefabInstance:
     - target: {fileID: 2994051549860731149, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: destroyers.Array.size
-      value: 13
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3011467293587890648, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -12279,7 +12316,7 @@ PrefabInstance:
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: Health.Amount
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -13027,6 +13064,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfaceData: []
+--- !u!114 &531369069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3159313920363465695, guid: 49ab6b7f6631c5e46928697600911e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 344315469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c0db6dd029f7a4ca26f4042b4749df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &546784221
 GameObject:
   m_ObjectHideFlags: 0

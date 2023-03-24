@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WendigoCharacter
@@ -15,12 +16,15 @@ namespace WendigoCharacter
         public override void Initialize(Wendigo wendigo)
         {
             SetData(wendigo.Data.Health);
-
-            foreach (IHitBox hitBox in wendigo.HitBoxes)
-                ConnectToHitBox(hitBox);
+            ConnectToHitBoxes(wendigo.HitBoxes);
         }
 
         public void SetData(HealthData data) => this.data = data;
+        private void ConnectToHitBoxes(IHitBox[] hitBoxes)
+        {
+            foreach (IHitBox hitBox in hitBoxes)
+                ConnectToHitBox(hitBox);
+        }
         public void ConnectToHitBox(IHitBox hitBox) => hitBox.Subscribe(this);
 
         public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
