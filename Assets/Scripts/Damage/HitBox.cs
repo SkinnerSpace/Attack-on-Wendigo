@@ -2,9 +2,17 @@
 
 public class HitBox : IHitBox
 {
+    private bool isActive = true;
     private event Action<DamagePackage> onDamage;
 
     public void Subscribe(IDamageable damageable) => onDamage += damageable.ReceiveDamage;
     public void Unsubscribe(IDamageable damageable) => onDamage -= damageable.ReceiveDamage;
-    public void ReceiveDamage(DamagePackage damagePackage) => onDamage?.Invoke(damagePackage);
+    public void ReceiveDamage(DamagePackage damagePackage){
+        if (isActive)
+            onDamage?.Invoke(damagePackage);
+    }
+
+    public void SwitchOn() => isActive = true;
+
+    public void SwitchOff() => isActive = false;
 }

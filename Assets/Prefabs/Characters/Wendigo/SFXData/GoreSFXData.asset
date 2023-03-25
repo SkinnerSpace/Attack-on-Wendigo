@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba008adec353a4340aefc2dfdc293834, type: 3}
+  m_Name: GoreSFXData
+  m_EditorClassIdentifier: 
+  hitSFX:
+    Guid:
+      Data1: -369013694
+      Data2: 1293314250
+      Data3: 1987562901
+      Data4: 559081979
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/Hit
+  fleshSmashSFX:
+    Guid:
+      Data1: -677909280
+      Data2: 1243810671
+      Data3: -1312158317
+      Data4: -1364374842
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/FleshSmash

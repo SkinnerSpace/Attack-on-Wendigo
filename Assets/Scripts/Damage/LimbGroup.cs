@@ -12,6 +12,10 @@ public class LimbGroup : MonoBehaviour, IDamageable
     {
         hitBox = GetComponent<IHitBox>();
         hitBox.Subscribe(this);
+
+        foreach (Limb limb in limbs){
+            limb.SetHitBox(hitBox);
+        }
     }
 
     public void ReceiveDamage(DamagePackage damagePackage)

@@ -12,15 +12,28 @@ public class Limb : MonoBehaviour
         Destroyed
     }
 
+    [Header("Settings")]
     [SerializeField] private int initialHealth;
+    [SerializeField] private Limb lockLimb;
+
+    [Header("Meshes")]
     [SerializeField] private SkinnedMeshRenderer fleshMesh;
     [SerializeField] private SkinnedMeshRenderer musclesMesh;
     [SerializeField] private SkinnedMeshRenderer bonesMesh;
+
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem fleshExplosion;
+    [SerializeField] private ParticleSystem bonesExplosion;
+
+    private IHitBox hitBox;
+    private GoreSFXPlayer sFXPlayer;
 
     private int health;
 
     private States state = States.Flesh;
     private float healthPercent;
+
+    public void SetHitBox(IHitBox hitBox) => this.hitBox = hitBox;
 
     private void Awake()
     {
@@ -35,7 +48,6 @@ public class Limb : MonoBehaviour
         }
 
         healthPercent = Mathf.InverseLerp(0f, initialHealth, health);
-        Debug.Log(transform.name + " " + healthPercent);
 
         if (ReadyForMutilation()){
             Mutilate();
@@ -43,16 +55,23 @@ public class Limb : MonoBehaviour
         else if (ReadyForAmputation()){
             Amputate();
         }
+        else{
+            Damage();
+        }
     }
 
     private bool ReadyForMutilation(){
         return healthPercent <= INJURY_THRESHOLD && 
-               state == States.Flesh;
+               state == States.Flesh
+               ;
     }
 
     private bool ReadyForAmputation(){
         return healthPercent <= AMPUTATION_THRESHOLD && 
-               state == States.Bones;
+               state == States.Bones &&
+               (lockLimb == null || 
+               lockLimb.IsDestroyed())
+               ;
     }
 
     private void Mutilate()
@@ -61,14 +80,32 @@ public class Limb : MonoBehaviour
         fleshMesh.enabled = false;
         musclesMesh.enabled = true;
         bonesMesh.enabled = true;
-        Debug.Log("INJURED");
+
+        fleshExplosion.Play();
+        sFXPlayer.PlaySmashSFX();
     }
 
     private void Amputate()
     {
         state = States.Destroyed;
+        hitBox.SwitchOff();
+
         musclesMesh.enabled = false;
         bonesMesh.enabled = false;
-        Debug.Log("DESTROYED");
+
+        bonesExplosion.Play();
+        sFXPlayer.PlaySmashSFX();
     }
+
+    private void Damage()
+    {
+        sFXPlayer.PlayHitSFX();
+    }
+
+    public void SetSFXPlayer(GoreSFXData goreSFXData)
+    {
+        sFXPlayer = new GoreSFXPlayer(transform, goreSFXData);
+    }
+
+    public bool IsDestroyed() => state == States.Destroyed;
 }
