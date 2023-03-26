@@ -5,6 +5,8 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
     private HitBox hitBox;
     private Collider hitCollider;
 
+    private int joints;
+
     private void Awake()
     {
         hitCollider = GetComponent<Collider>();
@@ -27,8 +29,15 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
         hitCollider.enabled = true;
     }
 
-    public void SwitchOff(){
-        hitBox.SwitchOff();
-        hitCollider.enabled = false;
+    public void SwitchOff()
+    {
+        joints -= 1;
+
+        if (joints <= 0){
+            hitBox.SwitchOff();
+            hitCollider.enabled = false;
+        }
+
+        Debug.Log("Joints " + joints);
     }
 }

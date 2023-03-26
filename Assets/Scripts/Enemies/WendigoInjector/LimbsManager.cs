@@ -25,4 +25,3 @@ public class LimbsManager : MonoBehaviour
             limb.SetSFXPlayer(goreSFXData);
     }
 }
-

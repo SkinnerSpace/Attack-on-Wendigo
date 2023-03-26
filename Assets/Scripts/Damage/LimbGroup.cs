@@ -14,7 +14,7 @@ public class LimbGroup : MonoBehaviour, IDamageable
         hitBox.Subscribe(this);
 
         foreach (Limb limb in limbs){
-            limb.SetHitBox(hitBox);
+            limb.AddHitBox(hitBox);
         }
     }
 

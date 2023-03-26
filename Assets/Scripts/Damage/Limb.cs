@@ -1,58 +1,48 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Limb : MonoBehaviour
 {
-    private float INJURY_THRESHOLD = 0.5f;
-    private float AMPUTATION_THRESHOLD = 0.1f;
+    [SerializeField] private LimbData data;
+    [SerializeField] private LimbSkin skin;
+    [SerializeField] private LimbParticles particles;
 
-    private enum States
-    {
-        Flesh,
-        Bones,
-        Destroyed
-    }
-
-    [Header("Settings")]
-    [SerializeField] private int initialHealth;
-    [SerializeField] private Limb lockLimb;
-
-    [Header("Meshes")]
-    [SerializeField] private SkinnedMeshRenderer fleshMesh;
-    [SerializeField] private SkinnedMeshRenderer musclesMesh;
-    [SerializeField] private SkinnedMeshRenderer bonesMesh;
-
-    [Header("Particles")]
-    [SerializeField] private ParticleSystem fleshExplosion;
-    [SerializeField] private ParticleSystem bonesExplosion;
-
-    private IHitBox hitBox;
+    private List<IHitBox> hitBoxes;
     private GoreSFXPlayer sFXPlayer;
 
-    private int health;
+    public void AddHitBox(IHitBox hitBox){
+        if (hitBoxes == null)
+            hitBoxes = new List<IHitBox>();
 
-    private States state = States.Flesh;
-    private float healthPercent;
+        hitBoxes.Add(hitBox);
+    }
 
-    public void SetHitBox(IHitBox hitBox) => this.hitBox = hitBox;
+    public void SetSFXPlayer(GoreSFXData goreSFXData){
+        sFXPlayer = new GoreSFXPlayer(transform, goreSFXData);
+    }
 
-    private void Awake()
+    private void Awake() => Initialize();
+
+    private void Initialize()
     {
-        health = initialHealth;
+        data.Initialize();
+
+        if (data.IsHealthy()){
+            skin.ShowFlesh();
+        }
+        else if (data.IsInjured()){
+            skin.ShowBones();
+        }
     }
 
     public void ReceiveDamage(int damage)
     {
-        if (health > 0)
-        {
-            health -= damage;
-        }
+        data.SubtractHealth(damage);
 
-        healthPercent = Mathf.InverseLerp(0f, initialHealth, health);
-
-        if (ReadyForMutilation()){
+        if (data.ReadyForMutilation()){
             Mutilate();
         }
-        else if (ReadyForAmputation()){
+        else if (data.ReadyForAmputation()){
             Amputate();
         }
         else{
@@ -60,41 +50,28 @@ public class Limb : MonoBehaviour
         }
     }
 
-    private bool ReadyForMutilation(){
-        return healthPercent <= INJURY_THRESHOLD && 
-               state == States.Flesh
-               ;
-    }
-
-    private bool ReadyForAmputation(){
-        return healthPercent <= AMPUTATION_THRESHOLD && 
-               state == States.Bones &&
-               (lockLimb == null || 
-               lockLimb.IsDestroyed())
-               ;
-    }
-
     private void Mutilate()
     {
-        state = States.Bones;
-        fleshMesh.enabled = false;
-        musclesMesh.enabled = true;
-        bonesMesh.enabled = true;
+        data.SetStateToInjured();
+        skin.ShowBones();
+        particles.PlayFleshExplosion();
 
-        fleshExplosion.Play();
         sFXPlayer.PlaySmashSFX();
     }
 
     private void Amputate()
     {
-        state = States.Destroyed;
-        hitBox.SwitchOff();
+        data.SetStateToDestroyed();
+        SwitchOffHitBoxes();
+        skin.Hide();
+        particles.PlayBonesExplosion();
 
-        musclesMesh.enabled = false;
-        bonesMesh.enabled = false;
-
-        bonesExplosion.Play();
         sFXPlayer.PlaySmashSFX();
+    }
+
+    private void SwitchOffHitBoxes(){
+        foreach (IHitBox hitBox in hitBoxes)
+            hitBox.SwitchOff();
     }
 
     private void Damage()
@@ -102,10 +79,7 @@ public class Limb : MonoBehaviour
         sFXPlayer.PlayHitSFX();
     }
 
-    public void SetSFXPlayer(GoreSFXData goreSFXData)
-    {
-        sFXPlayer = new GoreSFXPlayer(transform, goreSFXData);
-    }
-
-    public bool IsDestroyed() => state == States.Destroyed;
+    public bool IsDestroyed() => data.IsDestroyed();
 }
+
+
