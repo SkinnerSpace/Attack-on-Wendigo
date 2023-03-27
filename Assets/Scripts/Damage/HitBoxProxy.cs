@@ -29,6 +29,8 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
         hitCollider.enabled = true;
     }
 
+    public void IncrementJoints(int count) => joints += count;
+
     public void SwitchOff()
     {
         joints -= 1;
@@ -37,7 +39,5 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
             hitBox.SwitchOff();
             hitCollider.enabled = false;
         }
-
-        Debug.Log("Joints " + joints);
     }
 }

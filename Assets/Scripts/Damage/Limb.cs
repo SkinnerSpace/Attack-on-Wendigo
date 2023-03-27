@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Limb : MonoBehaviour
@@ -9,6 +10,8 @@ public class Limb : MonoBehaviour
 
     private List<IHitBox> hitBoxes;
     private GoreSFXPlayer sFXPlayer;
+
+    private event Action onMutilation;
 
     public void AddHitBox(IHitBox hitBox){
         if (hitBoxes == null)
@@ -35,6 +38,8 @@ public class Limb : MonoBehaviour
         }
     }
 
+    public void SubscribeOnMutilation(Action onMutilation) => this.onMutilation += onMutilation;
+
     public void ReceiveDamage(int damage)
     {
         data.SubtractHealth(damage);
@@ -54,9 +59,13 @@ public class Limb : MonoBehaviour
     {
         data.SetStateToInjured();
         skin.ShowBones();
+        GoBaldIfNecessary();
+
         particles.PlayFleshExplosion();
 
         sFXPlayer.PlaySmashSFX();
+
+        onMutilation?.Invoke();
     }
 
     private void Amputate()
@@ -64,9 +73,16 @@ public class Limb : MonoBehaviour
         data.SetStateToDestroyed();
         SwitchOffHitBoxes();
         skin.Hide();
+        GoBaldIfNecessary();
+
         particles.PlayBonesExplosion();
 
         sFXPlayer.PlaySmashSFX();
+    }
+
+    private void GoBaldIfNecessary(){
+        if (data.ReadyToGoBald())
+            skin.GoBald();
     }
 
     private void SwitchOffHitBoxes(){
@@ -80,6 +96,7 @@ public class Limb : MonoBehaviour
     }
 
     public bool IsDestroyed() => data.IsDestroyed();
-}
 
+    public void ExposeGoreButKeepTheFleshUntouched() => skin.ExposeGoreButKeepTheFleshUntouched();
+}
 

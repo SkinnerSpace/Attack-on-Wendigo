@@ -6,12 +6,13 @@ public class LimbGroup : MonoBehaviour, IDamageable
 {
     [SerializeField] private List<Limb> limbs;
 
-    private IHitBox hitBox;
+    private HitBoxProxy hitBox;
 
     private void Awake()
     {
-        hitBox = GetComponent<IHitBox>();
+        hitBox = GetComponent<HitBoxProxy>();
         hitBox.Subscribe(this);
+        hitBox.IncrementJoints(limbs.Count);
 
         foreach (Limb limb in limbs){
             limb.AddHitBox(hitBox);

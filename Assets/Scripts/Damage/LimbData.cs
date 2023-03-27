@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class LimbData
@@ -14,8 +15,12 @@ public class LimbData
     }
 
     [SerializeField] private States state = States.Flesh;
+    [SerializeField] private States baldState = States.Bones;
+
     [SerializeField] private int initialHealth;
-    [SerializeField] private Limb lockLimb;
+    [SerializeField] private List<Limb> lockLimbs;
+
+    [SerializeField] private bool alwaysUnlocked;
 
     private int health;
     private float healthPercent;
@@ -48,9 +53,25 @@ public class LimbData
     {
         return healthPercent <= AMPUTATION_THRESHOLD &&
                state == States.Bones &&
-               (lockLimb == null ||
-               lockLimb.IsDestroyed())
+               AmputationIsUnlocked()
                ;
+    }
+
+    public bool ReadyToGoBald() => state == baldState;
+
+    private bool AmputationIsUnlocked()
+    {
+        if (alwaysUnlocked)
+            return true;
+
+        if (lockLimbs != null){
+            foreach (Limb limb in lockLimbs){
+                if (!limb.IsDestroyed())
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     public bool IsHealthy() => state == States.Flesh;
