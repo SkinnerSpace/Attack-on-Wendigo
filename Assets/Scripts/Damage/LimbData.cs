@@ -16,6 +16,7 @@ public class LimbData
 
     [SerializeField] private States state = States.Flesh;
     [SerializeField] private States baldState = States.Bones;
+    [SerializeField] private LimbSFXSets sFXSet = LimbSFXSets.FleshCrash;
 
     [SerializeField] private int initialHealth;
     [SerializeField] private List<Limb> lockLimbs;
@@ -24,6 +25,8 @@ public class LimbData
 
     private int health;
     private float healthPercent;
+
+    public LimbSFXSets SFXSet => sFXSet;
 
     public void Initialize(){
         health = initialHealth;

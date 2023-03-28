@@ -6,6 +6,7 @@ public class HitBoxManager : MonoBehaviour
 {
     [SerializeField] private Transform hitBoxesRoot;
     [SerializeField] private List<SurfaceData> surfaceData;
+    [SerializeField] private bool resetSurfaceData;
 
     public HitBoxProxy[] hits;
 
@@ -31,7 +32,8 @@ public class HitBoxManager : MonoBehaviour
                 surface = hitBox.gameObject.AddComponent<Surface>();
             }
 
-            surface.Set(surfaceData);
+            if (resetSurfaceData)
+                surface.Set(surfaceData);
         }
     }
 }

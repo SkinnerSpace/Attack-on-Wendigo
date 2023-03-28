@@ -9,7 +9,7 @@ public class Limb : MonoBehaviour
     [SerializeField] private LimbParticles particles;
 
     private List<IHitBox> hitBoxes;
-    private GoreSFXPlayer sFXPlayer;
+    private LimbSFXPlayer sFXPlayer;
 
     private event Action onMutilation;
 
@@ -21,7 +21,7 @@ public class Limb : MonoBehaviour
     }
 
     public void SetSFXPlayer(GoreSFXData goreSFXData){
-        sFXPlayer = new GoreSFXPlayer(transform, goreSFXData);
+        sFXPlayer = LimbSFXPlayerFactory.Create(transform, goreSFXData, data.SFXSet);
     }
 
     private void Awake() => Initialize();
@@ -92,7 +92,7 @@ public class Limb : MonoBehaviour
 
     private void Damage()
     {
-        sFXPlayer.PlayHitSFX();
+        //sFXPlayer.PlayHitSFX();
     }
 
     public bool IsDestroyed() => data.IsDestroyed();

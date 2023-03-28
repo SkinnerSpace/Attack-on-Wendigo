@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba008adec353a4340aefc2dfdc293834, type: 3}
   m_Name: GoreSFXData
   m_EditorClassIdentifier: 
-  hitSFX:
+  fleshHitSFX:
     Guid:
       Data1: -369013694
       Data2: 1293314250
@@ -26,3 +26,17 @@ MonoBehaviour:
       Data3: -1312158317
       Data4: -1364374842
     Path: event:/SFX/Game/Gameplay/Wendigo/Gore/FleshSmash
+  bonesHitSFX:
+    Guid:
+      Data1: -1750345832
+      Data2: 1181845949
+      Data3: 951386775
+      Data4: 288407586
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/BoneHit
+  bonesSmashSFX:
+    Guid:
+      Data1: 196620429
+      Data2: 1115382512
+      Data3: -2001253497
+      Data4: 1608102186
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/BoneCrush
