@@ -12,6 +12,7 @@ public class Limb : MonoBehaviour
     private LimbSFXPlayer sFXPlayer;
 
     private event Action onMutilation;
+    private event Action onAmputation;
 
     public void AddHitBox(IHitBox hitBox){
         if (hitBoxes == null)
@@ -39,6 +40,7 @@ public class Limb : MonoBehaviour
     }
 
     public void SubscribeOnMutilation(Action onMutilation) => this.onMutilation += onMutilation;
+    public void SubscribeOnAmputation(Action onAmputation) => this.onAmputation += onAmputation;
 
     public void ReceiveDamage(int damage)
     {
@@ -78,6 +80,8 @@ public class Limb : MonoBehaviour
         particles.PlayBonesExplosion();
 
         sFXPlayer.PlaySmashSFX();
+
+        onAmputation?.Invoke();
     }
 
     private void GoBaldIfNecessary(){
@@ -85,7 +89,7 @@ public class Limb : MonoBehaviour
             skin.GoBald();
     }
 
-    private void SwitchOffHitBoxes(){
+    public void SwitchOffHitBoxes(){
         foreach (IHitBox hitBox in hitBoxes)
             hitBox.SwitchOff();
     }
@@ -99,4 +103,3 @@ public class Limb : MonoBehaviour
 
     public void ExposeGoreButKeepTheFleshUntouched() => skin.ExposeGoreButKeepTheFleshUntouched();
 }
-
