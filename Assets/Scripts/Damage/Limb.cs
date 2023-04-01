@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Limb : MonoBehaviour
 {
     [SerializeField] private LimbData data;
@@ -84,6 +85,12 @@ public class Limb : MonoBehaviour
         onAmputation?.Invoke();
     }
 
+    private void Damage()
+    {
+        //sFXPlayer.PlayHitSFX();
+        GoBaldIfNecessary();
+    }
+
     private void GoBaldIfNecessary(){
         if (data.ReadyToGoBald())
             skin.GoBald();
@@ -94,10 +101,11 @@ public class Limb : MonoBehaviour
             hitBox.SwitchOff();
     }
 
-    private void Damage()
+    public void MakeDestroyable()
     {
-        //sFXPlayer.PlayHitSFX();
+        data.canBeDestroyed = true;
     }
+
 
     public bool IsDestroyed() => data.IsDestroyed();
 

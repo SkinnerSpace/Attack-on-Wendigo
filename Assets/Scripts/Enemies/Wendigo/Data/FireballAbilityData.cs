@@ -16,6 +16,7 @@ namespace WendigoCharacter
         public float MaxTime;
 
         public bool OnTarget { get; set; }
+        public bool IsExist { get; set; }
         public bool IsReadyToUse { get; set; }
         public bool IsCharged { get; set; } = true;
         public bool IsOver { get; set; }

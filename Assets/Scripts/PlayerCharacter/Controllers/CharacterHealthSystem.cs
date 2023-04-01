@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Character
 {
-    public class CharacterHealthSystem : BaseController, IDamageable
+    public class CharacterHealthSystem : BaseController, IDamageable, IHealthSystem
     {
         private PlayerCharacter main;
         private HealthData healthData;
@@ -60,40 +60,6 @@ namespace Character
         {
             healthData.Amount = 0;
             onDeath?.Invoke();
-        }
-    }
-
-    public class ImpactReceiver : BaseController, IDamageable
-    {
-        private ICharacterData oldData;
-        private HitBoxProxy hitBox;
-
-        private event Action<float> onImpact;
-
-        public override void Initialize(PlayerCharacter main)
-        {
-            oldData = main.OldData;
-            hitBox = main.HitBox;
-        }
-
-        public void Initialize(ICharacterData oldData) => this.oldData = oldData;
-
-        public override void Connect()
-        {
-            hitBox.Subscribe(this);
-        }
-
-        public override void Disconnect()
-        {
-            hitBox.Unsubscribe(this);
-        }
-
-        public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
-
-        public void ReceiveDamage(DamagePackage damagePackage)
-        {
-            oldData.AddVelocity(damagePackage.impact);
-            onImpact?.Invoke(damagePackage.impact.magnitude);
         }
     }
 }

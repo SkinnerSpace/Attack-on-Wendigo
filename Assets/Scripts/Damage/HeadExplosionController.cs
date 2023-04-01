@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class HeadExplosionController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class HeadExplosionController : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private ParticleSystem tornLeftHorn;
     [SerializeField] private ParticleSystem tornRightHorn;
+
+    [SerializeField] private List<MeshRenderer> meshesToHide; 
 
     private void Awake(){
         head.SubscribeOnAmputation(TriggerExplosion);
@@ -25,6 +28,10 @@ public class HeadExplosionController : MonoBehaviour
         if (!rightHorn.IsDestroyed()){
             rightHorn.SwitchOffHitBoxes();
             tornRightHorn.Play();
+        }
+
+        foreach (MeshRenderer meshToHide in meshesToHide){
+            meshToHide.enabled = false;
         }
     }
 }

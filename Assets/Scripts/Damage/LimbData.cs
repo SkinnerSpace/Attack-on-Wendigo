@@ -20,7 +20,9 @@ public class LimbData
 
     [SerializeField] private int initialHealth;
     [SerializeField] private List<Limb> lockLimbs;
+    [SerializeField] public bool canBeDestroyed;
 
+    [Header("Test")]
     [SerializeField] private bool alwaysUnlocked;
 
     private int health;
@@ -56,6 +58,7 @@ public class LimbData
     {
         return healthPercent <= AMPUTATION_THRESHOLD &&
                state == States.Bones &&
+               canBeDestroyed &&
                AmputationIsUnlocked()
                ;
     }

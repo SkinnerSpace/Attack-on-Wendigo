@@ -75,18 +75,22 @@ namespace WendigoCharacter
 
         private void ShakeTheEarth(RaycastHit hit)
         {
-            float time = Rand.Range(shake.minTime, shake.maxTime);
-            float strength = shake.strength * collisionPower;
-            float angleMultiplier = shake.angleMultiplier * collisionPower;
+            if (data.Target.Exist)
+            {
+                float time = Rand.Range(shake.minTime, shake.maxTime);
+                float strength = shake.strength * collisionPower;
+                float angleMultiplier = shake.angleMultiplier * collisionPower;
 
-            if (IsAllowedToShakeTheEarth()){
-                ShakeBuilder.Create().
-                    withTime(time).
-                    WithAxis(1f, 1f, 0f).
-                    WithStrength(strength, angleMultiplier).
-                    WithCurve(shake.frequency, shake.attack, shake.release).
-                    WithAttenuation(hit.point, data.Target.transform, shake.maxDistance).
-                    BuildAndLaunch(ShakeManagerComponent.Instance);
+                if (IsAllowedToShakeTheEarth())
+                {
+                    ShakeBuilder.Create().
+                        withTime(time).
+                        WithAxis(1f, 1f, 0f).
+                        WithStrength(strength, angleMultiplier).
+                        WithCurve(shake.frequency, shake.attack, shake.release).
+                        WithAttenuation(hit.point, data.Target.transform, shake.maxDistance).
+                        BuildAndLaunch(ShakeManagerComponent.Instance);
+                }
             }
         }
 

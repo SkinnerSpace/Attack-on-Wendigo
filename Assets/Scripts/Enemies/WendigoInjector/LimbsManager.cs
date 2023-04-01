@@ -5,10 +5,15 @@ using UnityEngine;
 public class LimbsManager : MonoBehaviour
 {
     [SerializeField] private Transform root;
+    [SerializeField] private Transform healthSystempImp;
+
+    [Header("Parts")]
     public LimbGroup[] limbGroups;
     public Limb[] limbs;
 
     [SerializeField] private GoreSFXData goreSFXData;
+
+    private IHealthSystem healthSystem;
 
     private void OnEnable()
     {
@@ -21,7 +26,23 @@ public class LimbsManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach (Limb limb in limbs)
+        foreach (Limb limb in limbs){
             limb.SetSFXPlayer(goreSFXData);
+        }
+    }
+
+    private void Start()
+    {
+        healthSystem = healthSystempImp.GetComponent<IHealthSystem>();
+
+        if (healthSystem != null){
+            healthSystem.SubscribeOnDeath(MakeLimbsDestroyable);
+        }
+    }
+
+    public void MakeLimbsDestroyable(){
+        foreach (Limb limb in limbs){
+            limb.MakeDestroyable();
+        }
     }
 }

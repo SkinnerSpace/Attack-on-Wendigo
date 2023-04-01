@@ -44,6 +44,7 @@ namespace WendigoCharacter
         private bool IsAbleToUseAFireball()
         {
             return data.Target != null &&
+                   data.Fireball.IsExist &&
                    data.Fireball.OnTarget &&
                    data.Fireball.IsCharged;
         }

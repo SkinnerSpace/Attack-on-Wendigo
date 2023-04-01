@@ -54,6 +54,10 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     private void Update() => Move();
 
+    private Vector3 currentPos;
+    private Quaternion currentRotation;
+    private float updateSpeed = 10f;
+
     public void Move()
     {
         if (isMoving && chronos.IsTicking)
@@ -62,15 +66,24 @@ public class Helicopter : MonoBehaviour, ILaunchable
             {
                 synchronizer.UpdateTime();
                 transform.position = mover.Move(trajectory, Arrived);
-                transform.rotation = rotator.Rotate(transform.rotation, prevPos);
+                transform.rotation = rotator.Rotate(transform.rotation, transform.position, prevPos);
+                /*                currentPos = mover.Move(trajectory, Arrived);
+                                currentRotation = rotator.Rotate(currentRotation, currentPos, prevPos);*/
+/*
+                float difference = Vector3.Distance(currentPos, prevPos);
+                Debug.Log(difference);*/
 
                 prevPos = transform.position;
+                //prevPos = currentPos;
             }
             else
             {
                 skipFrame = false;
             }
         }
+
+/*        transform.position = Vector3.Lerp(transform.position, currentPos, updateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, updateSpeed * Time.deltaTime);*/
     }
 
     public void Arrived()

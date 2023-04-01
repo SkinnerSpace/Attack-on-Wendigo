@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WendigoCharacter;
 
@@ -6,6 +7,7 @@ public class FireballSpawnerComponent : MonoBehaviour
 {
     [SerializeField] private WendigoData data;
     [SerializeField] private ParticleSystem castVFX;
+    [SerializeField] private List<Limb> hands;
 
     private FireballSpawner fireballSpawner;
 
@@ -14,6 +16,10 @@ public class FireballSpawnerComponent : MonoBehaviour
     private void Awake()
     {
         fireballSpawner = new FireballSpawner(data.FireballSpawner);
+
+        foreach (Limb hand in hands){
+            hand.SubscribeOnAmputation(Deactivate);
+        }
     }
 
     private void Start() => pooler = PoolHolder.Instance;
@@ -30,5 +36,9 @@ public class FireballSpawnerComponent : MonoBehaviour
     {
         transform.LookAt(data.Target.Position);
         transform.localEulerAngles = fireballSpawner.GetConstrainedAngles(transform.localEulerAngles);
+    }
+
+    private void Deactivate(){
+        data.Fireball.IsExist = false;
     }
 }

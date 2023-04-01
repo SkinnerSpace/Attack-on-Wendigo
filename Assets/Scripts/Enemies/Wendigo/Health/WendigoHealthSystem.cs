@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WendigoCharacter
 {
-    public class WendigoHealthSystem : WendigoPlugableComponent, IDamageable
+    public class WendigoHealthSystem : WendigoPlugableComponent, IDamageable, IHealthSystem
     {
         public const float DEATH_IMPACT_MULTIPLIER = 5f;
 
@@ -12,11 +12,13 @@ namespace WendigoCharacter
 
         private event Action onDeath;
         private event Action<Vector3, Vector3> onImpactApply;
+        private event Action onInitialized;
 
         public override void Initialize(Wendigo wendigo)
         {
             SetData(wendigo.Data.Health);
             ConnectToHitBoxes(wendigo.HitBoxes);
+            onInitialized?.Invoke();
         }
 
         public void SetData(HealthData data) => this.data = data;
@@ -33,8 +35,6 @@ namespace WendigoCharacter
         public void ReceiveDamage(DamagePackage damagePackage)
         {
             data.Amount -= damagePackage.damage;
-
-
 
             if (MustDie()){
                 Die();
