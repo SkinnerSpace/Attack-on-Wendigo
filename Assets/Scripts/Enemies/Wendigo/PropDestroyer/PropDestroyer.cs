@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropDestroyer : MonoBehaviour
+public class PropDestroyer : MonoBehaviour, IAmputationObserver
 {
     private Collider destroyerCollider;
 
@@ -21,6 +21,11 @@ public class PropDestroyer : MonoBehaviour
         Vector3 collapseDirection = (itsPosition - ownPosition).normalized;
 
         collapsible.PullDown(collapseDirection);
+    }
+
+    public void OnAmputation()
+    {
+        SwitchOff();
     }
 
     public void SwitchOff() => destroyerCollider.enabled = false;

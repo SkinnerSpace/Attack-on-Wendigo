@@ -13,11 +13,17 @@ namespace WendigoCharacter
         [SerializeField] private ParticleSystem firebreathVFX;
         [SerializeField] private GameObject flameVFX;
         [SerializeField] private Chronos chronos;
+        [SerializeField] private WendigoHealthSystemComponent healthSystemComponent;
 
         [Header("Settings")]
         [SerializeField] private bool visualizeRaycast;
 
         private bool isSpewingFire;
+
+        private void Start()
+        {
+            healthSystemComponent.SubscribeOnDeath(Stop);
+        }
 
         public void Launch()
         {

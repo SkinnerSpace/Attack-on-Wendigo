@@ -2,7 +2,7 @@
 
 namespace WendigoCharacter
 {
-    public class CorpseGroundCollider : MonoBehaviour
+    public class CorpseGroundCollider : MonoBehaviour, IAmputationObserver
     {
         [SerializeField] private CorpseCollisionShape collisionShape;
 
@@ -13,6 +13,7 @@ namespace WendigoCharacter
 
         private float collisionPower;
         private bool isEnabled;
+        private bool isDestroyed;
 
         private void Awake()
         {
@@ -30,8 +31,17 @@ namespace WendigoCharacter
 
         public void SwitchOn()
         {
-            isEnabled = true;
-            enabled = true;
+            if (!isDestroyed){
+                isEnabled = true;
+                enabled = true;
+            }
+        }
+
+        public void OnAmputation()
+        {
+            isDestroyed = true;
+            isEnabled = false;
+            enabled = false;
         }
 
         private void Update()

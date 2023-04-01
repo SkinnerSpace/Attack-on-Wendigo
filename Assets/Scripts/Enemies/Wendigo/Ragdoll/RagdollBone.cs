@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RagdollBone : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class RagdollBone : MonoBehaviour
     private Collider boneCollider;
     private CharacterJoint boneJoint;
 
+    private bool isDestroyed;
+
     private void Awake()
     {
         InitializeComponents();
-        
+        //SubscribeOnLimbs();
     }
 
     public void InitializeComponents()
@@ -26,8 +29,21 @@ public class RagdollBone : MonoBehaviour
 
     public void LinkTheStorage(RagdollBoneStorage storage) => this.storage = storage;
 
-    public void SwitchOn() => EnableRagdoll(true);
+    public void SwitchOn()
+    {
+        if (!isDestroyed){
+            EnableRagdoll(true);
+        }
+    }
     public void SwitchOff() => EnableRagdoll(false);
+
+    private void Destroy()
+    {
+        isDestroyed = true;
+        //EnableRagdoll(false);
+        boneCollider.enabled = false;
+        Debug.Log("Ragdoll " + transform.name);
+    }
 
     public void EnableRagdoll(bool isRagdoll)
     {
