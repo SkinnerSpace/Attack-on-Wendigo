@@ -7,23 +7,22 @@ using TMPro;
 public class AmmoBar : MonoBehaviour, IAmmoObserver
 {
     [SerializeField] private TextMeshProUGUI label;
-    [SerializeField] private Animator animator;
-
-    private static int updateAnimation = Animator.StringToHash("Update");
 
     public static AmmoBar Instance;
 
-    private void Awake() => Instance = this;
+    private GUIAnimator animator;
+
+    private void Awake()
+    {
+        Instance = this;
+        animator = GetComponent<GUIAnimator>();
+    }
 
     public void OnUpdate(int ammo)
     {
         label.text = ammo.ToString();
-        EnforcedPlayAnimation(updateAnimation);
+        animator.PlayPush();
     }
 
     public void SetActive(bool active) => label.enabled = active;
-
-    private void PlayAnimation(int animation) => animator.Play(animation);
-
-    private void EnforcedPlayAnimation(int animation) => animator.Play(animation, -1, 0f);
 }
