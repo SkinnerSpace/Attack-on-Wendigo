@@ -1,36 +1,82 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[ExecuteAlways]
 public class AimPresenter : MonoBehaviour
 {
-    [SerializeField] private Aim aim;
-   // [SerializeField] private EventManager eventManager;
-    //[SerializeField] private PlayerCharacter player;
+    private const float DISTANCE_UNIT = 16f;
+    private const float ROTATION_UNIT = -90f;
+
+    [SerializeField] private RectTransform aim;
+    [SerializeField] private List<RectTransform> aimElements;
     [SerializeField] private UGUIElement uGUIElement;
 
-/*    private EventListener targetPresenceListener;
-    private EventListener targetAbsenceListener;
+    [Header("Colors")]
+    [SerializeField] private Color onTargetColor;
+    [SerializeField] private Color offTargetColor;
 
-    private EventListener gameOnStartListener;
-    private EventListener gameOnPauseListener;
-    private EventListener gameOnResumeListener;*/
+    [SerializeField] private float defaultDistance;
+    [SerializeField] private float defaultRotation;
+    [SerializeField] private float defaultScale;
+
+    [SerializeField] private AimAnimationsPack animationData;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float completeness;
+    [SerializeField] private AimAnimation testAnimation;
 
     private List<Transform> targets = new List<Transform>();
+    private List<Image> aimImages;
+
+    private float distance => defaultDistance + animationDistance;
+    private float rotation => defaultRotation + animationRotation;
+    private float scale => defaultScale + animationScale;
+
+    private float animationDistance;
+    private float animationRotation;
+    private float animationScale;
 
     private void Awake()
     {
-        /*player.GetController<PickUpController>().Subscribe(AddTarget, RemoveTarget);*/
+        if (uGUIElement != null){
+            uGUIElement.Subscribe(OnTargetUpdate);
+        }
 
-        uGUIElement.Subscribe(OnTargetUpdate);
+        FindAimImages();
+    }
 
-        /*gameOnStartListener = new EventListener(aim.Show);
-        eventManager.Subscribe(gameOnStartListener, "OnGameStart");
+    private void FindAimImages()
+    {
+        aimImages = new List<Image>();
 
-        gameOnPauseListener = new EventListener(aim.Hid);
-        eventManager.Subscribe(gameOnPauseListener, "OnGamePause");
+        foreach (RectTransform aimElement in aimElements)
+        {
+            aimImages.Add(aimElement.GetComponent<Image>());
+        }
+    }
 
-        gameOnResumeListener = new EventListener(aim.Show);
-        eventManager.Subscribe(gameOnResumeListener, "OnGameResume");*/
+    private void Update()
+    {
+        UpdateAimAnimation();
+        UpdateAimTransform();
+    }
+
+    private void UpdateAimAnimation()
+    {
+        animationDistance = testAnimation.distance.Evaluate(completeness) * DISTANCE_UNIT;
+        animationRotation = testAnimation.rotation.Evaluate(completeness) * ROTATION_UNIT;
+        animationScale = testAnimation.scale.Evaluate(completeness);
+    }
+
+    private void UpdateAimTransform()
+    {
+        foreach (RectTransform aimElement in aimElements)
+        {
+            aimElement.localPosition = new Vector3(0f, distance, 0f);
+            aim.localEulerAngles = new Vector3(0f, 0f, rotation);
+            aim.localScale = new Vector3(scale, scale, 0f);
+        }
     }
 
     public void AddTarget(Transform target)
@@ -48,11 +94,11 @@ public class AimPresenter : MonoBehaviour
     {
         if (targetExist)
         {
-            aim.SetOnTarget();
+            SetOnTarget();
         }
         else
         {
-            aim.SetOffTarget();
+            SetOffTarget();
         }
     }
 
@@ -60,11 +106,25 @@ public class AimPresenter : MonoBehaviour
     {
         if (targets.Count > 0)
         {
-            aim.SetOnTarget();
+            SetOnTarget();
         }
         else
         {
-            aim.SetOffTarget();
+            SetOffTarget();
+        }
+    }
+
+    private void SetOnTarget()
+    {
+        foreach (Image aimImage in aimImages){
+            aimImage.color = onTargetColor;
+        }
+    }
+
+    private void SetOffTarget()
+    {
+        foreach (Image aimImage in aimImages){
+            aimImage.color = offTargetColor;
         }
     }
 }

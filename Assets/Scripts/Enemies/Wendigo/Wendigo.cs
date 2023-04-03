@@ -50,6 +50,8 @@ namespace WendigoCharacter
 
         private List<WendigoPlugableComponent> controllers;
 
+        private event Action<Transform> notifyOnDeath;
+
         public void OnSpawn() => Data.IsActive = true;
         private void Update()
         {
@@ -107,12 +109,16 @@ namespace WendigoCharacter
             return null;
         }
 
+        public void SubscribeOnDeath(Action<Transform> notifyOnDeath) => this.notifyOnDeath += notifyOnDeath;
+
         public void OnDeath()
         {
             GetController<WendigoTargetManager>().ResetTarget();
             mainPropDestroyer.enabled = false;
             ragDollController.SwitchOn();
             corpseCollisionController.SwitchOn();
+
+            notifyOnDeath?.Invoke(transform);
         }
 
         public void OnImpact(Vector3 impact, Vector3 hitPoint){

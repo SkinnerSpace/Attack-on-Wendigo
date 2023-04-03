@@ -66,9 +66,15 @@ public class AudioPlayer
 
     public void Update()
     {
-        if (audioEvent != null)
+        if (audioEvent != null){
             parameters.ApplyTo(audioEvent);
+        }
     }
 
-    public void Stop() => audioEvent.Stop();
+    public void Stop()
+    {
+        if (audioEvent != null){
+            audioEvent.Stop();
+        }
+    }
 }

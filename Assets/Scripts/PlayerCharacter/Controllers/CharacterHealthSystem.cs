@@ -43,6 +43,7 @@ namespace Character
             SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
 
             SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
+            onHealthUpdate?.Invoke(healthData.Amount);
         }
 
         public void Initialize(HealthData data) => this.healthData = data;

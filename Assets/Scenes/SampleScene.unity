@@ -11629,7 +11629,7 @@ PrefabInstance:
     - target: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2604546528073915768, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -34838,7 +34838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wendigoSpawner: {fileID: 1488656787}
-  spawnWendigo: 0
+  spawnWendigoOnWeaponPickedUp: 1
 --- !u!114 &826512744 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6649175868031260509, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -70200,7 +70200,6 @@ MonoBehaviour:
   maxConcurrentCount: 8
   minTimeInterval: 5
   maxTimeInterval: 15
-  wendigoLeftCount: 0
 --- !u!4 &1488656788
 Transform:
   m_ObjectHideFlags: 0

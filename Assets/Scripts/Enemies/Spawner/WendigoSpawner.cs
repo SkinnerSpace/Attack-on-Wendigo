@@ -88,6 +88,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
         IWendigo wendigo = wendigoImp.GetComponent<IWendigo>();
         wendigo.SetTarget(characterImp);
+        wendigo.SubscribeOnDeath(OnDeath);
         SetInPlace(wendigoImp, position);
     }
 

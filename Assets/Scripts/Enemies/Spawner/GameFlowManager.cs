@@ -6,11 +6,11 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField] private WendigoSpawner wendigoSpawner;
 
     [Header("Settings")]
-    [SerializeField] private bool spawnWendigo;
+    [SerializeField] private bool spawnWendigoOnWeaponPickedUp;
 
     private void Start()
     {
-        if (spawnWendigo)
+        if (spawnWendigoOnWeaponPickedUp)
         {
             EventN1();
         }

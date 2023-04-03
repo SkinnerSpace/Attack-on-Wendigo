@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2390497192909978897}
   - component: {fileID: 5352497758579659819}
   - component: {fileID: 578650458131078265}
+  - component: {fileID: 6463224618470633925}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -189,6 +190,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &6463224618470633925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500135513001351036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1df07dc559d5a47be7e7ca02a61aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 0d4e3522d0423cc48a6ba5886d52bba1, type: 2}
+  subject: {fileID: 4500135513121884964}
+  testMode: 0
+  completeness: 0
+  testAnimation: {fileID: 11400000, guid: 5e3d14f72ffc882479d888964d24f31b, type: 2}
 --- !u!1 &4500135513121884963
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +244,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4500135513121884967
 CanvasRenderer:
   m_ObjectHideFlags: 0

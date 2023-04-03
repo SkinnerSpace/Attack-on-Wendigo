@@ -6,4 +6,3 @@ public class AnimationCurveData : ScriptableObject
     public AnimationCurve animationCurve;
     public float animationTime;
 }
-
