@@ -28,6 +28,9 @@ public class WeaponKeeper : IKeeper
         this.weapon = weapon;
 
         pickable.PickUp(this, OnCameToHands);
+
+        AimPresenter.Instance.SetAnimation(weapon.AimAnimation, weapon.Rate);
+        AimPresenter.Instance.SetCombatMode();
     }
 
     public void DropAnItem(Vector2 screenPoint)
@@ -42,6 +45,8 @@ public class WeaponKeeper : IKeeper
 
             pickable.Drop(dropPos, force);
             pickable = null;
+
+            AimPresenter.Instance.SetIdleMode();
         }
     }
 

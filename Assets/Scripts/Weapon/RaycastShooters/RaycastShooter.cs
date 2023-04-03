@@ -20,10 +20,24 @@ public class RaycastShooter
         this.timer = timer;
     }
 
+    public void OnReady(bool isReady){
+        if (isReady)
+        {
+            SubscribeOnShot(AimPresenter.Instance.OnShot);
+        }
+        else
+        {
+            UnsubscribeFromOnShot(AimPresenter.Instance.OnShot);
+        }
+    }
+
     public void SetCamera(Camera cam) => sight = new WeaponSight(data, cam);
 
     public void SubscribeOnShot(Action onShot) => this.onShot += onShot;
+    public void UnsubscribeFromOnShot(Action onShot) => this.onShot -= onShot;
+
     public void SubscribeOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
+    public void UnsubscribeFromOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget -= onShotTarget;
 
     public void Shoot()
     {

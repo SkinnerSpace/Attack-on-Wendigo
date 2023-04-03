@@ -30,6 +30,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
     [SerializeField] private float maxTimeInterval = 15f;
 
     private int concurrentCount;
+    private int wendigosLeft;
 
     private IObjectPooler pooler;
     private List<Transform> wendigos = new List<Transform>();
@@ -45,11 +46,12 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         //Pickable.SubscribeOnFirstPickUp(Spawn);
 
         concurrentCount = minConcurrentCount;
+        wendigosLeft = spawnCount;
     }
 
     private void Start(){
         pooler = PoolHolder.Instance;
-        onCountUpdate?.Invoke(spawnCount);
+        onCountUpdate?.Invoke(wendigosLeft);
     }
 
     public void Spawn()
@@ -60,8 +62,6 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
             HandleSpawn();
             SetSpawnTimer();
         }
-
-        onCountUpdate?.Invoke(spawnCount);
     }
 
     private void HandleSpawn()
@@ -109,7 +109,8 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
             SetSpawnTimer();
         }
 
-        onCountUpdate?.Invoke(spawnCount);
+        wendigosLeft -= 1;
+        onCountUpdate?.Invoke(wendigosLeft);
     }
 
     private bool IsAllowedToSpawn(){

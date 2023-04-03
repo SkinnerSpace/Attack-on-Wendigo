@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
-//using Character;
 
 public class UGUIElement : MonoBehaviour
 {
-    //[SerializeField] private PlayerCharacter player;
     [SerializeField] private KeyBinds.Binds key;
     [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance = 3f;
@@ -17,6 +15,8 @@ public class UGUIElement : MonoBehaviour
     private TextMeshProUGUI label;
 
     private event Action<bool> onTargetUpdate;
+
+    private bool isActive;
 
     private void Awake()
     {
@@ -36,10 +36,20 @@ public class UGUIElement : MonoBehaviour
             Vector2 screenPoint = cam.WorldToScreenPoint(target.position);
             element.position = screenPoint;
             label.enabled = true;
+
+            if (!isActive){
+                isActive = true;
+                onTargetUpdate?.Invoke(true);
+            }
         }
         else
         {
             label.enabled = false;
+
+            if (isActive){
+                isActive = false;
+                onTargetUpdate?.Invoke(false);
+            }
         }
     }
 
@@ -50,12 +60,10 @@ public class UGUIElement : MonoBehaviour
     public void AddTarget(Transform target)
     {
         this.target = target;
-        onTargetUpdate(true);
     }
 
     public void RemoveTarget(Transform target)
     {
         this.target = null;
-        onTargetUpdate(false);
     }
 }

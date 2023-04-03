@@ -76,8 +76,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BloodColor: {r: 4.40846, g: 4.0517063, b: 0, a: 0}
-    - EmissionColor: {r: 77.87429, g: 0, b: 0, a: 0}
+    - BloodColor: {r: 667.709, g: 615.2711, b: 0, a: 0}
+    - EmissionColor: {r: 6.8831816, g: 5.5455875, b: 0, a: 0}
     - SpecularColor: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

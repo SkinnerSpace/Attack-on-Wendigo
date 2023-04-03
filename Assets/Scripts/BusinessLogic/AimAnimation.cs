@@ -6,5 +6,4 @@ public class AimAnimation : ScriptableObject
     public AnimationCurve distance;
     public AnimationCurve rotation;
     public AnimationCurve scale;
-    public float time;
 }

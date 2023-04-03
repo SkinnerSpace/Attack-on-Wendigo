@@ -9,6 +9,10 @@ public class NullWeapon : IWeapon
     private static IWeapon instance;
     public static IWeapon Instance => GetSingleInstance();
 
+    public AimAnimationsPack AimAnimation => throw new System.NotImplementedException();
+
+    public float Rate => 1f;
+
     private NullWeapon() { }
 
     private static IWeapon GetSingleInstance(){

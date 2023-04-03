@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private Pickable pickable;
     [SerializeField] private WeaponPhysics physics;
     [SerializeField] private FunctionTimer timer;
+    [SerializeField] private AimAnimationsPack animationsPack;
 
     [Header("Effects")]
     [SerializeField] private WeaponVFXController vFXController;
@@ -22,6 +23,9 @@ public class Weapon : MonoBehaviour, IWeapon
     private Magazine magazine;
     private WeaponHitSurfaceHandler surfaceHitHandler;
     public Vector3 DefaultPosition => aimController.DefaultPosition;
+
+    public AimAnimationsPack AimAnimation => animationsPack;
+    public float Rate => data.Rate;
 
     private event Action<bool> onReadinessUpdate;
     private event Action onReady;
@@ -54,6 +58,7 @@ public class Weapon : MonoBehaviour, IWeapon
         magazine = new Magazine(data, timer);
         magazine.SubscribeOnEmpty(sFXPlayer.PlayIsEmptySFX);
         SubscribeOnReadinessUpdate(magazine.OnReady);
+        SubscribeOnReadinessUpdate(shooter.OnReady);
     }
 
     public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader)

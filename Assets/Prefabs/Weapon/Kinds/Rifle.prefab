@@ -296,7 +296,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5633621881303655743}
   - component: {fileID: 4958221207093448998}
-  - component: {fileID: 2852261989110516508}
   m_Layer: 16
   m_Name: VFXController
   m_TagString: Untagged
@@ -334,23 +333,6 @@ MonoBehaviour:
   muzzleFlash: {fileID: 7370337034712265316}
   bulletShell: {fileID: 3838171174058834867}
   animator: {fileID: 513965784358409265}
---- !u!114 &2852261989110516508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5842747548233882238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolTemplates:
-  - tag: BulletExplosion
-    prefab: {fileID: 2459673218311241910, guid: 4d5a878363f043a469570653df67d39a,
-      type: 3}
-    size: 30
 --- !u!1 &5858615530408207058
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +504,7 @@ MonoBehaviour:
   pickable: {fileID: 4611041808808164778}
   physics: {fileID: 3281898898999005978}
   timer: {fileID: 7286420635910837017}
+  animationsPack: {fileID: 11400000, guid: 45b42ed4f6fd94d44a56bfab1daf3ec1, type: 2}
   vFXController: {fileID: 4958221207093448998}
   sFXPlayer: {fileID: 7115739823039445605}
   animationController: {fileID: 917269318626394575}
