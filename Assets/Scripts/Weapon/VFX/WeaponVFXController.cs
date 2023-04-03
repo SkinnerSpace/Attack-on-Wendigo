@@ -26,6 +26,7 @@ public class WeaponVFXController : MonoBehaviour
 
     public void Hit(WeaponTarget target)
     {
-        pooler.SpawnFromThePool("BulletExplosion", target.hitPosition, Quaternion.identity);
+        Quaternion rotation = SurfaceHitMirror.ReflectRotation(target.hitDirection, target.normal);
+        pooler.SpawnFromThePool("BulletExplosion", target.hitPosition, rotation);
     }
 }

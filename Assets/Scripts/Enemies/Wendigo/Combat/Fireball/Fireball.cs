@@ -66,4 +66,9 @@ public class Fireball : MonoBehaviour
 
         hitHandler.RadiallyHitTheSurface();
     }
+
+    public void SetOwner(Transform owner)
+    {
+        data.owner = owner;
+    }
 }

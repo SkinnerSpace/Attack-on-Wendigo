@@ -8,18 +8,32 @@ public class HitBoxManager : MonoBehaviour
     [SerializeField] private List<SurfaceData> surfaceData;
     [SerializeField] private bool resetSurfaceData;
 
+    [SerializeField] private Transform owner;
+
     public HitBoxProxy[] hits;
 
     private void OnEnable()
     {
-        FindSurfaceComponents();
+        FindHitBoxes();
+        ProvideHitBoxesWithOwner();
         AddSurfaceComponentsIfNecessary();
     }
 
-    private void FindSurfaceComponents()
+    private void FindHitBoxes()
     {
         if (hitBoxesRoot != null)
             hits = hitBoxesRoot.GetComponentsInChildren<HitBoxProxy>();
+    }
+
+    private void ProvideHitBoxesWithOwner()
+    {
+        if (owner != null)
+        {
+            foreach (HitBoxProxy hitBox in hits)
+            {
+                hitBox.SetOwner(owner);
+            }
+        }
     }
 
     private void AddSurfaceComponentsIfNecessary()

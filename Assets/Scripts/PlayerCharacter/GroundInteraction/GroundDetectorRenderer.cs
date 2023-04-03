@@ -2,6 +2,7 @@
 using UnityEditor;
 using Character;
 
+# if UNITY_EDITOR
 public class GroundDetectorRenderer : MonoBehaviour
 {
     [SerializeField] private CharacterData data;
@@ -26,3 +27,4 @@ public class GroundDetectorRenderer : MonoBehaviour
         Handles.color = Color.white;
     }
 }
+#endif

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(BezierTrajectory))]
 public class BezierTrajectoryEditor : Editor
 {
@@ -31,3 +32,4 @@ public class BezierTrajectoryEditor : Editor
         }
     }
 }
+# endif

@@ -10,19 +10,31 @@ public class LaserBeam : MonoBehaviour
     private LineRenderer line;
     private UpDirectionFinder upDirFinder;
 
+    private bool isActive;
+
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
         upDirFinder = new UpDirectionFinder();
     }
 
+    private void Update()
+    {
+        if (isActive){
+            line.SetPosition(0, transform.position);
+            line.SetPosition(1, transform.position + (Vector3.up * EMISSION_HEIGHT));
+        }
+    }
+
     public void SwitchOn()
     {
-        Vector3 upDir = upDirFinder.GetUpwardDirection(transform);
-        Vector3 upPos = transform.position + (upDir * EMISSION_HEIGHT);
+        /*        Vector3 upDir = upDirFinder.GetUpwardDirection(transform);
+                Vector3 upPos = transform.position + (upDir * EMISSION_HEIGHT);
 
-        line.SetPosition(0, transform.position);
-        line.SetPosition(1, upPos);
+                line.SetPosition(0, transform.position);
+                line.SetPosition(1, upPos);*/
+
+        isActive = true;
         line.enabled = true;
 
         fader.FadeIn();

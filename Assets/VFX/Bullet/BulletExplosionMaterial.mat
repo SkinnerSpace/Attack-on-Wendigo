@@ -14,7 +14,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3001
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -76,9 +76,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BloodColor: {r: 667.709, g: 615.2711, b: 0, a: 0}
-    - EmissionColor: {r: 6.8831816, g: 5.5455875, b: 0, a: 0}
-    - SpecularColor: {r: 0, g: 0, b: 0, a: 0}
+    - BloodColor: {r: 23.968628, g: 22.086275, b: 0, a: 0}
+    - EmissionColor: {r: 11.984314, g: 9.662745, b: 0, a: 0}
+    - SpecularColor: {r: 1, g: 0.74628437, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

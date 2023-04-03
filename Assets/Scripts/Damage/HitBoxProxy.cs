@@ -2,6 +2,7 @@
 
 public class HitBoxProxy : MonoBehaviour, IHitBox
 {
+    public Transform owner;
     private HitBox hitBox;
     private Collider hitCollider;
 
@@ -11,6 +12,8 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
     {
         hitCollider = GetComponent<Collider>();
     }
+
+    public void SetOwner(Transform owner) => this.owner = owner;
 
     public void ReceiveDamage(DamagePackage damagePackage) => hitBox.ReceiveDamage(damagePackage);
 

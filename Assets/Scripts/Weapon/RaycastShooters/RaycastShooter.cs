@@ -78,10 +78,10 @@ public class RaycastShooter
 
         if (surface != null)
         {
-            surface.Hit().
+            surface.Hit("BulletSnowParticle").
                     WithPosition(target.hitPosition).
                     WithAngle(target.hitDirection, target.normal).
-                  /*  WithShape(0f, 45f).
+/*                    WithShape(0f, 45f).
                     WithCount(20, 30).*/
                     Launch();
         }

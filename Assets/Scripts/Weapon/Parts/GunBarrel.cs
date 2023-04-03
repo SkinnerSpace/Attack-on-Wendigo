@@ -5,12 +5,7 @@ public class GunBarrel : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float shootInterval = 1f;
 
-    [SerializeField] private float maxPower = 100f;
-    [SerializeField] private float chargeTime = 2f;
-
     private float power;
-    private float charge;
-
     public bool isReady { get; private set; } = true;
 
     public GameObject projectile { get; set; }

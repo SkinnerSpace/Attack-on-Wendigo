@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-
+# if UNITY_EDITOR
 namespace WendigoCharacter
 {
     [CustomEditor(typeof(Wendigo))]
@@ -35,3 +35,4 @@ namespace WendigoCharacter
         }
     }
 }
+#endif

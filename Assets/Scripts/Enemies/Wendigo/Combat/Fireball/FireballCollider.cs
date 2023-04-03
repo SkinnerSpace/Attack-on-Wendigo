@@ -26,6 +26,15 @@ public class FireballCollider : IFireballCollider
     public void NotifyOnCollision()
     {
         if (hitColliders[0] != null)
+        {
+            HitBoxProxy hitBox = hitColliders[0].GetComponent<HitBoxProxy>();
+
+            if (hitBox != null && hitBox.owner == data.owner){
+                hitColliders[0] = null;
+                return;
+            }
+
             onCollision?.Invoke();
+        }
     }
 }

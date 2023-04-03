@@ -31,7 +31,8 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     public void PrepareToBeUnpacked()
     {
-        ResetPhysics();
+
+        //ResetPhysics();
     }
 
     public void Open()

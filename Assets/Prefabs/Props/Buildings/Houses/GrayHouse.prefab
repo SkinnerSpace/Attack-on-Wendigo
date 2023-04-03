@@ -133,6 +133,18 @@ MonoBehaviour:
       variety: 2
       minPitch: -2
       maxPitch: 2
+  - name: BulletSnowParticle
+    sfx:
+      reference:
+        Guid:
+          Data1: -2112291897
+          Data2: 1170762902
+          Data3: -935357809
+          Data4: -1354720529
+        Path: event:/SFX/Game/Gameplay/Environment/Snow/SnowHit
+      variety: 2
+      minPitch: -1
+      maxPitch: 3
 --- !u!114 &7355269380469640033
 MonoBehaviour:
   m_ObjectHideFlags: 0

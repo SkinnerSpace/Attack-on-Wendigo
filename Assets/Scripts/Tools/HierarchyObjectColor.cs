@@ -7,6 +7,8 @@ using UnityEditor;
 
 [UnityEditor.InitializeOnLoad]
 #endif
+
+# if UNITY_EDITOR
 public class HierarchyObjectColor
 {
     private static Vector2 offset = new Vector2(20, 1);
@@ -53,3 +55,4 @@ public class HierarchyObjectColor
         }
     }
 }
+#endif

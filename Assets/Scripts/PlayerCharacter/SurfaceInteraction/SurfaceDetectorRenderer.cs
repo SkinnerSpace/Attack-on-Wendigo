@@ -2,6 +2,7 @@
 using UnityEditor;
 using Character;
 
+# if UNITY_EDITOR
 public class SurfaceDetectorRenderer : MonoBehaviour
 {
     [SerializeField] private CharacterData data;
@@ -25,3 +26,4 @@ public class SurfaceDetectorRenderer : MonoBehaviour
         Handles.color = Color.white;
     }
 }
+#endif

@@ -12,7 +12,7 @@ public class ParticleSoundSystem : MonoBehaviour
     private IDictionary<uint, ParticleSystem.Particle> trackedParticles = new Dictionary<uint, ParticleSystem.Particle>();
 
     private AudioPlayer player;
-
+/*
     private void Awake()
     {
         particles = GetComponent<ParticleSystem>();
@@ -69,5 +69,5 @@ public class ParticleSoundSystem : MonoBehaviour
     {
         public IList<ParticleSystem.Particle> Added { get; set; } = new List<ParticleSystem.Particle>();
         public IList<ParticleSystem.Particle> Removed { get; set; } = new List<ParticleSystem.Particle>();
-    }
+    }*/
 }

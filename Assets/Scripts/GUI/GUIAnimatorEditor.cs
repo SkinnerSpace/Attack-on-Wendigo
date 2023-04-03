@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(GUIAnimator))]
 public class GUIAnimatorEditor : Editor
 {
@@ -16,3 +17,4 @@ public class GUIAnimatorEditor : Editor
         base.OnInspectorGUI();
     }
 }
+#endif

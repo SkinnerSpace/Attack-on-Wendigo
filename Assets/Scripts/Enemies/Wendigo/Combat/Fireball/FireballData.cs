@@ -32,4 +32,6 @@ public class FireballData : MonoBehaviour, IFireballData
     public Vector3 Forward => transform.forward;
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
+
+    public Transform owner;
 }

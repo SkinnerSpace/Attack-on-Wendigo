@@ -5,6 +5,7 @@ using WendigoCharacter;
 
 public class FireballSpawnerComponent : MonoBehaviour
 {
+    [SerializeField] private Transform owner;
     [SerializeField] private WendigoData data;
     [SerializeField] private ParticleSystem castVFX;
     [SerializeField] private List<Limb> hands;
@@ -29,7 +30,8 @@ public class FireballSpawnerComponent : MonoBehaviour
     public void SpawnFireball()
     {
         Rotate();
-        pooler.SpawnFromThePool("Fireball", transform.position, transform.rotation);
+        Fireball fireball = pooler.SpawnFromThePool("Fireball", transform.position, transform.rotation).GetComponent<Fireball>();
+        fireball.SetOwner(owner); 
     }
 
     private void Rotate()
