@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class HitBoxProxy : MonoBehaviour, IHitBox
 {
@@ -8,6 +9,8 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
 
     private int joints;
 
+    private event Action onGetDamage;
+
     private void Awake()
     {
         hitCollider = GetComponent<Collider>();
@@ -15,7 +18,11 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
 
     public void SetOwner(Transform owner) => this.owner = owner;
 
-    public void ReceiveDamage(DamagePackage damagePackage) => hitBox.ReceiveDamage(damagePackage);
+    public void ReceiveDamage(DamagePackage damagePackage)
+    {
+        hitBox.ReceiveDamage(damagePackage);
+        onGetDamage?.Invoke();
+    }
 
     public void Subscribe(IDamageable damageable)
     {
@@ -26,6 +33,8 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
     }
 
     public void Unsubscribe(IDamageable damageable) => hitBox.Unsubscribe(damageable);
+
+    public void SubscribeOnGettingDamage(Action onGetDamage) => this.onGetDamage += onGetDamage;
 
     public void SwitchOn(){
         hitBox.SwitchOn();

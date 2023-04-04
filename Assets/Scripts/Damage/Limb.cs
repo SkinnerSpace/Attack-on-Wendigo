@@ -93,7 +93,11 @@ public class Limb : MonoBehaviour
 
     private void GoBaldIfNecessary(){
         if (data.ReadyToGoBald())
+        {
+            data.isBald = true;
+            particles.PlayHairCut();
             skin.GoBald();
+        }
     }
 
     public void SwitchOffHitBoxes(){

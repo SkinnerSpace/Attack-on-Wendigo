@@ -28,6 +28,8 @@ public class LimbData
     private int health;
     private float healthPercent;
 
+    public bool isBald;
+
     public LimbSFXSets SFXSet => sFXSet;
 
     public void Initialize(){
@@ -63,7 +65,11 @@ public class LimbData
                ;
     }
 
-    public bool ReadyToGoBald() => state == baldState;
+    public bool ReadyToGoBald()
+    {
+        return state == baldState &&
+               !isBald;
+    }
 
     private bool AmputationIsUnlocked()
     {
