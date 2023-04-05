@@ -5,13 +5,43 @@ using UnityEngine;
 public class AudioEvent
 {
     private static event Action onStop;
-    private static event Action onPause;
-    private static event Action onResume;
+
+    private static int totalCount;
+    private string eventName;
 
     public FMOD.Studio.EventInstance instance { get; private set; }
     public AudioEvent(FMODUnity.EventReference audioReference)
     {
         instance = FMODUnity.RuntimeManager.CreateInstance(audioReference);
+        //LogAudioEventCreation(audioReference);
+    }
+
+/*    ~AudioEvent()
+    {
+        LogAudioEventDestruction();
+    }*/
+
+    private void LogAudioEventCreation(FMODUnity.EventReference audioReference)
+    {
+        totalCount += 1;
+        string[] words = audioReference.ToString().Split('/');
+        eventName = words[words.Length - 1] + totalCount;
+
+        if (MustUpdateEventsTable()){
+            AudioEventsTable.Instance.AddEvent(eventName);
+        }
+    }
+
+    private void LogAudioEventDestruction()
+    {
+        if (MustUpdateEventsTable()){
+            AudioEventsTable.Instance.RemoveEvent(eventName);
+        }
+    }
+
+    private bool MustUpdateEventsTable(){
+        return AudioEventsTable.Instance != null && 
+               AudioEventsTable.Instance.IsActive;
     }
 
     public void SetVariant(int variant) => instance.setParameterByName("Versions", variant);
@@ -36,24 +66,13 @@ public class AudioEvent
     {
         instance.start();
         instance.release();
+
     }
     
     public void PlayLoop()
     {
         instance.start();
-
-/*        InitializeIfNecessary();*/
-
-        onStop += ForcedStop;
-        onPause += Pause;
-/*        audioEvents.Add(this);
-        Debug.Log(audioEvents.Count);*/
-    }
-
-    private void ForcedStop()
-    {
-        Stop();
-        Debug.Log("Forced Stop");
+        onStop += Stop;
     }
 
     public void Stop()
@@ -62,20 +81,10 @@ public class AudioEvent
         instance.release();
 
         onStop -= Stop;
-
-        /*        InitializeIfNecessary();*/
-        /*        audioEvents.Remove(this);
-                Debug.Log(audioEvents.Count);*/
     }
 
-    public void Pause()
-    {
-        instance
-    }
+    public void Pause() => instance.setPaused(true);
+    public void Resume() => instance.setPaused(false);
 
     public static void StopAll() => onStop?.Invoke();
-
-    public static void PauseAll() => onPause?.Invoke();
-
-    public static void ResumeAll() => onResume?.Invoke();
 }

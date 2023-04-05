@@ -70,7 +70,7 @@ public class Pickable : MonoBehaviour, IPickable
     {
         onInteract?.Invoke();
         onPickedUp?.Invoke();
-        PickUpManager.PickUp();
+        PickUpManager.Instance.PickUp();
     }
 
     private void NotifyOnDropped()

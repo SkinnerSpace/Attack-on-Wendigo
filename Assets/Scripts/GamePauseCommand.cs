@@ -9,6 +9,7 @@ public class GamePauseCommand : ICommand
     public void Execute()
     {
         GameState.PauseMode = PauseMode.Paused;
+        AudioPlayer.PauseAll();
 
         gameManager.Menu.Open("Pause");
 

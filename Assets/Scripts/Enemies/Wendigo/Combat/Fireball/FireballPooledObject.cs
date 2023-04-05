@@ -25,7 +25,7 @@ public class FireballPooledObject : MonoBehaviour, IPooledObject
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
-    private void BackToPool()
+    public void BackToPool()
     {
         sFXPlayer.StopFlySFX();
         gameObject.SetActive(false);

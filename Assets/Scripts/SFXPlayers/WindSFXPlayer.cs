@@ -11,7 +11,7 @@ public class WindSFXPlayer : MonoBehaviour
 
     private void Awake()
     {
-        audioPlayer = AudioPlayer.Create(windSFX);
+        audioPlayer = AudioPlayer.Create(windSFX).SetUnpausable();
         audioPlayer.PlayLoop();
     }
 }

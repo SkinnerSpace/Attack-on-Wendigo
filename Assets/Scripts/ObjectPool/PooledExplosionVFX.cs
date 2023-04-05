@@ -21,6 +21,11 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 
     private void OnParticleSystemStopped()
     {
+        BackToPool();
+    }
+
+    public void BackToPool()
+    {
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
     }

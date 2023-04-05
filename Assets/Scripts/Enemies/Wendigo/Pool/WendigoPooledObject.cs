@@ -14,4 +14,6 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
     public void SetActive(bool active) => gameObject.SetActive(active);
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
+
+    public void BackToPool() { }
 }

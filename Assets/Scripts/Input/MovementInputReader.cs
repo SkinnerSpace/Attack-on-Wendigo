@@ -23,7 +23,7 @@ public class MovementInputReader : InputReader
 
     public void Subscribe(IMovementReaderObserver reader) => onDirectionUpdate += reader.Move;
 
-    public void Unsubscribe(IMovementReaderObserver reader) => onDirectionUpdate += reader.Move;
+    public void Unsubscribe(IMovementReaderObserver reader) => onDirectionUpdate -= reader.Move;
 }
 
 

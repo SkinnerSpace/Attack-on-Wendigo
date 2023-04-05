@@ -7,4 +7,5 @@ public interface IPooledObject
     void OnObjectSpawn();
     void SetActive(bool active);
     void SetPositionAndRotation(Vector3 position, Quaternion rotation);
+    void BackToPool();
 }

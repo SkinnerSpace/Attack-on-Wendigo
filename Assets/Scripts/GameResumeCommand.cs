@@ -9,6 +9,7 @@ public class GameResumeCommand : ICommand
     public void Execute()
     {
         GameState.PauseMode = PauseMode.None;
+        AudioPlayer.ResumeAll();
 
         gameManager.Menu.Close();
 
