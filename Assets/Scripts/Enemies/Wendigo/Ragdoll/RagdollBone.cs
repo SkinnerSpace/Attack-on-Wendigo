@@ -12,11 +12,21 @@ public class RagdollBone : MonoBehaviour
     private Collider boneCollider;
     private CharacterJoint boneJoint;
 
+    [SerializeField] private List<Limb> limbs;
+    private int limbsDestroyed;
+
     private bool isDestroyed;
 
     private void Awake()
     {
         InitializeComponents();
+
+        if (limbs != null && limbs.Count > 0){
+            foreach (Limb limb in limbs){
+                limb.SubscribeOnAmputation(SwitchTheLayerIfNecessary);
+            }
+        }
+
         //SubscribeOnLimbs();
     }
 
@@ -124,6 +134,15 @@ public class RagdollBone : MonoBehaviour
             SoftJointLimitSpring swingLimit = boneJoint.swingLimitSpring;
             swingLimit.spring = spring;
             boneJoint.swingLimitSpring = swingLimit;
+        }
+    }
+
+    private void SwitchTheLayerIfNecessary()
+    {
+        limbsDestroyed += 1;
+
+        if (limbsDestroyed >= limbs.Count){
+            gameObject.layer = (int)Layers.RagDoll;
         }
     }
 }

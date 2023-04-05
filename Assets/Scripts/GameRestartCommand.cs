@@ -6,6 +6,7 @@
 
     public void Execute()
     {
+        AudioEvent.StopAll();
         gameManager.LevelLoader.ReloadScene();
     }
 }

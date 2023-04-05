@@ -11703,7 +11703,7 @@ PrefabInstance:
     - target: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2604546528073915768, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -30273,7 +30273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wendigoSpawner: {fileID: 1488656787}
-  spawnWendigoOnWeaponPickedUp: 0
+  spawnWendigoOnWeaponPickedUp: 1
 --- !u!114 &826512744 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6649175868031260509, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -65705,7 +65705,7 @@ MonoBehaviour:
   characterImp: {fileID: 1302925505}
   wendigoPrefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
     type: 3}
-  spawnCount: 1
+  spawnCount: 3
   minConcurrentCount: 4
   maxConcurrentCount: 8
   minTimeInterval: 5
@@ -65810,7 +65810,7 @@ MonoBehaviour:
   - tag: Wendigo
     prefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
       type: 3}
-    size: 10
+    size: 30
   - tag: Fireball
     prefab: {fileID: 6894375513939352395, guid: 1053d71a1d9c45b48a27b4d600e34939,
       type: 3}
@@ -112628,6 +112628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: testCube
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406221231773347257, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
+        type: 3}
+      propertyPath: Health.Amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7559064758374433838, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
