@@ -19,7 +19,6 @@ public class CrateLandingController : MonoBehaviour
         if (!isDisabled && isGrounded && physics.IsAtRest())
         {
             isDisabled = true;
-            crate.PrepareToBeUnpacked();
             laserBeam.SwitchOn();
         }
     }

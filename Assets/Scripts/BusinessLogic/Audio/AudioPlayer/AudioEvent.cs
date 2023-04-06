@@ -5,44 +5,19 @@ using UnityEngine;
 public class AudioEvent
 {
     private static event Action onStop;
-
-    private static int totalCount;
     private string eventName;
 
     public FMOD.Studio.EventInstance instance { get; private set; }
     public AudioEvent(FMODUnity.EventReference audioReference)
     {
         instance = FMODUnity.RuntimeManager.CreateInstance(audioReference);
-        //LogAudioEventCreation(audioReference);
+        //eventName = AudioEventLogger.LogCreationAndGetName(audioReference);
     }
 
 /*    ~AudioEvent()
     {
-        LogAudioEventDestruction();
+        AudioEventLogger.LogDestruction(eventName);
     }*/
-
-    private void LogAudioEventCreation(FMODUnity.EventReference audioReference)
-    {
-        totalCount += 1;
-        string[] words = audioReference.ToString().Split('/');
-        eventName = words[words.Length - 1] + totalCount;
-
-        if (MustUpdateEventsTable()){
-            AudioEventsTable.Instance.AddEvent(eventName);
-        }
-    }
-
-    private void LogAudioEventDestruction()
-    {
-        if (MustUpdateEventsTable()){
-            AudioEventsTable.Instance.RemoveEvent(eventName);
-        }
-    }
-
-    private bool MustUpdateEventsTable(){
-        return AudioEventsTable.Instance != null && 
-               AudioEventsTable.Instance.IsActive;
-    }
 
     public void SetVariant(int variant) => instance.setParameterByName("Versions", variant);
     public void SetPitch(float pitch) => instance.setParameterByName("Pitch", pitch);

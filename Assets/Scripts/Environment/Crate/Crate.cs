@@ -11,7 +11,7 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     private bool isOpened;
 
-    public void ResetState()
+    public void ResetStateOnSpawn()
     {
         isOpened = false;
         ResetPhysics();
@@ -29,25 +29,24 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     public void ResetPhysics() => physics.SetKinematic();
 
-    public void PrepareToBeUnpacked()
-    {
-
-        //ResetPhysics();
-    }
-
     public void Open()
     {
         if (!isOpened){
             isOpened = true;
 
-            model.enabled = false;
-            physics.SwitchOff();
-            laserBeam.SwitchOff();
+            SwitchOff();
             destructionParticles.Play();
             sFXPlayer.PlayOpen();
 
             PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
         }
+    }
+
+    private void SwitchOff()
+    {
+        model.enabled = false;
+        physics.SwitchOff();
+        laserBeam.SwitchOff();
     }
 }
 

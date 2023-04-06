@@ -12,10 +12,10 @@ public class AudioPlayer
     private FMODUnity.EventReference audioReference;
     private AudioParameters parameters;
 
-    private bool unpausable;
+    private bool isUnpausable;
+    private bool isPaused;
     private bool isLoop;
     private float timeToDisappear;
-    private bool isPaused;
 
     public static AudioPlayer Create(FMODUnity.EventReference audioReference) => new AudioPlayer(audioReference);
 
@@ -29,6 +29,8 @@ public class AudioPlayer
         UnsubscribeFromPauseAndResume();
         AudioPlayersManager.Instance.UnsubscribeFromTimeUpdate(DisappearOnTime);
     }
+
+    // Customization
 
     public AudioPlayer WithPitch(float min, float max)
     {
@@ -66,73 +68,80 @@ public class AudioPlayer
         return this;
     }
 
-    public AudioPlayer SetUnpausable()
+    public AudioPlayer WithUnpausableMode()
     {
-        unpausable = true;
+        isUnpausable = true;
         return this;
     }
 
+    // Play
+
     public void PlayOneShot()
     {
-        UnsubscribeFromPauseAndResume();
+        AssembleAndRegisterAudioEvent();
 
-        audioEvent = new AudioEvent(audioReference);
-        parameters.ApplyTo(audioEvent);
         audioEvent.PlayOneShot();
-
-        SubscribeOnPauseAndResume();
-
         SetDisappearanceTimer();
     }
 
     public void PlayLoop()
     {
-        UnsubscribeFromPauseAndResume();
+        AssembleAndRegisterAudioEvent();
 
         isLoop = true;
-        audioEvent = new AudioEvent(audioReference);
-        parameters.ApplyTo(audioEvent);
         audioEvent.PlayLoop();
+    }
 
+    private void AssembleAndRegisterAudioEvent()
+    {
+        UnsubscribeFromPauseAndResume();
+        AssembleAudioEvent();
         SubscribeOnPauseAndResume();
     }
 
-    public void Update()
+    private void AssembleAudioEvent(){
+        audioEvent = new AudioEvent(audioReference);
+        parameters.ApplyTo(audioEvent);
+    }
+
+    public void UpdateParameters()
+    {
+        ApplyParametersIfEventExist();
+        ResetDisappearanceTimer();
+    }
+
+    private void ApplyParametersIfEventExist()
     {
         if (audioEvent != null){
             parameters.ApplyTo(audioEvent);
         }
-
-        ResetDisappearanceTimer();
     }
 
     public void Stop()
     {
+        StopAudioEvent();
+        UnsubscribeFromPauseAndResume();
+        UnsubscribeFromTimeUpdate();
+    }
+
+    private void StopAudioEvent()
+    {
         if (audioEvent != null){
             audioEvent.Stop();
         }
-
-        UnsubscribeFromPauseAndResume();
-        AudioPlayersManager.Instance.UnsubscribeFromTimeUpdate(DisappearOnTime);
     }
 
-    public void DisappearOnTime(float time)
-    {
-        if (time >= timeToDisappear && !isPaused){
-            UnsubscribeFromPauseAndResume();
-            AudioPlayersManager.Instance.UnsubscribeFromTimeUpdate(DisappearOnTime);
-        }
-    }
+    // Pause and resume
 
     private void SubscribeOnPauseAndResume(){
-        if (!unpausable){
+        if (!isUnpausable){
             onPause += Pause;
             onResume += Resume;
         }
     }
 
     public void UnsubscribeFromPauseAndResume(){
-        if (!unpausable){
+        if (!isUnpausable){
             onPause -= Pause;
             onResume -= Resume;
 
@@ -159,9 +168,11 @@ public class AudioPlayer
 
     public static void ResumeAll() => onResume?.Invoke();
 
+    // Disappearance timer
+
     private void SetDisappearanceTimer(){
         if (!isLoop){
-            AudioPlayersManager.Instance.SubscribeOnTimeUpdate(DisappearOnTime);
+            SubscribeOnTimeUpdate();
             timeToDisappear = Time.realtimeSinceStartup + MUTE_TIME;
         }
     }
@@ -171,4 +182,22 @@ public class AudioPlayer
             timeToDisappear = Time.realtimeSinceStartup + MUTE_TIME;
         }
     } 
+
+    private void SubscribeOnTimeUpdate() => AudioPlayersManager.Instance.SubscribeOnTimeUpdate(DisappearOnTime);
+    private void UnsubscribeFromTimeUpdate() => AudioPlayersManager.Instance.UnsubscribeFromTimeUpdate(DisappearOnTime);
+
+    public void DisappearOnTime(float time)
+    {
+        if (TimeOutDuringGameplay(time))
+        {
+            UnsubscribeFromPauseAndResume();
+            UnsubscribeFromTimeUpdate();
+        }
+    }
+
+    private bool TimeOutDuringGameplay(float time)
+    {
+        return time >= timeToDisappear &&
+               !isPaused;
+    }
 }

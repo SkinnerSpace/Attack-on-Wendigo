@@ -1,15 +1,35 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class WeaponAnimationController : MonoBehaviour
 {
     private static int shootAnim = Animator.StringToHash("Shoot");
 
-    [SerializeField] private Animator animator;
-    [SerializeField] private bool playAnimation;
+    [Header("Required Components")]
+    [SerializeField] private List<Animator> animators;
+    [SerializeField] private FunctionTimer timer;
 
-    public void PlayShoot()
+    [Header("Settings")]
+    [SerializeField] private bool isAnimated;
+    [SerializeField] private float delay;
+
+    public void PlayAnimationIfPossible()
     {
-        if (playAnimation){
+        if (isAnimated){
+            if (delay <= 0f)
+            {
+                PlayAnimation();
+            }
+            else
+            {
+                timer.Set("Play", delay, PlayAnimation);
+            }
+        }
+    }
+
+    private void PlayAnimation()
+    {
+        foreach(Animator animator in animators){
             animator.Play(shootAnim, -1, 0f);
         }
     }

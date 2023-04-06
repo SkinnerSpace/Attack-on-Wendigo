@@ -30,6 +30,6 @@ public class BlizzardSFXPlayer : MonoBehaviour
         float distToCenter = Vector3.Distance(transform.position, attenuationPoint.position);
         float volume = Mathf.InverseLerp(0f, blizzard.Radius, distToCenter);
 
-        audioPlayer.WithVolume(volume).Update();
+        audioPlayer.WithVolume(volume).UpdateParameters();
     }
 }

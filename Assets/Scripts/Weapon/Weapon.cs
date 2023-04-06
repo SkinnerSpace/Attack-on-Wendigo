@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour, IWeapon
         shooter.SubscribeOnShot(vFXController.PlayShootVFX);
         shooter.SubscribeOnShotTarget(vFXController.Hit);
         shooter.SubscribeOnShot(sFXPlayer.PlayShootSFX);
-        shooter.SubscribeOnShot(animationController.PlayShoot);
+        shooter.SubscribeOnShot(animationController.PlayAnimationIfPossible);
     }
 
     private void CreateMagazine()

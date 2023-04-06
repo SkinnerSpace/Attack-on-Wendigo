@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8854467b38b93de41bbdefa6a036c364, type: 3}
-  m_Name: RifleAnimPack
+  m_Name: ShotgunAnimPack
   m_EditorClassIdentifier: 
-  shoot: {fileID: 11400000, guid: 826eae34b6f7fc549b08fded6ade6a62, type: 2}
+  shoot: {fileID: 11400000, guid: d0291fd32b2d8b94490dc3d46c17b2d4, type: 2}

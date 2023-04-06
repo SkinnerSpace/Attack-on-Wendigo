@@ -1,22 +1,14 @@
 fileFormatVersion: 2
-guid: 5c7f1fc6d34b2f240aa0bf5d273d52c8
+guid: 0a56fc949875df14bb361dea895d507b
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: 5155137735277419619
-    second: ArmsArmature|Idle
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ArmsMaterial
-    second: {fileID: 2100000, guid: bab426c69e9ec8c47a89bdcbcb736c74, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ShotgunMaterial
-    second: {fileID: 2100000, guid: 2d70c87118547104b9fa6caaf7e0b887, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 0ea3aee05153e5046b80042a7bcfdc8e, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
