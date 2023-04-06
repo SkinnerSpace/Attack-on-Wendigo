@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public interface ISurfaceHitBuilder
 {
@@ -8,5 +9,6 @@ public interface ISurfaceHitBuilder
     ISurfaceHitBuilder WithScale(float scale);
     ISurfaceHitBuilder WithCount(short minCount, short maxCount);
     ISurfaceHitBuilder WithSFXVolume(float volume);
+    ISurfaceHitBuilder WithSFXID(object obj, int id);
     void Launch();
 }

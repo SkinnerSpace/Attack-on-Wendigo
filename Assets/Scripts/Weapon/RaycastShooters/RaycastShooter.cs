@@ -1,68 +1,63 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 
-public class RaycastShooter 
+public abstract class RaycastShooter
 {
-    private WeaponData data;
-    private FunctionTimer timer;
-    private WeaponSight sight;
-
-    public bool IsReady { get; set; } = true;
+    public bool IsReady { get; protected set; } = true;
+    protected int shotsCount { get; private set; }
 
     private event Action onShot;
     private event Action<WeaponTarget> onShotTarget;
 
-    public RaycastShooter(WeaponData data, FunctionTimer timer)
-    {
-        this.data = data;
-        this.timer = timer;
-    }
-
-    public void OnReady(bool isReady){
-        if (isReady)
-        {
-            SubscribeOnShot(AimPresenter.Instance.OnShot);
-        }
-        else
-        {
-            UnsubscribeFromOnShot(AimPresenter.Instance.OnShot);
-        }
-    }
-
-    public void SetCamera(Camera cam) => sight = new WeaponSight(data, cam);
-
-    public void SubscribeOnShot(Action onShot) => this.onShot += onShot;
-    public void UnsubscribeFromOnShot(Action onShot) => this.onShot -= onShot;
-
-    public void SubscribeOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
-    public void UnsubscribeFromOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget -= onShotTarget;
+    protected WeaponData data;
+    protected FunctionTimer timer;
+    protected WeaponSight sight;
 
     public void Shoot()
     {
         if (IsReady)
         {
             IsReady = false;
-            WeaponTarget target = sight.GetTarget();
-            HitTheTarget(target);
+            shotsCount += 1;
             onShot?.Invoke();
+            DoShoot();
 
             timer.Set("CoolDown", data.Rate, CoolDown);
         }
     }
 
-    private void HitTheTarget(WeaponTarget target)
+    private void CoolDown() => IsReady = true;
+
+    protected abstract void DoShoot();
+
+    protected void ShootAtTheTarget()
+    {
+        WeaponTarget target = sight.GetTarget();
+        HitTheTarget(target);
+    }
+
+    protected void HitTheTarget(WeaponTarget target)
     {
         if (target.exist)
         {
-            DamageTheTarget(target);
-            BlowUpTheSurface(target);
             onShotTarget?.Invoke(target);
+            BlowUpTheSurface(target);
+            DamageTheTarget(target);
         }
     }
 
-    private void DamageTheTarget(WeaponTarget target)
+    protected void BlowUpTheSurface(WeaponTarget target)
+    {
+        ISurface surface = target.surface;
+
+        if (surface != null){
+            DoBlowUpTheSurface(surface, target);
+        }
+    }
+
+    protected abstract void DoBlowUpTheSurface(ISurface surface, WeaponTarget target);
+
+    protected void DamageTheTarget(WeaponTarget target)
     {
         if (target.isDamageable)
         {
@@ -72,21 +67,22 @@ public class RaycastShooter
         }
     }
 
-    private void BlowUpTheSurface(WeaponTarget target)
-    {
-        ISurface surface = target.surface;
+    private Vector3 CalculateImpact(Vector3 direction, float force) => direction * force;
 
-        if (surface != null)
-        {
-            surface.Hit("BulletSnowParticle").
-                    WithPosition(target.hitPosition).
-                    WithAngle(target.hitDirection, target.normal).
-/*                    WithShape(0f, 45f).
-                    WithCount(20, 30).*/
-                    Launch();
+    public void SubscribeOnShot(Action onShot) => this.onShot += onShot;
+    public void UnsubscribeFromOnShot(Action onShot) => this.onShot -= onShot;
+    public void SubscribeOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
+    public void UnsubscribeFromOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget -= onShotTarget;
+
+    public void OnReady(bool isReady)
+    {
+        if (isReady){
+            SubscribeOnShot(AimPresenter.Instance.OnShot);
+        }
+        else{
+            UnsubscribeFromOnShot(AimPresenter.Instance.OnShot);
         }
     }
-    private void CoolDown() => IsReady = true;
-    public void ConnectCamera(Camera cam) => sight = new WeaponSight(data, cam);
-    private Vector3 CalculateImpact(Vector3 direction, float force) => direction * force;
+
+    public void SetCamera(Camera cam) => sight = new WeaponSight(data, cam);
 }

@@ -54,14 +54,11 @@ public class Surface : MonoBehaviour, ISurface
 
     private void SetUpHitBuilder()
     {
-        particle = pooler.SpawnFromThePool(data.name).transform.GetComponent<ParticleSystem>();
-        //IPooledObject pooledObject = particle.GetComponent<IPooledObject>();
+        particle = pooler.SpawnFromThePool(data.Name).transform.GetComponent<ParticleSystem>();
 
         audioPlayer = AudioPlayer.Create(data.sfx.reference).
                                   WithVariety(data.sfx.variety).
                                   WithPitch(data.sfx.minPitch, data.sfx.maxPitch);
-
-        //pooledObject.SetAudioPlayer(audioPlayer);
 
         if (hitBuilder == null)
             hitBuilder = new SurfaceHitBuilder();

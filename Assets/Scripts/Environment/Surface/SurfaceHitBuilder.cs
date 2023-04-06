@@ -7,10 +7,15 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
     private AudioPlayer audioPlayer;
     private ParticleCountManager countManager;
 
-    private float tangent;
-    private float sfxVolume;
+    private float sfxVolume = 1f;
+    private bool canPlaySFX = true;
+    private object caller;
+    private int callerID;
 
     public void SetUp(ParticleSystem particle, AudioPlayer audioPlayer){
+        sfxVolume = 1f;
+        canPlaySFX = true;
+
         this.particle = particle;
         this.audioPlayer = audioPlayer;
         countManager = new ParticleCountManager();
@@ -27,7 +32,7 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
     public ISurfaceHitBuilder WithAngle(Vector3 direction, Vector3 normal)
     {
         particle.transform.rotation = SurfaceHitMirror.ReflectRotation(direction, normal);
-        tangent = Mathf.Abs(Vector3.Dot(direction, normal));
+        //tangent = Mathf.Abs(Vector3.Dot(direction, normal));
 
         return this;
     }
@@ -61,6 +66,18 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
         return this;
     }
 
+    public ISurfaceHitBuilder WithSFXID(object caller, int callerID)
+    {
+        if (this.caller == caller && this.callerID == callerID){
+            canPlaySFX = false;
+        }
+
+        this.caller = caller;
+        this.callerID = callerID;
+
+        return this;
+    }
+
     public void Launch()
     {
         audioPlayer.WithVolume(sfxVolume);
@@ -69,6 +86,9 @@ public class SurfaceHitBuilder : ISurfaceHitBuilder
         countManager.ApplyCount(particle);*/
 
         particle.Play();
-        audioPlayer.PlayOneShot();
+
+        if (canPlaySFX){
+            audioPlayer.PlayOneShot();
+        }
     }
 }

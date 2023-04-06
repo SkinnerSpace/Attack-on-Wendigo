@@ -12,7 +12,7 @@ public class WeaponSFXPlayer : MonoBehaviour
     private void Awake()
     {
         shootPlayer = AudioPlayer.Create(shootSFX).WithPitch(-2f, 2f);
-        isEmptyPlayer = AudioPlayer.Create(isEmptySFX).WithPitch(-2f, 2f);
+        isEmptyPlayer = AudioPlayer.Create(isEmptySFX).WithPitch(-0.5f, 0.5f);
     }
 
     public void PlayShootSFX() => shootPlayer.PlayOneShot();

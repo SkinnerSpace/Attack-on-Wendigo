@@ -551,6 +551,10 @@ MonoBehaviour:
     prefab: {fileID: 4005881168588452409, guid: 65d57663398a61a4ab73d2b6d49c9a32,
       type: 3}
     size: 20
+  - tag: SparseRedSparks
+    prefab: {fileID: 3563687342544693264, guid: 2f13cbcc9ca60cb4cbc682951dd72d14,
+      type: 3}
+    size: 40
 --- !u!1 &4841737612848342637
 GameObject:
   m_ObjectHideFlags: 0

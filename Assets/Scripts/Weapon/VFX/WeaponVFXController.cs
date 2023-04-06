@@ -9,6 +9,7 @@ public class WeaponVFXController : MonoBehaviour
     [SerializeField] private VisualEffect muzzleFlash;
     [SerializeField] private ParticleSystem bulletShell;
     [SerializeField] private Animator animator;
+    [SerializeField] private string hitExplosion;
 
     private IObjectPooler pooler;
 
@@ -27,6 +28,6 @@ public class WeaponVFXController : MonoBehaviour
     public void Hit(WeaponTarget target)
     {
         Quaternion rotation = SurfaceHitMirror.ReflectRotation(target.hitDirection, target.normal);
-        pooler.SpawnFromThePool("BulletExplosion", target.hitPosition, rotation);
+        pooler.SpawnFromThePool(hitExplosion, target.hitPosition, rotation);
     }
 }

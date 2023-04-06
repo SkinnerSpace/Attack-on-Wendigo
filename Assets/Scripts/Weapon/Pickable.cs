@@ -60,6 +60,7 @@ public class Pickable : MonoBehaviour, IPickable
         item.position = pos;
         item.SetParent(originalParent);
 
+        sFXPlayer.PlayDropSFX();
         transitionController.Stop();
         Throw(force);
 

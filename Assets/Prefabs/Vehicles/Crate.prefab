@@ -19763,6 +19763,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surfaceData:
   - name: RedSparks
+    secondName: 
+    sfx:
+      reference:
+        Guid:
+          Data1: -394331513
+          Data2: 1125145045
+          Data3: -1288010578
+          Data4: -1133156338
+        Path: event:/SFX/Game/Gameplay/Crate/CrateShoot
+      variety: 1
+      minPitch: -2
+      maxPitch: 2
+  - name: Buckshot
+    secondName: SparseRedSparks
     sfx:
       reference:
         Guid:

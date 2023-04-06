@@ -467,6 +467,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 5944037392786839833}
   bulletShell: {fileID: 599221758087645794}
   animator: {fileID: 6420187401967105178}
+  hitExplosion: BulletExplosion
 --- !u!114 &4506095490508226331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +620,7 @@ MonoBehaviour:
   precision: 0.7
   aimPrecision: 0.9
   rate: 0.3
+  shooterType: 0
 --- !u!114 &997745253376797098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5666,6 +5668,13 @@ MonoBehaviour:
       Data3: -544231019
       Data4: -1728884771
     Path: event:/SFX/Game/Gameplay/Weapon/Pistol/PistolTake
+  dropSFX:
+    Guid:
+      Data1: 385305225
+      Data2: 1315561507
+      Data3: 1980137396
+      Data4: 1171876976
+    Path: event:/SFX/Game/Gameplay/Weapon/WeaponDrop
 --- !u!1 &8823583539870073284
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
     private ParticleSystem particle;
     private IObjectPooler pooler;
 
+    [SerializeField] private bool permanent;
+
     private void Awake() => particle = GetComponent<ParticleSystem>();
 
     private void Start() => pooler = PoolHolder.Instance;
@@ -21,7 +23,9 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 
     private void OnParticleSystemStopped()
     {
-        BackToPool();
+        if (!permanent){
+            BackToPool();
+        }
     }
 
     public void BackToPool()

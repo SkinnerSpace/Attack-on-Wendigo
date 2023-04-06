@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void CreateShooter()
     {
-        shooter = new RaycastShooter(data, timer);
+        shooter = RaycastShooterFactory.Create(data.ShooterType, data, timer);
         shooter.SubscribeOnShot(vFXController.PlayShootVFX);
         shooter.SubscribeOnShotTarget(vFXController.Hit);
         shooter.SubscribeOnShot(sFXPlayer.PlayShootSFX);
