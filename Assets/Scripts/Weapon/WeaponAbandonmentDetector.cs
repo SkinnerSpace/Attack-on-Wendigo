@@ -50,7 +50,6 @@ public class WeaponAbandonmentDetector : MonoBehaviour
     {
         isActive = false;
         isGrounded = false;
-        Debug.Log("Reset abandonment");
     }
 
     private void OnGroundUpdate(bool isGrounded){

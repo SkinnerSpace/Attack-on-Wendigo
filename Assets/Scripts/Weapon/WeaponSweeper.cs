@@ -13,12 +13,32 @@ public class WeaponSweeper : MonoBehaviour
     [SerializeField] private float fallSpeed = 0.5f;
     [SerializeField] private float sweepTime = 3f;
 
+    private IObjectPooler pooler;
+    private ParticleSystem sweepParticle;
+
     private bool isSwept;
 
     public static event Action onSweptAway;
+
+    private void Start()
+    {
+        pooler = PoolHolder.Instance;
+    }
+
     public static void SubscribeOnSweptAway(Action onSwept) => onSweptAway += onSwept;
 
-    public void SweepTheWeapon() => StartCoroutine(WaitForRest());
+    public void SweepTheWeapon()
+    {
+        Vector3 sweepPosition = transform.position;
+
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Landscape)){
+            sweepPosition = hit.point;
+        }
+
+        sweepParticle = pooler.SpawnFromThePool("SweepSnowParticle", sweepPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+        StartCoroutine(WaitForRest());
+    }
 
     private IEnumerator WaitForRest()
     {
@@ -43,6 +63,7 @@ public class WeaponSweeper : MonoBehaviour
     {
         physics.DisablePhysics();
         timer.Set("OnSwept", sweepTime, () => isSwept = true);
+        timer.Set("StopParticles", sweepTime * 0.5f, () => sweepParticle.Stop());
     }
 
     private void MoveDown() => transform.position += Vector3.down * fallSpeed * Time.deltaTime;

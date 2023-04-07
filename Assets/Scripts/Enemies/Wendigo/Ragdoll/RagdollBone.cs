@@ -145,4 +145,7 @@ public class RagdollBone : MonoBehaviour
             gameObject.layer = (int)Layers.RagDoll;
         }
     }
+
+    public void EnableCollider() => boneCollider.enabled = true;
+    public void DisableCollider() => boneCollider.enabled = false;
 }

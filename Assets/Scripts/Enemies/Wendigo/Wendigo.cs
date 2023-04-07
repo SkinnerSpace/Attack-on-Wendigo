@@ -7,6 +7,7 @@ namespace WendigoCharacter
 {
     public class Wendigo : MonoBehaviour, IWendigo, IRagdoll, IPooledObjectObserver
     {
+        private const float DEATH_FALLING_TIME = 5f;
         public static int id;
 
         [SerializeField] private WendigoData data;
@@ -22,6 +23,7 @@ namespace WendigoCharacter
         [SerializeField] private PropDestroyer mainPropDestroyer;
         [SerializeField] private RagDollController ragDollController;
         [SerializeField] private CorpseCollisionController corpseCollisionController;
+        [SerializeField] private WendigoCorpse corpse;
 
         [Header("Combat")]
         [SerializeField] private FireballSpawnerComponent fireballSpawner;
@@ -118,6 +120,7 @@ namespace WendigoCharacter
             ragDollController.SwitchOn();
             corpseCollisionController.SwitchOn();
 
+            timer.Set("Bury", DEATH_FALLING_TIME, BuryTheCorpse);
             notifyOnDeath?.Invoke(transform);
         }
 
@@ -126,5 +129,7 @@ namespace WendigoCharacter
         }
 
         public void SetTarget(Transform target) => GetController<WendigoTargetManager>().SetTarget(target);
+        private void BuryTheCorpse() => WendigoCorpseCollector.Instance.AddCorpse(corpse);
     }
 }
+

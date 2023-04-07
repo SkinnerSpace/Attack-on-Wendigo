@@ -53,4 +53,16 @@ public class RagDollController : MonoBehaviour
         foreach (RagdollPuller puller in storage.pullers)
             puller.Launch();
     }
+
+    public void EnableColliders()
+    {
+        foreach (RagdollBone bone in storage.ragdollBones)
+            bone.EnableCollider();
+    }
+
+    public void DisableColliders()
+    {
+        foreach (RagdollBone bone in storage.ragdollBones)
+            bone.DisableCollider();
+    }
 }

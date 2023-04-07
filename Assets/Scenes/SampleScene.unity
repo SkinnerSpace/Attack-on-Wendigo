@@ -6193,6 +6193,10 @@ MonoBehaviour:
     prefab: {fileID: 3959281334994011231, guid: 12daa2ac66c724245b98b0a9d90e36f6,
       type: 3}
     size: 70
+  - tag: SweepSnowParticle
+    prefab: {fileID: 5886012222994725952, guid: 8d9a075c0fb8fed418d542cb47291b1a,
+      type: 3}
+    size: 30
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13390,7 +13394,7 @@ PrefabInstance:
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: Health.Amount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8273375489332084520, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -65756,6 +65760,7 @@ GameObject:
   - component: {fileID: 1488656793}
   - component: {fileID: 1488656795}
   - component: {fileID: 1488656794}
+  - component: {fileID: 1488656796}
   m_Layer: 0
   m_Name: WendigoSpawner
   m_TagString: Untagged
@@ -65935,6 +65940,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chronos: {fileID: 1488656794}
+--- !u!114 &1488656796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488656786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a970fa95f4f8c90429f54537c84de284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1497846040
 GameObject:
   m_ObjectHideFlags: 0
