@@ -478,7 +478,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6119623930978718648}
   - component: {fileID: 1056638609630317292}
-  - component: {fileID: 106448554005381371}
   m_Layer: 0
   m_Name: DispenserManager
   m_TagString: Untagged
@@ -522,39 +521,6 @@ MonoBehaviour:
   timer: {fileID: 1630779641384377885}
   rightDispenser: {fileID: 881964518253523129}
   leftDispenser: {fileID: 2820582263639390175}
---- !u!114 &106448554005381371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3860514765557123674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolTemplates:
-  - tag: Crate
-    prefab: {fileID: 6715555677677968425, guid: f735480e936003a489e6d5c688ab4a85,
-      type: 3}
-    size: 25
-  - tag: Pistol
-    prefab: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d,
-      type: 3}
-    size: 10
-  - tag: Rifle
-    prefab: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
-      type: 3}
-    size: 10
-  - tag: RedSparks
-    prefab: {fileID: 4005881168588452409, guid: 65d57663398a61a4ab73d2b6d49c9a32,
-      type: 3}
-    size: 20
-  - tag: SparseRedSparks
-    prefab: {fileID: 3563687342544693264, guid: 2f13cbcc9ca60cb4cbc682951dd72d14,
-      type: 3}
-    size: 40
 --- !u!1 &4841737612848342637
 GameObject:
   m_ObjectHideFlags: 0

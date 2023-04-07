@@ -9,8 +9,10 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private WeaponAimController aimController; 
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private Pickable pickable;
+    [SerializeField] private WeaponSweeper sweeper;
     [SerializeField] private WeaponPhysics physics;
     [SerializeField] private FunctionTimer timer;
+    [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
     [SerializeField] private AimAnimationsPack animationsPack;
 
     [Header("Effects")]
@@ -65,6 +67,7 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         this.inputReader = inputReader;
         swayController.Initialize(characterData, inputReader);
+        abandonmentDetector.Initialize(characterData);
         shooter.SetCamera(characterData.Cam);
     }
 
@@ -115,8 +118,16 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void DisposeUsedWeapon()
     {
-        if (magazine.IsEmpty() && pickable.IsReadyToHand)
+        if (WeaponIsDisposed()){
             pickable.SwitchOff();
+            sweeper.SweepTheWeapon();
+        }
+    }
+
+    private bool WeaponIsDisposed()
+    {
+        return magazine.IsEmpty() &&
+               pickable.IsReadyToHand;
     }
 }
 

@@ -52,6 +52,7 @@ namespace Character
         [SerializeField] private float defense;
 
         public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
+        public Vector3 Bottom => transform.position - new Vector3(0f, 1f, 0f);
         public Vector3 CameraDampedPos { get; set; }
 
         public Vector3 Forward => transform.forward;

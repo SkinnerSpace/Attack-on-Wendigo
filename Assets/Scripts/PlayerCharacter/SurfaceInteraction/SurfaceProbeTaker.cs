@@ -6,13 +6,14 @@ public class SurfaceProbeTaker : ISurfaceProbeTaker
     {
         SurfaceProbe probe = new SurfaceProbe();
 
-        if (Physics.Raycast(ray, out RaycastHit hit, ComplexLayers.Solid))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Solid))
         {
             probe.surface = hit.transform.GetComponent<ISurface>();
             probe.position = hit.point;
 
-            if (probe.surface != null)
+            if (probe.surface != null){
                 probe.isValid = true;
+            }
         }
 
         return probe;

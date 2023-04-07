@@ -6,6 +6,7 @@ public class Surface : MonoBehaviour, ISurface
     private const int DEFAULT = 0;
 
     [SerializeField] private List<SurfaceData> surfaceData;
+    [SerializeField] private SurfaceTypes surfaceType;
     private SurfaceData data;
 
     private ParticleSystem particle;
@@ -13,6 +14,8 @@ public class Surface : MonoBehaviour, ISurface
     private SurfaceHitBuilder hitBuilder;
 
     private IObjectPooler pooler;
+
+    public SurfaceTypes SurfaceType => surfaceType;
 
     private void Start() => pooler = PoolHolder.Instance;
 

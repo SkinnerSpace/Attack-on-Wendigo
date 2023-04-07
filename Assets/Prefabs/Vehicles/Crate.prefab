@@ -19718,6 +19718,7 @@ MonoBehaviour:
   crate: {fileID: 137477694732360836}
   physics: {fileID: 5350540118256880488}
   sFXPlayer: {fileID: 7705346738062873578}
+  buggyCollisionRadius: 1.5
   jumpForce: 15
 --- !u!114 &5350540118256880488
 MonoBehaviour:
@@ -19788,6 +19789,7 @@ MonoBehaviour:
       variety: 1
       minPitch: -2
       maxPitch: 2
+  surfaceType: 0
 --- !u!114 &8351341909458789206
 MonoBehaviour:
   m_ObjectHideFlags: 0

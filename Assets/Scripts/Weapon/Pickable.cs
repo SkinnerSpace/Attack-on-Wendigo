@@ -7,7 +7,6 @@ public class Pickable : MonoBehaviour, IPickable
     [SerializeField] private ItemTransitionController transitionController;
     [SerializeField] private ItemSFXPlayer sFXPlayer;
     [SerializeField] private WeaponPhysics physics;
-    [SerializeField] private WeaponSweeper sweeper;
 
     public Transform Transform => item;
     public Vector3 Position => item.position;
@@ -33,8 +32,6 @@ public class Pickable : MonoBehaviour, IPickable
     {
         IsReadyToHand = false;
         gameObject.layer = (int)Layers.DisabledInteractables;
-        
-        sweeper.SweepTheWeapon();
     }
 
     public void SwitchOn()

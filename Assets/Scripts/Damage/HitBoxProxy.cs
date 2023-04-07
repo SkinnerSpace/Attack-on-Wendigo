@@ -53,3 +53,4 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
         }
     }
 }
+

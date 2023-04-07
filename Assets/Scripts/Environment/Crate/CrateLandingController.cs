@@ -7,6 +7,7 @@ public class CrateLandingController : MonoBehaviour
     [SerializeField] private Crate crate;
     [SerializeField] private CratePhysics physics;
     [SerializeField] private CrateSFXPlayer sFXPlayer;
+    [SerializeField] private float buggyCollisionRadius = 1.5f;
 
     [Header("Settings")]
     [SerializeField] private float jumpForce = 7f;
@@ -16,10 +17,23 @@ public class CrateLandingController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDisabled && isGrounded && physics.IsAtRest())
-        {
+        if (isGrounded){
+            SwitchOnLaserWhenAtRest();
+            JumpIfInsideACollider();
+        }
+    }
+
+    private void SwitchOnLaserWhenAtRest()
+    {
+        if (!isDisabled && physics.IsAtRest()){
             isDisabled = true;
             laserBeam.SwitchOn();
+        }
+    }
+
+    private void JumpIfInsideACollider(){
+        if (Physics.CheckSphere(transform.position, buggyCollisionRadius, ComplexLayers.Ground)){
+            Jump();
         }
     }
 
@@ -31,28 +45,35 @@ public class CrateLandingController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        JumpOffTheWrongSurface(collision);
+        JumpIfTheSurfaceIsInappropriate(collision);
         HitTheSurface(collision);
         sFXPlayer.PlayBump();
     }
 
-    private void JumpOffTheWrongSurface(Collision collision)
+    private void JumpIfTheSurfaceIsInappropriate(Collision collision)
     {
-        if (collision.gameObject.layer == (int)Layers.Landscape)
-        {
+        if (SurfaceIsAppropriate(collision)){
             isGrounded = true;
         }
-        else
-        {
-            isGrounded = false;
-
-            physics.SetVelocity(
-                new Vector3(x: Rand.Range(-0.5f, 0.5f), 
-                            y: Rand.Range(0.6f, 1f), 
-                            z: Rand.Range(-0.5f, 0.5f)) 
-                               * jumpForce
-                );
+        else{
+            Jump();
         }
+    }
+
+    private bool SurfaceIsAppropriate(Collision collision){
+        return collision.gameObject.layer == (int)Layers.Landscape;
+    }
+
+    private void Jump()
+    {
+        isGrounded = false;
+
+        physics.SetVelocity(
+            new Vector3(x: Rand.Range(-0.5f, 0.5f),
+                        y: Rand.Range(0.6f, 1f),
+                        z: Rand.Range(-0.5f, 0.5f))
+                           * jumpForce
+                        );
     }
 
     private void HitTheSurface(Collision collision)
@@ -69,4 +90,11 @@ public class CrateLandingController : MonoBehaviour
                     Launch();
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, buggyCollisionRadius);
+    }
+#endif
 }

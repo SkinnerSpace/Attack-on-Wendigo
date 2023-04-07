@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752990138465119577}
   - component: {fileID: 5914274010727276762}
+  - component: {fileID: 816151919761848123}
   m_Layer: 13
   m_Name: SFXPlayer
   m_TagString: Untagged
@@ -59,6 +60,27 @@ MonoBehaviour:
       Data3: 1686102408
       Data4: 639327713
     Path: event:/SFX/Game/Gameplay/FootSteps/SnowSteps2D
+--- !u!114 &816151919761848123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446330999445019643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45dae6b2d6b194b4284e332d6526cff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 402587302504087578}
+  data: {fileID: 61735261016310312}
+  offTheSurfaceSFX:
+    Guid:
+      Data1: 1519633592
+      Data2: 1176574544
+      Data3: 1407048382
+      Data4: -39234486
+    Path: event:/SFX/Game/Gameplay/Jump/OffTheSnow
 --- !u!1 &2170787529287074303
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace1df3de4825c6499b6d22b94c6f944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
 --- !u!1 &7584302398406140779
 GameObject:
   m_ObjectHideFlags: 0

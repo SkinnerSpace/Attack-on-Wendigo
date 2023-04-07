@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Character
 {
@@ -7,6 +8,8 @@ namespace Character
         private PlayerCharacter main;
         private ICharacterData data;
         private IInputReader input;
+
+        private event Action onJump;
 
         public override void Initialize(PlayerCharacter main)
         {
@@ -43,6 +46,8 @@ namespace Character
             {
                 data.IsJumping = true;
                 ApplyJumpForce();
+
+                onJump?.Invoke();
             }
         }
 
@@ -64,5 +69,10 @@ namespace Character
         private float GetJumpVelocity() => Mathf.Sqrt(data.JumpHeight * 2f * data.Gravity);
 
         public void Land() => data.JumpCount = 0;
+
+        public void Subscribe(IJumpObserver observer)
+        {
+            onJump += observer.OnJump;
+        }
     }
 }

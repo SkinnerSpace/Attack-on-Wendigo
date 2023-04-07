@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7678803173278249975}
   - component: {fileID: 6793378130430391198}
+  - component: {fileID: 3307474204293395094}
+  - component: {fileID: 5348182080979604873}
   - component: {fileID: 5232593936176410974}
   m_Layer: 8
   m_Name: CollisionBox
@@ -46,6 +48,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -931021205976162681, guid: b1b2fc4ff53a33048946f49d5d38e000, type: 3}
+--- !u!114 &3307474204293395094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500299552274067749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01127a0c014aa6e4384560365260460f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedData: {fileID: 11400000, guid: 03d45b08b4fa5f94aab49633214945ea, type: 2}
+--- !u!114 &5348182080979604873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500299552274067749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d83dd873c0dbf4b83983fa76ac47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceData: []
+  surfaceType: 0
 --- !u!114 &5232593936176410974
 MonoBehaviour:
   m_ObjectHideFlags: 0

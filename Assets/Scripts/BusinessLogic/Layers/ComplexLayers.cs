@@ -70,4 +70,8 @@ public static class ComplexLayers
         1 << (int)Layers.Ground |
         1 << (int)Layers.Landscape
         ;
+
+    public static LayerMask Ground =
+        1 << (int)Layers.Ground
+        ;
 }

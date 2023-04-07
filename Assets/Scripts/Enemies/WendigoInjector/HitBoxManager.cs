@@ -5,15 +5,25 @@ using UnityEngine;
 public class HitBoxManager : MonoBehaviour
 {
     [SerializeField] private Transform hitBoxesRoot;
-    [SerializeField] private List<SurfaceData> surfaceData;
-    [SerializeField] private bool resetSurfaceData;
 
+    [SerializeField] private List<SurfaceData> surfaceData;
+    [Header("Surface data")]
+    [SerializeField] private List<SurfaceData> fleshSurfaceData;
+    [SerializeField] private List<SurfaceData> boneSurfaceData;
+    private Dictionary<SurfaceTypes, List<SurfaceData>> surfaces;
+
+    [Header("Settings")]
+    [SerializeField] private bool resetSurfaceData;
     [SerializeField] private Transform owner;
 
     public HitBoxProxy[] hits;
 
     private void OnEnable()
     {
+        surfaces = new Dictionary<SurfaceTypes, List<SurfaceData>>();
+        surfaces.Add(SurfaceTypes.Flesh, fleshSurfaceData);
+        surfaces.Add(SurfaceTypes.Bone, boneSurfaceData);
+
         FindHitBoxes();
         ProvideHitBoxesWithOwner();
         AddSurfaceComponentsIfNecessary();
@@ -47,7 +57,9 @@ public class HitBoxManager : MonoBehaviour
             }
 
             if (resetSurfaceData)
-                surface.Set(surfaceData);
+            {
+                surface.Set(surfaces[surface.SurfaceType]);
+            }
         }
     }
 }

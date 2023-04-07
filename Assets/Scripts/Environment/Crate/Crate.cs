@@ -49,4 +49,3 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
         laserBeam.SwitchOff();
     }
 }
-

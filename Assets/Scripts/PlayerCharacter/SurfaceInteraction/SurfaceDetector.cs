@@ -19,8 +19,9 @@ public class SurfaceDetector : BaseController, IGroundObserver
     {
         SurfaceProbe probe = ProbeTheSurface();
 
-        if (probe.isValid) 
+        if (probe.isValid){
             notifyOnSurfaceFound?.Invoke(probe);
+        }
     }
 
     public SurfaceProbe ProbeTheSurface()

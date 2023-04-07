@@ -5,6 +5,8 @@ using Character;
 
 public class InteractionController : BaseController, IInteractor, IMousePosObserver
 {
+    private const float REACH_DISTANCE = 4f;
+
     private PlayerCharacter main;
     private CharacterData data;
     private WeaponKeeper keeper;
@@ -12,7 +14,9 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private VisionRaycast visionRaycast;
     private ItemInteractor itemInteractor;
     private Transform target;
+    private FunctionTimer timer;
 
+    private bool isLocked;
     private Vector2 mousePos;
 
     private event Action<Transform> onTargetAdded;
@@ -23,6 +27,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         this.main = main;
         data = main.OldData;
         input = main.InputReader;
+        timer = main.Timer;
 
         keeper = new WeaponKeeper(data, input);
         itemInteractor = ItemInteractor.CreateWithDataTakeAndDrop(data, TakeAnItem, DropAnItem);
@@ -52,7 +57,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public void OnMousePosUpdate(Vector2 pos)
     {
         mousePos = pos;
-        Transform newTarget = visionRaycast.Cast(pos);
+        Transform newTarget = visionRaycast.Cast(pos, REACH_DISTANCE);
 
         if (target != newTarget)
             UpdateTarget(newTarget);
@@ -69,7 +74,15 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         this.target = target;
     }
 
-    public void Interact() => itemInteractor.Interact(target);
+    public void Interact()
+    {
+        if (!isLocked){
+            isLocked = true;
+            itemInteractor.Interact(target);
+
+            timer.Set("Unlock", 0.2f, () => isLocked = false);
+        }
+    }
 
     private void DropAnItem() => keeper.DropAnItem(mousePos);
     private void TakeAnItem(IPickable pickable, IWeapon weapon) => keeper.Take(pickable, weapon);

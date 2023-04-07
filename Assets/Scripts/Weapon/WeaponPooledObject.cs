@@ -7,6 +7,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
     [SerializeField] private Weapon weapon;
     [SerializeField] private Pickable pickable;
     [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
     private IObjectPooler pooler;
 
     private void Start() => pooler = PoolHolder.Instance;
@@ -21,6 +22,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
         pickable.SwitchOn();
         weapon.Reload();
         physics.SetLevitation(true);
+        abandonmentDetector.ResetState();
     }
 
     public void SetActive(bool active) => gameObject.SetActive(active);
