@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CratePooledObject : MonoBehaviour, IPooledObject
 {
@@ -28,4 +29,5 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
     public void BackToPool() => pooler.PutIntoThePool(this);
+    public void SubscribeOnSpawn(Action onSpawn) { }
 }

@@ -15,5 +15,10 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
-    public void BackToPool() { }
+    public void BackToPool()
+    {
+
+    }
+
+    public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
 }

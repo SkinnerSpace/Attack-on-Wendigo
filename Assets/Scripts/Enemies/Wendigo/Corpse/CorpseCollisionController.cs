@@ -18,6 +18,12 @@ public class CorpseCollisionController : MonoBehaviour
             groundCollider.SwitchOn();
     }
 
+    public void SwitchOff()
+    {
+        foreach (CorpseGroundCollider groundCollider in groundColliders)
+            groundCollider.SwitchOff();
+    }
+
     private void OnEnable()
     {
         FindColliders();

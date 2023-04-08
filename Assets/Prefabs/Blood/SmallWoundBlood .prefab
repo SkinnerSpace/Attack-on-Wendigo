@@ -28966,6 +28966,7 @@ MonoBehaviour:
     Path: event:/SFX/Game/Gameplay/Wendigo/Gore/BloodSpill
   variety: 5
   pitchRange: 2
+  data: {fileID: 11400000, guid: 96c85c2e9adb1c5479a50fabb5f85168, type: 2}
 --- !u!1 &3908546181673306251
 GameObject:
   m_ObjectHideFlags: 0
@@ -28978,6 +28979,7 @@ GameObject:
   - component: {fileID: 3908546181673306249}
   - component: {fileID: 3908546181673306250}
   - component: {fileID: 3328728372653254068}
+  - component: {fileID: 948318573671499716}
   m_Layer: 0
   m_Name: 'SmallWoundBlood '
   m_TagString: Untagged
@@ -33801,6 +33803,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e1f982f950cfa438f02911de5d916f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  permanent: 0
+--- !u!114 &948318573671499716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908546181673306251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665fbde7f1b147943a372caca4bc22ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundSystems:
+  - {fileID: 7232946489423324387}
+  - {fileID: 4830843787841196849}
 --- !u!1 &3908546182738131177
 GameObject:
   m_ObjectHideFlags: 0
@@ -43470,3 +43488,4 @@ MonoBehaviour:
     Path: event:/SFX/Game/Gameplay/Wendigo/Gore/BloodSpill
   variety: 5
   pitchRange: 2
+  data: {fileID: 11400000, guid: 96c85c2e9adb1c5479a50fabb5f85168, type: 2}

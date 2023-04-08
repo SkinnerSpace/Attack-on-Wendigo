@@ -68,6 +68,12 @@ public class AudioPlayer
         return this;
     }
 
+    public AudioPlayer WithRandomStartTime()
+    {
+        parameters.Get<AudioTimelinePosition>().Set(Rand.Range(0f, 1f));
+        return this;
+    }
+
     public AudioPlayer WithUnpausableMode()
     {
         isUnpausable = true;

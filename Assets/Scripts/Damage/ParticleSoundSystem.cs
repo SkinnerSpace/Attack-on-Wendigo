@@ -2,22 +2,42 @@
 using System.Linq;
 using UnityEngine;
 
-public class ParticleSoundSystem : MonoBehaviour
+public class ParticleSoundSystem : MonoBehaviour, ISwitchable
 {
     [SerializeField] private FMODUnity.EventReference collisionSFX;
     [SerializeField] private int variety;
     [SerializeField] private float pitchRange;
 
+    [SerializeField] private ParticleSoundData data;
+
     private ParticleSystem particles;
     private IDictionary<uint, ParticleSystem.Particle> trackedParticles = new Dictionary<uint, ParticleSystem.Particle>();
 
     private AudioPlayer player;
-/*
+
+    public void SwitchOn()
+    {
+        enabled = true;
+    }
+
+    public void SwitchOff()
+    {
+        enabled = false;
+    }
+
     private void Awake()
     {
         particles = GetComponent<ParticleSystem>();
+        if (data != null)
+        {
+            player = AudioPlayer.Create(data.collisionSFX).WithPitch(-data.pitchRange, data.pitchRange).WithVariety(data.variety);
+        }
+        else
+        {
+            player = AudioPlayer.Create(collisionSFX).WithPitch(-pitchRange, pitchRange).WithVariety(variety);
+        }
 
-        player = AudioPlayer.Create(collisionSFX).WithPitch(-pitchRange, pitchRange).WithVariety(variety);
+        enabled = false;
     }
 
     private void Update()
@@ -27,8 +47,14 @@ public class ParticleSoundSystem : MonoBehaviour
 
         var particleDelta = GetParticleDelta(liveParticles);
 
-        foreach (var particleRemoved in particleDelta.Removed){
+        foreach (var particleRemoved in particleDelta.Removed)
+        {
             player.WithPosition(particleRemoved.position).PlayOneShot();
+        }
+
+        if (particles.particleCount == 0)
+        {
+            enabled = false;
         }
     }
 
@@ -69,5 +95,5 @@ public class ParticleSoundSystem : MonoBehaviour
     {
         public IList<ParticleSystem.Particle> Added { get; set; } = new List<ParticleSystem.Particle>();
         public IList<ParticleSystem.Particle> Removed { get; set; } = new List<ParticleSystem.Particle>();
-    }*/
+    }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MockPooledObject : IPooledObject
 {
@@ -12,4 +13,5 @@ public class MockPooledObject : IPooledObject
     public void SetActive(bool active) { }
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) { }
+    public void SubscribeOnSpawn(Action onSpawn) { }
 }

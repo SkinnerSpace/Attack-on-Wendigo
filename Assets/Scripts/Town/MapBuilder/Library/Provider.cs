@@ -8,19 +8,23 @@ public class Provider : MonoBehaviour
 
     private readonly Dictionary<PropTypes, List<GameObject>> objects = new Dictionary<PropTypes, List<GameObject>>();
 
-    private void Awake()
+    private bool isInitialized = false;
+
+    public GameObject GetObject(Mark mark)
     {
-        InitializeObjects();
+        if (!isInitialized){
+            InitializeObjects();
+        }
+
+        return objects[mark.Type][mark.Index-1];
     }
 
     private void InitializeObjects()
     {
         objects.Add(PropTypes.BUILDING, buildings);
         objects.Add(PropTypes.TREE, trees);
+
+        isInitialized = true;
     }
 
-    public GameObject GetObject(Mark mark)
-    {
-        return objects[mark.Type][mark.Index-1];
-    }
 }

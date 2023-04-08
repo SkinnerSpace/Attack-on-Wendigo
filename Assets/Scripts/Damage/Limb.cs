@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Limb : MonoBehaviour
 {
     [SerializeField] private LimbData data;

@@ -5,11 +5,11 @@ namespace WendigoCharacter
 {
     public class WendigoCorpseCollector : MonoBehaviour
     {
-        private const int MAX_CORPSES = 1;
+        [SerializeField] private int maxCorpses = 3;
 
         public static WendigoCorpseCollector Instance { get; private set; }
 
-        private Stack<WendigoCorpse> corpses;
+        private Queue<WendigoCorpse> corpses;
 
         private void Awake()
         {
@@ -18,14 +18,14 @@ namespace WendigoCharacter
 
         public void AddCorpse(WendigoCorpse corpse){
             if (corpses == null){
-                corpses = new Stack<WendigoCorpse>();
+                corpses = new Queue<WendigoCorpse>();
             }
 
-            corpses.Push(corpse);
+            corpses.Enqueue(corpse);
 
-            if (corpses.Count >= MAX_CORPSES){
-                WendigoCorpse rottenCorpse = corpses.Pop();
-                rottenCorpse.Bury(); 
+            if (corpses.Count >= maxCorpses){
+                WendigoCorpse rottenCorpse = corpses.Dequeue();
+                rottenCorpse.PrepareToFuneral(); 
             }
         }
     }

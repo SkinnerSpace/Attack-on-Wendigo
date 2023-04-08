@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public interface IPooledObject
 {
@@ -8,4 +9,5 @@ public interface IPooledObject
     void SetActive(bool active);
     void SetPositionAndRotation(Vector3 position, Quaternion rotation);
     void BackToPool();
+    void SubscribeOnSpawn(Action onSpawn);
 }

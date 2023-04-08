@@ -33,13 +33,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+
         PlayerCharacter = character.GetComponent<ISwitchable>();
         Airdrop = airdropImp.GetComponent<IAirdrop>();
 
         Instance = this;
         triggers = new TriggersManager(eventManager);
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-
+        
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));
         commands.Add("Resume", new GameResumeCommand(this));

@@ -34,13 +34,13 @@ public class RagDollController : MonoBehaviour
         if (ragdollIsEnabled != isRagdoll){
             ragdollIsEnabled = true;
 
-            DisableAnimator(isRagdoll);
+            DisableAnimator();
             EnableBones(isRagdoll);
             EnablePullers();
         }
     }
 
-    private void DisableAnimator(bool isRagdoll) => animator.enabled = isRagdoll ? false : true;
+    private void DisableAnimator() => animator.enabled = false;
 
     private void EnableBones(bool isRagdoll)
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SurfaceExplosion : MonoBehaviour, IPooledObject
 {
@@ -29,4 +30,6 @@ public class SurfaceExplosion : MonoBehaviour, IPooledObject
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
     }
+
+    public void SubscribeOnSpawn(Action onSpawn) { }
 }

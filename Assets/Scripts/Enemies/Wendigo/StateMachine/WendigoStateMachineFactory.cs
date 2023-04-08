@@ -49,7 +49,7 @@ public static class WendigoStateMachineFactory
 
         void SetMovement()
         {
-            Add(idle, chase, HasTarget());
+            Add(idle, chase, ReadyToChase());
             Add(chase, idle, HasNoTarget());
         }
 
@@ -64,14 +64,18 @@ public static class WendigoStateMachineFactory
         void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
         Func<bool> IsActive() => () => data.IsActive;
         Func<bool> IsArrived() => () => data.IsArrived;
-        Func<bool> HasTarget() => () => data.Target != null;
-        Func<bool> HasNoTarget() => () => data.Target == null;
 
-        Func<bool> ReadyToCast() => () => data.Fireball.IsReadyToUse;
+
+        Func<bool> ReadyToChase() => () => data.Target != null && !data.Fireball.IsReadyToUse && !data.Firebreath.IsReadyToUse;
+
+        Func<bool> ReadyToCast() => () => data.Target != null && data.Fireball.IsReadyToUse;
         Func<bool> FireballCastIsOver() => () => data.Fireball.IsOver;
 
-        Func<bool> ReadyToBurn() => () => data.Firebreath.IsReadyToUse;
+        Func<bool> ReadyToBurn() => () => data.Target != null && data.Firebreath.IsReadyToUse;
         Func<bool> FireBreathIsOver() => () => data.Firebreath.IsOver;
+
+        Func<bool> HasTarget() => () => data.Target != null;
+        Func<bool> HasNoTarget() => () => data.Target == null;
 
         Func<bool> IsDead() => () => !wendigo.Data.Health.IsAlive;
 

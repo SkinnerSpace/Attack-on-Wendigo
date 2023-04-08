@@ -1,10 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-# if UNITY_EDITOR
-# endif
-
-public class Architect : MonoBehaviour
+public class Architect : MonoBehaviour, IArchitect
 {
     private const float BUILDING_CHANCE = 0.05f;
 
@@ -23,19 +20,19 @@ public class Architect : MonoBehaviour
 
     private Mark[,] map;
 
-    private void Awake()
+    public void BuildTheTown()
     {
         UnityEngine.Random.InitState(DateTime.Now.Millisecond);
-        designDepartment = new DesignDepartment();
+
+        if (designDepartment == null){
+            designDepartment = new DesignDepartment();
+        }
 
         GenerateMap();
         FindCenter();
 
         centralizedObjects.Centralize(center);
-    }
 
-    private void Start()
-    {
         SetMarks();
 
         Blueprint blueprint = DrawBlueprint();

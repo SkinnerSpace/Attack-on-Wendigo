@@ -38,7 +38,7 @@ public class ShakeBuilderImp : IShakeBuilder
 
     public IShakeBuilder WithCurve(float frequency, float attack, float release)
     {
-        ShakeCurve curve = new ShakeCurve(frequency, attack, release);
+        curve = new ShakeCurve(frequency, attack, release);
         return this;
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WeaponPooledObject : MonoBehaviour, IPooledObject
 {
@@ -30,6 +31,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
     public void BackToPool() => pooler.PutIntoThePool(this);
+    public void SubscribeOnSpawn(Action onSpawn) { }
 
 }
 

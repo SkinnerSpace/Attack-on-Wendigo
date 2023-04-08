@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 {
@@ -9,12 +10,15 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
 
     [SerializeField] private bool permanent;
 
+    private event Action onSpawn;
+
     private void Awake() => particle = GetComponent<ParticleSystem>();
 
     private void Start() => pooler = PoolHolder.Instance;
 
     public void OnObjectSpawn(){
         particle.Play();
+        onSpawn?.Invoke();
     }
 
     public void SetActive(bool active) => gameObject.SetActive(active);
@@ -33,4 +37,7 @@ public class PooledExplosionVFX : MonoBehaviour, IPooledObject
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
     }
+
+    public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
+
 }

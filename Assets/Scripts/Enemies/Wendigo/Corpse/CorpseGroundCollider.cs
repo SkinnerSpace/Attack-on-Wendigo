@@ -8,10 +8,10 @@ namespace WendigoCharacter
 
         private Rigidbody body;
         private CorpseCollisionController controller;
+        private CorpseCollisionAftermathController aftermathController;
         private ShakeSettings shake;
         private WendigoData data;
 
-        private float collisionPower;
         private bool isEnabled;
         private bool isDestroyed;
 
@@ -29,6 +29,13 @@ namespace WendigoCharacter
             this.shake = shake;
         }
 
+        private void Start(){
+            aftermathController = new CorpseCollisionAftermathController(data, body, shake);
+        }
+
+
+        public void OnAmputation() => SwitchOff();
+
         public void SwitchOn()
         {
             if (!isDestroyed){
@@ -37,7 +44,7 @@ namespace WendigoCharacter
             }
         }
 
-        public void OnAmputation()
+        public void SwitchOff()
         {
             isDestroyed = true;
             isEnabled = false;
@@ -56,55 +63,9 @@ namespace WendigoCharacter
             Ray ray = new Ray(collisionShape.Center, Vector3.down);
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Landscape)){
-                ActUponCollisionPoint(hit);
+                aftermathController.ActUponCollisionPoint(hit);
             }
         }
-
-        private void ActUponCollisionPoint(RaycastHit hit)
-        {
-            CalculateCollisionPower();
-            HitTheSurface(hit);
-            ShakeTheEarth(hit);
-        }
-
-        private void CalculateCollisionPower(){
-            collisionPower = Mathf.InverseLerp(0f, shake.maxVelocity, body.velocity.magnitude);
-            collisionPower = Easing.QuadEaseIn(collisionPower);
-        }
-
-        private void HitTheSurface(RaycastHit hit)
-        {
-            ISurface surface = hit.transform.GetComponent<ISurface>();
-
-            surface.Hit("WendigoFallSnowParticle").
-                WithPosition(hit.point).
-                WithAngle(Vector3.down, Vector3.up).
-                WithSFXVolume(collisionPower).
-                Launch();
-        }
-
-        private void ShakeTheEarth(RaycastHit hit)
-        {
-            if (data.Target.Exist)
-            {
-                float time = Rand.Range(shake.minTime, shake.maxTime);
-                float strength = shake.strength * collisionPower;
-                float angleMultiplier = shake.angleMultiplier * collisionPower;
-
-                if (IsAllowedToShakeTheEarth())
-                {
-                    ShakeBuilder.Create().
-                        withTime(time).
-                        WithAxis(1f, 1f, 0f).
-                        WithStrength(strength, angleMultiplier).
-                        WithCurve(shake.frequency, shake.attack, shake.release).
-                        WithAttenuation(hit.point, data.Target.transform, shake.maxDistance).
-                        BuildAndLaunch(ShakeManagerComponent.Instance);
-                }
-            }
-        }
-
-        private bool IsAllowedToShakeTheEarth() => data != null && data.Target.IsGrounded;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
@@ -118,3 +79,5 @@ namespace WendigoCharacter
 #endif
     }
 }
+
+

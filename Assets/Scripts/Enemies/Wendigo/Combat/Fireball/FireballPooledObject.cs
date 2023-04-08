@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class FireballPooledObject : MonoBehaviour, IPooledObject
 {
@@ -31,4 +32,6 @@ public class FireballPooledObject : MonoBehaviour, IPooledObject
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
     }
+
+    public void SubscribeOnSpawn(Action onSpawn) { }
 }
