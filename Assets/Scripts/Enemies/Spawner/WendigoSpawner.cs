@@ -47,6 +47,14 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         wendigosLeft = spawnCount;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Spawn();
+        }
+    }
+
     private void Start(){
         pooler = PoolHolder.Instance;
         onCountUpdate?.Invoke(wendigosLeft);

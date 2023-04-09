@@ -11,7 +11,6 @@ public class PropDestroyerManager : MonoBehaviour
     private void OnEnable()
     {
         FindDestroyers();
-        SetPivotToDestroyers();
     }
 
     private void FindDestroyers()
@@ -20,12 +19,10 @@ public class PropDestroyerManager : MonoBehaviour
             destroyers = destroyersRoot.GetComponentsInChildren<PropDestroyer>();
     }
 
-    private void SetPivotToDestroyers()
+    public void ResetState()
     {
-        if (pivot != null)
-        {
-            /*foreach (PropDestroyer destroyer in destroyers)
-                destroyer.SetPivot(pivot);*/
+        foreach (PropDestroyer destroyer in destroyers){
+            destroyer.SwitchOn();
         }
     }
 }

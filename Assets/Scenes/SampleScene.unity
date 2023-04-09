@@ -11762,7 +11762,7 @@ PrefabInstance:
     - target: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2604546528073915768, guid: 49ab6b7f6631c5e46928697600911e71,
         type: 3}
@@ -65939,9 +65939,9 @@ MonoBehaviour:
   characterImp: {fileID: 1302925505}
   wendigoPrefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
     type: 3}
-  spawnCount: 15
-  minConcurrentCount: 2
-  maxConcurrentCount: 5
+  spawnCount: 1
+  minConcurrentCount: 1
+  maxConcurrentCount: 1
   minTimeInterval: 5
   maxTimeInterval: 15
 --- !u!4 &1488656788
@@ -66044,7 +66044,7 @@ MonoBehaviour:
   - tag: Wendigo
     prefab: {fileID: 2604546528073915766, guid: 49ab6b7f6631c5e46928697600911e71,
       type: 3}
-    size: 30
+    size: 1
   - tag: Fireball
     prefab: {fileID: 6894375513939352395, guid: 1053d71a1d9c45b48a27b4d600e34939,
       type: 3}

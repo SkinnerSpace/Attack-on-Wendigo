@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WendigoCharacter
 {
     [Serializable]
-    public class FireballAbilityData
+    public class FireballAbilityData : IRebootable
     {
         [Header("Distance")]
         public float MinDistance;
@@ -20,6 +20,21 @@ namespace WendigoCharacter
         public bool IsReadyToUse { get; set; }
         public bool IsCharged { get; set; } = true;
         public bool IsOver { get; set; }
+
+        public void Save()
+        {
+            
+        }
+
+        public void Reboot()
+        {
+            OnTarget = false;
+            IsExist = true;
+            IsReadyToUse = false;
+            IsCharged = true;
+            IsOver = false;
+        }
+
     }
 }
 

@@ -19,10 +19,5 @@ namespace WendigoCharacter
 
             Exist = true;
         }
-
-        public void ResetTarget()
-        {
-            Exist = false;
-        }
     }
 }

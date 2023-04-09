@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using WendigoCharacter;
 
 public class WendigoPooledObject : MonoBehaviour, IPooledObject
 {
@@ -8,13 +9,25 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
     private IObjectPooler pooler;
     private Action onSpawn;
 
+    [SerializeField] private RagDollController ragDollController;
+    [SerializeField] private WendigoData data;
+    [SerializeField] private CharacterController controller;
+
     private void Start() => pooler = PoolHolder.Instance;
 
     public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
 
-    public void OnObjectSpawn() => onSpawn?.Invoke();
+    public void OnObjectSpawn()
+    {
+        onSpawn?.Invoke();
+        ragDollController.ResetState();
+    }
 
-    public void SetActive(bool active) => gameObject.SetActive(active);
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
+        controller.enabled = true;
+    }
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
@@ -22,5 +35,6 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
     {
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
+        data.ResetData();
     }
 }

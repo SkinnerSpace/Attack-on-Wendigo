@@ -28,6 +28,8 @@ public class LimbData
     private int health;
     private float healthPercent;
 
+    private States initialState;
+    private bool initialCanBeDestroyed;
     public bool isBald;
 
     public LimbSFXSets SFXSet => sFXSet;
@@ -89,4 +91,13 @@ public class LimbData
     public bool IsHealthy() => state == States.Flesh;
     public bool IsInjured() => state == States.Bones;
     public bool IsDestroyed() => state == States.Destroyed;
+
+    public void ResetState()
+    {
+        health = initialHealth;
+        healthPercent = 1f;
+        state = initialState;
+        canBeDestroyed = initialCanBeDestroyed;
+        isBald = false;
+    }
 }

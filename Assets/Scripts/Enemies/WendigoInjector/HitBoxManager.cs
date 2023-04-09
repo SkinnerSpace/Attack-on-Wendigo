@@ -62,5 +62,15 @@ public class HitBoxManager : MonoBehaviour
             }
         }
     }
+
+    public void ResetState()
+    {
+        foreach (HitBoxProxy hitBox in hits){
+            hitBox.ResetState();
+        }
+    }
 }
+
+
+
 

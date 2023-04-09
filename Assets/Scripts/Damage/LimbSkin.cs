@@ -33,6 +33,7 @@ public class LimbSkin
         EnableRendering(bones, false);
     }
 
+    public void GrowHair() => EnableRendering(hair, true);
     public void GoBald() => EnableRendering(hair, false);
 
     public void ExposeGoreButKeepTheFleshUntouched(){

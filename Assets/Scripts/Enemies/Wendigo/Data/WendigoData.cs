@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace WendigoCharacter
 {
@@ -15,12 +17,40 @@ namespace WendigoCharacter
 
         public TransformData Transform { get; private set; }
 
+        public bool IsActive { get; set; }
+        public bool IsArrived { get; set; }
+
+        private List<IRebootable> backup;
+
         private void Awake()
         {
             Transform = new TransformData(transform);
+            CreateBackup();
         }
 
-        public bool IsActive { get; set; }
-        public bool IsArrived { get; set; }
+        private void CreateBackup()
+        {
+            backup = new List<IRebootable>()
+            {
+                Health,
+                Movement,
+                Firebreath,
+                Fireball,
+                Head
+            };
+
+            foreach (IRebootable rebootable in backup)
+                rebootable.Save();
+        }
+
+
+        public void ResetData()
+        {
+            foreach (IRebootable rebootable in backup)
+                rebootable.Reboot();
+
+            IsActive = false;
+            IsArrived = false;
+        }
     }
 }

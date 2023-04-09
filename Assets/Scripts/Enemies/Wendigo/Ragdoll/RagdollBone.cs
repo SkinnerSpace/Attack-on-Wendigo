@@ -15,7 +15,7 @@ public class RagdollBone : MonoBehaviour
     [SerializeField] private List<Limb> limbs;
     private int limbsDestroyed;
 
-    private bool isDestroyed;
+    private LayerMask initialLayer;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class RagdollBone : MonoBehaviour
             }
         }
 
-        //SubscribeOnLimbs();
+        initialLayer = gameObject.layer;
     }
 
     public void InitializeComponents()
@@ -37,23 +37,14 @@ public class RagdollBone : MonoBehaviour
         boneJoint = GetComponent<CharacterJoint>();
     }
 
+    public void ResetState()
+    {
+        limbsDestroyed = 0;
+        gameObject.layer = initialLayer;
+        EnableRagdoll(false);
+    }
+
     public void LinkTheStorage(RagdollBoneStorage storage) => this.storage = storage;
-
-    public void SwitchOn()
-    {
-        if (!isDestroyed){
-            EnableRagdoll(true);
-        }
-    }
-    public void SwitchOff() => EnableRagdoll(false);
-
-    private void Destroy()
-    {
-        isDestroyed = true;
-        //EnableRagdoll(false);
-        boneCollider.enabled = false;
-        Debug.Log("Ragdoll " + transform.name);
-    }
 
     public void EnableRagdoll(bool isRagdoll)
     {
@@ -145,7 +136,4 @@ public class RagdollBone : MonoBehaviour
             gameObject.layer = (int)Layers.RagDoll;
         }
     }
-
-    public void EnableCollider() => boneCollider.enabled = true;
-    public void DisableCollider() => boneCollider.enabled = false;
 }

@@ -29,4 +29,5 @@ public class PropDestroyer : MonoBehaviour, IAmputationObserver
     }
 
     public void SwitchOff() => destroyerCollider.enabled = false;
+    public void SwitchOn() => destroyerCollider.enabled = true;
 }

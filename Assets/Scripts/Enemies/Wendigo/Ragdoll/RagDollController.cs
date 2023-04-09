@@ -4,6 +4,8 @@ using System.Linq;
 
 public class RagDollController : MonoBehaviour
 {
+    private int arrivalAnimation = Animator.StringToHash("Arrival");
+
     private Animator animator;
     private RagdollBoneStorage storage;
 
@@ -24,23 +26,38 @@ public class RagDollController : MonoBehaviour
         RagdollBone closestBone = storage.ragdollBones.OrderBy(bone => Vector3.Distance(bone.transform.position, hitPoint)).First();
         closestBone.AddForceAtPosition(force, hitPoint);
     }
-    public void SwitchOn() => EnableRagdoll(true);
+    public void SwitchOn()
+    {
+        animator.enabled = false;
+        EnableRagdoll(true);
+    }
 
-    public void SwitchOff() => EnableRagdoll(false);
+    public void SwitchOff()
+    {
+        EnableRagdoll(false);
+    }
 
+    public void ResetState()
+    {
+        ragdollIsEnabled = false;
+        
+        foreach (RagdollBone bone in storage.ragdollBones){
+            bone.ResetState();
+        }
+
+        animator.enabled = true;
+        animator.Play(arrivalAnimation);
+    }
 
     private void EnableRagdoll(bool isRagdoll)
     {
         if (ragdollIsEnabled != isRagdoll){
             ragdollIsEnabled = true;
 
-            DisableAnimator();
             EnableBones(isRagdoll);
             EnablePullers();
         }
     }
-
-    private void DisableAnimator() => animator.enabled = false;
 
     private void EnableBones(bool isRagdoll)
     {
@@ -52,17 +69,5 @@ public class RagDollController : MonoBehaviour
     {
         foreach (RagdollPuller puller in storage.pullers)
             puller.Launch();
-    }
-
-    public void EnableColliders()
-    {
-        foreach (RagdollBone bone in storage.ragdollBones)
-            bone.EnableCollider();
-    }
-
-    public void DisableColliders()
-    {
-        foreach (RagdollBone bone in storage.ragdollBones)
-            bone.DisableCollider();
     }
 }

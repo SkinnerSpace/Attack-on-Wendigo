@@ -81,4 +81,10 @@ public static class WendigoStateMachineFactory
 
         return stateMachine;
     }
+
+    public static IStateMachine Clear(IStateMachine stateMachine)
+    {
+        stateMachine.SetState(new Disabled());
+        return stateMachine;
+    }
 }

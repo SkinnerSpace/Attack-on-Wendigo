@@ -21,15 +21,28 @@ namespace WendigoCharacter
 
             GUILayout.Space(25);
 
-            using (new GUILayout.HorizontalScope())
+            using (new GUILayout.VerticalScope())
             {
-                if (GUILayout.Button("Activate", GUILayout.Width(100)))
+                using (new GUILayout.HorizontalScope())
                 {
-                    wendigo.Data.IsActive = true;
-                    wendigo.Data.IsArrived = true;
+                    if (GUILayout.Button("Activate", GUILayout.Width(100)))
+                    {
+                        wendigo.Data.IsActive = true;
+                        wendigo.Data.IsArrived = true;
 
-                    wendigo.PoolObject.OnObjectSpawn();
-                    wendigo.SetTarget(wendigo.PendingTarget);
+                        wendigo.PoolObject.OnObjectSpawn();
+                        wendigo.SetTarget(wendigo.PendingTarget);
+                    }
+                }
+
+                GUILayout.Space(10);
+
+                using (new GUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("BackUp", GUILayout.Width(100)))
+                    {
+                        wendigo.BackUp();
+                    }
                 }
             }
         }

@@ -8,6 +8,7 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
     private Collider hitCollider;
 
     private int joints;
+    private int initialJoints;
 
     private event Action onGetDamage;
 
@@ -36,12 +37,22 @@ public class HitBoxProxy : MonoBehaviour, IHitBox
 
     public void SubscribeOnGettingDamage(Action onGetDamage) => this.onGetDamage += onGetDamage;
 
+    public void ResetState()
+    {
+        joints = initialJoints;
+        SwitchOn();
+    }
+
     public void SwitchOn(){
         hitBox.SwitchOn();
         hitCollider.enabled = true;
     }
 
-    public void IncrementJoints(int count) => joints += count;
+    public void IncrementJoints(int count)
+    {
+        joints += count;
+        initialJoints = joints;
+    }
 
     public void SwitchOff()
     {

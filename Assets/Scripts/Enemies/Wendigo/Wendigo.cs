@@ -53,7 +53,15 @@ namespace WendigoCharacter
 
         private event Action<Transform> notifyOnDeath;
 
-        public void OnSpawn() => Data.IsActive = true;
+        public void OnSpawn()
+        {
+            Data.IsActive = true;
+
+            if (stateMachine != null){
+                stateMachine = WendigoStateMachineFactory.Clear(stateMachine);
+            }
+        }
+
         private void Update()
         {
             if (chronos.IsTicking)
@@ -133,6 +141,8 @@ namespace WendigoCharacter
             GetController<WendigoTargetManager>().SetTarget(target);
         }
         private void BuryTheCorpse() => WendigoCorpseCollector.Instance.AddCorpse(corpse);
+
+        public void BackUp() => data.ResetData();
     }
 }
 

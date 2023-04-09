@@ -113,4 +113,16 @@ public class Limb : MonoBehaviour
     public bool IsDestroyed() => data.IsDestroyed();
 
     public void ExposeGoreButKeepTheFleshUntouched() => skin.ExposeGoreButKeepTheFleshUntouched();
+
+    public void ResetState()
+    {
+        data.ResetState();
+
+        if (data.IsHealthy()){
+            skin.ShowFlesh();
+        }
+        else if (data.IsInjured()){
+            skin.ShowBones();
+        }
+    }
 }

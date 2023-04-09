@@ -97,6 +97,7 @@ namespace WendigoCharacter
 
         private void Bury()
         {
+            Debug.Log("BURY");
             isBeingBuried = true;
 
             CalculateBurialPosition();
