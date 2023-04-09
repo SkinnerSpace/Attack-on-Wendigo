@@ -84,7 +84,6 @@ GameObject:
   - component: {fileID: 4974421214811940018}
   - component: {fileID: 4974421214811940019}
   - component: {fileID: 4974421214811939980}
-  - component: {fileID: 4974421214811939981}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
@@ -153,20 +152,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4974421214811939981
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4974421214811939982}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4974421215194494018
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +163,6 @@ GameObject:
   - component: {fileID: 4974421215194494022}
   - component: {fileID: 4974421215194494023}
   - component: {fileID: 4974421215194494016}
-  - component: {fileID: 4974421215194494017}
   m_Layer: 9
   m_Name: Shield
   m_TagString: Untagged
@@ -248,16 +232,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4974421215194494017
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4974421215194494018}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

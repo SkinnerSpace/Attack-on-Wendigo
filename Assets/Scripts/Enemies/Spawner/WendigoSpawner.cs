@@ -14,7 +14,6 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
     [SerializeField] private RadPosGenerator radPosGenerator;
     [SerializeField] private Transform characters;
     [SerializeField] private FunctionTimer timer;
-    [SerializeField] private InvasionCounter counter;
     [SerializeField] private Transform characterImp;
 
     [Header("Prefabs")]
@@ -41,7 +40,6 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
     private void Awake()
     {
-        counter.SubscribeOnTimeOut(Spawn);
         character = characterImp.GetComponent<ICharacterData>();
         //Pickable.SubscribeOnFirstPickUp(Spawn);
 
@@ -54,14 +52,20 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         onCountUpdate?.Invoke(wendigosLeft);
     }
 
-    public void Spawn()
+    public void Launch()
     {
-        if (IsAllowedToSpawn()){
-            spawnCount -= 1;
-
-            HandleSpawn();
+        if (IsAllowedToSpawn())
+        {
+            Spawn();
             SetSpawnTimer();
         }
+    }
+
+    public void Spawn()
+    {
+        spawnCount -= 1;
+        HandleSpawn();
+        //SetSpawnTimer();
     }
 
     private void HandleSpawn()
@@ -122,10 +126,9 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
     {
         if (!timer.TimerExist(SPAWN_TIMER)){
             float interval = GetSpawnTimeInterval();
-            timer.Set("Spawn", interval, Spawn);
+            timer.Set("Spawn", interval, Launch);
         }
     }
 
     public void SubscribeOnCountUpdate(Action<int> onCountUpdate) => this.onCountUpdate += onCountUpdate;
 }
-

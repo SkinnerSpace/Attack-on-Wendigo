@@ -124,7 +124,20 @@ namespace Character
         public bool IsJumping { get; set; }
 
         public bool WasGrounded { get; set; }
-        public bool IsGrounded { get; set; }
+        public bool IsGrounded
+        {
+            get
+            {
+                return isGrounded;
+            }
+            set
+            {
+                grounded = value;
+                isGrounded = value;
+            }
+        }
+        private bool isGrounded;
+        public bool grounded;
 
         public float GroundDetectionRadius { get { return groundDetectionRadius; } set { groundDetectionRadius = value; } }
         public float GroundDetectionHeight { get { return groundDetectionHeight; } set { groundDetectionHeight = value; } }

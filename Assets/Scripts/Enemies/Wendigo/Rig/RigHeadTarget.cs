@@ -16,7 +16,7 @@ namespace WendigoCharacter
 
         private void Awake()
         {
-            pooledObject.Subscribe(this);
+            pooledObject.SubscribeOnSpawn(OnSpawn);
         }
 
         public void OnSpawn()

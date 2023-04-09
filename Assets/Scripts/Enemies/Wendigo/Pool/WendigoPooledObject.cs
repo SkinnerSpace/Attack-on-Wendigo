@@ -5,9 +5,12 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
 {
     public string PoolTag { get; set; }
     public GameObject Object => gameObject;
+    private IObjectPooler pooler;
     private Action onSpawn;
 
-    public void Subscribe(IPooledObjectObserver observer) => onSpawn += observer.OnSpawn;
+    private void Start() => pooler = PoolHolder.Instance;
+
+    public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
 
     public void OnObjectSpawn() => onSpawn?.Invoke();
 
@@ -17,8 +20,7 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
 
     public void BackToPool()
     {
-
+        gameObject.SetActive(false);
+        pooler.PutIntoThePool(this);
     }
-
-    public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
 }

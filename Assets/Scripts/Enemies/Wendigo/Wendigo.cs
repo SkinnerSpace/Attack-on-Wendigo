@@ -90,7 +90,8 @@ namespace WendigoCharacter
             GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
             GetController<WendigoHealthSystem>().SubscribeOnDeath(OnDeath);
             GetController<WendigoHealthSystem>().SubscribeOnImpactApply(OnImpact);
-            poolObject.Subscribe(this);
+
+            poolObject.SubscribeOnSpawn(OnSpawn);
         }
 
         private void AddController(Type type)
