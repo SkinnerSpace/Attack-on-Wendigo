@@ -10,7 +10,6 @@ public class BlizzardSFXPlayer : MonoBehaviour
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference blizzardSFX;
 
-    //private IAttenuationPoint attenuationPoint;
     private AudioPlayer audioPlayer;
 
     private void Awake()
@@ -21,14 +20,13 @@ public class BlizzardSFXPlayer : MonoBehaviour
         audioPlayer.PlayLoop();
     }
 
-    //public void SetAttenuationPoint(IAttenuationPoint attenuationPoint) => this.attenuationPoint = attenuationPoint;
-
     private void Update() => UpdateAttenuation();
 
     private void UpdateAttenuation()
     {
         float distToCenter = Vector3.Distance(transform.position, attenuationPoint.position);
         float volume = Mathf.InverseLerp(0f, blizzard.Radius, distToCenter);
+        volume = Easing.QuadEaseIn(volume);
 
         audioPlayer.WithVolume(volume).UpdateParameters();
     }

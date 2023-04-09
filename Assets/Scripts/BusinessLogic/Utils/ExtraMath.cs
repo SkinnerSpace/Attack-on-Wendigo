@@ -18,6 +18,8 @@ public static class ExtraMath
     public static Vector3 OnlyY(this Vector3 vector) => new Vector3(0f, vector.y, 0f);
     public static Vector3 OnlyYZ(this Vector3 vector) => new Vector3(0f, vector.y, vector.z);
     public static Vector3 GetRandomVector3() => new Vector3(x: Rand.Range(-1f, 1f), y: Rand.Range(-1f, 1f), z: Rand.Range(-1f, 1f)).normalized;
+    public static Vector3 Abs(this Vector3 v) => new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+    public static float[] ToArray(this Vector3 v) => new float[] {v.x, v.y, v.z};
 
     public static float Round(this float value, float digits) => Mathf.Round(value * 10f * digits) / (10f * digits);
 

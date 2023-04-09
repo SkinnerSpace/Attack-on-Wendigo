@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Blizzard : MonoBehaviour
 {
-    public float Radius => radius;
+    public float Radius => influenceRadius;
+    public float Influence => influence;
+    private float influence;
 
-    private List<IPushable> pushables = new List<IPushable>();
+    [SerializeField] private List<PushableObject> pushables = new List<PushableObject>();
 
     [SerializeField] private float strength;
-    [SerializeField] private float radius;
-    [SerializeField] private float maxOuterDistance;
+    [SerializeField] private float influenceRadius;
+    [SerializeField] private float influenceThickness;
 
     public static Blizzard Instance { get; private set; }
 
@@ -18,60 +20,32 @@ public class Blizzard : MonoBehaviour
 
     private void Update()
     {
-        foreach (IPushable pushable in pushables)
+        foreach (PushableObject pushable in pushables)
             PushAway(pushable);
     }
 
-    public void AddPushable(IPushable pushable) => pushables.Add(pushable);
-
-    public void PushAway(IPushable pushable)
+    public void PushAway(PushableObject pushable)
     {
-        float proximity = GetProximity(pushable.position);
-
-        float resistance = GetResistance(pushable, proximity);
-        pushable.SetResistance(resistance);
-
-        Vector3 force = GetForce(pushable, proximity);
-        //pushable.ApplyForce(force);
+        CalculateInfluence(pushable.transform.position);
+        Vector3 forceDirection = GetForceDirection(pushable.transform.position);
+        Vector3 force = (forceDirection * influence) * strength;
+        pushable.ApplyForce(force);
     }
 
-    public float GetProximity(Vector3 objPosition)
+    private void CalculateInfluence(Vector3 point)
     {
-        float distance = Vector3.Distance(transform.position, objPosition);
-        float rawProximity = Mathf.Max(0f, (distance - radius)) / maxOuterDistance;
-        float proximity = Mathf.Clamp(rawProximity, 0f, 1f);
-
-        return proximity;
+        float distanceToTheCenter = Vector3.Distance(transform.position, point);
+        float distanceFromTheInfluenceRadius = Mathf.Max(0f, (distanceToTheCenter - influenceRadius));
+        float rawInfluence = distanceFromTheInfluenceRadius / influenceThickness;
+        influence = Mathf.Clamp(rawInfluence, 0f, 1f);
+        influence = Easing.QuadEaseIn(influence);
     }
 
-    private float GetResistance(IPushable pushable, float proximity)
+    private Vector3 GetForceDirection(Vector3 point)
     {
-        float directedness = GetDirectedness(pushable);
-        float resistance = Mathf.Clamp((proximity * directedness), 0f, 1f);
-        resistance = 1f - resistance;
+        Vector3 faceVector = (transform.position - point).FlatV3();
+        faceVector = faceVector.normalized;
 
-        return resistance;
-    }
-
-    private float GetDirectedness(IPushable pushable)
-    {
-        Vector3 faceVector = (transform.position - pushable.position);
-        Vector2 flatFaceVector = new Vector2(faceVector.x, faceVector.z);
-        Vector2 faceDirection = flatFaceVector.normalized;
-
-        Vector2 currentDirection = new Vector2(pushable.direction.x, pushable.direction.z).normalized;
-
-        float directedness = Vector2.Dot(faceDirection, currentDirection);
-        directedness = -directedness;
-
-        return directedness;
-    }
-
-    public Vector3 GetForce(IPushable pushable, float proximity)
-    {
-        Vector3 direction = (transform.position - pushable.position).normalized;
-        Vector3 force = direction * strength * proximity;
-
-        return force;
+        return faceVector;
     }
 }

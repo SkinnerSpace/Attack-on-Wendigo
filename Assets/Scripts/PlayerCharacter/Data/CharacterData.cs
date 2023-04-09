@@ -8,6 +8,7 @@ namespace Character
     {
         public static CharacterData Instance;
         [SerializeField] private Data data;
+        [SerializeField] private PushableObject pushable;
 
         [Header("Movement")]
         [SerializeField] private float speed = 300f;
@@ -137,6 +138,8 @@ namespace Character
         public float ReachDistance => reachDistance;
         public float DropItemStrength => dropItemStrength;
 
+        public Vector3 ExternalForce;
+
         public IShakeConfig GetShake(string key)
         {
             IShakeConfig screenShake = null;
@@ -153,6 +156,7 @@ namespace Character
         private void Awake()
         {
             Instance = this;
+            pushable.SubscribeOnForceUpdate((Vector3 force) => ExternalForce = force);
         }
     }
 }

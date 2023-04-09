@@ -15,6 +15,10 @@ public class BezierTrajectory : MonoBehaviour
     [SerializeField] public float distance;
     [SerializeField] private bool visualize;
 
+    [Header("Bounds")]
+    [SerializeField] private Vector2 boundsCenter;
+    [SerializeField] private float boundsRadius;
+
     [SerializeField] private BezierArrangement arrangement;
 
     public float Length => bezierLUT.arcLength;
@@ -61,10 +65,20 @@ public class BezierTrajectory : MonoBehaviour
     public void GenerateTrajectory()
     {
         constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
-        pointsManager.PushThePoints();
+        pointsManager.PushThePointsAwayFromEachOther();
+        pointsManager.KeepThePointsWithinTheBoundaries(boundsCenter, boundsRadius);
     }
 
+    public void PushAway() => pointsManager.PushThePointsAwayFromEachOther();
+
 #if UNITY_EDITOR
-    private void OnDrawGizmos() => RenderBezierCurve();
+    private void OnDrawGizmos()
+    {
+        RenderBezierCurve();
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), boundsRadius);
+        Gizmos.color = Color.white;
+    }
 #endif
 }

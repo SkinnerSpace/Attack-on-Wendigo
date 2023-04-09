@@ -34,7 +34,7 @@ namespace Character
             if (isReady)
             {
                 data.PreviousVerticalVelocity = data.VerticalVelocity;
-                data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y);
+                data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y) + data.ExternalForce;
                 data.Controller.Move(data.Velocity * Time.fixedDeltaTime);
             }
         }

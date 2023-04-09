@@ -24,8 +24,7 @@ public class BezierTrajectoryEditor : Editor
             GUILayout.Space(50);
             using (new GUILayout.HorizontalScope())
             {
-                if (GUILayout.Button("Generate Trajectory"))
-                {
+                if (GUILayout.Button("Generate Trajectory")){
                     bezierTrajectory.GenerateTrajectory();
                 }
             }
