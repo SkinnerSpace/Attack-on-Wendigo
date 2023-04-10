@@ -41,8 +41,6 @@ public class LimbsManager : MonoBehaviour
     }
 
     public void MakeLimbsDestroyable(){
-        Debug.Log("Make destroyable");
-
         foreach (Limb limb in limbs){
             limb.MakeDestroyable();
         }

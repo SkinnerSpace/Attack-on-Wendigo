@@ -76,6 +76,8 @@ namespace WendigoCharacter
 
             if (funeralProgress >= 1f){
                 isBeingBuried = false;
+                currentTime = 0f;
+                funeralProgress = 0f;
                 pooledObject.BackToPool();
             }
         }
@@ -97,7 +99,6 @@ namespace WendigoCharacter
 
         private void Bury()
         {
-            Debug.Log("BURY");
             isBeingBuried = true;
 
             CalculateBurialPosition();

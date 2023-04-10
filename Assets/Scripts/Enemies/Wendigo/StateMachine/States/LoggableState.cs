@@ -2,7 +2,7 @@
 
 public abstract class LoggableState
 {
-    public static bool isActive = true;
+    public static bool isActive = false;
 
     public virtual void LogEnter()
     {

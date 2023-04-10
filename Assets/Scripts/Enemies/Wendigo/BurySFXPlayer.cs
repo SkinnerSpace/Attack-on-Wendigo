@@ -32,6 +32,7 @@ public class BurySFXPlayer : MonoBehaviour
 
         timer.Set("StopGurgle", BLOOD_GURGLE_TIME, () => bloodGurglePlayer.Stop());
         timer.Set("StopStream", BLOOD_STREAM_TIME, () => bloodStreamPlayer.Stop());
+        Debug.Log("Playt");
     }
 }
 

@@ -124,5 +124,7 @@ public class Limb : MonoBehaviour
         else if (data.IsInjured()){
             skin.ShowBones();
         }
+
+        skin.GrowHair();
     }
 }

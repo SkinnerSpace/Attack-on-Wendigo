@@ -38,8 +38,14 @@ namespace WendigoCharacter
         {
             this.target = target;
 
-            if (target != null) rigController.SwitchOn();
-            else rigController.SwitchOff();
+            if (target != null)
+            {
+                rigController.SwitchOn();
+            }
+            else
+            {
+                rigController.SwitchOff();
+            }
         }
     }
 }

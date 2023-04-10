@@ -50,7 +50,9 @@ public class RagdollBone : MonoBehaviour
     {
         SetRigidBody(isRagdoll);
         boneCollider.enabled = isRagdoll;
-        if (boneJoint != null) boneJoint.enableCollision = isRagdoll;
+
+        if (boneJoint != null) 
+            boneJoint.enableCollision = isRagdoll;
     }
 
     private void SetRigidBody(bool isRagdoll)

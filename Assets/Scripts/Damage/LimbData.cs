@@ -36,6 +36,8 @@ public class LimbData
 
     public void Initialize(){
         health = initialHealth;
+        initialState = state;
+        initialCanBeDestroyed = canBeDestroyed;
     }
 
     public void SubtractHealth(int damage)
