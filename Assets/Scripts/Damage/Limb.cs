@@ -127,4 +127,6 @@ public class Limb : MonoBehaviour
 
         skin.GrowHair();
     }
+
+    public void SetHealthMultiplier(int healthMultipler) => data.SetHealthMultiplier(healthMultipler);
 }

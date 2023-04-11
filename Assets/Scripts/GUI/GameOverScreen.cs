@@ -3,14 +3,10 @@
 public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private EventManager eventManager;
 
-    private EventListener gameOverListener;
-
-    private void Awake()
+    private void Start()
     {
-        gameOverListener = new EventListener(Show);
-        eventManager.Subscribe(gameOverListener, "PlayerDied");
+        GameEvents.current.onPlayerHasDied += Show;
     }
 
     private void Show()

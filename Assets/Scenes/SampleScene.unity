@@ -5244,7 +5244,7 @@ PrefabInstance:
     - target: {fileID: 5944037392786839834, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5944037392786839834, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
@@ -6735,7 +6735,7 @@ PrefabInstance:
     - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
@@ -13178,7 +13178,7 @@ MonoBehaviour:
   - tag: BloodPuddle
     prefab: {fileID: 3807754980978305404, guid: 9829789518f615f4e85b74131263c919,
       type: 3}
-    size: 80
+    size: 200
 --- !u!114 &1488656794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13227,6 +13227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497846041}
   - component: {fileID: 1497846042}
+  - component: {fileID: 1497846043}
   m_Layer: 0
   m_Name: EventManager
   m_TagString: Untagged
@@ -13258,6 +13259,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77166973a73613c4c82eae9abc1c5f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1497846043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497846040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5125fbcd51445514a84280458010ec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1500942367 stripped
@@ -13744,7 +13757,7 @@ PrefabInstance:
     - target: {fileID: 3277814352433182445, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3277814352433182445, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
         type: 3}
@@ -15075,7 +15088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2033496633
 Transform:
   m_ObjectHideFlags: 0

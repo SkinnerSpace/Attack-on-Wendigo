@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 [ExecuteAlways]
 public class HitBoxManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class HitBoxManager : MonoBehaviour
 
     public HitBoxProxy[] hits;
 
+#if UNITY_EDITOR
     private void OnEnable()
     {
         surfaces = new Dictionary<SurfaceTypes, List<SurfaceData>>();
@@ -28,6 +30,7 @@ public class HitBoxManager : MonoBehaviour
         ProvideHitBoxesWithOwner();
         AddSurfaceComponentsIfNecessary();
     }
+#endif
 
     private void FindHitBoxes()
     {

@@ -12,6 +12,8 @@ public class BuckshotShooter : RaycastShooter
 
     protected override void DoShoot()
     {
+
+
         for (int i = 0; i < BUCKSHOT_COUNT; i++){
             ShootAtTheTarget();
         }

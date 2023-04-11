@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class WendigoSpawnerLogic
 {
@@ -40,8 +41,9 @@ public class WendigoSpawnerLogic
 
         UpdateProgress();
         NotifyOnSetTimer();
-    }
 
+        Debug.Log("LEFT " + data.leftToSpawnCount);
+    }
 
     public void OnDeath()
     {
@@ -51,6 +53,14 @@ public class WendigoSpawnerLogic
         UpdateDensity();
         UpdateAliveCount();
         NotifyOnSetTimer();
+
+        if (data.aliveCount <= 0){
+            GameEvents.current.WendigosAreDefeated();
+        }
+
+        Debug.Log("---COUNT---");
+        Debug.Log("Alive " + data.aliveCount);
+        Debug.Log("Dead " + data.deadCount);
     }
 
     public void SubscribeOnAliveCountUpdate(Action<int> onAliveCountUpdate) => this.onAliveCountUpdate += onAliveCountUpdate; 

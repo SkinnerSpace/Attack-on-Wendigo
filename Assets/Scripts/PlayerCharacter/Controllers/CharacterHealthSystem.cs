@@ -61,6 +61,7 @@ namespace Character
         {
             healthData.Amount = 0;
             onDeath?.Invoke();
+            GameEvents.current.PlayerHasDied();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 [ExecuteAlways]
 public class PropDestroyerManager : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class PropDestroyerManager : MonoBehaviour
 
     public PropDestroyer[] destroyers;
 
+#if UNITY_EDITOR
     private void OnEnable()
     {
         FindDestroyers();
     }
+#endif
 
     private void FindDestroyers()
     {

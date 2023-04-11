@@ -18,13 +18,15 @@ public class LimbData
     [SerializeField] private States baldState = States.Bones;
     [SerializeField] private LimbSFXSets sFXSet = LimbSFXSets.FleshCrash;
 
-    [SerializeField] private int initialHealth;
+    [SerializeField] private int healthMultiplier;
+    [SerializeField] private int healthProportion;
     [SerializeField] private List<Limb> lockLimbs;
     [SerializeField] public bool canBeDestroyed;
 
     [Header("Test")]
     [SerializeField] private bool alwaysUnlocked;
 
+    private int initialHealth;
     private int health;
     private float healthPercent;
 
@@ -35,6 +37,7 @@ public class LimbData
     public LimbSFXSets SFXSet => sFXSet;
 
     public void Initialize(){
+        initialHealth = healthProportion * healthMultiplier;
         health = initialHealth;
         initialState = state;
         initialCanBeDestroyed = canBeDestroyed;
@@ -102,4 +105,6 @@ public class LimbData
         canBeDestroyed = initialCanBeDestroyed;
         isBald = false;
     }
+
+    public void SetHealthMultiplier(int healthMultiplier) => this.healthMultiplier = healthMultiplier;
 }

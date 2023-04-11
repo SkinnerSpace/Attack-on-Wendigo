@@ -5336,8 +5336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   impact: 25
-  ammoCapacity: 20
-  ammo: 20
+  ammoCapacity: 8
+  ammo: 8
   precision: 0.1
   aimPrecision: 0.2
   rate: 0.5

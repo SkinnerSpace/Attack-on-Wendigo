@@ -101,11 +101,16 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void ManageConnectionToInput(bool connect)
     {
-        if (connect){
-            inputReader.Get<CombatInputReader>().Subscribe(this);
-        }
-        else{
-            inputReader.Get<CombatInputReader>().Unsubscribe(this);
+        if (inputReader != null)
+        {
+            if (connect)
+            {
+                inputReader.Get<CombatInputReader>().Subscribe(this);
+            }
+            else
+            {
+                inputReader.Get<CombatInputReader>().Unsubscribe(this);
+            }
         }
     }
 

@@ -524,10 +524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6272efc6b6cfc458c2f1205434dded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
   impact: 25
-  ammoCapacity: 50
-  ammo: 50
+  ammoCapacity: 30
+  ammo: 30
   precision: 0.6
   aimPrecision: 0.7
   rate: 0.1

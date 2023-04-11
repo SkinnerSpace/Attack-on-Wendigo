@@ -56,9 +56,21 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
     private void SetSpawnTimer(float timeToSpawn)
     {
-        if (!timer.TimerExist(SPAWN_TIMER)){
-            timer.Set(SPAWN_TIMER, timeToSpawn, spawnerLogic.SpawnIfPossible);
+        if (IsAbleToSetTimer(timeToSpawn)){
+             timer.Set(SPAWN_TIMER, timeToSpawn, spawnerLogic.SpawnIfPossible);
         }
+    }
+
+    private bool IsAbleToSetTimer(float timeToSpawn)
+    {
+        return !timer.TimerExist(SPAWN_TIMER) ||
+               LessTimeLeftThanIsOffered(timeToSpawn);
+    }
+
+    private bool LessTimeLeftThanIsOffered(float timeToSpawn)
+    {
+        return timer.TimerExist(SPAWN_TIMER) &&
+               timer.GetTimeLeft(SPAWN_TIMER) <= timeToSpawn;
     }
 
     public void SubscribeOnAliveCountUpdate(Action<int> onCountUpdate) => spawnerLogic.SubscribeOnAliveCountUpdate(onCountUpdate);

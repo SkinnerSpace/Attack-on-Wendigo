@@ -6,6 +6,7 @@ public class LimbsManager : MonoBehaviour
 {
     [SerializeField] private Transform root;
     [SerializeField] private Transform healthSystempImp;
+    [SerializeField] private int healthMultiplier;
 
     [Header("Parts")]
     public LimbGroup[] limbGroups;
@@ -15,14 +16,20 @@ public class LimbsManager : MonoBehaviour
 
     private IHealthSystem healthSystem;
 
+#if UNITY_EDITOR
     private void OnEnable()
     {
         if (root != null)
         {
             limbGroups = root.GetComponentsInChildren<LimbGroup>();
             limbs = root.GetComponentsInChildren<Limb>();
+
+            foreach (Limb limb in limbs){
+                limb.SetHealthMultiplier(healthMultiplier);
+            }
         }
     }
+#endif
 
     private void Awake()
     {

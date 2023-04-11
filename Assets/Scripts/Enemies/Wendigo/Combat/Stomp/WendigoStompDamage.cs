@@ -4,4 +4,5 @@
 public class WendigoStompDamage : ScriptableObject
 {
     public int damage;
+    public float impact;
 }
