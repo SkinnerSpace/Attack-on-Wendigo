@@ -143,6 +143,8 @@ namespace WendigoCharacter
         private void BuryTheCorpse() => WendigoCorpseCollector.Instance.AddCorpse(corpse);
 
         public void BackUp() => data.ResetData();
+
+        public void SetHealth(int healthAmount) => data.Health.Amount = healthAmount;
     }
 }
 

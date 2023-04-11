@@ -11,7 +11,11 @@ public class EnemiesBar : MonoBehaviour
     private void Awake()
     {
         spawner = spawnerImp.GetComponent<ISpawner>();
-        spawner.SubscribeOnCountUpdate(OnUpdate);
+    }
+
+    private void Start()
+    {
+        spawner.SubscribeOnAliveCountUpdate(OnUpdate);
     }
 
     public void OnUpdate(int count){

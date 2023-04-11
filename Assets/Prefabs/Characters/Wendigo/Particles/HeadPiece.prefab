@@ -4832,7 +4832,6 @@ GameObject:
   - component: {fileID: 7744124783963655302}
   - component: {fileID: 1907328129507946925}
   - component: {fileID: 6896167149322879136}
-  - component: {fileID: 2579679744216775572}
   m_Layer: 0
   m_Name: MicroPieces
   m_TagString: Untagged
@@ -9663,27 +9662,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2579679744216775572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554978186500939894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5aa9f847ea0d464383b02fee0e35e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionSFX:
-    Guid:
-      Data1: 1799391505
-      Data2: 1174616698
-      Data3: 1129216424
-      Data4: 446970996
-    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/BoneSlap
-  variety: 4
-  pitchRange: 2
 --- !u!1 &981333561679946554
 GameObject:
   m_ObjectHideFlags: 0
@@ -14547,6 +14525,7 @@ MonoBehaviour:
     Path: event:/SFX/Game/Gameplay/Wendigo/Gore/FleshSlap
   variety: 4
   pitchRange: 2
+  data: {fileID: 0}
 --- !u!1 &5851279566191470988
 GameObject:
   m_ObjectHideFlags: 0
@@ -29066,3 +29045,4 @@ MonoBehaviour:
     Path: event:/SFX/Game/Gameplay/Wendigo/Gore/FleshSlap
   variety: 4
   pitchRange: 2
+  data: {fileID: 0}

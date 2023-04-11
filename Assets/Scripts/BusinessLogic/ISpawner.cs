@@ -2,5 +2,5 @@
 
 public interface ISpawner
 {
-    void SubscribeOnCountUpdate(Action<int> onCountUpdate);
+    void SubscribeOnAliveCountUpdate(Action<int> onCountUpdate);
 }

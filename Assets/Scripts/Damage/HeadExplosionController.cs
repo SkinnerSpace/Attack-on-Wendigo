@@ -12,6 +12,10 @@ public class HeadExplosionController : MonoBehaviour
     [SerializeField] private ParticleSystem tornLeftHorn;
     [SerializeField] private ParticleSystem tornRightHorn;
 
+    [Header("Sounds")]
+    [SerializeField] private ParticleSoundSystem leftHornSFX;
+    [SerializeField] private ParticleSoundSystem rightHornSFX;
+
     [SerializeField] private List<MeshRenderer> meshesToHide; 
 
     private void Awake(){
@@ -23,11 +27,13 @@ public class HeadExplosionController : MonoBehaviour
         if (!leftHorn.IsDestroyed()){
             leftHorn.SwitchOffHitBoxes();
             tornLeftHorn.Play();
+            leftHornSFX.SwitchOn();
         }
 
         if (!rightHorn.IsDestroyed()){
             rightHorn.SwitchOffHitBoxes();
             tornRightHorn.Play();
+            rightHornSFX.SwitchOn();
         }
 
         foreach (MeshRenderer meshToHide in meshesToHide){

@@ -53,6 +53,7 @@ public class RadPosGenerator : MonoBehaviour
         return radPosCalc.GetForwardPos(rawForwardPos, randRadius);
     }
 
+# if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (test && viewer != null)
@@ -63,4 +64,5 @@ public class RadPosGenerator : MonoBehaviour
             Gizmos.DrawSphere(GetPosition(radius), 3f);
         }
     }
+#endif
 }

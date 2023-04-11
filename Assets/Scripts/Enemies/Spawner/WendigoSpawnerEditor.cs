@@ -15,19 +15,6 @@ public class WendigoSpawnerEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-
-        using (new GUILayout.VerticalScope())
-        {
-            GUILayout.Space(10);
-
-            using (new GUILayout.HorizontalScope())
-            {
-                if (GUILayout.Button("Spawn"))
-                {
-                    spawner.Spawn();
-                }
-            }
-        }
     }
 }
 # endif
