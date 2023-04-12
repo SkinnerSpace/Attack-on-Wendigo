@@ -16,28 +16,30 @@ public class WeaponSweeper : MonoBehaviour
     private IObjectPooler pooler;
     private ParticleSystem sweepParticle;
 
+    private bool isSweeping;
     private bool isSwept;
-
-    public static event Action onSweptAway;
 
     private void Start()
     {
         pooler = PoolHolder.Instance;
     }
 
-    public static void SubscribeOnSweptAway(Action onSwept) => onSweptAway += onSwept;
-
     public void SweepTheWeapon()
     {
-        Vector3 sweepPosition = transform.position;
+        if (!isSweeping)
+        {
+            isSweeping = true;
+            Vector3 sweepPosition = transform.position;
 
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Landscape)){
-            sweepPosition = hit.point;
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ComplexLayers.Landscape))
+            {
+                sweepPosition = hit.point;
+            }
+
+            sweepParticle = pooler.SpawnFromThePool("SweepSnowParticle", sweepPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+            StartCoroutine(WaitForRest());
         }
-
-        sweepParticle = pooler.SpawnFromThePool("SweepSnowParticle", sweepPosition, Quaternion.identity).GetComponent<ParticleSystem>();
-        StartCoroutine(WaitForRest());
     }
 
     private IEnumerator WaitForRest()
@@ -71,7 +73,8 @@ public class WeaponSweeper : MonoBehaviour
     private void FinishSweeping()
     {
         isSwept = false;
-        onSweptAway?.Invoke();
+        isSweeping = false;
+        GameEvents.current.WeaponHasBeenSweptAway();
         pooledObject.BackToPool();
     }
 }

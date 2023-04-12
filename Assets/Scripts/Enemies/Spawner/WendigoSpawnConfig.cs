@@ -11,4 +11,3 @@ public class WendigoSpawnConfig : ScriptableObject
     public AnimationCurve health;
 }
 
-//public class AirDropConfig : ScriptableObject

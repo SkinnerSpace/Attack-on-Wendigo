@@ -2,8 +2,7 @@
 
 public class LaserBeam : MonoBehaviour
 {
-    private const float EMISSION_HEIGHT = 100f;
-
+    [SerializeField] private float emissionHeight = 1000f;
     [SerializeField] private LaserBeamFader fader;
     [SerializeField] private CrateSFXPlayer sFXPlayer;
 
@@ -22,7 +21,7 @@ public class LaserBeam : MonoBehaviour
     {
         if (isActive){
             line.SetPosition(0, transform.position);
-            line.SetPosition(1, transform.position + (Vector3.up * EMISSION_HEIGHT));
+            line.SetPosition(1, transform.position + (Vector3.up * emissionHeight));
         }
     }
 

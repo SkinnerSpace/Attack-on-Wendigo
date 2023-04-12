@@ -5,6 +5,7 @@ public class CrateSFXPlayer : MonoBehaviour
 {
     [SerializeField] private FMODUnity.EventReference dropSFX;
     [SerializeField] private FMODUnity.EventReference bumpSFX;
+    [SerializeField] private FMODUnity.EventReference jumpSFX;
     [SerializeField] private FMODUnity.EventReference flashSFX;
     [SerializeField] private FMODUnity.EventReference lightOnSFX;
     [SerializeField] private FMODUnity.EventReference openSFX;
@@ -13,8 +14,6 @@ public class CrateSFXPlayer : MonoBehaviour
 
     private Dictionary<string, AudioPlayer> players = new Dictionary<string, AudioPlayer>();
 
-    private AudioPlayer audioPlayer;
-
     private void Awake()
     {
         players.Add("Drop", 
@@ -22,6 +21,9 @@ public class CrateSFXPlayer : MonoBehaviour
 
         players.Add("Bump",
             AudioPlayer.Create(bumpSFX).WithAnchor(transform).WithPitch(-4f, 1f));
+
+        players.Add("Jump",
+            AudioPlayer.Create(jumpSFX).WithAnchor(transform).WithPitch(0, 4f));
 
         players.Add("Flash",
             AudioPlayer.Create(flashSFX).WithAnchor(transform).WithPitch(-2f, 2f));
@@ -42,6 +44,7 @@ public class CrateSFXPlayer : MonoBehaviour
 
     public void PlayDrop() => Play("Drop");
     public void PlayBump() => Play("Bump");
+    public void PlayJump() => Play("Jump");
     public void PlayLightOn() => Play("LightOn");
     public void PlayShoot() => Play("Shoot");
     public void PlayOpen(){

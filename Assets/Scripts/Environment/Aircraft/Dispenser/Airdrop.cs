@@ -4,15 +4,17 @@ using UnityEngine;
 public class Airdrop : MonoBehaviour, IAirdrop
 {
     [SerializeField] private DispenserStorage storage;
-    [SerializeField] private int maxCargoCount = 5;
     [SerializeField] private List<string> cargo = new List<string>();
+    [SerializeField] private AirDropConfig config;
 
+    private int maxCargoCount = 1;
     private int cargoCount;
 
-    private void Awake()
+    private void Start()
     {
-        PickUpManager.Instance.SubscribeOnFirstPickUp(LoadCargo);
-        WeaponSweeper.SubscribeOnSweptAway(CargoDisappeared);
+        GameEvents.current.onFirstWeaponPickedUp += LoadCargo;
+        GameEvents.current.onWeaponSweptAway += WeaponDisappeared;
+        GameEvents.current.onProgressUpdate += UpdateProgress;
     }
 
     public void AddCargo(int index)
@@ -21,9 +23,18 @@ public class Airdrop : MonoBehaviour, IAirdrop
         storage.AddAnItem(cargo[index]);
     }
 
-    public void CargoDisappeared()
+    public void WeaponDisappeared()
     {
         cargoCount -= 1;
+        Debug.Log("Cargo after disappearance: " + cargoCount);
+
+        LoadCargo();
+    }
+
+    public void UpdateProgress(float progress)
+    {
+        maxCargoCount = Mathf.RoundToInt(config.weaponCount.Evaluate(progress));
+        Debug.Log("Cargo max count " + maxCargoCount);
         LoadCargo();
     }
 
@@ -31,7 +42,10 @@ public class Airdrop : MonoBehaviour, IAirdrop
     {
         int dropCount = maxCargoCount - cargoCount;
 
-        for (int i = 0; i < dropCount; i++)
+        for (int i = 0; i < dropCount; i++){
             AddCargo(Rand.Range(0, cargo.Count));
+        }
+
+        Debug.Log("Cargo after the load " + cargoCount);
     }
 }

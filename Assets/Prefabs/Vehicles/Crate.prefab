@@ -57,6 +57,13 @@ MonoBehaviour:
       Data3: -1442617667
       Data4: -1023508277
     Path: event:/SFX/Game/Gameplay/Crate/CrateBump
+  jumpSFX:
+    Guid:
+      Data1: 1368737366
+      Data2: 1142238123
+      Data3: 150620318
+      Data4: 1342302728
+    Path: event:/SFX/Game/Gameplay/Crate/CrateJump
   flashSFX:
     Guid:
       Data1: 1595984124
@@ -5103,6 +5110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2e333f3aab3114a911a0ddf632196c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emissionHeight: 500
   fader: {fileID: 6143223655137451496}
   sFXPlayer: {fileID: 7705346738062873578}
 --- !u!114 &6143223655137451496

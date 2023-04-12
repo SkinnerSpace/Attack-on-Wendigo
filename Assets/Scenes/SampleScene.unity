@@ -940,6 +940,7 @@ MonoBehaviour:
   - Pistol
   - Rifle
   - Shotgun
+  config: {fileID: 11400000, guid: a2b4e42152dc89a4fb2868238a339597, type: 2}
 --- !u!1 &225116403
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,5 +82,7 @@ public class WendigoSpawnerLogic
     {
         data.progress = data.spawnedCount / (float) data.initialSpawnCount;
         data.UpdateGameFlowValues();
+
+        GameEvents.current.UpdateProgress(data.progress);
     }
 }

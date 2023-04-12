@@ -7,7 +7,7 @@
     public void Execute()
     {
         AudioEvent.StopAll();
-        PickUpManager.Instance.ResetState();
+        GameEvents.current.ResetState();
         gameManager.LevelLoader.ReloadScene();
     }
 }

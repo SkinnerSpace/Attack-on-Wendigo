@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608eeabc729bf2d48810679bb2880dc5, type: 3}
   m_Name: WendigoSpawnConfig
   m_EditorClassIdentifier: 
-  initialCount: 30
+  initialCount: 10
   concurrentSpawnCount:
     serializedVersion: 2
     m_Curve:

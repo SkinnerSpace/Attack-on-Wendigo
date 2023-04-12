@@ -9,6 +9,8 @@ public class GameFlowManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private bool spawnWendigoOnWeaponPickedUp;
 
+
+
     private void Start()
     {
         if (spawnWendigoOnWeaponPickedUp)
@@ -19,6 +21,6 @@ public class GameFlowManager : MonoBehaviour
 
     private void EventN1()
     {
-        PickUpManager.Instance.SubscribeOnFirstPickUp(wendigoSpawner.Launch);
+        GameEvents.current.onFirstWeaponPickedUp += wendigoSpawner.Launch;
     }
 }

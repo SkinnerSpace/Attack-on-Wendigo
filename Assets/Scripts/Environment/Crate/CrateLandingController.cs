@@ -34,6 +34,7 @@ public class CrateLandingController : MonoBehaviour
     private void JumpIfInsideACollider(){
         if (Physics.CheckSphere(transform.position, buggyCollisionRadius, ComplexLayers.Ground)){
             Jump();
+            sFXPlayer.PlayJump();
         }
     }
 

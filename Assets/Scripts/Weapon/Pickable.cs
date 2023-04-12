@@ -68,7 +68,7 @@ public class Pickable : MonoBehaviour, IPickable
     {
         onInteract?.Invoke();
         onPickedUp?.Invoke();
-        PickUpManager.Instance.PickUp();
+        GameEvents.current.WeaponHasBeenPickedUp();
     }
 
     private void NotifyOnDropped()
