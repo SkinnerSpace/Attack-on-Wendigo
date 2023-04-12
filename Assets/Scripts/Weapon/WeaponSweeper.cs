@@ -9,9 +9,7 @@ public class WeaponSweeper : MonoBehaviour
     [SerializeField] private WeaponPooledObject pooledObject;
     [SerializeField] private FunctionTimer timer;
 
-    [Header("Settings")]
-    [SerializeField] private float fallSpeed = 0.5f;
-    [SerializeField] private float sweepTime = 3f;
+    [SerializeField] private SweeperData data;
 
     private IObjectPooler pooler;
     private ParticleSystem sweepParticle;
@@ -26,8 +24,10 @@ public class WeaponSweeper : MonoBehaviour
 
     public void SweepTheWeapon()
     {
+        Debug.Log("Sweep call");
         if (!isSweeping)
         {
+            Debug.Log("Is being swept");
             isSweeping = true;
             Vector3 sweepPosition = transform.position;
 
@@ -37,14 +37,14 @@ public class WeaponSweeper : MonoBehaviour
                 sweepPosition = hit.point;
             }
 
-            sweepParticle = pooler.SpawnFromThePool("SweepSnowParticle", sweepPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+            //sweepParticle = pooler.SpawnFromThePool("SweepSnowParticle", sweepPosition, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(WaitForRest());
         }
     }
 
     private IEnumerator WaitForRest()
     {
-        while (physics.Velocity.magnitude != 0f)
+        while (physics.Velocity.magnitude > Mathf.Epsilon)
             yield return null;
 
         StartCoroutine(FallThrough());
@@ -64,11 +64,11 @@ public class WeaponSweeper : MonoBehaviour
     private void PrepareForSweeping()
     {
         physics.DisablePhysics();
-        timer.Set("OnSwept", sweepTime, () => isSwept = true);
-        timer.Set("StopParticles", sweepTime * 0.5f, () => sweepParticle.Stop());
+        timer.Set("OnSwept", data.sweepTime, () => isSwept = true);
+        //timer.Set("StopParticles", data.sweepTime * 0.5f, () => sweepParticle.Stop());
     }
 
-    private void MoveDown() => transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+    private void MoveDown() => transform.position += Vector3.down * data.fallSpeed * Time.deltaTime;
 
     private void FinishSweeping()
     {
@@ -76,5 +76,6 @@ public class WeaponSweeper : MonoBehaviour
         isSweeping = false;
         GameEvents.current.WeaponHasBeenSweptAway();
         pooledObject.BackToPool();
+        Debug.Log("Is swept away");
     }
 }

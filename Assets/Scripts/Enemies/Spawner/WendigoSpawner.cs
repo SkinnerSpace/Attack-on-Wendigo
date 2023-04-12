@@ -39,6 +39,12 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         IObjectPooler pooler = PoolHolder.Instance;
         wendigoManager = new WendigoManager(spawnerLogic, container, characterImp, pooler);
         spawnerLogic.UpdateAliveCount();
+
+        GameEvents.current.onFirstWeaponPickedUp += LaunchWithDelay;
+    }
+
+    public void LaunchWithDelay(){
+        timer.Set("Launch", 4f, Launch);
     }
 
     public void Launch(){

@@ -663,8 +663,7 @@ MonoBehaviour:
   physics: {fileID: 3281898898999005978}
   pooledObject: {fileID: 6638904995267437864}
   timer: {fileID: 7286420635910837017}
-  fallSpeed: 0.5
-  sweepTime: 3
+  data: {fileID: 11400000, guid: d054f6b4c392e054dafeb3e88c27f4e9, type: 2}
 --- !u!54 &4743937849382538504
 Rigidbody:
   m_ObjectHideFlags: 0

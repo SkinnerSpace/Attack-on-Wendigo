@@ -47,11 +47,11 @@ public class WendigoSpawnerData
         timeToSpawn = Mathf.Lerp(config.minTimeInterval.Evaluate(progress), config.maxTimeInterval.Evaluate(progress), density);
         health = Mathf.RoundToInt(config.health.Evaluate(progress));
 
-        Debug.Log("---WENDIGO---");
+/*        Debug.Log("---WENDIGO---");
         Debug.Log("Density " + density);
         Debug.Log("Concurrent " + allowedConcurrentCount);
         Debug.Log("Time " + timeToSpawn);
-        Debug.Log("Health " + health);
+        Debug.Log("Health " + health);*/
     }
 }
 

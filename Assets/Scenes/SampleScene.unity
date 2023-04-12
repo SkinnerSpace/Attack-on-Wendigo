@@ -935,7 +935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 1559680915}
-  maxCargoCount: 4
   cargo:
   - Pistol
   - Rifle
@@ -6522,7 +6521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wendigoSpawner: {fileID: 1488656787}
-  spawnWendigoOnWeaponPickedUp: 1
+  spawnWendigoOnWeaponPickedUp: 0
 --- !u!114 &826512744 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6649175868031260509, guid: 49ab6b7f6631c5e46928697600911e71,
