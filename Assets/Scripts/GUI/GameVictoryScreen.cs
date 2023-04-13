@@ -6,7 +6,7 @@ public class GameVictoryScreen : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onWendigosAreDefeated += Show;
+        GameEvents.current.onVictory += Show;
     }
 
     private void Show()

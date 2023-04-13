@@ -30,7 +30,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
     private void Awake()
     {
         data = new WendigoSpawnerData(config);
-        spawnerLogic = new WendigoSpawnerLogic(data);
+        spawnerLogic = new WendigoSpawnerLogic(data, timer);
         spawnerLogic.SubscribeOnSpawn(Spawn);
         spawnerLogic.SubscribeOnSetSpawnTimer(SetSpawnTimer);
     }

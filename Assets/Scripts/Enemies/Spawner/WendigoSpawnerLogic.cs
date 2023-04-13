@@ -4,14 +4,16 @@ using UnityEngine;
 public class WendigoSpawnerLogic
 {
     public WendigoSpawnerData data;
+    private FunctionTimer timer;
 
     private event Action onSpawn;
     private event Action<float> onSetTimer;
     private event Action<int> onAliveCountUpdate;
 
-    public WendigoSpawnerLogic(WendigoSpawnerData data)
+    public WendigoSpawnerLogic(WendigoSpawnerData data, FunctionTimer timer)
     {
         this.data = data; ;
+        this.timer = timer;
     }
 
     public void SpawnIfPossible()
@@ -54,9 +56,7 @@ public class WendigoSpawnerLogic
         UpdateAliveCount();
         NotifyOnSetTimer();
 
-        if (data.aliveCount <= 0){
-            GameEvents.current.WendigosAreDefeated();
-        }
+        DeclareVictoryIfNoOneIsLeft();
 
 /*        Debug.Log("---COUNT---");
         Debug.Log("Alive " + data.aliveCount);
@@ -80,9 +80,16 @@ public class WendigoSpawnerLogic
 
     private void UpdateProgress()
     {
-        data.progress = data.spawnedCount / (float) data.initialSpawnCount;
+        data.progress = data.spawnedCount / (float)data.initialSpawnCount;
         data.UpdateGameFlowValues();
 
         GameEvents.current.UpdateProgress(data.progress);
+    }
+
+    private void DeclareVictoryIfNoOneIsLeft()
+    {
+        if (data.aliveCount <= 0){
+            timer.Set("Victory", 2f, GameEvents.current.DeclareVictory);
+        }
     }
 }

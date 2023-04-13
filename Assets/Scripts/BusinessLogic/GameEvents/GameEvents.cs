@@ -9,7 +9,7 @@ public class GameEvents : MonoBehaviour
 
     public event Action onStart;
     public event Action onPlayerHasDied;
-    public event Action onWendigosAreDefeated;
+    public event Action onVictory;
 
     public event Action<float> onProgressUpdate;
     public event Action onFirstWeaponPickedUp;
@@ -23,7 +23,7 @@ public class GameEvents : MonoBehaviour
     public void ResetState()
     {
         onPlayerHasDied = null;
-        onWendigosAreDefeated = null;
+        onVictory = null;
         onProgressUpdate = null;
         onFirstWeaponPickedUp = null;
 
@@ -32,7 +32,7 @@ public class GameEvents : MonoBehaviour
 
     public void InvasionHasBegun() => onStart?.Invoke();
     public void PlayerHasDied() => onPlayerHasDied?.Invoke();
-    public void WendigosAreDefeated() => onWendigosAreDefeated?.Invoke();
+    public void DeclareVictory() => onVictory?.Invoke();
     public void UpdateProgress(float progress) => onProgressUpdate?.Invoke(progress);
     public void WeaponHasBeenPickedUp()
     {

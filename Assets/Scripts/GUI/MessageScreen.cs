@@ -3,32 +3,50 @@ using UnityEngine;
 
 public class MessageScreen : MonoBehaviour
 {
+    private const string HIDE_TIMER = "Hide";
+
+    private static int appearAnimation = Animator.StringToHash("Appear");
+    private static int disappearAnimation = Animator.StringToHash("Disappear");
+
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private Animator animator;
     [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private FunctionTimer timer;
 
     private void Start()
     {
         GameEvents.current.onFirstWeaponPickedUp += OnStart;
         GameEvents.current.onPlayerHasDied += OnGameOver;
-        GameEvents.current.onWendigosAreDefeated += OnVictory;
+        GameEvents.current.onVictory += OnVictory;
     }
 
-    private void OnStart(){
+    public void OnStart(){
         message.text = "SURVIVE";
         Show();
+        HideAfterSomeTime(3f);
     }
 
-    private void OnGameOver(){
+    public void OnGameOver(){
         message.text = "YOU DIED";
         Show();
+        HideAfterSomeTime(4f);
     }
 
-    private void OnVictory(){
+    public void OnVictory(){
         message.text = "VICTORY";
         Show();
+        HideAfterSomeTime(3f);
     }
 
     private void Show(){
-        canvasGroup.alpha = 1f;
+        animator.Play(appearAnimation);
+    }
+
+    private void HideAfterSomeTime(float hideTime){
+        timer.Set(HIDE_TIMER, hideTime, Hide);
+    }
+
+    private void Hide(){
+        animator.Play(disappearAnimation);
     }
 }

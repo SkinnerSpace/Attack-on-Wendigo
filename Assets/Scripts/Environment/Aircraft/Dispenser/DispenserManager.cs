@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class DispenserManager : MonoBehaviour
+public class DispenserManager : MonoBehaviour, ISwitchable
 {
     [Header("Required Components")]
     [SerializeField] private Transform target;
@@ -14,6 +14,7 @@ public class DispenserManager : MonoBehaviour
     [SerializeField] private Dispenser leftDispenser;
 
     private IObjectPooler pooler;
+    private bool isActive = true;
 
     private void Awake()
     {
@@ -24,11 +25,12 @@ public class DispenserManager : MonoBehaviour
     private void Start()
     {
         pooler = PoolHolder.Instance;
+        GameEvents.current.onVictory += SwitchOff;
     }
 
     public void DropAnItem(Action moveOn)
     {
-        if (!storage.IsEmpty())
+        if (IsAbleToDrop())
         {
             Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
             GameObject crate = pooler.SpawnFromThePool("Crate");
@@ -40,6 +42,11 @@ public class DispenserManager : MonoBehaviour
         }
     }
 
+    private bool IsAbleToDrop(){
+        return isActive && 
+               !storage.IsEmpty();
+    }
+
     private bool TargetOnTheRightSide()
     {
         Vector3 right = transform.right;
@@ -48,5 +55,15 @@ public class DispenserManager : MonoBehaviour
         float dot = Vector3.Dot(right, dirToTarget);
 
         return dot > 0;
+    }
+
+    public void SwitchOn()
+    {
+        isActive = true;
+    }
+
+    public void SwitchOff()
+    {
+        isActive = false;
     }
 }
