@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class UrbanPlanner : Designer
 {
+    private const int EDGE = -1;
+
     public override Mark Design(Requirments doc)
     {
         int X = doc.Cell.X;
@@ -14,7 +16,7 @@ public class UrbanPlanner : Designer
         float chance = UnityEngine.Random.Range(0f, 1f);
         float likelyhood = CalculateLikelyhood(doc);
 
-        return (chance <= likelyhood) ? doc.Mark : doc.Map[X, Y];
+        return (chance <= likelyhood) ? doc.Mark : doc.Map.GetMark(X, Y);
     }
 
     private float CalculateLikelyhood(Requirments doc)
@@ -36,15 +38,16 @@ public class UrbanPlanner : Designer
             Cell guessedCell = new Cell(doc.Cell.X + offset.X, doc.Cell.Y + offset.Y);
 
             if (CellExist(guessedCell, doc.Map))
-                neighbours.Add(direction, doc.Map[guessedCell.X, guessedCell.Y]);
+                neighbours.Add(direction, doc.Map.GetMark(guessedCell.X, guessedCell.Y));
         }
 
         return neighbours;
     }
 
-    private bool CellExist(Cell guessedCell, Mark[,] Map)
+    private bool CellExist(Cell guessedCell, Map Map)
     {
-        return (guessedCell.X > -1 && guessedCell.X < Map.GetLength(0)) && (guessedCell.Y > -1 && guessedCell.Y < Map.GetLength(1));
+        return (guessedCell.X > EDGE && guessedCell.X < Map.GetWidth()) && 
+               (guessedCell.Y > EDGE && guessedCell.Y < Map.GetHeight());
     }
 
     private float GetNeighboursOfSameTypePercent(Dictionary<Directions, Mark> neighbours, PropTypes type)

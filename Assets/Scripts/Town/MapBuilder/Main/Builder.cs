@@ -50,10 +50,10 @@ public class Builder : MonoBehaviour
         int offset = blueprint.offset;
 
         int min_X = offset;
-        int max_X = blueprint.map.GetLength(1) - offset;
+        int max_X = blueprint.map.GetHeight() - offset;
 
         int min_Y = offset;
-        int max_Y = blueprint.map.GetLength(0) - offset;
+        int max_Y = blueprint.map.GetWidth() - offset;
 
         iterator = new Iterator2D(min_X, max_X, min_Y, max_Y); 
     }
@@ -77,7 +77,7 @@ public class Builder : MonoBehaviour
 
     private void BuildAndIterate()
     {
-        BuildObject(blueprint, new Cell(iterator.x, iterator.y), blueprint.map[iterator.x, iterator.y]);
+        BuildObject(blueprint, new Cell(iterator.x, iterator.y), blueprint.map.GetMark(iterator.x, iterator.y));
         iterator.Iterate();
     }
 

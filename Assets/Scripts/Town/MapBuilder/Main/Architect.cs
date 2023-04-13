@@ -4,6 +4,7 @@ using UnityEngine;
 public class Architect : MonoBehaviour, IArchitect
 {
     private const float BUILDING_CHANCE = 0.05f;
+    private int CentralCell => mapSize / 2;
 
     [SerializeField] public bool debugMode;
 
@@ -15,10 +16,11 @@ public class Architect : MonoBehaviour, IArchitect
 
     private DesignDepartment designDepartment;
     [SerializeField] private Builder builder;
+    [SerializeField] private AirDispatcher airDispatcher;
 
     [SerializeField] private CentralizedObjects centralizedObjects;
 
-    private Mark[,] map;
+    private Map map;
 
     public void BuildTheTown()
     {
@@ -28,7 +30,7 @@ public class Architect : MonoBehaviour, IArchitect
             designDepartment = new DesignDepartment();
         }
 
-        GenerateMap();
+        GenerateMap(); // GIVE MAP TO THE AIR DISPATCHER!!!
         FindCenter();
 
         centralizedObjects.Centralize(center);
@@ -50,13 +52,14 @@ public class Architect : MonoBehaviour, IArchitect
 
     private void GenerateMap()
     {
-        map = new Mark[mapSize, mapSize];
+        map = new Map(mapSize);
 
         for (int y = 0; y < mapSize; y++)
         {
             for (int x = 0; x < mapSize; x++)
             {
-                map[x, y] = new Mark(PropTypes.NONE, Index: 0);
+                Mark mark = new Mark(PropTypes.NONE, Index: 0);
+                map.SetMark(x, y, mark);
             }
         }
     }
@@ -76,15 +79,16 @@ public class Architect : MonoBehaviour, IArchitect
         {
             for (int x = offset; x < mapSize - offset; x++)
             {
-                if (map[x, y].IsEmpty())
-                {
+                if (map.IsEmpty(x, y)){
                     Requirments doc = new Requirments(map, new Cell(x, y), mark, likelyhood);
-                    map[x, y] = designDepartment.Design(doc);
+                    Mark newMark = designDepartment.Design(doc);
+                    map.SetMark(x, y, newMark);
                 }
             }
         }
 
-        map[mapSize / 2, mapSize / 2] = new Mark(PropTypes.NONE, Index: 0);
+        Mark emptyMark = new Mark(PropTypes.NONE, Index: 0);
+        map.SetMark(CentralCell, CentralCell, emptyMark);
     }
 
     private Blueprint DrawBlueprint()

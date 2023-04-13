@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 public class Requirments
 {
-    public Mark[,] Map { get; private set; }
+    public Map Map { get; private set; }
     public Cell Cell { get; private set; }
     public Mark Mark { get; private set; }
     public float Likelyhood { get; private set; }
 
-    public Requirments(Mark[,] Map, Cell Cell, Mark Mark, float Likelyhood)
+    public Requirments(Map Map, Cell Cell, Mark Mark, float Likelyhood)
     {
         this.Map = Map;
         this.Cell = Cell;

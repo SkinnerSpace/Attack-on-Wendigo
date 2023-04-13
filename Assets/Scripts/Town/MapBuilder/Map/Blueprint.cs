@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class Blueprint
 {
-    public Mark[,] map;
+    public Map map;
     public int offset;
     public float scale;
     public Transform field;
 
-    public Blueprint(Mark[,] map, int offset, float scale, Transform field)
+    public Blueprint(Map map, int offset, float scale, Transform field)
     {
         this.map = map;
         this.offset = offset;
@@ -22,11 +22,11 @@ public class Blueprint
 
     public int GetWidth()
     {
-        return map.GetLength(0);
+        return map.GetWidth();
     }
 
     public int GetHeight()
     {
-        return map.GetLength(1);
+        return map.GetHeight();
     }
 }

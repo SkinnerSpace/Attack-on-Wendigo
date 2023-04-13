@@ -29,6 +29,8 @@ public class AimPresenter : MonoBehaviour
         if (uGUIElement != null){
             uGUIElement.Subscribe(OnInteractiveItemUpdate);
         }
+
+        SetOffTarget();
     }
 
     public void AddTarget(Transform target)

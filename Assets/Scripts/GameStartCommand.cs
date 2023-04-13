@@ -15,5 +15,7 @@
         AudioPlayer.ResumeAll();
 
         gameManager.Triggers.Trigger("OnGameStart");
+
+        GameEvents.current.TheGameHasStarted();
     }
 }

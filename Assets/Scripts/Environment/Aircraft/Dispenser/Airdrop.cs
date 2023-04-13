@@ -26,15 +26,12 @@ public class Airdrop : MonoBehaviour, IAirdrop
     public void WeaponDisappeared()
     {
         cargoCount -= 1;
-        Debug.Log("Disappeared " + cargoCount);
-
         LoadCargo();
     }
 
     public void UpdateProgress(float progress)
     {
         maxCargoCount = Mathf.RoundToInt(config.weaponCount.Evaluate(progress));
-        Debug.Log("Update max count " + maxCargoCount);
         LoadCargo();
     }
 
@@ -45,7 +42,5 @@ public class Airdrop : MonoBehaviour, IAirdrop
         for (int i = 0; i < dropCount; i++){
             AddCargo(Rand.Range(0, cargo.Count));
         }
-
-        Debug.Log("Load " + cargoCount);
     }
 }

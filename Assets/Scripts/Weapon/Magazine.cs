@@ -39,7 +39,7 @@ public class Magazine
 
     public void Subscribe(IAmmoObserver observer)
     {
-        observer.SetActive(true);
+        //observer.SetActive(true);
         onUpdate += observer.OnUpdate;
         onUpdate?.Invoke(data.Ammo);
     }

@@ -15,5 +15,7 @@ public class GameResumeCommand : ICommand
 
         gameManager.Triggers.ResetTrigger("OnGamePause");
         gameManager.Triggers.Trigger("OnGameResume");
+
+        GameEvents.current.TheGameIsResumed();
     }
 }

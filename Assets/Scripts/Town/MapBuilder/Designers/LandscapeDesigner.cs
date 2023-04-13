@@ -12,6 +12,6 @@ public class LandscapeDesigner : Designer
         int y = doc.Cell.Y;
         float chance = UnityEngine.Random.Range(0f, 1f);
 
-        return (chance <= doc.Likelyhood) ? doc.Mark : doc.Map[x, y];
+        return (chance <= doc.Likelyhood) ? doc.Mark : doc.Map.GetMark(x, y);
     }
 }

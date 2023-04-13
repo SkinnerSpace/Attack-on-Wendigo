@@ -24,5 +24,10 @@ public class AmmoBar : MonoBehaviour, IAmmoObserver
         animator.PlayPush();
     }
 
-    public void SetActive(bool active) => label.enabled = active;
+    public void SetActive(bool active)
+    {
+        if (!active){
+            label.text = 0.ToString();
+        }
+    }
 }

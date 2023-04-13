@@ -2,28 +2,93 @@
 
 public class GUIContainer : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private EventManager eventManager;
+    private enum Modes
+    {
+        Invisible,
+        Visible,
+        Appearing,
+        Disappearing
+    }
 
-    private EventListener gameOnStartListener;
-    private EventListener gameOnPauseListener;
-    private EventListener gameOnResumeListener;
+    private Modes mode = Modes.Invisible;
+
+    private CanvasGroup canvasGroup;
+    [SerializeField] private float appearTime = 1f;
+    [SerializeField] private float disappearTime = 1f;
+
+    private float time;
+    private float visibility;
 
     private void Awake()
     {
-        gameOnStartListener = new EventListener(Show);
-        eventManager.Subscribe(gameOnStartListener, "OnGameStart");
-
-        gameOnPauseListener = new EventListener(Hid);
-        eventManager.Subscribe(gameOnPauseListener, "OnGamePause");
-
-        gameOnResumeListener = new EventListener(Show);
-        eventManager.Subscribe(gameOnResumeListener, "OnGameResume");
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void Hid()
+    private void Update()
     {
-        canvasGroup.alpha = 0f;
+        switch (mode)
+        {
+            case Modes.Appearing:
+                GraduallyAppear();
+                break;
+
+            case Modes.Disappearing:
+                GraduallyDisappear();
+                break;
+        }
     }
-    public void Show() => canvasGroup.alpha = 1f;
+
+    private void GraduallyAppear()
+    {
+        time += Time.unscaledDeltaTime;
+        visibility = Mathf.InverseLerp(0f, appearTime, time);
+        visibility = Easing.QuadEaseOut(visibility);
+        SetAlpha(visibility);
+
+        if (visibility >= 1f){
+            mode = Modes.Visible;
+        }
+    }
+
+    private void GraduallyDisappear()
+    {
+        time += Time.unscaledDeltaTime;
+        visibility = 1f - Mathf.InverseLerp(0f, disappearTime, time);
+        visibility = Easing.QuadEaseOut(visibility);
+        SetAlpha(visibility);
+
+        if (visibility <= Mathf.Epsilon){
+            mode = Modes.Invisible;
+        }
+    }
+
+    public void ShowImmediately()
+    {
+        mode = Modes.Visible;
+        SetAlpha(1f);
+    }
+
+    public void HideImmediately()
+    {
+        mode = Modes.Invisible;
+        SetAlpha(0f);
+    }
+
+    public void ShowGradually()
+    {
+        time = 0f;
+        mode = Modes.Appearing;
+    }
+
+    public void HideGradually()
+    {
+        time = 0f;
+        mode = Modes.Disappearing;
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        canvasGroup.alpha = alpha;
+        //Debug.Log(alpha);
+    }
 }

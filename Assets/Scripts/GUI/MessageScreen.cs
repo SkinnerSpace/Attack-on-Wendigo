@@ -23,19 +23,19 @@ public class MessageScreen : MonoBehaviour
     public void OnStart(){
         message.text = "SURVIVE";
         Show();
-        HideAfterSomeTime(3f);
+        HideAfterSomeTime(2f);
     }
 
     public void OnGameOver(){
         message.text = "YOU DIED";
         Show();
-        HideAfterSomeTime(4f);
+        HideAfterSomeTime(3f);
     }
 
     public void OnVictory(){
         message.text = "VICTORY";
         Show();
-        HideAfterSomeTime(3f);
+        HideAfterSomeTime(2f);
     }
 
     private void Show(){

@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class Helicopter : MonoBehaviour, ILaunchable
 {
+    private enum States
+    {
+        Flying,
+        Landing
+    }
+    private States state;
+
     [SerializeField] private BezierTrajectory trajectory;
     [SerializeField] private HelicopterMover mover;
     [SerializeField] private HelicopterRotator rotator;
@@ -31,6 +38,25 @@ public class Helicopter : MonoBehaviour, ILaunchable
         SynchronizeComponents();
     }
 
+    private void Start()
+    {
+        GameEvents.current.onVictory += StartLanding;
+    }
+
+    private void Update()
+    {
+        Fly();
+
+/*        switch (state)
+        {
+            case States.Flying:
+                Fly(); break;
+
+            case States.Landing:
+                Land(); break;
+        }*/
+    }
+
     private void SynchronizeComponents()
     {
         synchronizer.Subscribe(mover);
@@ -52,13 +78,7 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     public void Stop() => isMoving = false;
 
-    private void Update() => Move();
-
-    private Vector3 currentPos;
-    private Quaternion currentRotation;
-    private float updateSpeed = 10f;
-
-    public void Move()
+    private void Fly()
     {
         if (isMoving && chronos.IsTicking)
         {
@@ -67,30 +87,41 @@ public class Helicopter : MonoBehaviour, ILaunchable
                 synchronizer.UpdateTime();
                 transform.position = mover.Move(trajectory, Arrived);
                 transform.rotation = rotator.Rotate(transform.rotation, transform.position, prevPos);
-                /*                currentPos = mover.Move(trajectory, Arrived);
-                                currentRotation = rotator.Rotate(currentRotation, currentPos, prevPos);*/
-/*
-                float difference = Vector3.Distance(currentPos, prevPos);
-                Debug.Log(difference);*/
 
                 prevPos = transform.position;
-                //prevPos = currentPos;
             }
             else
             {
                 skipFrame = false;
             }
         }
-
-/*        transform.position = Vector3.Lerp(transform.position, currentPos, updateSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, updateSpeed * Time.deltaTime);*/
     }
 
-    public void Arrived()
+    private void Arrived()
     {
         isMoving = false;
-        dispenserManager.DropAnItem(Launch);
+
+        if (state == States.Flying){
+            dispenserManager.DropAnItem(Launch);
+        }
+        else if (state == States.Landing)
+        {
+            Debug.Log("DOWN!");
+        }
     }
 
-    public void UpdateDistance(float distancePassed) => this.distancePassed = distancePassed;
+    public void StartLandingAfterSomeTime()
+    {
+        timer.Set("Start Landing", 3f, StartLanding);
+    }
+
+    private void StartLanding()
+    {
+        state = States.Landing;
+    }
+
+    public void Land()
+    {
+
+    }
 }

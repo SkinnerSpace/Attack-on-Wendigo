@@ -44,7 +44,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
     }
 
     public void LaunchWithDelay(){
-        timer.Set("Launch", 4f, Launch);
+        timer.Set("Launch", 2.6f, Launch);
     }
 
     public void Launch(){

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteAlways]
 public class AimAnimator : MonoBehaviour
 {
     private const float DISTANCE_UNIT = 16f;
