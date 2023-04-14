@@ -52,16 +52,6 @@ public class BezierTrajectory : MonoBehaviour
         bezierLUT.UpdateLUT(pointsManager.Points, details);
     }
 
-    public void RenderBezierCurve()
-    {
-        if (pointsManager.isReady)
-        {
-            float time = bezierLUT.GetTimeFromDistance(distance);
-            projector.DrawPoints(pointsManager.Points, time);
-            projector.DrawCurve(pointsManager.Points, details);
-        }
-    }
-
     public void GenerateTrajectory()
     {
         constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
@@ -74,11 +64,21 @@ public class BezierTrajectory : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        RenderBezierCurve();
+/*        RenderBezierCurve();
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), boundsRadius);
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.white;*/
     }
 #endif
+
+    public void RenderBezierCurve()
+    {
+        if (pointsManager.isReady)
+        {
+            float time = bezierLUT.GetTimeFromDistance(distance);
+            projector.DrawPoints(pointsManager.Points, time);
+            projector.DrawCurve(pointsManager.Points, details);
+        }
+    }
 }

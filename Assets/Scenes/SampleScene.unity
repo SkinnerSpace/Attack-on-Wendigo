@@ -13528,11 +13528,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
-  mapSize: 120
-  forestSize: 70
-  townSize: 30
-  scale: 16
+  explication: {fileID: 11400000, guid: 3860847ab289ab14e8805066b419011b, type: 2}
   builder: {fileID: 1515446542}
+  airDispatcher: {fileID: 0}
   centralizedObjects: {fileID: 1044881766}
 --- !u!114 &1515446542
 MonoBehaviour:
@@ -16180,12 +16178,12 @@ PrefabInstance:
     - target: {fileID: 2642366879279922163, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2642366879279922163, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2642366879279922163, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
@@ -16195,12 +16193,12 @@ PrefabInstance:
     - target: {fileID: 2642366879279922163, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2642366879279922163, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2642366879279922167, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
