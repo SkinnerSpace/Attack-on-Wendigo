@@ -32,9 +32,9 @@ public class BezierPointsManager : MonoBehaviour
         }
     }
 
-    public void PushThePointsAwayFromEachOther()
+    public void PushThePointsAwayFromEachOther(int maxPoints)
     {
-        for (int i = FREE_STARTING_POINT; i < bezierPoints.Length; i++)
+        for (int i = FREE_STARTING_POINT; i < maxPoints; i++)
         {
             Vector3 centerOfTheCurve = GetTheCenterOfTheCurve();
             Vector3 vectorFromTheCenter = bezierPoints[i].Position - centerOfTheCurve;

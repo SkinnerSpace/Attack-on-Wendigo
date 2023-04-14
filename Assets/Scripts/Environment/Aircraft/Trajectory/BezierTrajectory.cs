@@ -55,18 +55,25 @@ public class BezierTrajectory : MonoBehaviour
     public void GenerateTrajectory()
     {
         constellator.RearrangePoints(pointsManager.BezierPoints, arrangement);
-        pointsManager.PushThePointsAwayFromEachOther();
+        pointsManager.PushThePointsAwayFromEachOther(pointsManager.BezierPoints.Length);
         pointsManager.KeepThePointsWithinTheBoundaries(boundsCenter, boundsRadius);
     }
 
-    public void PushAway() => pointsManager.PushThePointsAwayFromEachOther();
+    public void GenerateLandingTrajectory(Vector3 currentPosition)
+    {
+        constellator.ArrangeThePathDownToTheGround(pointsManager.BezierPoints, arrangement, currentPosition);
+        pointsManager.PushThePointsAwayFromEachOther(pointsManager.BezierPoints.Length-1);
+        /*        pointsManager.PushThePointsAwayFromEachOther();
+                pointsManager.KeepThePointsWithinTheBoundaries(boundsCenter, boundsRadius);*/
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-/*        RenderBezierCurve();
+        RenderBezierCurve();
 
-        Gizmos.color = Color.green;
+/*        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), boundsRadius);
         Gizmos.color = Color.white;*/
     }

@@ -6,7 +6,9 @@ public class Helicopter : MonoBehaviour, ILaunchable
     private enum States
     {
         Flying,
-        Landing
+        PreparingToLand,
+        Landing,
+        Landed
     }
     private States state;
 
@@ -33,6 +35,9 @@ public class Helicopter : MonoBehaviour, ILaunchable
     private float distancePassed;
     private Vector3 prevPos;
 
+    public event Action onLanded;
+    public event Action onTakeOff;
+
     private void Awake()
     {
         SynchronizeComponents();
@@ -40,21 +45,21 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     private void Start()
     {
-        GameEvents.current.onVictory += StartLanding;
+        GameEvents.current.onVictory += PrepareToLand;
     }
 
     private void Update()
     {
         Fly();
 
-/*        switch (state)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            case States.Flying:
-                Fly(); break;
-
-            case States.Landing:
-                Land(); break;
-        }*/
+            PrepareToLand();
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            Launch();
+        }
     }
 
     private void SynchronizeComponents()
@@ -68,11 +73,30 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     public void Launch()
     {
+        state = States.Flying;
+        sway.SetFlyingMagnitude();
+
         isMoving = true;
         skipFrame = true;
 
         distancePassed = 0f;
         trajectory.GenerateTrajectory();
+        synchronizer.Set(trajectory.Length, data.Speed);
+
+        onTakeOff?.Invoke();
+    }
+
+    public void Land()
+    {
+        state = States.Landing;
+        sway.SetLandingMagnitude();
+
+        isMoving = true;
+        skipFrame = true;
+
+        distancePassed = 0f;
+        trajectory.GenerateLandingTrajectory(transform.position);
+
         synchronizer.Set(trajectory.Length, data.Speed);
     }
 
@@ -104,24 +128,16 @@ public class Helicopter : MonoBehaviour, ILaunchable
         if (state == States.Flying){
             dispenserManager.DropAnItem(Launch);
         }
-        else if (state == States.Landing)
-        {
-            Debug.Log("DOWN!");
+        else if (state == States.PreparingToLand){
+            dispenserManager.DropAnItem(Land);
+        }
+        else if (state == States.Landing){
+            state = States.Landed;
+            onLanded?.Invoke();
         }
     }
 
-    public void StartLandingAfterSomeTime()
-    {
-        timer.Set("Start Landing", 3f, StartLanding);
-    }
-
-    private void StartLanding()
-    {
-        state = States.Landing;
-    }
-
-    public void Land()
-    {
-
+    private void PrepareToLand(){
+        state = States.PreparingToLand;
     }
 }

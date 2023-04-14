@@ -18,7 +18,7 @@ public struct Cell
         NORH_WEST
     }
 
-    public static Dictionary<Directions, Cell> directionOffsets = new Dictionary<Directions, Cell>()
+    public static Dictionary<Directions, Cell> eightDirectionOffsets = new Dictionary<Directions, Cell>()
     {
         { Directions.NORTH, new Cell(0,1) },
         { Directions.NORTH_EAST, new Cell(1,1) },
@@ -28,6 +28,14 @@ public struct Cell
         { Directions.SOUTH_WEST, new Cell(-1,-1) },
         { Directions.WEST, new Cell(-1, 0) },
         { Directions.NORH_WEST, new Cell(-1,1) }
+    };
+
+    public static Dictionary<Directions, Cell> fourDirectionOffsets = new Dictionary<Directions, Cell>()
+    {
+        { Directions.NORTH, new Cell(0,1) },
+        { Directions.EAST, new Cell(1,0) },
+        { Directions.SOUTH, new Cell(0,-1) },
+        { Directions.WEST, new Cell(-1, 0) }
     };
 
     public int X { get; private set; }

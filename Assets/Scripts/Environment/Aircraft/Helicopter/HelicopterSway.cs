@@ -4,12 +4,26 @@ using UnityEngine;
 public class HelicopterSway : MonoBehaviour, IHelicopterTimeObserver
 {
     [SerializeField] private float maxSwayAngle = 15f;
-    [SerializeField] private float waveMagnitude = 8f;
+
+    [Header("Magnitude")]
+    [SerializeField] private float flyingMagnitude = 1f;
+    [SerializeField] private float landingMagnitude = 0.2f;
+    [SerializeField] private float magnitudeChangeSpeed = 0.5f;
+
     [SerializeField] private float waveSpeed = 1f;
 
     private float time;
     private float movement;
     private float wave;
+
+    private float targetMagnitude;
+    private float waveMagnitude = 1f;
+
+    private void Awake()
+    {
+        targetMagnitude = flyingMagnitude;
+        waveMagnitude = flyingMagnitude;
+    }
 
     public void UpdateCompletion(float completion)
     {
@@ -21,6 +35,7 @@ public class HelicopterSway : MonoBehaviour, IHelicopterTimeObserver
     {
         TiltForward();
         Wave();
+        UpdateMagnitude();
     }
 
     private void TiltForward()
@@ -38,5 +53,13 @@ public class HelicopterSway : MonoBehaviour, IHelicopterTimeObserver
 
         Vector3 wavePosition = new Vector3(0f, wave, 0f);
         transform.localPosition = wavePosition;
+    }
+
+    public void SetFlyingMagnitude() => targetMagnitude = flyingMagnitude;
+    public void SetLandingMagnitude() => targetMagnitude = landingMagnitude;
+
+    private void UpdateMagnitude()
+    {
+        waveMagnitude = Mathf.Lerp(waveMagnitude, targetMagnitude, magnitudeChangeSpeed * Time.deltaTime);
     }
 }

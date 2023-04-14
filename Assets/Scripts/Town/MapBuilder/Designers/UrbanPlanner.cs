@@ -19,7 +19,7 @@ public class UrbanPlanner : Designer
 
     private float CalculateLikelyhood(Requirments doc)
     {
-        Dictionary<Cell.Directions, Mark> neighbours = MapNeighbourFinder.GetNeighbours(doc.Map, doc.Cell);
+        Dictionary<Cell.Directions, Mark> neighbours = MapNeighbourFinder.GetEightNeighbours(doc.Map, doc.Cell);
         float percent = GetNeighboursOfSameTypePercent(neighbours, doc.Mark.Type);
         float likelyhood = doc.Likelyhood + percent;
 

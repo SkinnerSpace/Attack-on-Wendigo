@@ -32,6 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7512669058965056507}
   - {fileID: 8152335387003716868}
   - {fileID: 6119623930978718648}
   - {fileID: 2890851214297167744}
@@ -185,7 +186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006917162978430111}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1630779641384377885
 MonoBehaviour:
@@ -501,7 +502,7 @@ Transform:
   - {fileID: 8375978555134074245}
   - {fileID: 1216141717815980357}
   m_Father: {fileID: 1006917162978430111}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056638609630317292
 MonoBehaviour:
@@ -704,7 +705,7 @@ Transform:
   - {fileID: 1294797246088150514}
   - {fileID: 3051558936682772678}
   m_Father: {fileID: 1006917162978430111}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7312109861332469447
 MonoBehaviour:
@@ -719,7 +720,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSwayAngle: 30
-  waveMagnitude: 1
+  flyingMagnitude: 1
+  landingMagnitude: 0.2
+  magnitudeChangeSpeed: 0.5
   waveSpeed: 30
 --- !u!1 &6742343366095317708
 GameObject:
@@ -983,6 +986,64 @@ MonoBehaviour:
   storage: {fileID: 7261413878735653690}
   doorImp: {fileID: 6115379156979578511}
   timer: {fileID: 1630779641384377885}
+--- !u!1 &7737373747684790561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7512669058965056507}
+  - component: {fileID: 6936666610686103287}
+  - component: {fileID: 8486223520981873345}
+  m_Layer: 21
+  m_Name: Vehicle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7512669058965056507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737373747684790561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.44, z: 0}
+  m_LocalScale: {x: 5.9, y: 2.97, z: 5.73}
+  m_Children: []
+  m_Father: {fileID: 1006917162978430111}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6936666610686103287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737373747684790561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadaf557f01fc2843b8c8013f33d0e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helicopter: {fileID: 1006917162978430107}
+--- !u!65 &8486223520981873345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737373747684790561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8615449424028571068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1118,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006917162978430111}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4193065293784461157
 MonoBehaviour:

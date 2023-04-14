@@ -18,7 +18,7 @@ public class Architect : MonoBehaviour, IArchitect
         UnityEngine.Random.InitState(DateTime.Now.Millisecond);
 
         if (cartographer == null){
-            cartographer = new Cartographer();
+            cartographer = new Cartographer(transform);
         }
 
         Map map = cartographer.GenerateMap(explication); 

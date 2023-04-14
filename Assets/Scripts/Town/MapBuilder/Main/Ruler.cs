@@ -14,4 +14,8 @@
                 return 0;
         }
     }
+
+    public static int GetCustomOffset(int size, Map map){
+        return (map.size - size) / 2;
+    }
 }

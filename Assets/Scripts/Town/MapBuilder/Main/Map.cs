@@ -1,4 +1,6 @@
-﻿public class Map
+﻿using UnityEngine;
+
+public class Map
 {
     private const int WIDTH = 0;
     private const int HEIGHT = 1;
@@ -21,14 +23,18 @@
         marks[x, y] = mark;
     }
 
+    public void SetMark(Mark mark) => marks[mark.mapPosition.X, mark.mapPosition.Y] = mark;
+
     public void SetMark(Cell cell, Mark mark)
     {
         marks[cell.X, cell.Y] = mark;
     }
 
     public Mark GetMark(int x, int y) => marks[x, y];
+    public Mark GetMark(Cell cell) => marks[cell.X, cell.Y];
 
     public bool IsEmpty(int x, int y) => marks[x, y].IsEmpty();
+    public bool IsEmpty(Cell cell) => marks[cell.X, cell.Y].IsEmpty();
 
     public int GetWidth()
     {

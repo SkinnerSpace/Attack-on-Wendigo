@@ -1,8 +1,12 @@
-﻿public class Cartographer
+﻿using UnityEngine;
+
+public class Cartographer
 {
+    private Transform container;
     private DesignDepartment designDepartment;
 
-    public Cartographer(){
+    public Cartographer(Transform container){
+        this.container = container;
         designDepartment = new DesignDepartment();
     }
 
@@ -32,45 +36,45 @@
     private void SetMarksOnTheMap(Map map)
     {
         foreach (MapMarkData data in map.explication.marks){
-            Mark mark = new Mark(data.propType, data.propIndex);
-            AddMarks(map, mark, data.likelyhood);
+            AddMarks(map, data);
         }
     }
 
-    public void AddMarks(Map map, Mark mark, float likelyhood)
+    public void AddMarks(Map map, MapMarkData data)
     {
-        int offset = Ruler.GetOffset(mark.Type, map);
+        int offset = Ruler.GetOffset(data.propType, map);
 
         for (int y = offset; y < map.size - offset; y++)
         {
             for (int x = offset; x < map.size - offset; x++)
             {
-                AddMarkOnTheMapAtPositionWithALikelyhood(mark, map, x, y, likelyhood);
+                Mark mark = new Mark(data.propType, data.propIndex, x, y, map.explication.scale, container);
+                AddMarkOnTheMapAtPositionWithALikelyhood(mark, map, data.likelyhood);
             }
         }
 
         SetEmptyMark(map, map.Center);
     }
 
-    private void AddMarkOnTheMapAtPositionWithALikelyhood(Mark mark, Map map, int x, int y, float likelyhood)
+    private void AddMarkOnTheMapAtPositionWithALikelyhood(Mark mark, Map map, float likelyhood)
     {
-        if (map.IsEmpty(x, y))
+        if (map.IsEmpty(mark.mapPosition))
         {
-            Requirments doc = new Requirments(map, new Cell(x, y), mark, likelyhood);
+            Requirments doc = new Requirments(map, mark.mapPosition, mark, likelyhood);
             Mark newMark = designDepartment.Design(doc);
-            map.SetMark(x, y, newMark);
+            map.SetMark(newMark);
         }
     }
 
     private void SetEmptyMark(Map map, int x, int y)
     {
-        Mark mark = new Mark(PropTypes.NONE, Index: 0);
+        Mark mark = new Mark(PropTypes.NONE, Index: 0, x, y, map.explication.scale, container);
         map.SetMark(x, y, mark);
     }
 
     private void SetEmptyMark(Map map, Cell cell)
     {
-        Mark mark = new Mark(PropTypes.NONE, Index: 0);
-        map.SetMark(cell, mark);
+        Mark mark = new Mark(PropTypes.NONE, Index: 0, cell.X, cell.Y, map.explication.scale, container);
+        map.SetMark(mark);
     }
 }
