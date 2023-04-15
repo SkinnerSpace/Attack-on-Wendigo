@@ -26,8 +26,6 @@ public class VisionRaycast
             currentTarget = TryToGetATargetFromTheBackSide(ray, distance);
         }
 
-        Debug.LogError("Distance to the hit " + hit.distance);
-
         return currentTarget;
     }
 

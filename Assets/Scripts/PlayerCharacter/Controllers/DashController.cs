@@ -12,7 +12,15 @@ namespace Character
         private IFunctionTimer timer;
         private IInputReader input;
 
-        private event Action onDash;
+        public event Action onDash;
+        public event Action<float, DashDirections> onDashAngle;
+        public event Action onStop;
+
+        private float rawDashAngle;
+        private float dashAngleDeg;
+        private float dashAngleRad;
+
+        private DashDirections dashDirection;
 
         public override void Initialize(PlayerCharacter main)
         {
@@ -39,15 +47,36 @@ namespace Character
 
         public void Move(Vector3 direction)
         {
-            float dashAngle = 0f;
+            rawDashAngle = GetAngleInOneOfTheFourDirections(direction);
+            dashAngleDeg = data.Euler.y + rawDashAngle;
+            dashAngleRad = dashAngleDeg * Mathf.Deg2Rad;
+            data.DashDirection = new Vector2(Mathf.Sin(dashAngleRad), Mathf.Cos(dashAngleRad));
+        }
 
-            if (direction.x > 0f) dashAngle = 90f;
-            if (direction.x < 0f) dashAngle = 270f;
-            if (direction.z < 0f) dashAngle = 180f;
-            if (direction.z > 0f) dashAngle = 0f;
+        private float GetAngleInOneOfTheFourDirections(Vector3 direction)
+        {
+            if (direction.x > 0f){
+                dashDirection = DashDirections.Right;
+                return 90f;
+            }
 
-            float rads = (data.Euler.y + dashAngle) * Mathf.Deg2Rad;
-            data.DashDirection = new Vector2(Mathf.Sin(rads), Mathf.Cos(rads));
+            if (direction.x < 0f){
+                dashDirection = DashDirections.Left;
+                return 270f;
+            }
+
+            if (direction.z < 0f){
+                dashDirection = DashDirections.Backward;
+                return 180f;
+            }
+
+            if (direction.z > 0f){
+                dashDirection = DashDirections.Forward;
+                return 0f;
+            }
+
+            dashDirection = DashDirections.Forward;
+            return 0f;
         }
 
         public void Dash()
@@ -60,6 +89,7 @@ namespace Character
 
                 timer.Set(COOL_DOWN, data.DashCoolDownTime, CoolDown);
                 onDash?.Invoke();
+                onDashAngle?.Invoke(dashAngleDeg, dashDirection);
             }
         }
 
@@ -73,6 +103,10 @@ namespace Character
             return dashPower;
         }
 
-        public void CoolDown() => data.IsAbleToDash = false;
+        public void CoolDown()
+        {
+            data.IsAbleToDash = false;
+            onStop?.Invoke();
+        }
     }
 }

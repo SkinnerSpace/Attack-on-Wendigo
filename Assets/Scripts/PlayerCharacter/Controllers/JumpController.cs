@@ -9,7 +9,7 @@ namespace Character
         private ICharacterData data;
         private IInputReader input;
 
-        private event Action onJump;
+        public event Action onJump;
 
         public override void Initialize(PlayerCharacter main)
         {
