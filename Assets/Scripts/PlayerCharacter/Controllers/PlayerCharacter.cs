@@ -30,11 +30,6 @@ namespace Character
         private event Action onConnectControlles;
         private event Action onDisconnectControllers;
 
-        private void Update()
-        {
-            //Debug.Log("Is grounded: " + oldData.IsGrounded);
-        }
-
         private void Awake()
         {
             controllers = new List<BaseController>();
@@ -87,8 +82,11 @@ namespace Character
 
         public void SetActive(bool isActive)
         {
-            if (isActive) onConnectControlles?.Invoke();
-            if (!isActive) onDisconnectControllers?.Invoke();
+            if (isActive) 
+                onConnectControlles?.Invoke();
+
+            if (!isActive) 
+                onDisconnectControllers?.Invoke();
         }
     }
 }

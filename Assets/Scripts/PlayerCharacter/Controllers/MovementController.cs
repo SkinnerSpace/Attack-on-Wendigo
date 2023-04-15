@@ -32,7 +32,7 @@ namespace Character
             Vector2 direction = ((inDirection.x * data.Right) + (inDirection.z * data.Forward)).FlatV2();
             Vector2 acceleration = direction * data.Speed * chronos.DeltaTime;
             data.FlatVelocity += acceleration;
-
+            
             bool isRunningNow = inDirection.magnitude > 0;
 
             if (isRunning != isRunningNow)

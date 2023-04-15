@@ -34,7 +34,7 @@ TagManager:
   - SolidItems
   - RagDollInteractable
   - CorpseGroundInteraction
-  - 
+  - ImpenetrableWendigo
   - 
   - 
   m_SortingLayers:

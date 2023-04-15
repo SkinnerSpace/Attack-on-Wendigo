@@ -25,7 +25,7 @@ namespace Character
             {
                 data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler + data.ShakeEuler);
                 data.CameraLocalPos = data.CameraDampedPos + data.ShakePosition;
-                onUpdate?.Invoke();
+                
             }
         }
 
@@ -36,9 +36,9 @@ namespace Character
                 data.PreviousVerticalVelocity = data.VerticalVelocity;
                 data.Velocity = new Vector3(data.FlatVelocity.x, data.VerticalVelocity, data.FlatVelocity.y) + data.ExternalForce;
 
-                //Debug.Log("Vel " + data.Velocity);
-
                 data.Controller.Move(data.Velocity * Time.fixedDeltaTime);
+
+                onUpdate?.Invoke();
             }
         }
     }
