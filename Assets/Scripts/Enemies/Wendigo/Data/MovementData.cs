@@ -6,9 +6,20 @@ namespace WendigoCharacter
     [Serializable]
     public class MovementData : IRebootable
     {
+        [Header("Walk")]
+        public float DefaultWalkSpeed;
+        public float InjuredWalkSpeed;
         public float WalkSpeed;
-        public float RotationSpeed;
+        public float DeltaWalkSpeed;
+
+        public float CurrentSpeed;
+        public float Acceleration;
         public float Deceleration;
+
+        [Header("Rotation")]
+        public float DefaultRotationSpeed;
+        public float InjuredRotationSpeed;
+        public float RotationSpeed;
 
         public Vector3 Velocity { get; set; }
 

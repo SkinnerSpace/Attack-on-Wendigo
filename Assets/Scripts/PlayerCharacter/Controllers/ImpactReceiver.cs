@@ -1,9 +1,12 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Character
 {
     public class ImpactReceiver : BaseController, IDamageable
     {
+        private const float MAX_VERTICAL_IMPACT = 10f;
+
         private ICharacterData oldData;
         private HitBoxProxy hitBox;
 
@@ -27,12 +30,16 @@ namespace Character
             hitBox.Unsubscribe(this);
         }
 
+        // Screenshakes controller is subscribed on this event
         public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
 
         public void ReceiveDamage(DamagePackage damagePackage)
         {
-            oldData.AddVelocity(damagePackage.impact);
-            onImpact?.Invoke(damagePackage.impact.magnitude);
+            float verticalImpact = Mathf.Clamp(damagePackage.impact.y, -MAX_VERTICAL_IMPACT, MAX_VERTICAL_IMPACT);
+            Vector3 impact = new Vector3(damagePackage.impact.x, verticalImpact, damagePackage.impact.z);
+
+            oldData.AddVelocity(impact);
+            onImpact?.Invoke(impact.magnitude);
         }
     }
 }

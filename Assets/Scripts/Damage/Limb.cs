@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Limb : MonoBehaviour
 {
+    public DamageModifiers damageModifiers;
     [SerializeField] private LimbData data;
     [SerializeField] private LimbSkin skin;
     [SerializeField] private LimbParticles particles;
@@ -11,8 +12,11 @@ public class Limb : MonoBehaviour
     private List<IHitBox> hitBoxes;
     private LimbSFXPlayer sFXPlayer;
 
+    public event Action onInjury;
     private event Action onMutilation;
     private event Action onAmputation;
+
+    public event Action<DamagePackage> onDamage;
 
     public void AddHitBox(IHitBox hitBox){
         if (hitBoxes == null)
@@ -42,9 +46,10 @@ public class Limb : MonoBehaviour
     public void SubscribeOnMutilation(Action onMutilation) => this.onMutilation += onMutilation;
     public void SubscribeOnAmputation(Action onAmputation) => this.onAmputation += onAmputation;
 
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(DamagePackage damagePackage)
     {
-        data.SubtractHealth(damage);
+        data.RememberCurrentState();
+        data.SubtractHealth(damagePackage.damage);
 
         if (data.ReadyForMutilation()){
             Mutilate();
@@ -55,6 +60,8 @@ public class Limb : MonoBehaviour
         else{
             Damage();
         }
+
+        NotifyOnDamage(damagePackage);
     }
 
     private void Mutilate()
@@ -67,6 +74,7 @@ public class Limb : MonoBehaviour
 
         sFXPlayer.PlaySmashSFX();
 
+        onInjury?.Invoke();
         onMutilation?.Invoke();
     }
 
@@ -81,6 +89,7 @@ public class Limb : MonoBehaviour
 
         sFXPlayer.PlaySmashSFX();
 
+        onInjury?.Invoke();
         onAmputation?.Invoke();
     }
 
@@ -129,4 +138,26 @@ public class Limb : MonoBehaviour
     }
 
     public void SetHealthMultiplier(int healthMultipler) => data.SetHealthMultiplier(healthMultipler);
+
+    private void NotifyOnDamage(DamagePackage damagePackage){
+        DamagePackage modifiedDamagePackage = damagePackage;
+
+        if (data.StateHasBeenChanged()){
+            ModifyDamage(modifiedDamagePackage, damageModifiers.mutilation);
+        }
+        else{
+            if (data.IsHealthy()){
+                ModifyDamage(modifiedDamagePackage, damageModifiers.flesh);
+            }
+            else if (data.IsInjured()){
+                ModifyDamage(modifiedDamagePackage, damageModifiers.bones);
+            }
+        }
+
+        onDamage?.Invoke(modifiedDamagePackage);
+    }
+
+    private void ModifyDamage(DamagePackage damagePackage, float modifier){
+        damagePackage.damage = Mathf.RoundToInt(damagePackage.damage * modifier);
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball : MonoBehaviour, ISwitchable
 {
     [SerializeField] private FireballData data;
     [SerializeField] private Chronos chronos;
@@ -67,8 +67,15 @@ public class Fireball : MonoBehaviour
         hitHandler.RadiallyHitTheSurface();
     }
 
-    public void SetOwner(Transform owner)
+    public void SetOwner(Transform owner) => data.owner = owner;
+
+    public void SetTarget(Transform target) => data.target = target;
+
+    public void SwitchOn()
     {
-        data.owner = owner;
+        data.IsActive = true;
+        data.TimeToFullHomingLeft = data.InitialTimeToFullHoming;
     }
+
+    public void SwitchOff() => data.IsActive = false;
 }

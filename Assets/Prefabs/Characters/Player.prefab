@@ -9984,13 +9984,26 @@ MonoBehaviour:
   screenShakes:
   - name: Impact
     axis: {x: 1, y: 1, z: 0}
-    minTime: 0.3
-    maxTime: 0.5
-    minStrength: 0.15
-    maxStrength: 0.5
+    minTime: 0.5
+    maxTime: 1
+    minStrength: 0.2
+    maxStrength: 0.8
     minAngleMult: 1
-    maxAngleMult: 2
-    frequency: 4
+    maxAngleMult: 1.5
+    minFrequency: 3
+    maxFrequency: 8
+    attack: 0.1
+    release: 0.5
+  - name: Burn
+    axis: {x: 1, y: 1, z: 0}
+    minTime: 0.4
+    maxTime: 0.6
+    minStrength: 0.1
+    maxStrength: 0.3
+    minAngleMult: 1
+    maxAngleMult: 1.3
+    minFrequency: 4
+    maxFrequency: 8
     attack: 0.1
     release: 0.5
   defense: 0
@@ -15009,5 +15022,5 @@ MonoBehaviour:
   boxCollider: {fileID: 726602097511911221}
   chronos: {fileID: 8860424869380561027}
   enableCollisionTime: 0.2
-  putOutTheFireTime: 1
+  putOutTheFireTime: 3
   isDisposable: 0

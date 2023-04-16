@@ -63,15 +63,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0024765ed93874b4ab4264f62ac6cff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   speed: 20
+  timeToFullHoming: 6
+  maxHomingSpeed: 3
+  maxHorizontalBoundaries: 1920
+  maxVerticalBoundary: 128
   damage: 5
   impact: 500
-  isActive: 0
   collisionRadius: 1.2
   explosionRadius: 15
   raycastDetail: 2
-  maxHorizontalBoundaries: 1920
-  maxVerticalBoundary: 128
+  HomingSpeed: 0
+  owner: {fileID: 0}
+  target: {fileID: 0}
 --- !u!114 &5475918390870447353
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace WendigoCharacter
         [SerializeField] private Animator animator;
         [SerializeField] private WendigoSFXPlayer sFXPlayer;        
         [SerializeField] private WendigoPooledObject poolObject;
+        [SerializeField] private Transform limbsRoot;
 
         [Header("Death Components")]
         [SerializeField] private PropDestroyer mainPropDestroyer;
@@ -50,8 +51,10 @@ namespace WendigoCharacter
         public IHitBox[] HitBoxes { get; private set; }
 
         private List<WendigoPlugableComponent> controllers;
+        public Limb[] limbs { get; private set; }
 
         private event Action<Transform> notifyOnDeath;
+        public event Action onDeath;
 
         public void OnSpawn()
         {
@@ -73,13 +76,14 @@ namespace WendigoCharacter
             AssignName();
 
             HitBoxes = GetComponentsInChildren<IHitBox>();
+            limbs = limbsRoot.GetComponentsInChildren<Limb>();
             AddControllers();
 
             stateMachine = WendigoStateMachineFactory.Create(this);
             ManageSubscriptions(); 
         }
 
-        private void AssignName() => transform.name = "Wendigo_" + (id++);
+        private void AssignName() => transform.name = "Wendigo_" + (++id);
 
         private void AddControllers()
         {
@@ -95,11 +99,15 @@ namespace WendigoCharacter
 
         private void ManageSubscriptions()
         {
-            GetController<WendigoMovementController>().Subscribe(GetController<WendigoAnimationController>().OnVelocityUpdate);
+            GetController<WendigoMovementController>().onVelocityUpdate += GetController<WendigoAnimationController>().OnVelocityUpdate;
+
             GetController<WendigoHealthSystem>().SubscribeOnDeath(OnDeath);
             GetController<WendigoHealthSystem>().SubscribeOnImpactApply(OnImpact);
+            GetController<WendigoHealthSystem>().onInjuryDegreeUpdate += GetController<WendigoMovementController>().UpdateWalkSpeed;
 
             poolObject.SubscribeOnSpawn(OnSpawn);
+            poolObject.SubscribeOnSpawn(GetController<WendigoAnimationController>().ResetState);
+            poolObject.SubscribeOnSpawn(GetController<WendigoHealthSystem>().OnSpawn);
         }
 
         private void AddController(Type type)
@@ -129,6 +137,7 @@ namespace WendigoCharacter
             corpseCollisionController.SwitchOn();
 
             BuryTheCorpse();
+            onDeath?.Invoke();
             notifyOnDeath?.Invoke(transform);
         }
 
@@ -144,7 +153,11 @@ namespace WendigoCharacter
 
         public void BackUp() => data.ResetData();
 
-        public void SetHealth(int healthAmount) => data.Health.Amount = healthAmount;
+        public void SetHealth(int healthAmount)
+        {
+            data.Health.InitialAmount = 2000;
+            data.Health.Amount = data.Health.InitialAmount;
+        }
     }
 }
 

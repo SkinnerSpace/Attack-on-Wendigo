@@ -15,6 +15,8 @@ public class GameEvents : MonoBehaviour
     public event Action onFirstWeaponPickedUp;
     public event Action onWeaponSweptAway;
 
+    public event Action<float> onEnemyHealthUpdate;
+
     public event Action onStart;
     public event Action onPause;
     public event Action onResume;
@@ -53,6 +55,8 @@ public class GameEvents : MonoBehaviour
 
         pickUpCount += 1;
     }
+
+    public void EnemyHealthHasBeenUpdated(float health) => onEnemyHealthUpdate?.Invoke(health);
 
     public void WeaponHasBeenSweptAway() => onWeaponSweptAway?.Invoke();
 

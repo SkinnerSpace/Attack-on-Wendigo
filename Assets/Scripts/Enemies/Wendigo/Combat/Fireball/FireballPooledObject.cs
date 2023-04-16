@@ -17,7 +17,7 @@ public class FireballPooledObject : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-        data.IsActive = true;
+        fireball.SwitchOn();
         sFXPlayer.PlayThrowSFX();
         sFXPlayer.PlayFlySFX();
     }

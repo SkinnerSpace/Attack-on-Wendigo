@@ -6,6 +6,7 @@ public class EnergyShield : MonoBehaviour
 {
     [SerializeField] private MeshRenderer shieldRenderer;
     [SerializeField] private MeshRenderer bottomRenderer;
+    [SerializeField] private ParticleSystem soot;
     private Material shieldMaterial;
     private Material bottomMaterial;
 
@@ -23,9 +24,11 @@ public class EnergyShield : MonoBehaviour
 
         shieldMaterial = shieldRenderer.material;
         bottomMaterial = bottomRenderer.material;
+        soot.Play();
 
         SetEnergy(1f);
         timer.Set("Fade", 0.5f, StartFading);
+
     }
 
     private void Update() => Fade();

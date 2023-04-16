@@ -11,6 +11,7 @@ namespace WendigoCharacter
         public FirebreathAbilityData Firebreath;
         public FireballSpawnerData FireballSpawner;
         public FireballAbilityData Fireball;
+        public StompColliderData Collider;
         public HeadData Head;
 
         public WendigoTarget Target;
@@ -19,6 +20,7 @@ namespace WendigoCharacter
 
         public bool IsActive { get; set; }
         public bool IsArrived { get; set; }
+        public bool IsRested { get; set; } = true;
 
         private List<IRebootable> backup;
 
@@ -51,6 +53,7 @@ namespace WendigoCharacter
 
             IsActive = false;
             IsArrived = false;
+            IsRested = true;
         }
     }
 }

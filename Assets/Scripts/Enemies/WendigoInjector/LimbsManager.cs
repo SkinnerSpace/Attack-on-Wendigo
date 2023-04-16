@@ -7,6 +7,7 @@ public class LimbsManager : MonoBehaviour
     [SerializeField] private Transform root;
     [SerializeField] private Transform healthSystempImp;
     [SerializeField] private int healthMultiplier;
+    [SerializeField] private DamageModifiers standardModifiers;
 
     [Header("Parts")]
     public LimbGroup[] limbGroups;
@@ -26,6 +27,7 @@ public class LimbsManager : MonoBehaviour
 
             foreach (Limb limb in limbs){
                 limb.SetHealthMultiplier(healthMultiplier);
+                SetStandardDamageModifiersIfNecessary(limb);
             }
         }
     }
@@ -44,6 +46,15 @@ public class LimbsManager : MonoBehaviour
 
         if (healthSystem != null){
             healthSystem.SubscribeOnDeath(MakeLimbsDestroyable);
+        }
+    }
+
+    private void SetStandardDamageModifiersIfNecessary(Limb limb){
+        if (limb.damageModifiers.standard)
+        {
+            limb.damageModifiers.flesh = standardModifiers.flesh;
+            limb.damageModifiers.bones = standardModifiers.bones;
+            limb.damageModifiers.mutilation = standardModifiers.mutilation;
         }
     }
 

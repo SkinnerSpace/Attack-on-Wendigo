@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IWeapon
 {
+    private static int id;
+
+    [SerializeField] private string weaponName;
+
     [Header("Required Components")]
     [SerializeField] private WeaponData data;
     [SerializeField] private WeaponAimController aimController; 
@@ -34,10 +38,14 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void Awake()
     {
+        AssignName();
+
         CreateShooter();
         CreateMagazine();
         CreateSurfaceHitHandler();
     }
+
+    private void AssignName() => transform.name = weaponName + "_" + (++id);
 
     private void CreateSurfaceHitHandler()
     {

@@ -31,7 +31,8 @@ public class FireballSpawnerComponent : MonoBehaviour
     {
         Rotate();
         Fireball fireball = pooler.SpawnFromThePool("Fireball", transform.position, transform.rotation).GetComponent<Fireball>();
-        fireball.SetOwner(owner); 
+        fireball.SetOwner(owner);
+        fireball.SetTarget(data.Target.transform);
     }
 
     private void Rotate()

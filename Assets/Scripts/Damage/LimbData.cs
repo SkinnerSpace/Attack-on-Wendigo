@@ -8,12 +8,13 @@ public class LimbData
     private float INJURY_THRESHOLD = 0.5f;
     private float AMPUTATION_THRESHOLD = 0.1f;
 
-    private enum States{
+    public enum States{
         Flesh,
         Bones,
         Destroyed
     }
 
+    [Header("Other")]
     [SerializeField] private States state = States.Flesh;
     [SerializeField] private States baldState = States.Bones;
     [SerializeField] private LimbSFXSets sFXSet = LimbSFXSets.FleshCrash;
@@ -33,6 +34,9 @@ public class LimbData
     private States initialState;
     private bool initialCanBeDestroyed;
     public bool isBald;
+
+    private States previousState;
+    public States State => state;
 
     public LimbSFXSets SFXSet => sFXSet;
 
@@ -55,6 +59,12 @@ public class LimbData
 
     public void SetStateToInjured() => state = States.Bones;
     public void SetStateToDestroyed() => state = States.Destroyed;
+
+    public void RememberCurrentState(){
+        previousState = state;
+    }
+
+    public bool StateHasBeenChanged() => previousState != state;
 
     public bool ReadyForMutilation()
     {

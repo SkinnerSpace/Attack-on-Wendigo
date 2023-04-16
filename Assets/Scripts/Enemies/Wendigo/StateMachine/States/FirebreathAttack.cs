@@ -2,6 +2,7 @@
 {
     public class FirebreathAttack : LoggableState, IState
     {
+        private WendigoData generalData;
         private FirebreathAbilityData data;
         private WendigoMovementController movementController;
         private WendigoAnimationController animationPlayer;
@@ -10,6 +11,7 @@
 
         public FirebreathAttack(Wendigo wendigo)
         {
+            generalData = wendigo.Data;
             data = wendigo.Data.Firebreath;
             timer = wendigo.Timer;
             firebreath = wendigo.Firebreath;
@@ -27,6 +29,7 @@
         {
             LogEnter();
 
+            generalData.IsRested = false;
             data.IsReadyToUse = false;
             data.IsCharged = false;
             animationPlayer.PlayFirebreathAnimation();

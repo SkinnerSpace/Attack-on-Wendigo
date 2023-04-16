@@ -23,7 +23,7 @@ public class LimbGroup : MonoBehaviour, IDamageable
     {
         if (limbs.Count > 0){
             Limb targetLimb = limbs.OrderBy(limb => Vector3.Distance(limb.transform.position, damagePackage.point)).First();
-            targetLimb.ReceiveDamage(damagePackage.damage);
+            targetLimb.ReceiveDamage(damagePackage);
         }
     }
 }

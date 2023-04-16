@@ -18,12 +18,12 @@ public class StompDamageBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Vector3 impact = (other.transform.position - anchorPoint.position).FlatV3();
+/*        Vector3 impact = (other.transform.position - anchorPoint.position).FlatV3();
         impact += new Vector3(0f, 10f, 0f);
         impact = impact.normalized * stompDamage.impact;
 
         IHitBox hitBox = other.GetComponent<IHitBox>();
         DamagePackage damage = new DamagePackage(stompDamage.damage, impact, anchorPoint.position);
-        hitBox.ReceiveDamage(damage);
+        hitBox.ReceiveDamage(damage);*/
     }
 }

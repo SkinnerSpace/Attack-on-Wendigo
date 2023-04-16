@@ -16,12 +16,12 @@ namespace WendigoCharacter
         [SerializeField] private Firebreath firebreath;
 
         [Header("Stomp")]
-        [SerializeField] private StompDamageBox leftStompBox;
-        [SerializeField] private StompDamageBox rightStompBox;
         [SerializeField] private Transform leftStompPoint;
         [SerializeField] private Transform rightStompPoint;
 
         private IObjectPooler pooler;
+
+        public event Action onStomp;
 
         private void Start()
         {
@@ -30,7 +30,7 @@ namespace WendigoCharacter
 
         public void LeftStomp()
         {
-            leftStompBox.Activate();
+            onStomp?.Invoke();
             ShakeTheEarth(leftStompPoint.position);
             sFXPlayer.PlayStompSFX(leftStompPoint.position);
             pooler.SpawnFromThePool("StompSnow", leftStompPoint.position, Quaternion.identity);
@@ -38,7 +38,7 @@ namespace WendigoCharacter
 
         public void RightStomp()
         {
-            rightStompBox.Activate();
+            onStomp?.Invoke();
             ShakeTheEarth(rightStompPoint.position);
             sFXPlayer.PlayStompSFX(rightStompPoint.position);
             pooler.SpawnFromThePool("StompSnow", rightStompPoint.position, Quaternion.identity);

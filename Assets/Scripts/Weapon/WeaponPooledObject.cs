@@ -5,10 +5,12 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
 {
     public string PoolTag { get; set; }
     public GameObject Object => gameObject;
+
     [SerializeField] private Weapon weapon;
     [SerializeField] private Pickable pickable;
     [SerializeField] private WeaponPhysics physics;
     [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
+
     private IObjectPooler pooler;
 
     private void Start() => pooler = PoolHolder.Instance;
@@ -34,4 +36,3 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
     public void SubscribeOnSpawn(Action onSpawn) { }
 
 }
-

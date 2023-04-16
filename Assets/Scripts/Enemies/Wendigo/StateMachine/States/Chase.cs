@@ -15,6 +15,7 @@ namespace WendigoCharacter
         private WendigoRotationController rotationController;
         private WendigoMovementController movementController;
         private RangeCombatManager rangeCombatManager;
+        private WendigoAnimationController animationController;
 
         public Chase(Wendigo wendigo)
         {
@@ -22,28 +23,28 @@ namespace WendigoCharacter
             rotationController = wendigo.GetController<WendigoRotationController>();
             movementController = wendigo.GetController<WendigoMovementController>();
             rangeCombatManager = wendigo.GetController<RangeCombatManager>();
+            animationController = wendigo.GetController<WendigoAnimationController>();
         }
 
         public void Tick()
         {
             movementController.MoveForward();
-
-            if (ShouldRotate)
-                rotationController.RotateToTarget(data.Target.Position);
+            rotationController.RotateToTarget(data.Target.Position);
 
             rangeCombatManager.PrepareToAttack();
         }
 
-        private bool ShouldRotate => data.Movement.Velocity.magnitude > 1f;
-
         public void OnEnter()
         {
+            animationController.SetIsWalking(true);
             LogEnter();
         }
 
         public void OnExit()
         {
+            animationController.SetIsWalking(false);
             data.Movement.Velocity = Vector3.zero;
+            data.Movement.CurrentSpeed = 0f;
             LogExit();
         }
     }

@@ -20,7 +20,8 @@ public class ShakeConfig : IShakeConfig
     [SerializeField] private float maxAngleMult;
 
     [Header("Curve")]
-    [SerializeField] private float frequency;
+    [SerializeField] private float minFrequency;
+    [SerializeField] private float maxFrequency;
     [SerializeField] private float attack;
     [SerializeField] private float release;
 
@@ -31,7 +32,7 @@ public class ShakeConfig : IShakeConfig
     public float Time => minTime + ((maxTime - minTime) * power);
     public float Strength => minStrength + ((maxStrength - minStrength) * power);
     public float AngleMultiplier => minAngleMult + ((maxAngleMult - minAngleMult) * power);
-    public float Frenquency => frequency;
+    public float Frenquency => minFrequency + ((maxFrequency - minFrequency) * power);
     public float Attack => attack;
     public float Release => release;
 

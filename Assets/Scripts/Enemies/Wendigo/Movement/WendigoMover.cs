@@ -13,6 +13,7 @@ namespace WendigoCharacter
         public void SwitchOff(){
             controller.enabled = false;
             data.Movement.Velocity = Vector3.zero;
+            data.Movement.CurrentSpeed = 0f;
         }
 
         private void Update()

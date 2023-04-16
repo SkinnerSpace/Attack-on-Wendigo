@@ -1,4 +1,6 @@
-﻿namespace Character
+﻿using System;
+
+namespace Character
 {
     public class CharacterBurnController : BaseController
     {
@@ -7,6 +9,8 @@
 
         private float scorchTime = 1f;
         private int scorchDamage = 1;
+
+        public event Action onBurn;
 
         public override void Initialize(PlayerCharacter main)
         {
@@ -23,6 +27,8 @@
         {
             DamagePackage damagePackage = new DamagePackage(scorchDamage);
             healthSystem.ReceiveDamage(damagePackage);
+
+            onBurn?.Invoke();
         }
     }
 }

@@ -3,6 +3,7 @@ namespace WendigoCharacter
 {
     public class FireballCast : LoggableState, IState
     {
+        private WendigoData generalData;
         private FireballAbilityData data;
         private FunctionTimer timer;
         private WendigoMovementController movementController;
@@ -11,6 +12,7 @@ namespace WendigoCharacter
 
         public FireballCast(Wendigo wendigo)
         {
+            generalData = wendigo.Data;
             data = wendigo.Data.Fireball;
             timer = wendigo.Timer;
             movementController = wendigo.GetController<WendigoMovementController>();
@@ -27,6 +29,7 @@ namespace WendigoCharacter
         {
             LogEnter();
 
+            generalData.IsRested = false;
             data.IsReadyToUse = false;
             data.IsCharged = false;
             animationPlayer.PlayCastAnimation();

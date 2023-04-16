@@ -88,8 +88,8 @@ public class FireballExplosion
 
     private Vector3 GetImpact(Vector3 colliderPosition, float power)
     {
-        float forece = data.Impact * power;
-        Vector3 impact = (colliderPosition - data.Position).normalized * forece;
+        float force = data.Impact * power;
+        Vector3 impact = (colliderPosition - data.Position).normalized * force;
 
         return impact;
     }

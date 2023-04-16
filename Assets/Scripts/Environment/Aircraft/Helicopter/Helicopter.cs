@@ -52,14 +52,14 @@ public class Helicopter : MonoBehaviour, ILaunchable
     {
         Fly();
 
-        if (Input.GetKeyDown(KeyCode.Z))
+/*        if (Input.GetKeyDown(KeyCode.Z))
         {
             PrepareToLand();
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             Launch();
-        }
+        }*/
     }
 
     private void SynchronizeComponents()

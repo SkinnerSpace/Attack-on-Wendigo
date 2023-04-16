@@ -16,32 +16,41 @@ namespace WendigoCharacter
             chronos = wendigo.Chronos;
         }
 
-        public void Subscribe(Action<float> onVelocityUpdate) => this.onVelocityUpdate += onVelocityUpdate;
-
         public void MoveForward()
         {
             Accelerate();
             Decelerate();
-
-            onVelocityUpdate?.Invoke(data.Movement.Velocity.magnitude);
+            NotifyOnVelocityUpdate();
         }
 
         public void Stop()
         {
             Decelerate();
-            onVelocityUpdate?.Invoke(data.Movement.Velocity.magnitude);
         }
 
         private void Accelerate()
         {
-            Vector3 acceleration = data.Transform.Forward * data.Movement.WalkSpeed * chronos.DeltaTime;
-            data.Movement.Velocity += acceleration;
+            data.Movement.CurrentSpeed = Mathf.Lerp(data.Movement.CurrentSpeed, data.Movement.WalkSpeed, data.Movement.Acceleration * chronos.DeltaTime);
+            data.Movement.Velocity = data.transform.forward * data.Movement.CurrentSpeed;
         }
 
         private void Decelerate()
         {
             float percent = data.Movement.Deceleration * chronos.DeltaTime;
             data.Movement.Velocity = Vector3.Lerp(data.Movement.Velocity, Vector3.zero, percent);
+        }
+
+        private void NotifyOnVelocityUpdate()
+        {
+            data.Movement.DeltaWalkSpeed = data.Movement.Velocity.magnitude / data.Movement.DefaultWalkSpeed;
+            float clampedDeltaSpeed = Mathf.Clamp(data.Movement.DeltaWalkSpeed, 1f, 2f);
+            onVelocityUpdate?.Invoke(clampedDeltaSpeed);
+        }
+
+        public void UpdateWalkSpeed(float degree)
+        {
+            data.Movement.WalkSpeed = Mathf.Lerp(data.Movement.DefaultWalkSpeed, data.Movement.InjuredWalkSpeed, degree);
+            data.Movement.RotationSpeed = Mathf.Lerp(data.Movement.DefaultRotationSpeed, data.Movement.InjuredRotationSpeed, degree);
         }
     }
 }

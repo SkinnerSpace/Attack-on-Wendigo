@@ -62,16 +62,26 @@ public static class WendigoStateMachineFactory
         stateMachine.SetState(disabled);
 
         void Add(IState from, IState to, Func<bool> condition) => stateMachine.AddTransition(from, to, condition);
+
         Func<bool> IsActive() => () => data.IsActive;
         Func<bool> IsArrived() => () => data.IsArrived;
 
 
-        Func<bool> ReadyToChase() => () => data.Target != null && !data.Fireball.IsReadyToUse && !data.Firebreath.IsReadyToUse;
+        Func<bool> ReadyToChase() => () => data.Target != null && 
+                                           data.IsRested && 
+                                           !data.Fireball.IsReadyToUse && 
+                                           !data.Firebreath.IsReadyToUse;
 
-        Func<bool> ReadyToCast() => () => data.Target != null && data.Fireball.IsReadyToUse;
+        Func<bool> ReadyToCast() => () => data.Target != null && 
+                                          data.IsRested && 
+                                          data.Fireball.IsReadyToUse;
+
         Func<bool> FireballCastIsOver() => () => data.Fireball.IsOver;
 
-        Func<bool> ReadyToBurn() => () => data.Target != null && data.Firebreath.IsReadyToUse;
+        Func<bool> ReadyToBurn() => () => data.Target != null && 
+                                          data.IsRested && 
+                                          data.Firebreath.IsReadyToUse;
+
         Func<bool> FireBreathIsOver() => () => data.Firebreath.IsOver;
 
         Func<bool> HasTarget() => () => data.Target != null;
