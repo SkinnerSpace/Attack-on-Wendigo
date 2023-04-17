@@ -4,8 +4,14 @@ public class EnergyShieldSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject shieldPrefab;
 
+    private IObjectPooler pooler;
+
+    private void Start(){
+        pooler = PoolHolder.Instance;
+    }
+
     public void Spawn(Vector3 position)
     {
-        Instantiate(shieldPrefab, position, Quaternion.identity, transform);
+        pooler.SpawnFromThePool("EnergyShield", position, Quaternion.identity);
     }
 }

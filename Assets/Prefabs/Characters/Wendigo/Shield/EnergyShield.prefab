@@ -4839,6 +4839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4058788711753654398}
   - component: {fileID: 4058788711753654393}
+  - component: {fileID: 5430001920182514988}
   - component: {fileID: 1841619444459426677}
   - component: {fileID: 5236096112068699213}
   m_Layer: 9
@@ -4879,6 +4880,19 @@ MonoBehaviour:
   shieldRenderer: {fileID: 4974421215194494016}
   bottomRenderer: {fileID: 4974421214811939980}
   soot: {fileID: 454845933269712115}
+--- !u!114 &5430001920182514988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058788711753654392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56907e3d5c2a5134ab0106711b48add2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: {fileID: 4058788711753654393}
 --- !u!114 &1841619444459426677
 MonoBehaviour:
   m_ObjectHideFlags: 0

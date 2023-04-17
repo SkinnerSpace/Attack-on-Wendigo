@@ -10,14 +10,21 @@ public class LightningThrower : MonoBehaviour
     [SerializeField] private Transform attenuationPoint;
     private AudioPlayer thunderSFXPlayer;
 
+    private IObjectPooler pooler;
+
     private void Awake()
     {
         thunderSFXPlayer = AudioPlayer.Create(thunderSFX).WithPitch(-4f, 4f);
     }
 
+    private void Start(){
+        pooler = PoolHolder.Instance;
+    }
+
     public void Throw(Vector3 position)
     {
-        Instantiate(lightningBolt, position, Quaternion.identity, transform);
+        pooler.SpawnFromThePool("Lightning", position, Quaternion.identity);
+
         ShakeBuilder.Create().
                         withTime(1f).
                         WithAxis(1f, 1f, 0f).

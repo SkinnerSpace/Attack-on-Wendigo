@@ -155,7 +155,7 @@ namespace WendigoCharacter
 
         public void SetHealth(int healthAmount)
         {
-            data.Health.InitialAmount = 2000;
+            data.Health.InitialAmount = 1;//2000;
             data.Health.Amount = data.Health.InitialAmount;
         }
     }

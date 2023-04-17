@@ -31,10 +31,10 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+/*        if (Input.GetKeyDown(KeyCode.Z))
         {
-            Launch();
-        }
+            Spawn();
+        }*/
     }
 
     private void Awake()
@@ -64,7 +64,14 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         timer.Set("Launch", 2.6f, spawnerLogic.SpawnIfPossible);
     }
 
-    private void Spawn()
+    public void Spawn(int count)
+    {
+        for (int i = 0; i < count; i++){
+            Spawn();
+        }
+    }
+
+    public void Spawn()
     {
         Vector3 position = radPosGenerator.CalculatePos(wendigoManager.Wendigos);
 

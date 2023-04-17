@@ -12,6 +12,8 @@ public class WendigoManager
     private Transform container;
     private Transform characterImp;
 
+    private static float scale = 1f;
+
     public WendigoManager(WendigoSpawnerLogic spawner, Transform container, Transform characterImp, IObjectPooler pooler)
     {
         this.spawner = spawner;
@@ -25,6 +27,7 @@ public class WendigoManager
     public void InstantiateWendigo(Vector3 position, WendigoSpawnerData data)
     {
         Transform wendigoImp = pooler.SpawnFromThePool("Wendigo").transform;
+        //wendigoImp.localScale = scale.ToVector3(); // Experiment
         wendigos.Add(wendigoImp);
 
         IWendigo wendigo = wendigoImp.GetComponent<IWendigo>();
@@ -33,6 +36,8 @@ public class WendigoManager
         wendigo.SubscribeOnDeath(OnDeath);
 
         SetInPlace(wendigoImp, position);
+
+        //scale += 0.2f;
     }
 
     private void SetInPlace(Transform wendigo, Vector3 position)
