@@ -21,6 +21,8 @@ public class FireballCollider : IFireballCollider
     {
         Physics.OverlapSphereNonAlloc(data.Position, data.CollisionRadius, hitColliders, ComplexLayers.ProjectileCollidable);
         NotifyOnCollision();
+
+        hitColliders[0] = null;
     }
 
     public void NotifyOnCollision()
@@ -34,6 +36,7 @@ public class FireballCollider : IFireballCollider
                 return;
             }
 
+            Debug.Log("Collided");
             onCollision?.Invoke();
         }
     }

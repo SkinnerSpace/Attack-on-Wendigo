@@ -155,14 +155,16 @@ namespace WendigoCharacter
 
         public void SetHealth(int healthAmount)
         {
-            data.Health.InitialAmount = 1;//healthAmount;
+            data.Health.InitialAmount = healthAmount;
             data.Health.Amount = data.Health.InitialAmount;
         }
 
-        public void SetSpeed(float speedMultiplier)
-        {
+        public void SetSpeed(float speedMultiplier){
             data.Movement.MULTIPLIER = speedMultiplier;
-            Debug.Log("SET " + speedMultiplier);
+        }
+
+        public void SetMaxFireballAttackDistance(float maxFireballAttackDistance){
+            data.Fireball.MaxDistance = maxFireballAttackDistance;
         }
     }
 }

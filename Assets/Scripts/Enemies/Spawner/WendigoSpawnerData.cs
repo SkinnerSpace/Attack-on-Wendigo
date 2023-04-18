@@ -23,6 +23,8 @@ public class WendigoSpawnerData
 
     public float speed; // Configurable
 
+    public float maxFireballDistance; // Configurable
+
     private WendigoSpawnConfig config;
 
     public WendigoSpawnerData(WendigoSpawnConfig config)
@@ -52,6 +54,7 @@ public class WendigoSpawnerData
             timeToSpawn = Mathf.Lerp(config.minTimeInterval.Evaluate(progress), config.maxTimeInterval.Evaluate(progress), density);
             health = Mathf.RoundToInt(config.health.Evaluate(progress));
             speed = config.speed.Evaluate(progress);
+            maxFireballDistance = config.maxFireballDistance.Evaluate(progress);
         }
     }
 }

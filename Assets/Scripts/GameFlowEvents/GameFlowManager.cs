@@ -21,7 +21,7 @@ public class GameFlowManager : MonoBehaviour
 
     private void EventN1()
     {
-        GameEvents.current.onFirstWeaponPickedUp += wendigoSpawner.Launch;
+        //GameEvents.current.onFirstWeaponPickedUp += wendigoSpawner.Launch;
         //GameEvents.current.onFirstWeaponPickedUp
     }
 }

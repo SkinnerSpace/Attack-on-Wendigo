@@ -17,16 +17,13 @@ public class Airdrop : MonoBehaviour, IAirdrop
         GameEvents.current.onProgressUpdate += UpdateProgress;
     }
 
-    public void AddCargo(int index)
-    {
-        cargoCount += 1;
-        storage.AddAnItem(cargo[index]);
-    }
-
     public void WeaponDisappeared()
     {
         cargoCount -= 1;
         LoadCargo();
+
+        Debug.Log("Disappeared");
+        Debug.Log("Cargo count " + cargoCount); 
     }
 
     public void UpdateProgress(float progress)
@@ -42,5 +39,13 @@ public class Airdrop : MonoBehaviour, IAirdrop
         for (int i = 0; i < dropCount; i++){
             AddCargo(Rand.Range(0, cargo.Count));
         }
+    }
+
+    public void AddCargo(int index)
+    {
+        cargoCount += 1;
+        storage.AddAnItem(cargo[index]);
+
+        Debug.Log("Cargo count " + cargoCount);
     }
 }

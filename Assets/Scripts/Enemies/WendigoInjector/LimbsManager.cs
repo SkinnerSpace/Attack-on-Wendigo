@@ -46,6 +46,7 @@ public class LimbsManager : MonoBehaviour
 
         if (healthSystem != null){
             healthSystem.SubscribeOnDeath(MakeLimbsDestroyable);
+            healthSystem.SubscribeOnDeath(MakeLimbsFragile);
         }
     }
 

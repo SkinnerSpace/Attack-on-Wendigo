@@ -7,14 +7,16 @@ public class LaserBeam : MonoBehaviour
     [SerializeField] private CrateSFXPlayer sFXPlayer;
 
     private LineRenderer line;
-    private UpDirectionFinder upDirFinder;
 
     private bool isActive;
+    private bool isLocked;
 
-    private void Awake()
-    {
+    private void Awake(){
         line = GetComponent<LineRenderer>();
-        upDirFinder = new UpDirectionFinder();
+    }
+
+    private void Start(){
+        GameEvents.current.onVictory += SwitchOffAndLock;
     }
 
     private void Update()
@@ -27,23 +29,27 @@ public class LaserBeam : MonoBehaviour
 
     public void SwitchOn()
     {
-        /*        Vector3 upDir = upDirFinder.GetUpwardDirection(transform);
-                Vector3 upPos = transform.position + (upDir * EMISSION_HEIGHT);
+        if (!isLocked)
+        {
+            isActive = true;
+            line.enabled = true;
 
-                line.SetPosition(0, transform.position);
-                line.SetPosition(1, upPos);*/
-
-        isActive = true;
-        line.enabled = true;
-
-        fader.FadeIn();
-        sFXPlayer.PlayLightOn();
+            fader.FadeIn();
+            sFXPlayer.PlayLightOn();
+        }
     }
 
     public void ResetLaserBeam()
     {
         fader.ResetFade();
+        isLocked = false;
         line.enabled = false;
+    }
+
+    private void SwitchOffAndLock()
+    {
+        isLocked = true;
+        SwitchOff();
     }
 
     public void SwitchOff() => fader.FadeOut();

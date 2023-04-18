@@ -33,6 +33,7 @@ public class LimbData
 
     private States initialState;
     private bool initialCanBeDestroyed;
+    public bool isFragile { get; set; }
     public bool isBald;
 
     private States previousState;
@@ -68,18 +69,21 @@ public class LimbData
 
     public bool ReadyForMutilation()
     {
-        return healthPercent <= INJURY_THRESHOLD &&
-               state == States.Flesh
+        return state == States.Flesh && 
+               (healthPercent <= INJURY_THRESHOLD || isFragile)
                ;
     }
 
     public bool ReadyForAmputation()
     {
-        return healthPercent <= AMPUTATION_THRESHOLD &&
-               state == States.Bones &&
-               canBeDestroyed &&
-               AmputationIsUnlocked()
+        return (state == States.Bones && AmputationIsUnlocked()) &&
+               (AppropriateHealthForAmputation() || isFragile)
                ;
+    }
+
+    private bool AppropriateHealthForAmputation(){
+        return healthPercent <= AMPUTATION_THRESHOLD &&
+               canBeDestroyed;
     }
 
     public bool ReadyToGoBald()
@@ -113,6 +117,7 @@ public class LimbData
         healthPercent = 1f;
         state = initialState;
         canBeDestroyed = initialCanBeDestroyed;
+        isFragile = false;
         isBald = false;
     }
 

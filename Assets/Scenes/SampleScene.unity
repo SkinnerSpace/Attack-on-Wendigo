@@ -625,7 +625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203672775}
   m_Layer: 0
-  m_Name: WeaponPoolClient
+  m_Name: PoolClient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1376,26 +1376,26 @@ MonoBehaviour:
   - tag: SnowParticle
     prefab: {fileID: 8314286997772649536, guid: 10e9f5dd30e959a4b819e764f40d39cc,
       type: 3}
-    size: 120
+    size: 240
   - tag: WendigoFallSnowParticle
     prefab: {fileID: 872948489838112112, guid: d7f0697f32c89954bb889b2af29277fe, type: 3}
-    size: 80
+    size: 160
   - tag: BulletSnowParticle
     prefab: {fileID: 2067079203369254173, guid: 9958f7ad7d5be444eb18725ad53fdca9,
       type: 3}
-    size: 70
+    size: 140
   - tag: BuckshotSnowParticle
     prefab: {fileID: 3959281334994011231, guid: 12daa2ac66c724245b98b0a9d90e36f6,
       type: 3}
-    size: 70
+    size: 140
   - tag: SweepSnowParticle
     prefab: {fileID: 5886012222994725952, guid: 8d9a075c0fb8fed418d542cb47291b1a,
       type: 3}
-    size: 30
+    size: 60
   - tag: FuneralSnowParticle
     prefab: {fileID: 4741889441457076027, guid: 506eb6abe174186419ae2d5f2bf483de,
       type: 3}
-    size: 90
+    size: 180
 --- !u!114 &282758767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5135,6 +5135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -5147,6 +5152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d711c01ed670b8c428966b9dd627cc94, type: 3}
@@ -6147,11 +6157,11 @@ MonoBehaviour:
   - tag: BulletExplosion
     prefab: {fileID: 5421441620100881220, guid: ba41076a5384dd548a0ba62a516684c0,
       type: 3}
-    size: 60
+    size: 90
   - tag: BuckshotExplosion
     prefab: {fileID: 3551867146874852379, guid: c57cc8aace7aef74d97638b9fb0438bc,
       type: 3}
-    size: 120
+    size: 140
 --- !u!1 &691428452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,6 +6936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 931384815}
   - component: {fileID: 931384816}
+  - component: {fileID: 931384817}
   m_Layer: 0
   m_Name: GreenFireVignette
   m_TagString: Untagged
@@ -6964,6 +6975,39 @@ MonoBehaviour:
   blendDistance: 0
   weight: 0
   sharedProfile: {fileID: 11400000, guid: 1d98cfbbd2c960a43974a27833e9b4f0, type: 2}
+--- !u!114 &931384817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931384814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1d2ca7175bf024a94a4aab96d105b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inflameSFX:
+    Guid:
+      Data1: 1944948148
+      Data2: 1334091966
+      Data3: 1434944897
+      Data4: -1787024398
+    Path: event:/SFX/Game/Gameplay/Burn/PlayerInflame
+  damageSFX:
+    Guid:
+      Data1: 1093947699
+      Data2: 1164017330
+      Data3: -1795363690
+      Data4: -1109533150
+    Path: event:/SFX/Game/Gameplay/Burn/PlayerFireDamage
+  coolDownSFX:
+    Guid:
+      Data1: 1933023439
+      Data2: 1271721669
+      Data3: 876532366
+      Data4: -391197986
+    Path: event:/SFX/Game/Gameplay/Burn/PlayerCoolDown
 --- !u!1 &963580475
 GameObject:
   m_ObjectHideFlags: 0
@@ -12217,15 +12261,15 @@ MonoBehaviour:
   - tag: Pistol
     prefab: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d,
       type: 3}
-    size: 10
+    size: 1
   - tag: Rifle
     prefab: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
       type: 3}
-    size: 10
+    size: 1
   - tag: Shotgun
     prefab: {fileID: 7473361558535834234, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
       type: 3}
-    size: 10
+    size: 1
 --- !u!114 &1274228565 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7944384649400061894, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -15006,6 +15050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1077207054}
+  scorchSFXPlayer: {fileID: 931384817}
 --- !u!4 &1894431530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5764452896203316476, guid: d711c01ed670b8c428966b9dd627cc94,
@@ -16956,7 +17001,7 @@ PrefabInstance:
     - target: {fileID: 6406221231773347257, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}
       propertyPath: Health.Amount
-      value: 30
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7559064758374433838, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
         type: 3}

@@ -8,5 +8,6 @@ public interface IWendigo
     void SetTarget(Transform target);
     void SetHealth(int healthAmount);
     void SetSpeed(float speedMultiplier);
+    void SetMaxFireballAttackDistance(float maxFireballAttackDistance);
     void SubscribeOnDeath(Action<Transform> notifyOnDeath);
 }

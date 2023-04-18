@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSwayAngle: 30
-  flyingMagnitude: 1
+  flyingMagnitude: 0.5
   landingMagnitude: 0.2
   magnitudeChangeSpeed: 0.5
   waveSpeed: 30

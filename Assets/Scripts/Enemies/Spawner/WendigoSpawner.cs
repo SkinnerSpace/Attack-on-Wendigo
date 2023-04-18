@@ -29,14 +29,6 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
     private bool isActive;
 
-    private void Update()
-    {
-/*        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Spawn();
-        }*/
-    }
-
     private void Awake()
     {
         data = new WendigoSpawnerData(config);
@@ -50,7 +42,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         wendigoManager = new WendigoManager(spawnerLogic, container, characterImp, pooler);
         spawnerLogic.UpdateAliveCount();
 
-        GameEvents.current.onFirstWeaponPickedUp += LaunchWithDelay;
+        //GameEvents.current.onFirstWeaponPickedUp += LaunchWithDelay;
     }
 
     public void Launch(){
