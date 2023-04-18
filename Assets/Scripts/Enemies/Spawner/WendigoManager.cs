@@ -27,11 +27,12 @@ public class WendigoManager
     public void InstantiateWendigo(Vector3 position, WendigoSpawnerData data)
     {
         Transform wendigoImp = pooler.SpawnFromThePool("Wendigo").transform;
-        //wendigoImp.localScale = scale.ToVector3(); // Experiment
         wendigos.Add(wendigoImp);
 
         IWendigo wendigo = wendigoImp.GetComponent<IWendigo>();
         wendigo.SetHealth(data.health);
+        wendigo.SetSpeed(data.speed);
+
         wendigo.SetTarget(characterImp);
         wendigo.SubscribeOnDeath(OnDeath);
 

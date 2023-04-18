@@ -64,6 +64,12 @@ public class LimbsManager : MonoBehaviour
         }
     }
 
+    public void MakeLimbsFragile(){
+        foreach (Limb limb in limbs){
+            limb.MakeFragile();
+        }
+    }
+
     public void ResetState(){
         foreach (Limb limb in limbs){
             limb.ResetState();

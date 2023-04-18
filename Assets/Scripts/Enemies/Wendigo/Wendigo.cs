@@ -103,7 +103,7 @@ namespace WendigoCharacter
 
             GetController<WendigoHealthSystem>().SubscribeOnDeath(OnDeath);
             GetController<WendigoHealthSystem>().SubscribeOnImpactApply(OnImpact);
-            GetController<WendigoHealthSystem>().onInjuryDegreeUpdate += GetController<WendigoMovementController>().UpdateWalkSpeed;
+            GetController<WendigoHealthSystem>().onInjuryDegreeUpdate += GetController<WendigoMovementController>().UpdateSpeed;
 
             poolObject.SubscribeOnSpawn(OnSpawn);
             poolObject.SubscribeOnSpawn(GetController<WendigoAnimationController>().ResetState);
@@ -155,8 +155,14 @@ namespace WendigoCharacter
 
         public void SetHealth(int healthAmount)
         {
-            data.Health.InitialAmount = 1;//2000;
+            data.Health.InitialAmount = 1;//healthAmount;
             data.Health.Amount = data.Health.InitialAmount;
+        }
+
+        public void SetSpeed(float speedMultiplier)
+        {
+            data.Movement.MULTIPLIER = speedMultiplier;
+            Debug.Log("SET " + speedMultiplier);
         }
     }
 }

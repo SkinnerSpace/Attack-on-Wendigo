@@ -70,7 +70,11 @@ public class WendigoSpawnerLogic
         onAliveCountUpdate?.Invoke(data.aliveCount);
     }
 
-    private void NotifyOnSetTimer() => onSetTimer?.Invoke(data.timeToSpawn);
+    private void NotifyOnSetTimer()
+    {
+        float timeToSpawn = data.currentCount > 0 ? data.timeToSpawn : 1f;
+        onSetTimer?.Invoke(timeToSpawn);
+    }
 
     private void UpdateDensity()
     {

@@ -21,6 +21,8 @@ namespace WendigoCharacter
         public float InjuredRotationSpeed;
         public float RotationSpeed;
 
+        public float MULTIPLIER;
+
         public Vector3 Velocity { get; set; }
 
         private float init_walkSpeed;

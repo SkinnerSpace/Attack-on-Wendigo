@@ -66,7 +66,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
 
     public void Spawn(int count)
     {
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count-1; i++){
             Spawn();
         }
     }

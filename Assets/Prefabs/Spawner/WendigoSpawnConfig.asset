@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608eeabc729bf2d48810679bb2880dc5, type: 3}
   m_Name: WendigoSpawnConfig
   m_EditorClassIdentifier: 
-  initialCount: 1
+  initialCount: 30
   concurrentSpawnCount:
     serializedVersion: 2
     m_Curve:
@@ -90,7 +90,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 60
+      value: 200
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -99,12 +99,36 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 80
+      value: 400
       inSlope: 0.2979158
       outSlope: 0.2979158
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.23750001
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.29339707
+      outSlope: 0.29339707
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21666667
+    - serializedVersion: 3
+      time: 1.0041809
+      value: 1.5012245
+      inSlope: 0.0032476592
+      outSlope: 0.0032476592
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3625
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

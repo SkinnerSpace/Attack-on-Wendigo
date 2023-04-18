@@ -15,7 +15,6 @@ namespace WendigoCharacter
         public HeadData Head;
 
         public WendigoTarget Target;
-
         public TransformData Transform { get; private set; }
 
         public bool IsActive { get; set; }

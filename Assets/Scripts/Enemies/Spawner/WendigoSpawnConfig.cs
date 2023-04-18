@@ -9,5 +9,6 @@ public class WendigoSpawnConfig : ScriptableObject
     public AnimationCurve minTimeInterval;
     public AnimationCurve maxTimeInterval;
     public AnimationCurve health;
+    public AnimationCurve speed;
 }
 

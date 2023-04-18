@@ -24,16 +24,11 @@ namespace WendigoCharacter
         {
             SetData(wendigo.Data.Health);
             ConnectToLimbs(wendigo.limbs);
-            //ConnectToHitBoxes(wendigo.HitBoxes);
             onInitialized?.Invoke();
         }
 
         public void SetData(HealthData data) => this.data = data;
-        private void ConnectToHitBoxes(IHitBox[] hitBoxes)
-        {
-            foreach (IHitBox hitBox in hitBoxes)
-                ConnectToHitBox(hitBox);
-        }
+
         public void ConnectToHitBox(IHitBox hitBox) => hitBox.Subscribe(this);
 
         public void ConnectToLimbs(Limb[] limbs){

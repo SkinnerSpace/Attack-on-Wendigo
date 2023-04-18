@@ -4,13 +4,11 @@ namespace WendigoCharacter
 {
     public class WendigoRotationController : WendigoPlugableComponent
     {
-        private IWendigo wendigo;
         private WendigoData data;
         private IChronos chronos;
 
         public override void Initialize(Wendigo wendigo)
         {
-            this.wendigo = wendigo;
             data = wendigo.Data;
             chronos = wendigo.Chronos;
         }
@@ -23,7 +21,7 @@ namespace WendigoCharacter
             Vector3 dirToTarget = (flatTargetPos - flatOwnPos).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(dirToTarget, Vector3.up);
 
-            float lerp = data.Movement.RotationSpeed * chronos.DeltaTime;
+            float lerp = data.Movement.RotationSpeed * data.Movement.MULTIPLIER * chronos.DeltaTime;
             data.Transform.Rotation = Quaternion.RotateTowards(data.Transform.Rotation, targetRotation, lerp);
         }
     }

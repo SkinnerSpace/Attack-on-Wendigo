@@ -27,6 +27,10 @@ public class DebugCommands : MonoBehaviour
             components.debugController.showHelp = false;
         });
 
+/*        DebugCommand<bool> SPAWNER_SET_CONFIGURABLE = new DebugCommand<bool>("spawner configurable", "Set spawner configurable", "spawner configurable <yes/no>", (x) => {
+            components.spawner.da
+        });*/
+
         commandList = new List<object>()
         {
             SPAWN,

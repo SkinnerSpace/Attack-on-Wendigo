@@ -113,11 +113,13 @@ public class Limb : MonoBehaviour
             hitBox.SwitchOff();
     }
 
-    public void MakeDestroyable()
-    {
+    public void MakeDestroyable(){
         data.canBeDestroyed = true;
     }
 
+    public void MakeFragile(){
+        data.isFragile = true;
+    }
 
     public bool IsDestroyed() => data.IsDestroyed();
 

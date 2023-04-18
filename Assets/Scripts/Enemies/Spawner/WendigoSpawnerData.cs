@@ -2,6 +2,8 @@
 
 public class WendigoSpawnerData
 {
+    public bool configurable = true;
+
     public int initialSpawnCount; // Configurable
     public int leftToSpawnCount;
     public int spawnedCount;
@@ -18,6 +20,8 @@ public class WendigoSpawnerData
     public float progress;
 
     public int health; // Configurable
+
+    public float speed; // Configurable
 
     private WendigoSpawnConfig config;
 
@@ -43,15 +47,12 @@ public class WendigoSpawnerData
 
     public void UpdateGameFlowValues()
     {
-        allowedConcurrentCount = Mathf.RoundToInt(config.concurrentSpawnCount.Evaluate(progress));
-        timeToSpawn = Mathf.Lerp(config.minTimeInterval.Evaluate(progress), config.maxTimeInterval.Evaluate(progress), density);
-        health = Mathf.RoundToInt(config.health.Evaluate(progress));
-
-/*        Debug.Log("---WENDIGO---");
-        Debug.Log("Density " + density);
-        Debug.Log("Concurrent " + allowedConcurrentCount);
-        Debug.Log("Time " + timeToSpawn);
-        Debug.Log("Health " + health);*/
+        if (configurable){
+            allowedConcurrentCount = Mathf.RoundToInt(config.concurrentSpawnCount.Evaluate(progress));
+            timeToSpawn = Mathf.Lerp(config.minTimeInterval.Evaluate(progress), config.maxTimeInterval.Evaluate(progress), density);
+            health = Mathf.RoundToInt(config.health.Evaluate(progress));
+            speed = config.speed.Evaluate(progress);
+        }
     }
 }
 
