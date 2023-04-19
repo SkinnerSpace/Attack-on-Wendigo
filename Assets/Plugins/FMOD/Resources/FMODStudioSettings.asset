@@ -452,6 +452,7 @@ MonoBehaviour:
   - Master
   Banks:
   - Ambient
+  - Bank A
   - Environment
   - EnvironmentInteraction
   - Weapon

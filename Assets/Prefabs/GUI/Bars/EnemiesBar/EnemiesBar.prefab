@@ -242,6 +242,8 @@ GameObject:
   - component: {fileID: 546939043208730918}
   - component: {fileID: 7615694400410054698}
   - component: {fileID: 8049418360502503187}
+  - component: {fileID: 2885900347493919626}
+  - component: {fileID: 6597185025836396621}
   m_Layer: 5
   m_Name: EnemiesBar
   m_TagString: Untagged
@@ -343,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d700ba7b57aa64db61556f85aa2c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  container: {fileID: 6597185025836396621}
   spawnerImp: {fileID: 0}
   label: {fileID: 8662981245132605764}
 --- !u!114 &8049418360502503187
@@ -362,3 +365,29 @@ MonoBehaviour:
   testMode: 0
   completeness: 0
   testAnimation: {fileID: 11400000, guid: 5e3d14f72ffc882479d888964d24f31b, type: 2}
+--- !u!225 &2885900347493919626
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662981245288895774}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &6597185025836396621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662981245288895774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearTime: 0.5
+  disappearTime: 1

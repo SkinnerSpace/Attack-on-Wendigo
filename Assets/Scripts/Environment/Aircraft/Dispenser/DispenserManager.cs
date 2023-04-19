@@ -32,15 +32,12 @@ public class DispenserManager : MonoBehaviour, ISwitchable
     {
         if (IsAbleToDrop())
         {
-            Debug.Log("Is able to drop");
             Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
             GameObject crate = pooler.SpawnFromThePool("Crate");
             dispenser.Launch(crate, moveOn);
         }
         else
         {
-            Debug.Log("Is active " + isActive);
-            Debug.Log("Is empty " + storage.IsEmpty());
             timer.Set("MoveOn", 2f, moveOn);
         }
     }

@@ -89,6 +89,5 @@ public class GUIContainer : MonoBehaviour
     private void SetAlpha(float alpha)
     {
         canvasGroup.alpha = alpha;
-        //Debug.Log(alpha);
     }
 }

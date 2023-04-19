@@ -21,9 +21,6 @@ public class Airdrop : MonoBehaviour, IAirdrop
     {
         cargoCount -= 1;
         LoadCargo();
-
-        Debug.Log("Disappeared");
-        Debug.Log("Cargo count " + cargoCount); 
     }
 
     public void UpdateProgress(float progress)
@@ -45,7 +42,5 @@ public class Airdrop : MonoBehaviour, IAirdrop
     {
         cargoCount += 1;
         storage.AddAnItem(cargo[index]);
-
-        Debug.Log("Cargo count " + cargoCount);
     }
 }

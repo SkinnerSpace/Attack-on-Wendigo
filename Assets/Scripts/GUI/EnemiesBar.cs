@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemiesBar : MonoBehaviour
 {
+    [SerializeField] private GUIContainer container;
     [SerializeField] private Transform spawnerImp;
     [SerializeField] private TextMeshProUGUI label;
 
@@ -16,6 +17,7 @@ public class EnemiesBar : MonoBehaviour
     private void Start()
     {
         spawner.SubscribeOnAliveCountUpdate(OnUpdate);
+        GameEvents.current.onInvasionHasBegun += container.ShowGradually;
     }
 
     public void OnUpdate(int count){

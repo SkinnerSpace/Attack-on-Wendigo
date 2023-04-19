@@ -38,12 +38,6 @@ namespace Character
             healthData = main.Data.Health;
             hitBox = main.HitBox;
             eventManager = main.Events;
-
-            onDeathTrigger = new EventTrigger();
-            SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
-
-            SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
-            onHealthUpdate?.Invoke(healthData.Amount);
         }
 
         public void Initialize(HealthData data) => this.healthData = data;
@@ -51,6 +45,13 @@ namespace Character
         public override void Connect()
         {
             hitBox.Subscribe(this);
+
+            onDeathTrigger = new EventTrigger();
+            SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
+
+            SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
+            onHealthUpdate?.Invoke(healthData.Amount);
+
             SubscribeOnDeath(() => main.SetActive(false));
             eventManager.ConnectTrigger(onDeathTrigger, "PlayerDied");
         }

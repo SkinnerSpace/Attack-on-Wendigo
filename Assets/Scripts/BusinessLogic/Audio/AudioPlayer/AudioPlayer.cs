@@ -7,6 +7,7 @@ public class AudioPlayer
 
     private static event Action onPause;
     private static event Action onResume;
+    private static event Action onStop;
 
     private AudioEvent audioEvent;
     private FMODUnity.EventReference audioReference;
@@ -143,6 +144,7 @@ public class AudioPlayer
         if (!isUnpausable){
             onPause += Pause;
             onResume += Resume;
+            onStop += Stop;
         }
     }
 
@@ -150,6 +152,7 @@ public class AudioPlayer
         if (!isUnpausable){
             onPause -= Pause;
             onResume -= Resume;
+            onStop -= Stop;
 
             audioEvent = null;
         }
@@ -173,6 +176,8 @@ public class AudioPlayer
     public static void PauseAll() => onPause?.Invoke();
 
     public static void ResumeAll() => onResume?.Invoke();
+
+    public static void StopAll() => onStop?.Invoke();
 
     // Disappearance timer
 

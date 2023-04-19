@@ -36,7 +36,6 @@ public class FireballCollider : IFireballCollider
                 return;
             }
 
-            Debug.Log("Collided");
             onCollision?.Invoke();
         }
     }

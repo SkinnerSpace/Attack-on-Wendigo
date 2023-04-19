@@ -7,7 +7,9 @@ public class HealthBar : MonoBehaviour
 
     public static HealthBar Instance;
 
-    private void Awake() => Instance = this;
+    private void Awake(){
+        Instance = this;
+    }
 
     public void OnUpdate(int health)
     {
