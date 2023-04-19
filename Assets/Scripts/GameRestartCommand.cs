@@ -8,6 +8,11 @@
     {
         AudioEvent.StopAll();
         GameEvents.current.ResetState();
-        gameManager.LevelLoader.ReloadScene();
+
+        SceneLoader.Instance.LoadScene(0);
+        /*GameState.PauseMode = PauseMode.None;
+        AudioPlayer.ResumeAll();*/
+
+        //gameManager.LevelLoader.ReloadScene();
     }
 }
