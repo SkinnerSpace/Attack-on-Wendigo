@@ -7,7 +7,7 @@
     public void Execute()
     {
         AudioEvent.StopAll();
-        GameEvents.current.ResetState();
+        //GameEvents.current.ResetState();
 
         SceneLoader.Instance.LoadScene(0);
         /*GameState.PauseMode = PauseMode.None;

@@ -18,6 +18,7 @@ public class WendigoSpawnerData
     public float timeToSpawn; // Configurable
 
     public float progress;
+    public float deathProgress;
 
     public int health; // Configurable
 
@@ -45,6 +46,7 @@ public class WendigoSpawnerData
         aliveCount = 0;
         deadCount = 0;
         progress = 0;
+        deathProgress = 0f;
     }
 
     public void UpdateGameFlowValues()

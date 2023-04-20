@@ -74,4 +74,3 @@ public class GUIAnimator : MonoBehaviour
         isPlaying = true;
     }
 }
-

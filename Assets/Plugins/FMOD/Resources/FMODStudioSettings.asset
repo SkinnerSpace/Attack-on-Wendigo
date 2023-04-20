@@ -452,9 +452,10 @@ MonoBehaviour:
   - Master
   Banks:
   - Ambient
-  - Bank A
   - Environment
   - EnvironmentInteraction
+  - Music
+  - UI
   - Weapon
   - Wendigo
   BanksToLoad: []

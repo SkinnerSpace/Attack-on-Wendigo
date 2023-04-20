@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
     {
         menu.Open("Main");
         cameraManager.TrackTheHelicopter();
+
+        MenuEvents.current.onStart += commands["Start"].Execute;
+        MenuEvents.current.onResume += commands["Resume"].Execute;
+        MenuEvents.current.onRestart += commands["Restart"].Execute;
     }
 
     private void Update()

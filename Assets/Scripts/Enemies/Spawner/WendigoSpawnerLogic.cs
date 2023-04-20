@@ -53,6 +53,7 @@ public class WendigoSpawnerLogic
         data.deadCount += 1;
 
         UpdateDensity();
+        UpdateDeathProgress();
         UpdateAliveCount();
         NotifyOnSetTimer();
 
@@ -88,6 +89,12 @@ public class WendigoSpawnerLogic
         data.UpdateGameFlowValues();
 
         GameEvents.current.UpdateProgress(data.progress);
+    }
+
+    private void UpdateDeathProgress()
+    {
+        data.deathProgress = data.deadCount / (float)data.initialSpawnCount;
+        GameEvents.current.UpdateDeathProgress(data.deathProgress);
     }
 
     private void DeclareVictoryIfNoOneIsLeft()

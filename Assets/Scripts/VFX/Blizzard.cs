@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Blizzard : MonoBehaviour
 {
-    public float Radius => influenceRadius;
+    public float Radius => influenceRadius * blizzardTransform.Size;
     public float Influence => influence;
     private float influence;
 
     [SerializeField] private List<PushableObject> pushables = new List<PushableObject>();
+    [SerializeField] private BlizzardTransform blizzardTransform;
 
     [SerializeField] private float strength;
     [SerializeField] private float influenceRadius;
@@ -35,8 +36,8 @@ public class Blizzard : MonoBehaviour
     private void CalculateInfluence(Vector3 point)
     {
         float distanceToTheCenter = Vector3.Distance(transform.position, point);
-        float distanceFromTheInfluenceRadius = Mathf.Max(0f, (distanceToTheCenter - influenceRadius));
-        float rawInfluence = distanceFromTheInfluenceRadius / influenceThickness;
+        float distanceFromTheInfluenceRadius = Mathf.Max(0f, (distanceToTheCenter - (influenceRadius * blizzardTransform.Size)));
+        float rawInfluence = distanceFromTheInfluenceRadius / (influenceThickness * blizzardTransform.Size);
         influence = Mathf.Clamp(rawInfluence, 0f, 1f);
         influence = Easing.QuadEaseIn(influence);
     }

@@ -15,6 +15,7 @@ public class MusicPlayer : MonoBehaviour
     private void Start(){
         GameEvents.current.onFirstWeaponPickedUp += PlayBattleSoundtrack;
         GameEvents.current.onPlayerHasDied += StopBattleSoundtrack;
+        GameEvents.current.onVictory += StopBattleSoundtrack;
     }
 
     public void PlayBattleSoundtrack(){

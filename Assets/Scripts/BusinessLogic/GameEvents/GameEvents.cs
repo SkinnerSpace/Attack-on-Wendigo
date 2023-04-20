@@ -12,6 +12,8 @@ public class GameEvents : MonoBehaviour
     public event Action onVictory;
 
     public event Action<float> onProgressUpdate;
+    public event Action<float> onDeathProgressUpdate;
+
     public event Action onFirstWeaponPickedUp;
     public event Action onWeaponSweptAway;
 
@@ -20,6 +22,7 @@ public class GameEvents : MonoBehaviour
     public event Action onStart;
     public event Action onPause;
     public event Action onResume;
+
 
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class GameEvents : MonoBehaviour
     public void PlayerHasDied() => onPlayerHasDied?.Invoke();
     public void DeclareVictory() => onVictory?.Invoke();
     public void UpdateProgress(float progress) => onProgressUpdate?.Invoke(progress);
+    public void UpdateDeathProgress(float deathProgress) => onDeathProgressUpdate?.Invoke(deathProgress);
     public void WeaponHasBeenPickedUp()
     {
         if (pickUpCount == 0){
