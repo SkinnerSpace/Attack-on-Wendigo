@@ -15,9 +15,16 @@ namespace Character
         private event Action<int> onHealthUpdate;
         private event Action onDeath;
 
+        public void ReceiveNonCriticalDamage(DamagePackage damagePackage)
+        {
+            if (healthData.Amount - damagePackage.damage > 0){
+                ReceiveDamage(damagePackage);
+            }
+        }
+
         public void ReceiveDamage(DamagePackage damagePackage)
         {
-            if (healthData.IsAlive)
+            if (healthData.IsAlive && !healthData.IsImmortal)
             {
                 healthData.Amount -= damagePackage.damage;
 
@@ -54,6 +61,8 @@ namespace Character
 
             SubscribeOnDeath(() => main.SetActive(false));
             eventManager.ConnectTrigger(onDeathTrigger, "PlayerDied");
+
+            GameEvents.current.onVictory += BecomeImmortal;
         }
 
         public override void Disconnect() => hitBox.Unsubscribe(this);
@@ -63,6 +72,10 @@ namespace Character
             healthData.Amount = 0;
             onDeath?.Invoke();
             GameEvents.current.PlayerHasDied();
+        }
+
+        private void BecomeImmortal(){
+            healthData.IsImmortal = true;
         }
     }
 }

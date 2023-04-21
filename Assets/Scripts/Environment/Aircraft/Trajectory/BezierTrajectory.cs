@@ -17,12 +17,15 @@ public class BezierTrajectory : MonoBehaviour
 
     [Header("Bounds")]
     [SerializeField] private Vector2 boundsCenter;
-    [SerializeField] private float boundsRadius;
+    [SerializeField] private float maxBoundsRadius;
+    [SerializeField] private float minBoundsRadius;
 
     [SerializeField] private BezierArrangement arrangement;
 
     public float Length => bezierLUT.arcLength;
     public bool Visualize => visualize;
+
+    private float boundsRadius;
 
     private void OnEnable()
     {
@@ -31,6 +34,13 @@ public class BezierTrajectory : MonoBehaviour
 
     private void OnValidate() => UpdatePoints();
 
+    private void Awake(){
+        boundsRadius = maxBoundsRadius;
+    }
+
+    private void Start(){
+        GameEvents.current.onDeathProgressUpdate += UpdateBoundsRadius;
+    }
 
     public Vector3 GetPosition(float inDistance, Action onFinish)
     {
@@ -63,8 +73,11 @@ public class BezierTrajectory : MonoBehaviour
     {
         constellator.ArrangeThePathDownToTheGround(pointsManager.BezierPoints, arrangement, currentPosition);
         pointsManager.PushThePointsAwayFromEachOther(pointsManager.BezierPoints.Length-1);
-        /*        pointsManager.PushThePointsAwayFromEachOther();
-                pointsManager.KeepThePointsWithinTheBoundaries(boundsCenter, boundsRadius);*/
+    }
+
+    public void UpdateBoundsRadius(float progress){
+        boundsRadius = Mathf.Lerp(maxBoundsRadius, minBoundsRadius, progress);
+        Debug.Log("Bounds radius " + boundsRadius);
     }
 
 
@@ -73,8 +86,10 @@ public class BezierTrajectory : MonoBehaviour
     {
         RenderBezierCurve();
 
-/*        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), boundsRadius);
+ /*       Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), maxBoundsRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(new Vector3(boundsCenter.x, 0f, boundsCenter.y), minBoundsRadius);
         Gizmos.color = Color.white;*/
     }
 #endif

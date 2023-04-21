@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blizzard : MonoBehaviour
+public class Blizzard : MonoBehaviour, IBlizzard
 {
     public float Radius => influenceRadius * blizzardTransform.Size;
     public float Influence => influence;
@@ -15,14 +15,23 @@ public class Blizzard : MonoBehaviour
     [SerializeField] private float influenceRadius;
     [SerializeField] private float influenceThickness;
 
+    [SerializeField] private bool showRadius;
+
+/*    private float differenceFromTheOriginalSize;
+*/
     public static Blizzard Instance { get; private set; }
 
-    private void Awake() => Instance = this;
+    private void Awake(){
+        Instance = this;
+        blizzardTransform.onTargetSizeUpdate += NotifyOnRadiusUpdate;
+    }
 
     private void Update()
     {
         foreach (PushableObject pushable in pushables)
             PushAway(pushable);
+
+    /*    differenceFromTheOriginalSize = Radius / influenceRadius;*/
     }
 
     public void PushAway(PushableObject pushable)
@@ -49,4 +58,25 @@ public class Blizzard : MonoBehaviour
 
         return faceVector;
     }
+
+    private void NotifyOnRadiusUpdate()
+    {
+        GameEvents.current.UpdateBlizzardRadius(Radius, transform.position);
+    }
+
+#if UNITY_EDITOR
+
+    private void OnDrawGizmos()
+    {
+        if (showRadius)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, Radius + (influenceThickness * blizzardTransform.Size));
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, influenceRadius);
+            Gizmos.color = Color.white;
+        }
+    }
+
+# endif
 }

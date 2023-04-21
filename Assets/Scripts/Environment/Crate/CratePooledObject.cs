@@ -7,12 +7,17 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
 
     [SerializeField] private Crate crate;
     [SerializeField] private CrateLandingController landingController;
+    [SerializeField] private CrateSweeper sweeper;
     [SerializeField] private LaserBeam laserBeam;
     [SerializeField] private Openable openable;
 
     private IObjectPooler pooler;
 
     public GameObject Object => gameObject;
+
+    private void Awake(){
+        crate.onOpen += BackToPool;
+    }
 
     private void Start() => pooler = PoolHolder.Instance;
 
@@ -28,6 +33,11 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation) => transform.SetPositionAndRotation(position, rotation);
 
-    public void BackToPool() => pooler.PutIntoThePool(this);
+    public void BackToPool()
+    {
+        sweeper.SwitchOff();
+        pooler.PutIntoThePool(this);
+        Debug.Log("Crate back to pool!");
+    }
     public void SubscribeOnSpawn(Action onSpawn) { }
 }

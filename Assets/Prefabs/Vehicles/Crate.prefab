@@ -19638,6 +19638,8 @@ GameObject:
   - component: {fileID: 2257178372747876790}
   - component: {fileID: 542304009633892959}
   - component: {fileID: 8351341909458789206}
+  - component: {fileID: 1808885048126842134}
+  - component: {fileID: 5372539934640955815}
   m_Layer: 26
   m_Name: Crate
   m_TagString: Untagged
@@ -19710,6 +19712,7 @@ MonoBehaviour:
   model: {fileID: 7317556293849801138}
   laserBeam: {fileID: 6744949977964748514}
   destructionParticles: {fileID: 561078816427609617}
+  timer: {fileID: 5372539934640955815}
 --- !u!114 &340786710075545641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19756,6 +19759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crate: {fileID: 137477694732360836}
   landingController: {fileID: 340786710075545641}
+  sweeper: {fileID: 1808885048126842134}
   laserBeam: {fileID: 6744949977964748514}
   openable: {fileID: 1090654136677401993}
 --- !u!114 &542304009633892959
@@ -19810,6 +19814,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1808885048126842134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715555677677968425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3981b564c667ab542b7664dcc6b98cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crate: {fileID: 137477694732360836}
+  landingController: {fileID: 340786710075545641}
+--- !u!114 &5372539934640955815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715555677677968425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chronos: {fileID: 8351341909458789206}
 --- !u!1001 &881222740070319019
 PrefabInstance:
   m_ObjectHideFlags: 0

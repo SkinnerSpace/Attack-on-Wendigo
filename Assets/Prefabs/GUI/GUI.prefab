@@ -931,7 +931,6 @@ GameObject:
   - component: {fileID: 7948455897614015372}
   - component: {fileID: 5147483054928605959}
   - component: {fileID: 8844211140345212876}
-  - component: {fileID: 5891835373558252730}
   m_Layer: 5
   m_Name: MessageText
   m_TagString: Untagged
@@ -1055,25 +1054,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &5891835373558252730
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5667607662169837533}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80dea1a4cbd17c542854f5ae3153bb0d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6906136693086941230
 GameObject:
   m_ObjectHideFlags: 0

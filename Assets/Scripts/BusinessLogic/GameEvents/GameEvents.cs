@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    private static int pickUpCount;
+    private int pickUpCount;
 
     public static GameEvents current;
 
@@ -18,6 +18,7 @@ public class GameEvents : MonoBehaviour
     public event Action onWeaponSweptAway;
 
     public event Action<float> onEnemyHealthUpdate;
+    public event Action<float, Vector3> onBlizzardRadiusUpdate;
 
     public event Action onStart;
     public event Action onPause;
@@ -51,6 +52,8 @@ public class GameEvents : MonoBehaviour
     public void DeclareVictory() => onVictory?.Invoke();
     public void UpdateProgress(float progress) => onProgressUpdate?.Invoke(progress);
     public void UpdateDeathProgress(float deathProgress) => onDeathProgressUpdate?.Invoke(deathProgress);
+    public void UpdateBlizzardRadius(float blizzardRadius, Vector3 position) => onBlizzardRadiusUpdate?.Invoke(blizzardRadius, position);
+
     public void WeaponHasBeenPickedUp()
     {
         if (pickUpCount == 0){

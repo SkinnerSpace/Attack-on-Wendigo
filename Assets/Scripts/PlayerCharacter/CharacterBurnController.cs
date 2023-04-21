@@ -26,7 +26,7 @@ namespace Character
         private void ReceiveDamage()
         {
             DamagePackage damagePackage = new DamagePackage(scorchDamage);
-            healthSystem.ReceiveDamage(damagePackage);
+            healthSystem.ReceiveNonCriticalDamage(damagePackage);
 
             onBurn?.Invoke();
         }

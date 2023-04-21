@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MenuManager menu;
     [SerializeField] private InvasionCounter counter;
     [SerializeField] private Transform airdropImp;
+    [SerializeField] private MenuSFXPlayer menuSFXPlayer;
     [SerializeField] private LevelLoader levelLoader;
 
     [SerializeField] private EventManager eventManager;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     public LevelLoader LevelLoader => levelLoader;
 
     private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
+
+    private bool isPlaying;
 
     private void Awake()
     {
@@ -53,25 +56,33 @@ public class GameManager : MonoBehaviour
         cameraManager.TrackTheHelicopter();
 
         MenuEvents.current.onStart += commands["Start"].Execute;
+        MenuEvents.current.onStart += OnPlay;
+
         MenuEvents.current.onResume += commands["Resume"].Execute;
         MenuEvents.current.onRestart += commands["Restart"].Execute;
     }
 
     private void Update()
     {
-        switch (GameState.PauseMode)
+        if (isPlaying)
         {
-            case PauseMode.None:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                    ExecuteCommand("Pause");
+            switch (GameState.PauseMode)
+            {
+                case PauseMode.None:
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                        ExecuteCommand("Pause");
 
-                break;
+                    break;
 
-            case PauseMode.Paused:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                    ExecuteCommand("Resume");
+                case PauseMode.Paused:
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        ExecuteCommand("Resume");
+                        menuSFXPlayer.PlayMenuClose();
+                    }
 
-                break;
+                    break;
+            }
         }
     }
 
@@ -85,5 +96,9 @@ public class GameManager : MonoBehaviour
     public void QuitTheGame()
     {
         Debug.Log("QUIT");
+    }
+
+    private void OnPlay(){
+        isPlaying = true;
     }
 }

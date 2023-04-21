@@ -69,7 +69,7 @@ public class MenuManager : MonoBehaviour, IMenu
     public void Close()
     {
         CustomCursor.Instance.Lock();
-        sFXPlayer.PlayMenuClose();
+        //sFXPlayer.PlayMenuClose();
         gameObject.SetActive(false);
     }
 

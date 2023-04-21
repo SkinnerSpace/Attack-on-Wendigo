@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlizzardSFXPlayer : MonoBehaviour
 {
     [SerializeField] private Blizzard blizzard;
+    [SerializeField] private BlizzardTransform blizzardTransform;
     [SerializeField] private Transform attenuationPoint;
 
     [Header("Audio References")]
@@ -26,7 +27,8 @@ public class BlizzardSFXPlayer : MonoBehaviour
     {
         float distToCenter = Vector3.Distance(transform.position, attenuationPoint.position);
         float volume = Mathf.InverseLerp(0f, blizzard.Radius, distToCenter);
-        volume = Easing.QuadEaseIn(volume);
+        float power = 2f - blizzardTransform.Completeness;
+        volume = Mathf.Pow(volume, power);
 
         audioPlayer.WithVolume(volume).UpdateParameters();
     }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CollapseController : MonoBehaviour, ICollapsible
+public class CollapseController : MonoBehaviour, ICollapsible, ISwitchable
 {
     [SerializeField] private CollapseAcceptor acceptor;
     [SerializeField] private ParticleSystem dustVFX;
@@ -19,6 +19,8 @@ public class CollapseController : MonoBehaviour, ICollapsible
     private float completeness;
 
     public Vector3 Position => transform.position;
+
+    private bool isActive = true;
 
     private event Action<float> onUpdate;
     private event Action onCollapse;
@@ -50,7 +52,7 @@ public class CollapseController : MonoBehaviour, ICollapsible
 
     public void PullDown(Vector3 pushDir)
     {
-        if (!started){
+        if (isActive && !started){
             started = true;
             collapseCollider.enabled = false;
             onCollapse?.Invoke();
@@ -89,5 +91,13 @@ public class CollapseController : MonoBehaviour, ICollapsible
                 WithCurve(estimations.frequency, 0.3f, 0.3f).
                 WithAttenuation(transform.position, GameManager.Instance.Character, 100f).
                 BuildAndLaunch(ShakeManagerComponent.Instance);
+    }
+
+    public void SwitchOn(){
+        isActive = true;
+    }
+
+    public void SwitchOff(){
+        isActive = false;
     }
 }

@@ -7,5 +7,6 @@ namespace Character
     {
         public int Amount;
         public bool IsAlive => Amount > 0;
+        public bool IsImmortal { get; set; }
     }
 }

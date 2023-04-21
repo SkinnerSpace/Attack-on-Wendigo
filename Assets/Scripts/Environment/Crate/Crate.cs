@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Crate : MonoBehaviour, IOpenable, ICrate
 {
@@ -7,9 +8,12 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     [SerializeField] private MeshRenderer model;
     [SerializeField] private LaserBeam laserBeam;
     [SerializeField] private ParticleSystem destructionParticles;
+    [SerializeField] private FunctionTimer timer;
     private string itemName;
 
     private bool isOpened;
+
+    public event Action onOpen;
 
     public void ResetStateOnSpawn()
     {
@@ -39,6 +43,20 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
             sFXPlayer.PlayOpen();
 
             PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
+            timer.Set("Open", 2f, () => onOpen?.Invoke());
+        }
+    }
+
+    public void OpenEmpty()
+    {
+        if (!isOpened){
+            isOpened = true;
+
+            SwitchOff();
+            destructionParticles.Play();
+
+            GameEvents.current.WeaponHasBeenSweptAway();
+            timer.Set("Open", 2f, () => onOpen?.Invoke());
         }
     }
 

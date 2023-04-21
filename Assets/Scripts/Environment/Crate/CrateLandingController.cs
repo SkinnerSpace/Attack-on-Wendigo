@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CrateLandingController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class CrateLandingController : MonoBehaviour
     private bool isGrounded;
     private bool isDisabled;
 
+    public event Action onLanded;
+
     private void Update()
     {
         if (isGrounded){
@@ -28,6 +31,7 @@ public class CrateLandingController : MonoBehaviour
         if (!isDisabled && physics.IsAtRest()){
             isDisabled = true;
             laserBeam.SwitchOn();
+            onLanded?.Invoke();
         }
     }
 
