@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        menu.Open("Main");
+        menu.OpenSilently("Main");
         cameraManager.TrackTheHelicopter();
 
         MenuEvents.current.onStart += commands["Start"].Execute;
@@ -69,8 +69,9 @@ public class GameManager : MonoBehaviour
             switch (GameState.PauseMode)
             {
                 case PauseMode.None:
-                    if (Input.GetKeyDown(KeyCode.Escape))
+                    if (Input.GetKeyDown(KeyCode.Escape)){
                         ExecuteCommand("Pause");
+                    }
 
                     break;
 
@@ -78,7 +79,6 @@ public class GameManager : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
                         ExecuteCommand("Resume");
-                        menuSFXPlayer.PlayMenuClose();
                     }
 
                     break;

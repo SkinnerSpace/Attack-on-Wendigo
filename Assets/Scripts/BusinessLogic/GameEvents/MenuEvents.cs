@@ -10,6 +10,7 @@ public class MenuEvents : MonoBehaviour
     public event Action onRestart;
     public event Action onSettings;
     public event Action onQuit;
+    public event Action onBackToMenu;
 
     private void Awake(){
         current = this;
@@ -20,4 +21,5 @@ public class MenuEvents : MonoBehaviour
     public void RestartTheGame() => onRestart?.Invoke();
     public void OpenSettings() => onSettings?.Invoke();
     public void QuitTheGame() => onQuit?.Invoke();
+    public void BackToMenu() => onBackToMenu?.Invoke();
 }

@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   command: 0
-  label: {fileID: 4389621537506204529}
 --- !u!1001 &1087285282337450101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,18 +216,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1087285282337450101}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4389621537506204529 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
-    type: 3}
-  m_PrefabInstance: {fileID: 1087285282337450101}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3614057449153290330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +233,16 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6010639531860984247}
+    - target: {fileID: 13149364644577732, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 13149364644577732, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Deselect
+      objectReference: {fileID: 0}
     - target: {fileID: 2041213513666206268, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
         type: 3}
       propertyPath: m_Name
@@ -361,6 +358,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6010639531860984247}
+    - target: {fileID: 6990599821915849134, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Click
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3226f545adf9ab4783ea6ba50e3a4cb, type: 3}
 --- !u!224 &141761106633809698 stripped

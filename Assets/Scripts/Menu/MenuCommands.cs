@@ -4,5 +4,6 @@
     Continue,
     Restart,
     Settings,
-    Quit
+    Quit,
+    BackToMenu
 }

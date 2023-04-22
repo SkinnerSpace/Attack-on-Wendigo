@@ -20,6 +20,9 @@ public static class MenuCommandsFactory
 
             case MenuCommands.Quit:
                 return MenuEvents.current.QuitTheGame;
+
+            case MenuCommands.BackToMenu:
+                return MenuEvents.current.BackToMenu;
         }
 
         return null;

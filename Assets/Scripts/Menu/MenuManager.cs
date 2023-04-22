@@ -5,39 +5,68 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour, IMenu
 {
-    private MenuButtonInteraction[] buttons;
-
     [SerializeField] private MenuSFXPlayer sFXPlayer;
-
+    [SerializeField] private MenuTitle title;
     [SerializeField] private List<Menu> menus;
-    private Dictionary<string, List<MenuButtonInteraction>> Menus = new Dictionary<string, List<MenuButtonInteraction>>();
 
+    private Dictionary<string, Menu> Menus = new Dictionary<string, Menu>();
+
+    private MenuButtonInteraction[] buttons;
     private List<MenuButtonInteraction> requiredButtons = new List<MenuButtonInteraction>();
     private List<MenuButtonInteraction> redundantButtons = new List<MenuButtonInteraction>();
+
+    private Menu current;
 
     private void Awake()
     {
         buttons = GetComponentsInChildren<MenuButtonInteraction>();
-        
-        foreach (Menu menu in menus)
-            Menus.Add(menu.name, menu.buttons);
-
-        PassSFXPlayerToTheButtons();
+        InitializeMenus();
+        ConnectSFXPlayerToButtons();
     }
 
-    public void OpenWithSFX(string name){
-        Open(name);
+    private void Start(){
+        MenuEvents.current.onBackToMenu += BackToMainMenu;
+        MenuEvents.current.onSettings += () => Open("Settings");
+    }
+
+    private void InitializeMenus()
+    {
+        foreach (Menu menu in menus){
+            Menus.Add(menu.name, menu);
+        }
+    }
+
+    public void Open(string menuName)
+    {
+        DoOpen(menuName);
         sFXPlayer.PlayMenuOpen();
     }
 
-    public void Open(string name)
+    public void OpenSilently(string menuName) => DoOpen(menuName);
+
+    private void DoOpen(string menuName)
     {
         CustomCursor.Instance.Unlock();
         gameObject.SetActive(true);
 
-        SortButtons(Menus[name]);
+        CloseCurrentMenu();
+        current = Menus[menuName];
+        current.container.alpha = 1f;
+        current.container.enabled = true;
+
+        title.Set(Menus[menuName].title);
+        SortButtons(Menus[menuName].buttons);
         EnableRequiredButtons();
         DisableRedundantButtons();
+    }
+
+    public void Close()
+    {
+        CustomCursor.Instance.Lock();
+
+        CloseCurrentMenu();
+        sFXPlayer.PlayMenuClose();
+        gameObject.SetActive(false);
     }
 
     private void SortButtons(List<MenuButtonInteraction> menu)
@@ -56,27 +85,42 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private void EnableRequiredButtons()
     {
-        foreach (MenuButtonInteraction button in requiredButtons)
-            button.gameObject.SetActive(true);
+        foreach (MenuButtonInteraction button in requiredButtons){
+            button.SwitchOn();
+        }
     }
 
     private void DisableRedundantButtons()
     {
-        foreach (MenuButtonInteraction button in redundantButtons)
-            button.gameObject.SetActive(false);
+        foreach (MenuButtonInteraction button in redundantButtons){
+            button.SwitchOff();
+        }
     }
 
-    public void Close()
-    {
-        CustomCursor.Instance.Lock();
-        //sFXPlayer.PlayMenuClose();
-        gameObject.SetActive(false);
-    }
 
-    private void PassSFXPlayerToTheButtons()
+    private void ConnectSFXPlayerToButtons()
     {
         foreach (MenuButtonInteraction button in buttons){
-            button.SetSFXPlayer(sFXPlayer);
+            button.onClick += sFXPlayer.PlayButtonClick;
+            button.onSelect += sFXPlayer.PlayButtonSelect;
+        }
+    }
+
+    private void CloseCurrentMenu()
+    {
+        if (current != null){
+            current.container.alpha = 0f;
+            current.container.enabled = false;
+        }
+    }
+
+    private void BackToMainMenu()
+    {
+        if (GameState.PauseMode == PauseMode.None){
+            Open("Main");
+        }
+        else if (GameState.PauseMode == PauseMode.Paused){
+            Open("Pause");
         }
     }
 }

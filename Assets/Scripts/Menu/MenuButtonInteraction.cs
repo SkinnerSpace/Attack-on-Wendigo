@@ -2,37 +2,47 @@
 using System;
 using TMPro;
 
-public class MenuButtonInteraction : MonoBehaviour
+public class MenuButtonInteraction : MonoBehaviour, ISwitchable
 {
     [SerializeField] private MenuCommands command;
-    [SerializeField] private TextMeshProUGUI label;
-
-    private MenuSFXPlayer sFXPlayer;
+    private TextMeshProUGUI label;
 
     private Action onCommand;
+    public Action onClick;
+    public Action onSelect;
 
-    private void Start()
-    {
+    private void Awake(){
+        label = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    private void Start(){
         onCommand = MenuCommandsFactory.Create(command);
     }
 
-    public void OnClick(){
-        onCommand();
-        sFXPlayer.PlayButtonClick();
+    public void SwitchOn(){
+        gameObject.SetActive(true);
     }
 
-    public void Entered()
+    public void SwitchOff(){
+        Deselect();
+        gameObject.SetActive(false);
+    }
+
+    public void Click(){
+        onClick?.Invoke();
+        onCommand();
+    }
+
+    public void Select()
     {
         label.color = Color.green;
         label.rectTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
-        sFXPlayer.PlayButtonSelect();
+        onSelect?.Invoke();
     }
 
-    public void Exited()
+    public void Deselect()
     {
         label.color = Color.white;
         label.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
-
-    public void SetSFXPlayer(MenuSFXPlayer sFXPlayer) => this.sFXPlayer = sFXPlayer;
 }

@@ -7,5 +7,7 @@ using UnityEngine.UI;
 public class Menu
 {
     public string name;
+    public string title;
+    public CanvasGroup container;
     public List<MenuButtonInteraction> buttons;
 }
