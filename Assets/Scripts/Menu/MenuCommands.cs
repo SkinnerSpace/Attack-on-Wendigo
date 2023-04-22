@@ -5,5 +5,7 @@
     Restart,
     Settings,
     Quit,
-    BackToMenu
+    BackToMenu,
+    SoundSettings,
+    Controls
 }

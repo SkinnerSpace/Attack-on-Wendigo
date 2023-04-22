@@ -2,27 +2,36 @@
 
 public static class MenuCommandsFactory
 {
-    public static Action Create(MenuCommands interaction)
+    public static Action Create(string interaction)
     {
         switch (interaction)
         {
-            case MenuCommands.Start:
+            case "start":
                 return MenuEvents.current.StartTheGame;
 
-            case MenuCommands.Continue:
+            case "continue":
                 return MenuEvents.current.ContinueTheGame;
 
-            case MenuCommands.Restart:
+            case "restart":
                 return MenuEvents.current.RestartTheGame;
 
-            case MenuCommands.Settings:
+            case "settings":
                 return MenuEvents.current.OpenSettings;
 
-            case MenuCommands.Quit:
+            case "quit":
                 return MenuEvents.current.QuitTheGame;
 
-            case MenuCommands.BackToMenu:
+            case "back to main":
                 return MenuEvents.current.BackToMenu;
+
+            case "sound":
+                return MenuEvents.current.OpenSoundSettings;
+
+            case "back to settings":
+                return MenuEvents.current.BackToSettings;
+
+            case "controls":
+                return MenuEvents.current.OpenControls;
         }
 
         return null;

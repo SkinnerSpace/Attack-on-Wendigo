@@ -2,9 +2,9 @@
 using System;
 using TMPro;
 
-public class MenuButtonInteraction : MonoBehaviour, ISwitchable
+public class MenuButtonInteraction : MenuElement
 {
-    [SerializeField] private MenuCommands command;
+    [SerializeField] private string command;
     private TextMeshProUGUI label;
 
     private Action onCommand;
@@ -19,11 +19,7 @@ public class MenuButtonInteraction : MonoBehaviour, ISwitchable
         onCommand = MenuCommandsFactory.Create(command);
     }
 
-    public void SwitchOn(){
-        gameObject.SetActive(true);
-    }
-
-    public void SwitchOff(){
+    public override void SwitchOff(){
         Deselect();
         gameObject.SetActive(false);
     }

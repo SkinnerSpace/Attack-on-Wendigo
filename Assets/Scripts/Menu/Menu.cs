@@ -9,5 +9,5 @@ public class Menu
     public string name;
     public string title;
     public CanvasGroup container;
-    public List<MenuButtonInteraction> buttons;
+    public List<MenuElement> buttons;
 }

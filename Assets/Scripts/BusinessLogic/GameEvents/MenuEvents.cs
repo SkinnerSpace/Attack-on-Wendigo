@@ -11,6 +11,9 @@ public class MenuEvents : MonoBehaviour
     public event Action onSettings;
     public event Action onQuit;
     public event Action onBackToMenu;
+    public event Action onSoundSettings;
+    public event Action onBackToSettings;
+    public event Action onControls;
 
     private void Awake(){
         current = this;
@@ -22,4 +25,7 @@ public class MenuEvents : MonoBehaviour
     public void OpenSettings() => onSettings?.Invoke();
     public void QuitTheGame() => onQuit?.Invoke();
     public void BackToMenu() => onBackToMenu?.Invoke();
+    public void OpenSoundSettings() => onSoundSettings?.Invoke();
+    public void BackToSettings() => onBackToSettings?.Invoke();
+    public void OpenControls() => onControls?.Invoke();
 }

@@ -11,22 +11,29 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private Dictionary<string, Menu> Menus = new Dictionary<string, Menu>();
 
+    private MenuElement[] elements;
     private MenuButtonInteraction[] buttons;
-    private List<MenuButtonInteraction> requiredButtons = new List<MenuButtonInteraction>();
-    private List<MenuButtonInteraction> redundantButtons = new List<MenuButtonInteraction>();
+
+    private List<MenuElement> requiredElements = new List<MenuElement>();
+    private List<MenuElement> redundantElements = new List<MenuElement>();
 
     private Menu current;
 
     private void Awake()
     {
+        elements = GetComponentsInChildren<MenuElement>();
         buttons = GetComponentsInChildren<MenuButtonInteraction>();
+
         InitializeMenus();
         ConnectSFXPlayerToButtons();
     }
 
     private void Start(){
         MenuEvents.current.onBackToMenu += BackToMainMenu;
+
         MenuEvents.current.onSettings += () => Open("Settings");
+        MenuEvents.current.onSoundSettings += () => Open("SoundSettings");
+        MenuEvents.current.onBackToSettings += () => Open("Settings");
     }
 
     private void InitializeMenus()
@@ -55,9 +62,9 @@ public class MenuManager : MonoBehaviour, IMenu
         current.container.enabled = true;
 
         title.Set(Menus[menuName].title);
-        SortButtons(Menus[menuName].buttons);
-        EnableRequiredButtons();
-        DisableRedundantButtons();
+        SortElements(Menus[menuName].buttons);
+        EnableRequiredElements();
+        DisableRedundantElements();
     }
 
     public void Close()
@@ -69,31 +76,31 @@ public class MenuManager : MonoBehaviour, IMenu
         gameObject.SetActive(false);
     }
 
-    private void SortButtons(List<MenuButtonInteraction> menu)
+    private void SortElements(List<MenuElement> menu)
     {
-        requiredButtons.Clear();
-        redundantButtons.Clear();
+        requiredElements.Clear();
+        redundantElements.Clear();
 
-        foreach (MenuButtonInteraction button in buttons)
+        foreach (MenuElement element in elements)
         {
-            if (menu.Contains(button))
-                requiredButtons.Add(button);
+            if (menu.Contains(element))
+                requiredElements.Add(element);
             else
-                redundantButtons.Add(button);
+                redundantElements.Add(element);
         }
     }
 
-    private void EnableRequiredButtons()
+    private void EnableRequiredElements()
     {
-        foreach (MenuButtonInteraction button in requiredButtons){
-            button.SwitchOn();
+        foreach (MenuElement element in requiredElements){
+            element.SwitchOn();
         }
     }
 
-    private void DisableRedundantButtons()
+    private void DisableRedundantElements()
     {
-        foreach (MenuButtonInteraction button in redundantButtons){
-            button.SwitchOff();
+        foreach (MenuElement element in redundantElements){
+            element.SwitchOff();
         }
     }
 
