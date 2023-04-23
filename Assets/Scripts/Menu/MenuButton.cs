@@ -2,29 +2,27 @@
 using System;
 using TMPro;
 
-public class MenuButtonInteraction : MenuElement
+public abstract class MenuButton : MenuElement
 {
-    [SerializeField] private string command;
-    private TextMeshProUGUI label;
+    protected TextMeshProUGUI label;
 
-    private Action onCommand;
-    public Action onClick;
-    public Action onSelect;
+    public event Action onClick;
+    public event Action onSelect;
+
+    protected Action onCommand;
 
     private void Awake(){
         label = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    private void Start(){
-        onCommand = MenuCommandsFactory.Create(command);
-    }
-
-    public override void SwitchOff(){
+    public override void SwitchOff()
+    {
         Deselect();
         gameObject.SetActive(false);
     }
 
-    public void Click(){
+    public void Click()
+    {
         onClick?.Invoke();
         onCommand();
     }

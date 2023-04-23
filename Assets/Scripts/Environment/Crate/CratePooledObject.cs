@@ -37,7 +37,6 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     {
         sweeper.SwitchOff();
         pooler.PutIntoThePool(this);
-        Debug.Log("Crate back to pool!");
     }
     public void SubscribeOnSpawn(Action onSpawn) { }
 }

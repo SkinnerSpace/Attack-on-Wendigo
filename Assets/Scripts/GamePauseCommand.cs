@@ -11,7 +11,7 @@ public class GamePauseCommand : ICommand
         GameState.PauseMode = PauseMode.Paused;
         AudioPlayer.PauseAll();
 
-        gameManager.Menu.Open("Pause");
+        gameManager.Menu.Open("pause");
 
         gameManager.Triggers.ResetTrigger("OnGameStart");
         gameManager.Triggers.ResetTrigger("OnGameResume");

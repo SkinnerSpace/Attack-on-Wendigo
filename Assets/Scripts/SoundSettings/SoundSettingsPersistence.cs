@@ -17,10 +17,10 @@ public static class SoundSettingsPersistence
 
     public static void Load(SoundSettings settings)
     {
-        settings.masterVolume = PlayerPrefs.HasKey(MASTER_VOLUME) ? PlayerPrefs.GetFloat(MASTER_VOLUME) : MAX_VOLUME;
-        settings.effectsVolume = PlayerPrefs.HasKey(EFFECTS_VOLUME) ? PlayerPrefs.GetFloat(EFFECTS_VOLUME) : MAX_VOLUME;
-        settings.musicVolume = PlayerPrefs.HasKey(MUSIC_VOLUME) ? PlayerPrefs.GetFloat(MUSIC_VOLUME) : MAX_VOLUME;
+        float master = PlayerPrefs.HasKey(MASTER_VOLUME) ? PlayerPrefs.GetFloat(MASTER_VOLUME) : MAX_VOLUME;
+        float effects = PlayerPrefs.HasKey(EFFECTS_VOLUME) ? PlayerPrefs.GetFloat(EFFECTS_VOLUME) : MAX_VOLUME;
+        float music = PlayerPrefs.HasKey(MUSIC_VOLUME) ? PlayerPrefs.GetFloat(MUSIC_VOLUME) : MAX_VOLUME;
 
-        settings.UpdateSliders();
+        settings.SetMasterEffectsMusic(master, effects, music);
     }
 }

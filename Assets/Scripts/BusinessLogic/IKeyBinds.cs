@@ -7,7 +7,7 @@ public interface IKeyBinds
     
     KeyCode Shoot { get; }
     KeyCode Aim { get; }
-    KeyCode Reload { get; }
+    KeyCode Interact { get; }
 
     KeyCode MoveRight { get; }
     KeyCode MoveLeft { get; }
@@ -15,5 +15,4 @@ public interface IKeyBinds
     KeyCode MoveBackward { get; }
     KeyCode Jump { get; }
     KeyCode Dash { get; }
-    KeyCode Interact { get; }
 }

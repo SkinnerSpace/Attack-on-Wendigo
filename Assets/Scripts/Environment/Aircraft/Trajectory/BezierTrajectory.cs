@@ -77,7 +77,6 @@ public class BezierTrajectory : MonoBehaviour
 
     public void UpdateBoundsRadius(float progress){
         boundsRadius = Mathf.Lerp(maxBoundsRadius, minBoundsRadius, progress);
-        Debug.Log("Bounds radius " + boundsRadius);
     }
 
 

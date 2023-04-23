@@ -42,6 +42,7 @@ public class WendigoSpawner : MonoBehaviour, ISpawner
         wendigoManager = new WendigoManager(spawnerLogic, container, characterImp, pooler);
         spawnerLogic.UpdateAliveCount();
 
+        GameEvents.current.onFirstWeaponPickedUp += () => spawnerLogic.UpdateAliveCount();
         GameEvents.current.onFirstWeaponPickedUp += LaunchWithDelay;
     }
 

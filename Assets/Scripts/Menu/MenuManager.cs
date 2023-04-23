@@ -12,7 +12,8 @@ public class MenuManager : MonoBehaviour, IMenu
     private Dictionary<string, Menu> Menus = new Dictionary<string, Menu>();
 
     private MenuElement[] elements;
-    private MenuButtonInteraction[] buttons;
+    private MenuButton[] buttons;
+    private MenuToggleButton[] toggles;
 
     private List<MenuElement> requiredElements = new List<MenuElement>();
     private List<MenuElement> redundantElements = new List<MenuElement>();
@@ -22,18 +23,16 @@ public class MenuManager : MonoBehaviour, IMenu
     private void Awake()
     {
         elements = GetComponentsInChildren<MenuElement>();
-        buttons = GetComponentsInChildren<MenuButtonInteraction>();
+        buttons = GetComponentsInChildren<MenuButton>();
+        toggles = GetComponentsInChildren<MenuToggleButton>();
 
         InitializeMenus();
         ConnectSFXPlayerToButtons();
+        ConnectSFXPlayerToToggles();
     }
 
     private void Start(){
-        MenuEvents.current.onBackToMenu += BackToMainMenu;
-
-        MenuEvents.current.onSettings += () => Open("Settings");
-        MenuEvents.current.onSoundSettings += () => Open("SoundSettings");
-        MenuEvents.current.onBackToSettings += () => Open("Settings");
+        MenuEvents.current.onSubMenuEnter += Open;
     }
 
     private void InitializeMenus()
@@ -72,6 +71,8 @@ public class MenuManager : MonoBehaviour, IMenu
         CustomCursor.Instance.Lock();
 
         CloseCurrentMenu();
+        DisableAllTheElements();
+
         sFXPlayer.PlayMenuClose();
         gameObject.SetActive(false);
     }
@@ -104,12 +105,25 @@ public class MenuManager : MonoBehaviour, IMenu
         }
     }
 
+    private void DisableAllTheElements()
+    {
+        foreach (MenuElement element in elements){
+            element.SwitchOff();
+        }
+    }
 
     private void ConnectSFXPlayerToButtons()
     {
-        foreach (MenuButtonInteraction button in buttons){
+        foreach (MenuButton button in buttons){
             button.onClick += sFXPlayer.PlayButtonClick;
             button.onSelect += sFXPlayer.PlayButtonSelect;
+        }
+    }
+
+    private void ConnectSFXPlayerToToggles()
+    {
+        foreach (MenuToggleButton toggle in toggles){
+            toggle.onToggle += sFXPlayer.PlayButtonClick;
         }
     }
 
@@ -124,10 +138,10 @@ public class MenuManager : MonoBehaviour, IMenu
     private void BackToMainMenu()
     {
         if (GameState.PauseMode == PauseMode.None){
-            Open("Main");
+            Open("main");
         }
         else if (GameState.PauseMode == PauseMode.Paused){
-            Open("Pause");
+            Open("pause");
         }
     }
 }

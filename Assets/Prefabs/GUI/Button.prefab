@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6966176457383823595}
-  - component: {fileID: 6010639531860984247}
+  - component: {fileID: 4217309717692237816}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 135.2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6010639531860984247
+--- !u!114 &4217309717692237816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,10 +47,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3426119783529326606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1eb88ed88bd33b40b565563ca3bb7ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 339620e19c188f44e839dfc0a3cc9bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  command: 0
+  button: {fileID: 0}
 --- !u!1001 &1087285282337450101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,12 +227,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6010639531860984247}
+      objectReference: {fileID: 4217309717692237816}
     - target: {fileID: 13149364644577732, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
         type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6010639531860984247}
+      objectReference: {fileID: 4217309717692237816}
     - target: {fileID: 13149364644577732, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -357,7 +357,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6010639531860984247}
+      objectReference: {fileID: 4217309717692237816}
     - target: {fileID: 6990599821915849134, guid: f3226f545adf9ab4783ea6ba50e3a4cb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

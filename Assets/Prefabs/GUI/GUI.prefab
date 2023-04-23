@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945fcd72581474f439eae90a33563ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 0
+  key: 8
   cam: {fileID: 0}
   maxDistance: 3
 --- !u!114 &2642366879227983277
@@ -2025,7 +2025,7 @@ PrefabInstance:
     - target: {fileID: 8662981245132605764, guid: 868d303520e751d40a0790ec0316255f,
         type: 3}
       propertyPath: m_text
-      value: 99
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8662981245132605766, guid: 868d303520e751d40a0790ec0316255f,
         type: 3}

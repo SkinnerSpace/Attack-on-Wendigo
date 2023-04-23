@@ -38,11 +38,9 @@ public class CrateSweeper : MonoBehaviour, ISwitchable
 
     public void SwitchOn(){
         isActive = true;
-        Debug.Log("Crate sweeper is ON");
     }
 
     public void SwitchOff(){
         isActive = false;
-        Debug.Log("Crate sweeper is OFF");
     }
 }

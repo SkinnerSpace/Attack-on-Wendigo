@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        menu.OpenSilently("Main");
+        menu.OpenSilently("main");
         cameraManager.TrackTheHelicopter();
 
         MenuEvents.current.onStart += commands["Start"].Execute;

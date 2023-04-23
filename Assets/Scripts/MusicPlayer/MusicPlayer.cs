@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
+    [SerializeField] private FMODUnity.EventReference ambientSoundtrack;
     [SerializeField] private FMODUnity.EventReference battleSoundtrack;
 
+    private AudioPlayer ambientPlayer;
     private AudioPlayer battlePlayer;
 
     private void Awake(){
         battlePlayer = AudioPlayer.Create(battleSoundtrack).WithUnpausableMode();
+        ambientPlayer = AudioPlayer.Create(ambientSoundtrack).WithUnpausableMode();
     }
 
     private void Start(){
-        GameEvents.current.onFirstWeaponPickedUp += PlayBattleSoundtrack;
-        GameEvents.current.onPlayerHasDied += StopBattleSoundtrack;
-        GameEvents.current.onVictory += StopBattleSoundtrack;
-    }
+        GameEvents.current.onFirstWeaponPickedUp += () => ambientPlayer.Stop();
+        GameEvents.current.onFirstWeaponPickedUp += () => battlePlayer.PlayLoop();
 
-    public void PlayBattleSoundtrack(){
-        battlePlayer.PlayLoop();
-    }
+        GameEvents.current.onPlayerHasDied += () => battlePlayer.Stop();
+        GameEvents.current.onVictory += () => battlePlayer.Stop();
 
-    public void StopBattleSoundtrack(){
-        battlePlayer.Stop();
+        ambientPlayer.PlayLoop();
     }
 }

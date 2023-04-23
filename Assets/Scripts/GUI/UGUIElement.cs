@@ -6,7 +6,7 @@ using System;
 
 public class UGUIElement : MonoBehaviour
 {
-    [SerializeField] private KeyBinds.Binds key;
+    [SerializeField] private KeyActions key;
     [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance = 3f;
 
