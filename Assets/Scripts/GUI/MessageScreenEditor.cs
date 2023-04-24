@@ -18,7 +18,7 @@ public class MessageScreenEditor : Editor
     {
         base.OnInspectorGUI();
 
-        GUILayout.Space(25);
+/*        GUILayout.Space(25);
 
         using (new GUILayout.HorizontalScope())
         {
@@ -36,7 +36,7 @@ public class MessageScreenEditor : Editor
                     messageScreen.OnVictory();
                 }
             }
-        }
+        }*/
     }
 }
 #endif

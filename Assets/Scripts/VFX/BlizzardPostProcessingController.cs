@@ -7,8 +7,15 @@ public class BlizzardPostProcessingController : MonoBehaviour
     [SerializeField] private Blizzard blizzard;
     [SerializeField] private Animator animator;
 
+    private float modifier;
+
     private void Update()
     {
-        animator.Play(intensity, 0, blizzard.Influence);
+        float value = blizzard.Influence + modifier;
+        value = Mathf.Clamp01(value);
+
+        animator.Play(intensity, 0, value);
     }
+
+    public void SetModifier(float modifier) => this.modifier = modifier;
 }

@@ -10,50 +10,95 @@ public class KeyboardSettings : MonoBehaviour
 
     private KeyBinds keys;
 
+    private Event myEvent = new Event();
+
+    private KeyCode[] mouseKeys;
+
     private void Awake()
     {
-        InitializeKeyBindsButtons();
+        mouseKeys = new KeyCode[] { KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.Mouse2 };
     }
 
     private void Start()
     {
         keys = KeyBinds.Instance;
+
         KeyboardSettingsPersistence.Load(keys);
-        UpdateKeyBindsButtons();
+        MenuEvents.current.onSubMenuEnter += SaveSettingsOnExit;
+
+        InitializeButtons();
     }
 
-    private void OnGUI()
+    private void Update()
     {
         if (onKeyHandled != null){
-            Event e = Event.current;
+            HandleInputEvent();
+        }
+    }
 
-            if (e.isKey){
-                keys.Bind(currentAction, e.keyCode);
-                onKeyHandled?.Invoke();
-                onKeyHandled = null;
+    private void HandleInputEvent()
+    {
+        while (Event.PopEvent(myEvent))
+        {
+            if (IsMouseButton(myEvent)){
+                HandleMouseButton();
+            }
+            else if (IsKeyboardButton(myEvent)){
+                BindKey(myEvent.keyCode);
             }
         }
     }
 
-    private void HandleKey(Action onKeyHandled, KeyActions currentAction)
+    private bool IsMouseButton(Event inputEvent){
+        return myEvent.isMouse &&
+               myEvent.type == EventType.MouseDown;
+    }
+
+    private void HandleMouseButton()
+    {
+        for (int i = 0; i < mouseKeys.Length; i++)
+        {
+            KeyCode currentKeyCode = mouseKeys[i];
+
+            if (Input.GetKeyDown(currentKeyCode)){
+                BindKey(currentKeyCode);
+            }
+        }
+    }
+
+    private bool IsKeyboardButton(Event inputEvent){
+        return myEvent.isKey &&
+               myEvent.type == EventType.KeyDown &&
+               myEvent.keyCode != KeyCode.None;
+    }
+
+    private void BindKey(KeyCode keyCode){
+        keys.Bind(currentAction, keyCode);
+        onKeyHandled?.Invoke();
+        onKeyHandled = null;
+    }
+
+    private void GetReadyToHandleInput(Action onKeyHandled, KeyActions currentAction)
     {
         this.onKeyHandled = onKeyHandled;
         this.currentAction = currentAction;
     }
 
-    private void InitializeKeyBindsButtons()
+    private void InitializeButtons()
     {
         keyBinds = GetComponentsInChildren<MenuButtonKeyBind>();
 
-        foreach (MenuButtonKeyBind keyBind in keyBinds){
-            keyBind.onKeyHandled += HandleKey;
+        foreach (MenuButtonKeyBind keyBind in keyBinds)
+        {
+            keyBind.onActionSelected += GetReadyToHandleInput;
+            keyBind.InitializeButton(keys);
         }
     }
 
-    private void UpdateKeyBindsButtons()
+    private void SaveSettingsOnExit(string subMenuName)
     {
-        foreach (MenuButtonKeyBind keyBind in keyBinds){
-            keyBind.UpdateName(keys);
+        if (subMenuName == "controls"){
+            KeyboardSettingsPersistence.Save(keys);
         }
     }
 }

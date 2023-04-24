@@ -23,28 +23,11 @@ public class GameEvents : MonoBehaviour
     public event Action onStart;
     public event Action onPause;
     public event Action onResume;
-
+    public event Action onGameBegun; // Camera manager, Player character, Airdrop
 
     private void Awake()
     {
         current = this;
-    }
-
-    public void ResetState()
-    {
-        pickUpCount = 0;
-
-        onInvasionHasBegun = null;
-        onPlayerHasDied = null;
-        onVictory = null;
-
-        onProgressUpdate = null;
-        onFirstWeaponPickedUp = null;
-        onWeaponSweptAway = null;
-
-        onStart = null;
-        onPause = null;
-        onResume = null;
     }
 
     public void InvasionHasBegun() => onInvasionHasBegun?.Invoke();
@@ -70,4 +53,6 @@ public class GameEvents : MonoBehaviour
     public void TheGameHasStarted() => onStart?.Invoke();
     public void TheGameIsPaused() => onPause?.Invoke();
     public void TheGameIsResumed() => onResume?.Invoke();
+
+    public void TheGameHasBegun() => onGameBegun?.Invoke();
 }

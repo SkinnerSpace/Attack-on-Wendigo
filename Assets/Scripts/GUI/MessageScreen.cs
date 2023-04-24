@@ -8,34 +8,29 @@ public class MessageScreen : MonoBehaviour
     private static int appearAnimation = Animator.StringToHash("Appear");
     private static int disappearAnimation = Animator.StringToHash("Disappear");
 
+    [Header("Required Components")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Animator animator;
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private FunctionTimer timer;
 
+    [Header("Data")]
+    [SerializeField] private MessageCongif startMessage;
+    [SerializeField] private MessageCongif gameOverMessage;
+    [SerializeField] private MessageCongif victoryMessage;
+
     private void Start()
     {
-        GameEvents.current.onFirstWeaponPickedUp += OnStart;
-        GameEvents.current.onPlayerHasDied += OnGameOver;
-        GameEvents.current.onVictory += OnVictory;
+        GameEvents.current.onFirstWeaponPickedUp += () => ShowMessage(startMessage);
+        GameEvents.current.onPlayerHasDied += () => ShowMessage(gameOverMessage);
+        GameEvents.current.onVictory += () => ShowMessage(victoryMessage);
     }
 
-    public void OnStart(){
-        message.text = "SURVIVE";
+    private void ShowMessage(MessageCongif config){
+        message.text = config.message;
+        message.color = config.color;
         Show();
-        HideAfterSomeTime(2f);
-    }
-
-    public void OnGameOver(){
-        message.text = "YOU DIED";
-        Show();
-        HideAfterSomeTime(3f);
-    }
-
-    public void OnVictory(){
-        message.text = "VICTORY";
-        Show();
-        HideAfterSomeTime(2f);
+        HideAfterSomeTime(config.time);
     }
 
     private void Show(){

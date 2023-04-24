@@ -1,27 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public static class KeyboardSettingsPersistence
 {
-    public static void Save(KeyBinds keys)
+    public static void Save(KeyBinds binds)
     {
-        foreach (KeyActions keyAction in keys.Keys.Keys){
-            PlayerPrefs.SetString(keyAction.ToString(), keys.Keys[keyAction].ToString());
+        foreach (KeyActions action in Enum.GetValues(typeof(KeyActions))){
+            PlayerPrefs.SetString(action.ToString(), binds.keyActionPairs[action].ToString());
         }
     }
 
-    public static void Load(KeyBinds keys)
+    public static void Load(KeyBinds binds)
     {
-        foreach (KeyActions keyAction in keys.Keys.Keys)
+        foreach (KeyActions action in Enum.GetValues(typeof(KeyActions)))
         {
-            string savedKey = keyAction.ToString();
+            string storedKey = action.ToString();
 
-            if (PlayerPrefs.HasKey(savedKey)){
-                KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(savedKey), true);
-                keys.Bind(keyAction, code);
-                Debug.Log("Exist " + code);
+            if (PlayerPrefs.HasKey(storedKey)){
+                KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(storedKey), true);
+                binds.Bind(action, code);
             }
-
-            PlayerPrefs.SetString(keyAction.ToString(), keys.Keys[keyAction].ToString());
         }
     }
 }

@@ -8,10 +8,11 @@ public abstract class MenuButton : MenuElement
 
     public event Action onClick;
     public event Action onSelect;
-
     protected Action onCommand;
 
-    private void Awake(){
+    protected bool isSelected;
+
+    protected virtual void Awake(){
         label = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -21,21 +22,27 @@ public abstract class MenuButton : MenuElement
         gameObject.SetActive(false);
     }
 
-    public void Click()
+    public virtual void Click()
     {
-        onClick?.Invoke();
+        InvokeOnClick();
         onCommand();
     }
 
-    public void Select()
+    protected void InvokeOnClick() => onClick?.Invoke();
+
+    public virtual void Select()
     {
+        isSelected = true;
+
         label.color = Color.green;
         label.rectTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
         onSelect?.Invoke();
     }
 
-    public void Deselect()
+    public virtual void Deselect()
     {
+        isSelected = false;
+
         label.color = Color.white;
         label.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }

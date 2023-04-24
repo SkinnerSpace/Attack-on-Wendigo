@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Character;
 
 public class DebugCommands : MonoBehaviour
 {
@@ -27,16 +28,18 @@ public class DebugCommands : MonoBehaviour
             components.debugController.showHelp = false;
         });
 
-/*        DebugCommand<bool> SPAWNER_SET_CONFIGURABLE = new DebugCommand<bool>("spawner configurable", "Set spawner configurable", "spawner configurable <yes/no>", (x) => {
-            components.spawner.da
-        });*/
+        DebugCommand DIE = new DebugCommand("die", "Commit suicide", "die", () =>
+        {
+            components.player.GetController<CharacterHealthSystem>().Die();
+        });
 
         commandList = new List<object>()
         {
             SPAWN,
             SPAWN_N,
             HELP_OPEN,
-            HELP_CLOSE
+            HELP_CLOSE,
+            DIE
         };
     }
 }

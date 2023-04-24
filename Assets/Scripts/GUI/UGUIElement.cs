@@ -26,7 +26,7 @@ public class UGUIElement : MonoBehaviour
 
     private void Start()
     {
-        label.text = KeyBinds.Instance.Keys[key].ToString();
+        label.text = KeyBinds.Instance.keyActionPairs[key].ToString();
     }
 
     private void Update()

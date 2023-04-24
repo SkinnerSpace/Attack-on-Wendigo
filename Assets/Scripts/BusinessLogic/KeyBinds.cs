@@ -26,24 +26,24 @@ public partial class KeyBinds : MonoBehaviour, IKeyBinds
     public float MouseSensitivity => mouseSensitivity;
     public float MouseInversion => mouseInversion ? 1f : -1f;
 
-    public KeyCode Shoot => shoot;
-    public KeyCode Aim => aim;
+    public KeyCode Shoot => keyActionPairs[KeyActions.Shoot];
+    public KeyCode Aim => keyActionPairs[KeyActions.Aim];
 
-    public KeyCode MoveRight => Keys[KeyActions.Right];
-    public KeyCode MoveLeft => Keys[KeyActions.Left];
-    public KeyCode MoveForward => moveForward;
-    public KeyCode MoveBackward => moveBackward;
-    public KeyCode Jump => jump;
-    public KeyCode Dash => dash;
-    public KeyCode Interact => interact;
+    public KeyCode MoveRight => keyActionPairs[KeyActions.Right];
+    public KeyCode MoveLeft => keyActionPairs[KeyActions.Left];
+    public KeyCode MoveForward => keyActionPairs[KeyActions.Forward];
+    public KeyCode MoveBackward => keyActionPairs[KeyActions.Backward];
+    public KeyCode Jump => keyActionPairs[KeyActions.Jump];
+    public KeyCode Dash => keyActionPairs[KeyActions.Dash];
+    public KeyCode Interact => keyActionPairs[KeyActions.Interact];
 
-    public Dictionary<KeyActions, KeyCode> Keys { get; private set; } = new Dictionary<KeyActions, KeyCode>();
+    public Dictionary<KeyActions, KeyCode> keyActionPairs { get; private set; } = new Dictionary<KeyActions, KeyCode>();
 
     private void Awake()
     {
         Instance = this;
 
-        Keys = new Dictionary<KeyActions, KeyCode>() 
+        keyActionPairs = new Dictionary<KeyActions, KeyCode>() 
         {
             { KeyActions.Right, moveRight },
             { KeyActions.Left, moveLeft },
@@ -59,8 +59,8 @@ public partial class KeyBinds : MonoBehaviour, IKeyBinds
         };
     }
 
-    public void Bind(KeyActions action, KeyCode key) => Keys[action] = key;
+    public void Bind(KeyActions action, KeyCode key) => keyActionPairs[action] = key;
 
-    public KeyCode GetBind(KeyActions action) => Keys[action];
+    public KeyCode GetBind(KeyActions action) => keyActionPairs[action];
 }
 

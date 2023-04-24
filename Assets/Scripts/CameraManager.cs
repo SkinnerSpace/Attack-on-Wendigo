@@ -10,6 +10,11 @@ public class CameraManager : MonoBehaviour
 
     private ICameraHolder cameraHolder;
 
+    private void Start()
+    {
+        GameEvents.current.onGameBegun += TrackTheCharacter;
+    }
+
     private void Awake()
     {
         cameraHolder = cameraHolderImp.GetComponent<ICameraHolder>();

@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 0
-  actionName: Right
 --- !u!1001 &5859340425258552460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_margin.z
-      value: 0.18162547
+      value: -350.2704
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
@@ -370,7 +369,7 @@ PrefabInstance:
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}

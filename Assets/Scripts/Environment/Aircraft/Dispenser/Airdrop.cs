@@ -12,6 +12,7 @@ public class Airdrop : MonoBehaviour, IAirdrop
 
     private void Start()
     {
+        GameEvents.current.onGameBegun += () => AddCargo(0);
         GameEvents.current.onFirstWeaponPickedUp += LoadCargo;
         GameEvents.current.onWeaponSweptAway += WeaponDisappeared;
         GameEvents.current.onProgressUpdate += UpdateProgress;

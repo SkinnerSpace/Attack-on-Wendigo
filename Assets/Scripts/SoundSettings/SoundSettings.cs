@@ -58,7 +58,7 @@ public class SoundSettings : MonoBehaviour
 
     private void SaveSettingsOnExit(string subMenuName)
     {
-        if (subMenuName == "sound"){
+        if (subMenuName == "settings"){
             SoundSettingsPersistence.Save(this);
         }
     }

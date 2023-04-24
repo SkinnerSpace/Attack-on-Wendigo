@@ -30,6 +30,11 @@ namespace Character
         private event Action onConnectControlles;
         private event Action onDisconnectControllers;
 
+        private void Start()
+        {
+            GameEvents.current.onGameBegun += SwitchOn;
+        }
+
         private void Awake()
         {
             controllers = new List<BaseController>();
@@ -82,8 +87,9 @@ namespace Character
 
         public void SetActive(bool isActive)
         {
-            if (isActive) 
+            if (isActive){
                 onConnectControlles?.Invoke();
+            }
 
             if (!isActive) 
                 onDisconnectControllers?.Invoke();

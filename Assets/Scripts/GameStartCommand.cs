@@ -7,9 +7,9 @@
     public void Execute()
     {
         gameManager.Menu.Close();
-        gameManager.PlayerCharacter.SwitchOn();
-        gameManager.CameraManager.TrackTheCharacter();
-        gameManager.Airdrop.AddCargo(0);
+        //gameManager.PlayerCharacter.SwitchOn();
+        //gameManager.CameraManager.TrackTheCharacter();
+        //gameManager.Airdrop.AddCargo(0);
 
         GameState.PauseMode = PauseMode.None;
         AudioPlayer.ResumeAll();
