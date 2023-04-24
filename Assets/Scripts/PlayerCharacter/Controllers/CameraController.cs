@@ -20,7 +20,11 @@ namespace Character
             input = main.InputReader;
         }
 
-        public override void Connect() => input.Get<MouseMotionInputReader>().Subscribe(this);
+        public override void Connect()
+        {
+            input.Get<MouseMotionInputReader>().Subscribe(this);
+        }
+
         public override void Disconnect() => input.Get<MouseMotionInputReader>().Unsubscribe(this);
 
         public void ReceiveMotion(Vector2 motion)

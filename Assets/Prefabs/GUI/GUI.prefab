@@ -1286,7 +1286,7 @@ MonoBehaviour:
     time: 2
   gameOverMessage:
     message: YOU DIED
-    color: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 1, g: 0.09803922, b: 0, a: 1}
     time: 3
   victoryMessage:
     message: VICTORY

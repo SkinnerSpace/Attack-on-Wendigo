@@ -41,5 +41,4 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     {
         if (testMode) Follow();
     }
-
 }

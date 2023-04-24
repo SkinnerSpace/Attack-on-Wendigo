@@ -54,7 +54,7 @@ namespace Character
             hitBox.Subscribe(this);
 
             onDeathTrigger = new EventTrigger();
-            SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
+            //SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
 
             SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
             onHealthUpdate?.Invoke(healthData.Amount);
