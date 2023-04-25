@@ -24,15 +24,31 @@ namespace Character
 
         public void ReceiveDamage(DamagePackage damagePackage)
         {
-            if (healthData.IsAlive && !healthData.IsImmortal)
-            {
-                healthData.Amount -= damagePackage.damage;
-
-                if (!healthData.IsAlive){
-                    Die();
-                }
-
+            if (IsDamageable()){
+                ReduceHealth(damagePackage);
+                NotifyOnBluntDamage(damagePackage);
                 onHealthUpdate?.Invoke(healthData.Amount);
+            }
+        }
+
+        private bool IsDamageable(){
+            return healthData.IsAlive && 
+                   !healthData.IsImmortal;
+        }
+
+        private void ReduceHealth(DamagePackage damagePackage)
+        {
+            healthData.Amount -= damagePackage.damage;
+
+            if (!healthData.IsAlive){
+                Die();
+            }
+        }
+
+        private void NotifyOnBluntDamage(DamagePackage damagePackage)
+        {
+            if (damagePackage.damageType == DamageTypes.Blunt){
+                GameEvents.current.PlayerReceivedBluntDamage();
             }
         }
 

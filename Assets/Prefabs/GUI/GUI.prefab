@@ -1284,14 +1284,20 @@ MonoBehaviour:
     message: SURVIVE
     color: {r: 1, g: 0.09803922, b: 0, a: 1}
     time: 2
+    appearAnimation: 0
+    disappearAnimation: 0
   gameOverMessage:
     message: YOU DIED
     color: {r: 1, g: 0.09803922, b: 0, a: 1}
-    time: 6
+    time: 4
+    appearAnimation: 0
+    disappearAnimation: 1
   victoryMessage:
     message: VICTORY
     color: {r: 1, g: 1, b: 1, a: 1}
     time: 2
+    appearAnimation: 0
+    disappearAnimation: 1
 --- !u!95 &3083412171400925326
 Animator:
   serializedVersion: 3

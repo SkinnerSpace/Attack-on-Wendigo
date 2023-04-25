@@ -33,13 +33,19 @@ public class DebugCommands : MonoBehaviour
             components.player.GetController<CharacterHealthSystem>().Die();
         });
 
+        DebugCommand GET_BLUNT_DAMAGE = new DebugCommand("hit", "Get blunt damage", "hit", () =>
+        {
+            GameEvents.current.PlayerReceivedBluntDamage();
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
             SPAWN_N,
             HELP_OPEN,
             HELP_CLOSE,
-            DIE
+            DIE,
+            GET_BLUNT_DAMAGE
         };
     }
 }

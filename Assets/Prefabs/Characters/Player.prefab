@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5914274010727276762}
   - component: {fileID: 816151919761848123}
   - component: {fileID: 6738613822654814358}
+  - component: {fileID: 66893782540996783}
   m_Layer: 13
   m_Name: SFXPlayer
   m_TagString: Untagged
@@ -110,6 +111,32 @@ MonoBehaviour:
       Data3: -731808848
       Data4: 1544986244
     Path: event:/SFX/Game/Gameplay/Dash/DashSwing
+--- !u!114 &66893782540996783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446330999445019643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a01ec132aeb2f4cbce79070565f8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashSFX:
+    Guid:
+      Data1: 982257025
+      Data2: 1263002427
+      Data3: 1161383303
+      Data4: 1150264288
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/FleshSmash2D
+  bleedingSFX:
+    Guid:
+      Data1: -456518014
+      Data2: 1171375309
+      Data3: 1926538681
+      Data4: 1170314752
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/ShortBleeding2D
 --- !u!1 &1552549186542107050
 GameObject:
   m_ObjectHideFlags: 0

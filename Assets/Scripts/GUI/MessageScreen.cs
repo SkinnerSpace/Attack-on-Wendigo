@@ -5,9 +5,6 @@ public class MessageScreen : MonoBehaviour
 {
     private const string HIDE_TIMER = "Hide";
 
-    private static int appearAnimation = Animator.StringToHash("Appear");
-    private static int disappearAnimation = Animator.StringToHash("Disappear");
-
     [Header("Required Components")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Animator animator;
@@ -29,19 +26,21 @@ public class MessageScreen : MonoBehaviour
     private void ShowMessage(MessageCongif config){
         message.text = config.message;
         message.color = config.color;
-        Show();
-        HideAfterSomeTime(config.time);
+        Show(config);
+        HideAfterSomeTime(config);
     }
 
-    private void Show(){
-        animator.Play(appearAnimation);
+    private void Show(MessageCongif config){
+        int animation = MessageAnimationsProvider.Get(config.appearAnimation);
+        animator.Play(animation);
     }
 
-    private void HideAfterSomeTime(float hideTime){
-        timer.Set(HIDE_TIMER, hideTime, Hide);
+    private void HideAfterSomeTime(MessageCongif config){
+        timer.Set(HIDE_TIMER, config.time, () => Hide(config));
     }
 
-    private void Hide(){
-        animator.Play(disappearAnimation);
+    private void Hide(MessageCongif config){
+        int animation = MessageAnimationsProvider.Get(config.disappearAnimation);
+        animator.Play(animation);
     }
 }

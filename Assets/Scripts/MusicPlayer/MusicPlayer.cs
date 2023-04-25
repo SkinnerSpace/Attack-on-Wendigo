@@ -17,8 +17,10 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start(){
         GameEvents.current.onFirstWeaponPickedUp += () => ambientPlayer.Stop();
-        GameEvents.current.onFirstWeaponPickedUp += () => battlePlayer.PlayLoop();
+        GameEvents.current.onPlayerHasDied += () => ambientPlayer.Stop();
+        GameEvents.current.onVictory += () => ambientPlayer.Stop();
 
+        GameEvents.current.onFirstWeaponPickedUp += () => battlePlayer.PlayLoop();
         GameEvents.current.onPlayerHasDied += () => battlePlayer.Stop();
         GameEvents.current.onVictory += () => battlePlayer.Stop();
 
