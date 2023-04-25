@@ -16,7 +16,7 @@ public class DebugController : MonoBehaviour
 
     private bool showConsole;
     public bool showHelp { get; set; }
-    private string input;
+    private string input = "";
 
     private Vector2 scroll;
     float verticalPosition = 0f;
@@ -91,7 +91,7 @@ public class DebugController : MonoBehaviour
 
     private void OnReturn()
     {
-        if (input != null && input.Contains(EXECUTE_COMMAND)){
+        if (input != null && input != "" && input.Contains(EXECUTE_COMMAND)){
             if (showConsole)
             {
                 HandleInput();

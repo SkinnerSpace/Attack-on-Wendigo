@@ -6,7 +6,9 @@ public class HeadBackController : MonoBehaviour
     private float MAX_ANGLE = 75f;
 
     [SerializeField] private CharacterData data;
+    [SerializeField] private FunctionTimer timer;
     [SerializeField] private float maxTime = 1.5f;
+    [SerializeField] private float delay = 0.5f;
 
     private Vector3 originalAngle;
     private Vector3 targetAngle;
@@ -16,6 +18,8 @@ public class HeadBackController : MonoBehaviour
     private float time;
     private float completeness;
 
+    private float speed;
+
     private void Start(){
         GameEvents.current.onPlayerHasDied += HeadBack;
     }
@@ -23,7 +27,13 @@ public class HeadBackController : MonoBehaviour
     private void Update()
     {
         if (isTiltingBack){
-            time += Time.deltaTime;
+            time += speed * Time.deltaTime;
+
+            speed += 0.35f * Time.deltaTime;
+            if (speed >= 1f){
+                speed = 1f;
+            }
+
             completeness = Mathf.InverseLerp(0f, targetTime, time);
             completeness = Easing.QuadEaseOut(completeness);
 
@@ -34,6 +44,10 @@ public class HeadBackController : MonoBehaviour
             Vector3 currentAngle = Vector3.Lerp(originalAngle, targetAngle, completeness);
             data.CameraViewEuler = currentAngle;
         }
+    }
+
+    private void HeadBackWithDelay(){
+        timer.Set("HeadBack", delay, HeadBack);
     }
 
     private void HeadBack()

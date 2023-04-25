@@ -10125,7 +10125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 61735261016310312}
+  timer: {fileID: 7254224541728550267}
   maxTime: 1
+  delay: 0.15
 --- !u!1 &6475411278017162014
 GameObject:
   m_ObjectHideFlags: 0
