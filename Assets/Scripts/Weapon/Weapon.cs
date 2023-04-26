@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeapon
+public class Weapon : MonoBehaviour, IWeapon, IHandyItem
 {
     private static int id;
 
@@ -143,4 +143,3 @@ public class Weapon : MonoBehaviour, IWeapon
                pickable.IsReadyToHand;
     }
 }
-

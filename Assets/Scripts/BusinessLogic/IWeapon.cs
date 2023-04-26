@@ -3,7 +3,6 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    Vector3 DefaultPosition { get; }
     AimAnimationsPack AimAnimation { get; }
     float Rate { get; }
 

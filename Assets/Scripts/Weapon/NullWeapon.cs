@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class NullWeapon : IWeapon
+public class NullWeapon : IWeapon, IHandyItem
 {
     public bool IsReady => false;
     public Vector3 DefaultPosition => default;

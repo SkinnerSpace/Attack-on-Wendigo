@@ -69,7 +69,7 @@ Material:
     - Density: 0.5
     - NoiseScale: 400
     - SmallNoiseSpeed: 0.1
-    - Speed: 1.0811018
+    - Speed: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -92,10 +92,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BigNoiseTiling: {r: 5.8415823, g: 0.8, b: 0, a: 0}
+    - BigNoiseTiling: {r: 9, g: 0.8, b: 0, a: 0}
     - BlizzardColor: {r: 1, g: 1, b: 1, a: 0.3254902}
     - GradientOffset: {r: 0, g: -0.2, b: 0, a: 0}
-    - NoiseTiling: {r: 1.2981293, g: 1, b: 0, a: 0}
+    - NoiseTiling: {r: 2, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

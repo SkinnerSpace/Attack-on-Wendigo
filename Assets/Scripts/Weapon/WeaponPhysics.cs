@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPhysics : MonoBehaviour
+public class WeaponPhysics : MonoBehaviour, IPhysicalBody
 {
     [SerializeField] private float groundCheckRadius = 1f;
 

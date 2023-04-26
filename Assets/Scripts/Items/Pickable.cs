@@ -5,8 +5,9 @@ public class Pickable : MonoBehaviour, IPickable
 {
     [SerializeField] private Transform item;
     [SerializeField] private ItemTransitionController transitionController;
-    [SerializeField] private ItemSFXPlayer sFXPlayer;
-    [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private Transform physicalBodyImp;
+
+    private IPhysicalBody physicalBody;
 
     public Transform Transform => item;
     public Vector3 Position => item.position;
@@ -14,13 +15,14 @@ public class Pickable : MonoBehaviour, IPickable
     public Transform HoldParent { get; private set; }
 
     private event Action onInteract;
-    private event Action onPickedUp;
-    private event Action onDropped;
+    public event Action onPickedUp;
+    public event Action onDropped;
 
     public bool IsReadyToHand { get; private set; } = true;
 
     private void Awake()
     {
+        physicalBody = physicalBodyImp.GetComponent<IPhysicalBody>();
         originalParent = item.parent;
     }
 
@@ -44,9 +46,7 @@ public class Pickable : MonoBehaviour, IPickable
     {
         HoldParent = keeper.Root;
         item.parent = HoldParent;
-        physics.DisablePhysics();
-
-        sFXPlayer.PlayTakeSFX();
+        physicalBody.DisablePhysics();
         transitionController.Launch(item, onCameToHands);
 
         NotifyOnPickedUp();
@@ -57,7 +57,6 @@ public class Pickable : MonoBehaviour, IPickable
         item.position = pos;
         item.SetParent(originalParent);
 
-        sFXPlayer.PlayDropSFX();
         transitionController.Stop();
         Throw(force);
 
@@ -79,10 +78,10 @@ public class Pickable : MonoBehaviour, IPickable
 
     private void Throw(Vector3 force)
     {
-        physics.EnablePhysics();
-        physics.AddForce(force);
+        physicalBody.EnablePhysics();
+        physicalBody.AddForce(force);
 
         Vector3 torque = new Vector3(Rand.GetBisigned(), Rand.Range(-1f, 1f), Rand.GetBisigned()) * 25f;
-        physics.AddTorque(torque);
+        physicalBody.AddTorque(torque);
     }
 }

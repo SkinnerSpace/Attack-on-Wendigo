@@ -778,6 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fcaa6e40b9e1249bde919693a04116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickable: {fileID: 4611041808808164778}
   takeSFX:
     Guid:
       Data1: 1045841961
@@ -785,13 +786,6 @@ MonoBehaviour:
       Data3: -544231019
       Data4: -1728884771
     Path: event:/SFX/Game/Gameplay/Weapon/Pistol/PistolTake
-  dropSFX:
-    Guid:
-      Data1: 385305225
-      Data2: 1315561507
-      Data3: 1980137396
-      Data4: 1171876976
-    Path: event:/SFX/Game/Gameplay/Weapon/WeaponDrop
   throwSFX:
     Guid:
       Data1: 598218466
@@ -5672,8 +5666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 5764452896203316476}
   transitionController: {fileID: 298535625426325826}
-  sFXPlayer: {fileID: 1601505413764855744}
-  physics: {fileID: 3281898898999005978}
+  physicalBodyImp: {fileID: 5764452896203316476}
 --- !u!114 &298535625426325826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5686,7 +5679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e36f764ab1ef9b4588827a51af535aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
+  handyItemImp: {fileID: 5764452896203316476}
 --- !u!114 &7579685509612711756
 MonoBehaviour:
   m_ObjectHideFlags: 0

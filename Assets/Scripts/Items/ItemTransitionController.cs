@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemTransitionController : MonoBehaviour
 {
-    [SerializeField] private Weapon weapon;
+    [SerializeField] private Transform handyItemImp;
+    private IHandyItem handyItem;
 
     private Transform item;
 
@@ -18,13 +19,18 @@ public class ItemTransitionController : MonoBehaviour
 
     private Action onPickedUp;
 
+    private void Awake()
+    {
+        handyItem = handyItemImp.GetComponent<IHandyItem>();
+    }
+
     public void Launch(Transform item, Action onPickedUp)
     {
         this.onPickedUp = onPickedUp;
         this.item = item;
 
         originalPos = item.localPosition;
-        targetPos = weapon.DefaultPosition;
+        targetPos = handyItem.DefaultPosition;
 
         currentTime = 0f;
         isMoving = true;
@@ -63,9 +69,6 @@ public class ItemTransitionController : MonoBehaviour
 
     public void Displace(float transition)
     {
-/*        item.localPosition = targetPos;
-        item.localRotation = Quaternion.identity;*/
-
         item.localPosition = Vector3.Lerp(originalPos, targetPos, transition);
         item.localRotation = Quaternion.Slerp(item.localRotation, Quaternion.identity, transition);
     }
