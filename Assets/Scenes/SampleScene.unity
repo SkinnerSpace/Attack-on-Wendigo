@@ -6688,6 +6688,23 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &981577353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981577351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee56b0e95f4264995ce534f9ab1fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTemplates:
+  - tag: BloodSplatter
+    prefab: {fileID: 4660351311876477159, guid: 3a8a892cff652ba439f166963f76c849,
+      type: 3}
+    size: 150
 --- !u!1 &986469231
 GameObject:
   m_ObjectHideFlags: 0
@@ -7444,7 +7461,7 @@ PrefabInstance:
     - target: {fileID: 874012968601863398, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_Cameras.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 874012968601863398, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
@@ -7459,6 +7476,11 @@ PrefabInstance:
     - target: {fileID: 874012968601863398, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1165287139}
+    - target: {fileID: 874012968601863398, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: m_Cameras.Array.data[2]
       value: 
       objectReference: {fileID: 704566956}
     - target: {fileID: 1087774384352615281, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
@@ -7735,6 +7757,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.08092486
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846176551104915921, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846176551104915921, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: far clip plane
+      value: 21.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846176551104915921, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: near clip plane
+      value: 8.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846176551104915921, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1917407238196654510, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
@@ -9782,6 +9824,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.033992253
       objectReference: {fileID: 0}
+    - target: {fileID: 7208063685353080251, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7221679689427464397, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10704,6 +10751,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!20 &1165287139 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1846176551104915921, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1165287136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1176147936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8089060432747200167, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -147150,7 +147203,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1640929652}
+      objectReference: {fileID: 1165287139}
     - target: {fileID: 8149916527630423737, guid: 20b03fd47114ea946b0b6ee33ea21824,
         type: 3}
       propertyPath: m_RenderMode

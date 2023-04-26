@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4660351311876477154}
   - component: {fileID: 7603448247311547454}
   - component: {fileID: 4502705050105290898}
-  m_Layer: 5
+  - component: {fileID: 5793962057880648840}
+  m_Layer: 30
   m_Name: BloodSplatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +59,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70aa7ea1d50ee04db6fef5538bb38fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleProgression:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.58129126
+      outSlope: 0.58129126
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.06672636
+      value: 1.0040637
+      inSlope: 0.68919444
+      outSlope: 0.68919444
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.19154711
+    - serializedVersion: 3
+      time: 1
+      value: 1.3
+      inSlope: 0.048005406
+      outSlope: 0.048005406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2696021
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  alphaProgression:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.05416661
+      value: 1
+      inSlope: 0.028301708
+      outSlope: 0.028301708
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2643172
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.6492785
+      outSlope: -0.6492785
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.29955947
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   minTime: 5
   maxTime: 8
 --- !u!114 &4502705050105290898
@@ -73,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: dad2eac3f0806b34cba3d0205b0be53c, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -89,3 +156,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5793962057880648840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4660351311876477159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3944af15e893a4cb977ad1a74fdda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

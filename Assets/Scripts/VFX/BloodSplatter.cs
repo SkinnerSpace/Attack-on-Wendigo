@@ -1,48 +1,78 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BloodSplatter : MonoBehaviour
 {
+    [SerializeField] private AnimationCurve scaleProgression;
+    [SerializeField] private AnimationCurve alphaProgression;
     [SerializeField] private float minTime = 0.5f;
     [SerializeField] private float maxTime = 1.5f;
 
     private Image image;
+    private RectTransform rectTransform;
 
-    private float pattern;
     private float time;
     private float targetTime;
-    private float alpha = 1f;
+    private float normalizedTime;
 
-    private bool isBleeding = true;
+    private float pattern;
+
+    private bool isBleeding;
+
+    private Vector3 scale;
+    private float alpha;
+
+    public event Action onStopBleeding;
 
     private void Awake()
     {
         image = GetComponent<Image>();
-        targetTime = Rand.Range(minTime, maxTime);
+        rectTransform = GetComponent<RectTransform>();
+    }
 
+    public void Initialize(){
+        SetTime();
         SetRandomPattern();
         UpdateShader();
+    }
+
+    private void SetTime(){
+        targetTime = Rand.Range(minTime, maxTime);
     }
 
     private void SetRandomPattern(){
         pattern = Rand.Range01();
     }
 
+    public void Launch() => isBleeding = true;
+
     private void Update()
     {
-        if (isBleeding){
-            Dissolve();
-            UpdateShader();
+        if (isBleeding) {
+            Bleed();
         }
     }
 
-    private void Dissolve()
+    private void Bleed()
     {
+        CountDown();
+
+        scale = scaleProgression.Evaluate(normalizedTime).ToVector3();
+        rectTransform.localScale = scale;
+
+        alpha = alphaProgression.Evaluate(normalizedTime);
+        UpdateShader();
+    }
+
+    private void CountDown(){
+
         time += Time.deltaTime;
-        alpha = 1f - Easing.QuadEaseIn(Mathf.InverseLerp(0f, targetTime, time));
+        normalizedTime = Mathf.InverseLerp(0f, targetTime, time);
 
         if (time >= targetTime){
             isBleeding = false;
+            onStopBleeding?.Invoke();
         }
     }
 

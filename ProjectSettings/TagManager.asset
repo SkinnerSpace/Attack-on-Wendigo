@@ -35,7 +35,7 @@ TagManager:
   - RagDollInteractable
   - CorpseGroundInteraction
   - ImpenetrableWendigo
-  - 
+  - BloodScreen
   - 
   m_SortingLayers:
   - name: Default
