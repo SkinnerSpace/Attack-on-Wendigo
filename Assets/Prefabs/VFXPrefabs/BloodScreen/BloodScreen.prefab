@@ -83,5 +83,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e813a84fd65d49458c95ff6f1c62352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minCount: 3
+  maxCount: 5
+  deathMultiplier: 3
   minSize: 600
   maxSize: 1200
+  minTime: 3
+  maxTime: 7

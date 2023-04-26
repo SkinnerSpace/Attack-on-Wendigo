@@ -123,6 +123,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a01ec132aeb2f4cbce79070565f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageSFX:
+    Guid:
+      Data1: 800459492
+      Data2: 1245847297
+      Data3: 1804018595
+      Data4: 817749182
+    Path: event:/SFX/Game/Gameplay/Wendigo/Gore/Hit2D
   smashSFX:
     Guid:
       Data1: 982257025

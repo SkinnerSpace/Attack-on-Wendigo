@@ -99,8 +99,12 @@ public class WendigoSpawnerLogic
 
     private void DeclareVictoryIfNoOneIsLeft()
     {
-        if (data.aliveCount <= 0){
-            timer.Set("Victory", 2f, GameEvents.current.DeclareVictory);
+        if (data.aliveCount <= 0)
+        {
+            GameEvents.current.DeclareVictory();
         }
+            /*        if (data.aliveCount <= 0){
+                        timer.Set("Victory", 2f, GameEvents.current.DeclareVictory);
+                    }*/
     }
 }

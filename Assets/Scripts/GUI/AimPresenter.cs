@@ -20,7 +20,10 @@ public class AimPresenter : MonoBehaviour
     private bool interactiveItemExist;
     private bool targetExist;
 
-    public void OnShot() => animator.PlayShoot();
+    public void OnShot()
+    {
+        animator.PlayShoot();
+    }
 
     private void Awake()
     {

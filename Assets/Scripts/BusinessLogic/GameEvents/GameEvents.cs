@@ -24,6 +24,7 @@ public class GameEvents : MonoBehaviour
     public event Action onPause;
     public event Action onResume;
     public event Action onGameBegun; // Camera manager, Player character, Airdrop
+    public event Action onRestart;
 
     public event Action onBluntDamageReceived;
 
@@ -57,6 +58,7 @@ public class GameEvents : MonoBehaviour
     public void TheGameIsResumed() => onResume?.Invoke();
 
     public void TheGameHasBegun() => onGameBegun?.Invoke();
+    public void TheGameHasBeenRestarted() => onRestart?.Invoke();
 
     public void PlayerReceivedBluntDamage() => onBluntDamageReceived?.Invoke();
 }

@@ -6,8 +6,7 @@ public class BloodSplatter : MonoBehaviour
 {
     [SerializeField] private AnimationCurve scaleProgression;
     [SerializeField] private AnimationCurve alphaProgression;
-    [SerializeField] private float minTime = 0.5f;
-    [SerializeField] private float maxTime = 1.5f;
+    
 
     private Image image;
     private RectTransform rectTransform;
@@ -32,14 +31,11 @@ public class BloodSplatter : MonoBehaviour
     }
 
     public void Initialize(){
-        SetTime();
         SetRandomPattern();
         UpdateShader();
     }
 
-    private void SetTime(){
-        targetTime = Rand.Range(minTime, maxTime);
-    }
+    public void SetTime(float targetTime) => this.targetTime = targetTime;
 
     private void SetRandomPattern(){
         pattern = Rand.Range01();
@@ -78,5 +74,11 @@ public class BloodSplatter : MonoBehaviour
 
     private void UpdateShader(){
         image.color = new Color(image.color.r, image.color.g, pattern, alpha);
+    }
+
+    public void ResetState()
+    {
+        time = 0f;
+        normalizedTime = 0f;
     }
 }

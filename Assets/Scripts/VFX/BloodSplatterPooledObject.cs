@@ -26,10 +26,10 @@ public class BloodSplatterPooledObject : MonoBehaviour, IPooledObject
 
     public void SetActive(bool active)
     {
-        if (active){
+/*        if (active){
             bloodSplatter.Launch();
         }
-
+*/
         gameObject.SetActive(active);
     }
 
@@ -37,6 +37,7 @@ public class BloodSplatterPooledObject : MonoBehaviour, IPooledObject
 
     public void BackToPool()
     {
+        bloodSplatter.ResetState();
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
     }
