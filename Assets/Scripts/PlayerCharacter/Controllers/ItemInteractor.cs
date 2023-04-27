@@ -9,15 +9,14 @@ public class ItemInteractor
     private IPickable pickable;
     private IOpenable openable;
 
-    private Action<IPickable, IWeapon> takeAnItem;
+    private Action<IPickable> takeAnItem;
     private Action dropAnItem;
 
-    public static ItemInteractor CreateWithDataTakeAndDrop(CharacterData data, Action<IPickable, IWeapon> takeAnItem, Action dropAnItem)
-    {
+    public static ItemInteractor CreateWithDataTakeAndDrop(CharacterData data, Action<IPickable> takeAnItem, Action dropAnItem){
         return new ItemInteractor(data, takeAnItem, dropAnItem);
     }
 
-    private ItemInteractor(CharacterData data, Action<IPickable, IWeapon> takeAnItem, Action dropAnItem)
+    private ItemInteractor(CharacterData data, Action<IPickable> takeAnItem, Action dropAnItem)
     {
         this.data = data;
         this.takeAnItem = takeAnItem;
@@ -45,12 +44,12 @@ public class ItemInteractor
 
         if (pickable != null)
         {
-            dropAnItem();
-
-            IWeapon weapon = target.parent.GetComponent<IWeapon>();
-            takeAnItem(pickable, weapon);
+            DropPreviouslyHeldItem();
+            takeAnItem(pickable);
         }
     }
+
+    private void DropPreviouslyHeldItem() => dropAnItem();
 
     private void OpenOpenable(Transform target)
     {

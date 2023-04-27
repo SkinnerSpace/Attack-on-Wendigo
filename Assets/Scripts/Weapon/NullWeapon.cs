@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NullWeapon : IWeapon, IHandyItem
@@ -31,5 +32,10 @@ public class NullWeapon : IWeapon, IHandyItem
     public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader)
     {
   
+    }
+
+    public void SubscribeOnReady(Action onReady)
+    {
+        throw new NotImplementedException();
     }
 }

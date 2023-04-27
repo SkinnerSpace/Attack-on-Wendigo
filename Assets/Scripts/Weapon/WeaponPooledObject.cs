@@ -9,7 +9,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
     private Weapon weapon;
     private Pickable pickable;
     private Levitator levitator;
-    private WeaponAbandonmentDetector abandonmentDetector;
+    private AbandonmentDetector abandonmentDetector;
 
     private IObjectPooler pooler;
 
@@ -18,7 +18,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
         weapon = GetComponentInChildren<Weapon>();
         pickable = GetComponentInChildren<Pickable>();
         levitator = GetComponentInChildren<Levitator>();
-        abandonmentDetector = GetComponentInChildren<WeaponAbandonmentDetector>();
+        abandonmentDetector = GetComponentInChildren<AbandonmentDetector>();
     }
 
     private void Start() => pooler = PoolHolder.Instance;

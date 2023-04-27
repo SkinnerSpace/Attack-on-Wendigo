@@ -3,18 +3,16 @@ using UnityEngine;
 
 public class Pickable : MonoBehaviour, IPickable
 {
-    [SerializeField] private Transform item;
-    [SerializeField] private ItemTransitionController transitionController;
-    [SerializeField] private Transform physicalBodyImp;
-
+    private Transform item;
     private IPhysicalBody physicalBody;
+    private ItemTransitionController transitionController;
 
     public Transform Transform => item;
     public Vector3 Position => item.position;
     private Transform originalParent;
     public Transform HoldParent { get; private set; }
 
-    private event Action onInteract;
+    public event Action onInteract;
     public event Action onPickedUp;
     public event Action onDropped;
 
@@ -22,13 +20,11 @@ public class Pickable : MonoBehaviour, IPickable
 
     private void Awake()
     {
-        physicalBody = physicalBodyImp.GetComponent<IPhysicalBody>();
+        item = transform.parent;
+        physicalBody = GetComponentInParent<IPhysicalBody>();
+        transitionController = GetComponent<ItemTransitionController>();
         originalParent = item.parent;
     }
-
-    public void SubscribeOnInteraction(Action onInteract) => this.onInteract += onInteract;
-    public void SubscribeOnPickedUp(Action onPickedUp) => this.onPickedUp += onPickedUp;
-    public void SubscribeOnDropped(Action onDropped) => this.onDropped += onDropped;
 
     public void SwitchOff()
     {
@@ -42,7 +38,7 @@ public class Pickable : MonoBehaviour, IPickable
         gameObject.layer = (int)Layers.Interactables;
     }
 
-    public void PickUp(IKeeper keeper, Action onCameToHands)
+    public void PickUp(IItemsKeeper keeper, Action onCameToHands)
     {
         HoldParent = keeper.Root;
         item.parent = HoldParent;

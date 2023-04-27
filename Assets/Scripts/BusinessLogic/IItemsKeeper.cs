@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IKeeper
+public interface IItemsKeeper
 {
     Transform Root { get; }
-    void Take(IPickable pickable, IWeapon weapon);
+    void TakeAWeapon(IPickable pickable, IWeapon weapon);
     void DropAnItem(Vector2 screenPoint);
 }
 

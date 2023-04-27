@@ -9,7 +9,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
 
     private PlayerCharacter main;
     private CharacterData data;
-    private WeaponKeeper keeper;
+    private ItemsKeeper keeper;
     private IInputReader input;
     private VisionRaycast visionRaycast;
     private ItemInteractor itemInteractor;
@@ -29,7 +29,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         input = main.InputReader;
         timer = main.Timer;
 
-        keeper = new WeaponKeeper(data, input);
+        keeper = new ItemsKeeper(data, input);
         itemInteractor = ItemInteractor.CreateWithDataTakeAndDrop(data, TakeAnItem, DropAnItem);
         
         visionRaycast = new VisionRaycast(data.Cam, ComplexLayers.Interactables);
@@ -85,5 +85,20 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     }
 
     private void DropAnItem() => keeper.DropAnItem(mousePos);
-    private void TakeAnItem(IPickable pickable, IWeapon weapon) => keeper.Take(pickable, weapon);
+    private void TakeAnItem(IPickable pickable)
+    {
+        IWeapon weapon = pickable.Transform.GetComponentInParent<IWeapon>(); // IWeapon component is usually in the parent of an item
+
+        if (weapon != null){
+            keeper.TakeAWeapon(pickable, weapon);
+            return;
+        }
+
+        IHealthPack healthPack = pickable.Transform.GetComponentInParent<IHealthPack>();
+
+        if (healthPack != null){
+            keeper.TakeAHealthPack(pickable, healthPack);
+            return;
+        }
+    }
 }

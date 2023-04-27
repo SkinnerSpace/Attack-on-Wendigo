@@ -13,10 +13,10 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     [SerializeField] private WeaponAimController aimController; 
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private Pickable pickable;
-    [SerializeField] private WeaponSweeper sweeper;
+    [SerializeField] private ItemSweeper sweeper;
     [SerializeField] private ItemPhysicalBody physics;
     [SerializeField] private FunctionTimer timer;
-    [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
+    [SerializeField] private AbandonmentDetector abandonmentDetector;
     [SerializeField] private AimAnimationsPack animationsPack;
 
     [Header("Effects")]

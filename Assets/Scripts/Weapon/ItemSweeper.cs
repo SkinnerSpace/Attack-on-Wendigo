@@ -2,24 +2,29 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaponSweeper : MonoBehaviour
+public class ItemSweeper : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private ItemPhysicalBody physics;
-    [SerializeField] private WeaponPooledObject pooledObject;
     [SerializeField] private FunctionTimer timer;
-
     [SerializeField] private SweeperData data;
 
+    private IPooledObject pooledObject;
 
     private bool isSweeping;
     private bool isSwept;
 
+    private void Awake()
+    {
+        pooledObject = GetComponent<IPooledObject>();
+    }
+
     public void SweepTheWeapon()
     {
-        if (!isSweeping)
-        {
+        if (!isSweeping){
             isSweeping = true;
+
+            Debug.Log("SWEEp");
             StartCoroutine(WaitForRest());
         }
     }

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public class WeaponAbandonmentDetector : MonoBehaviour
+public class AbandonmentDetector : MonoBehaviour
 {
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private WeaponSweeper sweeper;
+    private const float ABANDONMENT_DISTANCE = 30f;
+
     [SerializeField] private FunctionTimer timer;
-    [SerializeField] private float abandonmentDistance = 20f;
 
     private ItemPhysicalBody physics;
     private ICharacterData owner;
+    private IHandyItem item;
+    private ItemSweeper sweeper;
 
     private bool isActive;
     private bool isGrounded = false;
@@ -16,11 +17,13 @@ public class WeaponAbandonmentDetector : MonoBehaviour
     private void Awake()
     {
         physics = GetComponent<ItemPhysicalBody>();
+        sweeper = GetComponent<ItemSweeper>();
+        item = GetComponent<IHandyItem>();
     }
 
     private void Start()
     {
-        weapon.SubscribeOnReady(SwitchOn);
+        item.SubscribeOnReady(SwitchOn);
         physics.SubscribeOnGroundUpdate(OnGroundUpdate);
     }
 
@@ -30,7 +33,7 @@ public class WeaponAbandonmentDetector : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, owner.Position);
 
-            if (distance >= abandonmentDistance)
+            if (distance >= ABANDONMENT_DISTANCE)
             {
                 sweeper.SweepTheWeapon();
                 ResetState();

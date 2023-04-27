@@ -6,13 +6,12 @@ public class Levitator : MonoBehaviour, ISwitchable
 
     [SerializeField] private LevitatorSharedData sharedData;
     [SerializeField] private float leviationHeight = 1.5f;
+    [SerializeField] private bool isLevitating;
 
     private ItemPhysicalBody physicalBody;
 
     private float time;
     private float localHeight;
-
-    private bool isLevitating;
 
     private void Awake(){
         physicalBody = GetComponent<ItemPhysicalBody>();

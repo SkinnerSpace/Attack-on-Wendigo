@@ -29,4 +29,14 @@ public class CombatInputReader : InputReader
         onHold -= observer.HoldTheTrigger;
         onAim -= observer.Aim;
     }
+
+    public void Subscribe(IHealthPack observer)
+    {
+        onPress += observer.Use;
+    }
+
+    public void Unsubscribe(IHealthPack observer)
+    {
+        onPress -= observer.Use;
+    }
 }

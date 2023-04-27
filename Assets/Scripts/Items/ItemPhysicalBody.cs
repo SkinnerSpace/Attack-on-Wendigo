@@ -80,8 +80,15 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
 
     public void SubscribeOnGroundUpdate(Action<bool> onGroundUpdate) => groundDetector.onGroundUpdate += onGroundUpdate;
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        
+        if (visualizeCollider)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, groundCheckRadius);
+            Gizmos.color = Color.white;
+        }
     }
+# endif
 }

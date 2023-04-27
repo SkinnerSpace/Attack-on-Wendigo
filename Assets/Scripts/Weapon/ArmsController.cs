@@ -15,10 +15,10 @@ public class ArmsController : MonoBehaviour
     {
         oldParent = transform.parent;
 
-        pickable.SubscribeOnPickedUp(ShowArms);
-        weapon.SubscribeOnReady(ResetOldParent);
+        pickable.onPickedUp += ShowArms;
+        pickable.onDropped += HideArms;
 
-        pickable.SubscribeOnDropped(HideArms);
+        weapon.SubscribeOnReady(ResetOldParent);
     }
 
     private void ShowArms()

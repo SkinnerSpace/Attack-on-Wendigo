@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemTransitionController : MonoBehaviour
 {
-    [SerializeField] private Transform handyItemImp;
     private IHandyItem handyItem;
 
     private Transform item;
@@ -19,9 +18,8 @@ public class ItemTransitionController : MonoBehaviour
 
     private Action onPickedUp;
 
-    private void Awake()
-    {
-        handyItem = handyItemImp.GetComponent<IHandyItem>();
+    private void Awake(){
+        handyItem = GetComponentInParent<IHandyItem>();
     }
 
     public void Launch(Transform item, Action onPickedUp)
