@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponSweeper : MonoBehaviour
 {
     [Header("Required Components")]
-    [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private ItemPhysicalBody physics;
     [SerializeField] private WeaponPooledObject pooledObject;
     [SerializeField] private FunctionTimer timer;
 

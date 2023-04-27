@@ -1,22 +1,39 @@
 ﻿using UnityEngine;
 
-public class Levitator : MonoBehaviour
+public class Levitator : MonoBehaviour, ISwitchable
 {
     private const float MAX_SIN_TIME = Mathf.PI * 2f;
 
-    [SerializeField] private float frequency = 5f;
-    [SerializeField] private float magnitude = 0.1f;
+    [SerializeField] private LevitatorSharedData sharedData;
     [SerializeField] private float leviationHeight = 1.5f;
-    [SerializeField] private float pushSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 50f;
+
+    private ItemPhysicalBody physicalBody;
 
     private float time;
     private float localHeight;
 
+    private bool isLevitating;
+
+    private void Awake(){
+        physicalBody = GetComponent<ItemPhysicalBody>();
+        physicalBody.onDisabled += SwitchOff;
+    }
+
+    public void SwitchOn() => isLevitating = true;
+
+    public void SwitchOff() => isLevitating = false;
+
+    private void Update()
+    {
+        if (isLevitating){
+            Levitate();
+        }
+    }
+
     public void Levitate()
     {
-        CountTime(frequency);
-        localHeight = Mathf.Sin(time) * magnitude;
+        CountTime(sharedData.frequency);
+        localHeight = Mathf.Sin(time) * sharedData.magnitude;
 
         PushOffTheGround();
         Rotate();
@@ -37,13 +54,12 @@ public class Levitator : MonoBehaviour
             float currentHeight = transform.position.y - localHeight;
             float targetHeight = hit.point.y + leviationHeight;
 
-            float adjustedHeight = Mathf.Lerp(currentHeight, targetHeight, pushSpeed * Time.deltaTime);
+            float adjustedHeight = Mathf.Lerp(currentHeight, targetHeight, sharedData.pushSpeed * Time.deltaTime);
             transform.position = transform.position.SetY(adjustedHeight + localHeight);
         }
     }
 
-    private void Rotate()
-    {
-        transform.eulerAngles += new Vector3(0f, rotationSpeed, 0f) * Time.deltaTime;
+    private void Rotate(){
+        transform.eulerAngles += new Vector3(0f, sharedData.rotationSpeed, 0f) * Time.deltaTime;
     }
 }

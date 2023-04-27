@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     [SerializeField] private WeaponSwayController swayController;
     [SerializeField] private Pickable pickable;
     [SerializeField] private WeaponSweeper sweeper;
-    [SerializeField] private WeaponPhysics physics;
+    [SerializeField] private ItemPhysicalBody physics;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
     [SerializeField] private AimAnimationsPack animationsPack;
@@ -50,8 +50,8 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     private void CreateSurfaceHitHandler()
     {
         surfaceHitHandler = new WeaponHitSurfaceHandler();
-        physics.SubscribeOnCollision(surfaceHitHandler.HitTheSurface);
-        physics.SubscribeOnCollision(DisposeUsedWeapon);
+        physics.onCollisionQuerry += surfaceHitHandler.HitTheSurface;
+        physics.onCollision += DisposeUsedWeapon;
     }
 
     private void CreateShooter()

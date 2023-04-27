@@ -561,10 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d3d299d707f6a438e6ae07ac30056a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
-  pickable: {fileID: 4611041808808164778}
-  physics: {fileID: 3281898898999005978}
-  abandonmentDetector: {fileID: 9175431412569059531}
 --- !u!114 &1162831166916930442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,7 +608,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7473361558535834234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae22ce0239af98143bdfa6c6a98d69e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 771ba24d5d9070243930ec885a549915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheckRadius: 1
@@ -628,11 +624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8755c108e73b1d4c8d6deee328e0441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequency: 5
-  magnitude: 0.1
+  sharedData: {fileID: 11400000, guid: 59df11fc858605447ab33be07409a7c4, type: 2}
   leviationHeight: 1.7
-  pushSpeed: 5
-  rotationSpeed: 50
 --- !u!114 &9175431412569059531
 MonoBehaviour:
   m_ObjectHideFlags: 0

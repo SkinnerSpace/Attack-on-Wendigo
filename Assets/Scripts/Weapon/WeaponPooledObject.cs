@@ -6,12 +6,20 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
     public string PoolTag { get; set; }
     public GameObject Object => gameObject;
 
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private Pickable pickable;
-    [SerializeField] private WeaponPhysics physics;
-    [SerializeField] private WeaponAbandonmentDetector abandonmentDetector;
+    private Weapon weapon;
+    private Pickable pickable;
+    private Levitator levitator;
+    private WeaponAbandonmentDetector abandonmentDetector;
 
     private IObjectPooler pooler;
+
+    private void Awake()
+    {
+        weapon = GetComponentInChildren<Weapon>();
+        pickable = GetComponentInChildren<Pickable>();
+        levitator = GetComponentInChildren<Levitator>();
+        abandonmentDetector = GetComponentInChildren<WeaponAbandonmentDetector>();
+    }
 
     private void Start() => pooler = PoolHolder.Instance;
 
@@ -24,7 +32,7 @@ public class WeaponPooledObject : MonoBehaviour, IPooledObject
         
         pickable.SwitchOn();
         weapon.Reload();
-        physics.SetLevitation(true);
+        levitator.SwitchOn();
         abandonmentDetector.ResetState();
     }
 

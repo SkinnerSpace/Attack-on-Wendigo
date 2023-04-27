@@ -17,7 +17,8 @@ public static class KeyboardSettingsPersistence
             string storedKey = action.ToString();
 
             if (PlayerPrefs.HasKey(storedKey)){
-                KeyCode code = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(storedKey), true);
+                string storedCode = PlayerPrefs.GetString(storedKey);
+                KeyCode code = (KeyCode)Enum.Parse(typeof(KeyCode), storedCode, true); // ignore case
                 binds.Bind(action, code);
             }
         }

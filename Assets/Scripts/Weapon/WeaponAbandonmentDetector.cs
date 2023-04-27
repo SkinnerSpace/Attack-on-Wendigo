@@ -7,7 +7,7 @@ public class WeaponAbandonmentDetector : MonoBehaviour
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private float abandonmentDistance = 20f;
 
-    private WeaponPhysics physics;
+    private ItemPhysicalBody physics;
     private ICharacterData owner;
 
     private bool isActive;
@@ -15,7 +15,7 @@ public class WeaponAbandonmentDetector : MonoBehaviour
 
     private void Awake()
     {
-        physics = GetComponent<WeaponPhysics>();
+        physics = GetComponent<ItemPhysicalBody>();
     }
 
     private void Start()

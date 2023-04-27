@@ -1,22 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-public class WeaponGroundDetector
+public class ItemGroundDetector
 {
     private bool isGrounded;
-    private event Action<bool> onGroundUpdate;
-
-    public void SubscribeOnGroundUpdate(Action<bool> onGroundUpdate) => this.onGroundUpdate += onGroundUpdate;
-    public void UnsubscribeFromGroundUpdate(Action<bool> onGroundUpdate) => this.onGroundUpdate -= onGroundUpdate;
+    public event Action<bool> onGroundUpdate;
 
     public void CheckIfGrounded(Vector3 point, float radius)
     {
-        if (CollidedWithTheGround(point, radius))
-        {
+        if (CollidedWithTheGround(point, radius)){
             RegisterIsGrounded();
         }
-        else
-        {
+        else{
             RegisterIsNotGrounded();
         }
     }
