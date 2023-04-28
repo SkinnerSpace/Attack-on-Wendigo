@@ -13,23 +13,18 @@ public class VisionRaycast
         this.layerMask = layerMask;
     }
 
-    public Transform Cast(Vector2 pos, float distance)
+    public RaycastHit Cast(Vector2 pos, float distance)
     {
         Ray ray = cam.ScreenPointToRay(pos);
-        Transform currentTarget = null;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, distance, layerMask)){
-            currentTarget = hit.transform;
+        if (Physics.Raycast(ray, out RaycastHit directHit, distance, layerMask)){
+            return directHit;
         }
 
-        if (currentTarget == null){
-            currentTarget = TryToGetATargetFromTheBackSide(ray, distance);
-        }
-
-        return currentTarget;
+        return TryToGetATargetFromTheBackSide(ray, distance);
     }
 
-    private Transform TryToGetATargetFromTheBackSide(Ray ray, float distance)
+    private RaycastHit TryToGetATargetFromTheBackSide(Ray ray, float distance)
     {
         float increasedDistance = distance * BACK_SIDE_DISTANCE_MULTIPLIER;
 
@@ -37,10 +32,8 @@ public class VisionRaycast
         reversedRay.direction = (reversedRay.direction * -1f) * increasedDistance;
         reversedRay.origin = ray.origin + (ray.direction * increasedDistance);
 
-        if (Physics.Raycast(reversedRay, out RaycastHit reversedHit, increasedDistance, layerMask)){
-            return reversedHit.transform;
-        }
+        Physics.Raycast(reversedRay, out RaycastHit reversedHit, increasedDistance, layerMask);
 
-        return null;
+        return reversedHit;
     }
 }

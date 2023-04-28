@@ -23,6 +23,8 @@ public class HelicopterPortal : MonoBehaviour, ISwitchable
 
     private Vector3 targetScale;
 
+    private bool isRising;
+
     private void Awake()
     {
         helicopter.onLanded += SwitchOn;
@@ -34,21 +36,32 @@ public class HelicopterPortal : MonoBehaviour, ISwitchable
 
     private void Update()
     {
-        if (isActive)
-        {
-            if (time < riseTime)
-            {
-                time += Time.deltaTime;
-                lightHeightLerp = Mathf.InverseLerp(0f, riseTime, time);
-                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, lightHeightLerp); // REFACTOR
-            }
-
-            transform.position = helicopter.transform.position.FlatV3();
+        if (isActive){
+            Rise();
 
             if (InTheArea())
             {
-                Debug.Log("Entered");
+
             }
+        }
+    }
+
+    private void Rise()
+    {
+        if (isRising)
+        {
+            CountDown();
+            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, lightHeightLerp); 
+        }
+    }
+
+    private void CountDown()
+    {
+        time += Time.deltaTime;
+        lightHeightLerp = Mathf.InverseLerp(0f, riseTime, time);
+
+        if (time >= riseTime){
+            isRising = false;
         }
     }
 
@@ -56,22 +69,24 @@ public class HelicopterPortal : MonoBehaviour, ISwitchable
 
     private bool WithinTheRadius()
     {
-        float distance = Vector2.Distance(passanger.position.FlatV2(), transform.position);
-        Debug.Log("Distance " + distance);
+        float distance = Vector2.Distance(passanger.position.FlatV2(), transform.position.FlatV2());
         return distance <= radius;
     }
 
     private bool WithinTheHeight()
     {
         float heightDifference = passanger.position.y - transform.position.y;
-        Debug.Log("Height " + heightDifference);
         return heightDifference > 0f && heightDifference <= height;
     }
 
     public void SwitchOn()
     {
         isActive = true;
+        isRising = true;
+        time = 0f;
+
         lightRenderer.enabled = true;
+        transform.position = helicopter.transform.position.FlatV3();
     }
 
     public void SwitchOff() => isActive = false;

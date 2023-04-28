@@ -62,17 +62,19 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     public void Launch()
     {
-        state = States.Flying;
-        sway.SetFlyingMagnitude();
+        if (state != States.PreparingToLand){
+            state = States.Flying;
+            sway.SetFlyingMagnitude();
 
-        isMoving = true;
-        skipFrame = true;
+            isMoving = true;
+            skipFrame = true;
 
-        distancePassed = 0f;
-        trajectory.GenerateTrajectory();
-        synchronizer.Set(trajectory.Length, data.Speed);
+            distancePassed = 0f;
+            trajectory.GenerateTrajectory();
+            synchronizer.Set(trajectory.Length, data.Speed);
 
-        onTakeOff?.Invoke();
+            onTakeOff?.Invoke();
+        }
     }
 
     public void Land()
@@ -100,7 +102,6 @@ public class Helicopter : MonoBehaviour, ILaunchable
                 synchronizer.UpdateTime();
                 transform.position = mover.Move(trajectory, ActOnArrival);
                 targetRotation = rotator.Rotate(targetRotation, transform.position, prevPos);
-                //transform.rotation = rotator.Rotate(transform.rotation, transform.position, prevPos);
 
                 prevPos = transform.position;
             }

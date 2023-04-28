@@ -10,7 +10,9 @@ public class UGUIElement : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private float maxDistance = 3f;
 
+    private RaycastHit targetHit;
     private Transform target;
+
     private RectTransform element;
     private TextMeshProUGUI label;
 
@@ -31,9 +33,9 @@ public class UGUIElement : MonoBehaviour
 
     private void Update()
     {
-        if (target != null && IsCloseEnough())
+        if (target != null && SurfaceIsCloseEnough())
         {
-            Vector2 screenPoint = cam.WorldToScreenPoint(target.position);
+            Vector2 screenPoint = cam.WorldToScreenPoint(targetHit.transform.position);
             element.position = screenPoint;
             label.enabled = true;
 
@@ -53,17 +55,18 @@ public class UGUIElement : MonoBehaviour
         }
     }
 
-    private bool IsCloseEnough() => Vector3.Distance(cam.transform.position, target.position) < maxDistance;
+    private bool SurfaceIsCloseEnough() => Vector3.Distance(cam.transform.position, targetHit.point) < maxDistance;
 
     public void Subscribe(Action<bool> onTargetUpdate) => this.onTargetUpdate += onTargetUpdate;
 
-    public void AddTarget(Transform target)
+    public void AddTarget(RaycastHit targetHit)
     {
-        this.target = target;
+        this.targetHit = targetHit;
+        target = targetHit.transform;
     }
 
-    public void RemoveTarget(Transform target)
+    public void RemoveTarget()
     {
-        this.target = null;
+        target = null;
     }
 }

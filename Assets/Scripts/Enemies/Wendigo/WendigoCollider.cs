@@ -43,24 +43,15 @@ namespace WendigoCharacter
         private void Update()
         {
             if (isActive){
-                UpdateHeight();
+                UpdateVerticalDistanceToTheVictim();
                 withinCollisionRadius = CheckWithinTheRadius();
-
-                if (withinCollisionRadius)
-                {
-                    UpdateDirectionToTarget();
-
-                    if (OnTheCollisionHeight())
-                    {
-                        PushTheTargetAway();
-                    }
-                }
+                UpdateIfWithinTheCollisionRadius();
 
                 withinDamageRange = withinCollisionRadius && OnTheDamageHeight();
             }
         }
 
-        private void UpdateHeight()
+        private void UpdateVerticalDistanceToTheVictim()
         {
             float targetHeight = pushable.transform.position.y;
             float ownHeight = transform.position.y;
@@ -70,13 +61,27 @@ namespace WendigoCharacter
 
         private bool CheckWithinTheRadius() => Vector2.Distance(transform.position.FlatV2(), pushable.transform.position.FlatV2()) <= colliderData.radius;
 
+        private void UpdateIfWithinTheCollisionRadius()
+        {
+            if (withinCollisionRadius){
+                UpdateDirectionToTarget();
+                PushTheTargetIfCollides();
+            }
+        }
 
-        private bool OnTheCollisionHeight() => height <= colliderData.collisionHeight;
+        private bool WithinTheVerticalCollisionRange() => height <= colliderData.collisionHeight;
         private bool OnTheDamageHeight() => height <= colliderData.damageHeight;
 
         private void UpdateDirectionToTarget(){
             Vector3 vector = (pushable.transform.position - transform.position).FlatV3();
             direction = vector.normalized;
+        }
+
+        private void PushTheTargetIfCollides()
+        {
+            if (WithinTheVerticalCollisionRange()){
+                PushTheTargetAway();
+            }
         }
 
         private void PushTheTargetAway(){

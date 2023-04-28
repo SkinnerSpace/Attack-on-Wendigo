@@ -13,15 +13,17 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private IInputReader input;
     private VisionRaycast visionRaycast;
     private ItemInteractor itemInteractor;
+
     private Transform target;
+
     private FunctionTimer timer;
     private IHealthSystem healthSystem;
 
     private bool isLocked;
     private Vector2 mousePos;
 
-    private event Action<Transform> onTargetAdded;
-    private event Action<Transform> onTargetRemoved;
+    private event Action<RaycastHit> onTargetAdded;
+    private event Action onTargetRemoved;
 
     public override void Initialize(PlayerCharacter main)
     {
@@ -51,7 +53,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         input.Get<MousePositionInputReader>().Unsubscribe(this);
     }
 
-    public void Subscribe(Action<Transform> addTarget, Action<Transform> removeTarget)
+    public void Subscribe(Action<RaycastHit> addTarget, Action removeTarget)
     {
         onTargetAdded += addTarget;
         onTargetRemoved += removeTarget;
@@ -60,19 +62,20 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public void OnMousePosUpdate(Vector2 pos)
     {
         mousePos = pos;
-        Transform newTarget = visionRaycast.Cast(pos, REACH_DISTANCE);
+        RaycastHit targetHit = visionRaycast.Cast(pos, REACH_DISTANCE);
+        Transform newTarget = targetHit.transform;
 
         if (target != newTarget)
-            UpdateTarget(newTarget);
+            UpdateTarget(newTarget, targetHit);
     }
 
-    private void UpdateTarget(Transform target)
+    private void UpdateTarget(Transform target, RaycastHit targetHit)
     {
         if (target == null)
-            onTargetRemoved(this.target);
+            onTargetRemoved?.Invoke();
 
         else if (target != null)
-            onTargetAdded(target);
+            onTargetAdded?.Invoke(targetHit);
 
         this.target = target;
     }
