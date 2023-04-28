@@ -85,6 +85,6 @@ public class IntroScreen : MonoBehaviour
 
     private void UpdateVFX(){
         whiteScreen.alpha = lerp;
-        postProcessingController.SetModifier(lerp);
+        postProcessingController.SetBlizzardInfluenctMultiplier(lerp);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemInteractor
 {
+    private PlayerCharacter character;
     private CharacterData data;
 
     private IPickable pickable;
@@ -12,15 +13,17 @@ public class ItemInteractor
     private Action<IPickable> takeAnItem;
     private Action dropAnItem;
 
-    public static ItemInteractor CreateWithDataTakeAndDrop(CharacterData data, Action<IPickable> takeAnItem, Action dropAnItem){
-        return new ItemInteractor(data, takeAnItem, dropAnItem);
+    public static ItemInteractor CreateWithDataTakeAndDrop(PlayerCharacter character, Action<IPickable> takeAnItem, Action dropAnItem){
+        return new ItemInteractor(character, takeAnItem, dropAnItem);
     }
 
-    private ItemInteractor(CharacterData data, Action<IPickable> takeAnItem, Action dropAnItem)
+    private ItemInteractor(PlayerCharacter character, Action<IPickable> takeAnItem, Action dropAnItem)
     {
-        this.data = data;
+        this.character = character;
         this.takeAnItem = takeAnItem;
         this.dropAnItem = dropAnItem;
+
+        data = character.OldData;
     }
 
     public void Interact(Transform target)

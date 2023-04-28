@@ -15,7 +15,7 @@ public class FuneralPostProcessingController : MonoBehaviour
     }
 
     private void Start(){
-        GameEvents.current.onPlayerHasDied += Desaturate;
+        PlayerEvents.current.onDeath += Desaturate;
     }
 
     private void Desaturate()

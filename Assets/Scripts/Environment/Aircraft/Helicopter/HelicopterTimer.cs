@@ -7,12 +7,7 @@ public class HelicopterTimer : MonoBehaviour
     private float currentTime;
     private float completion;
 
-    private event Action<float> onTimeUpdate;
-
-    public void Subscribe(IHelicopterTimeObserver observer)
-    {
-        onTimeUpdate += observer.UpdateCompletion;
-    }
+    public event Action<float> onTimeUpdate;
 
     public void Set(float distance, float speed)
     {

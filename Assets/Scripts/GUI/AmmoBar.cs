@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AmmoBar : MonoBehaviour, IAmmoObserver
+public class AmmoBar : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI label;
-
-    public static AmmoBar Instance;
-
     private GUIAnimator animator;
 
     private void Awake()
     {
-        Instance = this;
         animator = GetComponent<GUIAnimator>();
+    }
+
+    private void Start()
+    {
+        PlayerEvents.current.onAmmoUpdate += OnUpdate;
+        PlayerEvents.current.onWeaponThrown += Deactivate;
     }
 
     public void OnUpdate(int ammo)
@@ -23,10 +25,7 @@ public class AmmoBar : MonoBehaviour, IAmmoObserver
         animator.PlayPush();
     }
 
-    public void SetActive(bool active)
-    {
-        if (!active){
-            label.text = 0.ToString();
-        }
+    public void Deactivate(){
+        label.text = 0.ToString();
     }
 }

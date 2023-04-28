@@ -19,5 +19,12 @@ namespace WendigoCharacter
                 healthSystem.SubscribeOnDeath(onDeath);
             }
         }
+
+        public void RestoreHealth(int health)
+        {
+            if (healthSystem != null){
+                healthSystem.RestoreHealth(health);
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿public interface IAirdrop
 {
-    void AddCargo(int index);
-    void WeaponDisappeared();
+    void AddCargoFromCatalog(int index);
+    void OnCargoUnpacked();
 }

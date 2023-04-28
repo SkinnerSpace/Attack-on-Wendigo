@@ -15,6 +15,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private ItemInteractor itemInteractor;
     private Transform target;
     private FunctionTimer timer;
+    private IHealthSystem healthSystem;
 
     private bool isLocked;
     private Vector2 mousePos;
@@ -29,15 +30,17 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         input = main.InputReader;
         timer = main.Timer;
 
-        keeper = new ItemsKeeper(data, input);
-        itemInteractor = ItemInteractor.CreateWithDataTakeAndDrop(data, TakeAnItem, DropAnItem);
+        keeper = new ItemsKeeper(data, input, this);
+        itemInteractor = ItemInteractor.CreateWithDataTakeAndDrop(main, TakeAnItem, DropAnItem);
         
         visionRaycast = new VisionRaycast(data.Cam, ComplexLayers.Interactables);
     }
 
     public override void Connect()
     {
-        main.GetController<CharacterHealthSystem>().SubscribeOnDeath(DropAnItem);
+        healthSystem = main.GetController<CharacterHealthSystem>();
+
+        PlayerEvents.current.onDeath += DropAnItem;
         input.Get<InteractionInputReader>().Subscribe(Interact);
         input.Get<MousePositionInputReader>().Subscribe(this);
     }
@@ -84,8 +87,8 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         }
     }
 
-    private void DropAnItem() => keeper.DropAnItem(mousePos);
-    private void TakeAnItem(IPickable pickable)
+    public void DropAnItem() => keeper.DropAnItem(mousePos);
+    public void TakeAnItem(IPickable pickable)
     {
         IWeapon weapon = pickable.Transform.GetComponentInParent<IWeapon>(); // IWeapon component is usually in the parent of an item
 
@@ -97,7 +100,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
         IHealthPack healthPack = pickable.Transform.GetComponentInParent<IHealthPack>();
 
         if (healthPack != null){
-            keeper.TakeAHealthPack(pickable, healthPack);
+            keeper.TakeAHealthPack(pickable, healthPack, healthSystem);
             return;
         }
     }

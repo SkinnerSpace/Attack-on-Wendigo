@@ -24,8 +24,6 @@ public class Helicopter : MonoBehaviour, ILaunchable
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
 
-    public FunctionTimer Timer => timer;
-
     private bool isMoving;
 
     public float DistancePassed => distancePassed;
@@ -34,6 +32,9 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     private float distancePassed;
     private Vector3 prevPos;
+    private Quaternion targetRotation;
+
+    private bool skipFrame;
 
     public event Action onLanded;
     public event Action onTakeOff;
@@ -41,35 +42,23 @@ public class Helicopter : MonoBehaviour, ILaunchable
     private void Awake()
     {
         SynchronizeComponents();
+        targetRotation = transform.rotation;
     }
 
-    private void Start()
-    {
+    private void Start(){
         GameEvents.current.onVictory += PrepareToLand;
     }
 
-    private void Update()
-    {
+    private void Update(){
         Fly();
-
-/*        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            PrepareToLand();
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            Launch();
-        }*/
     }
 
     private void SynchronizeComponents()
     {
-        synchronizer.Subscribe(mover);
-        synchronizer.Subscribe(rotator);
-        synchronizer.Subscribe(sway);
+        synchronizer.onTimeUpdate += mover.UpdateCompletion;
+        synchronizer.onTimeUpdate += rotator.UpdateCompletion;
+        synchronizer.onTimeUpdate += sway.UpdateCompletion;
     }
-
-    private bool skipFrame;
 
     public void Launch()
     {
@@ -109,8 +98,9 @@ public class Helicopter : MonoBehaviour, ILaunchable
             if (!skipFrame)
             {
                 synchronizer.UpdateTime();
-                transform.position = mover.Move(trajectory, Arrived);
-                transform.rotation = rotator.Rotate(transform.rotation, transform.position, prevPos);
+                transform.position = mover.Move(trajectory, ActOnArrival);
+                targetRotation = rotator.Rotate(targetRotation, transform.position, prevPos);
+                //transform.rotation = rotator.Rotate(transform.rotation, transform.position, prevPos);
 
                 prevPos = transform.position;
             }
@@ -119,9 +109,11 @@ public class Helicopter : MonoBehaviour, ILaunchable
                 skipFrame = false;
             }
         }
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, data.RotationSpeed * Time.deltaTime);
     }
 
-    private void Arrived()
+    private void ActOnArrival()
     {
         isMoving = false;
 

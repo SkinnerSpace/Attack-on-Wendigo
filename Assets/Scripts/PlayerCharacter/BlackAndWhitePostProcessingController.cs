@@ -14,7 +14,8 @@ public class BlackAndWhitePostProcessingController : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onPlayerHasDied += DecreaseSaturation;
+        PlayerEvents.current.onDeath += DecreaseSaturation;
+
     }
 
     private void DecreaseSaturation()

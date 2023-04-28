@@ -21,7 +21,7 @@ public class HeadBackController : MonoBehaviour
     private float speed;
 
     private void Start(){
-        GameEvents.current.onPlayerHasDied += HeadBack;
+        PlayerEvents.current.onDeath += HeadBack;
     }
 
     private void Update()

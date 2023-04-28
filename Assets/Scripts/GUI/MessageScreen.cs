@@ -19,7 +19,7 @@ public class MessageScreen : MonoBehaviour
     private void Start()
     {
         GameEvents.current.onFirstWeaponPickedUp += () => ShowMessage(startMessage);
-        GameEvents.current.onPlayerHasDied += () => ShowMessage(gameOverMessage);
+        PlayerEvents.current.onDeath += () => ShowMessage(gameOverMessage);
         GameEvents.current.onVictory += () => ShowMessage(victoryMessage);
     }
 

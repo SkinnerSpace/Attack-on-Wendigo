@@ -7,7 +7,7 @@ public class PlayerBloodParticlesSoundSystem : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onPlayerHasDied += Play;
+        PlayerEvents.current.onDeath += Play;
     }
 
     private void Play()

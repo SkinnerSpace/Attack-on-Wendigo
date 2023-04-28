@@ -42,18 +42,18 @@ public class MusicPlayer : MonoBehaviour
 
     private void ConnectAmbient(){
         GameEvents.current.onFirstWeaponPickedUp += () => ambientPlayer.Stop();
-        GameEvents.current.onPlayerHasDied += () => ambientPlayer.Stop();
+        PlayerEvents.current.onDeath += () => ambientPlayer.Stop();
         GameEvents.current.onVictory += () => ambientPlayer.Stop();
     }
 
     private void ConnectBattleSoundtrack(){
         GameEvents.current.onFirstWeaponPickedUp += () => battlePlayer.PlayLoop();
-        GameEvents.current.onPlayerHasDied += () => battlePlayer.Stop();
+        PlayerEvents.current.onDeath += () => battlePlayer.Stop();
         GameEvents.current.onVictory += () => battlePlayer.Stop();
     }
 
     private void ConnectFuneralSoundtrack(){
-        GameEvents.current.onPlayerHasDied += () => funeralPlayer.PlayLoop();
+        PlayerEvents.current.onDeath += () => funeralPlayer.PlayLoop();
         GameEvents.current.onRestart += () => funeralPlayer.Stop();
     }
 

@@ -8,6 +8,7 @@ public class ItemsKeeper : IItemsKeeper
 {
     private ICharacterData data;
     private IInputReader input;
+    private IInteractor interactor;
     public Transform Root => data.Cam.transform;
 
     private IPickable pickable;
@@ -15,10 +16,11 @@ public class ItemsKeeper : IItemsKeeper
     private IHealthPack healthPack;
     private WeaponThrower thrower;
 
-    public ItemsKeeper(CharacterData data, IInputReader input)
+    public ItemsKeeper(CharacterData data, IInputReader input, IInteractor interactor)
     {
         this.data = data;
         this.input = input;
+        this.interactor = interactor;
 
         thrower = new WeaponThrower(data);
     }
@@ -32,11 +34,12 @@ public class ItemsKeeper : IItemsKeeper
         AimPresenter.Instance.SetCombatMode();
     }
 
-    public void TakeAHealthPack(IPickable pickable, IHealthPack healthPack)
+    public void TakeAHealthPack(IPickable pickable, IHealthPack healthPack, IHealthSystem healthSystem)
     {
         PickAnItem(pickable);
 
         this.healthPack = healthPack;
+        healthPack.SetTarget(healthSystem);
     }
 
     private void PickAnItem(IPickable pickable){
@@ -72,14 +75,14 @@ public class ItemsKeeper : IItemsKeeper
     {
         if (weapon != null)
         {
-            weapon.InitializeOnTake(data, input);
+            weapon.InitializeOnTake(data, input, interactor);
             weapon.SetReady(true);
             return;
         }
 
         if (healthPack != null)
         {
-            healthPack.InitializeOnTake(data, input);
+            healthPack.InitializeOnTake(data, input, interactor);
             healthPack.SetReady(true);
             return;
         }

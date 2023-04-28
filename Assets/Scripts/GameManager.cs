@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MenuSFXPlayer menuSFXPlayer;
     [SerializeField] private LevelLoader levelLoader;
 
-    [SerializeField] private EventManager eventManager;
-    private TriggersManager triggers;
-
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
 
@@ -27,7 +24,6 @@ public class GameManager : MonoBehaviour
     public ISwitchable PlayerCharacter { get; private set; }
     public CameraManager CameraManager => cameraManager;
     public IAirdrop Airdrop { get; private set; }
-    public TriggersManager Triggers => triggers;
     public LevelLoader LevelLoader => levelLoader;
 
     private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
@@ -42,7 +38,6 @@ public class GameManager : MonoBehaviour
         Airdrop = airdropImp.GetComponent<IAirdrop>();
 
         Instance = this;
-        triggers = new TriggersManager(eventManager);
         
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));

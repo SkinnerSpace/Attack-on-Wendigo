@@ -84,9 +84,7 @@ public static class WendigoStateMachineFactory
 
         Func<bool> FireBreathIsOver() => () => data.Firebreath.IsOver;
 
-        Func<bool> HasTarget() => () => data.Target != null;
         Func<bool> HasNoTarget() => () => data.Target == null;
-
         Func<bool> IsDead() => () => !wendigo.Data.Health.IsAlive;
 
         return stateMachine;

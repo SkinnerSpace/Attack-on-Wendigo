@@ -6,7 +6,7 @@ public class GameOverScreen : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onPlayerHasDied += Show;
+        PlayerEvents.current.onDeath += Show;
     }
 
     private void Show()

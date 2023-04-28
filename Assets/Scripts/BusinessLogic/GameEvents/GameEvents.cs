@@ -8,14 +8,13 @@ public class GameEvents : MonoBehaviour
     public static GameEvents current;
 
     public event Action onInvasionHasBegun;
-    public event Action onPlayerHasDied;
     public event Action onVictory;
 
     public event Action<float> onProgressUpdate;
     public event Action<float> onDeathProgressUpdate;
 
     public event Action onFirstWeaponPickedUp;
-    public event Action onWeaponSweptAway;
+    public event Action onCargoUnpacked;
 
     public event Action<float> onEnemyHealthUpdate;
     public event Action<float, Vector3> onBlizzardRadiusUpdate;
@@ -34,7 +33,6 @@ public class GameEvents : MonoBehaviour
     }
 
     public void InvasionHasBegun() => onInvasionHasBegun?.Invoke();
-    public void PlayerHasDied() => onPlayerHasDied?.Invoke();
     public void DeclareVictory() => onVictory?.Invoke();
     public void UpdateProgress(float progress) => onProgressUpdate?.Invoke(progress);
     public void UpdateDeathProgress(float deathProgress) => onDeathProgressUpdate?.Invoke(deathProgress);
@@ -51,7 +49,7 @@ public class GameEvents : MonoBehaviour
 
     public void EnemyHealthHasBeenUpdated(float health) => onEnemyHealthUpdate?.Invoke(health);
 
-    public void WeaponHasBeenSweptAway() => onWeaponSweptAway?.Invoke();
+    public void CargoUnpacked() => onCargoUnpacked?.Invoke();
 
     public void TheGameHasStarted() => onStart?.Invoke();
     public void TheGameIsPaused() => onPause?.Invoke();

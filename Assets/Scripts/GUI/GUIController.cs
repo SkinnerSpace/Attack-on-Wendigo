@@ -33,9 +33,8 @@ public class GUIController : MonoBehaviour
             }
         };
 
-
-        GameEvents.current.onPlayerHasDied += hUD.HideGradually;
-        GameEvents.current.onPlayerHasDied += aim.HideGradually;
+        PlayerEvents.current.onDeath += hUD.HideGradually;
+        PlayerEvents.current.onDeath += aim.HideGradually;
     }
 
     private void ConnectHUD()

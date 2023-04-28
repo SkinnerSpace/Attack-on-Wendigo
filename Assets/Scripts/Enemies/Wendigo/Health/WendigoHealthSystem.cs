@@ -93,5 +93,10 @@ namespace WendigoCharacter
             limbsCount = initialLimbsCount;
             injuryDegree = 0f;
         }
+
+        public void RestoreHealth(int health)
+        {
+            
+        }
     }
 }

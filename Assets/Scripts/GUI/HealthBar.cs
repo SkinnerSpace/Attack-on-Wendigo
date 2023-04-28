@@ -4,15 +4,19 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI label;
+    private GUIAnimator animator;
 
-    public static HealthBar Instance;
-
-    private void Awake(){
-        Instance = this;
+    private void Awake()
+    {
+        animator = GetComponent<GUIAnimator>();
     }
 
-    public void OnUpdate(int health)
-    {
+    private void Start(){
+        PlayerEvents.current.onHealthUpdate += OnUpdate;
+    }
+
+    public void OnUpdate(int health){
         label.text = health.ToString();
+        animator.PlayPush();
     }
 }

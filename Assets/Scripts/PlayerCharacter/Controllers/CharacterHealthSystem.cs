@@ -8,12 +8,18 @@ namespace Character
         private PlayerCharacter main;
         private HealthData healthData;
         private HitBoxProxy hitBox;
-        private EventManager eventManager;
 
-        private EventTrigger onDeathTrigger;
+        public void Initialize(HealthData healthData) => this.healthData = healthData;
 
-        private event Action<int> onHealthUpdate;
-        private event Action onDeath;
+        public override void Connect()
+        {
+            hitBox.Subscribe(this);
+
+            PlayerEvents.current.UpdateHealth(healthData.Amount);
+            GameEvents.current.onVictory += BecomeImmortal;
+        }
+
+        public override void Disconnect() => hitBox.Unsubscribe(this);
 
         public void ReceiveNonCriticalDamage(DamagePackage damagePackage)
         {
@@ -27,7 +33,7 @@ namespace Character
             if (IsDamageable()){
                 ReduceHealth(damagePackage);
                 NotifyOnBluntDamage(damagePackage);
-                onHealthUpdate?.Invoke(healthData.Amount);
+                PlayerEvents.current.UpdateHealth(healthData.Amount);
             }
         }
 
@@ -52,46 +58,29 @@ namespace Character
             }
         }
 
-        public void SubscribeOnUpdate(Action<int> onHealthUpdate) => this.onHealthUpdate += onHealthUpdate;
-        public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
-
         public override void Initialize(PlayerCharacter main)
         {
             this.main = main;
             healthData = main.Data.Health;
             hitBox = main.HitBox;
-            eventManager = main.Events;
         }
-
-        public void Initialize(HealthData data) => this.healthData = data;
-
-        public override void Connect()
-        {
-            hitBox.Subscribe(this);
-
-            onDeathTrigger = new EventTrigger();
-            //SubscribeOnDeath(() => onDeathTrigger.SetActive(true));
-
-            SubscribeOnUpdate(HealthBar.Instance.OnUpdate);
-            onHealthUpdate?.Invoke(healthData.Amount);
-
-            SubscribeOnDeath(() => main.SetActive(false));
-            eventManager.ConnectTrigger(onDeathTrigger, "PlayerDied");
-
-            GameEvents.current.onVictory += BecomeImmortal;
-        }
-
-        public override void Disconnect() => hitBox.Unsubscribe(this);
 
         public void Die()
         {
             healthData.Amount = 0;
-            onDeath?.Invoke();
-            GameEvents.current.PlayerHasDied();
+            PlayerEvents.current.Die();
+        }
+
+        public void RestoreHealth(int healthAmount)
+        {
+            healthData.Amount += healthAmount;
+            PlayerEvents.current.UpdateHealth(healthData.Amount);
         }
 
         private void BecomeImmortal(){
             healthData.IsImmortal = true;
         }
+
+        public void SubscribeOnDeath(Action onDeath) { }
     }
 }

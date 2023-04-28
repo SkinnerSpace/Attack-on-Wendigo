@@ -92,7 +92,7 @@ namespace Tests
                 healthSystem.Initialize(data);
 
                 IHealthObserver observer = Substitute.For<IHealthObserver>();
-                healthSystem.SubscribeOnUpdate(observer.OnHealthUpdate);
+                //healthSystem.SubscribeOnUpdate(observer.OnHealthUpdate);
 
                 DamagePackage damage = new DamagePackage(damageAmount);
                 healthSystem.ReceiveDamage(damage);
@@ -112,7 +112,7 @@ namespace Tests
                 healthSystem.Initialize(data);
 
                 IHealthObserver observer = Substitute.For<IHealthObserver>();
-                healthSystem.SubscribeOnDeath(observer.OnDeath);
+                //healthSystem.SubscribeOnDeath(observer.OnDeath);
 
                 DamagePackage damage = new DamagePackage(damageAmount);
                 healthSystem.ReceiveDamage(damage);
@@ -135,7 +135,7 @@ namespace Tests
                 healthSystem.ReceiveDamage(damage);
 
                 IHealthObserver observer = Substitute.For<IHealthObserver>();
-                healthSystem.SubscribeOnDeath(observer.OnDeath);
+                //healthSystem.SubscribeOnDeath(observer.OnDeath);
 
                 healthSystem.ReceiveDamage(damage);
 

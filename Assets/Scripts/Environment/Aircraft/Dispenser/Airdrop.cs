@@ -3,50 +3,52 @@ using UnityEngine;
 
 public class Airdrop : MonoBehaviour, IAirdrop
 {
+    private const int FIRST_ITEM = 0;
+
     [SerializeField] private DispenserStorage storage;
-    [SerializeField] private List<string> cargo = new List<string>();
+    [SerializeField] private List<string> cargoCatalog = new List<string>();
     [SerializeField] private AirDropConfig config;
 
-    private int maxCargoCount = 1;
-    private int cargoCount;
+    private int maxConcurrentCargoCountOnTheMap = 1;
+    private int currentCargoCountOnTheMap;
 
     private void Start()
     {
-        GameEvents.current.onGameBegun += () => AddCargo(0);
-        GameEvents.current.onFirstWeaponPickedUp += LoadCargo;
-        GameEvents.current.onWeaponSweptAway += WeaponDisappeared;
+        GameEvents.current.onGameBegun += () => AddCargoFromCatalog(FIRST_ITEM);
+        GameEvents.current.onFirstWeaponPickedUp += LoadDeficientCargo;
+        GameEvents.current.onCargoUnpacked += OnCargoUnpacked;
         GameEvents.current.onProgressUpdate += UpdateProgress;
     }
 
-    public void WeaponDisappeared()
+    public void OnCargoUnpacked()
     {
-        cargoCount -= 1;
-        LoadCargo();
-
-        LogCargoCount(cargoCount);
+        currentCargoCountOnTheMap -= 1;
+        LoadDeficientCargo();
+        LogCargoCount(currentCargoCountOnTheMap);
     }
 
     public void UpdateProgress(float progress)
     {
-        maxCargoCount = Mathf.RoundToInt(config.weaponCount.Evaluate(progress));
-        LoadCargo();
+        maxConcurrentCargoCountOnTheMap = Mathf.RoundToInt(config.weaponCount.Evaluate(progress));
+        LoadDeficientCargo();
     }
 
-    private void LoadCargo()
+    private void LoadDeficientCargo()
     {
-        int dropCount = maxCargoCount - cargoCount;
+        int deficientCargoCount = maxConcurrentCargoCountOnTheMap - currentCargoCountOnTheMap;
 
-        for (int i = 0; i < dropCount; i++){
-            AddCargo(Rand.Range(0, cargo.Count));
+        for (int i = 0; i < deficientCargoCount; i++){
+            int catalogIndex = Rand.Range(0, cargoCatalog.Count);
+            AddCargoFromCatalog(catalogIndex);
         }
     }
 
-    public void AddCargo(int index)
+    public void AddCargoFromCatalog(int index)
     {
-        cargoCount += 1;
-        storage.AddAnItem(cargo[index]);
+        currentCargoCountOnTheMap += 1;
+        storage.AddAnItem(cargoCatalog[index]);
 
-        LogCargoCount(cargoCount);
+        LogCargoCount(currentCargoCountOnTheMap);
     }
 
     private void LogCargoCount(int cargoCount)

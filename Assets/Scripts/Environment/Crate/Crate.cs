@@ -13,7 +13,7 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     private bool isOpened;
 
-    public event Action onOpen;
+    public event Action onTimeOutAfterUnpacking;
 
     public void ResetStateOnSpawn()
     {
@@ -36,28 +36,25 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     public void Open()
     {
         if (!isOpened){
-            isOpened = true;
-
-            SwitchOff();
-            destructionParticles.Play();
-            sFXPlayer.PlayOpen();
-
-            PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
-            timer.Set("Open", 2f, () => onOpen?.Invoke());
+            Unpack();
+            SpawnItem();
         }
     }
 
-    public void OpenEmpty()
+    public void Unpack()
     {
-        if (!isOpened){
-            isOpened = true;
+        isOpened = true;
+        GameEvents.current.CargoUnpacked();
 
-            SwitchOff();
-            destructionParticles.Play();
+        SwitchOff();
+        destructionParticles.Play();
+        sFXPlayer.PlayOpen();
 
-            GameEvents.current.WeaponHasBeenSweptAway();
-            timer.Set("Open", 2f, () => onOpen?.Invoke());
-        }
+        timer.Set("Unpacked", 2f, () => onTimeOutAfterUnpacking?.Invoke());
+    }
+
+    public void SpawnItem(){
+        PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
     }
 
     private void SwitchOff()

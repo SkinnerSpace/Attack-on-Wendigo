@@ -8,8 +8,7 @@ public class Magazine
 
     private bool ableToReport = true;
 
-    public event Action<int> onUpdate;
-    private event Action onEmpty;
+    public event Action onOutOfAmmo;
 
     public Magazine(WeaponData data, FunctionTimer timer)
     {
@@ -17,37 +16,16 @@ public class Magazine
         this.timer = timer;
     }
 
-    public void OnReady(bool isReady)
-    {
-        if (isReady) Subscribe(AmmoBar.Instance);
-        else Unsubscribe(AmmoBar.Instance);
-    }
-
-    public void SubscribeOnEmpty(Action onEmpty) => this.onEmpty += onEmpty;
-
     public void NotifyOnEmpty()
     {
         if (ableToReport)
         {
             ableToReport = false;
-            onUpdate?.Invoke(data.Ammo);
-            onEmpty?.Invoke();
+            PlayerEvents.current.UpdateAmmo(data.Ammo);
+            onOutOfAmmo?.Invoke();
 
             timer.Set("EnableReport", 0.5f, () => ableToReport = true);
         }
-    }
-
-    public void Subscribe(IAmmoObserver observer)
-    {
-        //observer.SetActive(true);
-        onUpdate += observer.OnUpdate;
-        onUpdate?.Invoke(data.Ammo);
-    }
-
-    public void Unsubscribe(IAmmoObserver observer)
-    {
-        observer.SetActive(false);
-        onUpdate -= observer.OnUpdate;
     }
 
     public bool HasAmmo() => data.Ammo > 0;
@@ -57,7 +35,7 @@ public class Magazine
     public void ReduceCount()
     {
         data.SetAmmo(data.Ammo - 1);
-        onUpdate?.Invoke(data.Ammo);
+        PlayerEvents.current.UpdateAmmo(data.Ammo);
     }
 
     public void RestoreAmmo() => data.SetAmmo(data.AmmoCapacity);

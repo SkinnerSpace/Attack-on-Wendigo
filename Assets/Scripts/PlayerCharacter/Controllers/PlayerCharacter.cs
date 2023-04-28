@@ -13,7 +13,6 @@ namespace Character
         [SerializeField] private FireHitBox fireHitBox;
         [SerializeField] private FunctionTimer timer;
         [SerializeField] private Chronos chronos;
-        [SerializeField] private EventManager events;
         [SerializeField] private MainInputReader inputReader;
 
         public CharacterData OldData => oldData;
@@ -21,7 +20,6 @@ namespace Character
         public CharacterMover Mover => mover;
         public FunctionTimer Timer => timer;
         public Chronos Chronos => chronos;
-        public EventManager Events => events;
         public MainInputReader InputReader => inputReader;
         public HitBoxProxy HitBox => hitBox;
         public FireHitBox FireHitBox => fireHitBox;
@@ -33,6 +31,7 @@ namespace Character
         private void Start()
         {
             GameEvents.current.onGameBegun += SwitchOn;
+            PlayerEvents.current.onDeath += SwitchOff;
         }
 
         private void Awake()

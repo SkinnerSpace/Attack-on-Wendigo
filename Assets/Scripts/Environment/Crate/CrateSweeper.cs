@@ -22,7 +22,7 @@ public class CrateSweeper : MonoBehaviour, ISwitchable
     private void Update()
     {
         if (isActive && wasUpdated && IsOutsideTheBoundaries()){
-            crate.OpenEmpty();
+            crate.Unpack();
         }
     }
 

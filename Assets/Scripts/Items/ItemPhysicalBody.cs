@@ -7,11 +7,11 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private bool visualizeCollider;
 
-    private Rigidbody weaponBody;
+    private Rigidbody body;
     private Collider[] combinedColliders;
     private ItemGroundDetector groundDetector;
 
-    public Vector3 Velocity => weaponBody.velocity;
+    public Vector3 Velocity => body.velocity;
 
     private bool physicsIsEnabled;
 
@@ -21,7 +21,7 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
     
     private void Awake()
     {
-        weaponBody = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
         combinedColliders = GetComponents<Collider>();
         groundDetector = new ItemGroundDetector();
     }
@@ -33,8 +33,8 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
         }
     }
 
-    public void AddForce(Vector3 force) => weaponBody.AddForce(force);
-    public void AddTorque(Vector3 torque) => weaponBody.AddTorque(torque);
+    public void AddForce(Vector3 force) => body.AddForce(force);
+    public void AddTorque(Vector3 torque) => body.AddTorque(torque);
 
     public void EnablePhysics()
     {
@@ -57,7 +57,7 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
         groundDetector.RegisterIsNotGrounded();
     }
 
-    private void ResetVelocity() => weaponBody.velocity = Vector3.zero;
+    private void ResetVelocity() => body.velocity = Vector3.zero;
 
     private void SetColliders(bool enabled)
     {
@@ -68,8 +68,8 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
 
     private void SetKinematic(bool enabled)
     {
-        weaponBody.isKinematic = enabled;
-        weaponBody.useGravity = !enabled;
+        body.isKinematic = enabled;
+        body.useGravity = !enabled;
     }
 
     private void OnCollisionEnter(Collision collision)

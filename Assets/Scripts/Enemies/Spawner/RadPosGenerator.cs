@@ -12,7 +12,6 @@ public class RadPosGenerator : MonoBehaviour
     [SerializeField] private RadPosCalc radPosCalc;
     [SerializeField] private Transform viewer;
 
-    [SerializeField] private float criticalDistance = 80f;
     [SerializeField] private float minRadius = 100f;
     [SerializeField] private float maxRadius = 360f;
 

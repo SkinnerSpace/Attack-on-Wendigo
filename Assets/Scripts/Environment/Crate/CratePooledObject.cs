@@ -16,7 +16,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     public GameObject Object => gameObject;
 
     private void Awake(){
-        crate.onOpen += BackToPool;
+        crate.onTimeOutAfterUnpacking += BackToPool;
     }
 
     private void Start() => pooler = PoolHolder.Instance;
@@ -38,5 +38,6 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
         sweeper.SwitchOff();
         pooler.PutIntoThePool(this);
     }
+
     public void SubscribeOnSpawn(Action onSpawn) { }
 }

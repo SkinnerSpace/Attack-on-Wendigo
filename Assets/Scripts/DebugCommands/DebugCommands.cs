@@ -38,6 +38,11 @@ public class DebugCommands : MonoBehaviour
             GameEvents.current.PlayerReceivedBluntDamage();
         });
 
+        DebugCommand DECLARE_VICTORY = new DebugCommand("victory", "Declare victory", "victory", () => 
+        {
+            GameEvents.current.DeclareVictory();
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
@@ -45,7 +50,8 @@ public class DebugCommands : MonoBehaviour
             HELP_OPEN,
             HELP_CLOSE,
             DIE,
-            GET_BLUNT_DAMAGE
+            GET_BLUNT_DAMAGE,
+            DECLARE_VICTORY
         };
     }
 }

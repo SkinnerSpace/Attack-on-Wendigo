@@ -22,7 +22,7 @@ namespace Character
         private void Start()
         {
             GameEvents.current.onBluntDamageReceived += () => damagePlayer.PlayOneShot();
-            GameEvents.current.onPlayerHasDied += PlayDeathSFX;
+            PlayerEvents.current.onDeath += PlayDeathSFX;
         }
 
         private void PlayDeathSFX()

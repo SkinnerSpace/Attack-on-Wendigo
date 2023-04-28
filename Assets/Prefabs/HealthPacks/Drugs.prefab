@@ -173,8 +173,9 @@ GameObject:
   - component: {fileID: 8443360487573563661}
   - component: {fileID: 8443360487573563663}
   - component: {fileID: 8443360487573563662}
+  - component: {fileID: 3315492697844037354}
   - component: {fileID: 8443360487573563660}
-  - component: {fileID: 8443360487573563699}
+  - component: {fileID: 3311857529280637073}
   m_Layer: 16
   m_Name: Drugs
   m_TagString: Untagged
@@ -211,6 +212,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b0b04d5737be469614c5a76c4d754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  abandonmentDetector: {fileID: 8443360487573563662}
+  pickable: {fileID: 8443360485833179145}
+  sweeper: {fileID: 8443360487573563663}
+  timer: {fileID: 8250268389591420583}
+  mesh: {fileID: 8443360487843496039}
+  fullMaterial: {fileID: 2100000, guid: a15a4d9513ad01248a42f314b7613e4a, type: 2}
+  emptyMaterial: {fileID: 2100000, guid: eba179ec4d0379c40ac5859ea5341b65, type: 2}
 --- !u!114 &8443360487573563698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771ba24d5d9070243930ec885a549915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckRadius: 1
+  groundCheckRadius: 0.3
   visualizeCollider: 0
 --- !u!114 &8443360487573563697
 MonoBehaviour:
@@ -281,6 +290,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 8250268389591420583}
+--- !u!114 &3315492697844037354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443360487573563702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c2bbf7ca33e0d4eaa5e121ccf0c29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &8443360487573563660
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -297,19 +318,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!136 &8443360487573563699
-CapsuleCollider:
+--- !u!65 &3311857529280637073
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8443360487573563702}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b359ec54ce7fdf8478e17b148f38a616, type: 2}
   m_IsTrigger: 0
   m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8443360487843496036
 GameObject:

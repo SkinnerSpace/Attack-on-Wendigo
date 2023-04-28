@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     [SerializeField] private WeaponAnimationController animationController;
     
     private IInputReader inputReader;
+    private IInteractor interactor;
     private RaycastShooter shooter;
     private Magazine magazine;
     private WeaponHitSurfaceHandler surfaceHitHandler;
@@ -66,14 +67,15 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     private void CreateMagazine()
     {
         magazine = new Magazine(data, timer);
-        magazine.SubscribeOnEmpty(sFXPlayer.PlayIsEmptySFX);
-        SubscribeOnReadinessUpdate(magazine.OnReady);
+        magazine.onOutOfAmmo += sFXPlayer.PlayIsEmptySFX;
         SubscribeOnReadinessUpdate(shooter.OnReady);
     }
 
-    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader)
+    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractor interactor)
     {
         this.inputReader = inputReader;
+        this.interactor = interactor;
+
         swayController.Initialize(characterData, inputReader);
         abandonmentDetector.Initialize(characterData);
         shooter.SetCamera(characterData.Cam);
@@ -105,6 +107,10 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
         onReadinessUpdate?.Invoke(isReady);
         ManageConnectionToInput(isReady);
         NotifyOnReady(isReady);
+
+        if (!isReady){
+            PlayerEvents.current.ThrowWeapon();
+        }
     }
 
     private void ManageConnectionToInput(bool connect)
