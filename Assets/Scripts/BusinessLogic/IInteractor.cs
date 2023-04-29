@@ -1,6 +1,5 @@
 ﻿public interface IInteractor
 {
-    void Interact();
-    void DropAnItem();
-    void TakeAnItem(IPickable pickable);
+    void DropPreviouslyHeldItem();
+    void TakePickableItem(IPickable pickable);
 }

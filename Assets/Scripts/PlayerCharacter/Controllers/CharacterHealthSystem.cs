@@ -5,7 +5,6 @@ namespace Character
 {
     public class CharacterHealthSystem : BaseController, IDamageable, IHealthSystem
     {
-        private PlayerCharacter main;
         private HealthData healthData;
         private HitBoxProxy hitBox;
 
@@ -60,7 +59,6 @@ namespace Character
 
         public override void Initialize(PlayerCharacter main)
         {
-            this.main = main;
             healthData = main.Data.Health;
             hitBox = main.HitBox;
         }

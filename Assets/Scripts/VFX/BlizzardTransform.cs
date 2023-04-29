@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BlizzardTransform : MonoBehaviour
 {
-    private static int speedProperty = Shader.PropertyToID("Speed");
+    private const float DEFAULT_SIZE = 1f;
+
     private static int noiseTilingProperty = Shader.PropertyToID("NoiseTiling");
     private static int bigNoiseTilingProperty = Shader.PropertyToID("BigNoiseTiling");
 
@@ -16,21 +17,23 @@ public class BlizzardTransform : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float sizeMultiplier = 1f;
     [SerializeField] private float heightMultiplier = 4f;
-    [SerializeField] private float changeSpeed = 0.5f;
+    [SerializeField] private float timeToChangeMultiplier = 5f;
     [SerializeField] private AnimationCurve sizeProgression;
 
     [Header("Shader Settings")]
     [SerializeField] private Vector4 defaultNoiseTiling;
     [SerializeField] private Vector4 defaultBigNoiseTiling;
 
-    [SerializeField] private float maxSpeed;
-
-    private float speed;
-
     private Material material;
 
+    private float sizeBeforeChange;
     private float targetSize = 1f;
     private float size = 1f;
+    private float height = 1f;
+
+    private float timeToChange;
+    private float time;
+    private bool isChanging;
 
     public event Action onTargetSizeUpdate;
 
@@ -40,6 +43,7 @@ public class BlizzardTransform : MonoBehaviour
 
     private void Awake(){
         material = blizzardRenderer.sharedMaterial;
+        UpdateSize(DEFAULT_SIZE);
     }
 
     private void Start(){
@@ -50,27 +54,40 @@ public class BlizzardTransform : MonoBehaviour
 
     private void Update()
     {
-        size = Mathf.Lerp(size, targetSize, changeSpeed * Time.deltaTime);
-        float height = ((1f - Size) * heightMultiplier) + 1f;
+        if (isChanging){
+            CountDown();
 
+            float lerp = Mathf.InverseLerp(0f, timeToChange, time);
+            lerp = Easing.QuadEaseOut(lerp);
+            float newSize = Mathf.Lerp(sizeBeforeChange, targetSize, lerp);
+
+            UpdateSize(newSize);
+        }
+    }
+
+    private void CountDown()
+    {
+        time += Time.deltaTime;
+        if (time >= timeToChange){
+            isChanging = false;
+        }
+    }
+
+    private void UpdateSize(float newSize)
+    {
+        size = newSize;
+        height = GetHeight(Size);
         Vector3 scale = new Vector3(Size, height, Size);
-        foreach (BlizzardRing ring in rings)
-        {
+
+        foreach (BlizzardRing ring in rings){
             ring.SetScale(scale);
         }
-
-        completeness = Mathf.InverseLerp(sizeProgression[0].value, sizeProgression[1].value, Size);
-        SetSpeed(completeness);
 
         SetNoiseTiling(height);
         SetBigNoiseTiling(height);
     }
 
-    private void SetSpeed(float completeness)
-    {
-        speed = Mathf.Lerp(1, maxSpeed, completeness);
-        material.SetFloat(speedProperty, speed);
-    }
+    private float GetHeight(float size) => ((1f - size) * heightMultiplier) + 1f;
 
     private void SetNoiseTiling(float height){
         float horizontalNoiseTiling = defaultNoiseTiling.x / height;
@@ -87,7 +104,12 @@ public class BlizzardTransform : MonoBehaviour
 
     private void SetTargetSize(float progress)
     {
+        sizeBeforeChange = size;
         targetSize = sizeProgression.Evaluate(progress);
+        timeToChange = (progress * 10f) * timeToChangeMultiplier;
+        time = 0f;
+        isChanging = true;
+
         onTargetSizeUpdate?.Invoke();
     }
 }

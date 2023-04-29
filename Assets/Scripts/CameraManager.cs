@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         GameEvents.current.onGameBegun += TrackTheCharacter;
+        GameEvents.current.onHelicopterIsGoingToSetOff += TrackTheHelicopter;
     }
 
     private void Awake()

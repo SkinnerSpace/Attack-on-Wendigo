@@ -7,7 +7,7 @@ public class AdditionalSFXPlayer : MonoBehaviour
 
     private void Awake()
     {
-        victoryAudioPlayer = AudioPlayer.Create(victorySFX);
+        victoryAudioPlayer = AudioPlayer.Create(victorySFX).WithUnpausableMode();
     }
 
     private void Start()

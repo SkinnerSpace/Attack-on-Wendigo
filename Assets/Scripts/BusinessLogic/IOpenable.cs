@@ -1,4 +1,4 @@
-﻿public interface IOpenable
+﻿public interface IOpenable : IInteractable
 {
     void Open();
 }

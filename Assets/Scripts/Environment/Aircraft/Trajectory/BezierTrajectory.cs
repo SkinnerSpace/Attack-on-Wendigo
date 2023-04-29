@@ -75,6 +75,11 @@ public class BezierTrajectory : MonoBehaviour
         pointsManager.PushThePointsAwayFromEachOther(pointsManager.BezierPoints.Length-1);
     }
 
+    public void GenerateEscapeTrajectroy()
+    {
+        GenerateTrajectory();
+    }
+
     public void UpdateBoundsRadius(float progress){
         boundsRadius = Mathf.Lerp(maxBoundsRadius, minBoundsRadius, progress);
     }

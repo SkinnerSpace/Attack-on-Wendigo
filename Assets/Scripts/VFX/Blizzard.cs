@@ -17,8 +17,6 @@ public class Blizzard : MonoBehaviour, IBlizzard
 
     [SerializeField] private bool showRadius;
 
-/*    private float differenceFromTheOriginalSize;
-*/
     public static Blizzard Instance { get; private set; }
 
     private void Awake(){
@@ -31,7 +29,6 @@ public class Blizzard : MonoBehaviour, IBlizzard
         foreach (PushableObject pushable in pushables)
             PushAway(pushable);
 
-    /*    differenceFromTheOriginalSize = Radius / influenceRadius;*/
     }
 
     public void PushAway(PushableObject pushable)

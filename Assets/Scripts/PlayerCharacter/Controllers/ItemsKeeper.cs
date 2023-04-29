@@ -8,7 +8,7 @@ public class ItemsKeeper : IItemsKeeper
 {
     private ICharacterData data;
     private IInputReader input;
-    private IInteractor interactor;
+    private IInteractionController interactor;
     public Transform Root => data.Cam.transform;
 
     private IPickable pickable;
@@ -16,7 +16,7 @@ public class ItemsKeeper : IItemsKeeper
     private IHealthPack healthPack;
     private WeaponThrower thrower;
 
-    public ItemsKeeper(CharacterData data, IInputReader input, IInteractor interactor)
+    public ItemsKeeper(CharacterData data, IInputReader input, IInteractionController interactor)
     {
         this.data = data;
         this.input = input;

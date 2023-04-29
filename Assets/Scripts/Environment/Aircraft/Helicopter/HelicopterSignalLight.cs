@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HelicopterPortal : MonoBehaviour, ISwitchable
+public class HelicopterSignalLight : MonoBehaviour, ISwitchable
 {
     [Header("Required Components")]
     [SerializeField] private Helicopter helicopter;
@@ -38,11 +38,6 @@ public class HelicopterPortal : MonoBehaviour, ISwitchable
     {
         if (isActive){
             Rise();
-
-            if (InTheArea())
-            {
-
-            }
         }
     }
 
@@ -89,7 +84,11 @@ public class HelicopterPortal : MonoBehaviour, ISwitchable
         transform.position = helicopter.transform.position.FlatV3();
     }
 
-    public void SwitchOff() => isActive = false;
+    public void SwitchOff()
+    {
+        isActive = false;
+        lightRenderer.enabled = false;
+    }
 
 # if UNITY_EDITOR
     private void OnDrawGizmos()

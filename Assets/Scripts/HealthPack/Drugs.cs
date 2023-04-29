@@ -20,7 +20,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
     [SerializeField] private Material emptyMaterial;
 
     private IInputReader inputReader;
-    private IInteractor interactor;
+    private IInteractionController interactor;
     private IHealthSystem healthSystem;
 
     private bool isUsed;
@@ -29,7 +29,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
 
     public Vector3 DefaultPosition => new Vector3(0.75f, -0.35f, 1.5f);
 
-    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractor interactor)
+    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractionController interactor)
     {
         this.inputReader = inputReader;
         this.interactor = interactor;

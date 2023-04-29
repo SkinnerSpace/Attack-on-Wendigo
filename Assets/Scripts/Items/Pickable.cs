@@ -38,6 +38,12 @@ public class Pickable : MonoBehaviour, IPickable
         gameObject.layer = (int)Layers.Interactables;
     }
 
+    public void Interact(IInteractor interactor)
+    {
+        interactor.DropPreviouslyHeldItem();
+        interactor.TakePickableItem(this);
+    }
+
     public void PickUp(IItemsKeeper keeper, Action onCameToHands)
     {
         HoldParent = keeper.Root;

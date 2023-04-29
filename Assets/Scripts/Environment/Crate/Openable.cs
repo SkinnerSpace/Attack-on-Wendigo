@@ -10,6 +10,8 @@ public class Openable : MonoBehaviour, IOpenable
         sphereCollider = GetComponent<SphereCollider>();
     }
 
+    public void Interact(IInteractor interactor) => Open();
+
     public void Open()
     {
         sphereCollider.enabled = false;

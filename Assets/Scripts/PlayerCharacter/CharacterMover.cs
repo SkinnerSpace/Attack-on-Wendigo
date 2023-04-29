@@ -10,6 +10,11 @@ namespace Character
         private event Action onUpdate;
         private bool isReady;
 
+        private void Start()
+        {
+            GameEvents.current.onHelicopterIsGoingToSetOff += ResetState;
+        }
+
         public void Initialize(PlayerCharacter main) => data = main.OldData;
 
         public void Connect() => isReady = true;
@@ -25,7 +30,6 @@ namespace Character
             {
                 data.CameraRotation = Quaternion.Euler(data.CameraViewEuler + data.CameraTiltEuler + data.ShakeEuler);
                 data.CameraLocalPos = data.CameraDampedPos + data.ShakePosition;
-                
             }
         }
 
@@ -40,6 +44,13 @@ namespace Character
 
                 onUpdate?.Invoke();
             }
+        }
+
+        private void ResetState()
+        {
+            isReady = false;
+            data.CameraRotation = Quaternion.identity;
+            data.CameraLocalPos = Vector3.zero;
         }
     }
 }

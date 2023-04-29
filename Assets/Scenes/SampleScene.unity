@@ -667,7 +667,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213085766
 GameObject:
@@ -720,7 +720,7 @@ Transform:
   - {fileID: 348362390}
   - {fileID: 2033496633}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &217159193 stripped
 MonoBehaviour:
@@ -1027,7 +1027,8 @@ MonoBehaviour:
   blizzardRenderer: {fileID: 2756025529777889395}
   sizeMultiplier: 1
   heightMultiplier: 4
-  changeSpeed: 0.5
+  updateTimePerUnit: 5
+  speedMultiplier: -0.2
   sizeProgression:
     serializedVersion: 2
     m_Curve:
@@ -1086,7 +1087,7 @@ Transform:
   - {fileID: 1998657956}
   - {fileID: 1323597736}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265337415
 GameObject:
@@ -4609,6 +4610,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b153ad9f5d73c4b488172e69278c6931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &363543192 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 263447871749678201, guid: e0c843d1cfbab034db11b41b9a9b2bac,
+    type: 3}
+  m_PrefabInstance: {fileID: 300981466319276898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &364795242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4717,11 +4724,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1420892163}
+  - {fileID: 363543192}
   - {fileID: 691428453}
   - {fileID: 1817865681}
   - {fileID: 1563087277}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &384437931
 GameObject:
@@ -5090,7 +5098,7 @@ PrefabInstance:
     - target: {fileID: 5764452896203316476, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5764452896203316476, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
@@ -5982,7 +5990,7 @@ Transform:
   - {fileID: 546784222}
   - {fileID: 2145819343}
   m_Father: {fileID: 365858762}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &691428454
 MonoBehaviour:
@@ -6780,7 +6788,7 @@ Transform:
   - {fileID: 344315470}
   - {fileID: 1302925505}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &981577351 stripped
 GameObject:
@@ -7041,7 +7049,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1031742751 stripped
 MonoBehaviour:
@@ -10967,7 +10975,7 @@ Transform:
   - {fileID: 1907459507}
   - {fileID: 6705627010780941526}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1242740338 stripped
 MonoBehaviour:
@@ -11254,11 +11262,12 @@ GameObject:
   - component: {fileID: 1304595568}
   - component: {fileID: 1304595570}
   - component: {fileID: 1304595571}
+  - component: {fileID: 1304595575}
   - component: {fileID: 1304595573}
   - component: {fileID: 1304595572}
   - component: {fileID: 1304595574}
   m_Layer: 5
-  m_Name: IntroScreen
+  m_Name: SnowTransitionScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11298,7 +11307,7 @@ RectTransform:
   m_Children:
   - {fileID: 1591645405}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11330,7 +11339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whiteScreen: {fileID: 1304595570}
-  snow: {fileID: 1907459510}
+  snowParticles: {fileID: 1907459510}
   postProcessingController: {fileID: 482730215}
   timer: {fileID: 1304595573}
   fadeInTime: 2
@@ -11373,13 +11382,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e876dd1723610840994eb1046a13d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introWindSFX:
+  windSFX:
     Guid:
       Data1: -1432875449
       Data2: 1084123313
       Data3: -952802657
       Data4: -2093156315
     Path: event:/SFX/Game/Gameplay/Intro/IntroWind
+--- !u!114 &1304595575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304595567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57709891cefa58241b3578451134d724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1306455890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5685789693806569962, guid: 49ab6b7f6631c5e46928697600911e71,
@@ -12538,7 +12559,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 365858762}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1563087278
 MonoBehaviour:
@@ -13386,7 +13407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 365858762}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -238.72, z: 0}
 --- !u!114 &1817865682
 MonoBehaviour:
@@ -13664,7 +13685,7 @@ GameObject:
   - component: {fileID: 1907459509}
   - component: {fileID: 1907459508}
   m_Layer: 0
-  m_Name: IntroSnow
+  m_Name: ScreenTransitionSnow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18590,7 +18611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1957597313
 MonoBehaviour:
@@ -28780,7 +28801,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 365858762}
     m_Modifications:
     - target: {fileID: 263447871749678201, guid: e0c843d1cfbab034db11b41b9a9b2bac,
         type: 3}
@@ -28850,7 +28871,7 @@ PrefabInstance:
     - target: {fileID: 642929378795765443, guid: e0c843d1cfbab034db11b41b9a9b2bac,
         type: 3}
       propertyPath: m_Name
-      value: HelicopterPortal
+      value: HelicopterSignalLight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c843d1cfbab034db11b41b9a9b2bac, type: 3}
@@ -62823,7 +62844,7 @@ PrefabInstance:
     - target: {fileID: 2642366878896203078, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2642366878896203078, guid: 16ebebf76f0f764439c91bf2142a9242,
         type: 3}
@@ -121417,7 +121438,7 @@ PrefabInstance:
     - target: {fileID: 5280391175114294397, guid: 0da14a0eee38d1742a0aa853fee6df56,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5280391175114294397, guid: 0da14a0eee38d1742a0aa853fee6df56,
         type: 3}
@@ -127488,7 +127509,7 @@ PrefabInstance:
     - target: {fileID: 6506765382160955200, guid: 02d1f8a670abd3d4b868dfe9c1640e5f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6506765382160955200, guid: 02d1f8a670abd3d4b868dfe9c1640e5f,
         type: 3}
@@ -142615,7 +142636,7 @@ PrefabInstance:
     - target: {fileID: 7231296196147640727, guid: 176a546903d48a0438af22d04523f64e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7231296196147640727, guid: 176a546903d48a0438af22d04523f64e,
         type: 3}
@@ -147490,7 +147511,7 @@ PrefabInstance:
     - target: {fileID: 8149916527630423738, guid: 20b03fd47114ea946b0b6ee33ea21824,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8149916527630423738, guid: 20b03fd47114ea946b0b6ee33ea21824,
         type: 3}

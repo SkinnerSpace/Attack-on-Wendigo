@@ -8,7 +8,8 @@ public class Helicopter : MonoBehaviour, ILaunchable
         Flying,
         PreparingToLand,
         Landing,
-        Landed
+        Landed,
+        Escaping
     }
     private States state;
 
@@ -47,6 +48,7 @@ public class Helicopter : MonoBehaviour, ILaunchable
 
     private void Start(){
         GameEvents.current.onVictory += PrepareToLand;
+        GameEvents.current.onHelicopterIsGoingToSetOff += Escape;
     }
 
     private void Update(){
@@ -64,7 +66,6 @@ public class Helicopter : MonoBehaviour, ILaunchable
     {
         if (state != States.PreparingToLand){
             state = States.Flying;
-            sway.SetFlyingMagnitude();
 
             isMoving = true;
             skipFrame = true;
@@ -72,23 +73,44 @@ public class Helicopter : MonoBehaviour, ILaunchable
             distancePassed = 0f;
             trajectory.GenerateTrajectory();
             synchronizer.Set(trajectory.Length, data.Speed);
+            sway.SetFlyingMagnitude();
 
             onTakeOff?.Invoke();
+        }
+        else
+        {
+            Land();
         }
     }
 
     public void Land()
     {
         state = States.Landing;
-        sway.SetLandingMagnitude();
 
         isMoving = true;
         skipFrame = true;
 
         distancePassed = 0f;
         trajectory.GenerateLandingTrajectory(transform.position);
+        synchronizer.Set(trajectory.Length, data.Speed);
+        sway.SetLandingMagnitude();
 
         synchronizer.Set(trajectory.Length, data.Speed);
+    }
+
+    public void Escape()
+    {
+        Debug.Log("ESCAPE!"); // FIX BUGS!!!
+
+        state = States.Escaping;
+
+        distancePassed = 0f;
+        trajectory.GenerateEscapeTrajectroy();
+        synchronizer.Set(trajectory.Length, data.Speed);
+        sway.SetLandingMagnitude();
+
+        onTakeOff?.Invoke();
+
     }
 
     public void Stop() => isMoving = false;

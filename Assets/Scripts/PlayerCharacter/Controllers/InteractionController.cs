@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Character;
 
-public class InteractionController : BaseController, IInteractor, IMousePosObserver
+public class InteractionController : BaseController, IInteractionController, IMousePosObserver
 {
     private const float REACH_DISTANCE = 4f;
 
@@ -15,11 +15,12 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     private ItemInteractor itemInteractor;
 
     private Transform target;
+    private RaycastHit targetHit;
 
     private FunctionTimer timer;
     private IHealthSystem healthSystem;
 
-    private bool isLocked;
+    private bool isLockedAfterInteraction;
     private Vector2 mousePos;
 
     private event Action<RaycastHit> onTargetAdded;
@@ -62,7 +63,7 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
     public void OnMousePosUpdate(Vector2 pos)
     {
         mousePos = pos;
-        RaycastHit targetHit = visionRaycast.Cast(pos, REACH_DISTANCE);
+        targetHit = visionRaycast.Cast(pos, REACH_DISTANCE);
         Transform newTarget = targetHit.transform;
 
         if (target != newTarget)
@@ -82,11 +83,11 @@ public class InteractionController : BaseController, IInteractor, IMousePosObser
 
     public void Interact()
     {
-        if (!isLocked){
-            isLocked = true;
+        if (!isLockedAfterInteraction){
+            isLockedAfterInteraction = true;
             itemInteractor.Interact(target);
 
-            timer.Set("Unlock", 0.2f, () => isLocked = false);
+            timer.Set("Unlock", 0.2f, () => isLockedAfterInteraction = false);
         }
     }
 

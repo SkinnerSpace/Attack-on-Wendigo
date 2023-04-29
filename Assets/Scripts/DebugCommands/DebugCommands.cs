@@ -16,7 +16,8 @@ public class DebugCommands : MonoBehaviour
             components.spawner.Spawn();
         });
 
-        DebugCommand<int> SPAWN_N = new DebugCommand<int>("spawn", "Spawn a chosen number of Wendigos", "spawn <count>", (n) => {
+        DebugCommand<int> SPAWN_N = new DebugCommand<int>("spawn", "Spawn a chosen number of Wendigos", "spawn <count>", (n) => 
+        {
             components.spawner.Spawn(n);
         });
 
@@ -43,6 +44,11 @@ public class DebugCommands : MonoBehaviour
             GameEvents.current.DeclareVictory();
         });
 
+        DebugCommand<float> SET_DEATH_PROGRESS = new DebugCommand<float>("progress", "Set death progress", "progress <progress>", (n) => 
+        {
+            GameEvents.current.UpdateDeathProgress(n);
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
@@ -51,7 +57,8 @@ public class DebugCommands : MonoBehaviour
             HELP_CLOSE,
             DIE,
             GET_BLUNT_DAMAGE,
-            DECLARE_VICTORY
+            DECLARE_VICTORY,
+            SET_DEATH_PROGRESS
         };
     }
 }

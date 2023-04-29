@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IPickable
+public interface IPickable : IInteractable
 {
     Transform Transform { get; }
     Vector3 Position { get; }

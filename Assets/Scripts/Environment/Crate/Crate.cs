@@ -23,6 +23,8 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     public void Pack(string itemName) => this.itemName = itemName;
 
+    public void Interact(IInteractor interactor) => Open();
+
     public void Throw(float force)
     {
         physics.SwitchOn();

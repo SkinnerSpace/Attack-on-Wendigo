@@ -116,6 +116,9 @@ public class DebugController : MonoBehaviour
                 else if (commands.Get(i) as DebugCommand<int> != null){
                     (commands.Get(i) as DebugCommand<int>).Invoke(int.Parse(properties[1]));
                 }
+                else if (commands.Get(i) as DebugCommand<float> != null){
+                    (commands.Get(i) as DebugCommand<float>).Invoke(float.Parse(properties[1]));
+                }
             }
         }
 

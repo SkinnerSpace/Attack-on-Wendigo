@@ -2,13 +2,10 @@
 using System;
 using UnityEngine;
 
-public class ItemInteractor
+public class ItemInteractor : IInteractor
 {
     private PlayerCharacter character;
     private CharacterData data;
-
-    private IPickable pickable;
-    private IOpenable openable;
 
     private Action<IPickable> takeAnItem;
     private Action dropAnItem;
@@ -28,10 +25,10 @@ public class ItemInteractor
 
     public void Interact(Transform target)
     {
-        if (target != null && IsCloseEnough(target))
+        if (target != null) // Do I need to check the distance?
         {
-            PickPickable(target);
-            OpenOpenable(target);
+            IInteractable interactable = target.GetComponent<IInteractable>();
+            interactable.Interact(this);
         }
         else
         {
@@ -39,26 +36,6 @@ public class ItemInteractor
         }
     }
 
-    private bool IsCloseEnough(Transform target) => Vector3.Distance(data.Position, target.position) < data.ReachDistance;
-
-    private void PickPickable(Transform target)
-    {
-        pickable = target.GetComponent<IPickable>();
-
-        if (pickable != null)
-        {
-            DropPreviouslyHeldItem();
-            takeAnItem(pickable);
-        }
-    }
-
-    private void DropPreviouslyHeldItem() => dropAnItem();
-
-    private void OpenOpenable(Transform target)
-    {
-        openable = target.GetComponent<IOpenable>();
-
-        if (openable != null)
-            openable.Open();
-    }
+    public void DropPreviouslyHeldItem() => dropAnItem();
+    public void TakePickableItem(IPickable pickable) => takeAnItem(pickable);  
 }

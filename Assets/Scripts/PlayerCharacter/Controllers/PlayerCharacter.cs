@@ -31,6 +31,7 @@ namespace Character
         private void Start()
         {
             GameEvents.current.onGameBegun += SwitchOn;
+            GameEvents.current.onHelicopterOnBoard += SwitchOff;
             PlayerEvents.current.onDeath += SwitchOff;
         }
 

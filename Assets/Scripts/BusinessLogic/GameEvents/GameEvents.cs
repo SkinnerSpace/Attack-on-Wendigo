@@ -9,6 +9,8 @@ public class GameEvents : MonoBehaviour
 
     public event Action onInvasionHasBegun;
     public event Action onVictory;
+    public event Action onHelicopterOnBoard;
+    public event Action onHelicopterIsGoingToSetOff;
 
     public event Action<float> onProgressUpdate;
     public event Action<float> onDeathProgressUpdate;
@@ -59,4 +61,7 @@ public class GameEvents : MonoBehaviour
     public void TheGameHasBeenRestarted() => onRestart?.Invoke();
 
     public void PlayerReceivedBluntDamage() => onBluntDamageReceived?.Invoke();
+    public void OnboardTheHelicopter() => onHelicopterOnBoard?.Invoke();
+
+    public void HelicopterIsGoingToSetOff() => onHelicopterIsGoingToSetOff?.Invoke();
 }

@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     [SerializeField] private WeaponAnimationController animationController;
     
     private IInputReader inputReader;
-    private IInteractor interactor;
+    private IInteractionController interactor;
     private RaycastShooter shooter;
     private Magazine magazine;
     private WeaponHitSurfaceHandler surfaceHitHandler;
@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
         SubscribeOnReadinessUpdate(shooter.OnReady);
     }
 
-    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractor interactor)
+    public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractionController interactor)
     {
         this.inputReader = inputReader;
         this.interactor = interactor;
