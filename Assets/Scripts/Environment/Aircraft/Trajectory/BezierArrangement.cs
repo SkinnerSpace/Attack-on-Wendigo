@@ -14,10 +14,12 @@ public class BezierArrangement
     [Header("Offset Beginning")]
     public float straightMinOffset;
     public float straightMaxOffset;
+    public float straightOffsetMultiplier;
 
     [Header("Offset Length")]
     public float perpendicularMinOffset;
     public float perpendicularMaxOffset;
+    public float perpendicularOffsetMultiplier;
 
     [Header("Height")]
     public float minHeight;

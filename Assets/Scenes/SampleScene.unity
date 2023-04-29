@@ -537,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186572985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1066.1931, y: 32.351845, z: 992.9305}
+  m_LocalPosition: {x: 901.05664, y: 46.363876, z: 1149.3749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -1027,8 +1027,7 @@ MonoBehaviour:
   blizzardRenderer: {fileID: 2756025529777889395}
   sizeMultiplier: 1
   heightMultiplier: 4
-  updateTimePerUnit: 5
-  speedMultiplier: -0.2
+  timeToChangeMultiplier: 5
   sizeProgression:
     serializedVersion: 2
     m_Curve:
@@ -1055,7 +1054,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   defaultNoiseTiling: {x: 2, y: 1, z: 0, w: 0}
   defaultBigNoiseTiling: {x: 9, y: 0.8, z: 0, w: 0}
-  maxSpeed: 1.3
 --- !u!1 &256498851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6010,7 +6008,6 @@ MonoBehaviour:
   projector: {fileID: 850003685}
   details: 32
   distance: 177.8
-  visualize: 0
   boundsCenter: {x: 960, y: 960}
   maxBoundsRadius: 370
   minBoundsRadius: 200
@@ -6020,8 +6017,10 @@ MonoBehaviour:
     lineMaxLength: 120
     straightMinOffset: 10
     straightMaxOffset: 30
+    straightOffsetMultiplier: 3
     perpendicularMinOffset: 30
     perpendicularMaxOffset: 60
+    perpendicularOffsetMultiplier: 10
     minHeight: 32
     maxHeight: 52
 --- !u!114 &693326575 stripped
@@ -9478,6 +9477,16 @@ PrefabInstance:
       propertyPath: cameraPivot
       value: 
       objectReference: {fileID: 1817865681}
+    - target: {fileID: 5893274589254510266, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: maxInfluence
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893274589254510266, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
+        type: 3}
+      propertyPath: influenceEaseTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6037991018348936867, guid: 34f09780e6308ae488f5b2b91d8cbd2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11524,7 +11533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326193597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 979.735, y: 26.678259, z: 1093.4617}
+  m_LocalPosition: {x: 1102.8672, y: 45.09289, z: 843.82513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -12555,7 +12564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563087276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 960, y: 0, z: 960}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 365858762}
@@ -12573,8 +12582,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e40fae69e028d044a1933094631ea11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 18
+  landingZoneSize: 18
   landingOffset: 1
+  escapeRadius: 750
+  minEscapeHeight: 250
+  maxEscapeHeight: 300
+  escapeAreaOffset: {x: 960, y: 0, z: 960}
 --- !u!1 &1565016040
 GameObject:
   m_ObjectHideFlags: 0
@@ -12836,7 +12849,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639146908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1038.2535, y: 31.350958, z: 889.5199}
+  m_LocalPosition: {x: 906.0905, y: 46.06045, z: 923.47516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}
@@ -13360,7 +13373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812486621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 916.66693, y: 25.267056, z: 1026.0704}
+  m_LocalPosition: {x: 1007.39185, y: 44.86861, z: 791.8223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145819343}

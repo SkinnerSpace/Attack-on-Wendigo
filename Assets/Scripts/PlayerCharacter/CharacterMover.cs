@@ -49,8 +49,10 @@ namespace Character
         private void ResetState()
         {
             isReady = false;
-            data.CameraRotation = Quaternion.identity;
-            data.CameraLocalPos = Vector3.zero;
+     /*       data.CameraRotation = Quaternion.identity;
+            data.CameraLocalPos = Vector3.zero;*/
+
+            Debug.Log("State was reset");
         }
     }
 }

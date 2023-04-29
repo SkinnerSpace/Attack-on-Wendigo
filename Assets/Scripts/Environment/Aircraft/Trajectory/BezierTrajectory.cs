@@ -13,7 +13,7 @@ public class BezierTrajectory : MonoBehaviour
     [Range(3,128)]
     [SerializeField] private int details = 32;
     [SerializeField] public float distance;
-    [SerializeField] private bool visualize;
+    
 
     [Header("Bounds")]
     [SerializeField] private Vector2 boundsCenter;
@@ -23,7 +23,9 @@ public class BezierTrajectory : MonoBehaviour
     [SerializeField] private BezierArrangement arrangement;
 
     public float Length => bezierLUT.arcLength;
+
     public bool Visualize => visualize;
+    private bool visualize;
 
     private float boundsRadius;
 
@@ -75,15 +77,26 @@ public class BezierTrajectory : MonoBehaviour
         pointsManager.PushThePointsAwayFromEachOther(pointsManager.BezierPoints.Length-1);
     }
 
+    public void GenerateDescendingTrajectory(float height){
+        constellator.ShiftEndDown(pointsManager.BezierPoints, height);
+    }
+
     public void GenerateEscapeTrajectroy()
     {
-        GenerateTrajectory();
+        constellator.ArrangeTheEscapePath(pointsManager.BezierPoints, arrangement);
     }
+
+    public void SwitchOnVisualization() => visualize = true;
+
+    public void SwitchOffVisualization() => visualize = false;
 
     public void UpdateBoundsRadius(float progress){
         boundsRadius = Mathf.Lerp(maxBoundsRadius, minBoundsRadius, progress);
     }
 
+    public Vector3 GetEndPointPosition(){
+        return constellator.GetEndPointPosition(pointsManager.BezierPoints);
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

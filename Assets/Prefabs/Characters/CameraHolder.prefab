@@ -521,9 +521,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5950e18763aa97b4abf0c73e8ece8f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 1680944993474019686}
   pivot: {fileID: 0}
   state: 0
   testMode: 0
+  maxInfluence: 10
+  influenceEaseTime: 10
 --- !u!1 &7290335171503858707
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class GUIController : MonoBehaviour
     [SerializeField] private GUIContainer main;
     [SerializeField] private GUIContainer hUD;
     [SerializeField] private GUIContainer aim;
+    [SerializeField] private GUIContainer uGUI;
 
     private bool playerIsActive;
 
@@ -33,8 +34,15 @@ public class GUIController : MonoBehaviour
             }
         };
 
-        PlayerEvents.current.onDeath += hUD.HideGradually;
-        PlayerEvents.current.onDeath += aim.HideGradually;
+        PlayerEvents.current.onDeath += HideAllButMain;
+        GameEvents.current.onHelicopterIsGoingToSetOff += HideAllButMain;
+    }
+
+    private void HideAllButMain()
+    {
+        hUD.HideGradually();
+        aim.HideGradually();
+        uGUI.HideGradually();
     }
 
     private void ConnectHUD()

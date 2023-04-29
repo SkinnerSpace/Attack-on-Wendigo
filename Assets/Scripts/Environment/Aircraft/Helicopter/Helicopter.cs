@@ -8,6 +8,7 @@ public class Helicopter : MonoBehaviour, ILaunchable
         Flying,
         PreparingToLand,
         Landing,
+        Descending,
         Landed,
         Escaping
     }
@@ -25,13 +26,16 @@ public class Helicopter : MonoBehaviour, ILaunchable
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private Chronos chronos;
 
+    [Header("Descending")]
+    [SerializeField] private float descendingTime;
+    [SerializeField] private float descendingHeight;
+
+    private float currentDescendingTime;
+    private Vector3 positionBeforDescend;
+    private Vector3 descendDestination;
+
     private bool isMoving;
 
-    public float DistancePassed => distancePassed;
-    public float RouteCompletion => (trajectory != null) ? Mathf.Round((distancePassed / trajectory.Length) * 100f) : 0f;
-    public float timeToComplete => (trajectory != null) ? (trajectory.Length - distancePassed) / data.Speed : 0f;
-
-    private float distancePassed;
     private Vector3 prevPos;
     private Quaternion targetRotation;
 
@@ -52,7 +56,12 @@ public class Helicopter : MonoBehaviour, ILaunchable
     }
 
     private void Update(){
-        Fly();
+        if (state != States.Descending){
+            UpdatePositionAccordingToTheTrajectory();
+        }
+        else{
+            UpdateDescending();
+        }
     }
 
     private void SynchronizeComponents()
@@ -67,10 +76,8 @@ public class Helicopter : MonoBehaviour, ILaunchable
         if (state != States.PreparingToLand){
             state = States.Flying;
 
-            isMoving = true;
-            skipFrame = true;
+            StartMoving();
 
-            distancePassed = 0f;
             trajectory.GenerateTrajectory();
             synchronizer.Set(trajectory.Length, data.Speed);
             sway.SetFlyingMagnitude();
@@ -87,10 +94,8 @@ public class Helicopter : MonoBehaviour, ILaunchable
     {
         state = States.Landing;
 
-        isMoving = true;
-        skipFrame = true;
+        StartMoving();
 
-        distancePassed = 0f;
         trajectory.GenerateLandingTrajectory(transform.position);
         synchronizer.Set(trajectory.Length, data.Speed);
         sway.SetLandingMagnitude();
@@ -98,34 +103,48 @@ public class Helicopter : MonoBehaviour, ILaunchable
         synchronizer.Set(trajectory.Length, data.Speed);
     }
 
+    private void Descend()
+    {
+        state = States.Descending;
+
+        //StartMoving();
+
+        positionBeforDescend = transform.position;
+        trajectory.GenerateDescendingTrajectory(descendingHeight);
+        descendDestination = trajectory.GetEndPointPosition();
+
+        //synchronizer.Set(trajectory.Length, data.Speed);
+
+    }
+
     public void Escape()
     {
-        Debug.Log("ESCAPE!"); // FIX BUGS!!!
-
         state = States.Escaping;
 
-        distancePassed = 0f;
+        StartMoving();
+
         trajectory.GenerateEscapeTrajectroy();
         synchronizer.Set(trajectory.Length, data.Speed);
-        sway.SetLandingMagnitude();
+        sway.SetFlyingMagnitude();
 
         onTakeOff?.Invoke();
+    }
 
+    private void StartMoving()
+    {
+        isMoving = true;
+        skipFrame = true;
     }
 
     public void Stop() => isMoving = false;
 
-    private void Fly()
+    private void UpdatePositionAccordingToTheTrajectory()
     {
         if (isMoving && chronos.IsTicking)
         {
             if (!skipFrame)
             {
-                synchronizer.UpdateTime();
-                transform.position = mover.Move(trajectory, ActOnArrival);
-                targetRotation = rotator.Rotate(targetRotation, transform.position, prevPos);
-
-                prevPos = transform.position;
+                MoveAlongTheTrajectory();
             }
             else
             {
@@ -136,23 +155,44 @@ public class Helicopter : MonoBehaviour, ILaunchable
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, data.RotationSpeed * Time.deltaTime);
     }
 
+    //private void
+
+    private void MoveAlongTheTrajectory()
+    {
+        synchronizer.UpdateTime();
+        transform.position = mover.Move(trajectory, ActOnArrival);
+        targetRotation = rotator.Rotate(targetRotation, transform.position, prevPos);
+
+        prevPos = transform.position;
+    }
+
     private void ActOnArrival()
     {
         isMoving = false;
+        dispenserManager.DropCargoIfPossible(OnDispenserIsDone);
+    }
 
+    private void OnDispenserIsDone()
+    {
         if (state == States.Flying){
-            dispenserManager.DropAnItem(Launch);
+            Launch();
         }
         else if (state == States.PreparingToLand){
-            dispenserManager.DropAnItem(Land);
+            Land();
         }
-        else if (state == States.Landing){
-            state = States.Landed;
-            onLanded?.Invoke();
+        else if (state == States.Landing)
+        {
+            Descend();
+            //onLanded?.Invoke();
         }
     }
 
     private void PrepareToLand(){
         state = States.PreparingToLand;
+    }
+
+    private void UpdateDescending()
+    {
+
     }
 }

@@ -21,12 +21,20 @@ public class BezierTrajectoryEditor : Editor
 
         using (new GUILayout.VerticalScope())
         {
-            GUILayout.Space(50);
-            using (new GUILayout.HorizontalScope())
-            {
-                if (GUILayout.Button("Generate Trajectory")){
-                    bezierTrajectory.GenerateTrajectory();
-                }
+            GUILayout.Space(10);
+
+            if (GUILayout.Button("Generate Trajectory")){
+                bezierTrajectory.SwitchOnVisualization();
+                bezierTrajectory.GenerateTrajectory();
+            }
+
+            if (GUILayout.Button("Generate Escape Trajectory")){
+                bezierTrajectory.SwitchOnVisualization();
+                bezierTrajectory.GenerateEscapeTrajectroy();
+            }
+
+            if (GUILayout.Button("Cancel")){
+                bezierTrajectory.SwitchOffVisualization();
             }
         }
     }

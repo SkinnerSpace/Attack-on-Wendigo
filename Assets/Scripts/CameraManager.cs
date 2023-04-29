@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         GameEvents.current.onGameBegun += TrackTheCharacter;
-        GameEvents.current.onHelicopterIsGoingToSetOff += TrackTheHelicopter;
+        GameEvents.current.onHelicopterIsGoingToSetOff += TrackTheHelicopterFlyingAway;
     }
 
     private void Awake()
@@ -24,4 +24,5 @@ public class CameraManager : MonoBehaviour
     public void TrackTheCharacter() => cameraHolder.SetGameMode(characterPivot);
 
     public void TrackTheHelicopter() => cameraHolder.SetDemoMode(helicopterPivot);
+    public void TrackTheHelicopterFlyingAway() => cameraHolder.SetOutroMode(helicopterPivot);
 }

@@ -28,7 +28,7 @@ public class DispenserManager : MonoBehaviour, ISwitchable
         GameEvents.current.onVictory += SwitchOff;
     }
 
-    public void DropAnItem(Action moveOn)
+    public void DropCargoIfPossible(Action moveOn)
     {
         if (IsAbleToDrop())
         {
