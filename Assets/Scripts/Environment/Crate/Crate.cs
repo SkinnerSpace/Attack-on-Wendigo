@@ -46,8 +46,7 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     public void Unpack()
     {
         isOpened = true;
-        GameEvents.current.CargoUnpacked();
-
+        
         SwitchOff();
         destructionParticles.Play();
         sFXPlayer.PlayOpen();

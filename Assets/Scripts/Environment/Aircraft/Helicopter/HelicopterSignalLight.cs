@@ -8,12 +8,7 @@ public class HelicopterSignalLight : MonoBehaviour, ISwitchable
     
     [Header("Visual")]
     [SerializeField] private float lightHeight = 100f;
-    [SerializeField] private float riseTime = 0.5f;
-
-    [Header("Collider")]
-    [SerializeField] private float radius = 7.5f;
-    [SerializeField] private float height = 9f;
-    [SerializeField] private bool visualize;
+    [SerializeField] private float riseTime = 3f;
 
     private MeshRenderer lightRenderer;
 
@@ -28,7 +23,7 @@ public class HelicopterSignalLight : MonoBehaviour, ISwitchable
     private void Awake()
     {
         helicopter.onLanded += SwitchOn;
-        helicopter.onTakeOff += SwitchOff;
+        helicopter.onSetOff += SwitchOff;
 
         lightRenderer = GetComponent<MeshRenderer>();
         targetScale = new Vector3(1f, lightHeight, 1f);
@@ -53,25 +48,12 @@ public class HelicopterSignalLight : MonoBehaviour, ISwitchable
     private void CountDown()
     {
         time += Time.deltaTime;
-        lightHeightLerp = Mathf.InverseLerp(0f, riseTime, time);
-
         if (time >= riseTime){
             isRising = false;
         }
-    }
 
-    private bool InTheArea() => WithinTheRadius() && WithinTheHeight();
-
-    private bool WithinTheRadius()
-    {
-        float distance = Vector2.Distance(passanger.position.FlatV2(), transform.position.FlatV2());
-        return distance <= radius;
-    }
-
-    private bool WithinTheHeight()
-    {
-        float heightDifference = passanger.position.y - transform.position.y;
-        return heightDifference > 0f && heightDifference <= height;
+        lightHeightLerp = Mathf.InverseLerp(0f, riseTime, time);
+        lightHeightLerp = Easing.QuadEaseInOut(lightHeightLerp);
     }
 
     public void SwitchOn()
@@ -89,23 +71,4 @@ public class HelicopterSignalLight : MonoBehaviour, ISwitchable
         isActive = false;
         lightRenderer.enabled = false;
     }
-
-# if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (visualize)
-        {
-            float halfHeight = height / 2f;
-            Vector3 cubePosition = new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z);
-
-            float cubeSide = radius * 2f;
-            Vector3 cubeScale = new Vector3(cubeSide, height, cubeSide);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, radius);
-            Gizmos.DrawWireCube(cubePosition, cubeScale);
-            Gizmos.color = Color.white;
-        }
-    }
-# endif
 }

@@ -12,16 +12,25 @@ public class HelicopterModel : MonoBehaviour
         transform.SetParent(newParent);
     }
 
+    private void Start()
+    {
+        HelicopterEvents.current.onMovedForTheFirstTime += MoveInstantly;
+    }
+
     private void LateUpdate()
     {
         MoveSmoothly();
-/*        Debug.Log("Speed " + movementSpeed * Time.deltaTime);
-        Debug.Log(Vector3.Distance(transform.position, anchor.position));*/
     }
 
     private void MoveSmoothly()
     {
         transform.position = Vector3.Lerp(transform.position, anchor.position, movementSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, anchor.rotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void MoveInstantly()
+    {
+        transform.position = anchor.position;
+        transform.rotation = anchor.rotation;
     }
 }

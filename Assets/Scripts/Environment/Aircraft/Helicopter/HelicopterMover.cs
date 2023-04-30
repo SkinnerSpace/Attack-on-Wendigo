@@ -12,8 +12,6 @@ public class HelicopterMover : MonoBehaviour, IHelicopterTimeObserver
     {
         float distancePassed = Mathf.Lerp(0f, trajectory.Length, completion);
 
-        //helicopter.UpdateDistance(distancePassed);
-
         Vector3 position = trajectory.GetPosition(distancePassed, onFinish);
         return position;
     }

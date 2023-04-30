@@ -30,8 +30,8 @@ namespace Character
 
         private void Start()
         {
-            GameEvents.current.onGameBegun += SwitchOn;
-            GameEvents.current.onHelicopterOnBoard += SwitchOff;
+            GameEvents.current.onIntroIsOver += SwitchOn;
+            HelicopterEvents.current.onBoarded += SwitchOff;
             PlayerEvents.current.onDeath += SwitchOff;
         }
 

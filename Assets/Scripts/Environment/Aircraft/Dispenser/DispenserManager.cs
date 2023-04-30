@@ -13,6 +13,8 @@ public class DispenserManager : MonoBehaviour, ISwitchable
     [SerializeField] private Dispenser rightDispenser;
     [SerializeField] private Dispenser leftDispenser;
 
+    private Dispenser dispenser;
+
     private IObjectPooler pooler;
     private bool isActive = true;
 
@@ -26,26 +28,47 @@ public class DispenserManager : MonoBehaviour, ISwitchable
     {
         pooler = PoolHolder.Instance;
         GameEvents.current.onVictory += SwitchOff;
+        HelicopterEvents.current.onBoarded += JustOpenTheDoor;
+        HelicopterEvents.current.onIsGoingToSetOff += JustShutTheDoor;
     }
 
-    public void DropCargoIfPossible(Action moveOn)
+    public void DropCargoIfPossible(Action moveOn, float idleTime)
     {
         if (IsAbleToDrop())
         {
-            Dispenser dispenser = TargetOnTheRightSide() ? rightDispenser : leftDispenser;
+            dispenser = GetDispencer();
             GameObject crate = pooler.SpawnFromThePool("Crate");
             dispenser.Launch(crate, moveOn);
         }
-        else
-        {
-            timer.Set("MoveOn", 2f, moveOn);
+        else{
+            WaitAndExecute(moveOn, idleTime);
         }
     }
+
+    private void WaitAndExecute(Action moveOn, float idleTime)
+    {
+        if (idleTime > 0f){
+            timer.Set("MoveOn", idleTime, moveOn);
+        }
+        else{
+            moveOn();
+        }
+    }
+
+    private void JustOpenTheDoor()
+    {
+        dispenser = GetDispencer();
+        dispenser.JustOpenTheDoor();
+    }
+
+    private void JustShutTheDoor() => dispenser.JustShutTheDoor();
 
     private bool IsAbleToDrop(){
         return isActive && 
                !storage.IsEmpty();
     }
+
+    private Dispenser GetDispencer() => TargetOnTheRightSide() ? rightDispenser : leftDispenser;
 
     private bool TargetOnTheRightSide()
     {

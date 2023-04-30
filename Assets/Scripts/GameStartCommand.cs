@@ -1,4 +1,6 @@
-﻿public class GameStartCommand : ICommand
+﻿using UnityEngine;
+
+public class GameStartCommand : ICommand
 {
     private GameManager gameManager;
 

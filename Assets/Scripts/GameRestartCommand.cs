@@ -1,13 +1,11 @@
-﻿public class GameRestartCommand : ICommand
+﻿using UnityEngine;
+
+public class GameRestartCommand : ICommand
 {
-    private GameManager gameManager;
-
-    public GameRestartCommand(GameManager gameManager) => this.gameManager = gameManager;
-
     public void Execute()
     {
-        GameEvents.current.TheGameHasBeenRestarted();
+        GameEvents.current.NotifyOnRestart();
         AudioEvent.StopAll();
-        SceneLoader.Instance.LoadScene(0);
+        SceneLoader.Instance.RestartTheGame(0);
     }
 }

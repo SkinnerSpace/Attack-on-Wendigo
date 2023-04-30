@@ -12,6 +12,8 @@ public class Pickable : MonoBehaviour, IPickable
     private Transform originalParent;
     public Transform HoldParent { get; private set; }
 
+    private bool wasPickedUp;
+
     public event Action onInteract;
     public event Action onPickedUp;
     public event Action onDropped;
@@ -70,6 +72,11 @@ public class Pickable : MonoBehaviour, IPickable
         onInteract?.Invoke();
         onPickedUp?.Invoke();
         GameEvents.current.WeaponHasBeenPickedUp();
+
+        if (!wasPickedUp){
+            wasPickedUp = true;
+            GameEvents.current.CargoIsTaken();
+        }
     }
 
     private void NotifyOnDropped()
@@ -85,5 +92,9 @@ public class Pickable : MonoBehaviour, IPickable
 
         Vector3 torque = new Vector3(Rand.GetBisigned(), Rand.Range(-1f, 1f), Rand.GetBisigned()) * 25f;
         physicalBody.AddTorque(torque);
+    }
+
+    public void ResetState(){
+        wasPickedUp = false;
     }
 }

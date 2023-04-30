@@ -54,12 +54,12 @@ public class MusicPlayer : MonoBehaviour
 
     private void ConnectFuneralSoundtrack(){
         PlayerEvents.current.onDeath += () => funeralPlayer.PlayLoop();
-        GameEvents.current.onRestart += () => funeralPlayer.Stop();
+        MenuEvents.current.onRestart += () => funeralPlayer.Stop();
     }
 
     private void ConnectVictorySoundtrack(){
         GameEvents.current.onVictory += () => PlayVictorySoundtrack();
-        GameEvents.current.onRestart += () => victoryPlayer.Stop();
+        MenuEvents.current.onRestart += () => victoryPlayer.Stop();
     }
 
     private void PlayVictorySoundtrack()

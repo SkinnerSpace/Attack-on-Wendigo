@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1006917162978430107}
   - component: {fileID: 1006917162978430102}
   - component: {fileID: 1006917162978430100}
+  - component: {fileID: 3018467798520348915}
+  - component: {fileID: 6019547550580937012}
   - component: {fileID: 1006917162978430103}
   - component: {fileID: 1006917162978430101}
   - component: {fileID: 8281222767907578855}
@@ -54,16 +56,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668c7c91a217cd743a548079ee2bee88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trajectory: {fileID: 0}
-  mover: {fileID: 1006917162978430100}
-  rotator: {fileID: 1006917162978430103}
-  sway: {fileID: 7312109861332469447}
-  dispenserManager: {fileID: 1056638609630317292}
-  storage: {fileID: 7261413878735653690}
+  engine: {fileID: 3018467798520348915}
   synchronizer: {fileID: 1006917162978430101}
+  sway: {fileID: 7312109861332469447}
+  elevator: {fileID: 6019547550580937012}
   data: {fileID: 1006917162978430102}
-  timer: {fileID: 1630779641384377885}
-  chronos: {fileID: 9215758063044485939}
+  trajectory: {fileID: 0}
 --- !u!114 &1006917162978430102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +76,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rotationSpeed: 5
+  emptyStorageIdleTime: 2
+  landIdleTime: 1
+  descendIdleTime: 0
+  descendTime: 5
+  descendHeight: 1
+  ascendTime: 5
 --- !u!114 &1006917162978430100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +94,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c92b0c04a96e134fa88cc3607323685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helicopter: {fileID: 0}
+  helicopter: {fileID: 1006917162978430107}
+--- !u!114 &3018467798520348915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006917162978430110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885f515a98d04c8428556214a5a73d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helicopter: {fileID: 1006917162978430107}
+  synchronizer: {fileID: 1006917162978430101}
+  mover: {fileID: 1006917162978430100}
+  rotator: {fileID: 1006917162978430103}
+  sway: {fileID: 7312109861332469447}
+  dispenserManager: {fileID: 1056638609630317292}
+  data: {fileID: 1006917162978430102}
+--- !u!114 &6019547550580937012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006917162978430110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd5d8c75a09a9242b76b51973167c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helicopter: {fileID: 1006917162978430107}
+  data: {fileID: 1006917162978430102}
 --- !u!114 &1006917162978430103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1294797246088150514}
   - component: {fileID: 7764628816809268089}
+  - component: {fileID: 6389858798091141085}
   m_Layer: 0
   m_Name: HelicopterModel
   m_TagString: Untagged
@@ -294,6 +332,19 @@ MonoBehaviour:
   anchor: {fileID: 3051558936682772678}
   movementSpeed: 10
   rotationSpeed: 10
+--- !u!114 &6389858798091141085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924122880284337992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2cdeba13bb26b47ba8ff58160b833f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  illusionTime: 10
 --- !u!1 &2112989695497998137
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,8 +612,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724875270810104188}
-  - component: {fileID: 9043602739884190403}
   - component: {fileID: 2240451630175867506}
+  - component: {fileID: 2672321663080195195}
+  - component: {fileID: 3624849155876252737}
   m_Layer: 21
   m_Name: Interactable
   m_TagString: Untagged
@@ -578,26 +630,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4709759008920288915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006917162978430111}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &9043602739884190403
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4709759008920288915}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 3.5
-  m_Height: 12
-  m_Direction: 2
-  m_Center: {x: 0, y: 2.8, z: 0}
 --- !u!114 &2240451630175867506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +648,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228113b011c99944d96356f83d790701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &2672321663080195195
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709759008920288915}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Center: {x: 2, y: 0, z: 0}
+--- !u!135 &3624849155876252737
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709759008920288915}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Center: {x: -2, y: 0, z: 0}
 --- !u!1 &4841737612848342637
 GameObject:
   m_ObjectHideFlags: 0

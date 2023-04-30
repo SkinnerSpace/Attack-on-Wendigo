@@ -9,14 +9,12 @@ public class GameEvents : MonoBehaviour
 
     public event Action onInvasionHasBegun;
     public event Action onVictory;
-    public event Action onHelicopterOnBoard;
-    public event Action onHelicopterIsGoingToSetOff;
 
     public event Action<float> onProgressUpdate;
     public event Action<float> onDeathProgressUpdate;
 
     public event Action onFirstWeaponPickedUp;
-    public event Action onCargoUnpacked;
+    public event Action onCargoIsTaken;
 
     public event Action<float> onEnemyHealthUpdate;
     public event Action<float, Vector3> onBlizzardRadiusUpdate;
@@ -24,10 +22,11 @@ public class GameEvents : MonoBehaviour
     public event Action onStart;
     public event Action onPause;
     public event Action onResume;
-    public event Action onGameBegun; // Camera manager, Player character, Airdrop
+    public event Action onIntroIsOver;
     public event Action onRestart;
 
     public event Action onBluntDamageReceived;
+    public event Action onOutroCameraStoppedTracking;
 
     private void Awake()
     {
@@ -51,17 +50,17 @@ public class GameEvents : MonoBehaviour
 
     public void EnemyHealthHasBeenUpdated(float health) => onEnemyHealthUpdate?.Invoke(health);
 
-    public void CargoUnpacked() => onCargoUnpacked?.Invoke();
+    public void CargoIsTaken() => onCargoIsTaken?.Invoke();
 
     public void TheGameHasStarted() => onStart?.Invoke();
     public void TheGameIsPaused() => onPause?.Invoke();
     public void TheGameIsResumed() => onResume?.Invoke();
 
-    public void TheGameHasBegun() => onGameBegun?.Invoke();
-    public void TheGameHasBeenRestarted() => onRestart?.Invoke();
+    public void IntroIsOver() => onIntroIsOver?.Invoke();
+    public void NotifyOnRestart() => onRestart?.Invoke();
 
     public void PlayerReceivedBluntDamage() => onBluntDamageReceived?.Invoke();
-    public void OnboardTheHelicopter() => onHelicopterOnBoard?.Invoke();
+    
 
-    public void HelicopterIsGoingToSetOff() => onHelicopterIsGoingToSetOff?.Invoke();
+    public void OutroCameraStoppedTracking() => onOutroCameraStoppedTracking?.Invoke();
 }

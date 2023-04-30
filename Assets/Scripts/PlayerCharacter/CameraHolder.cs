@@ -2,6 +2,9 @@
 
 public class CameraHolder : MonoBehaviour, ICameraHolder
 {
+    private const float POSITION_MULTIPLIER = 0.5f;
+    private const float STOPPED_TRACKING_THRESHOLD = 0.85f;
+
     public enum States
     {
         Demo,
@@ -23,6 +26,8 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     private float influenceLerp;
     private float influence;
     private float currentInfluenceEaseTime;
+
+    private bool stoppedTracking;
 
     void Update()
     {
@@ -46,20 +51,39 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     private void UpdateOutro()
     {
         if (isEasingTheInfluence){
-            currentInfluenceEaseTime += Time.deltaTime;
-            if (currentInfluenceEaseTime >= influenceEaseTime){
-                isEasingTheInfluence = false;
-            }
-
-            influenceLerp = Mathf.InverseLerp(0f, influenceEaseTime, currentInfluenceEaseTime);
-            influenceLerp = Easing.QuadEaseOut(influenceLerp);
-
-            influence = Mathf.Lerp(maxInfluence, 0f, influenceLerp);
+            UpdateInfluence();
         }
 
         ResetCameraTransform();
-        transform.position = Vector3.Lerp(transform.position, pivot.position, influence * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pivot.position, (influence * POSITION_MULTIPLIER) * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, pivot.rotation, influence * Time.deltaTime);
+    }
+
+    private void UpdateInfluence()
+    {
+        CountDown();
+        NotifyOnStoppedTracking();
+        influenceLerp = Mathf.InverseLerp(0f, influenceEaseTime, currentInfluenceEaseTime);
+        influenceLerp = Easing.QuadEaseOut(influenceLerp);
+
+        influence = Mathf.Lerp(maxInfluence, 0f, influenceLerp);
+    }
+
+    private void CountDown()
+    {
+        currentInfluenceEaseTime += Time.deltaTime;
+        if (currentInfluenceEaseTime >= influenceEaseTime)
+        {
+            isEasingTheInfluence = false;  
+        }
+    }
+
+    private void NotifyOnStoppedTracking()
+    {
+        if (!stoppedTracking && influenceLerp >= STOPPED_TRACKING_THRESHOLD){
+            stoppedTracking = true;
+            GameEvents.current.OutroCameraStoppedTracking();
+        }
     }
 
     public void SetGameMode(Transform pivot)

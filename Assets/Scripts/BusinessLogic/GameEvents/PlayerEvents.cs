@@ -11,6 +11,9 @@ public class PlayerEvents : MonoBehaviour
     public event Action<int> onAmmoUpdate;
     public event Action onWeaponThrown;
 
+    public event Action<RaycastHit> onInteractiveTargetAdded;
+    public event Action onInteractiveTargetRemoved;
+
     private void Awake(){
         current = this;
     }
@@ -20,4 +23,7 @@ public class PlayerEvents : MonoBehaviour
 
     public void UpdateAmmo(int ammo) => onAmmoUpdate?.Invoke(ammo);
     public void ThrowWeapon() => onWeaponThrown?.Invoke();
+
+    public void AddInteractiveTarget(RaycastHit interactiveTarget) => onInteractiveTargetAdded?.Invoke(interactiveTarget);
+    public void RemoveInteractiveTarget() => onInteractiveTargetRemoved?.Invoke();
 }

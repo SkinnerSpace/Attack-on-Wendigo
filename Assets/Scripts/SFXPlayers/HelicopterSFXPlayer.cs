@@ -21,7 +21,7 @@ public class HelicopterSFXPlayer : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onGameBegun += IncreaseVolume;
+        GameEvents.current.onIntroIsOver += IncreaseVolume;
     }
 
     private void IncreaseVolume(){

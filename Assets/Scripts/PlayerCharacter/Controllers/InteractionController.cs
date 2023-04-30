@@ -23,9 +23,6 @@ public class InteractionController : BaseController, IInteractionController, IMo
     private bool isLockedAfterInteraction;
     private Vector2 mousePos;
 
-    private event Action<RaycastHit> onTargetAdded;
-    private event Action onTargetRemoved;
-
     public override void Initialize(PlayerCharacter main)
     {
         this.main = main;
@@ -54,12 +51,6 @@ public class InteractionController : BaseController, IInteractionController, IMo
         input.Get<MousePositionInputReader>().Unsubscribe(this);
     }
 
-    public void Subscribe(Action<RaycastHit> addTarget, Action removeTarget)
-    {
-        onTargetAdded += addTarget;
-        onTargetRemoved += removeTarget;
-    }
-
     public void OnMousePosUpdate(Vector2 pos)
     {
         mousePos = pos;
@@ -73,10 +64,14 @@ public class InteractionController : BaseController, IInteractionController, IMo
     private void UpdateTarget(Transform target, RaycastHit targetHit)
     {
         if (target == null)
-            onTargetRemoved?.Invoke();
+        {
+            PlayerEvents.current.RemoveInteractiveTarget();
+        }
 
         else if (target != null)
-            onTargetAdded?.Invoke(targetHit);
+        {
+            PlayerEvents.current.AddInteractiveTarget(targetHit);
+        }
 
         this.target = target;
     }
@@ -94,7 +89,7 @@ public class InteractionController : BaseController, IInteractionController, IMo
     public void DropAnItem() => keeper.DropAnItem(mousePos);
     public void TakeAnItem(IPickable pickable)
     {
-        IWeapon weapon = pickable.Transform.GetComponentInParent<IWeapon>(); // IWeapon component is usually in the parent of an item
+        IWeapon weapon = pickable.Transform.GetComponentInParent<IWeapon>(); // Weapon component is usually is in the parent of an item
 
         if (weapon != null){
             keeper.TakeAWeapon(pickable, weapon);

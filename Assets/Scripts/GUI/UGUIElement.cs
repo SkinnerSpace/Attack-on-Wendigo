@@ -29,6 +29,8 @@ public class UGUIElement : MonoBehaviour
     private void Start()
     {
         label.text = KeyBinds.Instance.keyActionPairs[key].ToString();
+        PlayerEvents.current.onInteractiveTargetAdded += AddTarget;
+        PlayerEvents.current.onInteractiveTargetRemoved += RemoveTarget;
     }
 
     private void Update()

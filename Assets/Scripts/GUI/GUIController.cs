@@ -17,8 +17,8 @@ public class GUIController : MonoBehaviour
 
     private void ConnectMain()
     {
-        GameEvents.current.onGameBegun += main.ShowGradually;
-        GameEvents.current.onGameBegun += () => playerIsActive = true;
+        GameEvents.current.onIntroIsOver += main.ShowGradually;
+        GameEvents.current.onIntroIsOver += () => playerIsActive = true;
 
         GameEvents.current.onPause += () => 
         {
@@ -34,15 +34,8 @@ public class GUIController : MonoBehaviour
             }
         };
 
-        PlayerEvents.current.onDeath += HideAllButMain;
-        GameEvents.current.onHelicopterIsGoingToSetOff += HideAllButMain;
-    }
-
-    private void HideAllButMain()
-    {
-        hUD.HideGradually();
-        aim.HideGradually();
-        uGUI.HideGradually();
+        PlayerEvents.current.onDeath += main.HideGradually;
+        HelicopterEvents.current.onBoarded += main.HideGradually;
     }
 
     private void ConnectHUD()

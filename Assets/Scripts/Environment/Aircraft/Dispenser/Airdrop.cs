@@ -14,9 +14,9 @@ public class Airdrop : MonoBehaviour, IAirdrop
 
     private void Start()
     {
-        GameEvents.current.onGameBegun += () => AddCargoFromCatalog(FIRST_ITEM);
+        GameEvents.current.onIntroIsOver += () => AddCargoFromCatalog(FIRST_ITEM);
         GameEvents.current.onFirstWeaponPickedUp += LoadDeficientCargo;
-        GameEvents.current.onCargoUnpacked += OnCargoUnpacked;
+        GameEvents.current.onCargoIsTaken += OnCargoUnpacked;
         GameEvents.current.onProgressUpdate += UpdateProgress;
     }
 
@@ -40,6 +40,13 @@ public class Airdrop : MonoBehaviour, IAirdrop
         for (int i = 0; i < deficientCargoCount; i++){
             int catalogIndex = Rand.Range(0, cargoCatalog.Count);
             AddCargoFromCatalog(catalogIndex);
+        }
+    }
+
+    public void AddCargoFromCatalogWithQuantity(int index, int count)
+    {
+        for (int i = 0; i < count; i++){
+            AddCargoFromCatalog(index);
         }
     }
 

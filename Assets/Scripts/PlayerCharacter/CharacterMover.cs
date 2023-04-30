@@ -12,7 +12,7 @@ namespace Character
 
         private void Start()
         {
-            GameEvents.current.onHelicopterIsGoingToSetOff += ResetState;
+            HelicopterEvents.current.onIsGoingToSetOff += ResetState;
         }
 
         public void Initialize(PlayerCharacter main) => data = main.OldData;
@@ -49,10 +49,6 @@ namespace Character
         private void ResetState()
         {
             isReady = false;
-     /*       data.CameraRotation = Quaternion.identity;
-            data.CameraLocalPos = Vector3.zero;*/
-
-            Debug.Log("State was reset");
         }
     }
 }

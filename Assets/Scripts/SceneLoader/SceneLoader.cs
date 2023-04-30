@@ -19,28 +19,56 @@ public class SceneLoader : MonoBehaviour
 
     [Header("Canvas groups")]
     [SerializeField] private CanvasGroup blackScreen;
-    [SerializeField] private CanvasGroup text;
+    [SerializeField] private LoadingScreenText text;
 
     [Header("Required Components")]
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Image barFill;
     [SerializeField] private FunctionTimer timer;
 
     [Header("Fade Time")]
-    [SerializeField] private float fadeInBlackScreenTime = 0.2f;
-    [SerializeField] private float fadeInTextTime = 0.5f;
+    [SerializeField] private float defaultFadeInBlackScreenTime = 0.3f;
+    [SerializeField] private float defaultFadeInTextTime = 0.2f;
     [SerializeField] private float fadeOutTextTime = 0.2f;
-    [SerializeField] private float fadeOutBlackScreenTime = 0.5f;
+    [SerializeField] private float fadeOutBlackScreenTime = 0.3f;
+
+    [Header("Fade In Finish Time")]
+    [SerializeField] private float finishFadeInBlackScreenTime = 2f;
+    [SerializeField] private float finishFadeInTextTime = 0.5f;
 
     public static SceneLoader Instance;
 
     private float time;
     private float transparency;
 
+    private float fadeInBlackScreenTime;
+    private float fadeInTextTime;
+
     private int sceneID;
 
     private void Awake(){
         Instance = this;
+        SetDefaultFadeInTime();
+    }
+
+    public void RestartTheGame(int sceneID)
+    {
+        SetDefaultFadeInTime();
+        text.SetLoadingText();
+        LoadScene(sceneID);
+    }
+
+    public void FinishTheGame(int sceneID)
+    {
+        fadeInBlackScreenTime = finishFadeInBlackScreenTime;
+        fadeInTextTime = finishFadeInTextTime;
+        text.SetEndingText();
+        LoadScene(sceneID);
+    }
+
+    private void SetDefaultFadeInTime()
+    {
+        fadeInBlackScreenTime = defaultFadeInBlackScreenTime;
+        fadeInTextTime = defaultFadeInTextTime;
     }
 
     public void LoadScene(int sceneID)
@@ -48,7 +76,6 @@ public class SceneLoader : MonoBehaviour
         this.sceneID = sceneID;
         StartToFadeInBlackScreen();
     }
-
 
     private void Update()
     {
@@ -94,7 +121,7 @@ public class SceneLoader : MonoBehaviour
     {
         Tick();
         transparency = Mathf.InverseLerp(0f, fadeInTextTime, time);
-        text.alpha = transparency;
+        text.SetAlpha(transparency);
 
         if (transparency >= 1f){
             OnFadedIn();
@@ -112,11 +139,7 @@ public class SceneLoader : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
 
-        while (!operation.isDone)
-        {
-            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            //barFill.fillAmount = progressValue;
-
+        while (!operation.isDone){
             yield return null;
         }
 
@@ -134,7 +157,7 @@ public class SceneLoader : MonoBehaviour
     {
         Tick();
         transparency = 1f - Mathf.InverseLerp(0f, fadeOutTextTime, time);
-        text.alpha = transparency;
+        text.SetAlpha(transparency);
 
         if (transparency <= Mathf.Epsilon){
             StartToFadeOutBlackScreen();

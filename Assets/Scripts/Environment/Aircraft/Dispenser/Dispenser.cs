@@ -40,4 +40,7 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
     }
 
     public void OnDoorHasClosed() => notifyOnComplete();
+
+    public void JustOpenTheDoor() => door.OpenSilently();
+    public void JustShutTheDoor() => door.CloseSilently();
 }

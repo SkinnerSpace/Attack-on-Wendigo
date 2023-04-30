@@ -10,11 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private Transform shakeManager;
     [SerializeField] private MenuManager menu;
-    [SerializeField] private InvasionCounter counter;
     [SerializeField] private Transform airdropImp;
     [SerializeField] private MenuSFXPlayer menuSFXPlayer;
-    [SerializeField] private LevelLoader levelLoader;
-
     [SerializeField] private FunctionTimer timer;
     public static GameManager Instance;
 
@@ -24,7 +21,6 @@ public class GameManager : MonoBehaviour
     public ISwitchable PlayerCharacter { get; private set; }
     public CameraManager CameraManager => cameraManager;
     public IAirdrop Airdrop { get; private set; }
-    public LevelLoader LevelLoader => levelLoader;
 
     private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
 
@@ -42,7 +38,8 @@ public class GameManager : MonoBehaviour
         commands.Add("Start", new GameStartCommand(this));
         commands.Add("Pause", new GamePauseCommand(this));
         commands.Add("Resume", new GameResumeCommand(this));
-        commands.Add("Restart", new GameRestartCommand(this));
+        commands.Add("Restart", new GameRestartCommand());
+        commands.Add("Finish", new GameFinishCommand());
     }
 
     private void Start()
@@ -55,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         MenuEvents.current.onResume += commands["Resume"].Execute;
         MenuEvents.current.onRestart += commands["Restart"].Execute;
+        HelicopterEvents.current.onFlewAway += commands["Finish"].Execute;
     }
 
     private void Update()
@@ -82,16 +80,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void ExecuteCommand(string command) => commands[command].Execute();
-
-    public void OpenSettings()
-    {
-        Debug.Log("Settings");
-    }
-
-    public void QuitTheGame()
-    {
-        Debug.Log("QUIT");
-    }
 
     private void OnPlay(){
         isPlaying = true;

@@ -49,6 +49,11 @@ public class DebugCommands : MonoBehaviour
             GameEvents.current.UpdateDeathProgress(n);
         });
 
+        DebugCommand<int, int> ADD_CARGO = new DebugCommand<int, int>("cargo", "Add cargo", "cargo <kind> <count>", (t, n) =>
+        {
+            components.airdrop.AddCargoFromCatalogWithQuantity(t, n);
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
@@ -58,7 +63,8 @@ public class DebugCommands : MonoBehaviour
             DIE,
             GET_BLUNT_DAMAGE,
             DECLARE_VICTORY,
-            SET_DEATH_PROGRESS
+            SET_DEATH_PROGRESS,
+            ADD_CARGO
         };
     }
 }

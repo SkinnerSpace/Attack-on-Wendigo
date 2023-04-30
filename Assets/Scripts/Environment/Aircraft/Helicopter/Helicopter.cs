@@ -1,88 +1,44 @@
 ﻿using System;
 using UnityEngine;
 
-public class Helicopter : MonoBehaviour, ILaunchable
+public class Helicopter : MonoBehaviour
 {
-    private enum States
-    {
-        Flying,
-        PreparingToLand,
-        Landing,
-        Descending,
-        Landed,
-        Escaping
-    }
-    private States state;
-
-    [SerializeField] private BezierTrajectory trajectory;
-    [SerializeField] private HelicopterMover mover;
-    [SerializeField] private HelicopterRotator rotator;
-    [SerializeField] private HelicopterSway sway;
-    [SerializeField] private DispenserManager dispenserManager;
-    [SerializeField] private DispenserStorage storage;
-
+    [Header("Movement")]
+    [SerializeField] private HelicopterEngine engine;
     [SerializeField] private HelicopterTimer synchronizer;
+    [SerializeField] private HelicopterSway sway;
+    [SerializeField] private HelicopterElevator elevator;
+
+    [Header("Data")]
     [SerializeField] private HelicopterData data;
-    [SerializeField] private FunctionTimer timer;
-    [SerializeField] private Chronos chronos;
-
-    [Header("Descending")]
-    [SerializeField] private float descendingTime;
-    [SerializeField] private float descendingHeight;
-
-    private float currentDescendingTime;
-    private Vector3 positionBeforDescend;
-    private Vector3 descendDestination;
-
-    private bool isMoving;
-
-    private Vector3 prevPos;
-    private Quaternion targetRotation;
-
-    private bool skipFrame;
+    [SerializeField] private BezierTrajectory trajectory;
 
     public event Action onLanded;
-    public event Action onTakeOff;
+    public event Action onSetOff;
 
     private void Awake()
     {
-        SynchronizeComponents();
-        targetRotation = transform.rotation;
+        Fly();
     }
 
     private void Start(){
         GameEvents.current.onVictory += PrepareToLand;
-        GameEvents.current.onHelicopterIsGoingToSetOff += Escape;
     }
 
     private void Update(){
-        if (state != States.Descending){
-            UpdatePositionAccordingToTheTrajectory();
-        }
-        else{
-            UpdateDescending();
-        }
+        engine.MoveAlongTheTrajectoryIfPossible(trajectory);
     }
 
-    private void SynchronizeComponents()
+    public void Fly()
     {
-        synchronizer.onTimeUpdate += mover.UpdateCompletion;
-        synchronizer.onTimeUpdate += rotator.UpdateCompletion;
-        synchronizer.onTimeUpdate += sway.UpdateCompletion;
-    }
-
-    public void Launch()
-    {
-        if (state != States.PreparingToLand){
-            state = States.Flying;
+        if (IsNotGoingToLand()){
+            data.state = HelicopterStates.Follow;
 
             StartMoving();
 
             trajectory.GenerateTrajectory();
-            synchronizer.Set(trajectory.Length, data.Speed);
+            synchronizer.Set(trajectory.Length, data.speed);
             sway.SetFlyingMagnitude();
-
-            onTakeOff?.Invoke();
         }
         else
         {
@@ -90,109 +46,42 @@ public class Helicopter : MonoBehaviour, ILaunchable
         }
     }
 
-    public void Land()
-    {
-        state = States.Landing;
+    private bool IsNotGoingToLand() => data.state != HelicopterStates.IsGoingToLand;
+
+    private void PrepareToLand() => data.state = HelicopterStates.IsGoingToLand;
+
+    public void Land(){
+        data.state = HelicopterStates.Land;
 
         StartMoving();
 
-        trajectory.GenerateLandingTrajectory(transform.position);
-        synchronizer.Set(trajectory.Length, data.Speed);
+        trajectory.GenerateLandingTrajectory(data.position);
+        synchronizer.Set(trajectory.Length, data.speed);
         sway.SetLandingMagnitude();
 
-        synchronizer.Set(trajectory.Length, data.Speed);
+        synchronizer.Set(trajectory.Length, data.speed);
     }
 
-    private void Descend()
-    {
-        state = States.Descending;
+    public void Descend() => elevator.Descend();
 
-        //StartMoving();
-
-        positionBeforDescend = transform.position;
-        trajectory.GenerateDescendingTrajectory(descendingHeight);
-        descendDestination = trajectory.GetEndPointPosition();
-
-        //synchronizer.Set(trajectory.Length, data.Speed);
-
-    }
+    public void NotifyOnLanded() => onLanded?.Invoke();
 
     public void Escape()
     {
-        state = States.Escaping;
+        data.state = HelicopterStates.Escape;
 
         StartMoving();
 
         trajectory.GenerateEscapeTrajectroy();
-        synchronizer.Set(trajectory.Length, data.Speed);
+        synchronizer.Set(trajectory.Length, data.speed);
         sway.SetFlyingMagnitude();
 
-        onTakeOff?.Invoke();
+        onSetOff?.Invoke();
     }
 
     private void StartMoving()
     {
-        isMoving = true;
-        skipFrame = true;
-    }
-
-    public void Stop() => isMoving = false;
-
-    private void UpdatePositionAccordingToTheTrajectory()
-    {
-        if (isMoving && chronos.IsTicking)
-        {
-            if (!skipFrame)
-            {
-                MoveAlongTheTrajectory();
-            }
-            else
-            {
-                skipFrame = false;
-            }
-        }
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, data.RotationSpeed * Time.deltaTime);
-    }
-
-    //private void
-
-    private void MoveAlongTheTrajectory()
-    {
-        synchronizer.UpdateTime();
-        transform.position = mover.Move(trajectory, ActOnArrival);
-        targetRotation = rotator.Rotate(targetRotation, transform.position, prevPos);
-
-        prevPos = transform.position;
-    }
-
-    private void ActOnArrival()
-    {
-        isMoving = false;
-        dispenserManager.DropCargoIfPossible(OnDispenserIsDone);
-    }
-
-    private void OnDispenserIsDone()
-    {
-        if (state == States.Flying){
-            Launch();
-        }
-        else if (state == States.PreparingToLand){
-            Land();
-        }
-        else if (state == States.Landing)
-        {
-            Descend();
-            //onLanded?.Invoke();
-        }
-    }
-
-    private void PrepareToLand(){
-        state = States.PreparingToLand;
-    }
-
-    private void UpdateDescending()
-    {
-
+        data.isMoving = true;
+        data.skipFrame = true; // Don't ask why
     }
 }

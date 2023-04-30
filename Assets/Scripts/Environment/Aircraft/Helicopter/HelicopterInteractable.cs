@@ -3,12 +3,13 @@
 public class HelicopterInteractable : MonoBehaviour, IInteractable, ISwitchable
 {
     private Helicopter helicopter;
-    private Collider interactionCollider;
+    private Collider[] interactionColliders;
     private bool isUsed;
 
     private void Awake()
     {
-        interactionCollider = GetComponent<Collider>();
+        helicopter = GetComponentInParent<Helicopter>();
+        interactionColliders = GetComponentsInChildren<Collider>();
         helicopter.onLanded += SwitchOn;
     }
 
@@ -17,15 +18,19 @@ public class HelicopterInteractable : MonoBehaviour, IInteractable, ISwitchable
         if (!isUsed){
             isUsed = true;
             SwitchOff();
-            GameEvents.current.OnboardTheHelicopter();
+            HelicopterEvents.current.NotifyOnBoarded();
         }
     }
 
     public void SwitchOn(){
-        interactionCollider.enabled = true;
+        foreach (Collider interactionCollider in interactionColliders){
+            interactionCollider.enabled = true;
+        }
     }
 
     public void SwitchOff(){
-        interactionCollider.enabled = false;
+        foreach (Collider interactionCollider in interactionColliders){
+            interactionCollider.enabled = false;
+        }
     }
 }
