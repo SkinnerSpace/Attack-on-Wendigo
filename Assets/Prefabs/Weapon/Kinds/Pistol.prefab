@@ -360,9 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9cbff8d496c0140bcc6b5749cee7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 5764452896203316476}
-  transitionController: {fileID: 5930679563411641543}
-  physicalBodyImp: {fileID: 5764452896203316476}
 --- !u!114 &5930679563411641543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e36f764ab1ef9b4588827a51af535aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handyItemImp: {fileID: 5764452896203316476}
 --- !u!114 &8224795515409809753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedData: {fileID: 11400000, guid: 59df11fc858605447ab33be07409a7c4, type: 2}
   leviationHeight: 1.3
+  isLevitating: 0
 --- !u!114 &4816719089680199614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +703,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physics: {fileID: 167394209420275762}
-  pooledObject: {fileID: 7317129112943931184}
   timer: {fileID: 1398000214756220517}
   data: {fileID: 11400000, guid: d054f6b4c392e054dafeb3e88c27f4e9, type: 2}
 --- !u!114 &4207718243511403909
@@ -721,10 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9187051e52960140827fb9f18bb024e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
-  sweeper: {fileID: 4816719089680199614}
   timer: {fileID: 1398000214756220517}
-  abandonmentDistance: 30
 --- !u!114 &7317129112943931184
 MonoBehaviour:
   m_ObjectHideFlags: 0
