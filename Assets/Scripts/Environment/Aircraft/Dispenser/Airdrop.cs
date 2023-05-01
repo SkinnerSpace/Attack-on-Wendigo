@@ -60,6 +60,6 @@ public class Airdrop : MonoBehaviour, IAirdrop
 
     private void LogCargoCount(int cargoCount)
     {
-        Debug.Log("Cargo " + cargoCount);
+        //Debug.Log("Cargo " + cargoCount);
     }
 }

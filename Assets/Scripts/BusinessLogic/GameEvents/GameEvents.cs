@@ -25,7 +25,6 @@ public class GameEvents : MonoBehaviour
     public event Action onIntroIsOver;
     public event Action onRestart;
 
-    public event Action onBluntDamageReceived;
     public event Action onOutroCameraStoppedTracking;
 
     private void Awake()
@@ -58,8 +57,6 @@ public class GameEvents : MonoBehaviour
 
     public void IntroIsOver() => onIntroIsOver?.Invoke();
     public void NotifyOnRestart() => onRestart?.Invoke();
-
-    public void PlayerReceivedBluntDamage() => onBluntDamageReceived?.Invoke();
     
 
     public void OutroCameraStoppedTracking() => onOutroCameraStoppedTracking?.Invoke();

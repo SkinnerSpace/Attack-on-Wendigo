@@ -18,17 +18,23 @@ namespace Character
             burnHandler = new BurnHandler(main.FireHitBox, main.Timer, scorchTime);
         }
 
-        public override void Connect() => burnHandler.SubscribeOnScorch(ReceiveDamage);
+        public override void Connect() => burnHandler.onScorchDamage += ReceiveDamage;
         public override void Disconnect() { }
 
         public void Subscribe(IBurnObserver observer) => burnHandler.Subscribe(observer);
 
-        private void ReceiveDamage()
+        private void ReceiveDamage(bool criticalDamage)
         {
             DamagePackage damagePackage = new DamagePackage(scorchDamage);
             damagePackage.damageType = DamageTypes.Fire;
 
-            healthSystem.ReceiveNonCriticalDamage(damagePackage);
+            if (criticalDamage){
+                healthSystem.ReceiveDamage(damagePackage);
+            }
+            else{
+                healthSystem.ReceiveNonCriticalDamage(damagePackage);
+            }
+
             onBurn?.Invoke();
         }
     }

@@ -3,6 +3,7 @@
 public class GUIController : MonoBehaviour
 {
     [SerializeField] private GUIContainer main;
+
     [SerializeField] private GUIContainer hUD;
     [SerializeField] private GUIContainer aim;
     [SerializeField] private GUIContainer uGUI;
@@ -34,12 +35,19 @@ public class GUIController : MonoBehaviour
             }
         };
 
-        PlayerEvents.current.onDeath += main.HideGradually;
-        HelicopterEvents.current.onBoarded += main.HideGradually;
+        PlayerEvents.current.onDeath += HideAllButMain;
+        HelicopterEvents.current.onBoarded += HideAllButMain;
     }
 
     private void ConnectHUD()
     {
         GameEvents.current.onVictory += hUD.HideGradually;
+    }
+
+    private void HideAllButMain()
+    {
+        hUD.HideGradually();
+        aim.HideGradually();
+        uGUI.HideGradually();
     }
 }

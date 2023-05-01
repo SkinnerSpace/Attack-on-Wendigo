@@ -12,6 +12,7 @@ public class ItemsKeeper : IItemsKeeper
     public Transform Root => data.Cam.transform;
 
     private IPickable pickable;
+    private IItem item;
     private IWeapon weapon;
     private IHealthPack healthPack;
     private WeaponThrower thrower;
@@ -27,7 +28,7 @@ public class ItemsKeeper : IItemsKeeper
 
     public void TakeAWeapon(IPickable pickable, IWeapon weapon)
     {
-        PickAnItem(pickable);
+        PickAnItem(pickable, weapon);
 
         this.weapon = weapon;
         AimPresenter.Instance.SetAnimation(weapon.AimAnimation, weapon.Rate);
@@ -36,14 +37,15 @@ public class ItemsKeeper : IItemsKeeper
 
     public void TakeAHealthPack(IPickable pickable, IHealthPack healthPack, IHealthSystem healthSystem)
     {
-        PickAnItem(pickable);
+        PickAnItem(pickable, healthPack);
 
         this.healthPack = healthPack;
         healthPack.SetTarget(healthSystem);
     }
 
-    private void PickAnItem(IPickable pickable){
+    private void PickAnItem(IPickable pickable, IItem item){
         this.pickable = pickable;
+        this.item = item;
         pickable.PickUp(this, OnCameToHands);
     }
 
@@ -51,7 +53,7 @@ public class ItemsKeeper : IItemsKeeper
     {
         if (pickable != null)
         {
-            DropAWeapon();
+            ResetAnItem();
 
             Vector3 dropPos = thrower.GetDropPos(pickable, screenPoint);
             Vector3 force = data.CameraForward * data.DropItemStrength;
@@ -63,11 +65,13 @@ public class ItemsKeeper : IItemsKeeper
         }
     }
 
-    private void DropAWeapon()
+    private void ResetAnItem()
     {
-        if (weapon != null){
-            weapon.SetReady(false);
+        if (item != null){
+            item.SetReady(false);
+            item = null;
             weapon = null;
+            healthPack = null;
         }
     }
 
@@ -84,6 +88,7 @@ public class ItemsKeeper : IItemsKeeper
         {
             healthPack.InitializeOnTake(data, input, interactor);
             healthPack.SetReady(true);
+
             return;
         }
     }

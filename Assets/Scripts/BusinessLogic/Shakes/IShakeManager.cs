@@ -2,4 +2,5 @@
 {
     void Handle(IShake shake);
     void AddAndLaunch(IShake shake);
+    void Stop();
 }

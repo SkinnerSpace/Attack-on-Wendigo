@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ShakeManager : IShakeManager
 {
@@ -42,4 +43,10 @@ public class ShakeManager : IShakeManager
     }
 
     public int GetShakesCount() => shakes.Count;
+
+    public void Stop()
+    {
+        shakes.Clear();
+        displacementTotal.Clear();
+    }
 }

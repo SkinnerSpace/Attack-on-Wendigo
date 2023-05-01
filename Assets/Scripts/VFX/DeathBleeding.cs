@@ -15,7 +15,7 @@ public class DeathBleeding : MonoBehaviour
 
     private void Start()
     {
-        PlayerEvents.current.onDeath += Bleed;
+        PlayerEvents.current.onHammered += Bleed;
     }
 
     private void Bleed()

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class BurnHandler
 {
@@ -8,9 +9,10 @@ public class BurnHandler
     private float scorchTime = 1f;
     private bool isOnFire;
 
-    private Action onFire;
-    private Action onScorch;
-    private Action onCoolDown;
+    private event Action onScorch;
+    private event Action onCoolDown;
+
+    public event Action<bool> onScorchDamage;
 
     public BurnHandler(FireHitBox fireHitBox, FunctionTimer timer, float scorchTime)
     {
@@ -22,22 +24,16 @@ public class BurnHandler
 
     public void Subscribe(IBurnObserver observer)
     {
-        onCoolDown += observer.CoolDown;
         onScorch += observer.Scorch;
+        onCoolDown += observer.CoolDown;
     }
-
-    public void SubscribeOnFire(Action onFire) => this.onFire += onFire;
-    public void SubscribeOnScorch(Action onScorch) => this.onScorch += onScorch;
-    public void SubscribeOnCoolDown(Action onCoolDown) => this.onCoolDown += onCoolDown;
 
     private void SetOnFire()
     {
         if (!isOnFire)
-        {
-            onFire?.Invoke();
-            isOnFire = true;
-
+        { 
             Scorch();
+            isOnFire = true;
         }
     }
 
@@ -45,6 +41,15 @@ public class BurnHandler
     {
         timer.Set(SCORCH_TIMER, scorchTime, Scorch);
         onScorch?.Invoke();
+
+        if (!isOnFire)
+        {
+            onScorchDamage?.Invoke(true);
+        }
+        else
+        {
+            onScorchDamage?.Invoke(false);
+        }
     }
 
     private void CoolDown()

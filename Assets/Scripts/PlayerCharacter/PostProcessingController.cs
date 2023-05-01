@@ -11,8 +11,6 @@ public class PostProcessingController : MonoBehaviour, IBurnObserver
 
     private Animator animator;
 
-    private bool isBurning;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -25,8 +23,6 @@ public class PostProcessingController : MonoBehaviour, IBurnObserver
 
     public void CoolDown()
     {
-        //isBurning = false;
-
         animator.ResetTrigger(damageTrigger);
         animator.SetTrigger(wentOutTrigger);
 
@@ -35,14 +31,6 @@ public class PostProcessingController : MonoBehaviour, IBurnObserver
 
     public void Scorch()
     {
-        /*if (!isBurning){
-            isBurning = true;
-            scorchSFXPlayer.PlayInflameSFX();
-        }
-        else{
-            scorchSFXPlayer.PlayDamageSFX();
-        }*/
-
         scorchSFXPlayer.PlayDamageSFX();
         animator.SetTrigger(damageTrigger);
     }

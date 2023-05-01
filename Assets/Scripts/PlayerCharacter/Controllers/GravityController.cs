@@ -22,8 +22,8 @@ public class GravityController : BaseController, IGroundObserver, IMoverObserver
 
     public override void Disconnect()
     {
-        main.Mover.Unsubscribe(this);
-        main.GetController<GroundDetector>().Unsubscribe(this);
+        //main.Mover.Unsubscribe(this);
+        //main.GetController<GroundDetector>().Unsubscribe(this);
     }
 
     public void Update()

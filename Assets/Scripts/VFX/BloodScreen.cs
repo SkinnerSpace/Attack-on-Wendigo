@@ -22,7 +22,7 @@ public class BloodScreen : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.onBluntDamageReceived += () => ScatterTheScreenWithBlood(1);
+        PlayerEvents.current.onReceivedBluntDamage += () => ScatterTheScreenWithBlood(1);
         PlayerEvents.current.onDeath += () => ScatterTheScreenWithBlood(deathMultiplier);
         pooler = PoolHolder.Instance;
     }

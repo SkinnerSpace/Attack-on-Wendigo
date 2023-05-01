@@ -25,6 +25,8 @@ public class ShakeDisplacement : IShakeDisplacement
         Angle = Vector3.zero;
     }
 
+    public bool IsNotEmpty() => Position.magnitude > Mathf.Epsilon || Angle.magnitude > Mathf.Epsilon;
+
     public override string ToString()
     {
         return "Position: " + Position + " Angle: " + Angle; 

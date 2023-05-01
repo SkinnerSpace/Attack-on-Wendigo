@@ -62,6 +62,6 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     {
         model.enabled = false;
         physics.SwitchOff();
-        laserBeam.SwitchOff();
+        laserBeam.SwitchOffAndLock();
     }
 }

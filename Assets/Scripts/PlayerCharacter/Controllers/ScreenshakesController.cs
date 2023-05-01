@@ -23,6 +23,11 @@ namespace Character
 
         public override void Disconnect() { }
 
+        public void StopShake()
+        {
+            ShakeManagerComponent.Instance.Stop();
+        }
+
         private void ShakeOnImpactReceived(float impact)
         {
             float shakePower = (impact / maxImpact);

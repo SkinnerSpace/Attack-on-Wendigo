@@ -30,7 +30,6 @@ namespace Character
             hitBox.Unsubscribe(this);
         }
 
-        // Screenshakes controller is subscribed on this event
         public void SubscribeOnImpact(Action<float> onImpact) => this.onImpact += onImpact;
 
         public void ReceiveDamage(DamagePackage damagePackage)

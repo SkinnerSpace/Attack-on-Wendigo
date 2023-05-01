@@ -31,12 +31,12 @@ public class DebugCommands : MonoBehaviour
 
         DebugCommand DIE = new DebugCommand("die", "Commit suicide", "die", () =>
         {
-            components.player.GetController<CharacterHealthSystem>().Die();
+            components.player.GetController<CharacterHealthSystem>().Die(DamageTypes.Blunt);
         });
 
         DebugCommand GET_BLUNT_DAMAGE = new DebugCommand("hit", "Get blunt damage", "hit", () =>
         {
-            GameEvents.current.PlayerReceivedBluntDamage();
+            PlayerEvents.current.NotifyOnReceivedBluntDamage();
         });
 
         DebugCommand DECLARE_VICTORY = new DebugCommand("victory", "Declare victory", "victory", () => 
@@ -54,6 +54,11 @@ public class DebugCommands : MonoBehaviour
             components.airdrop.AddCargoFromCatalogWithQuantity(t, n);
         });
 
+        DebugCommand<int> SET_HEALTH = new DebugCommand<int>("health", "Set health", "health <n>", (n) =>
+        {
+            components.player.GetController<CharacterHealthSystem>().SetHealth(n);
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
@@ -64,7 +69,8 @@ public class DebugCommands : MonoBehaviour
             GET_BLUNT_DAMAGE,
             DECLARE_VICTORY,
             SET_DEATH_PROGRESS,
-            ADD_CARGO
+            ADD_CARGO,
+            SET_HEALTH
         };
     }
 }

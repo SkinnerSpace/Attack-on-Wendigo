@@ -64,7 +64,7 @@ namespace Character
         public Camera Cam => cam;
         public CharacterController Controller => controller;
 
-        public int Health { get { return data.Health.Amount; } set { data.Health.Amount = value; } }
+        public int Health { get { return data.Health.amount; } set { data.Health.amount = value; } }
 
         public Vector3 CameraViewEuler { get; set; }
         public Quaternion CameraRotation { get { return cam.transform.rotation; } set { cam.transform.rotation = value; } }

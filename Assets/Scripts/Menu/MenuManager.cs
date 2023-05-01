@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour, IMenu
 {
+    [SerializeField] private FunctionTimer timer;
     [SerializeField] private MenuSFXPlayer sFXPlayer;
     [SerializeField] private MenuTitle title;
     [SerializeField] private List<Menu> menus;
@@ -33,6 +34,7 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private void Start(){
         MenuEvents.current.onSubMenuEnter += Open;
+        PlayerEvents.current.onDeath += () => WaitAndOpen(6f);
     }
 
     private void InitializeMenus()
@@ -40,6 +42,11 @@ public class MenuManager : MonoBehaviour, IMenu
         foreach (Menu menu in menus){
             Menus.Add(menu.name, menu);
         }
+    }
+
+    private void WaitAndOpen(float waitTime)
+    {
+        timer.Set("Open pause", waitTime, () => Open("pause"));
     }
 
     public void Open(string menuName)

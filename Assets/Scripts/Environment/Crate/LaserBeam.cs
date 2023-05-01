@@ -46,7 +46,7 @@ public class LaserBeam : MonoBehaviour
         line.enabled = false;
     }
 
-    private void SwitchOffAndLock()
+    public void SwitchOffAndLock()
     {
         isLocked = true;
         SwitchOff();

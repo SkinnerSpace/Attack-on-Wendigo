@@ -15,9 +15,6 @@ namespace WendigoCharacter
         [SerializeField] private Chronos chronos;
         [SerializeField] private WendigoHealthSystemComponent healthSystem;
 
-        [Header("Settings")]
-        [SerializeField] private bool visualizeRaycast;
-
         private bool isSpewingFire;
 
         private void Start()

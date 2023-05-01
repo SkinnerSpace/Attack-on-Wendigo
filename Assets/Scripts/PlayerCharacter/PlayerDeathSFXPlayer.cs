@@ -21,11 +21,11 @@ namespace Character
 
         private void Start()
         {
-            GameEvents.current.onBluntDamageReceived += () => damagePlayer.PlayOneShot();
-            PlayerEvents.current.onDeath += PlayDeathSFX;
+            PlayerEvents.current.onReceivedBluntDamage += () => damagePlayer.PlayOneShot();
+            PlayerEvents.current.onHammered += PlayHammeredToDeathSFX;
         }
 
-        private void PlayDeathSFX()
+        private void PlayHammeredToDeathSFX()
         {
             smashAudioPlayer.PlayOneShot();
             bleedingAudioPlayer.PlayOneShot();

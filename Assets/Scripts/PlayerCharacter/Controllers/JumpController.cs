@@ -6,6 +6,7 @@ namespace Character
     public class JumpController : BaseController, IJumpController, IGroundObserver
     {
         private PlayerCharacter main;
+        private ScreenshakesController screenshakesController;
         private ICharacterData data;
         private IInputReader input;
 
@@ -14,6 +15,7 @@ namespace Character
         public override void Initialize(PlayerCharacter main)
         {
             this.main = main;
+            
             data = main.OldData;
             input = main.InputReader;
         }
@@ -22,6 +24,8 @@ namespace Character
 
         public override void Connect()
         {
+            screenshakesController = main.GetController<ScreenshakesController>();
+
             main.GetController<GroundDetector>().Subscribe(this);
             input.Get<JumpInputReader>().Subscribe(this);
         }
@@ -48,6 +52,7 @@ namespace Character
                 ApplyJumpForce();
 
                 onJump?.Invoke();
+                screenshakesController.StopShake();
             }
         }
 

@@ -1,12 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Character
 {
     [Serializable]
     public class HealthData
     {
-        public int Amount;
-        public bool IsAlive => Amount > 0;
-        public bool IsImmortal { get; set; }
+        public int amount = 20;
+        public int maxAmount = 20;
+        public bool isImmortal;
     }
 }

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.5
+  recoilPower: 0.4
   recoilTime: 0.3
 --- !u!1 &4611868940550012031
 GameObject:
@@ -232,8 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad76d8128f93b240a6ffb8b4655e206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
-  data: {fileID: 2257250665810215781}
   displacementOn: 1
   rotationOn: 1
   tiltOn: 1
@@ -253,7 +251,6 @@ MonoBehaviour:
   displacementIntensity: 0.2
   maxDisplacement: 0.5
   smoothDisplacement: 6
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &1536859498695772921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationIntensity: 3
   smoothRotation: 5
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &7650513728836118252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +280,6 @@ MonoBehaviour:
   tiltIntensity: 4
   maxTilt: 5
   smoothTilt: 12
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &8805010115170836883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5726,7 +5721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2633c62b79eb3b64c9d688fd41dc8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
+  handyItemImp: {fileID: 5764452896203316476}
   pickable: {fileID: 1380737539804280775}
   RetractablePoint: {fileID: 8127938057176914548}
   armsRenderers:
@@ -6375,6 +6370,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2338603169372130976, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338603169372130976, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2438152751756201485, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
         type: 3}
       propertyPath: m_Layer
@@ -6434,6 +6439,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128558231661533828, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128558231661533828, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5130527036563901254, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
         type: 3}

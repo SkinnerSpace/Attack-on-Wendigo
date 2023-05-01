@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.5
+  recoilPower: 0.4
   recoilTime: 0.3
 --- !u!1 &4611868940550012031
 GameObject:
@@ -205,8 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad76d8128f93b240a6ffb8b4655e206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
-  data: {fileID: 2257250665810215781}
   displacementOn: 1
   rotationOn: 1
   tiltOn: 1
@@ -226,7 +224,6 @@ MonoBehaviour:
   displacementIntensity: 0.2
   maxDisplacement: 0.5
   smoothDisplacement: 6
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &1536859498695772921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationIntensity: 3
   smoothRotation: 5
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &7650513728836118252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +253,6 @@ MonoBehaviour:
   tiltIntensity: 4
   maxTilt: 5
   smoothTilt: 12
-  aimController: {fileID: 997745253376797098}
 --- !u!114 &8805010115170836883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2633c62b79eb3b64c9d688fd41dc8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
+  handyItemImp: {fileID: 5764452896203316476}
   pickable: {fileID: 4611041808808164778}
   RetractablePoint: {fileID: 8344412466367245665}
   armsRenderers:
@@ -612,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheckRadius: 1
+  visualizeCollider: 0
 --- !u!114 &7697032488548761587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedData: {fileID: 11400000, guid: 59df11fc858605447ab33be07409a7c4, type: 2}
   leviationHeight: 1.7
+  isLevitating: 0
 --- !u!114 &9175431412569059531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,10 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9187051e52960140827fb9f18bb024e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1287198399616454532}
-  sweeper: {fileID: 18560906536944161}
   timer: {fileID: 7286420635910837017}
-  abandonmentDistance: 30
 --- !u!114 &18560906536944161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,7 +649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physics: {fileID: 3281898898999005978}
-  pooledObject: {fileID: 6638904995267437864}
   timer: {fileID: 7286420635910837017}
   data: {fileID: 11400000, guid: d054f6b4c392e054dafeb3e88c27f4e9, type: 2}
 --- !u!54 &4743937849382538504
@@ -5657,9 +5650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9cbff8d496c0140bcc6b5749cee7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 5764452896203316476}
-  transitionController: {fileID: 298535625426325826}
-  physicalBodyImp: {fileID: 5764452896203316476}
 --- !u!114 &298535625426325826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5672,7 +5662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e36f764ab1ef9b4588827a51af535aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handyItemImp: {fileID: 5764452896203316476}
 --- !u!114 &7579685509612711756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6406,6 +6395,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128558231661533828, guid: 278c01b7e04a8f047a29ed7b0f15d018,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128558231661533828, guid: 278c01b7e04a8f047a29ed7b0f15d018,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 278c01b7e04a8f047a29ed7b0f15d018,
         type: 3}
@@ -8241,6 +8240,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338603169372130976, guid: ad7aa19a235918f44ae38b5c4455beb6,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338603169372130976, guid: ad7aa19a235918f44ae38b5c4455beb6,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2425196717138541596, guid: ad7aa19a235918f44ae38b5c4455beb6,
         type: 3}

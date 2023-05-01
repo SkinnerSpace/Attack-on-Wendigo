@@ -23,4 +23,5 @@ public class ShakeManagerComponent : MonoBehaviour, IShakeManager
     public void Handle(IShake shake) => manager.Handle(shake);
 
     public void AddAndLaunch(IShake shake) => manager.AddAndLaunch(shake);
+    public void Stop() => manager.Stop();
 }

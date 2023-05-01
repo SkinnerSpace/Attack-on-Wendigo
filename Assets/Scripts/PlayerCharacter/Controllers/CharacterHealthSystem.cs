@@ -5,79 +5,78 @@ namespace Character
 {
     public class CharacterHealthSystem : BaseController, IDamageable, IHealthSystem
     {
-        private HealthData healthData;
+        private HealthController health;
         private HitBoxProxy hitBox;
 
-        public void Initialize(HealthData healthData) => this.healthData = healthData;
+        public event Action<DamagePackage> onReceivedDamage;
+
+        public void Initialize(HealthData healthData) => health = new HealthController(healthData);
 
         public override void Connect()
         {
             hitBox.Subscribe(this);
 
-            PlayerEvents.current.UpdateHealth(healthData.Amount);
-            GameEvents.current.onVictory += BecomeImmortal;
+            GameEvents.current.onVictory += () => health.BecomeImmortal();
         }
 
         public override void Disconnect() => hitBox.Unsubscribe(this);
 
         public void ReceiveNonCriticalDamage(DamagePackage damagePackage)
         {
-            if (healthData.Amount - damagePackage.damage > 0){
+            if (!health.CheckIfCritical(damagePackage.damage)){
                 ReceiveDamage(damagePackage);
+            }
+            else
+            {
+                health.Set(1);
             }
         }
 
         public void ReceiveDamage(DamagePackage damagePackage)
         {
-            if (IsDamageable()){
-                ReduceHealth(damagePackage);
+            if (health.IsDamageable()){
+                health.Reduce(damagePackage.damage);
+
+                if (!health.IsAlive()){
+                    Die(damagePackage.damageType);
+                }
+
                 NotifyOnBluntDamage(damagePackage);
-                PlayerEvents.current.UpdateHealth(healthData.Amount);
-            }
-        }
-
-        private bool IsDamageable(){
-            return healthData.IsAlive && 
-                   !healthData.IsImmortal;
-        }
-
-        private void ReduceHealth(DamagePackage damagePackage)
-        {
-            healthData.Amount -= damagePackage.damage;
-
-            if (!healthData.IsAlive){
-                Die();
             }
         }
 
         private void NotifyOnBluntDamage(DamagePackage damagePackage)
         {
             if (damagePackage.damageType == DamageTypes.Blunt){
-                GameEvents.current.PlayerReceivedBluntDamage();
+                PlayerEvents.current.NotifyOnReceivedBluntDamage();
             }
         }
 
         public override void Initialize(PlayerCharacter main)
         {
-            healthData = main.Data.Health;
+            health = new HealthController(main.Data.Health);
             hitBox = main.HitBox;
         }
 
-        public void Die()
+        public void Die(DamageTypes damageType)
         {
-            healthData.Amount = 0;
-            PlayerEvents.current.Die();
+            health.Set(0);
+            PlayerEvents.current.NotifyOnDeath();
+
+            if (damageType == DamageTypes.Blunt){
+                PlayerEvents.current.NotifyOnHammered();
+            }
+            else if (damageType == DamageTypes.Fire){
+                PlayerEvents.current.NotifyOnBurnt();
+            }
         }
 
         public void RestoreHealth(int healthAmount)
         {
-            healthData.Amount += healthAmount;
-            PlayerEvents.current.UpdateHealth(healthData.Amount);
+            health.Increase(healthAmount);
         }
 
-        private void BecomeImmortal(){
-            healthData.IsImmortal = true;
-        }
+        public void SetHealth(int healthValue) => health.Set(healthValue);
 
         public void SubscribeOnDeath(Action onDeath) { }
     }
