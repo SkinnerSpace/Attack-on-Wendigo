@@ -9,6 +9,7 @@ public class MessageScreen : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Animator animator;
     [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private MessageSFXPlayer sFXPlayer;
     [SerializeField] private FunctionTimer timer;
 
     [Header("Data")]
@@ -28,6 +29,7 @@ public class MessageScreen : MonoBehaviour
         message.color = config.color;
         Show(config);
         HideAfterSomeTime(config);
+        sFXPlayer.PlayAppearSFX();
     }
 
     private void Show(MessageCongif config){
@@ -42,5 +44,6 @@ public class MessageScreen : MonoBehaviour
     private void Hide(MessageCongif config){
         int animation = MessageAnimationsProvider.Get(config.disappearAnimation);
         animator.Play(animation);
+        sFXPlayer.PlayFadeOutSFX();
     }
 }

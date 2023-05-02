@@ -626,6 +626,13 @@ MonoBehaviour:
     - {fileID: 3121768735913848635}
     - {fileID: 7531316126229299323}
     - {fileID: 8976999189326346655}
+  - name: gameover
+    title: Game Over
+    container: {fileID: 6408525785780905737}
+    buttons:
+    - {fileID: 4521782456533157851}
+    - {fileID: 4897716647675451273}
+    - {fileID: 4108882793137609093}
 --- !u!1 &6506765383088308278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultWidth: 410
   keyboardSettingsWidth: 800
+  gameOverWidth: 444
   transitionTime: 0.2
 --- !u!1001 &662447803152001242
 PrefabInstance:
@@ -4619,10 +4627,15 @@ PrefabInstance:
       propertyPath: m_text
       value: Title
       objectReference: {fileID: 0}
+    - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -327.74994
+      objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
@@ -4712,12 +4725,12 @@ PrefabInstance:
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 212
+      value: 40.99994
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -239
+      value: -239.00003
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295621, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}

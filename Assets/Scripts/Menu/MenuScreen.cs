@@ -2,8 +2,12 @@
 
 public class MenuScreen : MonoBehaviour
 {
+    [Header("Width")]
     [SerializeField] private float defaultWidth;
     [SerializeField] private float keyboardSettingsWidth;
+    [SerializeField] private float gameOverWidth;
+
+    [Header("Time")]
     [SerializeField] private float transitionTime;
 
     private RectTransform rectTransform;
@@ -21,6 +25,21 @@ public class MenuScreen : MonoBehaviour
 
     private void Start(){
         MenuEvents.current.onSubMenuEnter += ChangeWidthAccordingToTheSubMenu;
+    }
+
+    private void ChangeWidthAccordingToTheSubMenu(string subMenuName)
+    {
+        if (subMenuName == "keyboard"){
+            SetTargetWidth(keyboardSettingsWidth);
+        }
+
+        else if (subMenuName == "controls"){
+            SetTargetWidth(defaultWidth);
+        }
+
+        else if (subMenuName == "gameover"){
+            SetTargetWidth(gameOverWidth);
+        }
     }
 
     private void Update()
@@ -47,6 +66,7 @@ public class MenuScreen : MonoBehaviour
 
     private void SetTargetWidth(float targetWidth){
         targetSize = new Vector2(targetWidth, rectTransform.sizeDelta.y);
+        StartTransition();
     }
 
     private void StartTransition()
@@ -54,27 +74,5 @@ public class MenuScreen : MonoBehaviour
         originalSize = rectTransform.sizeDelta;
         time = 0f;
         isChanging = true;
-    }
-
-    private void ChangeWidthAccordingToTheSubMenu(string subMenuName)
-    {
-        if (subMenuName == "keyboard"){
-            SetKeyboardSettingsWidth();
-        }
-        else if (subMenuName == "controls"){
-            SetDefaultWidth();
-        }
-    }
-
-    private void SetDefaultWidth()
-    {
-        SetTargetWidth(defaultWidth);
-        StartTransition();
-    }
-
-    private void SetKeyboardSettingsWidth()
-    {
-        SetTargetWidth(keyboardSettingsWidth);
-        StartTransition();
     }
 }

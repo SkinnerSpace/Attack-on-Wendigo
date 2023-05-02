@@ -10057,7 +10057,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health:
-    Amount: 30
+    amount: 20
+    maxAmount: 20
+    isImmortal: 0
 --- !u!114 &402587302504087578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10077,8 +10079,8 @@ MonoBehaviour:
   fireHitBox: {fileID: 3576839576228049924}
   timer: {fileID: 7254224541728550267}
   chronos: {fileID: 8860424869380561027}
-  events: {fileID: 0}
   inputReader: {fileID: 0}
+  pushableObject: {fileID: 5437647117367586289}
 --- !u!114 &2146012073234770375
 MonoBehaviour:
   m_ObjectHideFlags: 0

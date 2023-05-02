@@ -14,6 +14,7 @@ namespace Character
         [SerializeField] private FunctionTimer timer;
         [SerializeField] private Chronos chronos;
         [SerializeField] private MainInputReader inputReader;
+        [SerializeField] private PushableObject pushableObject;
 
         public CharacterData OldData => oldData;
         public Data Data => data;
@@ -91,8 +92,11 @@ namespace Character
                 onConnectControlles?.Invoke();
             }
 
-            if (!isActive) 
+            if (!isActive)
+            {
                 onDisconnectControllers?.Invoke();
+                pushableObject.SwitchOff();
+            }
         }
     }
 }

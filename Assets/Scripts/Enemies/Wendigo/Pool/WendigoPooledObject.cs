@@ -8,6 +8,7 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
     public GameObject Object => gameObject;
     private IObjectPooler pooler;
     private Action onSpawn;
+    private Action onBackToPool;
 
     [SerializeField] private RagDollController ragDollController;
     [SerializeField] private WendigoData data;
@@ -16,6 +17,7 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
     private void Start() => pooler = PoolHolder.Instance;
 
     public void SubscribeOnSpawn(Action onSpawn) => this.onSpawn += onSpawn;
+    public void SubscribeOnBackToPool(Action onBackToPool) => this.onBackToPool += onBackToPool;
 
     public void OnObjectSpawn()
     {
@@ -33,6 +35,7 @@ public class WendigoPooledObject : MonoBehaviour, IPooledObject
 
     public void BackToPool()
     {
+        onBackToPool?.Invoke();
         gameObject.SetActive(false);
         pooler.PutIntoThePool(this);
         data.ResetData();

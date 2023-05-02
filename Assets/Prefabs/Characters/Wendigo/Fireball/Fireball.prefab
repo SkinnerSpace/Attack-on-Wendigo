@@ -69,7 +69,7 @@ MonoBehaviour:
   maxHomingSpeed: 3
   maxHorizontalBoundaries: 1920
   maxVerticalBoundary: 128
-  damage: 10
+  damage: 5
   impact: 500
   collisionRadius: 1.2
   explosionRadius: 15

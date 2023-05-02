@@ -8,8 +8,6 @@ namespace Character
         private HealthController health;
         private HitBoxProxy hitBox;
 
-        public event Action<DamagePackage> onReceivedDamage;
-
         public void Initialize(HealthData healthData) => health = new HealthController(healthData);
 
         public override void Connect()
@@ -26,7 +24,7 @@ namespace Character
             if (!health.CheckIfCritical(damagePackage.damage)){
                 ReceiveDamage(damagePackage);
             }
-            else
+            else if (health.IsAlive())
             {
                 health.Set(1);
             }
@@ -74,6 +72,7 @@ namespace Character
         public void RestoreHealth(int healthAmount)
         {
             health.Increase(healthAmount);
+            PlayerEvents.current.NotifyOnHealthRestore();
         }
 
         public void SetHealth(int healthValue) => health.Set(healthValue);

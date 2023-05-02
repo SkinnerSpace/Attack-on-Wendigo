@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private void Start(){
         MenuEvents.current.onSubMenuEnter += Open;
-        PlayerEvents.current.onDeath += () => WaitAndOpen(6f);
+        PlayerEvents.current.onDeath += () => WaitAndOpen(5.5f);
     }
 
     private void InitializeMenus()
@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private void WaitAndOpen(float waitTime)
     {
-        timer.Set("Open pause", waitTime, () => Open("pause"));
+        timer.Set("Open game over menu", waitTime, () => MenuEvents.current.EnterSubMenu("gameover"));
     }
 
     public void Open(string menuName)
@@ -139,16 +139,6 @@ public class MenuManager : MonoBehaviour, IMenu
         if (current != null){
             current.container.alpha = 0f;
             current.container.enabled = false;
-        }
-    }
-
-    private void BackToMainMenu()
-    {
-        if (GameState.PauseMode == PauseMode.None){
-            Open("main");
-        }
-        else if (GameState.PauseMode == PauseMode.Paused){
-            Open("pause");
         }
     }
 }

@@ -18,6 +18,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
     [SerializeField] private ItemSweeper sweeper;
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private HealingLiquid liquid;
+    [SerializeField] private DrugsSFXPlayer sFXPlayer;
 
     private IInputReader inputReader;
     private IInteractionController interactor;
@@ -70,6 +71,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
         if (!isUsed){
             isUsed = true;
             onInjection?.Invoke();
+            sFXPlayer.PlayInjectionSFX();
         }
     }
 
