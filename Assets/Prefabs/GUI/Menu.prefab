@@ -569,7 +569,7 @@ MonoBehaviour:
   title: {fileID: 3618834719061238913}
   menus:
   - name: main
-    title: Main
+    title: Attack on<br>Wendigo
     container: {fileID: 6860489624089715105}
     buttons:
     - {fileID: 5695555555739674202}
@@ -1121,7 +1121,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -540}
-  m_SizeDelta: {x: 410, y: 1080}
+  m_SizeDelta: {x: 424, y: 1080}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1368950266246395003
 CanvasRenderer:
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c26f40a4f9dc24881260156e476530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWidth: 410
+  defaultWidth: 424
   keyboardSettingsWidth: 800
   gameOverWidth: 444
   transitionTime: 0.2
@@ -4625,7 +4625,14 @@ PrefabInstance:
     - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}
       propertyPath: m_text
-      value: Title
+      value: 'Attack on
+
+        Wendigo'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -26.81159
       objectReference: {fileID: 0}
     - target: {fileID: 3746363443449295620, guid: c12045d770351b7478bd5dee016f2792,
         type: 3}

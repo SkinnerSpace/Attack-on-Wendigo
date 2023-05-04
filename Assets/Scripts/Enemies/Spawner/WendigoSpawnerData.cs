@@ -20,11 +20,7 @@ public class WendigoSpawnerData
     public float progress;
     public float deathProgress;
 
-    public int health; // Configurable
-
-    public float speed; // Configurable
-
-    public float maxFireballDistance; // Configurable
+    public WendigoSettings settings;
 
     private WendigoSpawnConfig config;
 
@@ -54,10 +50,28 @@ public class WendigoSpawnerData
         if (configurable){
             allowedConcurrentCount = Mathf.RoundToInt(config.concurrentSpawnCount.Evaluate(progress));
             timeToSpawn = Mathf.Lerp(config.minTimeInterval.Evaluate(progress), config.maxTimeInterval.Evaluate(progress), density);
-            health = Mathf.RoundToInt(config.health.Evaluate(progress));
-            speed = config.speed.Evaluate(progress);
-            maxFireballDistance = config.maxFireballDistance.Evaluate(progress);
+
+            settings.health = Mathf.RoundToInt(config.health.Evaluate(progress));
+            settings.speedMultiplier = config.speed.Evaluate(progress);
+            settings.maxFireballDistance = config.maxFireballDistance.Evaluate(progress);
+
+            if (TimeForBossFight()){
+                SetUpBossFight();
+            }
+            else
+            {
+                settings.isABoss = false;
+            }
         }
+    }
+
+    private bool TimeForBossFight() => leftToSpawnCount == 1;
+    private void SetUpBossFight()
+    {
+        settings.isABoss = true;
+        settings.health = (int)(settings.health * config.healthMultiplier);
+        settings.speedMultiplier *= config.speedMultiplier;
+        settings.maxFireballDistance *= config.fireballDistanceMultiplier;
     }
 }
 

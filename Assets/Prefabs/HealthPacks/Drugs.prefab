@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drugName: Drugs
-  health: 10
+  health: 15
   abandonmentDetector: {fileID: 8443360487573563662}
   pickable: {fileID: 8443360485833179145}
   swayController: {fileID: 4494367409327659040}

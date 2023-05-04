@@ -34,6 +34,8 @@ public class WendigoSpawnerLogic
 
     public void Spawn()
     {
+        UpdateProgress();
+
         data.leftToSpawnCount -= 1;
         data.spawnedCount += 1;
         data.currentCount += 1;

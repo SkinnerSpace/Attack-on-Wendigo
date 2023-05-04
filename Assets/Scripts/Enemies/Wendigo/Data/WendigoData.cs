@@ -20,6 +20,7 @@ namespace WendigoCharacter
         public bool IsActive { get; set; }
         public bool IsArrived { get; set; }
         public bool IsRested { get; set; } = true;
+        public bool IsABoss { get; set; }
 
         private List<IRebootable> backup;
 

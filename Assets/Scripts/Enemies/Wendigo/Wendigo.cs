@@ -18,6 +18,7 @@ namespace WendigoCharacter
         [SerializeField] private WendigoSFXPlayer sFXPlayer;        
         [SerializeField] private WendigoPooledObject poolObject;
         [SerializeField] private Transform limbsRoot;
+        [SerializeField] private BossAntlers antlers;
 
         [Header("Death Components")]
         [SerializeField] private PropDestroyer mainPropDestroyer;
@@ -153,18 +154,22 @@ namespace WendigoCharacter
 
         public void BackUp() => data.ResetData();
 
-        public void SetHealth(int healthAmount)
+        public void SetUp(WendigoSettings settings)
         {
-            data.Health.InitialAmount = healthAmount;
+            data.Health.InitialAmount = settings.health;
             data.Health.Amount = data.Health.InitialAmount;
-        }
 
-        public void SetSpeed(float speedMultiplier){
-            data.Movement.MULTIPLIER = speedMultiplier;
-        }
+            data.Movement.MULTIPLIER = settings.speedMultiplier;
+            data.Fireball.MaxDistance = settings.maxFireballDistance;
 
-        public void SetMaxFireballAttackDistance(float maxFireballAttackDistance){
-            data.Fireball.MaxDistance = maxFireballAttackDistance;
+            data.IsABoss = settings.isABoss;
+
+            if (data.IsABoss){
+                antlers.SwitchOn();
+            }
+            else{
+                antlers.SwitchOff();
+            }
         }
     }
 }

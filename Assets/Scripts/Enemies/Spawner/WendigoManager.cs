@@ -28,10 +28,7 @@ public class WendigoManager
         wendigos.Add(wendigoImp);
 
         IWendigo wendigo = wendigoImp.GetComponent<IWendigo>();
-        wendigo.SetHealth(data.health);
-        wendigo.SetSpeed(data.speed);
-        wendigo.SetMaxFireballAttackDistance(data.maxFireballDistance);
-
+        wendigo.SetUp(data.settings);
         wendigo.SetTarget(characterImp);
         wendigo.SubscribeOnDeath(OnDeath);
 

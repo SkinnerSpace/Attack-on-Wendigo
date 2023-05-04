@@ -10,6 +10,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
     [SerializeField] private CrateSweeper sweeper;
     [SerializeField] private LaserBeam laserBeam;
     [SerializeField] private Openable openable;
+    [SerializeField] private MeshRenderer model;
 
     private IObjectPooler pooler;
 
@@ -23,6 +24,7 @@ public class CratePooledObject : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
+        model.enabled = true;
         crate.ResetStateOnSpawn();
         landingController.ResetLanding();
         laserBeam.ResetLaserBeam();

@@ -162,4 +162,6 @@ public class Limb : MonoBehaviour
     private void ModifyDamage(DamagePackage damagePackage, float modifier){
         damagePackage.damage = Mathf.RoundToInt(damagePackage.damage * modifier);
     }
+
+    public void Hide() => skin.Hide();
 }

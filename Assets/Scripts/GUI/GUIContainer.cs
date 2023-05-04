@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GUIContainer : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class GUIContainer : MonoBehaviour
 
     private float time;
     private float visibility;
+
+    public Action<float> onVisibilityUpdate;
+    public Action onAppeared;
+    public Action onDisappeared;
 
     private void Awake()
     {
@@ -45,8 +50,11 @@ public class GUIContainer : MonoBehaviour
         visibility = Easing.QuadEaseOut(visibility);
         SetAlpha(visibility);
 
+        onVisibilityUpdate?.Invoke(visibility);
+
         if (visibility >= 1f){
             mode = Modes.Visible;
+            onAppeared?.Invoke();
         }
     }
 
@@ -57,8 +65,11 @@ public class GUIContainer : MonoBehaviour
         visibility = Easing.QuadEaseOut(visibility);
         SetAlpha(visibility);
 
+        onVisibilityUpdate?.Invoke(visibility);
+
         if (visibility <= Mathf.Epsilon){
             mode = Modes.Invisible;
+            onDisappeared?.Invoke();
         }
     }
 
