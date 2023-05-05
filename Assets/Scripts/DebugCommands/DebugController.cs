@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class DebugController : MonoBehaviour
 {
@@ -110,20 +111,40 @@ public class DebugController : MonoBehaviour
 
             if (input.Contains(commandBase.CommandId))
             {
+
+                // NOTHING
                 if (commands.Get(i) as DebugCommand != null){
                     (commands.Get(i) as DebugCommand).Invoke();
                 }
+
+                // ONE INTEGER
                 else if (commands.Get(i) as DebugCommand<int> != null){
                     (commands.Get(i) as DebugCommand<int>).Invoke(int.Parse(properties[1]));
                 }
+
+                // ONE FLOAT
                 else if (commands.Get(i) as DebugCommand<float> != null){
                     (commands.Get(i) as DebugCommand<float>).Invoke(float.Parse(properties[1]));
                 }
+
+                // TWO INTEGERS
                 else if (commands.Get(i) as DebugCommand<int, int> != null){
                     int firstValue = int.Parse(properties[1]);
                     int secondValue = int.Parse(properties[2]);
 
                     (commands.Get(i) as DebugCommand<int, int>).Invoke(firstValue, secondValue);
+                }
+
+                // ONE STRING
+                else if (commands.Get(i) as DebugCommand<string> != null){
+                    string fullString = "";
+
+                    for (int j = 1; j < properties.Length; j++){
+                        fullString += properties[j];
+                        fullString += " ";
+                    }
+
+                    (commands.Get(i) as DebugCommand<string>).Invoke(fullString);
                 }
             }
         }

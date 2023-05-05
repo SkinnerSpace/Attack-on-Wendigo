@@ -11,17 +11,17 @@ public partial class KeyBinds : MonoBehaviour, IKeyBinds
     public bool mouseInversion = false;
 
     [Header("Actions")]
-    public KeyCode shoot = KeyCode.Mouse0;
-    public KeyCode aim = KeyCode.Mouse1;
-    public KeyCode interact = KeyCode.E;
+    [SerializeField] private KeyCode shoot = KeyCode.Mouse0;
+    [SerializeField] private KeyCode aim = KeyCode.Mouse1;
+    [SerializeField] private KeyCode interact = KeyCode.E;
 
     [Header("Movement")]
-    public KeyCode moveRight = KeyCode.D;
-    public KeyCode moveLeft = KeyCode.A;
-    public KeyCode moveForward = KeyCode.W;
-    public KeyCode moveBackward = KeyCode.S;
-    public KeyCode jump = KeyCode.Space;
-    public KeyCode dash = KeyCode.LeftShift;
+    [SerializeField] private KeyCode moveRight = KeyCode.D;
+    [SerializeField] private KeyCode moveLeft = KeyCode.A;
+    [SerializeField] private KeyCode moveForward = KeyCode.W;
+    [SerializeField] private KeyCode moveBackward = KeyCode.S;
+    [SerializeField] private KeyCode jump = KeyCode.Space;
+    [SerializeField] private KeyCode dash = KeyCode.LeftShift;
 
     public float MouseSensitivity => mouseSensitivity;
     public float MouseInversion => mouseInversion ? 1f : -1f;

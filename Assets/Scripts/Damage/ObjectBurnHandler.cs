@@ -26,6 +26,8 @@ public class ObjectBurnHandler : MonoBehaviour, IInflammable
 
     private void SetSootPattern() => SetMaterialProperty(sootPattern, Rand.Range(0f, 1000f));
 
+    public void InflameDirectly(Vector3 flamePoint) => SetOnFire();
+
     public void SetOnFire()
     {
         hitBox.enabled = false;

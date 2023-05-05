@@ -11,7 +11,10 @@ public class FireHitBox : MonoBehaviour, IInflammable
     [Header("Settings")]
     [SerializeField] private float enableCollisionTime = 0.2f;
     [SerializeField] private float putOutTheFireTime = 0.3f;
+
+    [Header("Additional")]
     [SerializeField] private bool isDisposable;
+    [SerializeField] private bool checkSourcePermeability;
 
     private float time;
     private bool isOnFire;
@@ -20,19 +23,42 @@ public class FireHitBox : MonoBehaviour, IInflammable
     private event Action onFire;
     private event Action putOutTheFire;
 
-    public void Subscribe(Action onFire, Action putOutTheFire)
+    public void Subscribe(IInflammableObserver observer)
     {
-        this.onFire += onFire;
-        this.putOutTheFire += putOutTheFire;
+        onFire += observer.SetOnFire;
+        putOutTheFire += observer.CoolDown;
     }
-
-    public void Subscribe(Action onFire) => this.onFire += onFire;
 
     public void SetActive(bool isActive)
     {
         this.isActive = isActive;
         enabled = isActive;
         boxCollider.enabled = isActive;
+    }
+
+    public void InflameDirectly(Vector3 flamePoint)
+    {
+        if (checkSourcePermeability)
+        {
+            if (NoObstalces(flamePoint)){
+                SetOnFire();
+            }
+        }
+        else
+        {
+            SetOnFire();
+        }
+    }
+
+    private bool NoObstalces(Vector3 flamePoint)
+    {
+        Vector3 flameDirection = (transform.position - flamePoint).normalized;
+
+        if (Physics.Raycast(flamePoint, flameDirection, Mathf.Infinity, ComplexLayers.Ground)){
+            return false;
+        }
+
+        return true;
     }
 
     public void SetOnFire()
@@ -53,8 +79,9 @@ public class FireHitBox : MonoBehaviour, IInflammable
         {
             time += chronos.DeltaTime;
 
-            if (!isDisposable)
+            if (!isDisposable){
                 EnableCollisionOnTimeOut();
+            }
 
             PutOutTheFireOnTimeOut();
         }

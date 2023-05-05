@@ -62,6 +62,7 @@ namespace Character
             {
                 data.IsJumping = true;
                 ApplyJumpForce();
+                PlayerEvents.current.NotifyOnSecondJump();
             }
         }
 

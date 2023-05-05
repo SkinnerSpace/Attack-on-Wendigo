@@ -51,15 +51,20 @@ public class Helicopter : MonoBehaviour
     private void PrepareToLand() => data.state = HelicopterStates.IsGoingToLand;
 
     public void Land(){
-        data.state = HelicopterStates.Land;
+        if (data.state != HelicopterStates.Land)
+        {
+            data.state = HelicopterStates.Land;
 
-        StartMoving();
+            StartMoving();
 
-        trajectory.GenerateLandingTrajectory(data.position);
-        synchronizer.Set(trajectory.Length, data.speed);
-        sway.SetLandingMagnitude();
+            trajectory.GenerateLandingTrajectory(data.position);
+            synchronizer.Set(trajectory.Length, data.speed);
+            sway.SetLandingMagnitude();
 
-        synchronizer.Set(trajectory.Length, data.speed);
+            synchronizer.Set(trajectory.Length, data.speed);
+
+            HelicopterEvents.current.NotifyOnIsGoingToLand();
+        }
     }
 
     public void Descend() => elevator.Descend();

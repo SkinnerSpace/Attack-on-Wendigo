@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 1
   appearTime: 1
   disappearTime: 1
 --- !u!1 &1014839040763411189
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 1
   appearTime: 1
   disappearTime: 1
 --- !u!1 &2642366878896203074
@@ -421,7 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearTime: 1
+  mode: 0
+  appearTime: 0.5
   disappearTime: 1
 --- !u!114 &3974211410519575758
 MonoBehaviour:
@@ -962,6 +965,8 @@ GameObject:
   - component: {fileID: 6616435995126317319}
   - component: {fileID: 932029144140649965}
   - component: {fileID: 2935192708851657385}
+  - component: {fileID: 9167250960844314154}
+  - component: {fileID: 6795011548895180461}
   m_Layer: 5
   m_Name: Hint
   m_TagString: Untagged
@@ -997,7 +1002,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6275182540629646845}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -1013,8 +1018,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   appearTime: 1
   disappearTime: 1
+--- !u!114 &9167250960844314154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275182540629646845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74eafef5323af14ab5e3a00bb8dd4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMessage: {fileID: 6795011548895180461}
+  timer: {fileID: 641219050986205939}
+  redColor: {r: 1, g: 0.09803922, b: 0, a: 1}
+--- !u!114 &6795011548895180461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275182540629646845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6f4f131e43161459b9e677e8716e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 641219050986205939}
+  moveDownTime: 1
+  centerTime: 1
+  downTime: 3
+  defaultPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: -444, z: 0}
+  minScale: {x: 0.6, y: 0.6, z: 1}
+  defaultScale: {x: 1, y: 1, z: 1}
+  appearSFX:
+    Guid:
+      Data1: -582275476
+      Data2: 1082827238
+      Data3: 1512587940
+      Data4: -933197201
+    Path: event:/SFX/UI/Message/HintAppear
 --- !u!1 &6906136693086941230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,8 +1255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -100}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_AnchoredPosition: {x: 600, y: -100}
+  m_SizeDelta: {x: 1200, y: 200}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7044868495365975427
 CanvasRenderer:
@@ -1237,7 +1285,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press "shift" to dash
+  m_text: Sample text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7797c6898c0b03642bdedc77409d18fa, type: 2}
   m_sharedMaterial: {fileID: -4922166121817328095, guid: 7797c6898c0b03642bdedc77409d18fa,
@@ -1247,8 +1295,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278196735
+  m_fontColor: {r: 1, g: 0.09803922, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1265,8 +1313,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1420,6 +1468,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2642366878896203078}
     m_Modifications:
+    - target: {fileID: 1657975134324057430, guid: 9a903f2b09bd0454486f5d364b09f79c,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2867246957379652768, guid: 9a903f2b09bd0454486f5d364b09f79c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1578,6 +1631,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a903f2b09bd0454486f5d364b09f79c, type: 3}
+--- !u!224 &2642366879279922163 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2867246957379652768, guid: 9a903f2b09bd0454486f5d364b09f79c,
+    type: 3}
+  m_PrefabInstance: {fileID: 243497054214797139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1469120013943394821 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1657975134324057430, guid: 9a903f2b09bd0454486f5d364b09f79c,
@@ -1590,12 +1649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c4ab1e0899974190ead536f641e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2642366879279922163 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2867246957379652768, guid: 9a903f2b09bd0454486f5d364b09f79c,
-    type: 3}
-  m_PrefabInstance: {fileID: 243497054214797139}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1934335369322894163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2352,6 +2405,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843644292613762261, guid: 2639a69905a6fe642bad67823efc214e,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843644292613762261, guid: 2639a69905a6fe642bad67823efc214e,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843644292613762261, guid: 2639a69905a6fe642bad67823efc214e,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843644292613762261, guid: 2639a69905a6fe642bad67823efc214e,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3203280899778035808, guid: 2639a69905a6fe642bad67823efc214e,
         type: 3}

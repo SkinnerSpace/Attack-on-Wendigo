@@ -41,6 +41,8 @@ public class InteractionController : BaseController, IInteractionController, IMo
         healthSystem = main.GetController<CharacterHealthSystem>();
 
         PlayerEvents.current.onDeath += DropAnItem;
+        HelicopterEvents.current.onBoarded += DropAnItem;
+
         input.Get<InteractionInputReader>().Subscribe(Interact);
         input.Get<MousePositionInputReader>().Subscribe(this);
     }

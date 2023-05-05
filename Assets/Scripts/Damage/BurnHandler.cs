@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BurnHandler
+public class BurnHandler : IInflammableObserver
 {
     private const string SCORCH_TIMER = "Scorch";
     private FunctionTimer timer;
@@ -16,7 +16,7 @@ public class BurnHandler
 
     public BurnHandler(FireHitBox fireHitBox, FunctionTimer timer, float scorchTime)
     {
-        fireHitBox.Subscribe(SetOnFire, CoolDown);
+        fireHitBox.Subscribe(this);
 
         this.timer = timer;
         this.scorchTime = scorchTime;
@@ -28,7 +28,7 @@ public class BurnHandler
         onCoolDown += observer.CoolDown;
     }
 
-    private void SetOnFire()
+    public void SetOnFire()
     {
         if (!isOnFire)
         { 
@@ -52,7 +52,7 @@ public class BurnHandler
         }
     }
 
-    private void CoolDown()
+    public void CoolDown()
     {
         isOnFire = false;
         timer.Stop(SCORCH_TIMER);

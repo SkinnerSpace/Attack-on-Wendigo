@@ -12,7 +12,7 @@ public class SnowTransitionManager : MonoBehaviour
     private void Start()
     {
         GameEvents.current.onStart += Set(() => GameEvents.current.IntroIsOver());
-        HelicopterEvents.current.onBoarded += Set(() => HelicopterEvents.current.NotifyOnIsGoringToSetOff());
+        HelicopterEvents.current.onBoarded += Set(() => HelicopterEvents.current.NotifyOnIsGoingToSetOff());
     }
 
     private Action Set(Action action)

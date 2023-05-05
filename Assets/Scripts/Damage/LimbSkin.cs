@@ -12,25 +12,33 @@ public class LimbSkin
 
     [SerializeField] private bool hideGoreOnStart;
 
+    [SerializeField] private LimbSkinAlternative alternative;
+
     public void ShowFlesh(){
         EnableRendering(flesh, true);
 
         if (hideGoreOnStart){
             EnableRendering(muscles, false);
+
             EnableRendering(bones, false);
+            EnableRendering(alternative.bones, false);
         }
     }
 
     public void ShowBones(){
         EnableRendering(flesh, false);
         EnableRendering(muscles, true);
+
         EnableRendering(bones, true);
+        EnableRendering(alternative.bones, true);
     }
 
     public void Hide(){
         EnableRendering(flesh, false);
         EnableRendering(muscles, false);
+
         EnableRendering(bones, false);
+        EnableRendering(alternative.bones, false);
     }
 
     public void GrowHair() => EnableRendering(hair, true);
@@ -38,7 +46,9 @@ public class LimbSkin
 
     public void ExposeGoreButKeepTheFleshUntouched(){
         EnableRendering(muscles, true);
+
         EnableRendering(bones, true);
+        EnableRendering(alternative.bones, true);
     }
 
     private void EnableRendering(List<SkinnedMeshRenderer> meshes, bool isEnabled){

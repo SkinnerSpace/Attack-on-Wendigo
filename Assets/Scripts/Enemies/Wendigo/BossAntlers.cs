@@ -11,12 +11,18 @@ namespace WendigoCharacter
         public void SwitchOn()
         {
             gameObject.SetActive(true);
+            DisableSmallAntlers();
+        }
 
-            foreach (Limb smallAntler in smallAntlers){
+        private void DisableSmallAntlers()
+        {
+            foreach (Limb smallAntler in smallAntlers)
+            {
                 smallAntler.Hide();
             }
 
-            foreach (HitBoxProxy hitBox in smallAntlersHitBoxes){
+            foreach (HitBoxProxy hitBox in smallAntlersHitBoxes)
+            {
                 hitBox.SwitchOff();
             }
         }

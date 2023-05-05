@@ -71,7 +71,7 @@ public class Pickable : MonoBehaviour, IPickable
     {
         onInteract?.Invoke();
         onPickedUp?.Invoke();
-        GameEvents.current.WeaponHasBeenPickedUp();
+        GameEvents.current.NotifyOnPickedUpForTheFirstTime();
 
         if (!wasPickedUp){
             wasPickedUp = true;

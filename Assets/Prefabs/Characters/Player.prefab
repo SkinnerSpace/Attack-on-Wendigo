@@ -15077,3 +15077,5 @@ MonoBehaviour:
   enableCollisionTime: 0.2
   putOutTheFireTime: 2
   isDisposable: 0
+  checkSourcePermeability: 1
+  showSourceCheck: 1

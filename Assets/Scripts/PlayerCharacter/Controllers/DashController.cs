@@ -90,6 +90,8 @@ namespace Character
                 timer.Set(COOL_DOWN, data.DashCoolDownTime, CoolDown);
                 onDash?.Invoke();
                 onDashAngle?.Invoke(dashAngleDeg, dashDirection);
+
+                PlayerEvents.current.NotifyOnDash();
             }
         }
 

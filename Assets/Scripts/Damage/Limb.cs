@@ -8,6 +8,7 @@ public class Limb : MonoBehaviour
     [SerializeField] private LimbData data;
     [SerializeField] private LimbSkin skin;
     [SerializeField] private LimbParticles particles;
+    [SerializeField] private bool notIncludedIntoTheOverallCount;
 
     private List<IHitBox> hitBoxes;
     private LimbSFXPlayer sFXPlayer;
@@ -164,4 +165,6 @@ public class Limb : MonoBehaviour
     }
 
     public void Hide() => skin.Hide();
+
+    public bool IncludedIntoTheOverallCount() => !notIncludedIntoTheOverallCount;
 }

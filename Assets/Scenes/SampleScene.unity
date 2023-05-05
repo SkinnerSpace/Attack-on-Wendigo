@@ -12711,7 +12711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landingZoneSize: 18
   escapeRadius: 750
-  minEscapeHeight: 250
+  minEscapeHeight: 275
   maxEscapeHeight: 300
   escapeAreaOffset: {x: 960, y: 0, z: 960}
 --- !u!1 &1565016040
@@ -13098,6 +13098,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ace1df3de4825c6499b6d22b94c6f944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1671975101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9167250960844314154, guid: 16ebebf76f0f764439c91bf2142a9242,
+    type: 3}
+  m_PrefabInstance: {fileID: 2642366878661638635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74eafef5323af14ab5e3a00bb8dd4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1671975102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6795011548895180461, guid: 16ebebf76f0f764439c91bf2142a9242,
+    type: 3}
+  m_PrefabInstance: {fileID: 2642366878661638635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6f4f131e43161459b9e677e8716e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1677091043
@@ -18594,6 +18618,8 @@ MonoBehaviour:
     player: {fileID: 1077207054}
     helicopter: {fileID: 860728240}
     airdrop: {fileID: 222127165}
+    hint: {fileID: 1671975102}
+    hintManager: {fileID: 1671975101}
 --- !u!1 &1957597310
 GameObject:
   m_ObjectHideFlags: 0
@@ -18766,7 +18792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2033496633
 Transform:
   m_ObjectHideFlags: 0

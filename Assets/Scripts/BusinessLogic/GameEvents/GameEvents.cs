@@ -38,7 +38,7 @@ public class GameEvents : MonoBehaviour
     public void UpdateDeathProgress(float deathProgress) => onDeathProgressUpdate?.Invoke(deathProgress);
     public void UpdateBlizzardRadius(float blizzardRadius, Vector3 position) => onBlizzardRadiusUpdate?.Invoke(blizzardRadius, position);
 
-    public void WeaponHasBeenPickedUp()
+    public void NotifyOnPickedUpForTheFirstTime()
     {
         if (pickUpCount == 0){
             onFirstWeaponPickedUp?.Invoke();

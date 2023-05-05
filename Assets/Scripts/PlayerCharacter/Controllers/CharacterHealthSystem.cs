@@ -39,6 +39,7 @@ namespace Character
                     Die(damagePackage.damageType);
                 }
 
+                PlayerEvents.current.NotifyOnDamage();
                 NotifyOnBluntDamage(damagePackage);
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GUIContainer : MonoBehaviour
 {
-    private enum Modes
+    public enum Modes
     {
         Invisible,
         Visible,
@@ -11,7 +11,7 @@ public class GUIContainer : MonoBehaviour
         Disappearing
     }
 
-    private Modes mode = Modes.Invisible;
+    public Modes mode = Modes.Invisible;
 
     private CanvasGroup canvasGroup;
     [SerializeField] private float appearTime = 1f;
@@ -87,14 +87,20 @@ public class GUIContainer : MonoBehaviour
 
     public void ShowGradually()
     {
-        time = 0f;
-        mode = Modes.Appearing;
+        if (mode != Modes.Visible){
+            time = 0f;
+            mode = Modes.Appearing;
+            SetAlpha(0f);
+        }
     }
 
     public void HideGradually()
     {
-        time = 0f;
-        mode = Modes.Disappearing;
+        if (mode != Modes.Invisible){
+            time = 0f;
+            mode = Modes.Disappearing;
+            SetAlpha(1f);
+        }
     }
 
     private void SetAlpha(float alpha)

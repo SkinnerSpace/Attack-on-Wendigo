@@ -17,6 +17,10 @@ public class PlayerEvents : MonoBehaviour
     public event Action<RaycastHit> onInteractiveTargetAdded;
     public event Action onInteractiveTargetRemoved;
 
+    public event Action onSecondJump;
+    public event Action onDash;
+
+    public event Action onDamage;
     public event Action onReceivedBluntDamage;
 
     private void Awake(){
@@ -35,5 +39,9 @@ public class PlayerEvents : MonoBehaviour
     public void AddInteractiveTarget(RaycastHit interactiveTarget) => onInteractiveTargetAdded?.Invoke(interactiveTarget);
     public void RemoveInteractiveTarget() => onInteractiveTargetRemoved?.Invoke();
 
+    public void NotifyOnSecondJump() => onSecondJump?.Invoke();
+    public void NotifyOnDash() => onDash?.Invoke();
+
+    public void NotifyOnDamage() => onDamage?.Invoke();
     public void NotifyOnReceivedBluntDamage() => onReceivedBluntDamage?.Invoke();
 }

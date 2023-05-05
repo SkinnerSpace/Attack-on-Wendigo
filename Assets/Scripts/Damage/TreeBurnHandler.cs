@@ -27,6 +27,8 @@ public class TreeBurnHandler : MonoBehaviour, IInflammable
         enabled = false;
     }
 
+    public void InflameDirectly(Vector3 flamePoint) => SetOnFire();
+
     public void SetOnFire()
     {
         hitBox.enabled = false;

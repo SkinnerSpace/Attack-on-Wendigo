@@ -36,6 +36,7 @@ public class DebugCommands : MonoBehaviour
 
         DebugCommand GET_BLUNT_DAMAGE = new DebugCommand("hit", "Get blunt damage", "hit", () =>
         {
+            PlayerEvents.current.NotifyOnDamage();
             PlayerEvents.current.NotifyOnReceivedBluntDamage();
         });
 
@@ -59,6 +60,21 @@ public class DebugCommands : MonoBehaviour
             components.player.GetController<CharacterHealthSystem>().SetHealth(n);
         });
 
+        DebugCommand<string> SHOW_HINT = new DebugCommand<string>("hint", "Show hint", "hint <s>", (s) =>
+        {
+            components.hint.Show(new Hint(s, Color.white));
+        });
+
+        DebugCommand RESET_HINT = new DebugCommand("Rhint", "Reset hint state", "Rhint", () =>
+        {
+            components.hintManager.SetUpHints();
+        });
+
+        DebugCommand FIRST_PICKED_UP = new DebugCommand("picked", "First weapon picked up", "picked", () =>
+        {
+            GameEvents.current.NotifyOnPickedUpForTheFirstTime();
+        });
+
         commandList = new List<object>()
         {
             SPAWN,
@@ -70,7 +86,10 @@ public class DebugCommands : MonoBehaviour
             DECLARE_VICTORY,
             SET_DEATH_PROGRESS,
             ADD_CARGO,
-            SET_HEALTH
+            SET_HEALTH,
+            SHOW_HINT,
+            RESET_HINT,
+            FIRST_PICKED_UP
         };
     }
 }

@@ -33,6 +33,10 @@ public static class ComplexLayers
         1 << (int)Layers.Inflammable
         ;
 
+    public static LayerMask Player =
+        1 << (int)Layers.Player
+        ;
+
     public static LayerMask Exploding =
         1 << (int)Layers.Ground |
         1 << (int)Layers.Player |

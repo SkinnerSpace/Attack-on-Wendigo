@@ -32,12 +32,27 @@ namespace WendigoCharacter
         public void ConnectToHitBox(IHitBox hitBox) => hitBox.Subscribe(this);
 
         public void ConnectToLimbs(Limb[] limbs){
-            initialLimbsCount = limbs.Length;
+            initialLimbsCount = GetLimbsCount(limbs);
 
             foreach (Limb limb in limbs){
                 limb.onDamage += ReceiveDamage;
                 limb.onInjury += OnInjury;
             }
+        }
+
+        private int GetLimbsCount(Limb[] limbs)
+        {
+            int count = 0;
+
+            foreach (Limb limb in limbs)
+            {
+                if (limb.IncludedIntoTheOverallCount())
+                {
+                    count += 1;
+                }
+            }
+
+            return count;
         }
 
         public void SubscribeOnDeath(Action onDeath) => this.onDeath += onDeath;
