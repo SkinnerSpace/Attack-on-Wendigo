@@ -6,7 +6,7 @@ public class Airdrop : MonoBehaviour, IAirdrop
     private const int FIRST_ITEM = 0;
 
     [SerializeField] private DispenserStorage storage;
-    [SerializeField] private List<string> cargoCatalog = new List<string>();
+    [SerializeField] private CargoItem[] catalog;
     [SerializeField] private AirDropConfig config;
 
     private int maxConcurrentCargoCountOnTheMap = 1;
@@ -15,7 +15,6 @@ public class Airdrop : MonoBehaviour, IAirdrop
     private void Start()
     {
         GameEvents.current.onIntroIsOver += () => AddCargoFromCatalog(FIRST_ITEM);
-        GameEvents.current.onFirstWeaponPickedUp += LoadDeficientCargo;
         GameEvents.current.onCargoIsTaken += OnCargoUnpacked;
         GameEvents.current.onProgressUpdate += UpdateProgress;
     }
@@ -38,9 +37,33 @@ public class Airdrop : MonoBehaviour, IAirdrop
         int deficientCargoCount = maxConcurrentCargoCountOnTheMap - currentCargoCountOnTheMap;
 
         for (int i = 0; i < deficientCargoCount; i++){
-            int catalogIndex = Rand.Range(0, cargoCatalog.Count);
+            int catalogIndex = GetRandomWeightedCargoIndex(catalog);
             AddCargoFromCatalog(catalogIndex);
         }
+    }
+
+    private int GetRandomWeightedCargoIndex(CargoItem[] untestedCargo)
+    {
+        int weightSum = 0;
+
+        for (int i = 0; i < untestedCargo.Length; ++i)
+        {
+            weightSum += untestedCargo[i].weight;
+        }
+
+        int index = 0;
+        int lastIndex = untestedCargo.Length - 1;
+
+        while (index < lastIndex)
+        {
+            if (CheckProbability(weightSum, index)){
+                return index;
+            }
+
+            weightSum -= untestedCargo[index++].weight;
+        }
+
+        return index;
     }
 
     public void AddCargoFromCatalogWithQuantity(int index, int count)
@@ -53,13 +76,14 @@ public class Airdrop : MonoBehaviour, IAirdrop
     public void AddCargoFromCatalog(int index)
     {
         currentCargoCountOnTheMap += 1;
-        storage.AddAnItem(cargoCatalog[index]);
-
-        LogCargoCount(currentCargoCountOnTheMap);
+        string cargo = catalog[index].poolName;
+        storage.AddAnItem(cargo);
     }
 
     private void LogCargoCount(int cargoCount)
     {
         //Debug.Log("Cargo " + cargoCount);
     }
+
+    private bool CheckProbability(int weightSum, int index) => Rand.Range(0, weightSum) < catalog[index].weight;
 }

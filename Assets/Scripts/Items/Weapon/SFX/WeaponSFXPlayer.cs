@@ -2,6 +2,9 @@
 
 public class WeaponSFXPlayer : MonoBehaviour
 {
+    [Header("Required Components")]
+    [SerializeField] private Weapon weapon;
+
     [Header("Audio References")]
     [SerializeField] private FMODUnity.EventReference shootSFX;
     [SerializeField] private FMODUnity.EventReference isEmptySFX;
@@ -15,6 +18,12 @@ public class WeaponSFXPlayer : MonoBehaviour
         isEmptyPlayer = AudioPlayer.Create(isEmptySFX).WithPitch(-0.5f, 0.5f);
     }
 
-    public void PlayShootSFX() => shootPlayer.PlayOneShot();
-    public void PlayIsEmptySFX() => isEmptyPlayer.PlayOneShot();
+    private void Start()
+    {
+        weapon.SubscribeOnShot(PlayShootSFX);
+        weapon.SubscribeOnOutOfAmmo(PlayIsEmptySFX);
+    }
+
+    private void PlayShootSFX() => shootPlayer.PlayOneShot();
+    private void PlayIsEmptySFX() => isEmptyPlayer.PlayOneShot();
 }

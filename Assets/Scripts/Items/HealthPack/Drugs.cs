@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
 {
-    private static int id;
-
-    [SerializeField] private string drugName;
-
     [Header("Settings")]
     [SerializeField] private int health;
 
@@ -35,11 +31,8 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
 
     private void Awake()
     {
-        AssignName();
         swayController.InitializeOnAwake(this);
     }
-
-    private void AssignName() => transform.name = drugName + "_" + (++id);
 
     public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractionController interactor)
     {

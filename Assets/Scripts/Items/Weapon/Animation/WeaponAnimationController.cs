@@ -5,26 +5,12 @@ public class WeaponAnimationController : MonoBehaviour
 {
     private static int shootAnim = Animator.StringToHash("Shoot");
 
-    [Header("Required Components")]
+    [SerializeField] private Weapon weapon;
     [SerializeField] private List<Animator> animators;
-    [SerializeField] private FunctionTimer timer;
 
-    [Header("Settings")]
-    [SerializeField] private bool isAnimated;
-    [SerializeField] private float delay;
-
-    public void PlayAnimationIfPossible()
+    private void Start()
     {
-        if (isAnimated){
-            if (delay <= 0f)
-            {
-                PlayAnimation();
-            }
-            else
-            {
-                timer.Set("Play", delay, PlayAnimation);
-            }
-        }
+        weapon.SubscribeOnShot(PlayAnimation);
     }
 
     private void PlayAnimation()

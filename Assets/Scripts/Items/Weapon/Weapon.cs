@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IWeapon, IHandyItem
 {
-    private static int id;
-
-    [SerializeField] private string weaponName;
-
     [Header("Required Components")]
     [SerializeField] private WeaponData data;
     [SerializeField] private WeaponAimController aimController; 
@@ -18,14 +14,8 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
     [SerializeField] private FunctionTimer timer;
     [SerializeField] private AbandonmentDetector abandonmentDetector;
     [SerializeField] private AimAnimationsPack animationsPack;
-
-    [Header("Effects")]
-    [SerializeField] private WeaponVFXController vFXController;
-    [SerializeField] private WeaponSFXPlayer sFXPlayer;
-    [SerializeField] private WeaponAnimationController animationController;
     
     private IInputReader inputReader;
-    private IInteractionController interactor;
     private RaycastShooter shooter;
     private Magazine magazine;
     private WeaponHitSurfaceHandler surfaceHitHandler;
@@ -39,16 +29,19 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
 
     private void Awake()
     {
-        AssignName();
-
         CreateShooter();
-        CreateMagazine();
+        magazine = new Magazine(data, timer);
         CreateSurfaceHitHandler();
 
         swayController.InitializeOnAwake(this, aimController);
     }
 
-    private void AssignName() => transform.name = weaponName + "_" + (++id);
+    private void CreateShooter()
+    {
+        shooter = RaycastShooterFactory.Create(data.ShooterType, data, timer);
+        SubscribeOnReady(shooter.OnReady);
+        SubscribeOnNotReady(shooter.OnNotReady);
+    }
 
     private void CreateSurfaceHitHandler()
     {
@@ -57,28 +50,9 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
         physics.onCollision += DisposeUsedWeapon;
     }
 
-    private void CreateShooter()
-    {
-        shooter = RaycastShooterFactory.Create(data.ShooterType, data, timer);
-        shooter.SubscribeOnShot(vFXController.PlayShootVFX);
-        shooter.SubscribeOnShotTarget(vFXController.Hit);
-        shooter.SubscribeOnShot(sFXPlayer.PlayShootSFX);
-        shooter.SubscribeOnShot(animationController.PlayAnimationIfPossible);
-    }
-
-    private void CreateMagazine()
-    {
-        magazine = new Magazine(data, timer);
-        magazine.onOutOfAmmo += sFXPlayer.PlayIsEmptySFX;
-
-        SubscribeOnReady(shooter.OnReady);
-        SubscribeOnNotReady(shooter.OnNotReady);
-    }
-
     public void InitializeOnTake(ICharacterData characterData, IInputReader inputReader, IInteractionController interactor)
     {
         this.inputReader = inputReader;
-        this.interactor = interactor;
 
         swayController.InitializeOnTake(characterData, inputReader);
         abandonmentDetector.Initialize(characterData);
@@ -138,4 +112,8 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
         return magazine.IsEmpty() &&
                pickable.IsReadyToHand;
     }
+
+    public void SubscribeOnShot(Action onShot) => shooter.SubscribeOnShot(onShot);
+    public void SubscribeOnTargetIsShot(Action<WeaponTarget> onShot) => shooter.SubscribeOnTargetIsShot(onShot);
+    public void SubscribeOnOutOfAmmo(Action onOutOfAmmo) => magazine.onOutOfAmmo += onOutOfAmmo;
 }

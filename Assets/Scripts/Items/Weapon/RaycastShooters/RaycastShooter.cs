@@ -71,7 +71,7 @@ public abstract class RaycastShooter
 
     public void SubscribeOnShot(Action onShot) => this.onShot += onShot;
     public void UnsubscribeFromOnShot(Action onShot) => this.onShot -= onShot;
-    public void SubscribeOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
+    public void SubscribeOnTargetIsShot(Action<WeaponTarget> onShotTarget) => this.onShotTarget += onShotTarget;
     public void UnsubscribeFromOnShotTarget(Action<WeaponTarget> onShotTarget) => this.onShotTarget -= onShotTarget;
 
     public void OnReady(){

@@ -840,17 +840,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3433500462826311474}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dc358a258347814eb77b67465929d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
   animators:
   - {fileID: 676737550157938344}
   - {fileID: 0}
-  timer: {fileID: 1398000214756220517}
-  isAnimated: 1
-  delay: 0
 --- !u!1 &3763908289392949513
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.4
+  recoilPower: 0.8
   recoilTime: 0.3
 --- !u!1 &4082503941666116683
 GameObject:
@@ -1330,8 +1328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5956a8c348194234ea358e80918c0984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displacementIntensity: 0.2
-  maxDisplacement: 0.5
+  displacementIntensity: 0.3
+  maxDisplacement: 0.6
   smoothDisplacement: 6
 --- !u!114 &1536859498695772921
 MonoBehaviour:
@@ -1359,8 +1357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba666762e6a86224986970f4eb8adcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltIntensity: 4
-  maxTilt: 5
+  tiltIntensity: 5
+  maxTilt: 6
   smoothTilt: 12
 --- !u!114 &8805010115170836883
 MonoBehaviour:
@@ -1772,7 +1770,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2005171980827018617
 Rigidbody:
@@ -1784,7 +1782,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.07
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -1987,10 +1985,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91292e07b42d23c4e9c9aea7fa290566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
   recoilController: {fileID: 8533214991433855408}
   muzzleFlash: {fileID: 5944037392786839833}
-  bulletShell: {fileID: 0}
-  animator: {fileID: 0}
+  particles: []
   hitExplosion: BulletExplosion
 --- !u!1 &5989526303984522751
 GameObject:
@@ -2242,6 +2240,8 @@ GameObject:
   - component: {fileID: 7614468595935389447}
   - component: {fileID: 6774501587279128738}
   - component: {fileID: 8784035798804028520}
+  - component: {fileID: 5671282265016426045}
+  - component: {fileID: 1992481589503146938}
   m_Layer: 0
   m_Name: MagnumDrum
   m_TagString: Untagged
@@ -2256,13 +2256,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7126900732743712189}
-  m_LocalRotation: {x: 0.00000072284763, y: 0.7947585, z: -0.6069259, w: 0.0000009480902}
+  m_LocalRotation: {x: -0.08307476, y: -0.79040533, z: 0.60360026, w: -0.06344072}
   m_LocalPosition: {x: 0, y: 0.000979, z: -0.00026}
   m_LocalScale: {x: 0.009999998, y: 0.010000002, z: 0.009999998}
   m_Children: []
   m_Father: {fileID: 1401675160680511638}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 74.735, y: -179.99998, z: 12}
 --- !u!33 &6774501587279128738
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2279,7 +2279,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7126900732743712189}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -2310,6 +2310,44 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5671282265016426045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126900732743712189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171cc1b9858aab347898f5e42f93b523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementLayer: 10
+--- !u!114 &1992481589503146938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126900732743712189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be2d3d0a76fd664b8ae41d2953450fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
+  pooledObject: {fileID: 7317129112943931184}
+  timer: {fileID: 1398000214756220517}
+  step: 60
+  rotationTime: 0.3
+  delay: 0.2
+  rotationSFX:
+    Guid:
+      Data1: 340285190
+      Data2: 1338884681
+      Data3: -729519696
+      Data4: 1699485558
+    Path: event:/SFX/Game/Gameplay/Weapon/Magnum/MagnumDrum
 --- !u!1 &7473361558535834234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764452896203316476}
+  - component: {fileID: 8287390771407412689}
   - component: {fileID: 1287198399616454532}
   - component: {fileID: 2257250665810215781}
   - component: {fileID: 997745253376797098}
@@ -2331,7 +2370,7 @@ GameObject:
   - component: {fileID: 7317129112943931184}
   - component: {fileID: 4743937849382538504}
   - component: {fileID: 1395478065546899735}
-  - component: {fileID: 2398258147307385258}
+  - component: {fileID: 4898915699141957219}
   m_Layer: 16
   m_Name: Magnum
   m_TagString: Untagged
@@ -2359,6 +2398,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8287390771407412689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473361558535834234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9556f764c8ff4e34bbbffd99904fd1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Magnum
 --- !u!114 &1287198399616454532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,7 +2423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c553390fa4a0e1408fb5aa5ddcb4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Pistol
   data: {fileID: 2257250665810215781}
   aimController: {fileID: 997745253376797098}
   swayController: {fileID: 1211558040129922699}
@@ -2381,9 +2432,6 @@ MonoBehaviour:
   timer: {fileID: 1398000214756220517}
   abandonmentDetector: {fileID: 4207718243511403909}
   animationsPack: {fileID: 11400000, guid: 45b42ed4f6fd94d44a56bfab1daf3ec1, type: 2}
-  vFXController: {fileID: 4958221207093448998}
-  sFXPlayer: {fileID: 7115739823039445605}
-  animationController: {fileID: 8067854466778471287}
 --- !u!114 &2257250665810215781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2396,13 +2444,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6272efc6b6cfc458c2f1205434dded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
-  impact: 25
-  ammoCapacity: 30
-  ammo: 30
-  precision: 0.7
+  damage: 100
+  impact: 40
+  ammoCapacity: 6
+  ammo: 6
+  precision: 0.6
   aimPrecision: 0.9
-  rate: 0.3
+  rate: 0.5
   shooterType: 0
 --- !u!114 &997745253376797098
 MonoBehaviour:
@@ -2542,10 +2590,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.3, z: 1.1}
-  m_Center: {x: 0, y: 0.2, z: 0}
---- !u!136 &2398258147307385258
-CapsuleCollider:
+  m_Size: {x: 0.15, y: 0.37, z: 1}
+  m_Center: {x: 0, y: 0.31, z: 0.45}
+--- !u!65 &4898915699141957219
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2554,10 +2602,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 0
-  m_Radius: 0.05
-  m_Height: 0.4
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.2, z: -0.3}
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.8, z: 0.54}
+  m_Center: {x: 0, y: 0.04, z: -0.34}
 --- !u!1 &7618721045883134607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,20 +2740,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7896c1933d834fb4985aca4eedb6590d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
   shootSFX:
     Guid:
-      Data1: -1763111464
-      Data2: 1334871092
-      Data3: -899505482
-      Data4: -555347396
-    Path: event:/SFX/Game/Gameplay/Weapon/Pistol/PistolShoot
+      Data1: 411483610
+      Data2: 1117044496
+      Data3: 561564044
+      Data4: -1146196911
+    Path: event:/SFX/Game/Gameplay/Weapon/Magnum/MagnumShoot
   isEmptySFX:
     Guid:
-      Data1: -188751277
-      Data2: 1111376465
-      Data3: 104608434
-      Data4: -1808488421
-    Path: event:/SFX/Game/Gameplay/Weapon/Pistol/PistolEmpty
+      Data1: 2024665166
+      Data2: 1210151901
+      Data3: -1859882577
+      Data4: 598417391
+    Path: event:/SFX/Game/Gameplay/Weapon/Magnum/MagnumIsEmpty
 --- !u!114 &1601505413764855744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3818,12 +3866,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fa1eb9ca4e4de2459a8bade193c4858, type: 3}
---- !u!137 &2243522778206771645 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5128558231661533828, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
-    type: 3}
-  m_PrefabInstance: {fileID: 6345242702641382201}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &676737550157938344 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
@@ -3833,6 +3875,12 @@ Animator:
 --- !u!4 &6882746956115420370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
+    type: 3}
+  m_PrefabInstance: {fileID: 6345242702641382201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2243522778206771645 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5128558231661533828, guid: 0fa1eb9ca4e4de2459a8bade193c4858,
     type: 3}
   m_PrefabInstance: {fileID: 6345242702641382201}
   m_PrefabAsset: {fileID: 0}

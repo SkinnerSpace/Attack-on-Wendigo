@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc358a258347814eb77b67465929d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
   animators:
   - {fileID: 676737550157938344}
   - {fileID: 6420187401967105178}
@@ -452,10 +453,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91292e07b42d23c4e9c9aea7fa290566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
   recoilController: {fileID: 8533214991433855408}
   muzzleFlash: {fileID: 5944037392786839833}
-  bulletShell: {fileID: 599221758087645794}
-  animator: {fileID: 6420187401967105178}
+  particles:
+  - {fileID: 599221758087645794}
   hitExplosion: BulletExplosion
 --- !u!114 &4506095490508226331
 MonoBehaviour:
@@ -529,6 +531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764452896203316476}
+  - component: {fileID: 5229317345870047183}
   - component: {fileID: 1287198399616454532}
   - component: {fileID: 2257250665810215781}
   - component: {fileID: 997745253376797098}
@@ -569,6 +572,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5229317345870047183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473361558535834234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9556f764c8ff4e34bbbffd99904fd1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Pistol
 --- !u!114 &1287198399616454532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c553390fa4a0e1408fb5aa5ddcb4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Pistol
   data: {fileID: 2257250665810215781}
   aimController: {fileID: 997745253376797098}
   swayController: {fileID: 1211558040129922699}
@@ -591,9 +606,6 @@ MonoBehaviour:
   timer: {fileID: 1398000214756220517}
   abandonmentDetector: {fileID: 4207718243511403909}
   animationsPack: {fileID: 11400000, guid: 45b42ed4f6fd94d44a56bfab1daf3ec1, type: 2}
-  vFXController: {fileID: 4958221207093448998}
-  sFXPlayer: {fileID: 7115739823039445605}
-  animationController: {fileID: 8067854466778471287}
 --- !u!114 &2257250665810215781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5636,6 +5648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7896c1933d834fb4985aca4eedb6590d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1287198399616454532}
   shootSFX:
     Guid:
       Data1: -1763111464

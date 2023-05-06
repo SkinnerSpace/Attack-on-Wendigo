@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(AirDispatcher))]
 public class AirDispatcherEditor : Editor
 {
@@ -32,3 +33,4 @@ public class AirDispatcherEditor : Editor
         }
     }
 }
+# endif
