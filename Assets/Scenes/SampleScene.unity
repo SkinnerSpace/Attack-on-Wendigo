@@ -5421,7 +5421,7 @@ PrefabInstance:
     - target: {fileID: 5944037392786839834, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5944037392786839834, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
@@ -5441,7 +5441,7 @@ PrefabInstance:
     - target: {fileID: 7473361558535834234, guid: cb7019212e5c65c4faad82eba323307d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb7019212e5c65c4faad82eba323307d, type: 3}
@@ -6569,7 +6569,7 @@ PrefabInstance:
     - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7370337034712265319, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
@@ -6589,7 +6589,7 @@ PrefabInstance:
     - target: {fileID: 7473361558535834234, guid: d711c01ed670b8c428966b9dd627cc94,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d711c01ed670b8c428966b9dd627cc94, type: 3}
@@ -13009,7 +13009,7 @@ PrefabInstance:
     - target: {fileID: 3277814352433182445, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3277814352433182445, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
         type: 3}
@@ -13084,7 +13084,7 @@ PrefabInstance:
     - target: {fileID: 7473361558535834234, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c1f9bb37c88e9f41bafe8e51f1a2a4e, type: 3}
@@ -18792,7 +18792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2033496633
 Transform:
   m_ObjectHideFlags: 0
