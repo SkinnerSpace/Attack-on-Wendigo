@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.8
+  recoilPower: 0.45
   recoilTime: 0.3
 --- !u!1 &4082503941666116683
 GameObject:

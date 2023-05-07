@@ -8,6 +8,7 @@ public class AntlersExplosionController : MonoBehaviour
     public List<Limb> limbs;
     public List<ParticleSystem> particles;
     public List<ParticleSoundSystem> soundSystems;
+    public List<MeshRenderer> meshesToHide;
 
     private void Awake()
     {
@@ -23,6 +24,11 @@ public class AntlersExplosionController : MonoBehaviour
                 particles[i].Play();
                 soundSystems[i].SwitchOn();
             }
+        }
+
+        foreach (MeshRenderer mesh in meshesToHide)
+        {
+            mesh.enabled = false;
         }
     }
 }

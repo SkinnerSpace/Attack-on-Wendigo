@@ -76,8 +76,6 @@ public class ItemPhysicalBody : MonoBehaviour, IPhysicalBody
     {
         onCollisionQuerry?.Invoke(collision);
         onCollision?.Invoke();
-
-        //Debug.Log("Collision " + transform.name);
     }
 
     public void SubscribeOnGroundUpdate(Action<bool> onGroundUpdate) => groundDetector.onGroundUpdate += onGroundUpdate;

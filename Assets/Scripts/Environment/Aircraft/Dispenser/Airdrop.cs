@@ -48,7 +48,7 @@ public class Airdrop : MonoBehaviour, IAirdrop
 
         for (int i = 0; i < untestedCargo.Length; ++i)
         {
-            weightSum += untestedCargo[i].weight;
+            weightSum += 1;//untestedCargo[i].weight;
         }
 
         int index = 0;
@@ -60,7 +60,8 @@ public class Airdrop : MonoBehaviour, IAirdrop
                 return index;
             }
 
-            weightSum -= untestedCargo[index++].weight;
+            index++;
+            weightSum -= 1;// untestedCargo[index++].weight;
         }
 
         return index;
@@ -85,5 +86,5 @@ public class Airdrop : MonoBehaviour, IAirdrop
         //Debug.Log("Cargo " + cargoCount);
     }
 
-    private bool CheckProbability(int weightSum, int index) => Rand.Range(0, weightSum) < catalog[index].weight;
+    private bool CheckProbability(int weightSum, int index) => Rand.Range(0, weightSum) < 1;//catalog[index].weight;
 }

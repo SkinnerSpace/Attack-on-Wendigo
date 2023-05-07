@@ -10,10 +10,15 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     [SerializeField] private ParticleSystem destructionParticles;
     [SerializeField] private FunctionTimer timer;
     private string itemName;
-
     private bool isOpened;
 
+    private Director director;
     public event Action onTimeOutAfterUnpacking;
+
+    private void Start()
+    {
+        director = Director.Instance;
+    }
 
     public void ResetStateOnSpawn()
     {
@@ -55,6 +60,7 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     }
 
     public void SpawnItem(){
+        itemName = director.ReplaceItemIfNecessary(itemName);
         PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
     }
 

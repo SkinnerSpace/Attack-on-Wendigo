@@ -32,7 +32,7 @@ public class MenuButtonActor : MenuButton
                 return MenuEvents.current.RestartTheGame;
 
             case Actions.Quit:
-                return MenuEvents.current.QuitTheGame;
+                return Application.Quit;
         }
 
         return null;

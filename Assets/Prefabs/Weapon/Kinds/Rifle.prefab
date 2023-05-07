@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.4
-  recoilTime: 0.3
+  recoilPower: 0.2
+  recoilTime: 0.12
 --- !u!1 &4611868940550012031
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,8 +532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 30
   impact: 25
-  ammoCapacity: 90
-  ammo: 90
+  ammoCapacity: 80
+  ammo: 80
   precision: 0.6
   aimPrecision: 0.7
   rate: 0.1

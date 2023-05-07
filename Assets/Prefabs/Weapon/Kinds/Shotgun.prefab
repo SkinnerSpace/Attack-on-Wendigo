@@ -6560,8 +6560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297239b1640753e42ba0e29a31f4301f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilPower: 0.9
-  recoilTime: 0.3
+  recoilPower: 0.7
+  recoilTime: 0.2
 --- !u!1 &4012513812083639363
 GameObject:
   m_ObjectHideFlags: 0
@@ -8851,7 +8851,7 @@ BoxCollider:
   m_GameObject: {fileID: 7473361558535834234}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.5, z: 3.7}
   m_Center: {x: 0, y: -0.1, z: 0.04}
@@ -8864,7 +8864,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 7473361558535834234}
   m_Material: {fileID: 13400000, guid: b359ec54ce7fdf8478e17b148f38a616, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.16
   m_Height: 0.51
   m_Direction: 1
@@ -9641,9 +9641,6 @@ MonoBehaviour:
   - {fileID: 3459456857946069984}
   - {fileID: 485112880759373840}
   - {fileID: 3553513427009545766}
-  timer: {fileID: 7286420635910837017}
-  isAnimated: 1
-  delay: 0
 --- !u!1 &8596782395050811967
 GameObject:
   m_ObjectHideFlags: 0
