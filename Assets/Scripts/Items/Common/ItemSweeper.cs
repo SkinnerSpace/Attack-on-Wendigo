@@ -30,8 +30,9 @@ public class ItemSweeper : MonoBehaviour
 
     private IEnumerator WaitForRest()
     {
-        while (physics.Velocity.magnitude > Mathf.Epsilon)
+        while (physics.Velocity.magnitude > 0.05f){
             yield return null;
+        }
 
         StartCoroutine(FallThrough());
     }

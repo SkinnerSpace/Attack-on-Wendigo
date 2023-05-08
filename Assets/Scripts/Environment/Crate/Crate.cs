@@ -12,12 +12,12 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     private string itemName;
     private bool isOpened;
 
-    private Director director;
+    private CargoDirector director;
     public event Action onTimeOutAfterUnpacking;
 
     private void Start()
     {
-        director = Director.Instance;
+        director = CargoDirector.Instance;
     }
 
     public void ResetStateOnSpawn()
@@ -60,7 +60,7 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
     }
 
     public void SpawnItem(){
-        itemName = director.ReplaceItemIfNecessary(itemName);
+        itemName = director.GetItem();
         PoolHolder.Instance.SpawnFromThePool(itemName, transform.position, Quaternion.identity);
     }
 

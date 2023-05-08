@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -970,6 +970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 222127164}
+  - component: {fileID: 222127166}
   - component: {fileID: 222127165}
   m_Layer: 0
   m_Name: Airdrop
@@ -1001,24 +1002,221 @@ MonoBehaviour:
   m_GameObject: {fileID: 222127163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4516551b7b115a43ba5df89a17933d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 91d80ddec96a49f4fa4328a5133a2284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storage: {fileID: 1559680915}
-  catalog:
+  aidKitDropProbability:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  aidKit: Drugs
+  items:
   - poolName: Pistol
-    weight: 1
-  - poolName: Rifle
-    weight: 1
-  - poolName: Shotgun
-    weight: 1
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9583435
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   - poolName: Magnum
-    weight: 1
-  - poolName: AA12
-    weight: 1
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - poolName: Rifle
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.7
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   - poolName: AK47
-    weight: 1
-  config: {fileID: 11400000, guid: a2b4e42152dc89a4fb2868238a339597, type: 2}
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.7
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - poolName: Shotgun
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.7
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - poolName: AA12
+    weight:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.7
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+--- !u!114 &222127166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222127163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad691d351a1d7ef4894142883e3b4160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  concurrentCargoCountCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &225116403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1307,7 @@ MonoBehaviour:
       outWeight: 0.42083332
     - serializedVersion: 3
       time: 1
-      value: 0.5
+      value: 0.34
       inSlope: -0.7421384
       outSlope: -0.7421384
       tangentMode: 0
@@ -6617,7 +6815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006532234}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &869320474
 MonoBehaviour:
@@ -7069,7 +7267,6 @@ Transform:
   - {fileID: 353433194}
   - {fileID: 1488656788}
   - {fileID: 222127164}
-  - {fileID: 1216068249}
   - {fileID: 869320473}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -11106,74 +11303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b59f97c1807d0449559b36236ea6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1216068248
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1216068249}
-  - component: {fileID: 1216068250}
-  m_Layer: 0
-  m_Name: Director
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1216068249
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216068248}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1006532234}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1216068250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216068248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d80ddec96a49f4fa4328a5133a2284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  replacementProbability:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  replacementItem: Drugs
 --- !u!4 &1224972911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4249632368387092724, guid: 0ea713909dd9e6146bb0cb59bddba2b9,
@@ -12761,18 +12890,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16c4b1939016cdc4b8692b9a214d8834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1559680915 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7261413878735653690, guid: 20a34df6d30fd1c469716e43b10b97d4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1006917164380443804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad691d351a1d7ef4894142883e3b4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1563087276
@@ -18905,7 +19022,6 @@ MonoBehaviour:
     spawner: {fileID: 1488656787}
     player: {fileID: 1077207054}
     helicopter: {fileID: 860728240}
-    airdrop: {fileID: 222127165}
     hint: {fileID: 1671975102}
     hintManager: {fileID: 1671975101}
 --- !u!1 &1957597310

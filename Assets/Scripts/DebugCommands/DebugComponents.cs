@@ -8,7 +8,6 @@ public class DebugComponents
     public WendigoSpawner spawner;
     public PlayerCharacter player;
     public Helicopter helicopter;
-    public Airdrop airdrop;
     public HintMessage hint;
     public HintManager hintManager;
 }

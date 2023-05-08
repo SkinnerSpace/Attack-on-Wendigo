@@ -50,9 +50,9 @@ public class DebugCommands : MonoBehaviour
             GameEvents.current.UpdateDeathProgress(n);
         });
 
-        DebugCommand<int, int> ADD_CARGO = new DebugCommand<int, int>("cargo", "Add cargo", "cargo <kind> <count>", (t, n) =>
+        DebugCommand<int> SET_CARGO_ITEM = new DebugCommand<int>("cargo", "Set item", "cargo <item>", (n) =>
         {
-            components.airdrop.AddCargoFromCatalogWithQuantity(t, n);
+            CargoDirector.Instance.ReserveItem(n);
         });
 
         DebugCommand<int> SET_HEALTH = new DebugCommand<int>("health", "Set health", "health <n>", (n) =>
@@ -85,7 +85,7 @@ public class DebugCommands : MonoBehaviour
             GET_BLUNT_DAMAGE,
             DECLARE_VICTORY,
             SET_DEATH_PROGRESS,
-            ADD_CARGO,
+            SET_CARGO_ITEM,
             SET_HEALTH,
             SHOW_HINT,
             RESET_HINT,

@@ -923,8 +923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771ba24d5d9070243930ec885a549915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckRadius: 0.3
-  visualizeCollider: 0
+  groundCheckRadius: 0.7
+  visualizeCollider: 1
 --- !u!114 &8443360487573563697
 MonoBehaviour:
   m_ObjectHideFlags: 0

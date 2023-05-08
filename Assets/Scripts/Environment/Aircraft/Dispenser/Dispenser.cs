@@ -4,7 +4,6 @@ using UnityEngine;
 public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
 {
     private DispenserData data;
-    [SerializeField] private DispenserStorage storage;
     [SerializeField] private Transform doorImp;
     [SerializeField] private FunctionTimer timer;
 
@@ -26,7 +25,7 @@ public class Dispenser : MonoBehaviour, IHelicopterDoorObserver
 
         crateObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
         crate = crateObject.GetComponent<ICrate>();
-        crate.Pack(storage.GetAnItem());
+        CargoManager.Instance.OnCargoIsDropped();
         
         door.Open();
     }

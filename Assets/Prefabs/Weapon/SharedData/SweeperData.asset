@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9a6254048b0ba41b591711574c5ad6, type: 3}
   m_Name: SweeperData
   m_EditorClassIdentifier: 
-  fallSpeed: 0.3
+  fallSpeed: 0.8
   sweepTime: 3

@@ -90,6 +90,7 @@ namespace Character
         {
             if (isActive){
                 onConnectControlles?.Invoke();
+                pushableObject.SwitchOn();
             }
 
             if (!isActive)

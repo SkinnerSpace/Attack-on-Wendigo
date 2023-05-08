@@ -157,6 +157,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  healthMultiplier: 2
+  healthMultiplier: 1.35
   speedMultiplier: 1.07
   fireballDistanceMultiplier: 1.2

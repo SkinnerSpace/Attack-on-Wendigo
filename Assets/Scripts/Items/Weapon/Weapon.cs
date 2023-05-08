@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
 
     private void CreateSurfaceHitHandler()
     {
-        surfaceHitHandler = new WeaponHitSurfaceHandler();
+        surfaceHitHandler = new WeaponHitSurfaceHandler(timer);
         physics.onCollisionQuerry += surfaceHitHandler.HitTheSurface;
         physics.onCollision += DisposeUsedWeapon;
     }

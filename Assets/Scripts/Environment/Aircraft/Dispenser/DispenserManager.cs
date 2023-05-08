@@ -6,7 +6,6 @@ public class DispenserManager : MonoBehaviour, ISwitchable
     [Header("Required Components")]
     [SerializeField] private Transform target;
     [SerializeField] private DispenserData data;
-    [SerializeField] private DispenserStorage storage;
     [SerializeField] private FunctionTimer timer;
 
     [Header("Dispensers")]
@@ -65,7 +64,7 @@ public class DispenserManager : MonoBehaviour, ISwitchable
 
     private bool IsAbleToDrop(){
         return isActive && 
-               !storage.IsEmpty();
+               !CargoManager.Instance.IsEmpty();
     }
 
     private Dispenser GetDispencer() => TargetOnTheRightSide() ? rightDispenser : leftDispenser;
