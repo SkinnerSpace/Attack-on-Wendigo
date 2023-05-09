@@ -83,6 +83,13 @@ MonoBehaviour:
       Data3: 1407048382
       Data4: -39234486
     Path: event:/SFX/Game/Gameplay/Jump/OffTheSnow
+  inTheAirSFX:
+    Guid:
+      Data1: -324538111
+      Data2: 1076062891
+      Data3: -1739874371
+      Data4: 965547114
+    Path: event:/SFX/Game/Gameplay/Jump/SecondJumpInTheAir
 --- !u!114 &6738613822654814358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15078,4 +15085,3 @@ MonoBehaviour:
   putOutTheFireTime: 2
   isDisposable: 0
   checkSourcePermeability: 1
-  showSourceCheck: 1

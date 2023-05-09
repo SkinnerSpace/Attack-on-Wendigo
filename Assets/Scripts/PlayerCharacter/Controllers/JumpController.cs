@@ -11,6 +11,7 @@ namespace Character
         private IInputReader input;
 
         public event Action onJump;
+        public event Action onSecondJump;
 
         public override void Initialize(PlayerCharacter main)
         {
@@ -63,6 +64,8 @@ namespace Character
                 data.IsJumping = true;
                 ApplyJumpForce();
                 PlayerEvents.current.NotifyOnSecondJump();
+
+                onSecondJump?.Invoke();
             }
         }
 

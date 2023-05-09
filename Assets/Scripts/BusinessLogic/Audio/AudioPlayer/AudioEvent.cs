@@ -11,13 +11,7 @@ public class AudioEvent
     public AudioEvent(FMODUnity.EventReference audioReference)
     {
         instance = FMODUnity.RuntimeManager.CreateInstance(audioReference);
-        //eventName = AudioEventLogger.LogCreationAndGetName(audioReference);
     }
-
-/*    ~AudioEvent()
-    {
-        AudioEventLogger.LogDestruction(eventName);
-    }*/
 
     public void SetVariant(int variant) => instance.setParameterByName("Versions", variant);
     public void SetPitch(float pitch) => instance.setParameterByName("Pitch", pitch);

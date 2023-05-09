@@ -134,6 +134,7 @@ namespace WendigoCharacter
         {
             GetController<WendigoTargetManager>().ResetTarget();
             mainPropDestroyer.enabled = false;
+            controller.enabled = false;
             ragDollController.SwitchOn();
             corpseCollisionController.SwitchOn();
 

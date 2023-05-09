@@ -43,8 +43,6 @@ public class Architect : MonoBehaviour, IArchitect
         return blueprint;
     }
 
-    // REFACTOR THIS CRAP and SEND THE MAP TO THE AIR DISPATCHER;
-
     # if UNITY_EDITOR
     private void OnDrawGizmos()
     {

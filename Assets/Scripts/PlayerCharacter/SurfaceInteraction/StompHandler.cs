@@ -7,6 +7,8 @@ namespace Character
         private PlayerCharacter main;
         private ICharacterData data;
 
+        private bool skipTheFirstStomp = true;
+
         public override void Initialize(PlayerCharacter main)
         {
             this.main = main;
@@ -20,16 +22,23 @@ namespace Character
 
         private void HitTheSurface(SurfaceProbe probe)
         {
-            ISurface surface = probe.surface;
-            Vector3 position = probe.position;
-            Vector3 direction = data.FlatVelocity.normalized;
+            if (!skipTheFirstStomp)
+            {
+                ISurface surface = probe.surface;
+                Vector3 position = probe.position;
+                Vector3 direction = data.FlatVelocity.normalized;
 
-            surface.Hit().
-                    WithPosition(position).
-                    WithAngle(direction, Vector3.up).
-                    WithShape(1f, 70f).
-                    WithCount(5, 10).
-                    Launch();
+                surface.Hit().
+                        WithPosition(position).
+                        WithAngle(direction, Vector3.up).
+                        WithShape(1f, 70f).
+                        WithCount(5, 10).
+                        Launch();
+            }
+            else
+            {
+                skipTheFirstStomp = false;
+            }
         }
     }
 }

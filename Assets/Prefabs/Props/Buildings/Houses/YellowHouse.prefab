@@ -148,6 +148,83 @@ MonoBehaviour:
   acceptor: {fileID: 4976458807267190740}
   dustVFX: {fileID: 2028581477430616179}
   depthMultiplier: 0.2
+  pushMultiplier: 15
+  angleMultiplier: 1
+--- !u!1 &7210536225099121907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5472240324981142915}
+  - component: {fileID: 8872493650375694204}
+  - component: {fileID: 3409544728607799065}
+  - component: {fileID: 5388481587387380711}
+  m_Layer: 14
+  m_Name: DominoCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5472240324981142915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210536225099121907}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8724278805808078295}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8872493650375694204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210536225099121907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263a2e3438d5b3c4fbb44ed7c928fa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collapseController: {fileID: 4184217490755039104}
+--- !u!65 &3409544728607799065
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210536225099121907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 8, y: 16, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5388481587387380711
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210536225099121907}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8239632340764624749
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +258,7 @@ Transform:
   m_Children:
   - {fileID: 7678803173278249975}
   - {fileID: 6747572053322638929}
+  - {fileID: 5472240324981142915}
   - {fileID: 1734353373300609184}
   - {fileID: 2620767307158086527}
   - {fileID: 2028581477430616178}
@@ -271,7 +349,7 @@ PrefabInstance:
     - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 130963185620608596, guid: aaf898879de511f47accc51547427e52,
         type: 3}
@@ -391,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 8223300665055619818, guid: 1e3b1ae581b218044ac49f61e33fed5a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8223300665055619818, guid: 1e3b1ae581b218044ac49f61e33fed5a,
         type: 3}
@@ -501,7 +579,7 @@ PrefabInstance:
     - target: {fileID: 2054206040093350115, guid: b683650df6c640a41ae7ce9a495ed307,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2054206040093350115, guid: b683650df6c640a41ae7ce9a495ed307,
         type: 3}
@@ -597,7 +675,7 @@ PrefabInstance:
     - target: {fileID: 8163315158887816132, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8163315158887816132, guid: 6aeb995689604504cb19eb78a83236ef,
         type: 3}

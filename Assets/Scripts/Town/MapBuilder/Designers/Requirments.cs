@@ -10,12 +10,14 @@ public class Requirments
     public Cell Cell { get; private set; }
     public Mark Mark { get; private set; }
     public float Likelyhood { get; private set; }
+    public bool increaseLikelyhood { get; private set; }
 
-    public Requirments(Map Map, Cell Cell, Mark Mark, float Likelyhood)
+    public Requirments(Map Map, Cell Cell, Mark Mark, float Likelyhood, bool increaseLikelyhood)
     {
         this.Map = Map;
         this.Cell = Cell;
         this.Mark = Mark;
         this.Likelyhood = Likelyhood;
+        this.increaseLikelyhood = increaseLikelyhood;
     }
 }

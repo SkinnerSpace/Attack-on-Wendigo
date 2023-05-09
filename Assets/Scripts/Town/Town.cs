@@ -30,7 +30,10 @@ public class Town : MonoBehaviour
 
     public void AddProp(PropTypes type, IProp prop)
     {
-        if (!Props.ContainsKey(type)) Props.Add(type, new List<IProp>());
+        if (!Props.ContainsKey(type)){
+            Props.Add(type, new List<IProp>());
+        }
+
         Props[type].Add(prop);
     }
 }

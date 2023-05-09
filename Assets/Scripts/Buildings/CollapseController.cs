@@ -9,6 +9,8 @@ public class CollapseController : MonoBehaviour, ICollapsible, ISwitchable
     private BoxCollider collapseCollider;
 
     [SerializeField] private float depthMultiplier = 1f;
+    [SerializeField] private float pushMultiplier = 15f;
+    [SerializeField] private float angleMultiplier = 1f;
 
     private PropShaker shaker;
     private PropDropper dropper;
@@ -22,6 +24,7 @@ public class CollapseController : MonoBehaviour, ICollapsible, ISwitchable
 
     private bool isActive = true;
 
+    public event Action<Vector3> onPushDirectionIsSet;
     private event Action<float> onUpdate;
     private event Action onCollapse;
 
@@ -36,7 +39,7 @@ public class CollapseController : MonoBehaviour, ICollapsible, ISwitchable
         collapseCollider = GetComponent<BoxCollider>();
 
         estimations = CollapseEstimator.EstimateFor(acceptor.height);
-        dropper = new PropDropper(acceptor, depthMultiplier);
+        dropper = new PropDropper(acceptor, depthMultiplier, pushMultiplier, angleMultiplier);
         shaker = new PropShaker(estimations.frequency);
     }
 
@@ -56,6 +59,7 @@ public class CollapseController : MonoBehaviour, ICollapsible, ISwitchable
             started = true;
             collapseCollider.enabled = false;
             onCollapse?.Invoke();
+            onPushDirectionIsSet?.Invoke(pushDir);
             dustVFX.Play();
 
             dropper.Launch(pushDir);

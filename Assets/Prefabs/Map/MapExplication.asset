@@ -20,15 +20,24 @@ MonoBehaviour:
   - propType: 1
     propIndex: 1
     likelyhood: 0.05
+    increaseLikelyhood: 1
   - propType: 1
     propIndex: 2
     likelyhood: 0.05
+    increaseLikelyhood: 1
   - propType: 1
     propIndex: 3
     likelyhood: 0.05
+    increaseLikelyhood: 1
   - propType: 1
     propIndex: 4
     likelyhood: 0.05
+    increaseLikelyhood: 1
   - propType: 2
     propIndex: 1
     likelyhood: 0.4
+    increaseLikelyhood: 1
+  - propType: 1
+    propIndex: 5
+    likelyhood: 0.15
+    increaseLikelyhood: 0

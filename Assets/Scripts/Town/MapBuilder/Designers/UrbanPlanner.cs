@@ -14,14 +14,19 @@ public class UrbanPlanner : Designer
         float chance = UnityEngine.Random.Range(0f, 1f);
         float likelyhood = CalculateLikelyhood(doc);
 
-        return (chance <= likelyhood) ? doc.Mark : doc.Map.GetMark(X, Y);
+        return (chance < likelyhood) ? doc.Mark : doc.Map.GetMark(X, Y);
     }
 
     private float CalculateLikelyhood(Requirments doc)
     {
         Dictionary<Cell.Directions, Mark> neighbours = MapNeighbourFinder.GetEightNeighbours(doc.Map, doc.Cell);
-        float percent = GetNeighboursOfSameTypePercent(neighbours, doc.Mark.Type);
-        float likelyhood = doc.Likelyhood + percent;
+        float likelyhood = doc.Likelyhood;
+
+        if (doc.increaseLikelyhood)
+        {
+            float percent = GetNeighboursOfSameTypePercent(neighbours, doc.Mark.Type);
+            likelyhood += percent;
+        }
 
         return likelyhood;
     }

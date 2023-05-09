@@ -3,7 +3,6 @@
 public class PropDropper : ICollapseObserver
 {
     private const float DEPTH_OFFSET = 1f;
-    private const float PUSH_MULTIPLIER = 15f;
 
     public Vector3 posDisplacement { get; private set; }
     public Quaternion rotDisplacement { get; private set; }
@@ -15,8 +14,10 @@ public class PropDropper : ICollapseObserver
     private Quaternion fallRotation;
 
     private float depthMultiplier;
+    private float pushMultiplier;
+    private float angleMultiplier;
 
-    public PropDropper(CollapseAcceptor acceptor, float depthMultiplier)
+    public PropDropper(CollapseAcceptor acceptor, float depthMultiplier, float pushMultiplier, float angleMultiplier)
     {
         originalPos = acceptor.originalPos;
         originalRot = acceptor.originalRot;
@@ -25,6 +26,8 @@ public class PropDropper : ICollapseObserver
         fallPosOffset = new Vector3(0f, depth, 0f);
 
         this.depthMultiplier = depthMultiplier;
+        this.pushMultiplier = pushMultiplier;
+        this.angleMultiplier = angleMultiplier;
     }
 
     public void Launch(Vector3 pushDir)
@@ -33,12 +36,14 @@ public class PropDropper : ICollapseObserver
         fallRotation = CalculateFallRotation(pushDir, fallPosOffset);
     }
 
-    private Vector3 GetDisplacementFromDirection(Vector3 direction) => new Vector3(direction.x, 0f, direction.z).normalized * PUSH_MULTIPLIER;
+    private Vector3 GetDisplacementFromDirection(Vector3 direction) => new Vector3(direction.x, 0f, direction.z).normalized * pushMultiplier;
 
     private Quaternion CalculateFallRotation(Vector3 direction, Vector3 offset)
     {
         Vector3 fallPos = originalPos + offset;
         Vector3 fallDir = (fallPos - originalPos).normalized;
+        fallDir = new Vector3(fallDir.x, fallDir.y * angleMultiplier, fallDir.z);
+
         float adjustmentAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         Quaternion adjustmentRotation = Quaternion.Euler(0f, -adjustmentAngle, 0f);
