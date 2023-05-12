@@ -1,0 +1,27 @@
+﻿using UnityEngine;
+
+[ExecuteAlways]
+public class EyesController : MonoBehaviour
+{
+    [Range(0f, 1f)]
+    [SerializeField] private float dilation;
+    [SerializeField] private float minSize;
+
+    [SerializeField] private RectTransform[] eyes;
+
+    private void Update()
+    {
+        UpdateSize();
+    }
+
+    private void UpdateSize()
+    {
+        float size = Mathf.Lerp(minSize, 1f, dilation);
+        size = Easing.QuadEaseInOut(size);
+
+        foreach (RectTransform eye in eyes)
+        {
+            eye.localScale = new Vector2(size, size);
+        }
+    }
+}
