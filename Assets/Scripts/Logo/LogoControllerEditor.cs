@@ -19,22 +19,16 @@ public class LogoControllerEditor : Editor
         {
             GUILayout.Space(10);
 
-            if (GUILayout.Button("Idle"))
+            if (GUILayout.Button("Play"))
             {
-                controller.SetStage(LogoAnimationStages.Idle);
+                controller.Play();
             }
 
-            if (GUILayout.Button("Pierced"))
+            if (GUILayout.Button("Reset"))
             {
-                controller.SetStage(LogoAnimationStages.Pierced);
-            }
-
-            if (GUILayout.Button("Final"))
-            {
-                controller.SetStage(LogoAnimationStages.Final);
+                controller.ResetState();
             }
         }
     }
 }
-
 

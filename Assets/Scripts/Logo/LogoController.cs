@@ -1,26 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteAlways]
 public class LogoController : MonoBehaviour
 {
-    private LogoPushController pushController;
-    private LogoAnimatedPart[] parts;
+    [Header("Required components")]
+    [SerializeField] private LogoCommand resetCommand;
+    [SerializeField] private LogoCommand[] logoCommands;
 
-    private void OnEnable()
+    public void Play()
     {
-        pushController = GetComponentInChildren<LogoPushController>();
-        parts = GetComponentsInChildren<LogoAnimatedPart>();
+        StartCoroutine(PlayCoroutine());
     }
 
-    public void SetStage(LogoAnimationStages stage)
+    private void Update()
     {
-        pushController.Push();
+        Debug.Log("Save me ");
+    }
 
-        foreach (LogoAnimatedPart part in parts){
-            part.SetFrame(stage);
+    public void ResetState() => resetCommand.Execute();
+
+    private IEnumerator PlayCoroutine()
+    {
+        for (int i = 0; i < logoCommands.Length; i++)
+        {
+            logoCommands[i].Execute();
+
+            while (!logoCommands[i].IsDone)
+            {
+                Debug.Log("I'm waiting you fucking dummy");
+                yield return null;
+            }
         }
+
+        Debug.Log("Is over");
     }
 }
-
-

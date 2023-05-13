@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[ExecuteAlways]
+[ExecuteInEditMode]
 public class LogoPulseController : MonoBehaviour
 {
     private const float MAX_SIN_TIME = Mathf.PI * 2f;
@@ -22,6 +22,8 @@ public class LogoPulseController : MonoBehaviour
     private float pulseValue;
     private float pulseIntensity;
     private bool isShocked;
+
+    public float openTime;
 
     public void Play()
     {
@@ -47,7 +49,11 @@ public class LogoPulseController : MonoBehaviour
             CountDown();
             Oscillate();
             UpdatePulse();
+            
         }
+
+        openTime = time;
+        Debug.Log("SHOCk");
     }
 
     private void CountDown()
@@ -80,7 +86,6 @@ public class LogoPulseController : MonoBehaviour
         pulseValue = Mathf.InverseLerp(-1f, 1f, sin);
         pulseValue *= pulseIntensity;
         pulseValue = Easing.QuadEaseInOut(pulseValue);
-        Debug.Log(pulseValue);
 
         UpdateColor();
         UpdateScale();

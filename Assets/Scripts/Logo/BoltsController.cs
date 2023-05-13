@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [ExecuteAlways]
 public class BoltsController : MonoBehaviour
@@ -17,16 +18,25 @@ public class BoltsController : MonoBehaviour
     private bool isPlaying;
     private bool isPierced;
 
+    private Action callBackOnPierced;
+    public void Play(Action callBackOnPierced)
+    {
+        this.callBackOnPierced = callBackOnPierced;
+        Play();
+    }
+
     public void Play()
     {
         time = 0f;
         isPlaying = true;
+        isPierced = false;
     }
 
     public void Stop()
     {
         time = 0f;
         isPlaying = false;
+        isPierced = false;
 
         UpdatePiercing();
     }
@@ -50,9 +60,10 @@ public class BoltsController : MonoBehaviour
             isPlaying = false;
         }
 
-        if (time >= piercedTime)
+        if (!isPierced && time >= piercedTime)
         {
-
+            isPierced = true;
+            callBackOnPierced();
         }
     }
 

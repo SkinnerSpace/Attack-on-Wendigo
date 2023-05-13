@@ -23,6 +23,23 @@ public class BezierTrajectoryEditor : Editor
         {
             GUILayout.Space(10);
 
+            GUILayout.Label("Visualizer");
+            
+            using (new GUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("On"))
+                {
+                    bezierTrajectory.SwitchOnVisualization();
+                }
+
+                if (GUILayout.Button("Off"))
+                {
+                    bezierTrajectory.SwitchOffVisualization();
+                }
+            }
+
+            GUILayout.Space(10);
+
             if (GUILayout.Button("Generate Trajectory")){
                 bezierTrajectory.SwitchOnVisualization();
                 bezierTrajectory.GenerateTrajectory();
