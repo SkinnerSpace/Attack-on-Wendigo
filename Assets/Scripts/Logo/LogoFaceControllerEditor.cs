@@ -14,7 +14,6 @@ public class LogoFaceControllerEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        Debug.Log("FUCK YOU");
 
         using (new GUILayout.VerticalScope())
         {

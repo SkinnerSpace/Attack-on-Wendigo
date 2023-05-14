@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 [ExecuteAlways]
 public class LogoPushController : MonoBehaviour
@@ -7,10 +8,14 @@ public class LogoPushController : MonoBehaviour
     [SerializeField] private float playTime = 0.3f;
     [SerializeField] private AnimationCurve curve;
 
-    private float time;
-    private bool isPlaying;
+    private static (float start, float current) time;
+    private static bool isPlaying;
 
-    private void Update()
+    private void OnEnable() => EditorApplication.update += UpdateState;
+
+    private void OnDisable() => EditorApplication.update -= UpdateState;
+
+    private void UpdateState()
     {
         if (isPlaying){
             UpdateScale();
@@ -19,20 +24,21 @@ public class LogoPushController : MonoBehaviour
 
     public void Push()
     {
-        time = 0f;
+        time.current = 0f;
+        time.start = Time.realtimeSinceStartup;
         isPlaying = true;
     }
 
     private void UpdateScale()
     {
-        time += Time.unscaledDeltaTime;
+        time.current = Time.realtimeSinceStartup - time.start;
 
-        if (time >= playTime){
-            time = playTime;
+        if (time.current >= playTime){
+            time.current = playTime;
             isPlaying = false;
         }
 
-        float curvePosition = Mathf.InverseLerp(0f, playTime, time);
+        float curvePosition = Mathf.InverseLerp(0f, playTime, time.current);
         float value = curve.Evaluate(curvePosition);
         Vector3 scale = new Vector3(value, value, 1f);
 

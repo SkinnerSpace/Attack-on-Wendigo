@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 [ExecuteInEditMode]
 public class LogoPulseController : MonoBehaviour
@@ -15,72 +16,73 @@ public class LogoPulseController : MonoBehaviour
     [SerializeField] private float maxScale;
     [SerializeField] private float frequency;
 
-    private float time;
+    private static (float start, float current) time;
+    private static (float start, float current) sinTime;
 
-    private float sinTime;
-    private float sin;
-    private float pulseValue;
-    private float pulseIntensity;
-    private bool isShocked;
+    private static float sin;
+    private static float pulseValue;
+    private static float pulseIntensity;
+    private static bool isShocked;
 
-    public float openTime;
+    private void OnEnable() => EditorApplication.update += UpdateState;
+
+    private void OnDisable() => EditorApplication.update -= UpdateState;
 
     public void Play()
     {
-        time = 0f;
-        sinTime = Mathf.PI * 2f;
+        time.current = 0f;
+        time.start = Time.realtimeSinceStartup;
+
+        sin = Mathf.PI * 2f;
         isShocked = true;
     }
     
     public void Stop()
     {
-        time = 0f;
-        sinTime = 0f;
+        time.current = 0f;
+        sinTime.current = 0f;
+
         sin = -1f;
         isShocked = false;
 
         UpdatePulse();
     }
 
-    private void Update()
+    private void UpdateState()
     {
         if (isShocked)
         {
             CountDown();
             Oscillate();
             UpdatePulse();
-            
         }
-
-        openTime = time;
-        Debug.Log("SHOCk");
     }
 
     private void CountDown()
     {
-        time += Time.unscaledDeltaTime;
+        time.current = Time.realtimeSinceStartup - time.start;
 
-        if (time >= pulseTime){
-            time = pulseTime;
+        if (time.current >= pulseTime){
+            time.current = pulseTime;
             isShocked = false;
         }
     }
 
     private void Oscillate()
     {
-        sinTime += Time.unscaledDeltaTime * frequency;
+        sinTime.current = (Time.realtimeSinceStartup - sinTime.start) * frequency;
 
-        if (sinTime > MAX_SIN_TIME)
+        if (sinTime.current > MAX_SIN_TIME)
         {
-            sinTime -= MAX_SIN_TIME;
+            sinTime.current -= MAX_SIN_TIME;
         }
 
-        sin = Mathf.Sin(sinTime);
+        sin = Mathf.Sin(sinTime.current);
     }
 
     private void UpdatePulse()
     {
-        float curvePosition = Mathf.InverseLerp(0f, pulseTime, time);
+        float curvePosition = Mathf.InverseLerp(0f, pulseTime, time.current);
         pulseIntensity = intensityCurve.Evaluate(curvePosition);
 
         pulseValue = Mathf.InverseLerp(-1f, 1f, sin);

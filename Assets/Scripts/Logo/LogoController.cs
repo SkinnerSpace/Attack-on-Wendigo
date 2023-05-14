@@ -15,11 +15,6 @@ public class LogoController : MonoBehaviour
         StartCoroutine(PlayCoroutine());
     }
 
-    private void Update()
-    {
-        Debug.Log("Save me ");
-    }
-
     public void ResetState() => resetCommand.Execute();
 
     private IEnumerator PlayCoroutine()
@@ -30,7 +25,6 @@ public class LogoController : MonoBehaviour
 
             while (!logoCommands[i].IsDone)
             {
-                Debug.Log("I'm waiting you fucking dummy");
                 yield return null;
             }
         }

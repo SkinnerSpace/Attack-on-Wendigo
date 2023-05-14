@@ -17,11 +17,6 @@ public class LogoFaceController : MonoBehaviour
         parts = GetComponentsInChildren<LogoAnimatedPart>();
     }
 
-    private void OnValidate()
-    {
-        
-    }
-
     public void SetStage(LogoAnimationStages stage)
     {
         if (this.stage != stage){
