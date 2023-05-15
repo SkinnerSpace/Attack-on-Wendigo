@@ -1,7 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[ExecuteAlways]
 public class LogoPushController : MonoBehaviour
 {
     [SerializeField] private RectTransform[] elements;
@@ -11,11 +10,7 @@ public class LogoPushController : MonoBehaviour
     private static (float start, float current) time;
     private static bool isPlaying;
 
-    private void OnEnable() => EditorApplication.update += UpdateState;
-
-    private void OnDisable() => EditorApplication.update -= UpdateState;
-
-    private void UpdateState()
+    private void Update()
     {
         if (isPlaying){
             UpdateScale();

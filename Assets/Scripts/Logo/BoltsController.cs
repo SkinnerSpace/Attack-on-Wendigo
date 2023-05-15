@@ -3,9 +3,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteAlways]
 public class BoltsController : MonoBehaviour
 {
+    [Header("Next stage")]
+    [SerializeField] private LogoPulseController pulseController;
+    [SerializeField] private LogoFaceController faceController;
+    [SerializeField] private ShrinkController shrinkController;
+
     [Header("Settings")]
     [SerializeField] private Vector2 destination;
     [SerializeField] private float piercingTime;
@@ -33,18 +37,6 @@ public class BoltsController : MonoBehaviour
     private static bool isPlaying;
     private static bool isPierced;
 
-    private Action callBackOnPierced;
-
-    private void OnEnable() => EditorApplication.update += UpdateState;
-
-    private void OnDisable() => EditorApplication.update -= UpdateState;
-
-    public void Play(Action callBackOnPierced)
-    {
-        this.callBackOnPierced = callBackOnPierced;
-        Play();
-    }
-
     public void Play()
     {
         time.start = Time.realtimeSinceStartup;
@@ -67,7 +59,7 @@ public class BoltsController : MonoBehaviour
         UpdatePiercing();
     }
 
-    private void UpdateState()
+    private void Update()
     {
         if (isPlaying)
         {
@@ -78,24 +70,27 @@ public class BoltsController : MonoBehaviour
 
     private void CountDown()
     {
-        time.current = Time.realtimeSinceStartup - time.start; 
+        time.current = Time.realtimeSinceStartup - time.start;
+
+        if (!isPierced && time.current >= piercedTime)
+        {
+            isPierced = true;
+            OnPierced();
+        }
 
         if (time.current >= piercingTime)
         {
             time.current = piercingTime;
             isPlaying = false;
         }
+    }
 
-        if (!isPierced && time.current >= piercedTime)
-        {
-            isPierced = true;
-            SetNailedImages();
-
-            if (callBackOnPierced != null)
-            {
-                callBackOnPierced();
-            }
-        }
+    private void OnPierced()
+    {
+        SetNailedImages();
+        faceController.SetStage(LogoAnimationStages.Pierced);
+        shrinkController.Play();
+        pulseController.Play();
     }
 
     private void SetNailedImages()
@@ -123,6 +118,7 @@ public class BoltsController : MonoBehaviour
             nailedBolt.enabled = false;
         }
     }
+
 
     private void UpdatePiercing()
     {

@@ -9,7 +9,7 @@ public class FirstLogoCommand : LogoCommand
     {
         isDone = false;
         faceController.SetStage(LogoAnimationStages.Idle);
-        boltsController.Play(Pierce);
+
     }
 
     private void Pierce()

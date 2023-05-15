@@ -1,10 +1,14 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class LogoPulseController : MonoBehaviour
 {
     private const float MAX_SIN_TIME = Mathf.PI * 2f;
+
+    [Header("Next stage")]
+    [SerializeField] private LogoFaceController faceController;
+    [SerializeField] private RainbowController rainbowController;
 
     [Header("Required components")]
     [SerializeField] private RectTransform[] scaledElements;
@@ -23,10 +27,6 @@ public class LogoPulseController : MonoBehaviour
     private static float pulseValue;
     private static float pulseIntensity;
     private static bool isShocked;
-
-    private void OnEnable() => EditorApplication.update += UpdateState;
-
-    private void OnDisable() => EditorApplication.update -= UpdateState;
 
     public void Play()
     {
@@ -48,7 +48,7 @@ public class LogoPulseController : MonoBehaviour
         UpdatePulse();
     }
 
-    private void UpdateState()
+    private void Update()
     {
         if (isShocked)
         {
@@ -65,7 +65,15 @@ public class LogoPulseController : MonoBehaviour
         if (time.current >= pulseTime){
             time.current = pulseTime;
             isShocked = false;
+
+            OnShocked();
         }
+    }
+
+    private void OnShocked()
+    {
+        faceController.SetStage(LogoAnimationStages.Final);
+        rainbowController.Play();
     }
 
     private void Oscillate()

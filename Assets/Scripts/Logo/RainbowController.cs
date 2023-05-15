@@ -11,20 +11,30 @@ public class RainbowController : MonoBehaviour
     }
 
     [SerializeField] private float valueMultiplier = 64f;
-    [SerializeField] private float flowTime = 1f;
+    [SerializeField] private float targetFlowTime = 1f;
     [SerializeField] private RainbowStripe[] stripes;
 
-    private bool isPlaying;
-    private bool isFlowing;
+    private static bool isPlaying;
+    private static bool isFlowing;
 
-    private float waveCyclicTime;
-    private float currentFlowTime;
+    private static (float current, float start) waveCyclicTime;
+    private static (float current, float start) flowTime;
     private float protrusion;
+
+    private void OnEnable() => EditorApplication.update += UpdateState;
+
+    private void OnDisable() => EditorApplication.update -= UpdateState;
 
     public void Play()
     {
         isPlaying = true;
         isFlowing = true;
+
+        waveCyclicTime.current = 0f;
+        waveCyclicTime.start = Time.realtimeSinceStartup;
+
+        flowTime.current = 0f;
+        flowTime.start = Time.realtimeSinceStartup;
     }
 
     public void Stop()
@@ -32,14 +42,14 @@ public class RainbowController : MonoBehaviour
         isPlaying = false;
         isFlowing = false;
 
-        waveCyclicTime = 0f;
-        currentFlowTime = 0f;
+        waveCyclicTime.current = 0f;
+        flowTime.current = 0f;
         protrusion = 0f;
 
         UpdateStripes();
     }
 
-    private void Update()
+    private void UpdateState()
     {
         if (isPlaying)
         {
@@ -52,26 +62,26 @@ public class RainbowController : MonoBehaviour
     {
         if (isFlowing)
         {
-            currentFlowTime += Time.unscaledDeltaTime;
+            flowTime.current = Time.realtimeSinceStartup - flowTime.start;
 
-            if (currentFlowTime >= flowTime)
+            if (flowTime.current >= targetFlowTime)
             {
-                currentFlowTime = flowTime;
-
+                flowTime.current = targetFlowTime;
                 isFlowing = false;
             }
 
-            protrusion = Mathf.InverseLerp(0f, flowTime, currentFlowTime);
+            protrusion = Mathf.InverseLerp(0f, targetFlowTime, flowTime.current);
             protrusion = Easing.QuadEaseOut(protrusion);
         }
     }
 
     private void UpdateWaveMotion()
     {
-        waveCyclicTime += Time.unscaledDeltaTime;
+        waveCyclicTime.current = Time.realtimeSinceStartup - waveCyclicTime.start;
         
-        if (waveCyclicTime >= 1f){
-            waveCyclicTime = Time.unscaledDeltaTime;
+        if (waveCyclicTime.current >= 1f){
+            waveCyclicTime.current -= 1f;
+            waveCyclicTime.start = Time.realtimeSinceStartup;
         }
 
         UpdateStripes();
@@ -82,7 +92,7 @@ public class RainbowController : MonoBehaviour
         float defaultOffset = Mathf.Lerp(DEFAULT_OFFSET.MIN, DEFAULT_OFFSET.MAX, protrusion);
 
         foreach (RainbowStripe stripe in stripes){
-            stripe.UpdateLength(waveCyclicTime, defaultOffset, valueMultiplier);
+            stripe.UpdateLength(waveCyclicTime.current, defaultOffset, valueMultiplier);
         }
     }
 }

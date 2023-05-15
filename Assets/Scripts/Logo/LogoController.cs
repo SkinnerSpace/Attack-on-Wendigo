@@ -3,32 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteAlways]
 public class LogoController : MonoBehaviour
 {
     [Header("Required components")]
-    [SerializeField] private LogoCommand resetCommand;
-    [SerializeField] private LogoCommand[] logoCommands;
+    [SerializeField] private BoltsController boltsController;
+    [SerializeField] private LogoFaceController faceController;
+    [SerializeField] private LogoPulseController pulseController;
+    [SerializeField] private ShrinkController shrinkController;
+    [SerializeField] private RainbowController rainbowController;
 
     public void Play()
     {
-        StartCoroutine(PlayCoroutine());
+        ResetState();
+        boltsController.Play();
     }
 
-    public void ResetState() => resetCommand.Execute();
-
-    private IEnumerator PlayCoroutine()
+    public void ResetState()
     {
-        for (int i = 0; i < logoCommands.Length; i++)
-        {
-            logoCommands[i].Execute();
-
-            while (!logoCommands[i].IsDone)
-            {
-                yield return null;
-            }
-        }
-
-        Debug.Log("Is over");
+        boltsController.Stop();
+        pulseController.Stop();
+        shrinkController.Stop();
+        rainbowController.Stop();
+        faceController.SetStage(LogoAnimationStages.Idle);
     }
 }

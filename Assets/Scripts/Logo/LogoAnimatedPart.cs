@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-[ExecuteAlways]
 public class LogoAnimatedPart : MonoBehaviour
 {
     private LogoAnimationFrame[] frames;
 
-    private void OnEnable()
+    private void Awake()
     {
         frames = GetComponentsInChildren<LogoAnimationFrame>(true);
     }

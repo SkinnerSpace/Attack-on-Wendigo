@@ -9,8 +9,9 @@ public class EyesController : MonoBehaviour
 
     [SerializeField] private RectTransform[] eyes;
 
-    private void Update()
+    public void SetDilation(float dilation)
     {
+        this.dilation = dilation;
         UpdateSize();
     }
 

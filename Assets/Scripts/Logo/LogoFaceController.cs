@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteAlways]
 public class LogoFaceController : MonoBehaviour
 {
     private LogoPushController pushController;
@@ -11,7 +10,7 @@ public class LogoFaceController : MonoBehaviour
 
     private LogoAnimationStages stage;
 
-    private void OnEnable()
+    private void Awake()
     {
         pushController = GetComponentInChildren<LogoPushController>();
         parts = GetComponentsInChildren<LogoAnimatedPart>();
