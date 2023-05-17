@@ -28,4 +28,32 @@ public class LogoFaceController : MonoBehaviour
             }
         }
     }
+
+    public void SetStageAndPushSecondaryElements(LogoAnimationStages stage)
+    {
+        if (this.stage != stage)
+        {
+            this.stage = stage;
+
+            pushController.PushSecondaryElements();
+
+            foreach (LogoAnimatedPart part in parts)
+            {
+                part.SetFrame(stage);
+            }
+        }
+    }
+
+    public void SetStageWithoutPush(LogoAnimationStages stage)
+    {
+        if (this.stage != stage)
+        {
+            this.stage = stage;
+
+            foreach (LogoAnimatedPart part in parts)
+            {
+                part.SetFrame(stage);
+            }
+        }
+    }
 }

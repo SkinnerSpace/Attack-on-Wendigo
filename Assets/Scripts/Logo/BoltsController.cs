@@ -32,15 +32,14 @@ public class BoltsController : MonoBehaviour
     [SerializeField] private RectTransform leftHole;
     [SerializeField] private RectTransform rightHole;
 
-    private static (float current, float start) time;
+    private float time;
 
     private static bool isPlaying;
     private static bool isPierced;
 
     public void Play()
     {
-        time.start = Time.realtimeSinceStartup;
-        time.current = 0f;
+        time = 0f;
 
         SetUnnailedImages();
 
@@ -50,7 +49,7 @@ public class BoltsController : MonoBehaviour
 
     public void Stop()
     {
-        time.current = 0f;
+        time = 0f;
         isPlaying = false;
         isPierced = false;
 
@@ -70,17 +69,17 @@ public class BoltsController : MonoBehaviour
 
     private void CountDown()
     {
-        time.current = Time.realtimeSinceStartup - time.start;
+        time += Time.unscaledDeltaTime;
 
-        if (!isPierced && time.current >= piercedTime)
+        if (!isPierced && time >= piercedTime)
         {
             isPierced = true;
             OnPierced();
         }
 
-        if (time.current >= piercingTime)
+        if (time >= piercingTime)
         {
-            time.current = piercingTime;
+            time = piercingTime;
             isPlaying = false;
         }
     }
@@ -122,7 +121,7 @@ public class BoltsController : MonoBehaviour
 
     private void UpdatePiercing()
     {
-        float curvePosition = Mathf.InverseLerp(0f, piercingTime, time.current);
+        float curvePosition = Mathf.InverseLerp(0f, piercingTime, time);
         float value = curve.Evaluate(curvePosition);
         Vector2 rightPosition = Vector2.LerpUnclamped(Vector2.zero, destination, value);
         Vector2 leftPosition = new Vector2(rightPosition.x * -1f, rightPosition.y);

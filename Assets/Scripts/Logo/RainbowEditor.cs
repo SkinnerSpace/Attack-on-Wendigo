@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(RainbowController))]
 public class RainbowEditor : Editor
 {
@@ -34,3 +35,4 @@ public class RainbowEditor : Editor
         }
     }
 }
+#endif

@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(LogoPulseController))]
 public class LogoPulseControllerEditor : Editor
 {
@@ -31,3 +32,4 @@ public class LogoPulseControllerEditor : Editor
         }
     }
 }
+#endif

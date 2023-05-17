@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(BoltsController))]
 public class BoltsControllerEditor : Editor
 {
@@ -31,3 +32,4 @@ public class BoltsControllerEditor : Editor
         }
     }
 }
+#endif

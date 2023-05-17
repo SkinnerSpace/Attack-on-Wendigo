@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RainbowStripe : MonoBehaviour
 {
+    private const float DEFAULT_VERTICAL_POSITION = 300f;
+
     [SerializeField] private RectTransform stripeImage;
     [SerializeField] private RainbowCurve curve;
 
@@ -20,5 +22,10 @@ public class RainbowStripe : MonoBehaviour
 
         float yPosition = defaultVerticalOffset - (curve.Evaluate(time) * valueMultiplier);
         stripeImage.anchoredPosition = new Vector2(stripeImage.anchoredPosition.x, yPosition);
+    }
+
+    public void ResetLength()
+    {
+        stripeImage.anchoredPosition = new Vector2(stripeImage.anchoredPosition.x, DEFAULT_VERTICAL_POSITION);
     }
 }

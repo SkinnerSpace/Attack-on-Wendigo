@@ -9,6 +9,8 @@ public class LogoPulseController : MonoBehaviour
     [Header("Next stage")]
     [SerializeField] private LogoFaceController faceController;
     [SerializeField] private RainbowController rainbowController;
+    [SerializeField] private TitleAnimator titleAnimator;
+    [SerializeField] private UpscaleAnimator upscaleAnimator;
 
     [Header("Required components")]
     [SerializeField] private RectTransform[] scaledElements;
@@ -20,8 +22,8 @@ public class LogoPulseController : MonoBehaviour
     [SerializeField] private float maxScale;
     [SerializeField] private float frequency;
 
-    private static (float start, float current) time;
-    private static (float start, float current) sinTime;
+    private float time;
+    private float sinTime;
 
     private static float sin;
     private static float pulseValue;
@@ -30,8 +32,7 @@ public class LogoPulseController : MonoBehaviour
 
     public void Play()
     {
-        time.current = 0f;
-        time.start = Time.realtimeSinceStartup;
+        time = 0f;
 
         sin = Mathf.PI * 2f;
         isShocked = true;
@@ -39,8 +40,7 @@ public class LogoPulseController : MonoBehaviour
     
     public void Stop()
     {
-        time.current = 0f;
-        sinTime.current = 0f;
+        time = 0f;
 
         sin = -1f;
         isShocked = false;
@@ -60,10 +60,10 @@ public class LogoPulseController : MonoBehaviour
 
     private void CountDown()
     {
-        time.current = Time.realtimeSinceStartup - time.start;
+        time += Time.unscaledDeltaTime;
 
-        if (time.current >= pulseTime){
-            time.current = pulseTime;
+        if (time >= pulseTime){
+            time = pulseTime;
             isShocked = false;
 
             OnShocked();
@@ -72,25 +72,27 @@ public class LogoPulseController : MonoBehaviour
 
     private void OnShocked()
     {
-        faceController.SetStage(LogoAnimationStages.Final);
+        faceController.SetStageAndPushSecondaryElements(LogoAnimationStages.Final);
         rainbowController.Play();
+        titleAnimator.Appear();
+        upscaleAnimator.Increase();
     }
 
     private void Oscillate()
     {
-        sinTime.current = (Time.realtimeSinceStartup - sinTime.start) * frequency;
+        sinTime += Time.unscaledDeltaTime * frequency;
 
-        if (sinTime.current > MAX_SIN_TIME)
+        if (sinTime > MAX_SIN_TIME)
         {
-            sinTime.current -= MAX_SIN_TIME;
+            sinTime -= MAX_SIN_TIME;
         }
 
-        sin = Mathf.Sin(sinTime.current);
+        sin = Mathf.Sin(sinTime);
     }
 
     private void UpdatePulse()
     {
-        float curvePosition = Mathf.InverseLerp(0f, pulseTime, time.current);
+        float curvePosition = Mathf.InverseLerp(0f, pulseTime, time);
         pulseIntensity = intensityCurve.Evaluate(curvePosition);
 
         pulseValue = Mathf.InverseLerp(-1f, 1f, sin);

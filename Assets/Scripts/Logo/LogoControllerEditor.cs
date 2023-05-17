@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(LogoController))]
 public class LogoControllerEditor : Editor
 {
@@ -31,4 +32,5 @@ public class LogoControllerEditor : Editor
         }
     }
 }
+# endif
 

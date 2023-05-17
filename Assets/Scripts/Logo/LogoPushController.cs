@@ -4,11 +4,13 @@ using UnityEngine;
 public class LogoPushController : MonoBehaviour
 {
     [SerializeField] private RectTransform[] elements;
+    [SerializeField] private RectTransform[] secondaryElements;
     [SerializeField] private float playTime = 0.3f;
     [SerializeField] private AnimationCurve curve;
 
-    private static (float start, float current) time;
-    private static bool isPlaying;
+    private float time;
+    private bool isPlaying;
+    private bool secondaryElementsAreUsed;
 
     private void Update()
     {
@@ -19,27 +21,39 @@ public class LogoPushController : MonoBehaviour
 
     public void Push()
     {
-        time.current = 0f;
-        time.start = Time.realtimeSinceStartup;
+        time = 0f;
         isPlaying = true;
+        secondaryElementsAreUsed = false;
+    }
+
+    public void PushSecondaryElements()
+    {
+        time = 0f;
+        isPlaying = true;
+        secondaryElementsAreUsed = true;
     }
 
     private void UpdateScale()
     {
-        time.current = Time.realtimeSinceStartup - time.start;
+        time += Time.unscaledDeltaTime;
 
-        if (time.current >= playTime){
-            time.current = playTime;
+        if (time >= playTime){
+            time = playTime;
             isPlaying = false;
         }
 
-        float curvePosition = Mathf.InverseLerp(0f, playTime, time.current);
+        float curvePosition = Mathf.InverseLerp(0f, playTime, time);
         float value = curve.Evaluate(curvePosition);
         Vector3 scale = new Vector3(value, value, 1f);
 
-        foreach (RectTransform element in elements)
+        UpdateRectTransforms(secondaryElementsAreUsed ? secondaryElements : elements, scale);
+    }
+
+    private void UpdateRectTransforms(RectTransform[] rectTransforms, Vector3 scale)
+    {
+        foreach (RectTransform rectTransform in rectTransforms)
         {
-            element.localScale = scale;
+            rectTransform.localScale = scale;
         }
     }
 }

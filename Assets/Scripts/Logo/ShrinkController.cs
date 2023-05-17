@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ShrinkController : MonoBehaviour
 {
-    private static (float start, float current) time;
+    private float time;
 
     private enum States
     {
@@ -54,16 +54,16 @@ public class ShrinkController : MonoBehaviour
 
     private void UpdateShrinking()
     {
-        time.current = Time.realtimeSinceStartup - time.start;
-        time.current = Mathf.Clamp(time.current, 0f, shrinkTime);
+        time += Time.unscaledDeltaTime;
+        time = Mathf.Clamp(time, 0f, shrinkTime);
 
-        float progress = Mathf.InverseLerp(0f, shrinkTime, time.current);
+        float progress = Mathf.InverseLerp(0f, shrinkTime, time);
         Vector3 scale = shrinkCurve.Evaluate(progress).ToVector3();
         shrinkContainer.localScale = scale;
 
         eyesController.SetDilation(1f - progress);
 
-        if (time.current >= shrinkTime)
+        if (time >= shrinkTime)
         {
             ResetTimer();
             state = States.Expand;
@@ -72,15 +72,15 @@ public class ShrinkController : MonoBehaviour
 
     private void UpdateExpansion()
     {
-        time.current = Time.realtimeSinceStartup - time.start;
+        time += Time.unscaledDeltaTime;
 
-        float progress = Mathf.InverseLerp(0f, expandTIme, time.current);
+        float progress = Mathf.InverseLerp(0f, expandTIme, time);
         Vector3 scale = expandCurve.Evaluate(progress).ToVector3();
         shrinkContainer.localScale = scale;
 
         eyesController.SetDilation(progress);
 
-        if (time.current >= expandTIme)
+        if (time >= expandTIme)
         {
             ResetTimer();
             state = States.Idle;
@@ -89,7 +89,6 @@ public class ShrinkController : MonoBehaviour
 
     private void ResetTimer()
     {
-        time.current = 0f;
-        time.start = Time.realtimeSinceStartup;
+        time = 0f;
     }
 }

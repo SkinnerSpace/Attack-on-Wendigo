@@ -11,6 +11,21 @@ public class LogoController : MonoBehaviour
     [SerializeField] private LogoPulseController pulseController;
     [SerializeField] private ShrinkController shrinkController;
     [SerializeField] private RainbowController rainbowController;
+    [SerializeField] private TitleAnimator titleAnimator;
+    [SerializeField] private UpscaleAnimator upscaleAnimator;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Play();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetState();
+        }
+    }
 
     public void Play()
     {
@@ -24,6 +39,8 @@ public class LogoController : MonoBehaviour
         pulseController.Stop();
         shrinkController.Stop();
         rainbowController.Stop();
+        titleAnimator.ResetState();
+        upscaleAnimator.ResetState();
         faceController.SetStage(LogoAnimationStages.Idle);
     }
 }

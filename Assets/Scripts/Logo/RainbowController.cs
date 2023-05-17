@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[ExecuteAlways]
 public class RainbowController : MonoBehaviour
 {
     private static class DEFAULT_OFFSET
@@ -20,10 +19,6 @@ public class RainbowController : MonoBehaviour
     private static (float current, float start) waveCyclicTime;
     private static (float current, float start) flowTime;
     private float protrusion;
-
-    private void OnEnable() => EditorApplication.update += UpdateState;
-
-    private void OnDisable() => EditorApplication.update -= UpdateState;
 
     public void Play()
     {
@@ -46,10 +41,10 @@ public class RainbowController : MonoBehaviour
         flowTime.current = 0f;
         protrusion = 0f;
 
-        UpdateStripes();
+        ResetStripes();
     }
 
-    private void UpdateState()
+    private void Update()
     {
         if (isPlaying)
         {
@@ -93,6 +88,13 @@ public class RainbowController : MonoBehaviour
 
         foreach (RainbowStripe stripe in stripes){
             stripe.UpdateLength(waveCyclicTime.current, defaultOffset, valueMultiplier);
+        }
+    }
+
+    private void ResetStripes()
+    {
+        foreach (RainbowStripe stripe in stripes){
+            stripe.ResetLength();
         }
     }
 }
