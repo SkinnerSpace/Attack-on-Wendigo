@@ -16,11 +16,11 @@ public class HelicopterSFXPlayer : MonoBehaviour
     private void Awake()
     {
         bladesAudioPlayer = AudioPlayer.Create(bladesSFX).WithAnchor(anchor).WithVolume(menuVolume);
-        bladesAudioPlayer.PlayLoop();
     }
 
     private void Start()
     {
+        MenuEvents.current.onMainMenuOpenedForTheFirstTime += () => bladesAudioPlayer.PlayLoop();
         GameEvents.current.onIntroIsOver += IncreaseVolume;
     }
 

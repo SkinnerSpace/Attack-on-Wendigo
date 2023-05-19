@@ -23,7 +23,6 @@ public class LogoAdditionalScaleController : MonoBehaviour
             lerp = Mathf.InverseLerp(0f, currentTemporalScale.upscaleTime, time);
 
             rectTransform.localScale = currentTemporalScale.upscaleCurve.Evaluate(lerp).ToVector3();
-            Debug.Log(rectTransform.localScale);
 
             if (time >= currentTemporalScale.upscaleTime)
             {

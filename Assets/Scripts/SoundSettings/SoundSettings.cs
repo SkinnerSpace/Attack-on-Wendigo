@@ -20,6 +20,7 @@ public class SoundSettings : MonoBehaviour
 
         SoundSettingsPersistence.Load(this);
         MenuEvents.current.onSubMenuEnter += SaveSettingsOnExit;
+        MenuEvents.current.onMenuClosed += SaveSettings;
 
         masterSlider.onValueChanged.AddListener(SetMasterVolume);
         effectsSlider.onValueChanged.AddListener(SetEffectsVolume);
@@ -59,7 +60,9 @@ public class SoundSettings : MonoBehaviour
     private void SaveSettingsOnExit(string subMenuName)
     {
         if (subMenuName == "settings"){
-            SoundSettingsPersistence.Save(this);
+            SaveSettings();
         }
     }
+
+    private void SaveSettings() => SoundSettingsPersistence.Save(this);
 }

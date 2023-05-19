@@ -17,8 +17,11 @@ public class BlizzardSFXPlayer : MonoBehaviour
     {
         audioPlayer = AudioPlayer.Create(blizzardSFX);
         UpdateAttenuation();
+    }
 
-        audioPlayer.PlayLoop();
+    private void Start()
+    {
+        MenuEvents.current.onMainMenuOpenedForTheFirstTime += () => audioPlayer.PlayLoop();
     }
 
     private void Update() => UpdateAttenuation();

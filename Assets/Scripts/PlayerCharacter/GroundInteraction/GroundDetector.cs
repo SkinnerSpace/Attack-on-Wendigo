@@ -6,6 +6,7 @@ namespace Character
     public class GroundDetector : BaseController, IMoverObserver
     {
         private PlayerCharacter main;
+        private CharacterMover mover;
         private ICharacterData data;
         private IGroundDetector detector;
 
@@ -18,12 +19,16 @@ namespace Character
         {
             this.main = main;
 
+            mover = main.Mover;
             data = main.OldData;
             detector = new GroundCollisionDetector();
         }
 
         public override void Connect() => main.Mover.Subscribe(this);
-        public override void Disconnect() { }
+        public override void Disconnect()
+        {
+            //notifyOnGrounded += () => mover.DisableController();
+        }
 
         public void Update()
         {

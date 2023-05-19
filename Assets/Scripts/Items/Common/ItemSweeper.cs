@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemSweeper : MonoBehaviour
 {
+    private const float SWEPT_HEIGHT = -4f;
+
     [Header("Required Components")]
     [SerializeField] private ItemPhysicalBody physics;
     [SerializeField] private FunctionTimer timer;
@@ -12,7 +14,7 @@ public class ItemSweeper : MonoBehaviour
     private IPooledObject pooledObject;
 
     private bool isSweeping;
-    private bool isSwept;
+    private bool isFalling;
 
     private void Awake()
     {
@@ -34,32 +36,39 @@ public class ItemSweeper : MonoBehaviour
             yield return null;
         }
 
-        StartCoroutine(FallThrough());
+        StartFalling();
     }
 
-    private IEnumerator FallThrough()
+    private void StartFalling()
     {
-        PrepareForSweeping();
-
-        while (!isSwept){
-            MoveDown(); yield return null;
-        }
-
-        FinishSweeping();
-    }
-
-    private void PrepareForSweeping()
-    {
+        isFalling = true;
         physics.DisablePhysics();
-        timer.Set("OnSwept", data.sweepTime, () => isSwept = true);
+    }
+
+    private void Update()
+    {
+        if (isFalling)
+        {
+            MoveDown();
+
+            if (IsBuriedUnderTheGround()){
+                FinishSweeping();
+            }
+        }
     }
 
     private void MoveDown() => transform.position += Vector3.down * data.fallSpeed * Time.deltaTime;
 
+    private bool IsBuriedUnderTheGround()
+    {
+        return transform.position.y <= SWEPT_HEIGHT;
+    }
+
     private void FinishSweeping()
     {
-        isSwept = false;
+        isFalling = false;
         isSweeping = false;
         pooledObject.BackToPool();
     }
+
 }

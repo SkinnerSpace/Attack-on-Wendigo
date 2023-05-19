@@ -44,6 +44,8 @@ namespace WendigoCharacter
         private bool CollisionIsEntered() => collidersCount > 0 && !isCollided;
         private bool CollisionIsExited() => collidersCount == 0 && isCollided;
 
+#if UNITY_EDITOR
         public abstract void Visualize();
+#endif
     }
 }

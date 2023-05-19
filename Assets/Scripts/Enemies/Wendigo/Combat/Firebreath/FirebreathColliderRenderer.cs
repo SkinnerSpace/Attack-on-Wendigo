@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace WendigoCharacter
 {
-#if UNITY_EDITOR
+
     public class FirebreathColliderRenderer : MonoBehaviour
     {
         [SerializeField] private FirebreathCollider firebreathCollider;
@@ -13,13 +13,15 @@ namespace WendigoCharacter
         private FirebreathColliderRendererData rendererData => data.Firebreath.ColliderRenderer;
         private bool atLeastOneCollider;
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (rendererData.IsActive && firebreathCollider != null)
                 Visualize();
         }
 
-        public void Visualize()
+
+        private void Visualize()
         {
             firebreathCollider.ActUponColliders(ShowColliders);
             SetUpMatrix();
@@ -85,6 +87,7 @@ namespace WendigoCharacter
         }
 
         private float GetDistance(float radius, float halfFovRad) => radius * Mathf.Cos(halfFovRad);
-    }
 #endif
+    }
+
 }

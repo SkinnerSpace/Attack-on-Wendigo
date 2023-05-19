@@ -25,6 +25,7 @@ public class KeyboardSettings : MonoBehaviour
 
         KeyboardSettingsPersistence.Load(keys);
         MenuEvents.current.onSubMenuEnter += SaveSettingsOnExit;
+        MenuEvents.current.onMenuClosed += SaveSettings;
 
         InitializeButtons();
     }
@@ -86,7 +87,7 @@ public class KeyboardSettings : MonoBehaviour
 
     private void InitializeButtons()
     {
-        keyBinds = GetComponentsInChildren<MenuButtonKeyBind>();
+        keyBinds = GetComponentsInChildren<MenuButtonKeyBind>(true);
 
         foreach (MenuButtonKeyBind keyBind in keyBinds)
         {
@@ -98,7 +99,9 @@ public class KeyboardSettings : MonoBehaviour
     private void SaveSettingsOnExit(string subMenuName)
     {
         if (subMenuName == "controls"){
-            KeyboardSettingsPersistence.Save(keys);
+            SaveSettings();
         }
     }
+
+    private void SaveSettings() => KeyboardSettingsPersistence.Save(keys);
 }

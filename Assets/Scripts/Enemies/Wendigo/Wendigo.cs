@@ -61,6 +61,8 @@ namespace WendigoCharacter
         {
             Data.IsActive = true;
 
+            PlayerEvents.current.onDeath += () => GetController<WendigoTargetManager>().ResetTarget();
+
             if (stateMachine != null){
                 stateMachine = WendigoStateMachineFactory.Clear(stateMachine);
             }

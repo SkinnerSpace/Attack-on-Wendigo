@@ -97,6 +97,7 @@ namespace Character
             {
                 onDisconnectControllers?.Invoke();
                 pushableObject.SwitchOff();
+                fireHitBox.SetActive(false);
             }
         }
     }

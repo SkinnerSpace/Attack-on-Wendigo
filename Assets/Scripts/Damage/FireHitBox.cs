@@ -21,12 +21,12 @@ public class FireHitBox : MonoBehaviour, IInflammable
     private bool isActive = true;
 
     private event Action onFire;
-    private event Action putOutTheFire;
+    private event Action onPutOutTheFire;
 
     public void Subscribe(IInflammableObserver observer)
     {
         onFire += observer.SetOnFire;
-        putOutTheFire += observer.CoolDown;
+        onPutOutTheFire += observer.CoolDown;
     }
 
     public void SetActive(bool isActive)
@@ -34,6 +34,10 @@ public class FireHitBox : MonoBehaviour, IInflammable
         this.isActive = isActive;
         enabled = isActive;
         boxCollider.enabled = isActive;
+
+        if (!isActive){
+            PutOutTheFire();
+        }
     }
 
     public void InflameDirectly(Vector3 flamePoint)
@@ -97,8 +101,13 @@ public class FireHitBox : MonoBehaviour, IInflammable
     {
         if (time >= putOutTheFireTime)
         {
-            isOnFire = false;
-            putOutTheFire?.Invoke();
+            PutOutTheFire();
         }
+    }
+
+    private void PutOutTheFire()
+    {
+        isOnFire = false;
+        onPutOutTheFire?.Invoke();
     }
 }

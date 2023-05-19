@@ -25,21 +25,28 @@ public class MenuScreen : MonoBehaviour
 
     private void Start(){
         MenuEvents.current.onSubMenuEnter += ChangeWidthAccordingToTheSubMenu;
+        MenuEvents.current.onMenuOpened += () => SetWidthImmediately(defaultWidth);
     }
 
     private void ChangeWidthAccordingToTheSubMenu(string subMenuName)
     {
-        if (subMenuName == "keyboard"){
+        if (EnteredDefaultSizeMenu(subMenuName)){
+            SetTargetWidth(defaultWidth);
+        }
+
+        else if (subMenuName == "keyboard"){
             SetTargetWidth(keyboardSettingsWidth);
         }
 
-        else if (subMenuName == "controls"){
-            SetTargetWidth(defaultWidth);
-        }
 
         else if (subMenuName == "gameover"){
             SetTargetWidth(gameOverWidth);
         }
+    }
+
+    private bool EnteredDefaultSizeMenu(string subMenuName)
+    {
+        return subMenuName == "main" || subMenuName == "pause" || subMenuName == "controls";
     }
 
     private void Update()
@@ -67,6 +74,12 @@ public class MenuScreen : MonoBehaviour
     private void SetTargetWidth(float targetWidth){
         targetSize = new Vector2(targetWidth, rectTransform.sizeDelta.y);
         StartTransition();
+    }
+
+    private void SetWidthImmediately(float targetWidth)
+    {
+        targetSize = new Vector2(targetWidth, rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = targetSize;
     }
 
     private void StartTransition()

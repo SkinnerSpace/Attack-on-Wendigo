@@ -45,7 +45,6 @@ namespace WendigoCharacter
                 rebootable.Save();
         }
 
-
         public void ResetData()
         {
             foreach (IRebootable rebootable in backup)

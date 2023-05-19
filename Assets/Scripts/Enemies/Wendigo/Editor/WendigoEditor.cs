@@ -4,7 +4,7 @@ using UnityEditor;
 # if UNITY_EDITOR
 namespace WendigoCharacter
 {
-    [CustomEditor(typeof(Wendigo))]
+/*    [CustomEditor(typeof(Wendigo))]
     public class WendigoEditor : Editor
     {
         private Wendigo wendigo;
@@ -46,6 +46,6 @@ namespace WendigoCharacter
                 }
             }
         }
-    }
+    }*/
 }
 #endif

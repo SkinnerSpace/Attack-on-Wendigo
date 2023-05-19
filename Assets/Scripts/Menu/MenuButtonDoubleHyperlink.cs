@@ -5,14 +5,23 @@ public class MenuButtonDoubleHyperlink : MenuButton
     [SerializeField] private string before;
     [SerializeField] private string after;
 
-    private void Start()
+    protected override void Awake()
     {
-        MenuEvents.current.onStart += SwapSubMenu;
-        onCommand = () => MenuEvents.current.EnterSubMenu(before);
-    }
+        base.Awake();
 
-    private void SwapSubMenu()
-    {
-        onCommand = () => MenuEvents.current.EnterSubMenu(after);
+        onCommand = () =>
+        {
+            if (MenuEvents.current != null)
+            {
+                if (MenuEvents.current.gameHasBegun)
+                {
+                    MenuEvents.current.EnterSubMenu(after);
+                }
+                else
+                {
+                    MenuEvents.current.EnterSubMenu(before);
+                }
+            }
+        };
     }
 }

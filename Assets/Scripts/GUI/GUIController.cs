@@ -10,6 +10,8 @@ public class GUIController : MonoBehaviour
 
     private bool playerIsActive;
 
+    public bool mainIsHidden { get; private set; }
+
     private void Start()
     {
         ConnectMain();
@@ -24,14 +26,14 @@ public class GUIController : MonoBehaviour
         GameEvents.current.onPause += () => 
         {
             if (playerIsActive){
-                main.HideImmediately();
+                HideMainImmediately();
             }
         };
 
         GameEvents.current.onResume += () =>
         {
             if (playerIsActive){
-                main.ShowImmediately();
+                ShowMainImmediately();
             }
         };
 
@@ -49,5 +51,17 @@ public class GUIController : MonoBehaviour
         hUD.HideGradually();
         aim.HideGradually();
         uGUI.HideGradually();
+    }
+
+    public void HideMainImmediately()
+    {
+        mainIsHidden = true;
+        main.HideImmediately();
+    }
+
+    public void ShowMainImmediately()
+    {
+        mainIsHidden = true;
+        main.ShowImmediately();
     }
 }

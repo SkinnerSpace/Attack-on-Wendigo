@@ -23,19 +23,12 @@ public class Logo : MonoBehaviour
         logoAudioPlayer = AudioPlayer.Create(logoSFX);
 
         videoPlayer.loopPointReached += IsOver;
-        
-        container.onVisibilityUpdate += SetVolume;
     }
 
     private void Start()
     {
         Play();
         WaitAndFade();
-    }
-
-    private void Update()
-    {
-        Debug.Log(videoPlayer.frame);
     }
 
     private void Play()
@@ -53,14 +46,8 @@ public class Logo : MonoBehaviour
         timer.Set("FadeOut", time, () => container.HideGradually());
     }
 
-    private void SetVolume(float value)
-    {
-        //Debug.Log("Value " + value);
-    }
-
     private void IsOver(VideoPlayer player)
     {
-        Debug.Log("IS over");
         gameObject.SetActive(false);
     }
 }

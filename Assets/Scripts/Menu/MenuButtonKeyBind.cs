@@ -28,11 +28,16 @@ public class MenuButtonKeyBind : MenuButton
     {
         if (isLocked)
         {
-            if (!Input.GetMouseButton(0) && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonUp(0)){
+            if (LeftMouseButtonIsNotPressed()){
                 isLocked = false;
                 button.enabled = true;
             }
         }
+    }
+
+    private bool LeftMouseButtonIsNotPressed()
+    {
+        return !Input.GetMouseButton(0) && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonUp(0);
     }
 
     public void InitializeButton(KeyBinds keys)
@@ -55,6 +60,7 @@ public class MenuButtonKeyBind : MenuButton
 
     private void UpdateName(){
         KeyCode keyCode = keys.GetBind(action);
+
         string keyName = KeyCodeConverter.Convert(keyCode);
         string text = actionName + ": " + keyName;
 

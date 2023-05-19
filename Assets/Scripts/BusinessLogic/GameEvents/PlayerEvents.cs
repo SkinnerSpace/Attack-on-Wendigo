@@ -23,6 +23,8 @@ public class PlayerEvents : MonoBehaviour
     public event Action onDamage;
     public event Action onReceivedBluntDamage;
 
+    public event Action<bool> onForcedMoverReadinessUpdate;
+
     private void Awake(){
         current = this;
     }
@@ -44,4 +46,6 @@ public class PlayerEvents : MonoBehaviour
 
     public void NotifyOnDamage() => onDamage?.Invoke();
     public void NotifyOnReceivedBluntDamage() => onReceivedBluntDamage?.Invoke();
+
+    public void UpdateMoverReadiness(bool isReady) => onForcedMoverReadinessUpdate(isReady);
 }

@@ -13,6 +13,7 @@ namespace WendigoCharacter
 
         protected override int CheckCollision() => Physics.OverlapCapsuleNonAlloc(FirstPoint, SecondPoint, radius, colliders, mask);
 
+#if UNITY_EDITOR
         public override void Visualize()
         {
             Gizmos.color = Color.red;
@@ -20,5 +21,6 @@ namespace WendigoCharacter
             Gizmos.DrawWireSphere(SecondPoint, radius);
             Gizmos.color = Color.white;
         }
+#endif
     }
 }

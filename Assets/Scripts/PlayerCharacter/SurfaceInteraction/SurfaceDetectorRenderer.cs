@@ -2,11 +2,12 @@
 using UnityEditor;
 using Character;
 
-# if UNITY_EDITOR
+
 public class SurfaceDetectorRenderer : MonoBehaviour
 {
     [SerializeField] private CharacterData data;
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (data != null) VisualizeSurfaceDetector();
@@ -25,5 +26,6 @@ public class SurfaceDetectorRenderer : MonoBehaviour
 
         Handles.color = Color.white;
     }
-}
 #endif
+}
+

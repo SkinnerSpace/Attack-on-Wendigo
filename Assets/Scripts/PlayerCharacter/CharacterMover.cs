@@ -13,6 +13,7 @@ namespace Character
         private void Start()
         {
             HelicopterEvents.current.onIsGoingToSetOff += ResetState;
+            PlayerEvents.current.onForcedMoverReadinessUpdate += (bool isReady) => this.isReady = isReady;
         }
 
         public void Initialize(PlayerCharacter main) => data = main.OldData;
@@ -49,6 +50,12 @@ namespace Character
         private void ResetState()
         {
             isReady = false;
+        }
+
+        public void DisableController()
+        {
+            isReady = false;
+            data.Controller.enabled = false;
         }
     }
 }

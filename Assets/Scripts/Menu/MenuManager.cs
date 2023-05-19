@@ -21,6 +21,8 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private Menu current;
 
+    private bool isOpened;
+
     private void Awake()
     {
         elements = GetComponentsInChildren<MenuElement>();
@@ -59,8 +61,13 @@ public class MenuManager : MonoBehaviour, IMenu
 
     private void DoOpen(string menuName)
     {
-        CustomCursor.Instance.Unlock();
-        gameObject.SetActive(true);
+        if (!isOpened)
+        {
+            isOpened = true;
+            CustomCursor.Instance.Unlock();
+            MenuEvents.current.NotifyOnMenuOpened();
+            gameObject.SetActive(true);
+        }
 
         CloseCurrentMenu();
         current = Menus[menuName];
@@ -75,7 +82,10 @@ public class MenuManager : MonoBehaviour, IMenu
 
     public void Close()
     {
+        isOpened = false;
+
         CustomCursor.Instance.Lock();
+        MenuEvents.current.NotifyOnMenuClosed();
 
         CloseCurrentMenu();
         DisableAllTheElements();

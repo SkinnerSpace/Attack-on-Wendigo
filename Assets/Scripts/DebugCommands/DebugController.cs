@@ -25,8 +25,8 @@ public class DebugController : MonoBehaviour
 
     private void Update()
     {
-        Toggle();
-        OnReturn();
+/*        Toggle();
+        OnReturn();*/
     }
 
     private void OnGUI()

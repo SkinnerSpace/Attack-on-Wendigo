@@ -17,6 +17,7 @@ public class MouseSettings : MonoBehaviour
 
         MouseSettingsPersistence.Load(this);
         MenuEvents.current.onSubMenuEnter += SaveSettingsOnExit;
+        MenuEvents.current.onMenuClosed += SaveSettings;
 
         mouseSensitivitySlider.onValueChanged.AddListener(SetMouseSensitivity);
         mouseInversionToggle.onValueChanged.AddListener(SetMouseInversion);
@@ -46,7 +47,9 @@ public class MouseSettings : MonoBehaviour
 
     private void SaveSettingsOnExit(string subMenuName){
         if (subMenuName == "controls"){
-            MouseSettingsPersistence.Save(this);
+            SaveSettings();
         }
     }
+
+    private void SaveSettings() => MouseSettingsPersistence.Save(this);
 }

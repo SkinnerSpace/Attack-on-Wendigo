@@ -48,6 +48,7 @@ public class GUIContainer : MonoBehaviour
         time += Time.unscaledDeltaTime;
         visibility = Mathf.InverseLerp(0f, appearTime, time);
         visibility = Easing.QuadEaseOut(visibility);
+
         SetAlpha(visibility);
 
         onVisibilityUpdate?.Invoke(visibility);
@@ -63,6 +64,7 @@ public class GUIContainer : MonoBehaviour
         time += Time.unscaledDeltaTime;
         visibility = 1f - Mathf.InverseLerp(0f, disappearTime, time);
         visibility = Easing.QuadEaseOut(visibility);
+
         SetAlpha(visibility);
 
         onVisibilityUpdate?.Invoke(visibility);
@@ -76,12 +78,14 @@ public class GUIContainer : MonoBehaviour
     public void ShowImmediately()
     {
         mode = Modes.Visible;
+        canvasGroup.blocksRaycasts = true;
         SetAlpha(1f);
     }
 
     public void HideImmediately()
     {
         mode = Modes.Invisible;
+        canvasGroup.blocksRaycasts = false;
         SetAlpha(0f);
     }
 
@@ -90,6 +94,7 @@ public class GUIContainer : MonoBehaviour
         if (mode != Modes.Visible){
             time = 0f;
             mode = Modes.Appearing;
+            canvasGroup.blocksRaycasts = true;
             SetAlpha(0f);
         }
     }
@@ -99,6 +104,7 @@ public class GUIContainer : MonoBehaviour
         if (mode != Modes.Invisible){
             time = 0f;
             mode = Modes.Disappearing;
+            canvasGroup.blocksRaycasts = false;
             SetAlpha(1f);
         }
     }

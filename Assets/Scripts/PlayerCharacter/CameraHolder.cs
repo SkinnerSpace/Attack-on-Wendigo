@@ -13,6 +13,8 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     }
 
     [SerializeField] private Camera cam;
+    [SerializeField] private Transform shakeContainer;
+
     [SerializeField] private Transform pivot;
     [SerializeField] private States state;
 
@@ -38,12 +40,20 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     {
         if (pivot != null)
         {
-            if (state != States.Outro){
-                transform.position = pivot.position;
-                transform.rotation = pivot.rotation;
-            }
-            else if (state == States.Outro){
-                UpdateOutro();
+            switch (state)
+            {
+                case States.Demo:
+                    transform.position = pivot.position;
+                    transform.rotation = pivot.rotation;
+                    break;
+
+                case States.Gameplay:
+                    transform.position = pivot.position;
+                    break;
+
+                case States.Outro:
+                    UpdateOutro();
+                    break;
             }
         }
     }
@@ -96,6 +106,12 @@ public class CameraHolder : MonoBehaviour, ICameraHolder
     {
         state = States.Demo;
         this.pivot = pivot;
+
+        cam.transform.localPosition = Vector3.zero;
+        cam.transform.localRotation = Quaternion.identity;
+
+        shakeContainer.localPosition = Vector3.zero;
+        shakeContainer.localRotation = Quaternion.identity;
     }
 
     public void SetOutroMode(Transform pivot)

@@ -25,13 +25,11 @@ public class CorpseCollisionController : MonoBehaviour
             groundCollider.SwitchOff();
     }
 
-# if UNITY_EDITOR
     private void OnEnable()
     {
         FindColliders();
         SetData();
     }
-# endif
 
     private void FindColliders()
     {

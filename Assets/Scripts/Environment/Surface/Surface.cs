@@ -51,7 +51,6 @@ public class Surface : MonoBehaviour, ISurface
                 return data;
         }
 
-        //Debug.LogError(particleName + " not found");
         return surfaceData[DEFAULT];
     }
 

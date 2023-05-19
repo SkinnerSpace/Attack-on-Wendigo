@@ -12,11 +12,4 @@ public class SecondLogoCommand : LogoCommand
         shrinkController.Play();
 
     }
-
-    private void OnShocked()
-    {
-        faceController.SetStage(LogoAnimationStages.Final);
-        isDone = true;
-        Debug.Log("SHOKED");
-    }
 }

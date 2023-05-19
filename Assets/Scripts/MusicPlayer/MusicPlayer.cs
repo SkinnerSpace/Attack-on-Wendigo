@@ -29,7 +29,6 @@ public class MusicPlayer : MonoBehaviour
     private void Start()
     {
         ConnectSoundtracks();
-        ambientPlayer.PlayLoop();
     }
 
     private void ConnectSoundtracks()
@@ -41,6 +40,7 @@ public class MusicPlayer : MonoBehaviour
     }
 
     private void ConnectAmbient(){
+        MenuEvents.current.onMainMenuOpenedForTheFirstTime += () => ambientPlayer.PlayLoop();
         GameEvents.current.onFirstWeaponPickedUp += () => ambientPlayer.Stop();
         PlayerEvents.current.onDeath += () => ambientPlayer.Stop();
         GameEvents.current.onVictory += () => ambientPlayer.Stop();

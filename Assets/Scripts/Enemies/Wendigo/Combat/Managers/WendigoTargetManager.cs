@@ -21,6 +21,7 @@ public class WendigoTargetManager : WendigoPlugableComponent
 
     public void ResetTarget()
     {
+        data.Target = null;
         onTargetSet?.Invoke(null);
     }
 }

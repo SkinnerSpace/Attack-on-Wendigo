@@ -17,7 +17,7 @@ public class PropPuller : MonoBehaviour, ISwitchable
         isActive = true;
         enabled = true;
 
-        Debug.Log("PULL AWAY");
+        //Debug.Log("PULL AWAY");
     }
 
     public void SwitchOff()

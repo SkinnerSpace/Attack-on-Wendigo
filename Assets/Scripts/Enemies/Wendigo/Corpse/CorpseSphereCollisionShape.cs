@@ -9,11 +9,13 @@ namespace WendigoCharacter
 
         protected override int CheckCollision() => Physics.OverlapSphereNonAlloc(Center, radius, colliders, mask);
 
+#if UNITY_EDITOR
         public override void Visualize()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(Center, radius);
             Gizmos.color = Color.white;
         }
+#endif
     }
 }
