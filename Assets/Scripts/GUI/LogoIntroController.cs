@@ -5,7 +5,6 @@ using UnityEngine.Video;
 
 public class LogoIntroController : MonoBehaviour
 {
-    private static bool showOnStart = true;
     private const string NOTIFY_ON_START_TIMER = "NotifyOnStart";
     private const string APPEAR_TIMER = "Appear";
     private const string FADEOUT_TIMER = "FadeOut";
@@ -33,7 +32,7 @@ public class LogoIntroController : MonoBehaviour
 
     void Start()
     {
-        if (showOnStart)
+        if (GlobalData.showIntroOnStart)
         {
             PlayOnStart();
         }
@@ -62,9 +61,9 @@ public class LogoIntroController : MonoBehaviour
 
     private void AppearOnAnimationStartPlaying()
     {
-        if (showOnStart && videoPlayer.isPlaying)
+        if (GlobalData.showIntroOnStart && videoPlayer.isPlaying)
         {
-            showOnStart = false;
+            GlobalData.showIntroOnStart = false;
 
             audioPlayer.PlayOneShot();
             timer.Set(APPEAR_TIMER, appearTime, ShowLogo);
@@ -101,5 +100,4 @@ public class LogoIntroController : MonoBehaviour
         container.HideGradually();
         MenuEvents.current.NotifyOnMainMenuOpenedForTheFirstTime();
     }
-
 }

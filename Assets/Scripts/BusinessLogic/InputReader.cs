@@ -8,7 +8,7 @@ public abstract class InputReader : MonoBehaviour
 
     protected virtual void ReadInputWhenActive()
     {
-        if (GameState.PauseMode == PauseMode.None){
+        if (GlobalData.PauseMode == PauseMode.None){
             ReadInput();
         }
     }

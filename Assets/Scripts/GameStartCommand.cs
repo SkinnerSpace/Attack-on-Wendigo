@@ -10,7 +10,7 @@ public class GameStartCommand : ICommand
     {
         gameManager.Menu.Close();
 
-        GameState.PauseMode = PauseMode.None;
+        GlobalData.PauseMode = PauseMode.None;
         AudioPlayer.ResumeAll();
 
         GameEvents.current.TheGameHasStarted();

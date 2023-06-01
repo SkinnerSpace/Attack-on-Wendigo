@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        menu.OpenSilently("main");
 
         MenuEvents.current.onStart += commands["Start"].Execute;
         MenuEvents.current.onStart += OnPlay;
@@ -51,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
-            switch (GameState.PauseMode)
+            switch (GlobalData.PauseMode)
             {
                 case PauseMode.None:
                     if (Input.GetKeyDown(KeyCode.Escape)){

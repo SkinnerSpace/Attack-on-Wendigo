@@ -29,7 +29,7 @@ public class HelicopterEngine : MonoBehaviour
 
     public void MoveAlongTheTrajectoryIfPossible(BezierTrajectory trajectory)
     {
-        if (data.isMoving && GameState.PauseMode == PauseMode.None)
+        if (data.isMoving && GlobalData.PauseMode == PauseMode.None)
         {
             if (!data.skipFrame)
             {

@@ -32,9 +32,15 @@ public class MenuManager : MonoBehaviour, IMenu
         InitializeMenus();
         ConnectSFXPlayerToButtons();
         ConnectSFXPlayerToToggles();
+
+        DoClose();
     }
 
     private void Start(){
+        if (GlobalData.initialGameState == GameState.Menu){
+            OpenSilently("main");
+        }
+
         MenuEvents.current.onSubMenuEnter += Open;
         PlayerEvents.current.onDeath += () => WaitAndOpen(5.5f);
     }
@@ -81,6 +87,12 @@ public class MenuManager : MonoBehaviour, IMenu
     }
 
     public void Close()
+    {
+        DoClose();
+        sFXPlayer.PlayMenuClose();
+    }
+
+    public void DoClose()
     {
         isOpened = false;
 

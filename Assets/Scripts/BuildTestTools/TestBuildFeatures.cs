@@ -7,6 +7,7 @@ public class TestBuildFeatures : MonoBehaviour
 
     [SerializeField] private GUIController gUIController;
     [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private Transform menu;
 
     private void Update()
     {
@@ -14,11 +15,13 @@ public class TestBuildFeatures : MonoBehaviour
         {
             if (gUIController.mainIsHidden)
             {
-                gUIController.ShowMainImmediately();
+                //gUIController.ShowMainImmediately();
+                menu.gameObject.SetActive(true);
             }
             else
             {
-                gUIController.HideMainImmediately();
+                //gUIController.HideMainImmediately();
+                menu.gameObject.SetActive(false);
             }
         }
 

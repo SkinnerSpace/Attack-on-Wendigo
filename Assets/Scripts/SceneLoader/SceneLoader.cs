@@ -131,7 +131,7 @@ public class SceneLoader : MonoBehaviour
     private void OnFadedIn(){
         state = States.None;
         StartCoroutine(LoadSceneAsync());
-        GameState.PauseMode = PauseMode.None;
+        GlobalData.PauseMode = PauseMode.None;
         AudioPlayer.StopAll();
     }
 
