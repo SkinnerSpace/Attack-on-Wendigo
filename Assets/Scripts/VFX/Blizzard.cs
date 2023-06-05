@@ -44,8 +44,7 @@ public class Blizzard : MonoBehaviour, IBlizzard
         float distanceToTheCenter = Vector3.Distance(transform.position, point);
         float distanceFromTheInfluenceRadius = Mathf.Max(0f, (distanceToTheCenter - (influenceRadius * blizzardTransform.Size)));
         float rawInfluence = distanceFromTheInfluenceRadius / (influenceThickness * blizzardTransform.Size);
-        influence = Mathf.Clamp(rawInfluence, 0f, 1f);
-        influence = Easing.QuadEaseIn(influence);
+        influence = Easing.QuadEaseIn(rawInfluence);
     }
 
     private Vector3 GetForceDirection(Vector3 point)

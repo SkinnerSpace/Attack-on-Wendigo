@@ -14218,6 +14218,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1794044210}
   - component: {fileID: 1794044211}
+  - component: {fileID: 1794044213}
+  - component: {fileID: 1794044212}
   m_Layer: 0
   m_Name: EditorGameSetUp
   m_TagString: Untagged
@@ -14253,6 +14255,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skipTheIntroOnStart: 1
   initialGameState: 1
+  timer: {fileID: 1794044213}
+--- !u!114 &1794044212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794044209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68eb4c7c949424194ebef430f12868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1794044213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794044209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad9c35bbe954754d9f078916236f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chronos: {fileID: 1794044212}
 --- !u!114 &1794520989 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6349540563759795015, guid: 0da14a0eee38d1742a0aa853fee6df56,
@@ -128598,6 +128626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506765382160955203, guid: 02d1f8a670abd3d4b868dfe9c1640e5f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6506765382160955203, guid: 02d1f8a670abd3d4b868dfe9c1640e5f,
         type: 3}

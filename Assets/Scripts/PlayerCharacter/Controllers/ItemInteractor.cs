@@ -25,10 +25,13 @@ public class ItemInteractor : IInteractor
 
     public void Interact(Transform target)
     {
+        Debug.Log("Try to interact");
+
         if (target != null) // Do I need to check the distance?
         {
             IInteractable interactable = target.GetComponent<IInteractable>();
             interactable.Interact(this);
+            Debug.Log("Target is non zero");
         }
         else
         {

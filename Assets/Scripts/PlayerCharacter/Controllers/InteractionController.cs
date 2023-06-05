@@ -68,11 +68,13 @@ public class InteractionController : BaseController, IInteractionController, IMo
         if (target == null)
         {
             PlayerEvents.current.RemoveInteractiveTarget();
+            Debug.Log("Remove target");
         }
 
         else if (target != null)
         {
             PlayerEvents.current.AddInteractiveTarget(targetHit);
+            Debug.Log("Target is new");
         }
 
         this.target = target;
@@ -81,6 +83,7 @@ public class InteractionController : BaseController, IInteractionController, IMo
     public void Interact()
     {
         if (!isLockedAfterInteraction){
+            Debug.Log("Not locked");
             isLockedAfterInteraction = true;
             itemInteractor.Interact(target);
 

@@ -6,6 +6,8 @@ public class EditorGameSetUp : MonoBehaviour
     public bool skipTheIntroOnStart;
     public GameState initialGameState;
 
+    [SerializeField] private FunctionTimer timer;
+
     private void Awake()
     {
         if (skipTheIntroOnStart)
@@ -14,5 +16,21 @@ public class EditorGameSetUp : MonoBehaviour
         }
 
         GlobalData.initialGameState = initialGameState;
+
+        StartTheGameIfInTheGameplayState();
+    }
+
+    private void StartTheGameIfInTheGameplayState()
+    {
+        if (GlobalData.initialGameState == GameState.Gameplay)
+        {
+            timer.Set("StartTheGame", 1f, StartTheGame);
+        }
+    }
+
+    private void StartTheGame()
+    {
+        //GameEvents.current.TheGameHasStarted();
+        MenuEvents.current.StartTheGame();
     }
 }

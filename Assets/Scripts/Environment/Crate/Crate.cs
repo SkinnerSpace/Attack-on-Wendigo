@@ -42,7 +42,11 @@ public class Crate : MonoBehaviour, IOpenable, ICrate
 
     public void Open()
     {
+        Debug.Log("Open");
+
         if (!isOpened){
+            Debug.Log("Is not opened");
+
             Unpack();
             SpawnItem();
         }
