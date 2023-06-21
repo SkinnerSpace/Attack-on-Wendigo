@@ -48,6 +48,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
         if (isReady){
             onReady?.Invoke();
             inputReader.Get<CombatInputReader>().Subscribe(this);
+            pickable.SetReady();
         }
         else{
             onNotReady?.Invoke();
@@ -62,6 +63,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
     public void Use()
     {
         if (!isUsed){
+            interactor.LockInteractions();
             isUsed = true;
             onInjection?.Invoke();
             sFXPlayer.PlayInjectionSFX();
@@ -79,6 +81,7 @@ public class Drugs : MonoBehaviour, IHandyItem, IHealthPack
         interactor.DropAnItem();
         pickable.SwitchOff();
         timer.Set("Sweep", 0.5f, () => sweeper.SweepTheWeapon());
+        interactor.UnlockInteractions();
     }
 
     public void Refill()

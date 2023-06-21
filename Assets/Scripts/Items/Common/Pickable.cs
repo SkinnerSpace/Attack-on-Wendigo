@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Pickable : MonoBehaviour, IPickable
 {
+    public bool IsReady { get; private set; }
+
     private Transform item;
     private IPhysicalBody physicalBody;
     private ItemTransitionController transitionController;
@@ -58,6 +60,8 @@ public class Pickable : MonoBehaviour, IPickable
 
     public void Drop(Vector3 pos, Vector3 force)
     {
+        IsReady = false;
+
         item.position = pos;
         item.SetParent(originalParent);
 
@@ -96,5 +100,16 @@ public class Pickable : MonoBehaviour, IPickable
 
     public void ResetState(){
         wasPickedUp = false;
+        IsReady = false;
+    }
+
+    public void SetReady()
+    {
+        IsReady = true;
+    }
+
+    public void SetNotReady()
+    {
+        IsReady = false;
     }
 }

@@ -21,6 +21,7 @@ public class InteractionController : BaseController, IInteractionController, IMo
     private IHealthSystem healthSystem;
 
     private bool isLockedAfterInteraction;
+    private bool isLocked;
     private Vector2 mousePos;
 
     public override void Initialize(PlayerCharacter main)
@@ -68,13 +69,11 @@ public class InteractionController : BaseController, IInteractionController, IMo
         if (target == null)
         {
             PlayerEvents.current.RemoveInteractiveTarget();
-            Debug.Log("Remove target");
         }
 
         else if (target != null)
         {
             PlayerEvents.current.AddInteractiveTarget(targetHit);
-            Debug.Log("Target is new");
         }
 
         this.target = target;
@@ -82,12 +81,11 @@ public class InteractionController : BaseController, IInteractionController, IMo
 
     public void Interact()
     {
-        if (!isLockedAfterInteraction){
-            Debug.Log("Not locked");
+        if (!isLockedAfterInteraction && !isLocked){
             isLockedAfterInteraction = true;
             itemInteractor.Interact(target);
 
-            timer.Set("Unlock", 0.2f, () => isLockedAfterInteraction = false);
+            timer.Set("Unlock", 0.1f, () => isLockedAfterInteraction = false);
         }
     }
 
@@ -107,5 +105,17 @@ public class InteractionController : BaseController, IInteractionController, IMo
             keeper.TakeAHealthPack(pickable, healthPack, healthSystem);
             return;
         }
+    }
+
+    public void LockInteractions()
+    {
+        isLocked = true;
+        itemInteractor.LockInteraction();
+    }
+
+    public void UnlockInteractions()
+    {
+        isLocked = false;
+        itemInteractor.UnlockInteraction();
     }
 }

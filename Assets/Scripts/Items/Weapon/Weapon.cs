@@ -89,13 +89,13 @@ public class Weapon : MonoBehaviour, IWeapon, IHandyItem
         {
             onReady?.Invoke();
             inputReader.Get<CombatInputReader>().Subscribe(this);
+            pickable.SetReady();
         }
         else
         {
             onNotReady?.Invoke();
             PlayerEvents.current.ThrowWeapon();
             inputReader.Get<CombatInputReader>().Unsubscribe(this);
-
         }
     }
 

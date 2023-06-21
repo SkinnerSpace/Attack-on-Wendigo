@@ -2,7 +2,7 @@
 
 public static class GlobalData
 {
-    public static bool showIntroOnStart;
+    public static bool showIntroOnStart = true;
     public static GameState initialGameState = GameState.Menu;
 
     public static PauseMode PauseMode

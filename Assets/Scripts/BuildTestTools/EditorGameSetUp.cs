@@ -14,6 +14,10 @@ public class EditorGameSetUp : MonoBehaviour
         {
             GlobalData.showIntroOnStart = false;
         }
+        else
+        {
+            GlobalData.showIntroOnStart = true;
+        }
 
         GlobalData.initialGameState = initialGameState;
 

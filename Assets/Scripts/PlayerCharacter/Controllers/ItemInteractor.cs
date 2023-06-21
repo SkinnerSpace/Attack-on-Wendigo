@@ -7,6 +7,8 @@ public class ItemInteractor : IInteractor
     private PlayerCharacter character;
     private CharacterData data;
 
+    private bool isLocked;
+
     private Action<IPickable> takeAnItem;
     private Action dropAnItem;
 
@@ -25,13 +27,10 @@ public class ItemInteractor : IInteractor
 
     public void Interact(Transform target)
     {
-        Debug.Log("Try to interact");
-
         if (target != null) // Do I need to check the distance?
         {
             IInteractable interactable = target.GetComponent<IInteractable>();
             interactable.Interact(this);
-            Debug.Log("Target is non zero");
         }
         else
         {
@@ -39,6 +38,21 @@ public class ItemInteractor : IInteractor
         }
     }
 
-    public void DropPreviouslyHeldItem() => dropAnItem();
-    public void TakePickableItem(IPickable pickable) => takeAnItem(pickable);  
+    public void DropPreviouslyHeldItem()
+    {
+        if (!isLocked)
+        {
+            dropAnItem();
+        }
+    }
+    public void TakePickableItem(IPickable pickable)
+    {
+        if (!isLocked)
+        {
+            takeAnItem(pickable);
+        }
+    }
+
+    public void LockInteraction() => isLocked = true;
+    public void UnlockInteraction() => isLocked = false;
 }

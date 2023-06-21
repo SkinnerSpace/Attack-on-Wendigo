@@ -51,7 +51,7 @@ public class ItemsKeeper : IItemsKeeper
 
     public void DropAnItem(Vector2 screenPoint)
     {
-        if (pickable != null)
+        if (pickable != null && pickable.IsReady)
         {
             ResetAnItem();
 
